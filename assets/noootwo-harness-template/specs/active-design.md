@@ -1,34 +1,20 @@
 # Approved Design Spec
 
-Status: pending; fill after the user selects a direction and before implementation planning
-
-## Source
-
-- Selected direction from `.noootwo/directions.md`: TBD
-- User decision recorded: TBD
-- Review or spike evidence used: TBD
-- Structured design spec source: TBD
+Status: pending; fill after the direction is chosen and before implementation planning
 
 ## Approval
 
 - Approved by user: no
-- Approval note or quote: TBD
-- Decisions delegated to agent: TBD
-- Open decisions still blocking implementation: TBD
+- Approval note or delegated authority: TBD
+- Remaining blockers before implementation: TBD
 
-## Scope
+## Design Contract
 
-- Surfaces covered: TBD
-- Surfaces excluded: TBD
-- Target stack and artifact path: TBD
-- Cost or fidelity limit accepted by user: TBD
-
-## Design Intent
-
-- One-sentence intent: TBD
-- One unforgettable thing: TBD
-- Target qualities: distinctive TBD; niche TBD; practical TBD; simple TBD; efficient TBD; premium TBD; current TBD
-- Anti-position: TBD
+- Selected direction or baseline system source: TBD
+- Objective carried into implementation: TBD
+- Core experience promise: TBD
+- Anti-goal or wrong outcome to avoid: TBD
+- Artifact family: UI surface, fixed-canvas graphic, slide deck, or live artifact: TBD
 
 ## Preservation Contract
 
@@ -40,59 +26,50 @@ Status: pending; fill after the user selects a direction and before implementati
 - Component target: TBD
 - Motion target: TBD
 
-## Design Spec Snapshot
+## Design System Contract
 
-- Color roles: canvas TBD; surface TBD; text TBD; accent TBD; semantic TBD; data TBD
-- Typography roles: display TBD; title TBD; body TBD; label TBD; number TBD; mono or annotation TBD
-- Layout model and density: TBD
-- Shape, material, and depth rules: TBD
+- Layout grammar: TBD
+- Typography system: TBD
+- Color role system: TBD
+- Density stance: TBD
 - Component vocabulary: TBD
-- Motion thesis: TBD
-- Imagery, iconography, and language rules: TBD
+- Shape, material, and depth rules: TBD
+- Artifact grammar: TBD
 - Forbidden moves: TBD
 
-## Product And Interaction Contract
+## Interaction And State Contract
 
-- Primary task path: TBD
-- Navigation or shell behavior: TBD
-- States: loading TBD; empty TBD; error TBD; focus TBD; disabled TBD; selected TBD
-- Data or evidence grammar when relevant: TBD
-- Accessibility and localization constraints: TBD
+- Primary task path or interaction path: TBD
+- Required states to support: TBD
+- Accessibility/localization constraints: TBD
 
 ## Surface Inventory
 
-- Shippable surfaces, routes, or sections covered: TBD
-- Surface-by-surface task and hierarchy summary: TBD
-- Components that define each surface: TBD
-- Required states to review on each surface: TBD
-- Default fallback that must not survive on each surface: TBD
+- Surfaces, routes, or artifact sections covered: TBD
+- Critical hierarchy on each surface: TBD
+- Defaults that must not survive on each surface: TBD
 
 ## Detail Translation Constraints
 
-- Components that must be visibly re-authored, not just recolored: TBD
-- Detail rules that carry the direction: TBD
+- Components that must be visibly re-authored: TBD
+- Micro-detail areas that carry the direction: TBD
 - Defaults that must be overridden before review: TBD
-- Micro-detail areas that need artifact proof: TBD
 
 ## Implementation Contract
 
+- Files/modules or stack areas likely to change: TBD
 - Tokens that must be applied: TBD
-- Components that must be created or changed: TBD
-- Existing components to preserve: TBD
-- Stack-native craft required: TBD
-- Details that must survive translation: TBD
-- Details explicitly allowed to simplify: TBD
+- Existing components that must remain: TBD
+- Allowed simplifications: TBD
 
 ## Artifact And Review Contract
 
 - Required artifact: TBD
-- Required screenshot or preview evidence: TBD
-- Responsive or platform checks: TBD
+- Preview surface required before ready: TBD
+- Export target or delivery format: TBD
+- Fixed vs responsive behavior: TBD
+- Artifact-family-specific review checks: TBD
+- Required review evidence: TBD
+- Responsive/platform checks: TBD
 - Typography checks: TBD
-- Review decision required before handoff: TBD
-
-## Promotion To Design System
-
-- Promote this design into `.noootwo/system.md`: no
-- User confirmation needed before promotion: yes
-- Rules to promote if approved: TBD
+- Review decision needed before handoff: TBD

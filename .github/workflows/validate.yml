@@ -27,8 +27,11 @@ jobs:
       - name: Verify skill package discovery
         run: npx -y skills add . --list
 
+      - name: Verify plugin skeleton
+        run: python scripts/validate_plugin_skeleton.py .
+
       - name: Verify Python scripts compile
-        run: python -m py_compile scripts/bootstrap_noootwo_harness.py scripts/validate_noootwo_readiness.py scripts/check_visual_gates.py
+        run: python -m py_compile scripts/bootstrap_noootwo_harness.py scripts/validate_noootwo_readiness.py scripts/check_visual_gates.py scripts/eval_noootwo_artifacts.py scripts/noootwo_status.py scripts/validate_plugin_skeleton.py
 
       - name: Verify harness bootstrap
         run: |

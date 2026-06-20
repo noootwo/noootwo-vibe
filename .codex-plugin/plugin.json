@@ -1,0 +1,38 @@
+{
+  "name": "noootwo-design",
+  "version": "0.1.17",
+  "description": "Research-backed design workflow plugin for UI generation, design exploration, artifact review, and implementation preservation.",
+  "author": {
+    "name": "Noootwo",
+    "url": "https://github.com/noootwo/noootwo-design"
+  },
+  "homepage": "https://github.com/noootwo/noootwo-design",
+  "repository": "https://github.com/noootwo/noootwo-design",
+  "license": "MIT",
+  "keywords": [
+    "design",
+    "ui",
+    "ux",
+    "research",
+    "review",
+    "workflow"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Noootwo Design",
+    "shortDescription": "Research-backed design workflow and review suite",
+    "longDescription": "Noootwo Design bundles a front-door design workflow with specialized skills for style discovery, artifact critique, and implementation-stage craft preservation.",
+    "developerName": "Noootwo",
+    "category": "Design",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use Noootwo Design to explore 3 directions before redesigning this surface.",
+      "Review these screenshots with Noootwo Design and tell me whether to refine, pivot, or return to a prior stage.",
+      "Use Noootwo Design to preserve the approved direction while implementing this UI."
+    ],
+    "brandColor": "#3E6B5A"
+  }
+}

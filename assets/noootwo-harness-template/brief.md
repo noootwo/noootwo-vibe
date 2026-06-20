@@ -2,101 +2,64 @@
 
 Status: pending; overwrite this file for the current active design task
 
-## Task
+## Classification
 
-- TBD
+- Change magnitude: local polish, non-trivial redesign, or system reset: TBD
+- Direction uncertainty: low, medium, or high: TBD
+- Implementation commitment: exploratory, direction-selected, or implementation-bound: TBD
+- Artifact verifiability: live artifact, screenshot/preview, nearest substitute, or blocked: TBD
+- System continuity: preserve current system, reinterpret current system, or create a new system: TBD
+- Artifact family: UI surface, fixed-canvas graphic, slide deck, or live artifact: TBD
 
-## Audience
+## Objective
 
-- TBD
+- What needs to be made or changed: TBD
+- Why this work matters: TBD
+- What “good” looks like: TBD
 
-## Primary Job To Be Done
+## Audience And Context
 
-- TBD
+- Primary audience or user: TBD
+- Use context or product moment: TBD
+- Existing surface, route, artifact, or flow: TBD
 
-## Desired Outcome
+## Success Criteria
 
-- TBD
+- Primary success signal: TBD
+- Secondary success signal: TBD
+- Review evidence expected: TBD
 
-## Surface Or Flow
+## Discovered Constraints
 
-- TBD
+- Product, brand, stack, runtime, or content constraints found during exploration: TBD
+- Existing system/components/tokens to preserve: TBD
+- Constraints that reduce direction space: TBD
 
-## Artifact Expectation
+## Unresolved Uncertainty
 
-- Target artifact: browser page, target-stack implementation, simulator preview, screenshot set, HTML-native prototype, or handoff-only fallback: TBD
-- Review evidence required: TBD
+- High-impact unknowns that can materially change the result: TBD
+- Which of them block implementation: TBD
 
-## Reference Sources
+## User Decisions Or Delegated Defaults
 
-- Product screenshots or live surfaces: TBD
-- Visual references or case mechanisms: TBD
-- References that must not be copied directly: TBD
+- Questions asked to user: TBD
+- User answers received: TBD
+- Choices delegated to agent and default principle used: TBD
 
-## Stack Constraints
+## Reference And Evidence Inputs
 
-- Target stack: TBD
-- Existing components or tokens: TBD
-- Runtime or preview constraints: TBD
+- Existing UI/system evidence reviewed: TBD
+- External sources or case evidence reviewed: TBD
+- Sources that are informative but must not be copied: TBD
 
-## Allowed Implementation Complexity
+## Artifact Plan
 
-- Default: enough complexity to express the chosen art direction; avoid expensive effects unless they carry the concept
-
-## Constraints
-
-- TBD
+- Intended artifact or review surface: TBD
+- Preview surface expected before ready: TBD
+- Export target or delivery format: TBD
+- Artifact-family-specific constraints: TBD
+- Verification path or blocker: TBD
 
 ## Non-Goals
 
-- TBD
-
-## Tone Extreme
-
-- Default: editorial, ceremonial, industrial, brutal, luxurious, or otherwise clearly opinionated; never neutral by accident
-
-## Aesthetic Ambition
-
-- Default: high; visibly opinionated and non-generic unless the user asks for restraint
-
-## Novelty Target
-
-- Default: uncommon and memorable, not merely cleaner than the baseline
-
-## Brand-Safety Tolerance
-
-- Default: medium; respect confirmed brand truth but avoid safe commercial fallback patterns
-
-## Motion Appetite
-
-- Default: purposeful and noticeable; motion should reinforce the chosen direction
-
-## One Unforgettable Thing
-
-- Default: define one visual or interaction move that makes the direction memorable
-
-## Must Feel Like
-
-- TBD
-
-## Must Not Feel Like
-
-- Generic AI landing page, generic SaaS dashboard, or polished-but-ordinary product page
-
-## Design Objectives
-
-- TBD
-
-## Success Signals
-
-- TBD
-
-## Open Questions
-
-- TBD
-
-## User Decisions Needed
-
-- Material decisions that cannot be inferred from evidence: TBD
-- Options to ask about: TBD
-- Recommended default if user delegates: TBD
+- What this task will not try to solve: TBD

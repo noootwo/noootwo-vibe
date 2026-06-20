@@ -1,0 +1,4 @@
+interface:
+  display_name: "Noootwo Design"
+  short_description: "Front-door workflow for research-backed interface design"
+  default_prompt: "Use the Noootwo Design front-door skill to classify the task, decide whether exploration is required, route into quick, standard, deep, production, or review, and block implementation until the design contract is real."
