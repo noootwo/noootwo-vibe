@@ -9,7 +9,7 @@ It publishes four focused skills:
 | `noootwo-workflow` | AI workflow control, project skill audits, foundation checks, task routing, planning, and closure | `0.3.0` |
 | `noootwo-docs` | Documentation state, docs audits, README/AGENTS/docs layering, ADRs, and release notes | `0.3.0` |
 | `noootwo-review` | Code quality, project-health review, maintainability, refactoring discipline, and implementation review | `0.3.0` |
-| `noootwo-design` | Research-backed UI/design workflow, `.noootwo/` harness, artifact review, and design handoff | `0.1.18` |
+| `noootwo-design` | Research-backed UI/design workflow, `.noootwo/` harness, artifact review, and design handoff | `0.3.0` |
 
 The repository root is not a published skill. It is the shared workspace for manifests, docs, validation, release helpers, and CI.
 
@@ -130,7 +130,7 @@ Each child skill has its own `VERSION` file and tag prefix:
 - `noootwo-workflow@v0.3.0`
 - `noootwo-docs@v0.3.0`
 - `noootwo-review@v0.3.0`
-- `noootwo-design@v0.1.18`
+- `noootwo-design@v0.3.0`
 
 The root `VERSION` records the workspace version only. Do not use it as the release source for child skills.
 

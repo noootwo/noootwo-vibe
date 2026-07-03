@@ -8,7 +8,7 @@
 
 ## Current Validation Surface
 
-Last verified: 2026-07-03 on `codex/noootwo-vibe-monorepo` for the non-design skill `v0.3.0` governance enhancement.
+Last verified: 2026-07-03 on `codex/noootwo-vibe-monorepo` after aligning all public skills to `v0.3.0`.
 
 - `python scripts/validate_skill_workspace.py .`
 - `npx -y skills add . --list`
@@ -18,7 +18,7 @@ Last verified: 2026-07-03 on `codex/noootwo-vibe-monorepo` for the non-design sk
 - temporary incomplete-project simulation for workflow/docs/review audit contracts
 - Noootwo Design harness checks under `skills/noootwo-design/scripts/`
 
-Latest result: all workspace, aggregate discovery, full-depth discovery, per-skill discovery, Python compile, skill quick validation, incomplete-project audit contract, and design harness bootstrap checks passed. The fresh pending design harness correctly remains non-ready until workflow fields are completed.
+Latest result: workspace validation and aggregate/design discovery passed after aligning `noootwo-design` to `0.3.0`. The earlier v0.3.0 governance pass also passed full-depth discovery, per-skill discovery, Python compile, skill quick validation, incomplete-project audit contract, and design harness bootstrap checks.
 
 ## Active Risks
 
