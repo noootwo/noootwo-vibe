@@ -1,4 +1,4 @@
 interface:
   display_name: "Noootwo Workflow"
-  short_description: "AI workflow routing and execution control"
-  default_prompt: "Use $noootwo-workflow to triage this development task, choose direct/planned/diagnostic/release flow, route to the right Noootwo skills, and close with evidence."
+  short_description: "AI workflow routing, project audit, and execution control"
+  default_prompt: "Use $noootwo-workflow to audit needed skills and project foundation, choose direct/planned/diagnostic/release/onboarding flow, route to the right Noootwo skills, and close with evidence."

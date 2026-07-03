@@ -6,21 +6,21 @@
     {
       "name": "noootwo-workflow",
       "path": "skills/noootwo-workflow",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "status": "public",
       "tagPrefix": "noootwo-workflow@"
     },
     {
       "name": "noootwo-docs",
       "path": "skills/noootwo-docs",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "status": "public",
       "tagPrefix": "noootwo-docs@"
     },
     {
       "name": "noootwo-review",
       "path": "skills/noootwo-review",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "status": "public",
       "tagPrefix": "noootwo-review@"
     },

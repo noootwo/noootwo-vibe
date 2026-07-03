@@ -7,6 +7,7 @@ Use this when reviewing maintainability, planning a refactor, or deciding whethe
 - Practice Basis
 - Evidence Sources
 - Risk Model
+- Project-Health Lens
 - Refactoring Heuristics
 - Refactor Decision Gate
 - AI-Generated Code Smells
@@ -47,6 +48,19 @@ Classify each issue before proposing a fix:
 | `context cost` | Does the structure force agents to load too much unrelated material? |
 
 Do not file a finding just because a different style is possible. Tie every finding to one of these risks.
+
+## Project-Health Lens
+
+Use `project-health-review.md` when the risk is not inside one code block but in the project system around it:
+
+- missing validation entrypoint or test command
+- CI not covering release-relevant checks
+- unclear release/version/install path
+- module boundaries that make future changes expensive
+- duplicated project facts across docs, config, prompts, or scripts
+- status/risk information only preserved in chat
+
+Report these as `Project Defects` and route ownership instead of turning the code review into a docs rewrite.
 
 ## Refactoring Heuristics
 
@@ -116,6 +130,9 @@ Open Questions
 
 Verification Gaps
 - Commands not run or behavior not covered.
+
+Project Defects
+- Only for project-health gaps that affect safe change, release, handoff, or context cost.
 
 Summary
 - One short paragraph only after findings.

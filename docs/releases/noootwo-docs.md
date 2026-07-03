@@ -1,5 +1,11 @@
 # noootwo-docs Releases
 
+## v0.3.0
+
+- Added documentation audit categories: `missing`, `stale`, `duplicated`, `wrong layer`, and `unverified claim`.
+- Added `docs-audit` reference with output contract and workflow/review interfaces.
+- Extended docs layering with a minimal first-adoption flow for AGENTS, status, ADR, release notes, and README.
+
 ## v0.2.0
 
 - Added changed-fact classification, owning-layer selection, stale-doc cleanup, and freshness rules.

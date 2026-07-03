@@ -1,6 +1,6 @@
 {
   "name": "noootwo-vibe",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A Noootwo multi-skill workspace for controlled AI software development, documentation, code review, and design work.",
   "author": {
     "name": "Noootwo",
@@ -21,7 +21,7 @@
   "interface": {
     "displayName": "Noootwo Vibe",
     "shortDescription": "AI development workflow skill suite",
-    "longDescription": "Noootwo Vibe bundles focused skills for AI workflow control, documentation hygiene, code-health review, and research-backed design work.",
+    "longDescription": "Noootwo Vibe bundles focused skills for AI workflow control, project governance, documentation hygiene, code-health review, and research-backed design work.",
     "developerName": "Noootwo",
     "category": "Development",
     "capabilities": [

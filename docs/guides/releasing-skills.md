@@ -5,7 +5,7 @@
 3. Update `docs/releases/<skill>.md` with user-visible changes and migration notes.
 4. Run workspace validation and skill discovery checks from `README.md`.
 5. Commit the change.
-6. Create a tag using the skill's `tagPrefix` from `skills.json`, for example `noootwo-review@v0.2.0`.
+6. Create a tag using the skill's `tagPrefix` from `skills.json`, for example `noootwo-review@vX.Y.Z`.
 7. Push the branch and tags.
 
 Do not use the root `VERSION` as a child-skill release source.

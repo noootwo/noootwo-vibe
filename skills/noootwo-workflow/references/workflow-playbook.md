@@ -5,6 +5,7 @@ Use this only when the task is broad enough that a short direct path is not enou
 ## Contents
 
 - Practice Basis
+- Project Entry
 - Routing Matrix
 - Work Size
 - Mode Details
@@ -19,10 +20,20 @@ Use this only when the task is broad enough that a short direct path is not enou
 - Agent skill guidance favors progressive disclosure: keep the entry file short and load deeper references only when useful.
 - Modern delivery practice favors small batches, clear ownership, and fresh verification over large speculative plans.
 
+## Project Entry
+
+Use onboarding mode before normal execution when the project is unfamiliar, under-documented, or being taken over from another agent:
+
+1. Run `project-skill-audit.md` to decide required Noootwo skills and optional local skills from repo evidence.
+2. Run `project-foundation-check.md` if the project lacks obvious operating instructions, validation commands, release policy, or current state.
+3. If gaps block safe work, use `minimal-foundation-templates.md` through `$noootwo-docs` to add the smallest useful file or section.
+4. Continue with direct, planned, diagnostic, release, or recovery mode.
+
 ## Routing Matrix
 
 | Signal | Route |
 | --- | --- |
+| unfamiliar project, missing process foundation, unclear skill needs | `$noootwo-workflow` onboarding mode |
 | UI, visual hierarchy, screenshots, `.noootwo/` | `$noootwo-design` |
 | README, AGENTS, docs, ADR, status, release notes | `$noootwo-docs` |
 | refactor, maintainability, architecture, code review | `$noootwo-review` |
@@ -76,6 +87,16 @@ Use when changing versions, tags, remotes, CI, local installs, or published pack
 - install/sync target
 - remote push evidence
 
+### Onboarding
+
+Use for unfamiliar repositories, missing process foundation, or skill-selection uncertainty. Output a short audit before implementation:
+
+- required Noootwo skills and why
+- optional local skills and exact triggers
+- missing or weak foundation files
+- minimal patch plan and owner skill
+- skills or process that are intentionally not needed
+
 ### Recovery
 
 Use after prior agent drift, repeated failed fixes, unclear half-finished work, or context compaction. First reconstruct current state from files, git, commands, and artifacts. Treat summaries as hints, not proof.
@@ -83,11 +104,12 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 ## Default Loop
 
 1. Inspect repo truth before deciding.
-2. State the smallest viable path.
-3. Implement in slices that can be tested independently.
-4. Run the closest meaningful checks after each risky slice.
-5. Update docs through `$noootwo-docs` when behavior, state, usage, or release changes.
-6. Use `$noootwo-review` for broad code structure or release-bound review.
+2. If skill needs or foundation are unclear, audit them before planning.
+3. State the smallest viable path.
+4. Implement in slices that can be tested independently.
+5. Run the closest meaningful checks after each risky slice.
+6. Update docs through `$noootwo-docs` when behavior, state, usage, or release changes.
+7. Use `$noootwo-review` for broad code structure, project-health gaps, or release-bound review.
 
 ## Handoff Packet Templates
 

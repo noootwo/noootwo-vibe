@@ -1,17 +1,17 @@
 ---
 name: noootwo-workflow
-description: Use as the Noootwo commander skill for AI software development workflow control, task triage, multi-skill routing, planning, implementation sequencing, debugging/recovery flow, review checkpoints, documentation handoff, release closure, and preventing agentic project work from becoming chaotic, under-verified, or expensive.
+description: Use as the Noootwo commander skill for AI software development workflow control, project onboarding, skill inventory, foundation audits, task triage, multi-skill routing, planning, implementation sequencing, debugging/recovery flow, review checkpoints, documentation handoff, release closure, and preventing agentic project work from becoming chaotic, under-verified, or expensive.
 ---
 
 # Noootwo Workflow
 
-Use this skill before or during non-trivial AI-assisted software development when the work needs coordination across implementation, design, docs, review, debugging, release, or multiple Noootwo skills.
+Use this skill before or during non-trivial AI-assisted software development when the work needs coordination across implementation, design, docs, review, debugging, release, project onboarding, or multiple Noootwo skills.
 
 ## Operating Goal
 
 Keep work moving through a controlled loop:
 
-`intake -> repo truth -> route -> plan -> execute -> verify -> document -> review -> release/handoff`
+`intake -> repo truth -> skill/foundation audit -> route -> plan -> execute -> verify -> document -> review -> release/handoff`
 
 Default to the lightest flow that can still prove the result. Load deeper references only when the task needs them.
 
@@ -25,11 +25,13 @@ Default to the lightest flow that can still prove the result. Load deeper refere
    - `planned`: multi-file behavior or public workflow change
    - `diagnostic`: bug, failure, regression, or surprising behavior
    - `release`: version, tag, publish, CI, install, or repo metadata work
+   - `onboarding`: unfamiliar project, missing process foundation, unclear skill needs, or handoff from another agent
    - `recovery`: prior agent drift, repeated failed fixes, or unclear handoff
 5. Do not add ceremony to direct work; do not skip evidence for risky work.
 
 ## Skill Routing
 
+- Use this skill first when a project needs a skill inventory, foundation health check, gap plan, or multi-skill handoff.
 - Use `$noootwo-design` when the work changes UI, visual direction, artifact review, `.noootwo/` deliverables, design systems, screenshots, or frontend implementation handoff.
 - Use `$noootwo-docs` when the work changes project state, public usage, architecture decisions, README, AGENTS, docs, or release notes.
 - Use `$noootwo-review` when the work needs maintainability judgment, refactoring, code structure review, test strategy review, or a second pass before release.
@@ -47,6 +49,7 @@ If the task is a bug or failing check, first establish root cause and reproducti
 - For planned work, produce a short plan before editing.
 - For diagnostic work, record the observed symptom, reproduction, evidence path, and root-cause hypothesis before fixes.
 - For release work, list version files, manifests, tags, install targets, and verification commands before publishing.
+- For onboarding work, audit needed skills and project foundation before proposing execution.
 - For broad work, split into independently verifiable slices with natural review checkpoints.
 - Keep decisions explicit: scope, non-scope, assumptions, proof of done, and rollback/compatibility notes when relevant.
 
@@ -76,9 +79,15 @@ When control returns, close the loop by checking whether docs, review, release, 
 Before calling work done, record:
 
 - changed behavior or structure
+- skill/foundation audit result when onboarding or taking over a project
 - validation run and result
 - documentation updated or intentionally unchanged
 - remaining risk or follow-up
 - release/tag/push state when relevant
 
-For deeper guidance, read `references/workflow-playbook.md` only when planning a multi-step implementation, diagnostic recovery, or release workflow.
+For deeper guidance, read:
+
+- `references/project-skill-audit.md` when deciding which Noootwo or local skills a project needs.
+- `references/project-foundation-check.md` when checking process health, missing project files, or handoff readiness.
+- `references/minimal-foundation-templates.md` only when a project lacks the minimal docs/process foundation.
+- `references/workflow-playbook.md` when planning a multi-step implementation, diagnostic recovery, or release workflow.

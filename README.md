@@ -6,9 +6,9 @@ It publishes four focused skills:
 
 | Skill | Purpose | Version |
 | --- | --- | --- |
-| `noootwo-workflow` | AI workflow control, task routing, planning, execution sequencing, and closure | `0.2.0` |
-| `noootwo-docs` | Documentation state, README/AGENTS/docs layering, ADRs, and release notes | `0.2.0` |
-| `noootwo-review` | Code quality, maintainability, refactoring discipline, and implementation review | `0.2.0` |
+| `noootwo-workflow` | AI workflow control, project skill audits, foundation checks, task routing, planning, and closure | `0.3.0` |
+| `noootwo-docs` | Documentation state, docs audits, README/AGENTS/docs layering, ADRs, and release notes | `0.3.0` |
+| `noootwo-review` | Code quality, project-health review, maintainability, refactoring discipline, and implementation review | `0.3.0` |
 | `noootwo-design` | Research-backed UI/design workflow, `.noootwo/` harness, artifact review, and design handoff | `0.1.18` |
 
 The repository root is not a published skill. It is the shared workspace for manifests, docs, validation, release helpers, and CI.
@@ -76,11 +76,11 @@ npx skills add ./skills/noootwo-design --list
 
 ## Skill Responsibilities
 
-Use `noootwo-workflow` first when the task is broad, multi-step, release-bound, or needs routing. It decides when to bring in the other Noootwo skills.
+Use `noootwo-workflow` first when the task is broad, multi-step, release-bound, needs routing, or needs a project skill/foundation audit. It decides when to bring in the other Noootwo skills.
 
-Use `noootwo-docs` when a change affects project state, user-facing instructions, repository layout, ADRs, release notes, or agent instructions.
+Use `noootwo-docs` when a change affects project state, user-facing instructions, repository layout, documentation audits, ADRs, release notes, or agent instructions.
 
-Use `noootwo-review` when code quality, refactoring, test strategy, architecture hygiene, or maintainability risk matters.
+Use `noootwo-review` when code quality, project health, refactoring, test strategy, architecture hygiene, or maintainability risk matters.
 
 Use `noootwo-design` for UI, visual systems, frontend design, screenshots, artifact review, `.noootwo/` deliverables, and design implementation handoff.
 
@@ -127,9 +127,9 @@ The readiness command is expected to fail on a freshly bootstrapped pending harn
 
 Each child skill has its own `VERSION` file and tag prefix:
 
-- `noootwo-workflow@v0.2.0`
-- `noootwo-docs@v0.2.0`
-- `noootwo-review@v0.2.0`
+- `noootwo-workflow@v0.3.0`
+- `noootwo-docs@v0.3.0`
+- `noootwo-review@v0.3.0`
 - `noootwo-design@v0.1.18`
 
 The root `VERSION` records the workspace version only. Do not use it as the release source for child skills.

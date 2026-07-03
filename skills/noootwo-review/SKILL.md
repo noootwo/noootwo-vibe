@@ -1,11 +1,13 @@
 ---
 name: noootwo-review
-description: Use for code quality, maintainability, refactoring discipline, architecture hygiene, implementation review, test strategy review, AI-generated code risk, review findings, code-health triage, and preventing software from becoming unstable, over-abstracted, hard to change, or expensive to reason about.
+description: Use for code quality, maintainability, refactoring discipline, architecture hygiene, implementation review, test strategy review, project-health review, AI-generated code risk, review findings, code-health triage, and preventing software from becoming unstable, under-verified, over-abstracted, hard to change, or expensive to reason about.
 ---
 
 # Noootwo Review
 
 Use this skill when the project needs code to stay easy to understand, change, test, and review. It is a code-health and implementation-review skill, not a style-only critique.
+
+It can report project-level defects when they affect engineering health, such as missing validation entrypoints, unclear CI, unreproducible release flow, unstable module boundaries, or duplicated sources of truth. It classifies those defects and hands ownership to `$noootwo-workflow` or `$noootwo-docs` when appropriate.
 
 ## Review Stance
 
@@ -51,6 +53,7 @@ Look specifically for agent-generated failure modes:
 - hidden state or side effects that make verification expensive
 - tests that mirror implementation details but miss user-visible behavior
 - comments or docs that claim stability without a proving command
+- missing validation, CI, release, or status paths that make future changes expensive
 
 ## Output For Reviews
 
@@ -70,6 +73,8 @@ Use severity labels only when useful:
 - `P2`: maintainability issue likely to cause near-term mistakes
 - `P3`: optional cleanup or clarity improvement
 
+When reviewing the whole project rather than a narrow diff, add `Project Defects` after code findings. Examples: no validation entrypoint, no status document, release flow cannot be reproduced, skill routing is unclear, or duplicated truth sources create context cost.
+
 ## Closure Gate
 
 Before approving or finishing work, verify:
@@ -80,4 +85,7 @@ Before approving or finishing work, verify:
 - public docs or release notes were routed to `$noootwo-docs` when needed
 - broader workflow or skill routing was routed to `$noootwo-workflow` when needed
 
-For deeper guidance, read `references/code-quality-playbook.md` when planning a refactor, reviewing architecture, deciding whether to split files, or evaluating repeated AI implementation friction.
+For deeper guidance, read:
+
+- `references/code-quality-playbook.md` when planning a refactor, reviewing architecture, deciding whether to split files, or evaluating repeated AI implementation friction.
+- `references/project-health-review.md` when reviewing project foundation, validation paths, release risk, CI, module boundaries, context cost, or repeated AI friction.

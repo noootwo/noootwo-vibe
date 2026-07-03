@@ -1,5 +1,11 @@
 # noootwo-review Releases
 
+## v0.3.0
+
+- Added project-health review for validation entrypoints, CI, module boundaries, release risk, context cost, and duplicated truth sources.
+- Added `Project Defects` output for engineering-health gaps outside a narrow code diff.
+- Clarified review handoff boundaries with workflow and docs.
+
 ## v0.2.0
 
 - Added code-health risk classes, AI-generated code risk checks, and severity guidance.

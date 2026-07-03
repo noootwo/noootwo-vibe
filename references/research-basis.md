@@ -40,6 +40,26 @@ Source index for the second pass:
 - Fowler on internal quality: `https://martinfowler.com/articles/is-quality-worth-cost.html`
 - Refactoring: `https://refactoring.com/`
 
+Third-pass project governance enhancement, checked on 2026-07-03:
+
+- Agent Skills and Claude skill documentation continue to support short skill bodies with direct supporting files and realistic task evaluation, which maps to project audits living in `references/` instead of default `SKILL.md` text.
+- DORA's small-batch delivery capability supports a workflow that audits foundation, then makes the smallest verifiable process patch instead of generating a full scaffold.
+- Diataxis supports separating current state, durable decisions, how-to procedures, and reference facts; this underpins the docs audit categories and first-adoption flow.
+- Google Engineering Practices and GitHub review guidance support concrete findings, reviewable change size, and evidence-backed review, which maps to `Project Defects` rather than preference-heavy project commentary.
+- Fowler/refactoring practice supports treating internal quality as a cost-of-change issue and rejecting speculative rewrites without current pressure.
+- Local mature skills informed the mechanism design: red flags, hard gates, output contracts, verification-before-completion, and progressive disclosure. No wording or full process was copied wholesale.
+
+Source index for the third pass:
+
+- Agent Skills specification: `https://agentskills.io/specification`
+- Anthropic Claude Code skills: `https://docs.anthropic.com/en/docs/claude-code/skills`
+- DORA working in small batches: `https://dora.dev/capabilities/working-in-small-batches/`
+- Diataxis: `https://diataxis.fr/`
+- Google Engineering Practices review docs: `https://google.github.io/eng-practices/review/reviewer/looking-for.html`
+- GitHub pull request review docs: `https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests`
+- Fowler on internal quality: `https://martinfowler.com/articles/is-quality-worth-cost.html`
+- Refactoring: `https://refactoring.com/`
+
 ## Mechanisms Borrowed
 
 - Keep publishable units independently addressable under `skills/`.
@@ -50,6 +70,8 @@ Source index for the second pass:
 - Use code-quality guidance as review heuristics, not as permission for broad rewrites. Evidence comes from changed files, tests, caller impact, and repeated friction.
 - Use mature-skill mechanisms as structure, not wording: hard gates, red flags, concise default bodies, handoff packets, and verification evidence.
 - For non-design skills, optimize for agent control and cost: task classification, facts ownership, code-health risk classes, and explicit stop conditions reduce unnecessary context loading and rework.
+- Make `workflow` the entry point for project onboarding: skill inventory, foundation health, gap planning, and closure. Keep docs/review as owners of their respective fixes.
+- Prefer audit plus minimal templates over automatic scaffolding. Missing foundation should produce the smallest useful AGENTS/status/ADR/release/validation patch.
 
 ## Boundaries
 
@@ -59,3 +81,4 @@ Source index for the second pass:
 - Do not claim plugin-style discovery as the primary install path until it is verified in the target runtime.
 - Do not promote every useful practice into a default gate; default paths must stay cheap and references should load only when relevant.
 - Do not import another skill's full process wholesale. Borrow the repeatable control mechanism and adapt it to Noootwo Vibe's four-skill model.
+- Do not let project-health review take over docs or workflow. It reports defects and routes ownership.

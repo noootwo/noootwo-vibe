@@ -36,6 +36,18 @@ Use this classifier before editing:
 
 If a fact seems to belong in several places, pick one owner and link from the others only when discovery would otherwise fail.
 
+## First Adoption Flow
+
+When a project has weak or missing documentation foundation, add the smallest durable set before writing detailed guides:
+
+1. `AGENTS.md`: always-on repo rules and skill routing only.
+2. `docs/status.md`: current state, validation entry, active risks, next actions.
+3. First ADR: durable repo/workflow decision that explains why the foundation exists.
+4. Release notes or release guide: only if versioning, publishing, or install flow is in scope.
+5. README update: stable purpose, install/run, and links to the owning layers.
+
+If the repo already uses equivalent locations, map to those responsibilities instead of forcing these names.
+
 ## Update Pattern
 
 1. Identify the changed fact.
@@ -55,6 +67,7 @@ If a fact seems to belong in several places, pick one owner and link from the ot
 | Architecture or workflow decision | ADR, status if currently active |
 | Agent behavior or routing | AGENTS, skill body, relevant reference |
 | Public API, schema, manifest field | reference docs, release notes if user-visible |
+| Project foundation or skill audit | AGENTS, status, ADR, guide only if repeated |
 
 ## Stale-Doc Cleanup
 
@@ -66,6 +79,7 @@ When changing docs, also scan nearby files for:
 - planned language that now describes shipped behavior
 - validation claims without a command or date
 - duplicated instructions that should route to a skill or guide
+- project state facts copied into README instead of status
 
 ## ADR Template
 
@@ -93,3 +107,4 @@ Before handoff, verify:
 - durable decisions are not only in status or chat
 - install/release commands were checked or clearly marked unverified
 - stale references from the old state were removed or intentionally retained with a migration note
+- first-adoption docs were kept minimal instead of generating a full handbook

@@ -8,21 +8,24 @@
 
 ## Current Validation Surface
 
-Last verified: 2026-07-03 on `codex/noootwo-vibe-monorepo` after the non-design skill `v0.2.0` optimization pass.
+Last verified: 2026-07-03 on `codex/noootwo-vibe-monorepo` for the non-design skill `v0.3.0` governance enhancement.
 
 - `python scripts/validate_skill_workspace.py .`
 - `npx -y skills add . --list`
 - `npx -y skills add . --list --full-depth`
 - per-skill `npx -y skills add ./skills/<skill> --list`
+- `python /Users/notwo/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/<skill>`
+- temporary incomplete-project simulation for workflow/docs/review audit contracts
 - Noootwo Design harness checks under `skills/noootwo-design/scripts/`
 
-Latest result: all workspace, aggregate discovery, per-skill discovery, Python compile, skill quick validation, and design harness bootstrap checks passed. The fresh pending design harness correctly remains non-ready until workflow fields are completed.
+Latest result: all workspace, aggregate discovery, full-depth discovery, per-skill discovery, Python compile, skill quick validation, incomplete-project audit contract, and design harness bootstrap checks passed. The fresh pending design harness correctly remains non-ready until workflow fields are completed.
 
 ## Active Risks
 
 - GitHub plugin-style ingestion is treated as packaging metadata; `skills` CLI discovery is the verified installation surface.
 - `noootwo-design` contains the previous design workflow and must remain self-contained for single-skill publishing.
-- Workflow/docs/review `v0.2.0` should stay concise at the entry point and keep deeper guidance in direct references.
+- Workflow/docs/review `v0.3.0` should stay concise at the entry point and keep project-governance guidance in direct references.
+- The new project audit templates should stay minimal; do not turn them into automatic full scaffolding without evidence from repeated use.
 
 ## Next Actions
 
