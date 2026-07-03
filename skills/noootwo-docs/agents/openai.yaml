@@ -1,0 +1,4 @@
+interface:
+  display_name: "Noootwo Docs"
+  short_description: "Documentation state and update steward"
+  default_prompt: "Use $noootwo-docs to update the right README, AGENTS, docs, ADR, status, or release notes after this change."

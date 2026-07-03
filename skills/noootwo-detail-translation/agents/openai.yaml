@@ -1,4 +1,0 @@
-interface:
-  display_name: "Noootwo Detail Translation"
-  short_description: "Late-stage pass to preserve authored detail through implementation"
-  default_prompt: "Use Noootwo Detail Translation when the direction is approved but implementation is drifting to defaults; run a preservation pass across surfaces, components, defaults, and micro-details."

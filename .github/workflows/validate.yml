@@ -24,19 +24,36 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Verify skill package discovery
-        run: npx -y skills add . --list
+      - name: Verify aggregate skill discovery
+        run: |
+          npx -y skills add . --list
+          npx -y skills add . --list --full-depth
 
-      - name: Verify plugin skeleton
-        run: python scripts/validate_plugin_skeleton.py .
+      - name: Verify single skill discovery
+        run: |
+          npx -y skills add ./skills/noootwo-workflow --list
+          npx -y skills add ./skills/noootwo-docs --list
+          npx -y skills add ./skills/noootwo-review --list
+          npx -y skills add ./skills/noootwo-design --list
+
+      - name: Verify skill workspace
+        run: python scripts/validate_skill_workspace.py .
 
       - name: Verify Python scripts compile
-        run: python -m py_compile scripts/bootstrap_noootwo_harness.py scripts/validate_noootwo_readiness.py scripts/check_visual_gates.py scripts/eval_noootwo_artifacts.py scripts/noootwo_status.py scripts/validate_plugin_skeleton.py
+        run: |
+          python -m py_compile \
+            scripts/validate_skill_workspace.py \
+            scripts/sync_local_install.py \
+            skills/noootwo-design/scripts/bootstrap_noootwo_harness.py \
+            skills/noootwo-design/scripts/validate_noootwo_readiness.py \
+            skills/noootwo-design/scripts/check_visual_gates.py \
+            skills/noootwo-design/scripts/eval_noootwo_artifacts.py \
+            skills/noootwo-design/scripts/noootwo_status.py
 
-      - name: Verify harness bootstrap
+      - name: Verify Noootwo Design harness bootstrap
         run: |
           tmpdir="$(mktemp -d)"
-          python scripts/bootstrap_noootwo_harness.py "$tmpdir" --profile full
+          python skills/noootwo-design/scripts/bootstrap_noootwo_harness.py "$tmpdir" --profile full
           test -f "$tmpdir/AGENTS.md"
           test -f "$tmpdir/.noootwo/system.md"
           test -f "$tmpdir/.noootwo/design-tokens.md"
@@ -50,7 +67,7 @@ jobs:
           test -f "$tmpdir/.noootwo/handoff/implementation.md"
           test -f "$tmpdir/.noootwo/handoff/acceptance.md"
           test -f "$tmpdir/.noootwo/handoff/assets.md"
-          if python scripts/validate_noootwo_readiness.py "$tmpdir" --allow-non-ready; then
+          if python skills/noootwo-design/scripts/validate_noootwo_readiness.py "$tmpdir" --allow-non-ready; then
             echo "Expected pending bootstrap harness to fail readiness validation"
             exit 1
           fi

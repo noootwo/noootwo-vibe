@@ -1,0 +1,35 @@
+{
+  "repository": "noootwo/noootwo-vibe",
+  "skillsRoot": "skills",
+  "releaseModel": "independent-child-skills",
+  "skills": [
+    {
+      "name": "noootwo-workflow",
+      "path": "skills/noootwo-workflow",
+      "version": "0.1.0",
+      "status": "public",
+      "tagPrefix": "noootwo-workflow@"
+    },
+    {
+      "name": "noootwo-docs",
+      "path": "skills/noootwo-docs",
+      "version": "0.1.0",
+      "status": "public",
+      "tagPrefix": "noootwo-docs@"
+    },
+    {
+      "name": "noootwo-review",
+      "path": "skills/noootwo-review",
+      "version": "0.1.0",
+      "status": "public",
+      "tagPrefix": "noootwo-review@"
+    },
+    {
+      "name": "noootwo-design",
+      "path": "skills/noootwo-design",
+      "version": "0.1.18",
+      "status": "public",
+      "tagPrefix": "noootwo-design@"
+    }
+  ]
+}

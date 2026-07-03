@@ -1,4 +1,0 @@
-interface:
-  display_name: "Noootwo Style Discovery"
-  short_description: "Research-backed direction discovery and mechanism transfer"
-  default_prompt: "Use Noootwo Style Discovery to research sources, compare territories, reject mimicry, and produce a direction menu before any implementation begins."

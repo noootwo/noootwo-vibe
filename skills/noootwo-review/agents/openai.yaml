@@ -1,0 +1,4 @@
+interface:
+  display_name: "Noootwo Review"
+  short_description: "Code quality and refactoring guardrails"
+  default_prompt: "Use $noootwo-review to inspect maintainability, refactoring risk, and code structure before changing this code."

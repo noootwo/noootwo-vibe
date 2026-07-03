@@ -1,37 +1,38 @@
 {
-  "name": "noootwo-design",
-  "version": "0.1.17",
-  "description": "Research-backed design workflow plugin for UI generation, design exploration, artifact review, and implementation preservation.",
+  "name": "noootwo-vibe",
+  "version": "0.1.0",
+  "description": "A Noootwo multi-skill workspace for controlled AI software development, documentation, code review, and design work.",
   "author": {
     "name": "Noootwo",
-    "url": "https://github.com/noootwo/noootwo-design"
+    "url": "https://github.com/noootwo/noootwo-vibe"
   },
-  "homepage": "https://github.com/noootwo/noootwo-design",
-  "repository": "https://github.com/noootwo/noootwo-design",
+  "homepage": "https://github.com/noootwo/noootwo-vibe",
+  "repository": "https://github.com/noootwo/noootwo-vibe",
   "license": "MIT",
   "keywords": [
+    "ai-workflow",
+    "software-development",
+    "documentation",
+    "code-review",
     "design",
-    "ui",
-    "ux",
-    "research",
-    "review",
-    "workflow"
+    "skills"
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Noootwo Design",
-    "shortDescription": "Research-backed design workflow and review suite",
-    "longDescription": "Noootwo Design bundles a front-door design workflow with specialized skills for style discovery, artifact critique, and implementation-stage craft preservation.",
+    "displayName": "Noootwo Vibe",
+    "shortDescription": "AI development workflow skill suite",
+    "longDescription": "Noootwo Vibe bundles focused skills for AI workflow control, documentation hygiene, code quality review, and research-backed design work.",
     "developerName": "Noootwo",
-    "category": "Design",
+    "category": "Development",
     "capabilities": [
       "Interactive",
       "Write"
     ],
     "defaultPrompt": [
-      "Use Noootwo Design to explore 3 directions before redesigning this surface.",
-      "Review these screenshots with Noootwo Design and tell me whether to refine, pivot, or return to a prior stage.",
-      "Use Noootwo Design to preserve the approved direction while implementing this UI."
+      "Use Noootwo Workflow to plan this development task and route to the right skill.",
+      "Use Noootwo Docs to update project documentation after this change.",
+      "Use Noootwo Review to check code quality and refactoring risk before release.",
+      "Use Noootwo Design for UI, visual, artifact, or frontend design work."
     ],
     "brandColor": "#3E6B5A"
   }

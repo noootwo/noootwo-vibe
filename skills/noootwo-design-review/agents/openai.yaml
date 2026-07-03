@@ -1,4 +1,0 @@
-interface:
-  display_name: "Noootwo Design Review"
-  short_description: "Artifact critique, defect diagnosis, and return-action review"
-  default_prompt: "Use Noootwo Design Review to judge screenshots or live artifacts, identify layout and generic-drift failures, and choose the earliest stage to return to."
