@@ -6,9 +6,9 @@ It publishes four focused skills:
 
 | Skill | Purpose | Version |
 | --- | --- | --- |
-| `noootwo-workflow` | AI workflow control, task routing, planning, execution sequencing, and closure | `0.1.0` |
-| `noootwo-docs` | Documentation state, README/AGENTS/docs layering, ADRs, and release notes | `0.1.0` |
-| `noootwo-review` | Code quality, maintainability, refactoring discipline, and implementation review | `0.1.0` |
+| `noootwo-workflow` | AI workflow control, task routing, planning, execution sequencing, and closure | `0.2.0` |
+| `noootwo-docs` | Documentation state, README/AGENTS/docs layering, ADRs, and release notes | `0.2.0` |
+| `noootwo-review` | Code quality, maintainability, refactoring discipline, and implementation review | `0.2.0` |
 | `noootwo-design` | Research-backed UI/design workflow, `.noootwo/` harness, artifact review, and design handoff | `0.1.18` |
 
 The repository root is not a published skill. It is the shared workspace for manifests, docs, validation, release helpers, and CI.
@@ -127,9 +127,9 @@ The readiness command is expected to fail on a freshly bootstrapped pending harn
 
 Each child skill has its own `VERSION` file and tag prefix:
 
-- `noootwo-workflow@v0.1.0`
-- `noootwo-docs@v0.1.0`
-- `noootwo-review@v0.1.0`
+- `noootwo-workflow@v0.2.0`
+- `noootwo-docs@v0.2.0`
+- `noootwo-review@v0.2.0`
 - `noootwo-design@v0.1.18`
 
 The root `VERSION` records the workspace version only. Do not use it as the release source for child skills.

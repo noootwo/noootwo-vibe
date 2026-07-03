@@ -2,6 +2,12 @@
 
 Use this when a change affects more than one documentation layer.
 
+## Practice Basis
+
+- Diataxis separates documentation by user need: learning, solving a task, looking up facts, and understanding decisions.
+- ADR practice keeps durable architectural decisions short, dated, and separate from operational logs.
+- Agent-facing docs work best when always-on files stay small and route to deeper references instead of duplicating them.
+
 ## Ownership Rules
 
 | File or directory | Owns | Does not own |
@@ -14,13 +20,52 @@ Use this when a change affects more than one documentation layer.
 | `docs/reference/` | commands, manifests, schema, stable facts | narrative tutorials |
 | `docs/releases/` | versioned release and migration notes | current active work |
 
+## Fact Classifier
+
+Use this classifier before editing:
+
+| Fact type | Owning layer |
+| --- | --- |
+| What the project is and how to install/use it | `README.md` |
+| What agents must always know before acting | `AGENTS.md` |
+| What is true right now but may change soon | `docs/status.md` |
+| Why a durable decision exists | `docs/adr/` |
+| How to repeat a workflow | `docs/guides/` |
+| Exact fields, commands, manifests, schemas | `docs/reference/` |
+| What changed in a version and how to migrate | `docs/releases/` |
+
+If a fact seems to belong in several places, pick one owner and link from the others only when discovery would otherwise fail.
+
 ## Update Pattern
 
 1. Identify the changed fact.
-2. Put it in exactly one owning layer.
-3. Add links from other layers only when discoverability requires it.
-4. Remove or revise stale claims in older layers.
-5. Record validation evidence for release or status claims.
+2. Search for existing claims about the same fact.
+3. Put the new truth in exactly one owning layer.
+4. Add links from other layers only when discoverability requires it.
+5. Remove or revise stale claims in older layers.
+6. Record validation evidence for release or status claims.
+
+## Change-To-Docs Matrix
+
+| Change | Check |
+| --- | --- |
+| Command, script, install path, CLI behavior | README, guides, reference |
+| Repo/package/skill layout | README, AGENTS, ADR, status |
+| Version, tag, release, local install | release notes, status, manifest reference |
+| Architecture or workflow decision | ADR, status if currently active |
+| Agent behavior or routing | AGENTS, skill body, relevant reference |
+| Public API, schema, manifest field | reference docs, release notes if user-visible |
+
+## Stale-Doc Cleanup
+
+When changing docs, also scan nearby files for:
+
+- old repository names, package names, and URLs
+- obsolete commands or paths
+- version numbers copied outside the manifest or release notes
+- planned language that now describes shipped behavior
+- validation claims without a command or date
+- duplicated instructions that should route to a skill or guide
 
 ## ADR Template
 
@@ -38,3 +83,13 @@ Use this when a change affects more than one documentation layer.
 ```
 
 Keep ADRs short. They explain why a durable choice exists; they are not implementation diaries.
+
+## Quality Gate
+
+Before handoff, verify:
+
+- every changed fact has one owner
+- volatile state is not in README or AGENTS
+- durable decisions are not only in status or chat
+- install/release commands were checked or clearly marked unverified
+- stale references from the old state were removed or intentionally retained with a migration note

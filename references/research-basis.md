@@ -20,7 +20,25 @@ Checked on 2026-07-03.
 - Semantic Versioning and GitHub release/tag practices support independent version files and release tags for separately published child skills.
 - GitHub repository rename documentation supports updating local remotes after a repository rename instead of relying on redirects as the durable configuration.
 
+Second-pass non-design skill review, checked on 2026-07-03:
+
+- Agent Skills and Claude skill guidance reinforce progressive disclosure: keep the entry skill focused, route to resources, scripts, and examples only when needed, and evaluate skills against realistic tasks.
+- Existing mature local skills such as `using-superpowers`, `systematic-debugging`, `verification-before-completion`, `writing-plans`, `requesting-code-review`, and the bundled `documents` skill show useful mechanisms: strong trigger metadata, non-negotiable gates for fragile work, red-flag lists, explicit output contracts, and render/test evidence before completion claims.
+- Diataxis and developer-documentation guidance reinforce documentation by user need and task type rather than by dumping all facts into README.
+- Google Engineering Practices and GitHub review guidance support small reviewable changes, clear reviewer expectations, and concrete defect findings over preference-heavy review.
+- Fowler's refactoring and internal-quality writing supports behavior-preserving refactors, evidence-backed code-health work, and rejecting speculative architecture without current pressure.
+
 Access note: `https://adr.github.io/` failed during the live check with a TLS connection error, so the ADR signal was verified through `https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions` and `https://github.com/architecture-decision-record/architecture-decision-record` instead.
+
+Source index for the second pass:
+
+- Agent Skills: `https://agentskills.io/`
+- Anthropic Claude Code skills: `https://docs.anthropic.com/en/docs/claude-code/skills`
+- Diataxis: `https://diataxis.fr/`
+- Google Engineering Practices review docs: `https://google.github.io/eng-practices/review/`
+- GitHub pull request review docs: `https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests`
+- Fowler on internal quality: `https://martinfowler.com/articles/is-quality-worth-cost.html`
+- Refactoring: `https://refactoring.com/`
 
 ## Mechanisms Borrowed
 
@@ -30,6 +48,8 @@ Access note: `https://adr.github.io/` failed during the live check with a TLS co
 - Use per-skill versions and tag prefixes so child skills can release independently.
 - Use docs layering: README for stable usage, AGENTS for always-on routing, docs/status for volatile state, ADRs for durable decisions.
 - Use code-quality guidance as review heuristics, not as permission for broad rewrites. Evidence comes from changed files, tests, caller impact, and repeated friction.
+- Use mature-skill mechanisms as structure, not wording: hard gates, red flags, concise default bodies, handoff packets, and verification evidence.
+- For non-design skills, optimize for agent control and cost: task classification, facts ownership, code-health risk classes, and explicit stop conditions reduce unnecessary context loading and rework.
 
 ## Boundaries
 
@@ -38,3 +58,4 @@ Access note: `https://adr.github.io/` failed during the live check with a TLS co
 - Do not duplicate long reference material across child skills.
 - Do not claim plugin-style discovery as the primary install path until it is verified in the target runtime.
 - Do not promote every useful practice into a default gate; default paths must stay cheap and references should load only when relevant.
+- Do not import another skill's full process wholesale. Borrow the repeatable control mechanism and adapt it to Noootwo Vibe's four-skill model.

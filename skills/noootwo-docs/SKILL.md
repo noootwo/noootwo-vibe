@@ -1,11 +1,13 @@
 ---
 name: noootwo-docs
-description: Use when maintaining project documentation after code, workflow, release, architecture, repository, or product changes. Owns README, AGENTS, docs/status, ADRs, guides, reference docs, release notes, and documentation-state hygiene without duplicating facts across layers.
+description: Use when maintaining project documentation after code, workflow, release, architecture, repository, product, API, installation, validation, or agent-instruction changes. Owns README, AGENTS, docs/status, ADRs, guides, reference docs, release notes, documentation-state hygiene, anti-duplication, and stale-doc cleanup.
 ---
 
 # Noootwo Docs
 
-Use this skill when documentation must reflect actual project state. The goal is not more documents; it is the right fact in the right layer.
+Use this skill when documentation must reflect actual project state. The goal is not more documents; it is the right fact in the right layer, with stale facts removed.
+
+Keep the default path lightweight: inspect the change, update the owning layer, and avoid turning docs into a second implementation.
 
 ## Document Layers
 
@@ -17,15 +19,19 @@ Use this skill when documentation must reflect actual project state. The goal is
 - `docs/reference/`: stable command, schema, manifest, or API references.
 - `docs/releases/`: per-skill release notes, migration notes, and tag history.
 
+If a repository uses different names, map by responsibility rather than forcing this exact layout.
+
 ## Update Rules
 
 1. Inspect the actual change before writing docs.
-2. Pick the lowest document layer that owns the fact.
-3. Update one source of truth; link rather than copy when another layer needs awareness.
-4. Record volatile state in `docs/status.md`, not README or AGENTS.
-5. Record lasting architectural or workflow decisions as ADRs.
-6. Keep AGENTS short enough to stay useful in every session.
-7. Do not claim validation, release, or readiness unless evidence exists.
+2. Classify each changed fact as `usage`, `agent rule`, `current state`, `decision`, `procedure`, `reference`, or `release`.
+3. Pick one owning layer for each fact.
+4. Update that source of truth; link rather than copy when another layer needs awareness.
+5. Remove or revise stale claims in nearby docs during the same pass.
+6. Record volatile state in `docs/status.md`, not README or AGENTS.
+7. Record lasting architecture or workflow decisions as ADRs.
+8. Keep AGENTS short enough to stay useful in every session.
+9. Do not claim validation, release, or readiness unless fresh evidence exists.
 
 ## After Any Completed Change
 
@@ -40,6 +46,17 @@ Check whether the change affects:
 
 If yes, update the owning document before final handoff.
 
+If no, state that docs were checked and intentionally unchanged.
+
+## Freshness Rules
+
+- Prefer exact commands, paths, versions, and dates over vague status language.
+- Put temporary progress, active risks, and next actions in status docs.
+- Put durable decisions in ADRs after they are accepted, not as a chat recap.
+- Put repeated procedures in guides only after they are likely to be reused.
+- Put schemas, command references, and manifests in reference docs.
+- Put release/user migration notes in release docs before tagging.
+
 ## Anti-Drift Rules
 
 - Do not write an operational diary in README.
@@ -47,5 +64,7 @@ If yes, update the owning document before final handoff.
 - Do not spread the same command list across README, AGENTS, and docs/reference.
 - Do not leave docs saying `noootwo-design` when the live repo/package is `noootwo-vibe`.
 - Do not preserve stale examples for backward compatibility unless the migration note says so explicitly.
+- Do not update README first just because it is visible; update the owning layer first.
+- Do not describe intent as fact. If something is planned, label it planned.
 
-For deeper layer guidance, read `references/docs-layering.md` when changing multiple documentation levels in one task.
+For deeper layer guidance, read `references/docs-layering.md` when changing multiple documentation levels, deciding whether to add an ADR, or cleaning up stale docs.
