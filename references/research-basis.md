@@ -60,6 +60,20 @@ Source index for the third pass:
 - Fowler on internal quality: `https://martinfowler.com/articles/is-quality-worth-cost.html`
 - Refactoring: `https://refactoring.com/`
 
+Fourth-pass lean-review enhancement, checked on 2026-07-06:
+
+- The user-provided PDF `为什么你的AI代码越来越冗余？答案在这套七层流程里.pdf` describes Ponytail's seven-layer reduction process and frames the problem as AI-generated over-engineering, dependency growth, and token-cost bloat.
+- Ponytail's public repository is MIT licensed and was checked at commit `40e50d9e03242aa5dd53ac771950f9127362b25f`.
+- Ponytail's corrected public benchmark language distinguishes average agentic results from earlier single-shot claims. Noootwo Review should cite the benchmark as external evidence, not as automatic savings for a current repository.
+- The useful reusable mechanism is the ordered reduction ladder plus safety floor, not Ponytail's full plugin runtime, hooks, benchmarks, assets, or cross-editor packaging.
+
+Source index for the fourth pass:
+
+- Local PDF: `/Users/notwo/Downloads/为什么你的AI代码越来越冗余？答案在这套七层流程里.pdf`
+- Ponytail repository: `https://github.com/DietrichGebert/ponytail`
+- Ponytail license: `https://github.com/DietrichGebert/ponytail/blob/main/LICENSE`
+- Ponytail source note: `skills/noootwo-review/references/external/ponytail/SOURCE.md`
+
 ## Mechanisms Borrowed
 
 - Keep publishable units independently addressable under `skills/`.
@@ -72,6 +86,9 @@ Source index for the third pass:
 - For non-design skills, optimize for agent control and cost: task classification, facts ownership, code-health risk classes, and explicit stop conditions reduce unnecessary context loading and rework.
 - Make `workflow` the entry point for project onboarding: skill inventory, foundation health, gap planning, and closure. Keep docs/review as owners of their respective fixes.
 - Prefer audit plus minimal templates over automatic scaffolding. Missing foundation should produce the smallest useful AGENTS/status/ADR/release/validation patch.
+- Add lean review as a Noootwo Review lens for over-engineering: delete, reuse, standard library, native platform, installed dependency, shrink fragmented code, then minimum new code.
+- Preserve safety before reduction: validation, error handling, security, accessibility, business invariants, and necessary checks are not bloat.
+- Keep external sources as selected references with license and source notes; avoid vendoring whole repositories unless the runtime needs executable code.
 
 ## Boundaries
 
@@ -82,3 +99,5 @@ Source index for the third pass:
 - Do not promote every useful practice into a default gate; default paths must stay cheap and references should load only when relevant.
 - Do not import another skill's full process wholesale. Borrow the repeatable control mechanism and adapt it to Noootwo Vibe's four-skill model.
 - Do not let project-health review take over docs or workflow. It reports defects and routes ownership.
+- Do not claim current-repo token, dollar, or speed savings from lean review unless there is a measured before/after baseline.
+- Do not let lean review become code golf. Smaller code is only acceptable when required behavior and safety are preserved.

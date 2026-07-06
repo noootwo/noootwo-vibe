@@ -8,7 +8,7 @@
 
 ## Current Validation Surface
 
-Last verified: 2026-07-03 on `codex/noootwo-vibe-monorepo` after aligning all public skills to `v0.3.0`.
+Last verified: 2026-07-06 on `codex/noootwo-vibe-monorepo` for the `v0.4.0` lean-review enhancement.
 
 - `python scripts/validate_skill_workspace.py .`
 - `npx -y skills add . --list`
@@ -18,14 +18,15 @@ Last verified: 2026-07-03 on `codex/noootwo-vibe-monorepo` after aligning all pu
 - temporary incomplete-project simulation for workflow/docs/review audit contracts
 - Noootwo Design harness checks under `skills/noootwo-design/scripts/`
 
-Latest result: workspace validation and aggregate/design discovery passed after aligning `noootwo-design` to `0.3.0`. The earlier v0.3.0 governance pass also passed full-depth discovery, per-skill discovery, Python compile, skill quick validation, incomplete-project audit contract, and design harness bootstrap checks.
+Latest result: workspace validation, Python compile, skill quick validation, aggregate discovery, full-depth discovery, per-skill discovery, and lean-review content contract checks passed.
 
 ## Active Risks
 
 - GitHub plugin-style ingestion is treated as packaging metadata; `skills` CLI discovery is the verified installation surface.
 - `noootwo-design` contains the previous design workflow and must remain self-contained for single-skill publishing.
-- Workflow/docs/review `v0.3.0` should stay concise at the entry point and keep project-governance guidance in direct references.
+- Workflow/docs/review `v0.4.0` should stay concise at the entry point and keep project-governance and lean-review guidance in direct references.
 - The new project audit templates should stay minimal; do not turn them into automatic full scaffolding without evidence from repeated use.
+- Lean review must not claim current-repo token, dollar, or speed savings without a measured baseline.
 
 ## Next Actions
 

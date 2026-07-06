@@ -1,5 +1,11 @@
 # noootwo-review Releases
 
+## v0.4.0
+
+- Added lean review for over-engineering, redundant code, YAGNI violations, dependency bloat, and token-cost expansion.
+- Added `references/lean-code-review.md` with the seven-rung reduction check, `Lean Findings` output, safety floor, and gain honesty boundary.
+- Added selected Ponytail source and MIT license notes under `references/external/ponytail/` without vendoring the full external repository.
+
 ## v0.3.0
 
 - Added project-health review for validation entrypoints, CI, module boundaries, release risk, context cost, and duplicated truth sources.

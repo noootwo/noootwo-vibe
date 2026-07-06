@@ -1,7 +1,7 @@
 {
   "name": "noootwo-vibe",
-  "version": "0.3.0",
-  "description": "A Noootwo multi-skill workspace for controlled AI software development, documentation, code review, and design work.",
+  "version": "0.4.0",
+  "description": "A Noootwo multi-skill workspace for controlled AI software development, documentation, lean code review, and design work.",
   "author": {
     "name": "Noootwo",
     "url": "https://github.com/noootwo/noootwo-vibe"
@@ -21,7 +21,7 @@
   "interface": {
     "displayName": "Noootwo Vibe",
     "shortDescription": "AI development workflow skill suite",
-    "longDescription": "Noootwo Vibe bundles focused skills for AI workflow control, project governance, documentation hygiene, code-health review, and research-backed design work.",
+    "longDescription": "Noootwo Vibe bundles focused skills for AI workflow control, project governance, documentation hygiene, lean code-health review, and research-backed design work.",
     "developerName": "Noootwo",
     "category": "Development",
     "capabilities": [
@@ -31,7 +31,7 @@
     "defaultPrompt": [
       "Use Noootwo Workflow to plan this development task and route to the right skill.",
       "Use Noootwo Docs to update project documentation after this change.",
-      "Use Noootwo Review to check code quality and refactoring risk before release.",
+      "Use Noootwo Review to check code quality, lean-review bloat, and refactoring risk before release.",
       "Use Noootwo Design for UI, visual, artifact, or frontend design work."
     ],
     "brandColor": "#3E6B5A"

@@ -7,6 +7,7 @@ Use this when reviewing maintainability, planning a refactor, or deciding whethe
 - Practice Basis
 - Evidence Sources
 - Risk Model
+- Lean-Review Lens
 - Project-Health Lens
 - Refactoring Heuristics
 - Refactor Decision Gate
@@ -22,6 +23,7 @@ Use this when reviewing maintainability, planning a refactor, or deciding whethe
 - Code review practice favors small, understandable changes and clear findings over broad preference lists.
 - Internal quality pays down change cost; speculative architecture can increase it.
 - Agent-written code needs extra checks for context cost, duplicated truths, and unjustified abstractions.
+- Lean code practice reduces unnecessary code only after understanding behavior and protecting validation, safety, accessibility, and checks.
 
 ## Evidence Sources
 
@@ -48,6 +50,20 @@ Classify each issue before proposing a fix:
 | `context cost` | Does the structure force agents to load too much unrelated material? |
 
 Do not file a finding just because a different style is possible. Tie every finding to one of these risks.
+
+## Lean-Review Lens
+
+Use `lean-code-review.md` when the risk is unnecessary code expansion rather than a conventional correctness defect:
+
+- speculative functionality or configuration
+- local code duplicating project helpers
+- hand-rolled standard-library behavior
+- custom platform features where native APIs fit
+- new dependency when an installed dependency or a few lines suffice
+- one-use abstraction layers, factories, adapters, or wrappers
+- fragmented helper code that makes future agents load more context
+
+Report these as `Lean Findings`. Keep safety-related code even when it is longer.
 
 ## Project-Health Lens
 
@@ -133,6 +149,9 @@ Verification Gaps
 
 Project Defects
 - Only for project-health gaps that affect safe change, release, handoff, or context cost.
+
+Lean Findings
+- Only for over-engineering or bloat findings with a concrete smaller replacement.
 
 Summary
 - One short paragraph only after findings.

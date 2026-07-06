@@ -1,4 +1,4 @@
 interface:
   display_name: "Noootwo Review"
-  short_description: "Code quality and refactoring guardrails"
-  default_prompt: "Use $noootwo-review to inspect code-health and project-health risk, AI-generated structure drift, refactoring need, test coverage, verification gaps, and release readiness."
+  short_description: "Code quality, lean review, and refactoring guardrails"
+  default_prompt: "Use $noootwo-review to inspect code-health, project-health, lean-review bloat, AI-generated structure drift, refactoring need, test coverage, verification gaps, and release readiness."

@@ -1,5 +1,10 @@
 # noootwo-workflow Releases
 
+## v0.4.0
+
+- Aligned `noootwo-workflow` version with the unified Noootwo Vibe `0.4.0` skill set.
+- No workflow behavior changed in this release.
+
 ## v0.3.0
 
 - Added project onboarding mode for skill inventory, foundation health checks, and controlled takeover of unfamiliar repositories.

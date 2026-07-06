@@ -6,10 +6,10 @@ It publishes four focused skills:
 
 | Skill | Purpose | Version |
 | --- | --- | --- |
-| `noootwo-workflow` | AI workflow control, project skill audits, foundation checks, task routing, planning, and closure | `0.3.0` |
-| `noootwo-docs` | Documentation state, docs audits, README/AGENTS/docs layering, ADRs, and release notes | `0.3.0` |
-| `noootwo-review` | Code quality, project-health review, maintainability, refactoring discipline, and implementation review | `0.3.0` |
-| `noootwo-design` | Research-backed UI/design workflow, `.noootwo/` harness, artifact review, and design handoff | `0.3.0` |
+| `noootwo-workflow` | AI workflow control, project skill audits, foundation checks, task routing, planning, and closure | `0.4.0` |
+| `noootwo-docs` | Documentation state, docs audits, README/AGENTS/docs layering, ADRs, and release notes | `0.4.0` |
+| `noootwo-review` | Code quality, lean review, project-health review, maintainability, refactoring discipline, and implementation review | `0.4.0` |
+| `noootwo-design` | Research-backed UI/design workflow, `.noootwo/` harness, artifact review, and design handoff | `0.4.0` |
 
 The repository root is not a published skill. It is the shared workspace for manifests, docs, validation, release helpers, and CI.
 
@@ -80,7 +80,7 @@ Use `noootwo-workflow` first when the task is broad, multi-step, release-bound, 
 
 Use `noootwo-docs` when a change affects project state, user-facing instructions, repository layout, documentation audits, ADRs, release notes, or agent instructions.
 
-Use `noootwo-review` when code quality, project health, refactoring, test strategy, architecture hygiene, or maintainability risk matters.
+Use `noootwo-review` when code quality, lean review, over-engineering, dependency bloat, project health, refactoring, test strategy, architecture hygiene, or maintainability risk matters.
 
 Use `noootwo-design` for UI, visual systems, frontend design, screenshots, artifact review, `.noootwo/` deliverables, and design implementation handoff.
 
@@ -127,10 +127,10 @@ The readiness command is expected to fail on a freshly bootstrapped pending harn
 
 Each child skill has its own `VERSION` file and tag prefix:
 
-- `noootwo-workflow@v0.3.0`
-- `noootwo-docs@v0.3.0`
-- `noootwo-review@v0.3.0`
-- `noootwo-design@v0.3.0`
+- `noootwo-workflow@v0.4.0`
+- `noootwo-docs@v0.4.0`
+- `noootwo-review@v0.4.0`
+- `noootwo-design@v0.4.0`
 
 The root `VERSION` records the workspace version only. Do not use it as the release source for child skills.
 
