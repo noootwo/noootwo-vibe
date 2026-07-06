@@ -1,5 +1,10 @@
 # noootwo-docs Releases
 
+## v0.5.0
+
+- Aligned `noootwo-docs` version with the unified Noootwo Vibe `0.5.0` skill set.
+- No documentation-layering behavior changed in this release.
+
 ## v0.4.0
 
 - Aligned `noootwo-docs` version with the unified Noootwo Vibe `0.4.0` skill set.

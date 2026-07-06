@@ -11,12 +11,20 @@ Status: pending; fill or refresh when a direction moves toward implementation
 
 ## Color
 
+- Neutral temperature: warm TBD; cool TBD; chromatic TBD; deliberately neutral TBD; rationale TBD
 - Canvas: TBD
 - Surface: TBD
+- Border: TBD
 - Text: primary TBD; secondary TBD; disabled TBD; inverse TBD
 - Accent: TBD
 - Semantic states: success TBD; warning TBD; danger TBD; info TBD; selected TBD; focus TBD
+- Semantic harmonization: TBD
 - Data colors: categorical TBD; sequential TBD; diverging TBD; neutral TBD
+- Shadow hue: TBD
+- Gradient boundary: TBD
+- Icon and illustration color source: TBD
+- Contrast proof: TBD
+- Color exceptions: TBD
 - Forbidden color moves: TBD
 
 ## Typography

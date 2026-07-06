@@ -1,5 +1,11 @@
 # noootwo-review Releases
 
+## v0.5.0
+
+- Added performance review for frontend loading/rendering, backend/API latency, database/query cost, algorithm/runtime hotspots, resource use, and performance regression risk.
+- Added `references/performance-review.md` with the evidence ladder, `Performance Findings` output, project-level performance defects, and before/after honesty boundary.
+- Kept performance review evidence-first: missing baselines, traces, query plans, benchmarks, or production metrics are verification gaps, not grounds for speculative rewrites.
+
 ## v0.4.0
 
 - Added lean review for over-engineering, redundant code, YAGNI violations, dependency bloat, and token-cost expansion.

@@ -13,6 +13,18 @@ Use this when a review needs concrete failure checks. Keep `review-rubric.md` fo
 
 If 2 or more flags are present, the design cannot be `ready`. If 3 or more are present, default to `pivot`.
 
+## Color Calibration Flags
+
+Use [color-system-calibration.md](color-system-calibration.md) before applying these flags. They are not automatic failures; they block `ready` only when they visibly damage hierarchy, brand fit, artifact cohesion, or accessibility.
+
+- `dead neutral stack`: canvas, surface, border, and muted text use generic black/white/gray values without product reason.
+- `foreign semantic color`: error, warning, success, selected, or focus colors look imported from another system or fail non-color communication.
+- `black-shadow sticker`: shadows read as pasted black overlays instead of depth, boundary, or state.
+- `gradient endpoint drift`: one or more gradient stops drift into pure white, dead gray, or an unrelated hue without direction rationale.
+- `icon gray drift`: icons or illustration shadows/highlights use a separate gray family instead of inheriting text or surface tokens.
+
+Do not flag deliberate high-contrast, document/editor, data-heavy, native-system, brand-specified, or platform accessibility neutrals as defects without artifact evidence.
+
 ## Designer-Grade Failure Flags
 
 - `AI gradient SaaS`

@@ -6,7 +6,7 @@ This repository is a multi-skill workspace. The root is not a published skill; t
 
 - Use `$noootwo-workflow` for multi-step AI development workflow, project skill audits, foundation health checks, task routing, planning, release sequencing, and keeping work controlled.
 - Use `$noootwo-docs` for README, AGENTS, docs/status, ADRs, guides, reference docs, release notes, documentation audits, and documentation hygiene.
-- Use `$noootwo-review` for code quality, lean review, over-engineering, dependency bloat, project-health defects, maintainability, refactoring discipline, test strategy, and implementation review.
+- Use `$noootwo-review` for code quality, performance review, lean review, over-engineering, dependency bloat, project-health defects, maintainability, refactoring discipline, test strategy, and implementation review.
 - Use `$noootwo-design` for UI/design work, `.noootwo/` deliverables, artifact review, screenshot critique, visual systems, and design handoff.
 
 ## Repository Rules

@@ -1,6 +1,6 @@
 ---
 name: noootwo-review
-description: Use for code quality, maintainability, refactoring discipline, architecture hygiene, implementation review, test strategy review, project-health review, lean review, over-engineering, bloat, YAGNI, redundant code, unnecessary dependencies, token-cost control, AI-generated code risk, review findings, code-health triage, and preventing software from becoming unstable, under-verified, over-abstracted, hard to change, or expensive to reason about.
+description: Use for code quality, maintainability, refactoring discipline, architecture hygiene, implementation review, test strategy review, project-health review, performance review, frontend loading/rendering, backend/API latency, database/query cost, algorithm hotspots, lean review, over-engineering, bloat, YAGNI, redundant code, unnecessary dependencies, token-cost control, AI-generated code risk, review findings, code-health triage, and preventing software from becoming unstable, under-verified, over-abstracted, slow, hard to change, or expensive to reason about.
 ---
 
 # Noootwo Review
@@ -10,6 +10,8 @@ Use this skill when the project needs code to stay easy to understand, change, t
 It can report project-level defects when they affect engineering health, such as missing validation entrypoints, unclear CI, unreproducible release flow, unstable module boundaries, or duplicated sources of truth. It classifies those defects and hands ownership to `$noootwo-workflow` or `$noootwo-docs` when appropriate.
 
 It can also run a lean review for over-engineering, code bloat, unnecessary abstraction, avoidable dependencies, and AI-generated code expansion. Lean review reduces only unnecessary code; it never removes safety, validation, accessibility, or required behavior.
+
+It can also run a performance review for frontend loading/rendering, backend/API latency, database/query cost, algorithm/runtime hotspots, resource use, and performance regression risk. Performance review requires evidence: baseline, trace, profiler output, query plan, benchmark, or a clearly reported verification gap.
 
 ## Review Stance
 
@@ -22,6 +24,7 @@ Prioritize concrete risk over aesthetic preference:
 - abstractions with no current pressure
 - over-engineered code, redundant layers, avoidable dependencies, and token-cost bloat
 - missing tests around shared behavior
+- credible performance risk in loading, rendering, API latency, database/query cost, algorithm complexity, CPU, memory, or throughput
 - files that force agents to load too much context
 - docs, comments, or names that hide the real model
 
@@ -31,7 +34,7 @@ Do not expand scope just because code can be improved. Review the current change
 
 1. Read the changed files, nearest tests, callers, public interfaces, and docs that describe the behavior.
 2. Identify the behavior that must remain true and the evidence that proves it.
-3. Classify risk: `correctness`, `changeability`, `reviewability`, `testability`, `operability`, or `context cost`.
+3. Classify risk: `correctness`, `changeability`, `reviewability`, `testability`, `operability`, `performance`, or `context cost`.
 4. Identify the smallest structure that supports the current requirement.
 5. Separate defects from future improvements.
 6. Prefer local fixes unless the same friction appears in multiple places.
@@ -81,6 +84,8 @@ When reviewing the whole project rather than a narrow diff, add `Project Defects
 
 When the user asks for lean review, bloat review, YAGNI review, dependency trimming, token-cost reduction, or over-engineering cleanup, use `Lean Findings` from `references/lean-code-review.md` before broader review commentary.
 
+When the user asks for performance review, slow behavior, latency, throughput, LCP, INP, CLS, bundle size, render jank, N+1, query plans, caching, CPU, memory, algorithm hotspots, or performance regression risk, use `Performance Findings` from `references/performance-review.md` before optional cleanup.
+
 ## Closure Gate
 
 Before approving or finishing work, verify:
@@ -88,6 +93,7 @@ Before approving or finishing work, verify:
 - tests or checks cover the changed behavior
 - module boundaries match current responsibility
 - no speculative framework or dependency was added
+- performance claims are backed by before/after evidence or recorded as verification gaps
 - public docs or release notes were routed to `$noootwo-docs` when needed
 - broader workflow or skill routing was routed to `$noootwo-workflow` when needed
 
@@ -95,4 +101,5 @@ For deeper guidance, read:
 
 - `references/code-quality-playbook.md` when planning a refactor, reviewing architecture, deciding whether to split files, or evaluating repeated AI implementation friction.
 - `references/lean-code-review.md` when reviewing over-engineering, redundant code, YAGNI violations, dependency bloat, or token-cost expansion.
+- `references/performance-review.md` when reviewing frontend loading/rendering, backend/API latency, database/query cost, algorithm/runtime hotspots, resource use, or performance regression risk.
 - `references/project-health-review.md` when reviewing project foundation, validation paths, release risk, CI, module boundaries, context cost, or repeated AI friction.

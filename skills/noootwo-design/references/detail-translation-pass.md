@@ -14,6 +14,9 @@ Sources reviewed for this mechanism:
 - Atlassian design tokens: tokens act as a single source of truth for design decisions, including modifiers and state-aware naming.
   - Source: https://atlassian.design/foundations/tokens/design-tokens/
   - Evidence level: official
+- Material Color Utilities, WCAG, and MDN color mixing guidance support color-system calibration through role-based tones, contrast checks, and perceptual color spaces such as HCT or OKLCH when practical.
+  - Sources: https://github.com/material-foundation/material-color-utilities, https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html, https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix
+  - Evidence level: official implementation plus standards/platform documentation
 - Carbon motion overview: components may include microinteractions, but product teams still need an overarching motion system so the product feels coherent rather than assembled.
   - Source: https://carbondesignsystem.com/elements/motion/overview/
   - Evidence level: official
@@ -35,6 +38,7 @@ Typical failure shape:
 - token choices are mostly correct
 - component defaults survive into final UI
 - states, spacing, dividers, icons, and motion timings drift back to framework norms
+- default grays, default error red, pure-black shadows, pure-white gradient endpoints, or icon gray stacks survive without product reason
 - the page reads as "close to the intended style" instead of feeling fully authored
 
 This pass exists to stop that last-mile drift.
@@ -89,6 +93,19 @@ Review details that change whether the UI feels authored:
 - microcopy cadence, label tone, and placeholder text
 
 This should happen on artifacts, not only in prose.
+
+### 5. Color Calibration Pass
+
+Use [color-system-calibration.md](color-system-calibration.md) when color drift is part of the generic feel. Check:
+
+- neutral temperature across canvas, surface, border, and muted text
+- shadow hue and whether depth should be shadow, glow, border, or plane contrast
+- semantic colors and subtle state backgrounds, especially error, warning, success, focus, and selected
+- gradient endpoints and mesh bases staying inside the token family
+- icons inheriting text tokens and illustrations sharing the UI shadow/highlight family
+- contrast proof and explicit exceptions for pure white, pure black, platform grays, or exact brand neutrals
+
+This pass calibrates the token system. It must not turn into a blanket ban on pure neutrals or a replacement for typography, layout, and artifact review.
 
 ## Cost And Applicability
 

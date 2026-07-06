@@ -1,5 +1,11 @@
 # noootwo-design Releases
 
+## v0.5.0
+
+- Added `references/color-system-calibration.md` as an on-demand lens for brand-aware neutral temperature, shadow hue, text hierarchy, semantic color harmonization, gradient boundaries, icon/illustration token inheritance, dark mode, grayscale checks, and contrast proof.
+- Connected color calibration to the design spec, `.noootwo/design-tokens.md` template, detail-translation pass, and review gates without making it a default quick-mode cost.
+- Explicitly rejected absolute color rules: pure white, pure black, pure gray, platform colors, and exact brand neutrals remain valid when product context, accessibility, or artifact evidence supports them.
+
 ## v0.4.0
 
 - Aligned `noootwo-design` version with the unified Noootwo Vibe `0.4.0` skill set.

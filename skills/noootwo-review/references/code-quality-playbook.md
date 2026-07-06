@@ -8,6 +8,7 @@ Use this when reviewing maintainability, planning a refactor, or deciding whethe
 - Evidence Sources
 - Risk Model
 - Lean-Review Lens
+- Performance-Review Lens
 - Project-Health Lens
 - Refactoring Heuristics
 - Refactor Decision Gate
@@ -24,6 +25,7 @@ Use this when reviewing maintainability, planning a refactor, or deciding whethe
 - Internal quality pays down change cost; speculative architecture can increase it.
 - Agent-written code needs extra checks for context cost, duplicated truths, and unjustified abstractions.
 - Lean code practice reduces unnecessary code only after understanding behavior and protecting validation, safety, accessibility, and checks.
+- Performance practice favors baselines, budgets, profiling, traces, query plans, and before/after verification over speculative optimization.
 
 ## Evidence Sources
 
@@ -33,6 +35,7 @@ Use this when reviewing maintainability, planning a refactor, or deciding whethe
 - failing or missing checks
 - module size and responsibility drift
 - release or migration risk
+- performance baselines, budgets, traces, profiles, query plans, benchmarks, or production metrics
 - docs that describe the changed behavior
 - generated code paths, prompts, schemas, or config that may duplicate logic
 
@@ -47,6 +50,7 @@ Classify each issue before proposing a fix:
 | `reviewability` | Is the change too broad, indirect, or mixed to review safely? |
 | `testability` | Is the behavior hard to prove with a focused command? |
 | `operability` | Will failure be hard to diagnose in CI, deploy, or runtime? |
+| `performance` | Will this create measurable user latency, render jank, resource cost, query cost, throughput, or algorithm/runtime risk? |
 | `context cost` | Does the structure force agents to load too much unrelated material? |
 
 Do not file a finding just because a different style is possible. Tie every finding to one of these risks.
@@ -65,12 +69,25 @@ Use `lean-code-review.md` when the risk is unnecessary code expansion rather tha
 
 Report these as `Lean Findings`. Keep safety-related code even when it is longer.
 
+## Performance-Review Lens
+
+Use `performance-review.md` when the risk is slow or expensive behavior rather than structure alone:
+
+- frontend loading: LCP, INP, CLS, bundle size, image/font loading, render-blocking assets
+- frontend rendering: rerenders, layout thrashing, long tasks, animation jank, memory leaks
+- backend/API: p95/p99 latency, timeouts, payload size, unbounded concurrency, cache correctness
+- database/query: N+1, missing pagination, query plans, index evidence, slow-query visibility
+- algorithm/runtime: complexity growth, CPU or memory hotspots, allocation churn, benchmark validity
+
+Report these as `Performance Findings` when there is evidence or credible risk. If evidence is missing, report a performance verification gap instead of claiming a speedup.
+
 ## Project-Health Lens
 
 Use `project-health-review.md` when the risk is not inside one code block but in the project system around it:
 
 - missing validation entrypoint or test command
 - CI not covering release-relevant checks
+- missing performance budgets, benchmarks, load tests, traces, dashboards, or slow-query visibility for performance-sensitive paths
 - unclear release/version/install path
 - module boundaries that make future changes expensive
 - duplicated project facts across docs, config, prompts, or scripts
@@ -146,6 +163,12 @@ Open Questions
 
 Verification Gaps
 - Commands not run or behavior not covered.
+
+Performance Findings
+- Only for measured or credible performance risk, with baseline/profiler/query-plan/benchmark evidence or an explicit verification gap.
+
+Performance Verification Gaps
+- Missing baseline, budget, trace, profiler output, query plan, benchmark, or production metric.
 
 Project Defects
 - Only for project-health gaps that affect safe change, release, handoff, or context cost.

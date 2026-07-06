@@ -74,6 +74,54 @@ Source index for the fourth pass:
 - Ponytail license: `https://github.com/DietrichGebert/ponytail/blob/main/LICENSE`
 - Ponytail source note: `skills/noootwo-review/references/external/ponytail/SOURCE.md`
 
+Fifth-pass design color-system calibration, checked on 2026-07-06:
+
+- The user-provided PDF `你的UI廉价，错在颜色.pdf` argues that UI quality often depends on subtle color temperature flowing through neutral surfaces, shadows, text hierarchy, semantic states, gradients, icons, and illustrations.
+- The reusable mechanism is role-based color calibration and artifact review, not the PDF's absolute wording such as "never use pure neutrals" or "premium UI has no exceptions."
+- Material Color Utilities supports HCT, tonal palettes, dynamic colors, and contrast-aware utilities as practical color-system mechanisms.
+- WCAG contrast and use-of-color guidance provides the safety floor: text must remain readable and color cannot be the only way to communicate information.
+- MDN `color-mix()` and OKLCH/Oklab guidance supports perceptual color spaces for gradients and chroma-preserving mixes when a project can use them.
+- Carbon, Atlassian, and Figma design-system guidance supports semantic/role-based tokens instead of hard-coded values.
+- Tailwind v4 is a current framework signal that modern CSS theming can use CSS variables, `color-mix()`, and OKLCH values without requiring a heavy design-token runtime.
+
+Source index for the fifth pass:
+
+- Local PDF: `/Users/notwo/Downloads/你的UI廉价，错在颜色.pdf`
+- Material Color Utilities: `https://github.com/material-foundation/material-color-utilities`
+- WCAG contrast minimum: `https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html`
+- WCAG use of color: `https://www.w3.org/WAI/WCAG21/Understanding/use-of-color.html`
+- MDN color-mix: `https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix`
+- MDN OKLCH: `https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch`
+- Carbon color tokens: `https://carbondesignsystem.com/elements/color/tokens/`
+- Atlassian design tokens: `https://atlassian.design/foundations/tokens/design-tokens/`
+- Figma semantic systems: `https://www.figma.com/blog/the-future-of-design-systems-is-semantic/`
+- Tailwind v4: `https://tailwindcss.com/blog/tailwindcss-v4`
+
+Sixth-pass performance-review enhancement, checked on 2026-07-06:
+
+- Core Web Vitals frames frontend user experience around loading, responsiveness, and visual stability; useful review targets are LCP, INP, and CLS rather than vague "fast enough" claims.
+- Lighthouse CI and WebPageTest show repeatable web-performance mechanisms: lab reports, budgets, waterfalls, traces, and regression checks.
+- Google SRE's four golden signals support backend/service review around latency, traffic, errors, and saturation.
+- OpenTelemetry provides the common observability model for traces, metrics, and logs across distributed systems.
+- k6 supports repeatable API/system load tests, but Noootwo Review should only route to existing project commands or recommend a smallest viable check; it should not vendor k6.
+- PostgreSQL `EXPLAIN` represents the database-query evidence model: review needs query plans, cardinality, index behavior, and realistic row counts before recommending query/index changes.
+- JMH, BenchmarkDotNet, Criterion.rs, and pytest-benchmark show that algorithm/runtime performance should use language-appropriate benchmark harnesses instead of intuition-only rewrites.
+- Local mature skills such as `optimize`, `audit`, and `systematic-debugging` reinforced the same mechanism: measure before optimizing, locate the bottleneck, and preserve correctness.
+
+Source index for the sixth pass:
+
+- Core Web Vitals: `https://web.dev/articles/vitals`
+- Lighthouse CI: `https://github.com/GoogleChrome/lighthouse-ci`
+- WebPageTest: `https://www.webpagetest.org/`
+- Google SRE monitoring: `https://sre.google/sre-book/monitoring-distributed-systems/`
+- OpenTelemetry: `https://opentelemetry.io/`
+- k6: `https://k6.io/docs/`
+- PostgreSQL EXPLAIN: `https://www.postgresql.org/docs/current/using-explain.html`
+- JMH: `https://openjdk.org/projects/code-tools/jmh/`
+- BenchmarkDotNet: `https://benchmarkdotnet.org/`
+- Criterion.rs: `https://bheisler.github.io/criterion.rs/book/`
+- pytest-benchmark: `https://pytest-benchmark.readthedocs.io/`
+
 ## Mechanisms Borrowed
 
 - Keep publishable units independently addressable under `skills/`.
@@ -89,6 +137,10 @@ Source index for the fourth pass:
 - Add lean review as a Noootwo Review lens for over-engineering: delete, reuse, standard library, native platform, installed dependency, shrink fragmented code, then minimum new code.
 - Preserve safety before reduction: validation, error handling, security, accessibility, business invariants, and necessary checks are not bloat.
 - Keep external sources as selected references with license and source notes; avoid vendoring whole repositories unless the runtime needs executable code.
+- Add color-system calibration as a Noootwo Design lens for brand temperature, neutral roles, shadow hue, semantic harmonization, gradient boundaries, icon/illustration token inheritance, and contrast proof.
+- Treat OKLCH/HCT as recommended color-engineering tools when practical, not mandatory dependencies.
+- Add performance review as a Noootwo Review lens for frontend loading/rendering, backend/API latency, database/query cost, algorithm/runtime hotspots, resource use, and performance regression risk.
+- Require performance evidence: baseline, budget, trace, profile, query plan, benchmark, production metric, or an explicit verification gap.
 
 ## Boundaries
 
@@ -101,3 +153,7 @@ Source index for the fourth pass:
 - Do not let project-health review take over docs or workflow. It reports defects and routes ownership.
 - Do not claim current-repo token, dollar, or speed savings from lean review unless there is a measured before/after baseline.
 - Do not let lean review become code golf. Smaller code is only acceptable when required behavior and safety are preserved.
+- Do not turn color-system calibration into a universal ban on pure white, pure black, pure gray, platform system colors, or exact brand neutrals.
+- Do not use color temperature to override accessibility, semantic-state recognizability, data readability, product context, or artifact evidence.
+- Do not claim faster load time, lower latency, lower CPU/memory, throughput gain, or cost reduction without before/after evidence.
+- Do not let performance review justify speculative rewrites, unsafe caching, weaker validation, weaker accessibility, broken data consistency, or removal of diagnostic logging.

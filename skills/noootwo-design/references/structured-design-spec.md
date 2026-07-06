@@ -36,6 +36,9 @@ Define roles, not just swatches.
 - Accent: one dominant action or identity accent with usage limits.
 - Semantic: success, warning, danger, info, selected, focus.
 - Data: categorical, sequential, diverging, and neutral data colors when relevant.
+- Neutral temperature: warm, cool, chromatic, deliberately neutral, or unknown, with rationale.
+- Contrast proof: the text/background and state pairs that must pass accessibility checks.
+- Color exceptions: where pure white, pure black, platform/system colors, or exact brand neutrals are intentional.
 - Forbidden color moves: generic gradients, glow, over-saturated accents, or brand-inconsistent colors.
 
 ### 4. Typography Roles
