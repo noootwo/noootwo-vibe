@@ -1,6 +1,6 @@
 ---
 name: noootwo-review
-description: Use for code quality, maintainability, refactoring discipline, architecture hygiene, implementation review, test strategy review, project-health review, performance review, frontend loading/rendering, backend/API latency, database/query cost, algorithm hotspots, lean review, over-engineering, bloat, YAGNI, redundant code, unnecessary dependencies, token-cost control, AI-generated code risk, review findings, code-health triage, and preventing software from becoming unstable, under-verified, over-abstracted, slow, hard to change, or expensive to reason about.
+description: Use for lens-based code quality, maintainability, refactoring discipline, architecture hygiene, implementation review, test strategy review, project-health review, performance review, frontend loading/rendering, backend/API latency, database/query cost, algorithm hotspots, lean review, over-engineering, bloat, YAGNI, redundant code, unnecessary dependencies, token-cost control, AI-generated code risk, review findings, code-health triage, and preventing software from becoming unstable, under-verified, over-abstracted, slow, hard to change, or expensive to reason about.
 ---
 
 # Noootwo Review
@@ -12,6 +12,21 @@ It can report project-level defects when they affect engineering health, such as
 It can also run a lean review for over-engineering, code bloat, unnecessary abstraction, avoidable dependencies, and AI-generated code expansion. Lean review reduces only unnecessary code; it never removes safety, validation, accessibility, or required behavior.
 
 It can also run a performance review for frontend loading/rendering, backend/API latency, database/query cost, algorithm/runtime hotspots, resource use, and performance regression risk. Performance review requires evidence: baseline, trace, profiler output, query plan, benchmark, or a clearly reported verification gap.
+
+## Review Lens Selector
+
+Choose review lenses before reading too broadly. A narrow diff should use only the lenses that match the change; a project audit or release review may use several.
+
+- `correctness`: behavior, contracts, data integrity, security, migrations, release breakage
+- `testability`: missing or brittle proof for changed behavior
+- `architecture boundary`: ownership, public interfaces, module/package boundaries, duplicated source of truth
+- `lean/bloat`: over-engineering, YAGNI, unnecessary dependencies, redundant code, context-cost expansion
+- `performance`: loading, rendering, API latency, query cost, algorithm/runtime hotspots, resource use
+- `project health`: validation entrypoints, CI, release path, docs/status drift, observability, handoff risk
+- `AI-code/context cost`: large files, generic wrappers, hidden state, repeated rules, comments that overclaim
+- `release readiness`: versioning, tags, publish/install steps, rollback, user-visible notes
+
+State which lenses were applied, which obvious lenses were skipped, and why.
 
 ## Review Stance
 
@@ -32,12 +47,13 @@ Do not expand scope just because code can be improved. Review the current change
 
 ## First Pass
 
-1. Read the changed files, nearest tests, callers, public interfaces, and docs that describe the behavior.
-2. Identify the behavior that must remain true and the evidence that proves it.
-3. Classify risk: `correctness`, `changeability`, `reviewability`, `testability`, `operability`, `performance`, or `context cost`.
-4. Identify the smallest structure that supports the current requirement.
-5. Separate defects from future improvements.
-6. Prefer local fixes unless the same friction appears in multiple places.
+1. Select lenses from the Review Lens Selector.
+2. Read the changed files, nearest tests, callers, public interfaces, and docs that describe the behavior.
+3. Identify the behavior that must remain true and the evidence that proves it.
+4. Classify risk: `correctness`, `changeability`, `reviewability`, `testability`, `operability`, `performance`, or `context cost`.
+5. Identify the smallest structure that supports the current requirement.
+6. Separate defects from future improvements.
+7. Prefer local fixes unless the same friction appears in multiple places.
 
 ## Refactoring Rules
 
@@ -72,6 +88,15 @@ Lead with findings, ordered by severity. For each finding, include:
 - smallest actionable fix
 
 If there are no findings, say so and note remaining test or verification gaps.
+
+For structured reviews, include:
+
+- applied lenses
+- skipped lenses and reason when they looked plausible but were out of scope
+- evidence read
+- findings with smallest fix
+- verification gaps
+- handoff owner for workflow, docs, or design issues
 
 Use severity labels only when useful:
 

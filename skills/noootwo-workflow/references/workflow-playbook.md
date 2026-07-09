@@ -6,6 +6,7 @@ Use this only when the task is broad enough that a short direct path is not enou
 
 - Practice Basis
 - Project Entry
+- Alignment Checkpoint
 - Routing Matrix
 - Work Size
 - Mode Details
@@ -19,6 +20,7 @@ Use this only when the task is broad enough that a short direct path is not enou
 - Mature process skills use hard gates, red flags, and completion evidence instead of vague encouragement.
 - Agent skill guidance favors progressive disclosure: keep the entry file short and load deeper references only when useful.
 - Modern delivery practice favors small batches, clear ownership, and fresh verification over large speculative plans.
+- High-friction process lowers real usage. Add control only where it prevents a likely wrong decision, missed verification, or expensive rework.
 
 ## Project Entry
 
@@ -28,6 +30,37 @@ Use onboarding mode before normal execution when the project is unfamiliar, unde
 2. Run `project-foundation-check.md` if the project lacks obvious operating instructions, validation commands, release policy, or current state.
 3. If gaps block safe work, use `minimal-foundation-templates.md` through `$noootwo-docs` to add the smallest useful file or section.
 4. Continue with direct, planned, diagnostic, release, or recovery mode.
+
+## Alignment Checkpoint
+
+Use this when a high-impact decision is unresolved and code inspection cannot decide it alone. It is intentionally smaller than a plan.
+
+Trigger examples:
+
+- unclear goal priority, success criteria, or non-goal
+- architecture boundary: which module, package, API, data store, or public contract owns the change
+- release or migration risk
+- design direction, artifact form, or review path
+- missing verification path for a non-trivial change
+
+Do not trigger for:
+
+- one-file direct edits with an obvious check
+- docs copy fixes that do not change project state
+- local polish that preserves an existing UI direction
+- decisions already made in AGENTS, status docs, ADRs, specs, or the user's latest message
+
+Output shape:
+
+```markdown
+Alignment Checkpoint
+- Repo truth checked: files/commands inspected.
+- Decision: one question that changes implementation.
+- Options: 2-3 choices with one recommended default.
+- Outcome: user chose | user delegated to agent | no question needed.
+```
+
+If the user is unavailable and the risk is acceptable, proceed with the recommended default and list it as an assumption. If the wrong answer could cause migration, release, data, security, or product-direction damage, stop for the decision.
 
 ## Routing Matrix
 
@@ -105,11 +138,13 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 
 1. Inspect repo truth before deciding.
 2. If skill needs or foundation are unclear, audit them before planning.
-3. State the smallest viable path.
-4. Implement in slices that can be tested independently.
-5. Run the closest meaningful checks after each risky slice.
-6. Update docs through `$noootwo-docs` when behavior, state, usage, or release changes.
-7. Use `$noootwo-review` for broad code structure, project-health gaps, or release-bound review.
+3. Run an alignment checkpoint only when one unresolved decision can change the work.
+4. State the smallest viable path.
+5. Implement in slices that can be tested independently.
+6. Run the closest meaningful checks after each risky slice.
+7. Update docs through `$noootwo-docs` when behavior, state, usage, or release changes.
+8. Use `$noootwo-review` for broad code structure, project-health gaps, or release-bound review.
+9. Before closing non-direct work, answer: verified, docs affected, review/design needed.
 
 ## Handoff Packet Templates
 
@@ -144,6 +179,7 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 - Do not paste large reference material into plans or summaries.
 - Do not introduce new gates unless they prevent a repeated failure.
 - Collapse repeated status into a single status file instead of rewriting the same fact in README, AGENTS, and release notes.
+- Prefer one short alignment checkpoint over a long intake form.
 
 ## Stop Conditions
 

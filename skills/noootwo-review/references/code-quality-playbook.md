@@ -6,6 +6,7 @@ Use this when reviewing maintainability, planning a refactor, or deciding whethe
 
 - Practice Basis
 - Evidence Sources
+- Review Lens Selector
 - Risk Model
 - Lean-Review Lens
 - Performance-Review Lens
@@ -38,6 +39,23 @@ Use this when reviewing maintainability, planning a refactor, or deciding whethe
 - performance baselines, budgets, traces, profiles, query plans, benchmarks, or production metrics
 - docs that describe the changed behavior
 - generated code paths, prompts, schemas, or config that may duplicate logic
+
+## Review Lens Selector
+
+Select lenses before expanding the review surface:
+
+| Lens | Use when | Evidence |
+| --- | --- | --- |
+| `correctness` | behavior, contract, data, security, migration, or release breakage is plausible | changed code, callers, tests, schemas, migrations, release files |
+| `testability` | behavior is changed but hard to prove | nearest tests, commands, fixtures, manual scenarios |
+| `architecture boundary` | responsibility may belong in another module, API, or package | module ownership, public interfaces, repeated edits |
+| `lean/bloat` | code may be redundant, speculative, or dependency-heavy | imports, dependency manifest, local helpers, actual use count |
+| `performance` | user latency, rendering, query, throughput, CPU, memory, or cost may regress | baseline, trace, profile, query plan, benchmark, metric |
+| `project health` | safe change, release, CI, status, or handoff may be weak | README, AGENTS, docs/status, CI, scripts, release notes |
+| `AI-code/context cost` | generated structure may force future agents to load too much or trust duplicated rules | file size, wrapper layers, prompts, schemas, docs overlap |
+| `release readiness` | version, tag, publish, install, rollback, or user-visible release note matters | manifest, VERSION, tags, release docs, install checks |
+
+For a narrow diff, two or three lenses are usually enough. Do not turn an implementation review into a project audit unless the user asked for it or release/project-health evidence makes it necessary.
 
 ## Risk Model
 
@@ -154,6 +172,11 @@ Use the lowest severity that still reflects the actual failure mode. Do not infl
 Use this shape when a structured review is useful:
 
 ```markdown
+Review Scope
+- Applied lenses: correctness, testability, ...
+- Skipped lenses: performance skipped because the changed path is not runtime-sensitive.
+- Evidence read: changed files, nearest tests, public interfaces, relevant docs.
+
 Findings
 - [P1] Short title - path:line
   Why it matters, concrete failure mode, smallest fix.
@@ -175,6 +198,11 @@ Project Defects
 
 Lean Findings
 - Only for over-engineering or bloat findings with a concrete smaller replacement.
+
+Handoff
+- `$noootwo-workflow`: sequencing, release, or unresolved decision ownership.
+- `$noootwo-docs`: documentation/source-of-truth update ownership.
+- `$noootwo-design`: artifact or UI-quality review ownership.
 
 Summary
 - One short paragraph only after findings.

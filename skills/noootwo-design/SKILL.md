@@ -1,6 +1,6 @@
 ---
 name: noootwo-design
-description: Use when UI design, frontend design, visual redesign, agentic style discovery, influence discovery, existing-project UI adoption, design system extraction, artifact review, screenshot critique, React, Vue, Flutter, SwiftUI, Compose, native app UI, or implementation handoff work needs distinctive and non-generic product design.
+description: Use when UI design, frontend design, quick UI polish, visual redesign, agentic style discovery, influence discovery, existing-project UI adoption, design system extraction, artifact review, screenshot critique, React, Vue, Flutter, SwiftUI, Compose, native app UI, or implementation handoff work needs distinctive and non-generic product design.
 ---
 
 # Noootwo Design
@@ -13,14 +13,17 @@ Use it for new UI pages, app screens, dashboards, workbenches, landing pages, vi
 
 ## Project Context
 
-Durable context lives in `.noootwo/`. If missing, bootstrap minimal context from `assets/noootwo-harness-template/` or run `python scripts/bootstrap_noootwo_harness.py`. Use `--profile deep`, `--profile production`, or `--profile full` only when those templates are needed.
+Durable context lives in `.noootwo/`, but not every UI task needs the full harness. For quick polish, read only the current UI and the nearest existing design truth such as `.noootwo/system.md` or `.noootwo/design-tokens.md` when they exist. Do not bootstrap or fill the whole harness just to adjust a local surface.
 
-Read only what the selected mode needs. Useful files include:
+For standard, deep, production, adoption, or handoff work, bootstrap minimal context from `assets/noootwo-harness-template/` or run `python scripts/bootstrap_noootwo_harness.py` if the project has no `.noootwo/` foundation. Use `--profile deep`, `--profile production`, or `--profile full` only when those templates are needed.
 
-- `.noootwo/system.md`, `.noootwo/design-tokens.md`, `.noootwo/adoption.md`, `.noootwo/product-facts.md`
-- `.noootwo/brief.md`, `.noootwo/style-calibration.md`, `.noootwo/style-discovery.md`, `.noootwo/reference-board.md`, `.noootwo/directions.md`
-- `.noootwo/specs/active-design.md`, `.noootwo/plans/active-implementation.md`
-- `.noootwo/review.md`, `.noootwo/handoff/implementation.md`, `.noootwo/handoff/acceptance.md`, `.noootwo/handoff/assets.md`
+Read only what the selected mode needs. Useful files by stage include:
+
+- quick: current UI, existing `.noootwo/system.md`, existing `.noootwo/design-tokens.md`
+- adopt-project: `.noootwo/adoption.md`, `.noootwo/brief.md`, screenshots/previews, current UI code
+- standard/deep: `.noootwo/brief.md`, `.noootwo/directions.md`, selected discovery references
+- production: `.noootwo/specs/active-design.md`, `.noootwo/plans/active-implementation.md`, tokens, stack notes
+- review/handoff: `.noootwo/review.md`, relevant handoff files, artifact evidence
 
 If a file is missing, stale, or `Status: pending`, refresh only the minimum needed for the current step. Write decisions as explicit contracts with evidence, constraints, unresolved uncertainty, preservation rules, artifact strategy, verification path, and return path.
 
@@ -130,8 +133,9 @@ If the user has not selected a direction and has not delegated the choice, stop 
 
 ### Quick
 
-- Read the current UI plus `.noootwo/system.md` and `.noootwo/design-tokens.md` when available.
+- Read the current UI plus existing `.noootwo/system.md` and `.noootwo/design-tokens.md` when available.
 - Preserve the existing direction unless the user explicitly asks to change it.
+- Do not require a full brief, three directions, approved spec, implementation plan, or readiness validation.
 - Use artifact evidence when available; otherwise state the limitation.
 
 ### Adopt Project
@@ -195,8 +199,8 @@ Return to the earliest stage that can fix the problem:
 
 ## Reference Map
 
-- State: `python scripts/noootwo_status.py <project>`
-- Artifact eval: `python scripts/eval_noootwo_artifacts.py <project> --scenario all`
+- State: `python scripts/noootwo_status.py <project>` for adoption, production, handoff, or workflow debugging; not required for quick polish.
+- Artifact readiness: `python scripts/validate_noootwo_readiness.py <project>` and `python scripts/eval_noootwo_artifacts.py <project> --scenario all` are delivery validation tools for completed or implementation-bound `.noootwo/` work, not entry requirements for every UI task.
 - Core workflow: [workflow-cost-model.md](references/workflow-cost-model.md), [adoption-playbook.md](references/adoption-playbook.md), [project-integration.md](references/project-integration.md), [research-protocol.md](references/research-protocol.md)
 - Discovery: [agentic-style-discovery.md](references/agentic-style-discovery.md), [source-registry.md](references/source-registry.md), [research-source-fallback.md](references/research-source-fallback.md), [reference-board.md](references/reference-board.md)
 - System/spec/tokens: [system-extraction.md](references/system-extraction.md), [design-system-setup.md](references/design-system-setup.md), [structured-design-spec.md](references/structured-design-spec.md), [brief-expansion.md](references/brief-expansion.md), [color-system-calibration.md](references/color-system-calibration.md)

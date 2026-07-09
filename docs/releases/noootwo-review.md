@@ -1,5 +1,11 @@
 # noootwo-review Releases
 
+## v0.6.0
+
+- Added an explicit Review Lens Selector covering correctness, testability, architecture boundaries, lean/bloat, performance, project health, AI-code/context cost, and release readiness.
+- Updated review output expectations to record applied lenses, skipped lenses, evidence read, smallest fixes, verification gaps, and handoff owners.
+- Clarified that narrow diffs should use only relevant lenses instead of becoming full project audits.
+
 ## v0.5.0
 
 - Added performance review for frontend loading/rendering, backend/API latency, database/query cost, algorithm/runtime hotspots, resource use, and performance regression risk.

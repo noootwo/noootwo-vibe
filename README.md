@@ -6,10 +6,10 @@ It publishes four focused skills:
 
 | Skill | Purpose | Version |
 | --- | --- | --- |
-| `noootwo-workflow` | AI workflow control, project skill audits, foundation checks, task routing, planning, and closure | `0.5.0` |
+| `noootwo-workflow` | AI workflow control, alignment checkpoints, project skill audits, foundation checks, task routing, planning, and closure | `0.6.0` |
 | `noootwo-docs` | Documentation state, docs audits, README/AGENTS/docs layering, ADRs, and release notes | `0.5.0` |
-| `noootwo-review` | Code quality, performance review, lean review, project-health review, maintainability, refactoring discipline, and implementation review | `0.5.0` |
-| `noootwo-design` | Research-backed UI/design workflow, `.noootwo/` harness, color-system calibration, artifact review, and design handoff | `0.5.0` |
+| `noootwo-review` | Lens-based code quality, performance review, lean review, project-health review, maintainability, refactoring discipline, and implementation review | `0.6.0` |
+| `noootwo-design` | Research-backed UI/design workflow, lightweight quick polish, `.noootwo/` harness, color-system calibration, artifact review, and design handoff | `0.6.0` |
 
 The repository root is not a published skill. It is the shared workspace for manifests, docs, validation, release helpers, and CI.
 
@@ -76,13 +76,13 @@ npx skills add ./skills/noootwo-design --list
 
 ## Skill Responsibilities
 
-Use `noootwo-workflow` first when the task is broad, multi-step, release-bound, needs routing, or needs a project skill/foundation audit. It decides when to bring in the other Noootwo skills.
+Use `noootwo-workflow` first when the task is broad, multi-step, release-bound, needs routing, or needs a project skill/foundation audit. It uses a lightweight alignment checkpoint only when one unresolved decision can materially change the work.
 
 Use `noootwo-docs` when a change affects project state, user-facing instructions, repository layout, documentation audits, ADRs, release notes, or agent instructions.
 
-Use `noootwo-review` when code quality, performance review, lean review, over-engineering, dependency bloat, project health, refactoring, test strategy, architecture hygiene, or maintainability risk matters.
+Use `noootwo-review` when code quality, performance review, lean review, over-engineering, dependency bloat, project health, refactoring, test strategy, architecture hygiene, or maintainability risk matters. It selects relevant review lenses instead of turning every review into a full audit.
 
-Use `noootwo-design` for UI, visual systems, frontend design, screenshots, artifact review, `.noootwo/` deliverables, and design implementation handoff.
+Use `noootwo-design` for UI, visual systems, frontend design, screenshots, artifact review, `.noootwo/` deliverables, and design implementation handoff. Quick polish stays lightweight and does not require completing the full `.noootwo/` harness.
 
 ## Validation
 
@@ -122,15 +122,16 @@ fi
 ```
 
 The readiness command is expected to fail on a freshly bootstrapped pending harness unless it is used inside a completed design workflow.
+This is a skill-workspace validation check, not a requirement for every quick UI polish task.
 
 ## Release Model
 
 Each child skill has its own `VERSION` file and tag prefix:
 
-- `noootwo-workflow@v0.5.0`
+- `noootwo-workflow@v0.6.0`
 - `noootwo-docs@v0.5.0`
-- `noootwo-review@v0.5.0`
-- `noootwo-design@v0.5.0`
+- `noootwo-review@v0.6.0`
+- `noootwo-design@v0.6.0`
 
 The root `VERSION` records the workspace version only. Do not use it as the release source for child skills.
 

@@ -1,5 +1,11 @@
 # noootwo-workflow Releases
 
+## v0.6.0
+
+- Added a lightweight `alignment checkpoint` for non-trivial work where one unresolved decision can materially change implementation.
+- Added closure triggers for verification, docs impact, and review/design follow-up before finishing non-direct work.
+- Kept small direct edits ceremony-free so workflow control does not become the default cost of every task.
+
 ## v0.5.0
 
 - Aligned `noootwo-workflow` version with the unified Noootwo Vibe `0.5.0` skill set.

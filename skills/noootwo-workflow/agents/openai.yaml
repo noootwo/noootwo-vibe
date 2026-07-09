@@ -1,4 +1,4 @@
 interface:
   display_name: "Noootwo Workflow"
   short_description: "AI workflow routing, project audit, and execution control"
-  default_prompt: "Use $noootwo-workflow to audit needed skills and project foundation, choose direct/planned/diagnostic/release/onboarding flow, route to the right Noootwo skills, and close with evidence."
+  default_prompt: "Use $noootwo-workflow to audit needed skills and project foundation, choose direct/planned/diagnostic/release/onboarding flow, run a lightweight alignment checkpoint only when a high-impact decision is unresolved, route to the right Noootwo skills, and close by checking verification, docs impact, and review/design needs."

@@ -122,6 +122,20 @@ Source index for the sixth pass:
 - Criterion.rs: `https://bheisler.github.io/criterion.rs/book/`
 - pytest-benchmark: `https://pytest-benchmark.readthedocs.io/`
 
+Seventh-pass lightweight-trigger redesign, checked on 2026-07-09:
+
+- The user-provided `grill-me` research screenshot framed the useful mechanism as a small "before action" decision control, not the external project's tone or popularity.
+- Agent Skills and Claude Code skills continue to support progressive disclosure: entry instructions should be short, while deeper references load only when needed.
+- Google Engineering Practices continues to support concrete review expectations and scope control: reviewers should inspect design, functionality, complexity, tests, naming, and comments as relevant, not as an unbounded checklist.
+- Existing Noootwo local evidence shows `noootwo-design` already has many references, a full `.noootwo/` harness, readiness scripts, and eval prompts; adding another default gate would raise friction for quick polish.
+
+Source index for the seventh pass:
+
+- User-provided screenshot: `/var/folders/s8/hsvb57g10c989g2lc4zdps100000gn/T/codex-clipboard-79f6f2ee-26ee-47fb-92c3-1eaf6fa226b1.png`
+- Agent Skills specification: `https://agentskills.io/specification`
+- Anthropic Claude Code skills: `https://docs.anthropic.com/en/docs/claude-code/skills`
+- Google Engineering Practices review docs: `https://google.github.io/eng-practices/review/reviewer/looking-for.html`
+
 ## Mechanisms Borrowed
 
 - Keep publishable units independently addressable under `skills/`.
@@ -141,6 +155,9 @@ Source index for the sixth pass:
 - Treat OKLCH/HCT as recommended color-engineering tools when practical, not mandatory dependencies.
 - Add performance review as a Noootwo Review lens for frontend loading/rendering, backend/API latency, database/query cost, algorithm/runtime hotspots, resource use, and performance regression risk.
 - Require performance evidence: baseline, budget, trace, profile, query plan, benchmark, production metric, or an explicit verification gap.
+- Add workflow alignment checkpoints only where one unresolved decision can change implementation.
+- Make review capability lens-based so narrow diffs stay focused while broader work can explicitly choose project-health, performance, lean, release, or AI-code/context-cost review.
+- Keep Noootwo Design quick mode lightweight; full `.noootwo/` harness completion belongs to standard, deep, production, adoption, review, or handoff work.
 
 ## Boundaries
 
@@ -157,3 +174,6 @@ Source index for the sixth pass:
 - Do not use color temperature to override accessibility, semantic-state recognizability, data readability, product context, or artifact evidence.
 - Do not claim faster load time, lower latency, lower CPU/memory, throughput gain, or cost reduction without before/after evidence.
 - Do not let performance review justify speculative rewrites, unsafe caching, weaker validation, weaker accessibility, broken data consistency, or removal of diagnostic logging.
+- Do not convert the alignment checkpoint into a long questionnaire.
+- Do not make every UI change pay the cost of full `.noootwo/` readiness validation.
+- Do not make every code review a full project audit; choose lenses from the change and evidence.

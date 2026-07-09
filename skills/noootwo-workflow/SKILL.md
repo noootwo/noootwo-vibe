@@ -1,6 +1,6 @@
 ---
 name: noootwo-workflow
-description: Use as the Noootwo commander skill for AI software development workflow control, project onboarding, skill inventory, foundation audits, task triage, multi-skill routing, planning, implementation sequencing, debugging/recovery flow, review checkpoints, documentation handoff, release closure, and preventing agentic project work from becoming chaotic, under-verified, or expensive.
+description: Use as the Noootwo commander skill for AI software development workflow control, lightweight alignment checkpoints, project onboarding, skill inventory, foundation audits, task triage, multi-skill routing, planning, implementation sequencing, debugging/recovery flow, review checkpoints, documentation handoff, release closure, and preventing agentic project work from becoming chaotic, under-verified, or expensive.
 ---
 
 # Noootwo Workflow
@@ -15,6 +15,8 @@ Keep work moving through a controlled loop:
 
 Default to the lightest flow that can still prove the result. Load deeper references only when the task needs them.
 
+Use an `alignment checkpoint` only when it prevents a likely wrong turn. It is a small decision control, not a meeting or questionnaire.
+
 ## First Pass
 
 1. Read the nearest operating truth first: `AGENTS.md`, README, active `docs/status.md`, release notes, package/build metadata, and changed-file context.
@@ -28,6 +30,19 @@ Default to the lightest flow that can still prove the result. Load deeper refere
    - `onboarding`: unfamiliar project, missing process foundation, unclear skill needs, or handoff from another agent
    - `recovery`: prior agent drift, repeated failed fixes, or unclear handoff
 5. Do not add ceremony to direct work; do not skip evidence for risky work.
+
+## Alignment Checkpoint
+
+Trigger this before editing only when the task is non-trivial and a decision could materially change the work: ambiguous goal, high-risk change, multi-file behavior, release, design direction, architecture boundary, public API, migration, or missing verification path.
+
+Run the checkpoint in four steps:
+
+1. Inspect repo truth first.
+2. Name the single highest-impact unresolved decision.
+3. Offer 2-3 meaningful options with one recommended default.
+4. Record one outcome: `user chose`, `user delegated to agent`, or `no question needed`.
+
+Skip it for small direct edits with an obvious verification path.
 
 ## Skill Routing
 
@@ -76,7 +91,13 @@ When control returns, close the loop by checking whether docs, review, release, 
 
 ## Completion Gate
 
-Before calling work done, record:
+Before calling non-direct work done, answer three closure triggers:
+
+- Was the changed behavior verified with the closest meaningful check?
+- Did user-facing docs, status, ADRs, or release notes need updates?
+- Does the result need `$noootwo-review` or `$noootwo-design` to inspect risk or artifact quality?
+
+Then record:
 
 - changed behavior or structure
 - skill/foundation audit result when onboarding or taking over a project

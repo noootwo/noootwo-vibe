@@ -1,5 +1,11 @@
 # noootwo-design Releases
 
+## v0.6.0
+
+- Lowered default quick-mode friction: small polish now reads current UI and existing system/tokens when present, without bootstrapping or completing the full `.noootwo/` harness.
+- Clarified that readiness and artifact eval scripts are delivery/handoff validation tools, not entry requirements for every UI task.
+- Shortened the project `AGENTS.md` snippet and OpenAI prompt so non-trivial gates remain available without making local UI polish feel like a full design-system adoption.
+
 ## v0.5.0
 
 - Added `references/color-system-calibration.md` as an on-demand lens for brand-aware neutral temperature, shadow hue, text hierarchy, semantic color harmonization, gradient boundaries, icon/illustration token inheritance, dark mode, grayscale checks, and contrast proof.
