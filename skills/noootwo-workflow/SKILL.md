@@ -1,35 +1,49 @@
 ---
 name: noootwo-workflow
-description: Use as the Noootwo commander skill for AI software development workflow control, lightweight alignment checkpoints, project onboarding, skill inventory, foundation audits, task triage, multi-skill routing, planning, implementation sequencing, debugging/recovery flow, review checkpoints, documentation handoff, release closure, and preventing agentic project work from becoming chaotic, under-verified, or expensive.
+description: Use as the Noootwo commander skill for AI software development workflow control, lifecycle guardrails, lightweight alignment checkpoints, project onboarding, skill inventory, foundation audits, task triage, multi-skill routing, planning, implementation sequencing, TDD/repro-first decisions, debugging/recovery flow, pre-submit review checkpoints, documentation handoff, release closure, and preventing agentic project work from becoming chaotic, under-verified, or expensive.
 ---
 
 # Noootwo Workflow
 
-Use this skill before or during non-trivial AI-assisted software development when the work needs coordination across implementation, design, docs, review, debugging, release, project onboarding, or multiple Noootwo skills.
+Use this skill before or during non-trivial AI-assisted software development when the work needs coordination across implementation, design, docs, review, debugging, release, project onboarding, or multiple Noootwo skills. Also use it at submit, release, or handoff time when lifecycle checks are needed.
 
 ## Operating Goal
 
 Keep work moving through a controlled loop:
 
-`intake -> repo truth -> skill/foundation audit -> route -> plan -> execute -> verify -> document -> review -> release/handoff`
+`intake -> lifecycle guardrails -> repo truth -> route/mode -> plan -> execute -> verify -> document -> review -> submit/release/handoff`
 
 Default to the lightest flow that can still prove the result. Load deeper references only when the task needs them.
 
+Lifecycle guardrails are always decisions, not always visible ceremony. Small direct work can pass them internally; non-trivial, submit-bound, or release-bound work should state the guardrail result briefly.
+
 Use an `alignment checkpoint` only when it prevents a likely wrong turn. It is a small decision control, not a meeting or questionnaire.
+
+## Lifecycle Guardrails
+
+Before acting at a development, close, submit, release, or handoff point, decide:
+
+- `read-first`: which repo truth must be checked first: `AGENTS.md`, README, `docs/status.md`, ADRs, specs, release notes, package/build metadata, changed files, or only the nearest file context.
+- `pre-implementation`: whether the work needs an alignment checkpoint, TDD/repro-first path, specialist routing, or a verification command before editing.
+- `during-work`: whether the work must be split into verifiable slices to avoid speculative abstractions, dependency bloat, or docs/implementation drift.
+- `pre-close/pre-submit`: whether changed behavior was verified, docs/status/release notes need updates, and `$noootwo-review` or `$noootwo-design` must inspect risk before closing, committing, or releasing.
+
+Do not turn these into a checklist for the user. State them only when the work is non-trivial, the user is about to receive a completed handoff, or a submit/release gate is being crossed.
 
 ## First Pass
 
-1. Read the nearest operating truth first: `AGENTS.md`, README, active `docs/status.md`, release notes, package/build metadata, and changed-file context.
-2. Classify the work by primary motion: `small edit`, `feature`, `bugfix`, `refactor`, `release/ops`, `design`, `documentation`, `review-only`, or `recovery`.
-3. Identify risks before editing: unclear intent, wide blast radius, migration/data risk, brittle tests, public API change, documentation drift, review ambiguity, or missing verification path.
-4. Choose a mode:
+1. Run the lifecycle guardrails at the lightest useful level.
+2. Read the nearest operating truth first: `AGENTS.md`, README, active `docs/status.md`, release notes, package/build metadata, and changed-file context.
+3. Classify the work by primary motion: `small edit`, `feature`, `bugfix`, `refactor`, `release/ops`, `design`, `documentation`, `review-only`, or `recovery`.
+4. Identify risks before editing: unclear intent, wide blast radius, migration/data risk, brittle tests, public API change, documentation drift, review ambiguity, or missing verification path.
+5. Choose a mode:
    - `direct`: small localized work with an obvious check
    - `planned`: multi-file behavior or public workflow change
    - `diagnostic`: bug, failure, regression, or surprising behavior
    - `release`: version, tag, publish, CI, install, or repo metadata work
    - `onboarding`: unfamiliar project, missing process foundation, unclear skill needs, or handoff from another agent
    - `recovery`: prior agent drift, repeated failed fixes, or unclear handoff
-5. Do not add ceremony to direct work; do not skip evidence for risky work.
+6. Do not add ceremony to direct work; do not skip evidence for risky work.
 
 ## Alignment Checkpoint
 
@@ -73,9 +87,10 @@ If the task is a bug or failing check, first establish root cause and reproducti
 - Prefer existing repo patterns over new frameworks or abstractions.
 - Keep files focused enough that future agents can reason about them cheaply.
 - Load only the files needed for the current slice; use references as navigation, not as default context dumps.
+- Use TDD or a repro-first path for bugfixes, behavior changes, public contracts, regression risk, or code whose behavior is not otherwise provable.
 - Do not duplicate long background context into multiple files.
 - Do not let documentation, implementation, and review drift apart; route to `$noootwo-docs` before closing work that changes project behavior or state.
-- Route to `$noootwo-review` before release when the change touches architecture, shared code, dependency shape, or repeated AI friction.
+- Route to `$noootwo-review` before submit or release for code changes. Small diffs can be self-reviewed and directly fixed; larger or risky diffs need a structured review gate.
 
 ## Handoff Contract
 
@@ -91,11 +106,13 @@ When control returns, close the loop by checking whether docs, review, release, 
 
 ## Completion Gate
 
-Before calling non-direct work done, answer three closure triggers:
+Before calling non-direct work done, or before submitting or releasing code changes, answer the closure triggers:
 
 - Was the changed behavior verified with the closest meaningful check?
+- Was TDD/repro-first needed, and if so was it used or recorded as a gap?
 - Did user-facing docs, status, ADRs, or release notes need updates?
 - Does the result need `$noootwo-review` or `$noootwo-design` to inspect risk or artifact quality?
+- If this is submit or release-bound code, did the review gate run or intentionally pass as a small self-review?
 
 Then record:
 

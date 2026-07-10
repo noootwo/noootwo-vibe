@@ -7,6 +7,7 @@ Use this when reviewing maintainability, planning a refactor, or deciding whethe
 - Practice Basis
 - Evidence Sources
 - Review Lens Selector
+- Pre-Submit Review Gate
 - Risk Model
 - Lean-Review Lens
 - Performance-Review Lens
@@ -56,6 +57,26 @@ Select lenses before expanding the review surface:
 | `release readiness` | version, tag, publish, install, rollback, or user-visible release note matters | manifest, VERSION, tags, release docs, install checks |
 
 For a narrow diff, two or three lenses are usually enough. Do not turn an implementation review into a project audit unless the user asked for it or release/project-health evidence makes it necessary.
+
+## Pre-Submit Review Gate
+
+Use this gate before commit, release, or implementation handoff when code changed.
+
+| Diff class | Review action |
+| --- | --- |
+| `small` | Pick one to three relevant lenses, inspect changed files plus nearest tests, fix local issues directly, and record remaining verification gaps. |
+| `medium` | Use a structured review over changed files, nearest callers, public interfaces, and tests; include correctness/testability when behavior changed. |
+| `large/risky` | Add architecture boundary, lean/bloat, AI-code/context cost, project-health, or release-readiness lenses based on evidence; split findings from follow-up work. |
+
+Do not ask the user about local cleanup that has one safe answer. Ask before review fixes that would:
+
+- expand scope beyond the requested change
+- alter product behavior or public contracts
+- introduce or remove a dependency
+- perform a broad behavior-preserving refactor
+- choose between competing architecture or release strategies
+
+For release-bound code, include `release readiness` and check versioning, tags, install path, rollback/handoff notes, docs or release notes, and the closest validation command. For non-code diffs, record why the review gate is not applicable instead of forcing a code review.
 
 ## Risk Model
 

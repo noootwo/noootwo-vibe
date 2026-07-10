@@ -1,5 +1,11 @@
 # noootwo-workflow Releases
 
+## v0.6.1
+
+- Added lifecycle guardrails for read-first, pre-implementation, during-work, and pre-close/pre-submit decisions.
+- Clarified that TDD or repro-first is risk-triggered for bugfixes, behavior changes, public contracts, regression risk, data/migration risk, and hard-to-prove shared code.
+- Made submit/release-bound code route through a review judgment while keeping small direct work low-ceremony.
+
 ## v0.6.0
 
 - Added a lightweight `alignment checkpoint` for non-trivial work where one unresolved decision can materially change implementation.

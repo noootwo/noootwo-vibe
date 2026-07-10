@@ -6,6 +6,7 @@ Use this only when the task is broad enough that a short direct path is not enou
 
 - Practice Basis
 - Project Entry
+- Lifecycle Guardrails
 - Alignment Checkpoint
 - Routing Matrix
 - Work Size
@@ -30,6 +31,62 @@ Use onboarding mode before normal execution when the project is unfamiliar, unde
 2. Run `project-foundation-check.md` if the project lacks obvious operating instructions, validation commands, release policy, or current state.
 3. If gaps block safe work, use `minimal-foundation-templates.md` through `$noootwo-docs` to add the smallest useful file or section.
 4. Continue with direct, planned, diagnostic, release, or recovery mode.
+
+## Lifecycle Guardrails
+
+Use guardrails at development, close, submit, release, and handoff points. They are required judgments, not required ceremony. Small direct work can pass them internally; non-trivial, submit-bound, or release-bound work should show a short result.
+
+### Read-First Guard
+
+Decide what repo truth must be checked before acting:
+
+- `minimal`: current file, changed-file context, and nearest instructions
+- `project`: `AGENTS.md`, README, active `docs/status.md`, package/build metadata, and nearest tests
+- `decision`: ADRs, specs, release notes, public contracts, migrations, or design artifacts
+
+Do not run a full doc crawl for small local edits. Do not skip source-of-truth docs when behavior, public usage, release, architecture, or handoff state can drift.
+
+### Pre-Implementation Guard
+
+Before editing, decide:
+
+- whether an alignment checkpoint is needed
+- whether TDD or repro-first is required
+- which specialist skill owns design, docs, review, or release evidence
+- what command or scenario will prove the change
+
+Use TDD or repro-first when the task is a bugfix, behavior change, public interface change, regression risk, data/migration risk, or hard-to-prove shared code. If no practical test exists, record the manual scenario or verification gap before editing.
+
+### During-Work Guard
+
+Work in slices when the change is medium or larger:
+
+- keep each slice independently reviewable and testable
+- avoid new abstractions or dependencies unless current evidence requires them
+- update docs through `$noootwo-docs` when implementation changes user-visible behavior, state, release facts, or agent instructions
+- reroute to `$noootwo-review` when code shape, dependency shape, or context cost becomes the risk
+
+### Pre-Close / Pre-Submit Guard
+
+Before finishing, committing, releasing, or handing off code changes, check:
+
+- closest meaningful verification ran or the gap is explicit
+- docs/status/ADR/release notes were updated or intentionally unchanged
+- `$noootwo-review` ran for submit-bound or release-bound code
+- `$noootwo-design` reviewed UI/artifact quality when visual behavior changed
+
+For small diffs, run a narrow self-review and directly fix local issues. For medium, broad, or risky diffs, run a structured review gate. Ask the user only when the fix would expand scope, alter product behavior, introduce a larger refactor, or choose between real tradeoffs.
+
+Short output shape when visible:
+
+```markdown
+Lifecycle Guardrails
+- Read first: files or docs checked.
+- TDD/repro: used | not needed | gap recorded.
+- Verification: command or scenario.
+- Docs: updated | not affected | routed.
+- Review: self-review | structured gate | not needed for non-code.
+```
 
 ## Alignment Checkpoint
 
@@ -136,15 +193,16 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 
 ## Default Loop
 
-1. Inspect repo truth before deciding.
-2. If skill needs or foundation are unclear, audit them before planning.
-3. Run an alignment checkpoint only when one unresolved decision can change the work.
-4. State the smallest viable path.
-5. Implement in slices that can be tested independently.
-6. Run the closest meaningful checks after each risky slice.
-7. Update docs through `$noootwo-docs` when behavior, state, usage, or release changes.
-8. Use `$noootwo-review` for broad code structure, project-health gaps, or release-bound review.
-9. Before closing non-direct work, answer: verified, docs affected, review/design needed.
+1. Run lifecycle guardrails at the lightest useful level.
+2. Inspect repo truth before deciding.
+3. If skill needs or foundation are unclear, audit them before planning.
+4. Run an alignment checkpoint only when one unresolved decision can change the work.
+5. State the smallest viable path.
+6. Implement in slices that can be tested independently.
+7. Run the closest meaningful checks after each risky slice.
+8. Update docs through `$noootwo-docs` when behavior, state, usage, or release changes.
+9. Use `$noootwo-review` before submit/release for code changes, and for broad code structure, project-health gaps, or context-cost risk.
+10. Before closing non-direct work, answer: verified, TDD/repro considered, docs affected, review/design needed.
 
 ## Handoff Packet Templates
 
@@ -179,6 +237,7 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 - Do not paste large reference material into plans or summaries.
 - Do not introduce new gates unless they prevent a repeated failure.
 - Collapse repeated status into a single status file instead of rewriting the same fact in README, AGENTS, and release notes.
+- Keep lifecycle guardrails as short decisions; only show them when the task, submit, release, or handoff risk justifies visibility.
 - Prefer one short alignment checkpoint over a long intake form.
 
 ## Stop Conditions

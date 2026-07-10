@@ -1,5 +1,11 @@
 # noootwo-review Releases
 
+## v0.6.1
+
+- Added a pre-submit review gate for code changes before commit, release, or implementation handoff.
+- Clarified diff-size behavior: small diffs get narrow self-review and direct fixes; medium, broad, risky, or release-bound diffs get structured lens-based review.
+- Added the user-escalation boundary for review fixes that expand scope, change product behavior, alter dependencies, or require larger refactoring.
+
 ## v0.6.0
 
 - Added an explicit Review Lens Selector covering correctness, testability, architecture boundaries, lean/bloat, performance, project health, AI-code/context cost, and release readiness.

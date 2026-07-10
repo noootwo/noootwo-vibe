@@ -1,6 +1,6 @@
 ---
 name: noootwo-review
-description: Use for lens-based code quality, maintainability, refactoring discipline, architecture hygiene, implementation review, test strategy review, project-health review, performance review, frontend loading/rendering, backend/API latency, database/query cost, algorithm hotspots, lean review, over-engineering, bloat, YAGNI, redundant code, unnecessary dependencies, token-cost control, AI-generated code risk, review findings, code-health triage, and preventing software from becoming unstable, under-verified, over-abstracted, slow, hard to change, or expensive to reason about.
+description: Use for lens-based code quality, pre-submit review gates, maintainability, refactoring discipline, architecture hygiene, implementation review, test strategy review, project-health review, performance review, frontend loading/rendering, backend/API latency, database/query cost, algorithm hotspots, lean review, over-engineering, bloat, YAGNI, redundant code, unnecessary dependencies, token-cost control, AI-generated code risk, review findings, code-health triage, and preventing software from becoming unstable, under-verified, over-abstracted, slow, hard to change, or expensive to reason about.
 ---
 
 # Noootwo Review
@@ -27,6 +27,16 @@ Choose review lenses before reading too broadly. A narrow diff should use only t
 - `release readiness`: versioning, tags, publish/install steps, rollback, user-visible notes
 
 State which lenses were applied, which obvious lenses were skipped, and why.
+
+## Pre-Submit Review Gate
+
+Use this gate before submitting or releasing code changes, and when `$noootwo-workflow` routes a completed implementation for quality review.
+
+- Small diff: choose one to three relevant lenses, self-review the changed files and nearest tests, directly fix local issues, and avoid a full project audit.
+- Medium, broad, or risky diff: run a structured review with relevant lenses. Include `correctness` and `testability` when behavior changes, plus `architecture boundary`, `lean/bloat`, or `AI-code/context cost` when structure or future maintenance is the risk.
+- Release-bound diff: include `release readiness` and project-health evidence for versioning, tags, install, rollback, and user-visible notes.
+
+Ask the user before applying a review fix only when it expands scope, changes product behavior, introduces a larger refactor, adds/removes dependencies, or chooses between real tradeoffs. Otherwise, make the smallest safe improvement directly.
 
 ## Review Stance
 
@@ -113,11 +123,12 @@ When the user asks for performance review, slow behavior, latency, throughput, L
 
 ## Closure Gate
 
-Before approving or finishing work, verify:
+Before approving, submitting, releasing, or finishing work, verify:
 
 - tests or checks cover the changed behavior
 - module boundaries match current responsibility
 - no speculative framework or dependency was added
+- small review issues were fixed directly, while large scope changes were routed back to `$noootwo-workflow` or the user
 - performance claims are backed by before/after evidence or recorded as verification gaps
 - public docs or release notes were routed to `$noootwo-docs` when needed
 - broader workflow or skill routing was routed to `$noootwo-workflow` when needed
