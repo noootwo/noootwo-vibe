@@ -1,6 +1,6 @@
 # ADR 0004: Use lightweight triggered workflow control
 
-- Status: accepted
+- Status: superseded by ADR 0005 for the public skill set; lifecycle guardrail decisions remain accepted
 - Date: 2026-07-09
 
 ## Context

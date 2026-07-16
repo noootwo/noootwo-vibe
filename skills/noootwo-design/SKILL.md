@@ -1,15 +1,15 @@
 ---
 name: noootwo-design
-description: Use when UI design, frontend design, quick UI polish, visual redesign, agentic style discovery, influence discovery, existing-project UI adoption, design system extraction, artifact review, screenshot critique, React, Vue, Flutter, SwiftUI, Compose, native app UI, or implementation handoff work needs distinctive and non-generic product design.
+description: Use when UI design, visual design, frontend design, quick UI polish, visual redesign, agentic style discovery, influence discovery, existing-project UI adoption, design system extraction, artifact review, screenshot critique, React, Vue, Flutter, SwiftUI, Compose, native app UI, or implementation handoff work needs distinctive and non-generic UI/frontend execution. Use after the product path is clear enough; route to noootwo-product when requirements, feature scope, user flow, IA, interaction model, states, acceptance criteria, usability, or cognitive-cost choices are unclear.
 ---
 
 # Noootwo Design
 
-Noootwo Design is a design workflow protocol for non-trivial UI work. It routes by task structure, not by surface keywords. The goal is to keep design work inside a reliable loop:
+Noootwo Design is a design workflow protocol for non-trivial UI and frontend experience work. It routes by task structure, not by surface keywords. It translates clarified product paths into visual systems, UI artifacts, frontend handoff, and artifact review. It does not own product requirement definition. The goal is to keep design work inside a reliable loop:
 
 `intake -> exploration -> directions -> decision -> design contract -> implementation plan -> artifact -> review -> handoff`
 
-Use it for new UI pages, app screens, dashboards, workbenches, landing pages, visual redesign, typography, motion, art direction, screenshot review, design-system extraction, and implementation handoff. Do not use it for backend-only work, CLI tasks, pure logic bug fixes, or refactors with no UI impact.
+Use it for new UI pages, app screens, dashboards, workbenches, landing pages, visual redesign, typography, motion, art direction, screenshot review, design-system extraction, and implementation handoff when the user task and product path are clear enough. Do not use it for backend-only work, CLI tasks, pure logic bug fixes, refactors with no UI impact, or unresolved feature scope and user-flow decisions that belong to `$noootwo-product`.
 
 ## Project Context
 
@@ -37,6 +37,7 @@ Before choosing a mode, classify the task on these dimensions:
 - `artifact verifiability`: can the current environment produce a reviewable artifact, screenshot, preview, or nearest equivalent?
 - `system continuity`: should the current system be preserved, or must it be reinterpreted or replaced?
 - `artifact family`: is the target best treated as a UI surface, fixed-canvas graphic, slide deck, or live artifact?
+- `product clarity`: are the real user, main path, required states, and acceptance criteria clear enough for design execution?
 
 Use those dimensions to route:
 
@@ -50,6 +51,8 @@ Use those dimensions to route:
 
 Do not route by surface label alone. A poster, dashboard, landing page, route screen, or HTML prototype may all use the same workflow if the task structure is the same.
 
+If product clarity is missing, stop and route to `$noootwo-product` for a Product Checkpoint or Product Choice Challenge. Do not use visual direction to decide what should exist.
+
 ## Workflow Contract
 
 For non-trivial UI work, follow this sequence:
@@ -58,7 +61,7 @@ For non-trivial UI work, follow this sequence:
 
 Stage meaning:
 
-- `intake`: state the objective, audience/context, success criteria, constraints, and unresolved uncertainty.
+- `intake`: state the objective, product checkpoint or delegated product assumption, audience/context, success criteria, constraints, and unresolved uncertainty.
 - `exploration`: inspect existing UI/system truth, artifact constraints, and reference evidence.
 - `direction brainstorm`: compare materially different paths and recommend one.
 - `user decision`: resolve high-impact ambiguity or record explicit delegated choice.
@@ -80,6 +83,7 @@ Artifact-family implications:
 These are hard stops, not recommendations:
 
 - If the result depends on aesthetic, brand, audience, or use-context tradeoffs, do not implement before the direction decision is recorded.
+- If the result depends on unresolved feature scope, user flow, information architecture, state model, or acceptance criteria, route to `$noootwo-product` before implementation.
 - If the task introduces a new structure, new visual language, or new information hierarchy, do not implement before the exploration summary is recorded in `.noootwo/brief.md`.
 - If the work is non-trivial UI implementation, do not edit UI files before `.noootwo/specs/active-design.md` and `.noootwo/plans/active-implementation.md` are completed and approved or explicitly delegated.
 - If there is no reviewable artifact or explicit blocker, do not claim `ready`.
@@ -96,6 +100,7 @@ Allowed exceptions:
 Ask the user whenever a high-impact uncertainty can materially change the result. High-impact uncertainty includes:
 
 - unclear goal priority
+- unclear real user, feature scope, user path, state model, or acceptance criteria
 - unclear brand or taste posture
 - unclear audience or use context
 - unclear artifact form or review path
@@ -104,7 +109,7 @@ Ask the user whenever a high-impact uncertainty can materially change the result
 
 The protocol:
 
-1. externalize the uncertainty in `.noootwo/brief.md` or `.noootwo/directions.md`
+1. route product-shaped uncertainty to `$noootwo-product`; keep visual/aesthetic uncertainty in `.noootwo/brief.md` or `.noootwo/directions.md`
 2. present 2-3 meaningful options with one recommendation
 3. record either the user choice or `User delegated choice to agent`
 4. do not continue past the blocked stage until one of those is true
@@ -135,6 +140,7 @@ If the user has not selected a direction and has not delegated the choice, stop 
 
 - Read the current UI plus existing `.noootwo/system.md` and `.noootwo/design-tokens.md` when available.
 - Preserve the existing direction unless the user explicitly asks to change it.
+- If the requested tweak exposes an unclear user path or state model, keep the UI change small and route the product question instead of broadening design scope.
 - Do not require a full brief, three directions, approved spec, implementation plan, or readiness validation.
 - Use artifact evidence when available; otherwise state the limitation.
 
@@ -178,6 +184,7 @@ Return to the earliest stage that can fix the problem:
 - no real comparison between viable directions: return to `direction brainstorm`
 - unresolved high-impact choice: return to `user decision`
 - structure, hierarchy, or system rules missing: return to `design contract`
+- unresolved product scope, user flow, state model, or acceptance criteria: return to `$noootwo-product`
 - artifact path, token mapping, or drift risks undefined: return to `implementation plan`
 - structure is right but execution is weak: return to `artifact`
 - overflow, clipping, or viewport failure: return to `responsive pass`
@@ -188,8 +195,9 @@ Return to the earliest stage that can fix the problem:
 ## Hard Rules
 
 - Establish design-system truth before inventing aesthetics.
+- Establish product-path truth before designing new UI structure.
 - Visual evidence beats style adjectives.
-- Never default to `Inter-only`, `system-only`, `hero + cards`, generic shadcn-like UI, or Flutter `Scaffold + AppBar + Card + ListView` without product reason.
+- Never default to `Inter-only`, `system-only`, `hero + cards`, generic shadcn-like UI, or Flutter `Scaffold + AppBar + Card + ListView` without product and UI reason.
 - Do not replace one generic template with another.
 - Do not imitate a specific designer or artist's signature look. Borrow mechanisms and reject mimicry.
 - Do not present a direction menu without openable case links or inspectable evidence.

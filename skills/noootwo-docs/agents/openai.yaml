@@ -1,4 +1,4 @@
 interface:
   display_name: "Noootwo Docs"
   short_description: "Documentation state and update steward"
-  default_prompt: "Use $noootwo-docs to audit missing/stale/duplicated/wrong-layer/unverified docs, classify changed facts, update the owning README/AGENTS/docs/ADR/release layer, and remove stale documentation."
+  default_prompt: "Use $noootwo-docs to audit missing/stale/duplicated/wrong-layer/unverified docs, classify changed workflow/product/design/review/release facts, update the owning README/AGENTS/docs/status/ADR/reference/release layer, and remove stale documentation without inventing product, design, or technical decisions."

@@ -17,6 +17,7 @@ Use this to prevent Noootwo Design from becoming too expensive for ordinary UI w
 - Do not bootstrap or complete the entire `.noootwo/` harness for quick polish.
 - Do not add a new mode for full redesign. Use the full redesign checkpoint inside `deep` or `adopt-project -> deep`.
 - If the user asks for minor polish or to preserve the current system, use `quick`.
+- If the user path, feature scope, interaction model, states, or acceptance criteria are unclear, route to `$noootwo-product` before design escalation.
 - If the user asks to redo all UI or abandon the current visual language, the cost of discovery and user direction selection is intentional. Stop at the direction menu before implementation.
 - For non-quick UI implementation, the approved design spec and implementation plan are intentional cost controls. They are cheaper than reworking a bad UI after code is written.
 - Use the detail-translation layer only for implementation-bound work, production review, or post-review drift. Do not make it the default cost of quick polish or early direction exploration.

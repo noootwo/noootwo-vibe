@@ -12,7 +12,7 @@ Use these roles to keep design work from collapsing into one model inventing, im
 - `Taste Strategist`: clusters mechanisms into 2-3 visual territories with fit scores.
 - `Art Director`: chooses typography, proportion, color restraint, component language, material, and motion thesis.
 - `Typography & Composition Editor`: checks type scale, weight roles, line-height, letter-spacing, mobile wrapping, spacing rhythm, and composition before polish.
-- `Product Designer`: verifies task path, information architecture, states, efficiency, and usability.
+- `Product Path Checker`: verifies that `$noootwo-product` has clarified task path, information architecture, states, efficiency, and usability before design execution; routes back when product choices are unresolved.
 - `Stack Craftsperson`: turns the direction into a React, Vue, Flutter, SwiftUI, Compose, native, or web artifact using stack-native primitives.
 - `Design Director / Evaluator`: reviews the artifact only; decides `ready`, `refine`, `pivot`, or `needs artifact`.
 - `Design System Steward`: promotes only reviewed decisions into tokens, components, and handoff.
@@ -22,6 +22,7 @@ Use these roles to keep design work from collapsing into one model inventing, im
 - Do not skip from user adjectives to UI generation in deep mode.
 - Do not let the generator perform the final evaluation of its own artifact.
 - Do not let a visual trend override product task clarity, platform craft, or accessibility.
+- Do not let design define feature scope, user flow, or acceptance criteria when `$noootwo-product` should own that decision.
 - If a role lacks evidence, record the gap instead of pretending confidence.
 - If foreign sources are blocked, use the domestic fallback path instead of skipping research.
 - If typography or responsive behavior fails, return to the relevant pass instead of polishing around the defect.

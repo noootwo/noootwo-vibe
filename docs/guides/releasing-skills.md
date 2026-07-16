@@ -7,5 +7,6 @@
 5. Commit the change.
 6. Create a tag using the skill's `tagPrefix` from `skills.json`, for example `noootwo-review@vX.Y.Z`.
 7. Push the branch and tags.
+8. Run `python scripts/sync_local_install.py` for local installs. It syncs to `~/.agents/skills` and removes duplicate Noootwo copies from `~/.codex/skills` when the agent-root copy exists.
 
 Do not use the root `VERSION` as a child-skill release source.

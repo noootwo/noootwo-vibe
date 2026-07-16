@@ -1,6 +1,6 @@
 # Skills Manifest Reference
 
-`skills.json` is the source of truth for public skills.
+`skills.json` is the source of truth for the five public skills.
 
 Fields:
 
@@ -14,3 +14,5 @@ Fields:
 - `skills[].tagPrefix`: prefix used for release tags.
 
 The workspace validator checks that the manifest matches the filesystem.
+
+The expected public skill order is `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-docs`. Do not add `noootwo-architecture`; architecture remains a `noootwo-review` lens.

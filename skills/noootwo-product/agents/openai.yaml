@@ -1,0 +1,4 @@
+interface:
+  display_name: "Noootwo Product"
+  short_description: "User-centered product scope and flow guardrails"
+  default_prompt: "Use $noootwo-product to clarify real users, feature scope, user flows, interaction models, low-cognitive-cost states, acceptance criteria, and product choices before design or implementation."

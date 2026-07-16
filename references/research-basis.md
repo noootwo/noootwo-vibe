@@ -136,6 +136,13 @@ Source index for the seventh pass:
 - Anthropic Claude Code skills: `https://docs.anthropic.com/en/docs/claude-code/skills`
 - Google Engineering Practices review docs: `https://google.github.io/eng-practices/review/reviewer/looking-for.html`
 
+Source index for the eighth pass:
+
+- Google People + AI Guidebook user needs and mental models: `https://pair.withgoogle.com/`
+- Microsoft Human-AI interaction guidelines: `https://www.microsoft.com/en-us/research/blog/guidelines-for-human-ai-interaction-design/`
+- Nielsen Norman Group AI UX and product design guidance: `https://www.nngroup.com/articles/designing-ai-study-guide/`
+- Superpowers brainstorming skill local reference: `/Users/notwo/.codex/plugins/cache/openai-api-curated/superpowers/11c74d6b/skills/brainstorming/SKILL.md`
+
 ## Mechanisms Borrowed
 
 - Keep publishable units independently addressable under `skills/`.
@@ -158,6 +165,8 @@ Source index for the seventh pass:
 - Add workflow alignment checkpoints only where one unresolved decision can change implementation.
 - Make review capability lens-based so narrow diffs stay focused while broader work can explicitly choose project-health, performance, lean, release, or AI-code/context-cost review.
 - Keep Noootwo Design quick mode lightweight; full `.noootwo/` harness completion belongs to standard, deep, production, adoption, review, or handoff work.
+- Add Product Checkpoints for real-user product scope, user paths, state models, cognitive-cost risks, and user-behavior acceptance criteria before UI or implementation when those choices are unclear.
+- Borrow the Product Choice Challenge mechanism from brainstorming-style skills: make 2-3 meaningful options visible with a recommended default, but do not import the heavy always-on spec workflow.
 
 ## Boundaries
 
@@ -166,7 +175,7 @@ Source index for the seventh pass:
 - Do not duplicate long reference material across child skills.
 - Do not claim plugin-style discovery as the primary install path until it is verified in the target runtime.
 - Do not promote every useful practice into a default gate; default paths must stay cheap and references should load only when relevant.
-- Do not import another skill's full process wholesale. Borrow the repeatable control mechanism and adapt it to Noootwo Vibe's four-skill model.
+- Do not import another skill's full process wholesale. Borrow the repeatable control mechanism and adapt it to Noootwo Vibe's current skill model.
 - Do not let project-health review take over docs or workflow. It reports defects and routes ownership.
 - Do not claim current-repo token, dollar, or speed savings from lean review unless there is a measured before/after baseline.
 - Do not let lean review become code golf. Smaller code is only acceptable when required behavior and safety are preserved.
@@ -177,3 +186,4 @@ Source index for the seventh pass:
 - Do not convert the alignment checkpoint into a long questionnaire.
 - Do not make every UI change pay the cost of full `.noootwo/` readiness validation.
 - Do not make every code review a full project audit; choose lenses from the change and evidence.
+- Do not make every product clarification a full PRD; use a Product Choice Challenge only when one choice materially changes the user path or build scope.

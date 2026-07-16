@@ -1,5 +1,12 @@
 # noootwo-workflow Releases
 
+## v0.7.0
+
+- Added specialist-first routing for `noootwo-product` when requirements, feature scope, user paths, IA, interaction models, states, acceptance criteria, usability, or cognitive cost are unclear.
+- Updated lifecycle guardrails, routing matrices, and handoff packets so Product can run before Design or implementation.
+- Clarified that architecture choices continue through `noootwo-review` rather than a separate public skill.
+- Updated local sync behavior to prefer `~/.agents/skills` and remove duplicate Noootwo copies from `~/.codex/skills` when an agent-root copy exists.
+
 ## v0.6.1
 
 - Added lifecycle guardrails for read-first, pre-implementation, during-work, and pre-close/pre-submit decisions.

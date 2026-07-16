@@ -5,13 +5,15 @@ This repository is a multi-skill workspace. The root is not a published skill; t
 ## Skill Routing
 
 - Use `$noootwo-workflow` for multi-step AI development workflow, project skill audits, foundation health checks, task routing, planning, release sequencing, and keeping work controlled.
-- Use `$noootwo-docs` for README, AGENTS, docs/status, ADRs, guides, reference docs, release notes, documentation audits, and documentation hygiene.
-- Use `$noootwo-review` for code quality, performance review, lean review, over-engineering, dependency bloat, project-health defects, maintainability, refactoring discipline, test strategy, and implementation review.
-- Use `$noootwo-design` for UI/design work, `.noootwo/` deliverables, artifact review, screenshot critique, visual systems, and design handoff.
+- Use `$noootwo-product` for requirements, feature scope, real-user paths, IA, interaction models, onboarding, permissions, product states, acceptance criteria, usability, cognitive-cost risks, and Product Choice Challenges.
+- Use `$noootwo-design` for UI/frontend visual work, `.noootwo/` deliverables, artifact review, screenshot critique, visual systems, and design handoff after product path is clear.
+- Use `$noootwo-review` for code quality, architecture-boundary review, performance review, lean review, over-engineering, dependency bloat, project-health defects, maintainability, refactoring discipline, test strategy, and implementation review.
+- Use `$noootwo-docs` for README, AGENTS, docs/status, ADRs, guides, reference docs, release notes, documentation audits, product decision persistence, and documentation hygiene.
 
 ## Repository Rules
 
-- Keep the public skill set exactly: `noootwo-workflow`, `noootwo-docs`, `noootwo-review`, `noootwo-design` unless the user explicitly changes the product model.
+- Keep the public skill set exactly: `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-docs` unless the user explicitly changes the product model.
+- Do not add `noootwo-architecture`; architecture, technical judgment, testing strategy, performance, and maintainability stay under `$noootwo-review`.
 - Keep skill bodies concise; move deeper guidance to direct `references/` files and load them only when needed.
 - Do not add a root `SKILL.md`; it prevents default discovery of all child skills.
 - Keep per-skill versions in `skills/<skill>/VERSION` and mirror them in `skills.json`.

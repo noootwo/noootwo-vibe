@@ -2,14 +2,15 @@
 
 Noootwo Vibe is a multi-skill workspace for controlled AI-assisted software development.
 
-It publishes four focused skills:
+It publishes five focused skills:
 
 | Skill | Purpose | Version |
 | --- | --- | --- |
-| `noootwo-workflow` | AI workflow control, lifecycle guardrails, alignment checkpoints, project skill audits, foundation checks, task routing, planning, and closure | `0.6.1` |
-| `noootwo-docs` | Documentation state, docs audits, README/AGENTS/docs layering, ADRs, and release notes | `0.5.0` |
-| `noootwo-review` | Lens-based code quality, pre-submit review gates, performance review, lean review, project-health review, maintainability, refactoring discipline, and implementation review | `0.6.1` |
-| `noootwo-design` | Research-backed UI/design workflow, lightweight quick polish, `.noootwo/` harness, color-system calibration, artifact review, and design handoff | `0.6.0` |
+| `noootwo-workflow` | AI workflow control, lifecycle guardrails, specialist-first routing, project skill audits, foundation checks, task routing, planning, and closure | `0.7.0` |
+| `noootwo-product` | Real-user product checkpoints, feature scope, user flows, IA, interaction models, states, acceptance criteria, cognitive-cost review, and product choice challenges | `0.1.0` |
+| `noootwo-design` | Research-backed UI/frontend design workflow, lightweight quick polish, `.noootwo/` harness, color-system calibration, artifact review, and design handoff | `0.7.0` |
+| `noootwo-review` | Tech Lead + QA Architect review, architecture-boundary lens, pre-submit gates, performance review, lean review, project-health review, maintainability, and implementation review | `0.7.0` |
+| `noootwo-docs` | Documentation state, docs audits, README/AGENTS/docs layering, product decision persistence, ADRs, and release notes | `0.6.0` |
 
 The repository root is not a published skill. It is the shared workspace for manifests, docs, validation, release helpers, and CI.
 
@@ -67,22 +68,25 @@ npx skills add ./skills/noootwo-design --list
 ├── skills.json
 └── skills/
     ├── noootwo-workflow/
-    ├── noootwo-docs/
+    ├── noootwo-product/
+    ├── noootwo-design/
     ├── noootwo-review/
-    └── noootwo-design/
+    └── noootwo-docs/
 ```
 
 `skills.json` is the source of truth for published child skills, versions, paths, and tag prefixes.
 
 ## Skill Responsibilities
 
-Use `noootwo-workflow` first when the task is broad, multi-step, release-bound, needs routing, or needs a project skill/foundation audit. It owns lifecycle guardrails for read-first, TDD/repro-first, verification, docs, review, submit, and release decisions while keeping small direct work lightweight.
+Use `noootwo-workflow` first when the task is broad, multi-step, release-bound, needs routing, or needs a project skill/foundation audit. It owns lifecycle guardrails for read-first, product/design/review/docs routing, TDD/repro-first, verification, submit, and release decisions while keeping small direct work lightweight.
 
-Use `noootwo-docs` when a change affects project state, user-facing instructions, repository layout, documentation audits, ADRs, release notes, or agent instructions.
+Use `noootwo-product` when requirements, feature scope, real users, user flows, information architecture, interaction models, onboarding, permissions, states, acceptance criteria, usability, cognitive cost, or product choices need clarification. It can challenge the request with 2-3 product options and a recommended default.
 
-Use `noootwo-review` when code quality, pre-submit review, performance review, lean review, over-engineering, dependency bloat, project health, refactoring, test strategy, architecture hygiene, or maintainability risk matters. It selects relevant review lenses instead of turning every review into a full audit.
+Use `noootwo-design` for UI, visual systems, frontend design, screenshots, artifact review, `.noootwo/` deliverables, and design implementation handoff after the product path is clear. Quick polish stays lightweight and does not require completing the full `.noootwo/` harness.
 
-Use `noootwo-design` for UI, visual systems, frontend design, screenshots, artifact review, `.noootwo/` deliverables, and design implementation handoff. Quick polish stays lightweight and does not require completing the full `.noootwo/` harness.
+Use `noootwo-review` when code quality, pre-submit review, performance review, lean review, over-engineering, dependency bloat, project health, refactoring, test strategy, architecture hygiene, or maintainability risk matters. Architecture remains a review lens here; there is no separate `noootwo-architecture` skill.
+
+Use `noootwo-docs` when a change affects project state, user-facing instructions, repository layout, documentation audits, product decisions, ADRs, release notes, or agent instructions.
 
 ## Validation
 
@@ -99,15 +103,19 @@ python scripts/sync_local_install.py --skill noootwo-workflow
 python scripts/sync_local_install.py
 ```
 
+The default sync target is `~/.agents/skills`. When a synced Noootwo skill exists there, the script removes the same `noootwo-*` skill from `~/.codex/skills` so Codex does not show duplicate local skills.
+For non-default targets, pass `--dedupe-codex` to apply the same duplicate cleanup.
+
 Run discovery checks:
 
 ```bash
 npx -y skills add . --list
 npx -y skills add . --list --full-depth
 npx -y skills add ./skills/noootwo-workflow --list
-npx -y skills add ./skills/noootwo-docs --list
-npx -y skills add ./skills/noootwo-review --list
+npx -y skills add ./skills/noootwo-product --list
 npx -y skills add ./skills/noootwo-design --list
+npx -y skills add ./skills/noootwo-review --list
+npx -y skills add ./skills/noootwo-docs --list
 ```
 
 Validate the design harness after changes to `noootwo-design`:
@@ -128,10 +136,11 @@ This is a skill-workspace validation check, not a requirement for every quick UI
 
 Each child skill has its own `VERSION` file and tag prefix:
 
-- `noootwo-workflow@v0.6.1`
-- `noootwo-docs@v0.5.0`
-- `noootwo-review@v0.6.1`
-- `noootwo-design@v0.6.0`
+- `noootwo-workflow@v0.7.0`
+- `noootwo-product@v0.1.0`
+- `noootwo-design@v0.7.0`
+- `noootwo-review@v0.7.0`
+- `noootwo-docs@v0.6.0`
 
 The root `VERSION` records the workspace version only. Do not use it as the release source for child skills.
 

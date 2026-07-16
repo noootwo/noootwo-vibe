@@ -42,6 +42,7 @@ Verification
 ## Workflow Interface
 
 - `$noootwo-workflow` discovers process gaps and asks for docs placement.
+- `$noootwo-product` may produce stable product decisions, user flows, states, or acceptance criteria that need one owning documentation layer.
 - `$noootwo-docs` writes or cleans the documentation source of truth.
 - `$noootwo-review` may report duplicated facts or unverified claims as project defects; docs fixes them without taking over code review.
 

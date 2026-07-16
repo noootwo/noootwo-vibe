@@ -10,12 +10,13 @@ Use this note when deciding whether a Noootwo capability should become a public 
 
 ## Current Noootwo Vibe Decision
 
-Noootwo Vibe publishes four workflow skills:
+Noootwo Vibe publishes five workflow skills:
 
 - `noootwo-workflow`
-- `noootwo-docs`
-- `noootwo-review`
+- `noootwo-product`
 - `noootwo-design`
+- `noootwo-review`
+- `noootwo-docs`
 
 Noootwo Design remains a skill because its value is workflow and judgment, not external system access. If future design work needs Figma, Slides, Drive, asset search, or other connected systems, add those as integrations around the skill family instead of making the design skill a giant tool manual.
 

@@ -10,9 +10,10 @@ from pathlib import Path
 
 EXPECTED_SKILLS = [
     "noootwo-workflow",
-    "noootwo-docs",
-    "noootwo-review",
+    "noootwo-product",
     "noootwo-design",
+    "noootwo-review",
+    "noootwo-docs",
 ]
 
 FRONTMATTER_FIELD_RE = re.compile(r"^([A-Za-z0-9_-]+):\s*(.+?)\s*$")
@@ -186,6 +187,8 @@ def validate_skill_set(root: Path, manifest_items: list[dict], errors: list[str]
     if not skills_root.is_dir():
         add(errors, "missing skills directory")
         return
+    if (skills_root / "noootwo-architecture").exists():
+        add(errors, "noootwo-architecture must not exist; architecture belongs to noootwo-review lenses")
     actual = sorted(path.name for path in skills_root.iterdir() if path.is_dir() and not path.name.startswith("."))
     expected_sorted = sorted(EXPECTED_SKILLS)
     if actual != expected_sorted:

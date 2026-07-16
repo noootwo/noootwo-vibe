@@ -1,5 +1,11 @@
 # noootwo-review Releases
 
+## v0.7.0
+
+- Reframed `noootwo-review` as Tech Lead + QA Architect for code quality, architecture-boundary review, technical judgment, test strategy, performance, maintainability, and release readiness.
+- Clarified that architecture remains a review lens; no public `noootwo-architecture` skill is introduced.
+- Added Product handoff language for product behavior, user-flow, state, or acceptance ambiguity discovered during review.
+
 ## v0.6.1
 
 - Added a pre-submit review gate for code changes before commit, release, or implementation handoff.

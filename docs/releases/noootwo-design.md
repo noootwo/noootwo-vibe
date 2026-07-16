@@ -1,5 +1,11 @@
 # noootwo-design Releases
 
+## v0.7.0
+
+- Narrowed `noootwo-design` to UI, visual systems, frontend execution, artifact review, and handoff after product path clarity.
+- Added explicit route-back behavior to `noootwo-product` when feature scope, user flow, IA, interaction model, states, acceptance criteria, usability, or cognitive-cost decisions are unresolved.
+- Updated design cost and AGENTS guidance without increasing quick-mode `.noootwo` harness requirements.
+
 ## v0.6.0
 
 - Lowered default quick-mode friction: small polish now reads current UI and existing system/tokens when present, without bootstrapping or completing the full `.noootwo/` harness.

@@ -32,9 +32,10 @@ jobs:
       - name: Verify single skill discovery
         run: |
           npx -y skills add ./skills/noootwo-workflow --list
-          npx -y skills add ./skills/noootwo-docs --list
-          npx -y skills add ./skills/noootwo-review --list
+          npx -y skills add ./skills/noootwo-product --list
           npx -y skills add ./skills/noootwo-design --list
+          npx -y skills add ./skills/noootwo-review --list
+          npx -y skills add ./skills/noootwo-docs --list
 
       - name: Verify skill workspace
         run: python scripts/validate_skill_workspace.py .

@@ -1,13 +1,15 @@
 ---
 name: noootwo-review
-description: Use for lens-based code quality, pre-submit review gates, maintainability, refactoring discipline, architecture hygiene, implementation review, test strategy review, project-health review, performance review, frontend loading/rendering, backend/API latency, database/query cost, algorithm hotspots, lean review, over-engineering, bloat, YAGNI, redundant code, unnecessary dependencies, token-cost control, AI-generated code risk, review findings, code-health triage, and preventing software from becoming unstable, under-verified, over-abstracted, slow, hard to change, or expensive to reason about.
+description: Use as the Noootwo Tech Lead and QA Architect skill for lens-based code quality, technical judgment, architecture boundary review, pre-submit review gates, maintainability, refactoring discipline, implementation review, test strategy review, project-health review, performance review, frontend loading/rendering, backend/API latency, database/query cost, algorithm hotspots, lean review, over-engineering, bloat, YAGNI, redundant code, unnecessary dependencies, token-cost control, AI-generated code risk, review findings, code-health triage, release readiness, and preventing software from becoming unstable, under-verified, over-abstracted, slow, hard to change, or expensive to reason about. Architecture is a review lens here; do not create or route to a separate noootwo-architecture skill.
 ---
 
 # Noootwo Review
 
-Use this skill when the project needs code to stay easy to understand, change, test, and review. It is a code-health and implementation-review skill, not a style-only critique.
+Use this skill when the project needs code to stay easy to understand, change, test, and review. It is a Tech Lead and QA Architect skill for technical judgment, code health, and implementation review, not a style-only critique.
 
-It can report project-level defects when they affect engineering health, such as missing validation entrypoints, unclear CI, unreproducible release flow, unstable module boundaries, or duplicated sources of truth. It classifies those defects and hands ownership to `$noootwo-workflow` or `$noootwo-docs` when appropriate.
+Architecture, test strategy, performance, maintainability, and technical tradeoff judgment stay here as review lenses. Do not split them into a public `noootwo-architecture` skill.
+
+It can report project-level defects when they affect engineering health, such as missing validation entrypoints, unclear CI, unreproducible release flow, unstable module boundaries, or duplicated sources of truth. It classifies those defects and hands ownership to `$noootwo-workflow` or `$noootwo-docs` when appropriate. Product behavior or user-flow questions route to `$noootwo-product` instead of being solved as code style.
 
 It can also run a lean review for over-engineering, code bloat, unnecessary abstraction, avoidable dependencies, and AI-generated code expansion. Lean review reduces only unnecessary code; it never removes safety, validation, accessibility, or required behavior.
 
@@ -19,7 +21,7 @@ Choose review lenses before reading too broadly. A narrow diff should use only t
 
 - `correctness`: behavior, contracts, data integrity, security, migrations, release breakage
 - `testability`: missing or brittle proof for changed behavior
-- `architecture boundary`: ownership, public interfaces, module/package boundaries, duplicated source of truth
+- `architecture boundary`: ownership, public interfaces, module/package boundaries, data ownership, duplicated source of truth
 - `lean/bloat`: over-engineering, YAGNI, unnecessary dependencies, redundant code, context-cost expansion
 - `performance`: loading, rendering, API latency, query cost, algorithm/runtime hotspots, resource use
 - `project health`: validation entrypoints, CI, release path, docs/status drift, observability, handoff risk
@@ -36,7 +38,7 @@ Use this gate before submitting or releasing code changes, and when `$noootwo-wo
 - Medium, broad, or risky diff: run a structured review with relevant lenses. Include `correctness` and `testability` when behavior changes, plus `architecture boundary`, `lean/bloat`, or `AI-code/context cost` when structure or future maintenance is the risk.
 - Release-bound diff: include `release readiness` and project-health evidence for versioning, tags, install, rollback, and user-visible notes.
 
-Ask the user before applying a review fix only when it expands scope, changes product behavior, introduces a larger refactor, adds/removes dependencies, or chooses between real tradeoffs. Otherwise, make the smallest safe improvement directly.
+Ask the user before applying a review fix only when it expands scope, changes product behavior, introduces a larger refactor, adds/removes dependencies, or chooses between real tradeoffs. Route product behavior choices through `$noootwo-workflow` or `$noootwo-product`. Otherwise, make the smallest safe improvement directly.
 
 ## Review Stance
 
@@ -52,6 +54,7 @@ Prioritize concrete risk over aesthetic preference:
 - credible performance risk in loading, rendering, API latency, database/query cost, algorithm complexity, CPU, memory, or throughput
 - files that force agents to load too much context
 - docs, comments, or names that hide the real model
+- product-facing behavior that changed without a Product Checkpoint or acceptance criteria when the user path was ambiguous
 
 Do not expand scope just because code can be improved. Review the current change and the smallest structural move that reduces real risk.
 
@@ -107,6 +110,7 @@ For structured reviews, include:
 - findings with smallest fix
 - verification gaps
 - handoff owner for workflow, docs, or design issues
+- handoff owner for product, workflow, docs, or design issues
 
 Use severity labels only when useful:
 
@@ -131,6 +135,7 @@ Before approving, submitting, releasing, or finishing work, verify:
 - small review issues were fixed directly, while large scope changes were routed back to `$noootwo-workflow` or the user
 - performance claims are backed by before/after evidence or recorded as verification gaps
 - public docs or release notes were routed to `$noootwo-docs` when needed
+- product behavior or acceptance ambiguity was routed to `$noootwo-product` when needed
 - broader workflow or skill routing was routed to `$noootwo-workflow` when needed
 
 For deeper guidance, read:

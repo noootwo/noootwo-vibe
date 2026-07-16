@@ -25,6 +25,7 @@ Use this when reviewing maintainability, planning a refactor, or deciding whethe
 - Refactoring practice favors small behavior-preserving steps backed by tests.
 - Code review practice favors small, understandable changes and clear findings over broad preference lists.
 - Internal quality pays down change cost; speculative architecture can increase it.
+- Architecture remains a review lens inside `$noootwo-review`, not a separate public skill.
 - Agent-written code needs extra checks for context cost, duplicated truths, and unjustified abstractions.
 - Lean code practice reduces unnecessary code only after understanding behavior and protecting validation, safety, accessibility, and checks.
 - Performance practice favors baselines, budgets, profiling, traces, query plans, and before/after verification over speculative optimization.
@@ -49,7 +50,7 @@ Select lenses before expanding the review surface:
 | --- | --- | --- |
 | `correctness` | behavior, contract, data, security, migration, or release breakage is plausible | changed code, callers, tests, schemas, migrations, release files |
 | `testability` | behavior is changed but hard to prove | nearest tests, commands, fixtures, manual scenarios |
-| `architecture boundary` | responsibility may belong in another module, API, or package | module ownership, public interfaces, repeated edits |
+| `architecture boundary` | responsibility may belong in another module, API, package, data owner, or public contract | module ownership, public interfaces, repeated edits |
 | `lean/bloat` | code may be redundant, speculative, or dependency-heavy | imports, dependency manifest, local helpers, actual use count |
 | `performance` | user latency, rendering, query, throughput, CPU, memory, or cost may regress | baseline, trace, profile, query plan, benchmark, metric |
 | `project health` | safe change, release, CI, status, or handoff may be weak | README, AGENTS, docs/status, CI, scripts, release notes |
@@ -75,6 +76,8 @@ Do not ask the user about local cleanup that has one safe answer. Ask before rev
 - introduce or remove a dependency
 - perform a broad behavior-preserving refactor
 - choose between competing architecture or release strategies
+
+Route product behavior choices to `$noootwo-workflow` or `$noootwo-product`. Route technical architecture choices through the `architecture boundary` lens here.
 
 For release-bound code, include `release readiness` and check versioning, tags, install path, rollback/handoff notes, docs or release notes, and the closest validation command. For non-code diffs, record why the review gate is not applicable instead of forcing a code review.
 
@@ -222,6 +225,7 @@ Lean Findings
 
 Handoff
 - `$noootwo-workflow`: sequencing, release, or unresolved decision ownership.
+- `$noootwo-product`: product behavior, user flow, states, or acceptance ambiguity.
 - `$noootwo-docs`: documentation/source-of-truth update ownership.
 - `$noootwo-design`: artifact or UI-quality review ownership.
 

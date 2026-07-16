@@ -1,5 +1,11 @@
 # noootwo-docs Releases
 
+## v0.6.0
+
+- Added documentation ownership for stable Product Checkpoints, product decisions, user flows, states, acceptance criteria, and product role-boundary decisions.
+- Clarified that Docs persists stable facts but does not invent product scope, UI direction, or technical architecture.
+- Updated docs layering references for five-skill routing.
+
 ## v0.5.0
 
 - Aligned `noootwo-docs` version with the unified Noootwo Vibe `0.5.0` skill set.

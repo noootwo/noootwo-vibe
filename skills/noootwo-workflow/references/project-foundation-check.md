@@ -54,9 +54,10 @@ Do Not Add
 ## Ownership
 
 - `$noootwo-workflow` owns the audit, routing order, and gap plan.
-- `$noootwo-docs` owns writing facts into README, AGENTS, status, ADRs, guides, references, and release notes.
-- `$noootwo-review` owns project-health defects tied to testability, maintainability, reviewability, release risk, and context cost.
+- `$noootwo-product` owns product path, real-user scope, states, and acceptance questions when the work depends on them.
 - `$noootwo-design` owns design-specific harness and artifact readiness only when design work exists.
+- `$noootwo-review` owns project-health defects tied to testability, maintainability, architecture boundaries, reviewability, release risk, and context cost.
+- `$noootwo-docs` owns writing facts into README, AGENTS, status, ADRs, guides, references, and release notes.
 
 ## Stop Conditions
 

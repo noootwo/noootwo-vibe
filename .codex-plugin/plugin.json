@@ -1,7 +1,7 @@
 {
   "name": "noootwo-vibe",
-  "version": "0.6.0",
-  "description": "A Noootwo multi-skill workspace for controlled AI software development, documentation, performance-aware code review, and design work.",
+  "version": "0.7.0",
+  "description": "A Noootwo multi-skill workspace for controlled AI software development, user-centered product decisions, design, code review, and documentation.",
   "author": {
     "name": "Noootwo",
     "url": "https://github.com/noootwo/noootwo-vibe"
@@ -12,6 +12,7 @@
   "keywords": [
     "ai-workflow",
     "software-development",
+    "product-management",
     "documentation",
     "code-review",
     "design",
@@ -21,7 +22,7 @@
   "interface": {
     "displayName": "Noootwo Vibe",
     "shortDescription": "AI development workflow skill suite",
-    "longDescription": "Noootwo Vibe bundles focused skills for lightweight AI workflow control, project governance, documentation hygiene, lens-based code-health review, and research-backed design work.",
+    "longDescription": "Noootwo Vibe bundles focused skills for lightweight AI workflow control, user-centered product scope and flow decisions, research-backed design work, lens-based code-health review, and documentation hygiene.",
     "developerName": "Noootwo",
     "category": "Development",
     "capabilities": [
@@ -29,10 +30,11 @@
       "Write"
     ],
     "defaultPrompt": [
-      "Use Noootwo Workflow to plan this development task, run a lightweight alignment checkpoint only when needed, and route to the right skill.",
-      "Use Noootwo Docs to update project documentation after this change.",
-      "Use Noootwo Review to choose relevant review lenses and check code quality, performance risk, lean-review bloat, and refactoring risk before release.",
-      "Use Noootwo Design for UI, visual, artifact, or frontend design work without forcing the full .noootwo harness onto quick polish."
+      "Use Noootwo Workflow to plan this development task, run lifecycle guardrails, and route to the right specialist skill.",
+      "Use Noootwo Product when requirements, user flows, feature scope, states, or acceptance criteria need a real-user product checkpoint or product choice challenge.",
+      "Use Noootwo Design for UI, visual, artifact, or frontend design work after the product path is clear, without forcing the full .noootwo harness onto quick polish.",
+      "Use Noootwo Review to choose relevant review lenses and check architecture boundaries, test strategy, code quality, performance risk, lean-review bloat, and refactoring risk before release.",
+      "Use Noootwo Docs to update project documentation after stable workflow, product, design, review, release, or repository facts change."
     ],
     "brandColor": "#3E6B5A"
   }

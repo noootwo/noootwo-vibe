@@ -22,9 +22,10 @@ Do not load every skill. Load a skill body only after a project fact makes it re
 | Signal | Required skill | Trigger |
 | --- | --- | --- |
 | broad task, unclear sequence, release, takeover, missing process foundation | `$noootwo-workflow` | route, plan, audit, and close the loop |
-| docs/status/README/AGENTS/ADR/release facts change or drift | `$noootwo-docs` | place facts in the right layer and remove stale claims |
-| code structure, refactor, tests, maintainability, architecture, AI-generated code risk | `$noootwo-review` | classify code/project defects and propose smallest fix |
+| requirements, feature scope, real user, user flow, IA, interaction model, onboarding, permissions, states, acceptance criteria, confusion risk | `$noootwo-product` | clarify product path and challenge high-impact choices |
 | UI, screenshots, visual system, `.noootwo/`, design handoff | `$noootwo-design` | inspect artifacts and design workflow evidence |
+| code structure, refactor, tests, maintainability, architecture, AI-generated code risk | `$noootwo-review` | classify code/project defects and propose smallest fix |
+| docs/status/README/AGENTS/ADR/release facts change or drift | `$noootwo-docs` | place facts in the right layer and remove stale claims |
 
 ## Local Skill Scan
 
@@ -57,7 +58,7 @@ Missing Foundation
 
 Routing Order
 1. `$noootwo-workflow` ...
-2. `$noootwo-docs` / `$noootwo-review` / `$noootwo-design` ...
+2. `$noootwo-product` / `$noootwo-design` / `$noootwo-review` / `$noootwo-docs` ...
 ```
 
 ## Red Flags
@@ -65,5 +66,6 @@ Routing Order
 - Listing every installed skill without evidence.
 - Loading many skill bodies before reading project files.
 - Treating `$noootwo-design` as a general frontend code-quality review skill.
+- Letting `$noootwo-design` define feature scope or user paths when `$noootwo-product` should clarify them first.
 - Letting `$noootwo-review` write docs instead of handing defects to `$noootwo-docs`.
 - Adding a new public Noootwo skill before proving a stable repeated trigger.
