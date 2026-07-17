@@ -143,6 +143,20 @@ Source index for the eighth pass:
 - Nielsen Norman Group AI UX and product design guidance: `https://www.nngroup.com/articles/designing-ai-study-guide/`
 - Superpowers brainstorming skill local reference: `/Users/notwo/.codex/plugins/cache/openai-api-curated/superpowers/11c74d6b/skills/brainstorming/SKILL.md`
 
+Ninth-pass product discovery routing, checked on 2026-07-17:
+
+- Product Talk opportunity-solution-tree practice supports moving from outcome to opportunities, solution options, and experiments instead of jumping from an idea straight to implementation.
+- Shape Up supports naming appetite, no-gos, and rabbit holes before committing to a shaped build.
+- Google Ventures Design Sprint practice supports fast map/sketch/decide/prototype/test cycles, but Noootwo Product should borrow the convergence mechanism rather than make every product idea pay a full sprint cost.
+- Local `brainstorming` skill analysis showed useful mechanisms: context-first exploration, one question at a time, multiple options with tradeoffs, recommended default, and design convergence. The heavy parts to avoid for Product are mandatory spec writing, commits, and formal user-review gates for every idea.
+
+Source index for the ninth pass:
+
+- Product Talk opportunity solution trees: `https://www.producttalk.org/opportunity-solution-trees/`
+- Shape Up chapter 2, Principles of Shaping: `https://basecamp.com/shapeup/1.1-chapter-02`
+- GV Design Sprint: `https://www.thesprintbook.com/the-design-sprint`
+- Local brainstorming skill reference: `/Users/notwo/.agents/skills/brainstorming/SKILL.md`
+
 ## Mechanisms Borrowed
 
 - Keep publishable units independently addressable under `skills/`.
@@ -167,6 +181,7 @@ Source index for the eighth pass:
 - Keep Noootwo Design quick mode lightweight; full `.noootwo/` harness completion belongs to standard, deep, production, adoption, review, or handoff work.
 - Add Product Checkpoints for real-user product scope, user paths, state models, cognitive-cost risks, and user-behavior acceptance criteria before UI or implementation when those choices are unclear.
 - Borrow the Product Choice Challenge mechanism from brainstorming-style skills: make 2-3 meaningful options visible with a recommended default, but do not import the heavy always-on spec workflow.
+- Add Product Discovery as the product-shaped replacement for generic brainstorming when the user starts from a software product idea, blank project, broad product vision, or first-loop question.
 
 ## Boundaries
 
@@ -187,3 +202,4 @@ Source index for the eighth pass:
 - Do not make every UI change pay the cost of full `.noootwo/` readiness validation.
 - Do not make every code review a full project audit; choose lenses from the change and evidence.
 - Do not make every product clarification a full PRD; use a Product Choice Challenge only when one choice materially changes the user path or build scope.
+- Do not let generic brainstorming become the owner of product discovery when Noootwo Product can identify the first user, first loop, no-gos, rabbit holes, and validation signal.

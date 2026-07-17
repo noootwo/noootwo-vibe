@@ -15,8 +15,11 @@ At the same time, adding a sixth architecture skill would split technical judgme
 
 Add `noootwo-product` as the fifth public skill. It acts as a product manager and real-user advocate. Its default output is a lightweight `Product Checkpoint`, not a large PRD.
 
+Clarification accepted on 2026-07-17: `noootwo-product` also owns lightweight Product Discovery for greenfield software product ideas, blank-project starts, broad product visions, and product brainstorming before design or implementation. It should borrow the useful mechanics of brainstorming-style workflows: context-first intake, one decisive question at a time, 2-3 materially different options, a recommended default, and convergence to a first usable product loop. It should not inherit mandatory spec writing, commit, or formal review gates unless the user asks for those artifacts or risk requires them.
+
 `noootwo-product` owns:
 
+- product idea discovery and first-loop framing
 - real user, use context, and user outcome
 - feature scope and should/should-not-build decisions
 - user flow, information architecture, interaction model, and state model

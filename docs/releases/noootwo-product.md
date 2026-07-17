@@ -1,5 +1,12 @@
 # noootwo-product Releases
 
+## v0.2.0
+
+- Added `Product Discovery` for greenfield software product ideas, blank-project starts, broad product visions, and product brainstorming before design or implementation.
+- Borrowed useful brainstorming mechanics: context-first intake, one decisive question at a time, 2-3 materially different options, recommended defaults, and convergence to a first usable product loop.
+- Kept Product lightweight by explicitly avoiding the generic brainstorming hard gate of mandatory specs, commits, or formal review unless the user or project risk requires that artifact.
+- Expanded the product playbook with greenfield scope, no-gos, rabbit holes, and first validation signals.
+
 ## v0.1.0
 
 - Added the fifth Noootwo public skill for real-user product management, Product Checkpoints, and Product Choice Challenges.

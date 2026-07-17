@@ -8,7 +8,7 @@
 
 ## Current Validation Surface
 
-Last verified: 2026-07-17 on the current worktree for the `v0.7.0` five-skill Product addition.
+Last verified: 2026-07-18 on the current worktree for the `v0.7.1` Product Discovery routing update.
 
 - `python scripts/validate_skill_workspace.py .`
 - `npx -y skills add . --list`
@@ -19,17 +19,17 @@ Last verified: 2026-07-17 on the current worktree for the `v0.7.0` five-skill Pr
 - local sync duplicate-cleanup test using temporary `agents` and `codex` skill roots
 - color-calibration content contract check for pure-gray SaaS, high-contrast exceptions, error-form safety, dark mode boundaries, and PDF color-system mechanisms
 - performance-review content contract check for frontend loading, frontend rendering, backend/API latency, database/query cost, algorithm/runtime hotspots, and safety boundaries
-- Product content contract check for five-skill versions, README/skills manifest, Product Choice Challenge, Design route-back, Review architecture lens, ADR, release notes, and no `noootwo-architecture`
+- Product content contract check for five-skill versions, README/skills manifest, Product Discovery, Product Choice Challenge, Design route-back, Review architecture lens, ADR, release notes, and no `noootwo-architecture`
 - Noootwo Design harness checks under `skills/noootwo-design/scripts/`
 
-Latest result: workspace validation, Python compile, quick validation for all five skills, aggregate discovery, full-depth discovery, per-skill discovery for all five skills, content contract, local sync duplicate-cleanup test, `git diff --check`, and Noootwo Design harness pending-readiness check passed. The `npx` discovery commands emitted existing npm config warnings but exited successfully and found the expected skills.
+Latest result: workspace validation, Python compile, quick validation for all five skills, aggregate discovery, full-depth discovery, per-skill discovery for all five skills, Product Discovery routing content check, local sync to `~/.agents/skills`, repo-to-local `diff -qr` checks, and `git diff --check` passed. The `npx` discovery commands emitted existing npm config warnings but exited successfully and found the expected skills.
 
 ## Active Risks
 
 - GitHub plugin-style ingestion is treated as packaging metadata; `skills` CLI discovery is the verified installation surface.
-- `noootwo-product` is new in `v0.7.0`; it must stay lightweight and default to Product Checkpoint rather than large PRDs.
+- `noootwo-product` `v0.2.0` now owns lightweight Product Discovery for greenfield product ideas and blank-project starts; it must not import generic brainstorming's mandatory spec/commit/review hard gate.
 - `noootwo-design` contains the previous design workflow and must remain self-contained for single-skill publishing.
-- `noootwo-workflow` `v0.7.0` routes unclear product paths to Product before Design or implementation.
+- `noootwo-workflow` `v0.7.1` routes product ideas, blank-project starts, and unclear product paths to Product before Design or implementation.
 - `noootwo-review` `v0.7.0` keeps architecture, technical judgment, testing, performance, and maintainability as review lenses; do not add `noootwo-architecture`.
 - `noootwo-design` `v0.7.0` focuses on UI/frontend execution after product path clarity; quick polish should not require full `.noootwo/` harness completion.
 - `noootwo-review` performance review remains an evidence-first, on-demand reference; it should report verification gaps instead of speculative optimization claims.

@@ -6,14 +6,14 @@
     {
       "name": "noootwo-workflow",
       "path": "skills/noootwo-workflow",
-      "version": "0.7.0",
+      "version": "0.7.1",
       "status": "public",
       "tagPrefix": "noootwo-workflow@"
     },
     {
       "name": "noootwo-product",
       "path": "skills/noootwo-product",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "status": "public",
       "tagPrefix": "noootwo-product@"
     },

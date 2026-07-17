@@ -1,5 +1,11 @@
 # noootwo-workflow Releases
 
+## v0.7.1
+
+- Routed greenfield software product ideas, blank-project product starts, broad product visions, and product brainstorming to `noootwo-product` Product Discovery before design or implementation.
+- Updated workflow handoff packets, routing references, and agent prompt text so Product receives the raw idea, assumptions, first-user ambiguity, and first-loop decision.
+- Clarified that product-shaped ambiguity should use Product Discovery or a Product Choice Challenge instead of generic brainstorming-style process.
+
 ## v0.7.0
 
 - Added specialist-first routing for `noootwo-product` when requirements, feature scope, user paths, IA, interaction models, states, acceptance criteria, usability, or cognitive cost are unclear.

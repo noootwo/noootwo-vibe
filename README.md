@@ -6,8 +6,8 @@ It publishes five focused skills:
 
 | Skill | Purpose | Version |
 | --- | --- | --- |
-| `noootwo-workflow` | AI workflow control, lifecycle guardrails, specialist-first routing, project skill audits, foundation checks, task routing, planning, and closure | `0.7.0` |
-| `noootwo-product` | Real-user product checkpoints, feature scope, user flows, IA, interaction models, states, acceptance criteria, cognitive-cost review, and product choice challenges | `0.1.0` |
+| `noootwo-workflow` | AI workflow control, lifecycle guardrails, specialist-first routing, product discovery routing, project skill audits, foundation checks, task routing, planning, and closure | `0.7.1` |
+| `noootwo-product` | Greenfield product discovery, product ideation, real-user product checkpoints, feature scope, user flows, IA, interaction models, states, acceptance criteria, cognitive-cost review, and product choice challenges | `0.2.0` |
 | `noootwo-design` | Research-backed UI/frontend design workflow, lightweight quick polish, `.noootwo/` harness, color-system calibration, artifact review, and design handoff | `0.7.0` |
 | `noootwo-review` | Tech Lead + QA Architect review, architecture-boundary lens, pre-submit gates, performance review, lean review, project-health review, maintainability, and implementation review | `0.7.0` |
 | `noootwo-docs` | Documentation state, docs audits, README/AGENTS/docs layering, product decision persistence, ADRs, and release notes | `0.6.0` |
@@ -78,9 +78,9 @@ npx skills add ./skills/noootwo-design --list
 
 ## Skill Responsibilities
 
-Use `noootwo-workflow` first when the task is broad, multi-step, release-bound, needs routing, or needs a project skill/foundation audit. It owns lifecycle guardrails for read-first, product/design/review/docs routing, TDD/repro-first, verification, submit, and release decisions while keeping small direct work lightweight.
+Use `noootwo-workflow` first when the task is broad, multi-step, release-bound, needs routing, or needs a project skill/foundation audit. It owns lifecycle guardrails for read-first, product/design/review/docs routing, TDD/repro-first, verification, submit, and release decisions while keeping small direct work lightweight. It routes greenfield product ideas and blank-project product starts to `noootwo-product` before design or implementation.
 
-Use `noootwo-product` when requirements, feature scope, real users, user flows, information architecture, interaction models, onboarding, permissions, states, acceptance criteria, usability, cognitive cost, or product choices need clarification. It can challenge the request with 2-3 product options and a recommended default.
+Use `noootwo-product` when a software product idea, blank-project start, broad product vision, requirements, feature scope, real users, user flows, information architecture, interaction models, onboarding, permissions, states, acceptance criteria, usability, cognitive cost, or product choices need clarification. It can run Product Discovery, challenge the request with 2-3 product options, and converge on a recommended first loop.
 
 Use `noootwo-design` for UI, visual systems, frontend design, screenshots, artifact review, `.noootwo/` deliverables, and design implementation handoff after the product path is clear. Quick polish stays lightweight and does not require completing the full `.noootwo/` harness.
 
@@ -136,8 +136,8 @@ This is a skill-workspace validation check, not a requirement for every quick UI
 
 Each child skill has its own `VERSION` file and tag prefix:
 
-- `noootwo-workflow@v0.7.0`
-- `noootwo-product@v0.1.0`
+- `noootwo-workflow@v0.7.1`
+- `noootwo-product@v0.2.0`
 - `noootwo-design@v0.7.0`
 - `noootwo-review@v0.7.0`
 - `noootwo-docs@v0.6.0`

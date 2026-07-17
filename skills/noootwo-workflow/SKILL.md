@@ -1,6 +1,6 @@
 ---
 name: noootwo-workflow
-description: Use as the Noootwo commander skill for AI software development workflow control, lifecycle guardrails, lightweight alignment checkpoints, project onboarding, skill inventory, foundation audits, task triage, specialist-first multi-skill routing, product/design/docs/review handoffs, planning, implementation sequencing, TDD/repro-first decisions, debugging/recovery flow, pre-submit review checkpoints, documentation handoff, release closure, and preventing agentic project work from becoming chaotic, under-verified, product-confused, or expensive.
+description: Use as the Noootwo commander skill for AI software development workflow control, lifecycle guardrails, lightweight alignment checkpoints, project onboarding, skill inventory, foundation audits, task triage, specialist-first multi-skill routing, greenfield product discovery routing, product/design/docs/review handoffs, planning, implementation sequencing, TDD/repro-first decisions, debugging/recovery flow, pre-submit review checkpoints, documentation handoff, release closure, and preventing agentic project work from becoming chaotic, under-verified, product-confused, or expensive.
 ---
 
 # Noootwo Workflow
@@ -34,7 +34,7 @@ Do not turn these into a checklist for the user. State them only when the work i
 
 1. Run the lifecycle guardrails at the lightest useful level.
 2. Read the nearest operating truth first: `AGENTS.md`, README, active `docs/status.md`, release notes, package/build metadata, and changed-file context.
-3. Classify the work by primary motion: `small edit`, `feature`, `product`, `bugfix`, `refactor`, `release/ops`, `design`, `documentation`, `review-only`, or `recovery`.
+3. Classify the work by primary motion: `small edit`, `feature`, `product discovery`, `product`, `bugfix`, `refactor`, `release/ops`, `design`, `documentation`, `review-only`, or `recovery`.
 4. Identify risks before editing: unclear intent, unclear real user, unclear product path, wide blast radius, migration/data risk, brittle tests, public API change, documentation drift, review ambiguity, or missing verification path.
 5. Choose a mode:
    - `direct`: small localized work with an obvious check
@@ -58,11 +58,12 @@ Run the checkpoint in four steps:
 
 Skip it for small direct edits with an obvious verification path.
 
-If the highest-impact unresolved decision is about the real user, feature scope, information architecture, interaction model, states, acceptance criteria, or whether something should be built at all, route to `$noootwo-product` for a Product Choice Challenge instead of deciding it inside workflow.
+If the highest-impact unresolved decision is about a product idea, real user, feature scope, information architecture, interaction model, states, acceptance criteria, or whether something should be built at all, route to `$noootwo-product` for Product Discovery or a Product Choice Challenge instead of deciding it inside workflow.
 
 ## Skill Routing
 
 - Use this skill first when a project needs a skill inventory, foundation health check, gap plan, or multi-skill handoff.
+- Use `$noootwo-product` first when the task is a greenfield software product idea, blank-project product start, broad product vision, product brainstorm, or "what should this become" question.
 - Use `$noootwo-product` when requirements, feature scope, real user, user flow, information architecture, interaction model, onboarding, permissions, states, acceptance criteria, usability, cognitive cost, or a product choice is unclear.
 - Use `$noootwo-design` when the product path is clear enough and the work changes UI, visual direction, artifact review, `.noootwo/` deliverables, design systems, screenshots, or frontend implementation handoff.
 - Use `$noootwo-review` when the work needs maintainability judgment, refactoring, architecture-boundary judgment, code structure review, test strategy review, performance review, or a second pass before release.
@@ -106,7 +107,7 @@ When routing to another Noootwo skill, pass a compact handoff packet:
 - verification command or missing verification path
 - decision needed from the specialist
 
-For `$noootwo-product`, include the suspected real user, desired outcome, unclear product choice, current flow evidence, and whether UI or implementation is waiting on the answer.
+For `$noootwo-product`, include the raw product idea when present, suspected real user, desired outcome, unclear product choice, current flow evidence, assumptions, and whether UI or implementation is waiting on the answer.
 
 When control returns, close the loop by checking whether docs, review, release, or user confirmation is still missing.
 

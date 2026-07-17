@@ -64,6 +64,7 @@ Work in slices when the change is medium or larger:
 - keep each slice independently reviewable and testable
 - avoid new abstractions or dependencies unless current evidence requires them
 - reroute to `$noootwo-product` when the real user, feature scope, interaction path, state model, or acceptance criteria becomes unclear
+- route greenfield software product ideas, blank-project product starts, broad product visions, and product brainstorming to `$noootwo-product` before design or implementation
 - update docs through `$noootwo-docs` when implementation changes user-visible behavior, state, release facts, or agent instructions
 - reroute to `$noootwo-review` when code shape, dependency shape, or context cost becomes the risk
 
@@ -122,13 +123,14 @@ Alignment Checkpoint
 
 If the user is unavailable and the risk is acceptable, proceed with the recommended default and list it as an assumption. If the wrong answer could cause migration, release, data, security, or product-direction damage, stop for the decision.
 
-If the unresolved decision is product-shaped, use `$noootwo-product` for a Product Choice Challenge: real user, should/should-not build scope, main path, cognitive cost, states, and acceptance criteria.
+If the unresolved decision is product-shaped, use `$noootwo-product` for Product Discovery or a Product Choice Challenge: real user, should/should-not build scope, main path, cognitive cost, states, and acceptance criteria.
 
 ## Routing Matrix
 
 | Signal | Route |
 | --- | --- |
 | unfamiliar project, missing process foundation, unclear skill needs | `$noootwo-workflow` onboarding mode |
+| greenfield software product idea, blank-project product start, broad product vision, product brainstorming, "what should this become" | `$noootwo-product` Product Discovery |
 | requirements, feature scope, user flow, IA, interaction model, onboarding, permissions, states, acceptance criteria, confusion risk | `$noootwo-product` |
 | UI, visual hierarchy, screenshots, `.noootwo/` | `$noootwo-design` |
 | README, AGENTS, docs, ADR, status, release notes | `$noootwo-docs` |
@@ -206,7 +208,7 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 5. State the smallest viable path.
 6. Implement in slices that can be tested independently.
 7. Run the closest meaningful checks after each risky slice.
-8. Route to `$noootwo-product` before design or implementation when the real user, product scope, main path, states, or acceptance criteria are unclear.
+8. Route to `$noootwo-product` before design or implementation when the task is a product idea or when the real user, product scope, main path, states, or acceptance criteria are unclear.
 9. Update docs through `$noootwo-docs` when behavior, state, usage, product decision, or release changes.
 10. Use `$noootwo-review` before submit/release for code changes, and for broad code structure, project-health gaps, architecture boundaries, or context-cost risk.
 11. Before closing non-direct work, answer: verified, TDD/repro considered, docs affected, product/design/review needed.
@@ -231,10 +233,12 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 
 ### To `$noootwo-product`
 
+- Raw product idea:
 - Real user or suspected user:
 - User outcome:
 - Unclear product choice:
 - Current flow or artifact evidence:
+- Assumptions:
 - Acceptance or state question:
 
 ### To `$noootwo-design`
@@ -255,6 +259,7 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 - Collapse repeated status into a single status file instead of rewriting the same fact in README, AGENTS, and release notes.
 - Keep lifecycle guardrails as short decisions; only show them when the task, submit, release, or handoff risk justifies visibility.
 - Prefer one short alignment checkpoint over a long intake form.
+- Prefer Product Discovery over generic brainstorming when the ambiguity is a software product idea, first user, first loop, or product-scope question.
 - Prefer one Product Choice Challenge over a full PRD unless the user asks for the larger artifact.
 
 ## Stop Conditions
