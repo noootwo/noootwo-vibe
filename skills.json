@@ -6,21 +6,21 @@
     {
       "name": "noootwo-workflow",
       "path": "skills/noootwo-workflow",
-      "version": "0.7.1",
+      "version": "0.7.3",
       "status": "public",
       "tagPrefix": "noootwo-workflow@"
     },
     {
       "name": "noootwo-product",
       "path": "skills/noootwo-product",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "status": "public",
       "tagPrefix": "noootwo-product@"
     },
     {
       "name": "noootwo-design",
       "path": "skills/noootwo-design",
-      "version": "0.7.0",
+      "version": "0.8.0",
       "status": "public",
       "tagPrefix": "noootwo-design@"
     },
@@ -34,7 +34,7 @@
     {
       "name": "noootwo-docs",
       "path": "skills/noootwo-docs",
-      "version": "0.6.0",
+      "version": "0.7.0",
       "status": "public",
       "tagPrefix": "noootwo-docs@"
     }

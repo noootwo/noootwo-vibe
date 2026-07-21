@@ -1,5 +1,15 @@
 # noootwo-workflow Releases
 
+## v0.7.3
+
+- Added Product-to-Design Handoff routing language so non-quick UI work reaches `noootwo-design` with real user, scenario, main path, states, scope cuts, acceptance criteria, open product decisions, and design constraints.
+- Updated workflow handoff playbook and OpenAI prompt to keep product decisions in `noootwo-product` and design execution in `noootwo-design`.
+
+## v0.7.2
+
+- Added retrieval-first context control: use local file and heading searches before reading long documents.
+- Clarified that whole-document reads are for audits, consistency checks, or failed targeted search, not the default path.
+
 ## v0.7.1
 
 - Routed greenfield software product ideas, blank-project product starts, broad product visions, and product brainstorming to `noootwo-product` Product Discovery before design or implementation.

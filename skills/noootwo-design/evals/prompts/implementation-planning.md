@@ -5,6 +5,7 @@ Use `$noootwo-design` after the user has selected a direction from `.noootwo/dir
 Expected behavior:
 
 - Create or update `.noootwo/specs/active-design.md` as the approved design contract.
+- Include Design Contract fields: structure, type scale, color/token roles, component behavior, state treatment, motion, anti-slop risks, and artifact/review path.
 - Ask for approval if the selected direction has unresolved scope, cost, target-stack, or artifact-path decisions.
 - Create `.noootwo/plans/active-implementation.md` before editing UI files.
 - Include file/module scope, token mapping tasks, component tasks, verification plan, and screenshot/preview method.

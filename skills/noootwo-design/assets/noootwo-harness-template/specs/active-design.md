@@ -10,11 +10,25 @@ Status: pending; fill after the direction is chosen and before implementation pl
 
 ## Design Contract
 
-- Selected direction or baseline system source: TBD
-- Objective carried into implementation: TBD
-- Core experience promise: TBD
-- Anti-goal or wrong outcome to avoid: TBD
-- Artifact family: UI surface, fixed-canvas graphic, slide deck, or live artifact: TBD
+- Structure: TBD
+- Type scale: TBD
+- Color/token roles: TBD
+- Component behavior: TBD
+- State treatment: TBD
+- Motion: TBD
+- Anti-slop risks: TBD
+- Artifact/review path: TBD
+
+## Design Read
+
+- Surface kind: TBD
+- Audience: TBD
+- Product posture: TBD
+- Visual posture: TBD
+- Variance: TBD
+- Motion: TBD
+- Density: TBD
+- Existing system to preserve: TBD
 
 ## Preservation Contract
 

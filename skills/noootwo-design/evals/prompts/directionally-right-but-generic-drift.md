@@ -5,6 +5,7 @@ Use `$noootwo-design` on a design result that mostly follows the chosen directio
 Expected behavior:
 
 - Use review to diagnose mechanism loss, default-component smell, or surface-only styling.
+- Return to semantic token roles, component behavior, state treatment, or anti-slop risks when those contract fields are missing.
 - Return to the earliest stage that can fix the drift, often approved spec, implementation plan, or artifact.
 - Preserve the chosen direction instead of replacing it with a new unrelated aesthetic.
 

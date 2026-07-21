@@ -36,11 +36,21 @@ Status: pending; replace with a real review before any ready/handoff claim
 
 ## Decision
 
-- ready, refine, pivot, or needs artifact: TBD
+- Decision: ready, refine, pivot, or needs artifact: TBD
 
 ## Return Action
 
 - return to exploration, directions, approved spec, implementation plan, artifact, responsive pass, typography pass, stack pass, or handoff: TBD
+
+## Artifact Review Summary
+
+- Evidence: TBD
+- Strongest authored move: TBD
+- Defects: TBD
+- Generic drift: TBD
+- Responsive/type/state findings: TBD
+- Decision: ready, refine, pivot, or needs artifact: TBD
+- Return action: TBD
 
 ## Open Issues
 

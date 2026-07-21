@@ -1,5 +1,12 @@
 # noootwo-design Releases
 
+## v0.8.0
+
+- Shortened `SKILL.md` from 218 lines to a compact entrypoint focused on routing, hard stops, Design Read, Design Contract, Artifact Review, anti-slop rules, and reference routing.
+- Added `references/design-read-and-contract.md` with Noootwo's stack-neutral Design Read, variance/motion/density dials, semantic token contract, anti-slop translation, and micro-detail checks.
+- Updated `.noootwo/` harness templates to carry Product-to-Design Handoff, Design Read, Design Contract, and Artifact Review fields.
+- Added design eval prompts for missing Design Read, generic shadcn/default UI, and pretty drafts without implementation-ready contracts.
+
 ## v0.7.0
 
 - Narrowed `noootwo-design` to UI, visual systems, frontend execution, artifact review, and handoff after product path clarity.

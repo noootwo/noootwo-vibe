@@ -65,7 +65,7 @@ If the highest-impact unresolved decision is about a product idea, real user, fe
 - Use this skill first when a project needs a skill inventory, foundation health check, gap plan, or multi-skill handoff.
 - Use `$noootwo-product` first when the task is a greenfield software product idea, blank-project product start, broad product vision, product brainstorm, or "what should this become" question.
 - Use `$noootwo-product` when requirements, feature scope, real user, user flow, information architecture, interaction model, onboarding, permissions, states, acceptance criteria, usability, cognitive cost, or a product choice is unclear.
-- Use `$noootwo-design` when the product path is clear enough and the work changes UI, visual direction, artifact review, `.noootwo/` deliverables, design systems, screenshots, or frontend implementation handoff.
+- Use `$noootwo-design` when the product path is clear enough and the work changes UI, visual direction, artifact review, `.noootwo/` deliverables, design systems, screenshots, or frontend implementation handoff. For non-quick UI work, Product-to-Design Handoff should include real user, main path, states, and acceptance criteria.
 - Use `$noootwo-review` when the work needs maintainability judgment, refactoring, architecture-boundary judgment, code structure review, test strategy review, performance review, or a second pass before release.
 - Use `$noootwo-docs` when the work changes project state, public usage, product decisions, architecture decisions, README, AGENTS, docs, or release notes.
 - Stay in this skill when the main problem is sequencing, scope control, routing, or making several skills cooperate.
@@ -91,6 +91,7 @@ If the task is a bug or failing check, first establish root cause and reproducti
 - Prefer existing repo patterns over new frameworks or abstractions.
 - Keep files focused enough that future agents can reason about them cheaply.
 - Load only the files needed for the current slice; use references as navigation, not as default context dumps.
+- Before reading a long document, use local search first: `rg --files`, `rg -n` headings/keywords/paths, then bounded `sed` ranges. Read the whole file only for whole-document audits, consistency checks, or when targeted search fails.
 - Use TDD or a repro-first path for bugfixes, behavior changes, public contracts, regression risk, or code whose behavior is not otherwise provable.
 - Do not duplicate long background context into multiple files.
 - Do not let implementation or UI work proceed on unclear product paths; route to `$noootwo-product` first when user task, scope, states, or acceptance criteria are ambiguous.
@@ -108,6 +109,8 @@ When routing to another Noootwo skill, pass a compact handoff packet:
 - decision needed from the specialist
 
 For `$noootwo-product`, include the raw product idea when present, suspected real user, desired outcome, unclear product choice, current flow evidence, assumptions, and whether UI or implementation is waiting on the answer.
+
+For `$noootwo-design`, include Product-to-Design Handoff when available: real user, scenario, main path, states, scope cuts, acceptance criteria, open product decisions, design constraints, current UI/artifacts, and review path.
 
 When control returns, close the loop by checking whether docs, review, release, or user confirmation is still missing.
 

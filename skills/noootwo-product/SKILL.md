@@ -1,156 +1,142 @@
 ---
 name: noootwo-product
-description: Use when product requirements, PRD, greenfield software product ideas, blank-project product discovery, product ideation, product brainstorming, feature scope, user flow, IA, information architecture, interaction model, onboarding, permissions, empty/error/loading/success states, acceptance criteria, usability, confusion risk, cognitive cost, user perspective, should/should not build decisions, product choice, or product challenge needs a real-user product manager perspective before design or implementation.
+description: Use when product requirements, PRD, greenfield software product ideas, blank-project product discovery, product ideation, product brainstorming, feature scope, user flow, IA, information architecture, interaction model, onboarding, permissions, empty/error/loading/success states, acceptance criteria, usability, confusion risk, cognitive cost, user perspective, should/should not build decisions, product choice, product-to-design handoff, or product challenge needs a real-user product manager perspective before design or implementation.
 ---
 
 # Noootwo Product
 
-Use this skill to protect the real user's task path before design or implementation. It is a product manager and user advocate skill, not a large-PRD generator.
+Use this skill to make product decisions clear before design or implementation. It is a product decision navigator and real-user advocate, not a large-PRD generator.
 
-For greenfield product ideas, vague product visions, or blank-project starts, default to `Product Discovery`. For known product paths, use a compact `Product Checkpoint`. Use `Product Choice Challenge` only when one unresolved product decision can materially change what should be built.
+Default to the lightest artifact that can unblock the next step:
+
+- `Product Discovery` for greenfield ideas, blank-project starts, broad product visions, or feature brainstorms.
+- `Product Checkpoint` for known product paths that need scope, flow, state, or acceptance clarity.
+- `Product-to-Design Handoff` when UI work is ready for `$noootwo-design`.
+- `Product Choice Challenge` only when one unresolved product decision can materially change what should be built.
 
 ## Operating Goal
 
-Make product work answer:
+Product work must answer:
 
-- who the real user is
-- what they are trying to accomplish
-- which problem or opportunity is worth testing first
-- what should exist now and what should not
-- how the main path stays obvious, efficient, and low-friction
-- which states and edge cases affect comprehension
-- how success is proven by user behavior, not implementation details
+- who the real user is and what pressure they are under
+- what outcome they need, in their language
+- which first loop should exist now
+- what should be cut, deferred, or hidden
+- how the main path, IA, interaction model, and states stay understandable
+- how success is proven by user behavior, not implementation shape
 
-Do not design for the developer, internal data model, admin field names, or the current requester alone unless they are the real end user.
+Do not design for the database model, admin fields, or requester preference unless that is the actual user's situation.
 
 ## First Pass
 
-1. Read the nearest product truth first: request text, `AGENTS.md`, README, `docs/status.md`, ADRs, active specs, screenshots, analytics, support notes, or current UI when available.
-2. Identify the real user, use context, desired outcome, and current friction.
-3. Classify the work: `product discovery`, `new feature`, `scope decision`, `user flow`, `information architecture`, `interaction model`, `state model`, `onboarding/permission`, `acceptance criteria`, or `usability review`.
-4. Decide whether `Product Discovery`, a direct `Product Checkpoint`, or a `Product Choice Challenge` is needed.
-5. Route clarified UI/visual execution to `$noootwo-design`, technical judgment to `$noootwo-review`, durable facts to `$noootwo-docs`, and sequencing back to `$noootwo-workflow`.
+1. Read the nearest product truth first: request, `AGENTS.md`, README, `docs/status.md`, ADRs, active specs, screenshots, analytics, support notes, or current UI when available.
+2. Identify `real user`, `scenario`, `job/outcome`, `current friction`, `constraints`, and `unknowns`.
+3. Classify the decision layer: `user`, `use context`, `problem/opportunity`, `scope`, `IA/main path`, `interaction model`, `state model`, `acceptance`, or `validation`.
+4. Choose one output: Discovery, Checkpoint, Handoff, or Choice Challenge.
+5. Route clarified visual execution to `$noootwo-design`, technical judgment to `$noootwo-review`, durable facts to `$noootwo-docs`, and sequencing back to `$noootwo-workflow`.
+
+If the answer would change the product direction, ask one decisive question with 2-3 options and one recommended default. If the user delegates, state the assumption and proceed.
 
 ## Product Discovery
 
-Use this when the user brings a software product idea, blank-project start, broad product vision, "what should this become" question, "is this worth building" question, or feature brainstorm before a product path exists.
-
-Borrow the useful parts of brainstorming: understand context first, ask only the decisive next question, make alternatives visible, recommend a default, and converge to an executable direction. Do not inherit the heavy always-on requirement to write a spec, commit it, or block implementation behind a formal review unless the user asks for that artifact or the project risk requires it.
-
-Run this loop lightly:
-
-1. Extract the user's raw idea, assumed real user, desired outcome, constraints, and unknowns.
-2. Check nearest product truth. In a blank project, the request text and supplied artifacts may be enough.
-3. If one answer would change the product direction, ask one question at a time. Prefer 2-3 choices with one recommended default.
-4. If enough context exists, propose 2-3 materially different product directions, not cosmetic variants.
-5. Converge to the smallest first product loop that can validate real user behavior.
-
-Default output:
+Use for ideas before the product path exists. Make alternatives visible, then converge to the smallest first loop that can test real behavior.
 
 ```markdown
 Product Discovery
+- Product truth checked:
 - Starting point:
-- Real user:
-- User outcome:
-- Problem/opportunity:
-- Assumptions:
+- Real user and scenario:
+- Job/outcome:
+- Opportunity:
+- Constraints:
 - Product directions:
 - Recommended first loop:
-- Should not build yet:
-- Validation question:
+- Scope cuts:
+- Rabbit holes:
+- First validation signal:
 - Handoff:
 ```
 
-Field rules:
-
-- `Starting point`: summarize the raw idea in the user's language.
-- `Problem/opportunity`: name the user pressure or gap, not the implementation theme.
-- `Assumptions`: list only the assumptions that would change scope if wrong.
-- `Product directions`: use two options when a third is filler; include user value, operation cost, fit, and risk.
-- `Recommended first loop`: describe the smallest usable loop, success feedback, and first proof signal.
-- `Should not build yet`: cut premature platform, community, admin, AI, analytics, monetization, or customization work unless it is required for the first loop.
-- `Validation question`: name the single riskiest thing to learn next from a real user, artifact, or market signal.
-- `Handoff`: route to `$noootwo-design`, `$noootwo-review`, `$noootwo-docs`, or `$noootwo-workflow` only after the product path is clear enough.
+`Product directions` must be materially different paths, not cosmetic variants. `Recommended first loop` must include start, action, feedback, and proof signal. `Scope cuts` should remove premature platform, community, admin, AI, analytics, monetization, or customization work unless required for the first loop.
 
 ## Product Checkpoint
 
-Use this as the default output. Keep it short unless the user explicitly asks for a PRD.
+Use as the default compact product output for an existing or mostly known product path.
 
 ```markdown
 Product Checkpoint
 - Real user:
+- Scenario:
 - User outcome:
 - Should exist:
 - Should not exist:
-- Main path:
-- Cognitive cost:
+- IA/main path:
+- Interaction model:
 - States:
 - Acceptance criteria:
-- Challenge:
+- Cognitive cost:
+- Open product decisions:
 - Handoff:
 ```
 
-Field rules:
+Acceptance criteria must describe observable user behavior before technical criteria. States cover only relevant loading, empty, error, success, permission, offline, onboarding, and boundary cases.
 
-- `Real user`: name the actual role and context; avoid generic "user" when a concrete persona is knowable.
-- `User outcome`: state the observable result the user wants, not the feature name.
-- `Should exist`: include only what helps the current user outcome.
-- `Should not exist`: cut or defer confusing, premature, programmer-facing, or low-value surface area.
-- `Main path`: describe entry, key steps, and success feedback.
-- `Cognitive cost`: name likely confusion, hesitation, hidden concepts, excess choices, or mismatched language.
-- `States`: cover only relevant loading, empty, error, success, permission, offline, onboarding, or boundary states.
-- `Acceptance criteria`: write user-behavior checks; do not use component names, DOM shape, API fields, or implementation tasks as acceptance.
-- `Challenge`: record `needed`, `not needed`, or `already resolved`.
-- `Handoff`: name the next owner skill and the decision or artifact it needs.
+## Product-to-Design Handoff
+
+Use this when the UI direction is ready for `$noootwo-design`.
+
+```markdown
+Product-to-Design Handoff
+- Real user:
+- Scenario:
+- Main path:
+- States:
+- Scope cuts:
+- Acceptance criteria:
+- Open product decisions:
+- Design constraints:
+```
+
+If `real user`, `main path`, `states`, or `acceptance criteria` are unknown, do not hand off as ready. Run a Product Checkpoint or Choice Challenge first.
 
 ## Product Choice Challenge
 
-Trigger this when product ambiguity matters:
+Trigger when ambiguity matters: unclear real user, feature-list-only request, backend-shaped flow, broad scope, onboarding/permission/payment uncertainty, AI quality/trust risk, or multiple plausible user paths.
 
-- a greenfield product idea lacks a clear real user, problem, first loop, or validation path
-- the goal is unclear or the request is only a feature list
-- multiple user paths are plausible and the choice changes comprehension
-- the proposed flow mirrors backend fields, internal systems, or developer mental models
-- scope is too broad, too fragmented, too early, or too complex
-- onboarding, permissions, payment, login, empty/error states, first use, or the core loop is unclear
-- the user says the result is abstract, hard to understand, hard to use, too complex, or made for developers
+```markdown
+Product Choice Challenge
+- Product truth checked:
+- Decision:
+- Recommended default:
+- Options:
+- Outcome: user chose | user delegated to agent | no question needed
+```
 
-Run the challenge as a small decision control:
-
-1. Inspect repo and product truth first.
-2. Name the single highest-impact product decision.
-3. Offer two or three mutually exclusive options with one recommended default.
-4. For each option, state user understanding, operation cost, fit, and risk.
-5. Record one outcome: `user chose`, `user delegated to agent`, or `no question needed`.
-
-Skip it for small copy, small style, or obvious local fixes with an existing product path.
+For each option, state user understanding, operation cost, fit, and risk. Use two options when a third is filler.
 
 ## Product Rules
 
-- Prefer the simplest path that lets the real user complete the job.
-- Use the user's vocabulary, not implementation or database vocabulary.
-- Reduce choices until each remaining choice changes a user outcome.
-- Treat "do not build" as a first-class product decision.
+- Start from user need, context, and mental model before implementation shape.
+- Use the user's vocabulary instead of internal status, ID, flag, or schema terms.
+- Treat `should not exist` as a first-class decision.
 - Prefer progressive disclosure over exposing all power at once.
-- Prefer one decisive question over a long intake form.
-- Offer 2-3 materially different options when exploration helps, then recommend a default.
 - Keep discovery concrete: first user, first loop, first proof signal.
-- Make empty, error, permission, and success states explain what the user can do next.
+- Make empty, error, permission, and success states explain the next action.
 - Do not let visual polish hide unclear product structure.
-- Do not let technical feasibility become the product rationale unless it changes user value or risk.
-- Do not create a full PRD, roadmap, or strategy doc unless explicitly requested.
+- Do not create a full PRD, roadmap, or strategy doc unless requested.
 
-## Product Acceptance Review
+## Acceptance Review
 
-Before handing off a user-visible feature, check:
+Before product work is handed off, verify:
 
 - the main path can be explained without internal terms
-- the first screen or entry point makes the next action obvious
+- the first screen or entry makes the next action obvious
 - important states do not dead-end the user
 - scope cuts did not remove required behavior
 - acceptance criteria describe user-visible outcomes
-- unresolved product choices are routed to `$noootwo-workflow` or the user
+- unresolved product choices are routed to the user or `$noootwo-workflow`
 
 ## Reference Map
 
-Read `references/product-playbook.md` when a task needs deeper product critique, product option framing, IA/state checklist, acceptance criteria examples, or anti-pattern review.
+- Read `references/product-decision-layers.md` when a task needs product-layer diagnosis, Product-to-Design Handoff details, IA/main-path checks, or backend-shaped-flow correction.
+- Read `references/product-playbook.md` when a task needs deeper discovery, option framing, state checklist, acceptance examples, or product anti-pattern review.

@@ -1,4 +1,4 @@
 interface:
   display_name: "Noootwo Product"
-  short_description: "Product discovery, scope, and flow guardrails"
-  default_prompt: "Use $noootwo-product for greenfield software product ideas, blank-project product discovery, product brainstorming, real users, feature scope, user flows, interaction models, low-cognitive-cost states, acceptance criteria, and product choices before design or implementation."
+  short_description: "Product decision layers, discovery, scope, flow, and design handoff"
+  default_prompt: "Use $noootwo-product for greenfield software product ideas, blank-project discovery, product brainstorming, real users, scope, IA, main paths, interaction models, states, acceptance criteria, cognitive-cost risks, product choices, and Product-to-Design Handoff before UI design or implementation."

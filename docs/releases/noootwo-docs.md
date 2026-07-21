@@ -1,5 +1,11 @@
 # noootwo-docs Releases
 
+## v0.7.0
+
+- Added status budget rules: `docs/status.md` stays a current-state snapshot with a 120-line target and 200-line hard stop.
+- Added `references/context-budget.md` for hot/warm/cold documentation layers, status compression, and retrieval-first reading.
+- Clarified that historical updates move to releases, durable decisions to ADRs, repeated workflows to guides/reference, and raw research out of the hot path.
+
 ## v0.6.0
 
 - Added documentation ownership for stable Product Checkpoints, product decisions, user flows, states, acceptance criteria, and product role-boundary decisions.

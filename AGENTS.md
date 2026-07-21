@@ -5,8 +5,8 @@ This repository is a multi-skill workspace. The root is not a published skill; t
 ## Skill Routing
 
 - Use `$noootwo-workflow` for multi-step AI development workflow, project skill audits, foundation health checks, task routing, planning, release sequencing, and keeping work controlled.
-- Use `$noootwo-product` for greenfield software product ideas, blank-project product discovery, product brainstorming, requirements, feature scope, real-user paths, IA, interaction models, onboarding, permissions, product states, acceptance criteria, usability, cognitive-cost risks, Product Discovery, and Product Choice Challenges.
-- Use `$noootwo-design` for UI/frontend visual work, `.noootwo/` deliverables, artifact review, screenshot critique, visual systems, and design handoff after product path is clear.
+- Use `$noootwo-product` for greenfield software product ideas, blank-project product discovery, product brainstorming, requirements, feature scope, real-user paths, IA/main paths, interaction models, onboarding, permissions, product states, acceptance criteria, usability, cognitive-cost risks, Product Discovery, Product Choice Challenges, and Product-to-Design Handoff.
+- Use `$noootwo-design` for UI/frontend visual work, Design Read, semantic token contracts, `.noootwo/` deliverables, artifact review, screenshot critique, visual systems, and design handoff after product path is clear.
 - Use `$noootwo-review` for code quality, architecture-boundary review, performance review, lean review, over-engineering, dependency bloat, project-health defects, maintainability, refactoring discipline, test strategy, and implementation review.
 - Use `$noootwo-docs` for README, AGENTS, docs/status, ADRs, guides, reference docs, release notes, documentation audits, product decision persistence, and documentation hygiene.
 

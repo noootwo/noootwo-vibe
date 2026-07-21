@@ -6,6 +6,28 @@ Status: pending; fill this after a design direction has passed review
 
 - TBD
 
+## Product-to-Design Handoff
+
+- Real user: TBD
+- Scenario: TBD
+- Main path: TBD
+- States: TBD
+- Scope cuts: TBD
+- Acceptance criteria: TBD
+- Open product decisions: TBD
+- Design constraints: TBD
+
+## Design Read
+
+- Surface kind: TBD
+- Audience: TBD
+- Product posture: TBD
+- Visual posture: TBD
+- Variance: TBD
+- Motion: TBD
+- Density: TBD
+- Existing system to preserve: TBD
+
 ## Decisions That Must Survive Implementation
 
 - TBD

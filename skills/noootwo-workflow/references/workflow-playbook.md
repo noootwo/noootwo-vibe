@@ -244,7 +244,12 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 ### To `$noootwo-design`
 
 - UI/artifact surface:
-- Product checkpoint or delegated product assumption:
+- Product-to-Design Handoff:
+- Real user and scenario:
+- Main path:
+- States and acceptance criteria:
+- Scope cuts and open product decisions:
+- Design constraints:
 - Current design evidence:
 - Direction uncertainty:
 - Reviewable artifact path:

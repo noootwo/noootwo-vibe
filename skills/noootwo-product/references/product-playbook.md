@@ -2,6 +2,8 @@
 
 Use this when the compact `Product Checkpoint` is not enough.
 
+For layer diagnosis and Product-to-Design readiness, use `product-decision-layers.md` first. This playbook gives deeper discovery, option framing, state, acceptance, and anti-pattern checks.
+
 ## Practice Basis
 
 - User-centered product work starts from user needs, context, and mental models before implementation shape.
@@ -20,13 +22,13 @@ Use this when starting from a product idea, not from an already-selected feature
 Product Discovery
 - Product truth checked:
 - Starting point:
-- Real user and situation:
+- Real user and scenario:
 - Job/outcome:
 - Opportunity:
 - Constraints:
-- Options:
+- Product directions:
 - Recommended first loop:
-- No-gos:
+- Scope cuts:
 - Rabbit holes:
 - First validation signal:
 - Handoff:
@@ -36,13 +38,13 @@ Field guidance:
 
 - `Product truth checked`: request, repo docs, screenshots, support notes, analytics, or "blank project; request only".
 - `Starting point`: keep the user's language visible so the idea does not get over-translated too early.
-- `Real user and situation`: include the moment of use, pressure, and why the user cares now.
+- `Real user and scenario`: include the moment of use, pressure, and why the user cares now.
 - `Job/outcome`: phrase as the observable result, not a module name.
 - `Opportunity`: the product gap worth testing first.
 - `Constraints`: platform, time, compliance, budget, data availability, team ability, distribution, or trust boundaries.
-- `Options`: two or three materially different paths. Do not list feature bundles that all solve the same problem the same way.
+- `Product directions`: two or three materially different paths. Do not list feature bundles that all solve the same problem the same way.
 - `Recommended first loop`: the smallest path where a user can start, act, and receive useful feedback.
-- `No-gos`: what not to build in this cycle.
+- `Scope cuts`: what not to build in this cycle.
 - `Rabbit holes`: likely complexity traps, such as marketplace dynamics, heavy admin tooling, unclear AI quality, sync, permissions, or monetization before value.
 - `First validation signal`: the behavior or evidence that would justify building the next slice.
 
@@ -151,13 +153,16 @@ Include technical criteria only after the user-visible behavior is clear.
 
 ## Handoff Templates
 
-### To `$noootwo-design`
+### Product-to-Design Handoff
 
-- Real user and scenario:
+- Real user:
+- Scenario:
 - Main path:
-- Product constraints:
-- States to design:
-- Product choice resolved or delegated:
+- States:
+- Scope cuts:
+- Acceptance criteria:
+- Open product decisions:
+- Design constraints:
 
 ### To `$noootwo-review`
 

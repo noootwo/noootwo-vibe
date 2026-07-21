@@ -15,13 +15,19 @@ When `$noootwo-workflow` finds missing project foundation, this skill owns placi
 
 - `README.md`: stable public overview, install, usage, skill list, and release model.
 - `AGENTS.md`: short always-on instructions for agents; route to skills instead of duplicating their full bodies.
-- `docs/status.md`: current repository state, active risks, validation status, and next actions.
+- `docs/status.md`: current repository state, active risks, latest validation status, and next actions.
 - `docs/adr/`: durable workflow, product, architecture, or role-boundary decisions with context, decision, consequences, and status.
 - `docs/guides/`: how-to workflows that users or agents repeat.
 - `docs/reference/`: stable command, schema, manifest, or API references.
 - `docs/releases/`: per-skill release notes, migration notes, and tag history.
 
 If a repository uses different names, map by responsibility rather than forcing this exact layout.
+
+## Status Budget
+
+Keep `docs/status.md` as a current-state snapshot, not a work diary. Target 120 lines or fewer; if it reaches 200 lines, compress it before adding more.
+
+Only keep current facts, latest validation evidence, active risks, and next actions there. Move version history to releases, durable decisions to ADRs, repeated procedures to guides or references, and raw research or old process notes out of the hot path.
 
 ## Update Rules
 
@@ -71,9 +77,11 @@ If no, state that docs were checked and intentionally unchanged.
 - Do not preserve stale examples for backward compatibility unless the migration note says so explicitly.
 - Do not update README first just because it is visible; update the owning layer first.
 - Do not describe intent as fact. If something is planned, label it planned.
+- Do not default to reading or appending long documents wholesale; search locally first and read only the relevant slices unless doing a whole-document audit.
 - Do not let docs invent product scope, UI direction, or technical architecture. Route those judgments back to `$noootwo-product`, `$noootwo-design`, or `$noootwo-review`.
 
 For deeper guidance, read:
 
+- `references/context-budget.md` when a status doc, AGENTS file, skill body, reference, research note, or repeated context source is growing too large or costly to read.
 - `references/docs-layering.md` when changing multiple documentation levels, deciding whether to add an ADR, adopting a project, or cleaning up stale docs.
 - `references/docs-audit.md` when auditing documentation defects, stale claims, duplicated facts, wrong-layer content, or unverified claims.

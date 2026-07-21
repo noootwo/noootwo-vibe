@@ -8,6 +8,17 @@ Status: pending; generate for direction-sensitive standard or deep design work
 - Why direct implementation is blocked: TBD
 - Recommended direction: TBD
 
+## Design Read
+
+- Surface kind: TBD
+- Audience: TBD
+- Product posture: TBD
+- Visual posture: TBD
+- Variance: TBD
+- Motion: TBD
+- Density: TBD
+- Existing system to preserve: TBD
+
 ## User Decision
 
 - Decision required before implementation: TBD
