@@ -1,6 +1,6 @@
 ---
 name: noootwo-workflow
-description: Use as the Noootwo commander skill for AI software development workflow control, lifecycle guardrails, lightweight alignment checkpoints, project onboarding, skill inventory, foundation audits, task triage, specialist-first multi-skill routing, greenfield product discovery routing, product/design/docs/review handoffs, planning, implementation sequencing, TDD/repro-first decisions, debugging/recovery flow, pre-submit review checkpoints, documentation handoff, release closure, and preventing agentic project work from becoming chaotic, under-verified, product-confused, or expensive.
+description: "Use for Noootwo multi-step AI development workflow: routing, lifecycle guardrails, planning, verification, correction-loop diagnosis, product/design/docs/review handoffs, onboarding, and release sequencing. Trigger when work is non-trivial, cross-skill, release-bound, recovery-oriented, or needs controlled execution."
 ---
 
 # Noootwo Workflow
@@ -44,6 +44,7 @@ Do not turn these into a checklist for the user. State them only when the work i
    - `onboarding`: unfamiliar project, missing process foundation, unclear skill needs, or handoff from another agent
    - `recovery`: prior agent drift, repeated failed fixes, or unclear handoff
 6. Do not add ceremony to direct work; do not skip evidence for risky work.
+7. If the user strongly rejects product sense, style understanding, or usability, classify the failed layer before making more small edits.
 
 ## Alignment Checkpoint
 
@@ -95,6 +96,7 @@ If the task is a bug or failing check, first establish root cause and reproducti
 - Use TDD or a repro-first path for bugfixes, behavior changes, public contracts, regression risk, or code whose behavior is not otherwise provable.
 - Do not duplicate long background context into multiple files.
 - Do not let implementation or UI work proceed on unclear product paths; route to `$noootwo-product` first when user task, scope, states, or acceptance criteria are ambiguous.
+- Do not keep polishing after repeated user correction. One strong rejection triggers layer diagnosis; two related rejections trigger Product Reality Check or Style Evidence Check before more implementation.
 - Do not let documentation, implementation, and review drift apart; route to `$noootwo-docs` before closing work that changes project behavior or state.
 - Route to `$noootwo-review` before submit or release for code changes. Small diffs can be self-reviewed and directly fixed; larger or risky diffs need a structured review gate.
 
@@ -111,6 +113,8 @@ When routing to another Noootwo skill, pass a compact handoff packet:
 For `$noootwo-product`, include the raw product idea when present, suspected real user, desired outcome, unclear product choice, current flow evidence, assumptions, and whether UI or implementation is waiting on the answer.
 
 For `$noootwo-design`, include Product-to-Design Handoff when available: real user, scenario, main path, states, scope cuts, acceptance criteria, open product decisions, design constraints, current UI/artifacts, and review path.
+
+For correction loops, include what the user rejected, whether the failure is likely product, style understanding, implementation translation, artifact review, or unclear evidence, and whether Product Reality Check or Style Evidence Check is required.
 
 When control returns, close the loop by checking whether docs, review, release, or user confirmation is still missing.
 

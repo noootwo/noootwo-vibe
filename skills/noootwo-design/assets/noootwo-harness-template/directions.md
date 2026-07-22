@@ -19,6 +19,16 @@ Status: pending; generate for direction-sensitive standard or deep design work
 - Density: TBD
 - Existing system to preserve: TBD
 
+## Style Evidence Check
+
+- Style claim: TBD
+- Visual evidence: TBD
+- Anti-example: TBD
+- Borrowed mechanism: TBD
+- Implementation translation: TBD
+- Confidence: TBD
+- Artifact/spike required: TBD
+
 ## User Decision
 
 - Decision required before implementation: TBD

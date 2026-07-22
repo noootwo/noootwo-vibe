@@ -1,5 +1,13 @@
 # noootwo-product Releases
 
+## v0.4.0
+
+- Added `Product Reality Check` for user-confusing, assumption-heavy, naive-AI, greenfield, or repeatedly corrected product work.
+- Added `references/product-reality-check.md` with current alternative, first loop, comprehension check, naive-AI failure, decision, and return action rules.
+- Added eval prompts for product reality gaps and confusing user paths without making Product Discovery a full PRD process.
+- Narrowed trigger metadata and agent prompts around real-user decisions, first loops, confusing paths, rejected product direction, feature-list-only requests, and backend-shaped flows.
+- Added explicit manual pass/fail language to the new Product Reality eval prompts.
+
 ## v0.3.0
 
 - Reframed `noootwo-product` as a product decision-layer navigator before design or implementation.

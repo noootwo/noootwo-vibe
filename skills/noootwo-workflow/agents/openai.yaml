@@ -1,4 +1,4 @@
 interface:
   display_name: "Noootwo Workflow"
   short_description: "AI workflow routing, project audit, and execution control"
-  default_prompt: "Use $noootwo-workflow to audit needed skills and project foundation, choose direct/planned/diagnostic/release/onboarding flow, run lifecycle guardrails, route greenfield ideas or unclear product scope, main paths, states, or acceptance to $noootwo-product before design or implementation, pass Product-to-Design Handoff to $noootwo-design for non-quick UI work, route technical risk to $noootwo-review, and close with verification, docs impact, product/design/review needs, and release readiness."
+  default_prompt: "Use $noootwo-workflow for non-trivial, cross-skill, recovery, or release-bound work. Choose the lightest direct/planned/diagnostic/release/onboarding/recovery flow, route unclear product paths to Product, route non-quick UI with handoff to Design, route technical risk to Review, and close with verification, docs impact, and release state."

@@ -1,6 +1,6 @@
 ---
 name: noootwo-docs
-description: Use when maintaining project documentation after code, workflow, release, architecture, repository, product decision, Product Checkpoint, PRD, user flow, acceptance criteria, API, installation, validation, project onboarding, documentation audit, or agent-instruction changes. Owns README, AGENTS, docs/status, ADRs, guides, reference docs, release notes, documentation-state hygiene, anti-duplication, and stale-doc cleanup without taking over product, design, or review judgment.
+description: "Use for Noootwo documentation maintenance: README, AGENTS, docs/status, ADRs, guides, reference docs, release notes, documentation audits, stale/duplicated/unverified docs, and placing product/design/review/workflow facts in the right layer."
 ---
 
 # Noootwo Docs

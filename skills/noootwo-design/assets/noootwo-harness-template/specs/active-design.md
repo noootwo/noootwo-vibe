@@ -30,6 +30,16 @@ Status: pending; fill after the direction is chosen and before implementation pl
 - Density: TBD
 - Existing system to preserve: TBD
 
+## Style Evidence Check
+
+- Style claim: TBD
+- Visual evidence: TBD
+- Anti-example: TBD
+- Borrowed mechanism: TBD
+- Implementation translation: TBD
+- Confidence: TBD
+- Artifact/spike required: TBD
+
 ## Preservation Contract
 
 - Must preserve: TBD

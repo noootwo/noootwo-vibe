@@ -11,11 +11,12 @@ Use this in deep mode before high-character UI. The goal is to discover usable s
 5. `Source Weighting`: rank evidence by credibility and task fit.
 6. `Influence Discovery` when useful: find relevant designers, artists, studios, products, movements, architecture, exhibition systems, or spatial references.
 7. `Pattern Clustering`: cluster findings into 3-5 mechanism groups instead of listing examples.
-8. `Mechanism Transfer`: translate each cluster into UI primitives such as grid, rail, surface, type scale, data grammar, state model, motion primitive, or native component vocabulary.
-9. `Preservation Contract`: state what must survive translation, what may vary, and what must never be substituted.
-10. `Fit Scoring`: score each candidate for scenario fit, practicality, distinctiveness, implementation cost, and brand risk.
-11. `Artifact Spike`: produce 2-3 small visual spikes for the best territories before investing in a polished draft. If only 1 spike is possible, mark low confidence.
-12. `Evaluator Pass`: reject AI slop, trend cosplay, artist/designer cosplay, crude styling, weak utility, typography failure, responsive failure, and stack-incredible directions.
+8. `Style Evidence Check`: record the style claim, visual evidence, anti-example, borrowed mechanism, implementation translation, confidence, and spike need.
+9. `Mechanism Transfer`: translate each cluster into UI primitives such as grid, rail, surface, type scale, data grammar, state model, motion primitive, or native component vocabulary.
+10. `Preservation Contract`: state what must survive translation, what may vary, and what must never be substituted.
+11. `Fit Scoring`: score each candidate for scenario fit, practicality, distinctiveness, implementation cost, and brand risk.
+12. `Artifact Spike`: produce 2-3 small visual spikes for the best territories before investing in a polished draft. If only 1 spike is possible, mark low confidence.
+13. `Evaluator Pass`: reject AI slop, trend cosplay, artist/designer cosplay, crude styling, weak utility, typography failure, responsive failure, and stack-incredible directions.
 
 ## Influence Discovery
 
@@ -44,6 +45,20 @@ Use this default ranking:
 6. Single social post or Dribbble-style shot
 
 High visual novelty with low product evidence can inspire campaign pages, but it cannot decide a tool, dashboard, or native app UI by itself.
+
+## Style Evidence Check
+
+For every high-character territory, record:
+
+- `style claim`: the taste target in concrete terms
+- `visual evidence`: openable reference, screenshot, user image, visual sample, or spike
+- `anti-example`: what would prove the style was misunderstood
+- `borrowed mechanism`: the transferable visual or interaction mechanism
+- `implementation translation`: how it maps to tokens, components, spacing, motion, native controls, or artifact structure
+- `confidence`: high, medium, or low
+- `artifact/spike required`: what must be seen before ready
+
+If visual evidence is missing, the territory can stay exploratory only with `low confidence`. Do not promote it into a Design Contract or implementation plan until evidence or a spike exists.
 
 ## Surface Routing
 
@@ -75,6 +90,7 @@ Write `.noootwo/style-discovery.md` with:
 - Domestic fallback sources when used
 - Evidence URLs or screenshots
 - Evidence levels
+- Style Evidence Check
 - Pattern clusters
 - Borrowed mechanisms
 - Influence shortlist when used
@@ -88,4 +104,4 @@ Write `.noootwo/style-discovery.md` with:
 
 Then update `.noootwo/reference-board.md` with the selected sources and mechanisms.
 
-If source accessibility, URL/artifact evidence, evidence levels, or rejected surfaces are missing, return to discovery before drafting.
+If source accessibility, URL/artifact evidence, evidence levels, Style Evidence Check, or rejected surfaces are missing, return to discovery before drafting.

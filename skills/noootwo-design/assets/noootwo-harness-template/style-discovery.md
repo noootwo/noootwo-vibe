@@ -43,6 +43,16 @@ Status: pending; required for deep mode before high-character directions
 - URL or artifact 3: TBD
 - Screenshot or visual proof location: TBD
 
+## Style Evidence Check
+
+- Style claim: TBD
+- Visual evidence: TBD
+- Anti-example: TBD
+- Borrowed mechanism: TBD
+- Implementation translation: TBD
+- Confidence: TBD
+- Artifact/spike required: TBD
+
 ## Evidence Levels
 
 - Real product flow or screenshot evidence: TBD

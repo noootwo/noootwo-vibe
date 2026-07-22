@@ -13,6 +13,7 @@ Keep the default path light:
 For non-trivial design work, route by task structure. If multiple reasonable visual directions exist, present options and stop until the user chooses or explicitly delegates. If the task is implementation-bound, do not edit UI files before the approved design spec and implementation plan exist.
 
 For non-quick UI work, carry the Product-to-Design Handoff when available and declare the Design Read before choosing a look.
+For high-character, niche, premium, selected, or previously rejected style work, record Style Evidence Check before trusting style prose.
 
 Do not claim `ready` without `.noootwo/review.md` and artifact/screenshot/preview evidence. If the artifact has layout, responsive, typography, or generic-drift defects, return to the earlier fixing stage instead of calling it polished.
 

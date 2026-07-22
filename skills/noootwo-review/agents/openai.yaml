@@ -1,4 +1,4 @@
 interface:
   display_name: "Noootwo Review"
   short_description: "Code quality, lean review, and refactoring guardrails"
-  default_prompt: "Use $noootwo-review as Tech Lead + QA Architect to inspect code-health with an explicit lens selector: correctness, testability, architecture boundary, lean/bloat, performance, project health, AI-code/context cost, and release readiness. Keep architecture as a review lens, route product behavior ambiguity to $noootwo-product, and state applied/skipped lenses, evidence read, findings, verification gaps, smallest fixes, and handoff owners."
+  default_prompt: "Use $noootwo-review for focused code and project-health review before submit/release or risky implementation. Choose only relevant lenses: correctness, testability, architecture boundary, lean/bloat, performance, AI-code/context cost, or release readiness. Report concrete findings, smallest fixes, and verification gaps."

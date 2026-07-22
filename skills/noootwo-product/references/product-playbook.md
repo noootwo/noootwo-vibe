@@ -4,6 +4,8 @@ Use this when the compact `Product Checkpoint` is not enough.
 
 For layer diagnosis and Product-to-Design readiness, use `product-decision-layers.md` first. This playbook gives deeper discovery, option framing, state, acceptance, and anti-pattern checks.
 
+Use `product-reality-check.md` when output may be PM-shaped but user-confusing, naive-AI, assumption-heavy, or repeatedly corrected.
+
 ## Practice Basis
 
 - User-centered product work starts from user needs, context, and mental models before implementation shape.
@@ -90,6 +92,8 @@ Check these before proposing scope:
 - What would make them feel stuck, unsafe, or unsure?
 - What is the smallest result that feels complete from their side?
 
+If these answers are mostly invented, mark them unknown and ask or narrow the product path. Do not turn weak assumptions into confident product strategy.
+
 ## Scope Lens
 
 Classify each proposed item:
@@ -139,6 +143,7 @@ Red flags:
 - labels that expose internal states, IDs, flags, or implementation terms
 - success that is only visible as data changing somewhere else
 - errors that explain the system but not the next user action
+- flows that look tidy to the maker but cannot pass a first-time user comprehension check
 
 ## Acceptance Criteria
 

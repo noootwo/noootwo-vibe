@@ -75,6 +75,17 @@ def has_meaningful_value(content: str, label: str) -> bool:
     return bool(pattern.search(content))
 
 
+def field_value(content: str, label: str) -> str | None:
+    pattern = re.compile(
+        rf"^\s*-\s*{re.escape(label)}\s*:\s*(.+?)\s*$",
+        re.IGNORECASE | re.MULTILINE,
+    )
+    match = pattern.search(content)
+    if not match:
+        return None
+    return match.group(1).strip()
+
+
 def missing_sections(content: str, sections: list[str], path_label: str) -> list[str]:
     lower_content = content.lower()
     return [
@@ -367,6 +378,48 @@ def validate_detail_translation_gate(target_root: Path) -> list[str]:
     return errors
 
 
+def validate_style_evidence_gate(target_root: Path) -> list[str]:
+    errors: list[str] = []
+
+    style = read_if_exists(target_root, Path(".noootwo/style-discovery.md"))
+    if style:
+        errors.extend(missing_sections(style, ["style evidence check"], ".noootwo/style-discovery.md"))
+        require(errors, has_meaningful_value(style, "Style claim"), ".noootwo/style-discovery.md missing style claim")
+        require(errors, has_meaningful_value(style, "Visual evidence"), ".noootwo/style-discovery.md missing visual evidence")
+        require(errors, has_meaningful_value(style, "Anti-example"), ".noootwo/style-discovery.md missing anti-example")
+        require(errors, has_meaningful_value(style, "Borrowed mechanism"), ".noootwo/style-discovery.md missing borrowed mechanism")
+        require(errors, has_meaningful_value(style, "Implementation translation"), ".noootwo/style-discovery.md missing implementation translation")
+        require(errors, has_meaningful_value(style, "Confidence"), ".noootwo/style-discovery.md missing confidence")
+        visual_evidence = (field_value(style, "Visual evidence") or "").lower()
+        if visual_evidence == "missing":
+            require(errors, (field_value(style, "Confidence") or "").lower() == "low", ".noootwo/style-discovery.md must mark confidence low when visual evidence is missing")
+            require(errors, has_meaningful_value(style, "Artifact/spike required"), ".noootwo/style-discovery.md missing spike requirement when visual evidence is missing")
+
+    directions = read_if_exists(target_root, Path(".noootwo/directions.md"))
+    if directions:
+        errors.extend(missing_sections(directions, ["style evidence check"], ".noootwo/directions.md"))
+        require(errors, has_meaningful_value(directions, "Visual evidence"), ".noootwo/directions.md missing style visual evidence")
+        require(errors, has_meaningful_value(directions, "Implementation translation"), ".noootwo/directions.md missing style implementation translation")
+        require(errors, has_meaningful_value(directions, "Confidence"), ".noootwo/directions.md missing style confidence")
+        visual_evidence = (field_value(directions, "Visual evidence") or "").lower()
+        if visual_evidence == "missing":
+            require(errors, (field_value(directions, "Confidence") or "").lower() == "low", ".noootwo/directions.md must mark confidence low when visual evidence is missing")
+            require(errors, has_meaningful_value(directions, "Artifact/spike required"), ".noootwo/directions.md missing spike requirement when visual evidence is missing")
+
+    spec = read_if_exists(target_root, Path(".noootwo/specs/active-design.md"))
+    if spec:
+        errors.extend(missing_sections(spec, ["style evidence check"], ".noootwo/specs/active-design.md"))
+        require(errors, has_meaningful_value(spec, "Borrowed mechanism"), ".noootwo/specs/active-design.md missing style borrowed mechanism")
+        require(errors, has_meaningful_value(spec, "Implementation translation"), ".noootwo/specs/active-design.md missing style implementation translation")
+
+    review = read_if_exists(target_root, Path(".noootwo/review.md"))
+    if review:
+        require(errors, has_meaningful_value(review, "Style understanding fit"), ".noootwo/review.md missing style understanding fit")
+        require(errors, has_meaningful_value(review, "Product comprehension fit"), ".noootwo/review.md missing product comprehension fit")
+
+    return errors
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Validate that Noootwo design deliverables are ready for handoff."
@@ -398,6 +451,11 @@ def main() -> int:
         help="Also require implementation-stage detail-translation coverage.",
     )
     parser.add_argument(
+        "--style-evidence-gate",
+        action="store_true",
+        help="Also require style evidence, confidence, and review-fit coverage for high-character design work.",
+    )
+    parser.add_argument(
         "--strict-workflow",
         action="store_true",
         help="Require the full generic workflow closure: brief, direction decision, implementation verification, and evidence-backed review.",
@@ -421,6 +479,8 @@ def main() -> int:
     if args.detail_translation_gate:
         errors.extend(validate_implementation_gate(target_root, args.strict_workflow))
         errors.extend(validate_detail_translation_gate(target_root))
+    if args.style_evidence_gate:
+        errors.extend(validate_style_evidence_gate(target_root))
 
     if errors:
         print("Noootwo readiness validation failed:")

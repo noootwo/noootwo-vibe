@@ -1,5 +1,14 @@
 # noootwo-design Releases
 
+## v0.9.0
+
+- Added Style Evidence Check as a targeted high-risk layer for premium, niche, unusual, selected, or previously rejected style work.
+- Folded style evidence into existing discovery, direction exploration, detail translation, artifact review, `.noootwo/` templates, readiness validation, and explicit eval prompts instead of adding a parallel workflow.
+- Added review fields for style understanding fit and product comprehension fit, while keeping quick polish exempt from full harness cost.
+- Narrowed the trigger metadata and entrypoint reference map so ordinary UI work does not load the full deep-mode reference set.
+- Changed direction exploration from a standard/deep default into a risk-triggered step for unresolved style/structure, full redesign, user-requested exploration, or strong style rejection.
+- Added `visual-direction-implemented-as-default-ui` as an opt-in artifact eval scenario; high-risk style scenarios remain outside default `--scenario all`.
+
 ## v0.8.0
 
 - Shortened `SKILL.md` from 218 lines to a compact entrypoint focused on routing, hard stops, Design Read, Design Contract, Artifact Review, anti-slop rules, and reference routing.

@@ -1,6 +1,6 @@
 ---
 name: noootwo-product
-description: Use when product requirements, PRD, greenfield software product ideas, blank-project product discovery, product ideation, product brainstorming, feature scope, user flow, IA, information architecture, interaction model, onboarding, permissions, empty/error/loading/success states, acceptance criteria, usability, confusion risk, cognitive cost, user perspective, should/should not build decisions, product choice, product-to-design handoff, or product challenge needs a real-user product manager perspective before design or implementation.
+description: "Use for product discovery and product decisions before design or implementation: real user, scenario, first loop, scope, IA/main path, interaction/state model, acceptance criteria, Product Reality Check, Product Choice Challenge, and Product-to-Design Handoff. Trigger for greenfield ideas, confusing or rejected product direction, feature-list-only requests, or backend-shaped flows."
 ---
 
 # Noootwo Product
@@ -11,6 +11,7 @@ Default to the lightest artifact that can unblock the next step:
 
 - `Product Discovery` for greenfield ideas, blank-project starts, broad product visions, or feature brainstorms.
 - `Product Checkpoint` for known product paths that need scope, flow, state, or acceptance clarity.
+- `Product Reality Check` when the output may be user-confusing, assumption-heavy, naive-AI, or repeatedly rejected.
 - `Product-to-Design Handoff` when UI work is ready for `$noootwo-design`.
 - `Product Choice Challenge` only when one unresolved product decision can materially change what should be built.
 
@@ -33,7 +34,8 @@ Do not design for the database model, admin fields, or requester preference unle
 2. Identify `real user`, `scenario`, `job/outcome`, `current friction`, `constraints`, and `unknowns`.
 3. Classify the decision layer: `user`, `use context`, `problem/opportunity`, `scope`, `IA/main path`, `interaction model`, `state model`, `acceptance`, or `validation`.
 4. Choose one output: Discovery, Checkpoint, Handoff, or Choice Challenge.
-5. Route clarified visual execution to `$noootwo-design`, technical judgment to `$noootwo-review`, durable facts to `$noootwo-docs`, and sequencing back to `$noootwo-workflow`.
+5. Use Product Reality Check before handoff when the request is greenfield, confusing, strongly criticized, or likely to produce a fake-PM answer.
+6. Route clarified visual execution to `$noootwo-design`, technical judgment to `$noootwo-review`, durable facts to `$noootwo-docs`, and sequencing back to `$noootwo-workflow`.
 
 If the answer would change the product direction, ask one decisive question with 2-3 options and one recommended default. If the user delegates, state the assumption and proceed.
 
@@ -81,6 +83,24 @@ Product Checkpoint
 
 Acceptance criteria must describe observable user behavior before technical criteria. States cover only relevant loading, empty, error, success, permission, offline, onboarding, and boundary cases.
 
+## Product Reality Check
+
+Use this only when risk is high enough to justify the extra check: blank-product discovery, vague "stand in the user's shoes" requests, user confusion, repeated correction, or AI-looking product decisions.
+
+```markdown
+Product Reality Check
+- Real user:
+- Moment of use:
+- Current alternative:
+- First loop:
+- User comprehension check:
+- Naive-AI failure:
+- Decision: keep | revise | ask | stop
+- Return action:
+```
+
+If the user would not understand the next action, why it matters, or whether progress happened, return to Product Discovery, Checkpoint, or Choice Challenge before design or implementation.
+
 ## Product-to-Design Handoff
 
 Use this when the UI direction is ready for `$noootwo-design`.
@@ -122,6 +142,8 @@ For each option, state user understanding, operation cost, fit, and risk. Use tw
 - Prefer progressive disclosure over exposing all power at once.
 - Keep discovery concrete: first user, first loop, first proof signal.
 - Make empty, error, permission, and success states explain the next action.
+- Treat strong user criticism as evidence to diagnose, not as an automatic instruction to add more features.
+- Name the most likely naive-AI failure before handoff when the task is broad, greenfield, or repeatedly corrected.
 - Do not let visual polish hide unclear product structure.
 - Do not create a full PRD, roadmap, or strategy doc unless requested.
 
@@ -134,9 +156,11 @@ Before product work is handed off, verify:
 - important states do not dead-end the user
 - scope cuts did not remove required behavior
 - acceptance criteria describe user-visible outcomes
+- Product Reality Check ran or was intentionally skipped for low-risk work
 - unresolved product choices are routed to the user or `$noootwo-workflow`
 
 ## Reference Map
 
 - Read `references/product-decision-layers.md` when a task needs product-layer diagnosis, Product-to-Design Handoff details, IA/main-path checks, or backend-shaped-flow correction.
 - Read `references/product-playbook.md` when a task needs deeper discovery, option framing, state checklist, acceptance examples, or product anti-pattern review.
+- Read `references/product-reality-check.md` when a product answer feels PM-shaped but may still be hard for the real user to understand or trust.

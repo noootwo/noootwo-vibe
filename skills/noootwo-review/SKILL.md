@@ -1,6 +1,6 @@
 ---
 name: noootwo-review
-description: Use as the Noootwo Tech Lead and QA Architect skill for lens-based code quality, technical judgment, architecture boundary review, pre-submit review gates, maintainability, refactoring discipline, implementation review, test strategy review, project-health review, performance review, frontend loading/rendering, backend/API latency, database/query cost, algorithm hotspots, lean review, over-engineering, bloat, YAGNI, redundant code, unnecessary dependencies, token-cost control, AI-generated code risk, review findings, code-health triage, release readiness, and preventing software from becoming unstable, under-verified, over-abstracted, slow, hard to change, or expensive to reason about. Architecture is a review lens here; do not create or route to a separate noootwo-architecture skill.
+description: "Use for Noootwo code and project-health review: correctness, testability, architecture boundaries, lean/bloat, performance, AI-code/context cost, release readiness, maintainability, and refactoring discipline. Trigger before submit/release or when implementation risk, over-engineering, missing validation, or technical tradeoffs need review."
 ---
 
 # Noootwo Review

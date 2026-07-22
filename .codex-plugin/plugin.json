@@ -1,6 +1,6 @@
 {
   "name": "noootwo-vibe",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "A Noootwo multi-skill workspace for controlled AI software development, user-centered product decisions, design, code review, and documentation.",
   "author": {
     "name": "Noootwo",
@@ -30,11 +30,11 @@
       "Write"
     ],
     "defaultPrompt": [
-      "Use Noootwo Workflow to plan this development task, run lifecycle guardrails, and route to the right specialist skill.",
-      "Use Noootwo Product when greenfield software product ideas, blank-project starts, requirements, user flows, feature scope, states, or acceptance criteria need product discovery, a real-user product checkpoint, or a product choice challenge.",
-      "Use Noootwo Design for UI, visual, artifact, or frontend design work after the product path is clear, without forcing the full .noootwo harness onto quick polish.",
-      "Use Noootwo Review to choose relevant review lenses and check architecture boundaries, test strategy, code quality, performance risk, lean-review bloat, and refactoring risk before release.",
-      "Use Noootwo Docs to update project documentation after stable workflow, product, design, review, release, or repository facts change."
+      "Use Noootwo Workflow for non-trivial development tasks, lifecycle guardrails, correction-loop routing, and specialist handoff.",
+      "Use Noootwo Product before design or implementation when real user, first loop, scope, main path, states, acceptance, or product choice is unclear.",
+      "Use Noootwo Design for UI, visual, artifact, or frontend design work after product path is clear; use Style Evidence Check only for high-risk style work.",
+      "Use Noootwo Review for focused code/project-health review before submit, release, or risky implementation.",
+      "Use Noootwo Docs to place verified workflow, product, design, review, release, or repository facts in the right documentation layer."
     ],
     "brandColor": "#3E6B5A"
   }

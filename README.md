@@ -6,9 +6,9 @@ It publishes five focused skills:
 
 | Skill | Purpose | Version |
 | --- | --- | --- |
-| `noootwo-workflow` | AI workflow control, lifecycle guardrails, specialist-first routing, product-to-design handoff routing, project skill audits, foundation checks, task routing, planning, and closure | `0.7.3` |
-| `noootwo-product` | Product decision layers, greenfield discovery, real-user checkpoints, IA/main paths, interaction/state models, acceptance criteria, cognitive-cost review, product choices, and Product-to-Design Handoff | `0.3.0` |
-| `noootwo-design` | UI/frontend Design Read, style stability, semantic token contracts, quick polish, `.noootwo/` harness, artifact review, anti-slop checks, and design handoff | `0.8.0` |
+| `noootwo-workflow` | AI workflow control, lifecycle guardrails, specialist-first routing, correction-loop routing, product-to-design handoff routing, project skill audits, foundation checks, task routing, planning, and closure | `0.7.4` |
+| `noootwo-product` | Product decision layers, greenfield discovery, real-user checkpoints, Product Reality Check, IA/main paths, interaction/state models, acceptance criteria, cognitive-cost review, product choices, and Product-to-Design Handoff | `0.4.0` |
+| `noootwo-design` | UI/frontend Design Read, Style Evidence Check, style stability, semantic token contracts, quick polish, `.noootwo/` harness, artifact review, anti-slop checks, and design handoff | `0.9.0` |
 | `noootwo-review` | Tech Lead + QA Architect review, architecture-boundary lens, pre-submit gates, performance review, lean review, project-health review, maintainability, and implementation review | `0.7.0` |
 | `noootwo-docs` | Documentation state, docs audits, README/AGENTS/docs layering, product decision persistence, ADRs, context budgets, and release notes | `0.7.0` |
 
@@ -78,11 +78,11 @@ npx skills add ./skills/noootwo-design --list
 
 ## Skill Responsibilities
 
-Use `noootwo-workflow` first when the task is broad, multi-step, release-bound, needs routing, or needs a project skill/foundation audit. It owns lifecycle guardrails for read-first, product/design/review/docs routing, TDD/repro-first, verification, submit, and release decisions while keeping small direct work lightweight. It routes greenfield product ideas and blank-project product starts to `noootwo-product`, then passes Product-to-Design Handoff to `noootwo-design` for non-quick UI work.
+Use `noootwo-workflow` first when the task is broad, multi-step, release-bound, needs routing, enters a repeated correction loop, or needs a project skill/foundation audit. It owns lifecycle guardrails for read-first, product/design/review/docs routing, TDD/repro-first, verification, submit, and release decisions while keeping small direct work lightweight. It routes greenfield product ideas and blank-project product starts to `noootwo-product`, then passes Product-to-Design Handoff and style-evidence risk to `noootwo-design` for non-quick UI work.
 
-Use `noootwo-product` when a software product idea, blank-project start, broad product vision, requirements, feature scope, real users, user flows, information architecture, interaction models, onboarding, permissions, states, acceptance criteria, usability, cognitive cost, or product choices need clarification. It can run Product Discovery, challenge the request with 2-3 product options, converge on a recommended first loop, and produce Product-to-Design Handoff.
+Use `noootwo-product` when a software product idea, blank-project start, broad product vision, requirements, feature scope, real users, user flows, information architecture, interaction models, onboarding, permissions, states, acceptance criteria, usability, cognitive cost, or product choices need clarification. It can run Product Discovery, challenge the request with 2-3 product options, run Product Reality Check for user-confusing or naive-AI risk, converge on a recommended first loop, and produce Product-to-Design Handoff.
 
-Use `noootwo-design` for UI, visual systems, frontend design, screenshots, artifact review, `.noootwo/` deliverables, and design implementation handoff after the product path is clear. Non-quick work declares Design Read and maps design decisions into semantic tokens, component behavior, states, and artifact review paths. Quick polish stays lightweight and does not require completing the full `.noootwo/` harness.
+Use `noootwo-design` for UI, visual systems, frontend design, screenshots, artifact review, `.noootwo/` deliverables, and design implementation handoff after the product path is clear. Non-quick work declares Design Read and maps design decisions into semantic tokens, component behavior, states, and artifact review paths. High-character or previously rejected style work uses Style Evidence Check before trusting style prose; direction exploration runs only when style or structure is genuinely unresolved. Quick polish stays lightweight and does not require completing the full `.noootwo/` harness.
 
 Use `noootwo-review` when code quality, pre-submit review, performance review, lean review, over-engineering, dependency bloat, project health, refactoring, test strategy, architecture hygiene, or maintainability risk matters. Architecture remains a review lens here; there is no separate `noootwo-architecture` skill.
 
@@ -99,12 +99,13 @@ python scripts/validate_skill_workspace.py .
 Sync local installed skill copies when iterating locally:
 
 ```bash
-python scripts/sync_local_install.py --skill noootwo-workflow
-python scripts/sync_local_install.py
+python scripts/sync_local_install.py --no-dedupe-codex
+python scripts/sync_local_install.py --target-root ~/.codex/skills --no-dedupe-codex
 ```
 
 The default sync target is `~/.agents/skills`. When a synced Noootwo skill exists there, the script removes the same `noootwo-*` skill from `~/.codex/skills` so Codex does not show duplicate local skills.
 For non-default targets, pass `--dedupe-codex` to apply the same duplicate cleanup.
+For release batches that must keep both agent roots current, use `--no-dedupe-codex` and sync both roots explicitly.
 
 Run discovery checks:
 
@@ -132,13 +133,20 @@ fi
 The readiness command is expected to fail on a freshly bootstrapped pending harness unless it is used inside a completed design workflow.
 This is a skill-workspace validation check, not a requirement for every quick UI polish task.
 
+Run opt-in high-risk design eval scenarios only when their prompt applies:
+
+```bash
+python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scenario style-prose-without-visual-evidence
+python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scenario visual-direction-implemented-as-default-ui
+```
+
 ## Release Model
 
 Each child skill has its own `VERSION` file and tag prefix:
 
-- `noootwo-workflow@v0.7.3`
-- `noootwo-product@v0.3.0`
-- `noootwo-design@v0.8.0`
+- `noootwo-workflow@v0.7.4`
+- `noootwo-product@v0.4.0`
+- `noootwo-design@v0.9.0`
 - `noootwo-review@v0.7.0`
 - `noootwo-docs@v0.7.0`
 

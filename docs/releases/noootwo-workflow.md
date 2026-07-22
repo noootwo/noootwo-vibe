@@ -1,5 +1,12 @@
 # noootwo-workflow Releases
 
+## v0.7.4
+
+- Added correction-loop routing: strong rejection first diagnoses the failed layer, repeated related rejection routes to Product Reality Check or Style Evidence Check before more implementation.
+- Updated design handoff packets to carry selected-direction or style-evidence risk when non-quick UI work is direction-sensitive.
+- Kept the control risk-triggered so small direct edits and quick polish do not gain extra ceremony.
+- Narrowed trigger metadata and agent prompts around non-trivial, cross-skill, release-bound, recovery, and correction-loop work.
+
 ## v0.7.3
 
 - Added Product-to-Design Handoff routing language so non-quick UI work reaches `noootwo-design` with real user, scenario, main path, states, scope cuts, acceptance criteria, open product decisions, and design constraints.

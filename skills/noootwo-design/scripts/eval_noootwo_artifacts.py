@@ -38,6 +38,17 @@ def has_value(content: str, label: str) -> bool:
     return bool(pattern.search(content))
 
 
+def field_value(content: str, label: str) -> str | None:
+    pattern = re.compile(
+        rf"^\s*-\s*{re.escape(label)}\s*:\s*(.+?)\s*$",
+        re.IGNORECASE | re.MULTILINE,
+    )
+    match = pattern.search(content)
+    if not match:
+        return None
+    return match.group(1).strip()
+
+
 def eval_missing_exploration(root: Path) -> list[str]:
     errors: list[str] = []
     brief = read(root, ".noootwo/brief.md")
@@ -111,6 +122,46 @@ def eval_implementation_closure(root: Path) -> list[str]:
     return errors
 
 
+def eval_style_prose_without_visual_evidence(root: Path) -> list[str]:
+    errors: list[str] = []
+    style = read(root, ".noootwo/style-discovery.md")
+    directions = read(root, ".noootwo/directions.md")
+    review = read(root, ".noootwo/review.md")
+    require(errors, bool(style) or bool(directions), "missing style discovery or directions")
+    if style:
+        require(errors, "style evidence check" in style.lower(), "style discovery missing Style Evidence Check")
+        require(errors, has_value(style, "Visual evidence"), "style discovery missing visual evidence")
+        require(errors, has_value(style, "Anti-example"), "style discovery missing anti-example")
+        require(errors, has_value(style, "Implementation translation"), "style discovery missing implementation translation")
+        require(errors, has_value(style, "Confidence"), "style discovery missing confidence")
+        if (field_value(style, "Visual evidence") or "").lower() == "missing":
+            require(errors, (field_value(style, "Confidence") or "").lower() == "low", "style discovery missing evidence must be low confidence")
+            require(errors, has_value(style, "Artifact/spike required"), "style discovery missing spike requirement")
+    if directions:
+        require(errors, "style evidence check" in directions.lower(), "directions missing Style Evidence Check")
+        require(errors, has_value(directions, "Artifact/spike required"), "directions missing spike requirement")
+        if (field_value(directions, "Visual evidence") or "").lower() == "missing":
+            require(errors, (field_value(directions, "Confidence") or "").lower() == "low", "directions missing evidence must be low confidence")
+    if review:
+        require(errors, has_value(review, "Style understanding fit"), "review missing style understanding fit")
+    return errors
+
+
+def eval_visual_direction_implemented_as_default_ui(root: Path) -> list[str]:
+    errors: list[str] = []
+    review = read(root, ".noootwo/review.md")
+    require(errors, bool(review), "missing .noootwo/review.md")
+    require(errors, has_value(review, "Style understanding fit"), "review missing style understanding fit")
+    require(errors, has_value(review, "Generic fallback signs found"), "review missing generic fallback diagnosis")
+    require(
+        errors,
+        "default-override" in review.lower() or "default override" in review.lower(),
+        "review missing default override review",
+    )
+    require(errors, has_value(review, "Return action"), "review missing return action")
+    return errors
+
+
 SCENARIOS = {
     "missing-exploration-before-build": eval_missing_exploration,
     "missing-user-decision-under-ambiguity": eval_missing_user_decision,
@@ -118,9 +169,18 @@ SCENARIOS = {
     "directionally-right-but-generic-drift": eval_generic_drift,
     "layout-defects-after-fast-delivery": eval_layout_defects,
     "implementation-closure": eval_implementation_closure,
+    "style-prose-without-visual-evidence": eval_style_prose_without_visual_evidence,
+    "visual-direction-implemented-as-default-ui": eval_visual_direction_implemented_as_default_ui,
 }
 
-DEFAULT_SCENARIOS = list(SCENARIOS.keys())
+DEFAULT_SCENARIOS = [
+    "missing-exploration-before-build",
+    "missing-user-decision-under-ambiguity",
+    "artifact-built-but-not-reviewable",
+    "directionally-right-but-generic-drift",
+    "layout-defects-after-fast-delivery",
+    "implementation-closure",
+]
 
 
 def main() -> int:

@@ -8,6 +8,7 @@ Use this only when the task is broad enough that a short direct path is not enou
 - Project Entry
 - Lifecycle Guardrails
 - Alignment Checkpoint
+- Correction Loop
 - Routing Matrix
 - Work Size
 - Mode Details
@@ -124,6 +125,17 @@ Alignment Checkpoint
 If the user is unavailable and the risk is acceptable, proceed with the recommended default and list it as an assumption. If the wrong answer could cause migration, release, data, security, or product-direction damage, stop for the decision.
 
 If the unresolved decision is product-shaped, use `$noootwo-product` for Product Discovery or a Product Choice Challenge: real user, should/should-not build scope, main path, cognitive cost, states, and acceptance criteria.
+
+## Correction Loop
+
+Use this when the user strongly rejects the result as confusing, not from the user's angle, stylistically misunderstood, generic, or unlike the selected direction.
+
+1. After one strong rejection, stop local polishing long enough to identify the failed layer: product premise, user comprehension, style understanding, implementation translation, artifact review, or missing evidence.
+2. After two related rejections, do not keep iterating on the artifact directly. Route to `$noootwo-product` Product Reality Check for product/user-comprehension failures, or `$noootwo-design` Style Evidence Check for style-understanding failures.
+3. Treat user feedback as evidence, not absolute truth. Confirm whether the issue is missing input, conflicting goals, wrong skill routing, weak artifact evidence, or an actual bad decision.
+4. Return with one action: `return to product reality`, `return to style evidence`, `return to implementation translation`, `return to artifact review`, or `ask one blocking question`.
+
+Correction loops are risk-triggered. Do not apply them to small copy edits, known quick polish, or a single preference tweak.
 
 ## Routing Matrix
 
@@ -252,8 +264,18 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 - Design constraints:
 - Current design evidence:
 - Direction uncertainty:
+- Style evidence or selected-direction risk:
 - Reviewable artifact path:
 - Implementation boundary:
+
+### Correction Loop Packet
+
+- User rejection:
+- Failed layer suspected:
+- Evidence checked:
+- Product Reality Check needed:
+- Style Evidence Check needed:
+- One return action:
 
 ## Cost Controls
 

@@ -4,6 +4,8 @@ Use this when the chosen direction is visually right but the implemented UI stil
 
 This is not a new mode. It is an implementation-stage reinforcement layer for `production` work, or for review loops where the artifact is close but still feels like a polished default.
 
+Do not use this pass to rescue a misunderstood style. If the visual evidence, selected direction, and implementation contract do not describe the same mechanisms, return to `style-evidence-check.md` or style discovery first.
+
 ## Research Basis
 
 Sources reviewed for this mechanism:

@@ -15,6 +15,8 @@ Status: pending; replace with a real review before any ready/handoff claim
 - Strongest authored move: TBD
 - Weakest or most fragile move: TBD
 - Mismatch between intent and rendered result: TBD
+- Style understanding fit: TBD
+- Product comprehension fit: TBD
 
 ## Generic Drift Checks
 
@@ -48,6 +50,8 @@ Status: pending; replace with a real review before any ready/handoff claim
 - Strongest authored move: TBD
 - Defects: TBD
 - Generic drift: TBD
+- Style understanding fit: TBD
+- Product comprehension fit: TBD
 - Responsive/type/state findings: TBD
 - Decision: ready, refine, pivot, or needs artifact: TBD
 - Return action: TBD

@@ -34,6 +34,7 @@ Status: pending; fill after the approved design spec and before editing UI files
 ## Known Drift Risks
 
 - Generic fallback risks: TBD
+- Style evidence mismatch risks: TBD
 - Layout/readability risks: TBD
 - Stack-native craft risks: TBD
 - Artifact-family-specific delivery risks: TBD
