@@ -1,5 +1,11 @@
 # noootwo-workflow Releases
 
+## v0.7.5
+
+- Routed multi-question product ambiguity to `noootwo-product` Decision Interview instead of letting Workflow become a long product interview.
+- Updated handoff packets to include whether Decision Interview is needed and what facts were already checked.
+- Kept Alignment Checkpoint as a single decision control for non-trivial work.
+
 ## v0.7.4
 
 - Added correction-loop routing: strong rejection first diagnoses the failed layer, repeated related rejection routes to Product Reality Check or Style Evidence Check before more implementation.

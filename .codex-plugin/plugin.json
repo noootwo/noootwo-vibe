@@ -1,6 +1,6 @@
 {
   "name": "noootwo-vibe",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "A Noootwo multi-skill workspace for controlled AI software development, user-centered product decisions, design, code review, and documentation.",
   "author": {
     "name": "Noootwo",
@@ -30,10 +30,10 @@
       "Write"
     ],
     "defaultPrompt": [
-      "Use Noootwo Workflow for non-trivial development tasks, lifecycle guardrails, correction-loop routing, and specialist handoff.",
-      "Use Noootwo Product before design or implementation when real user, first loop, scope, main path, states, acceptance, or product choice is unclear.",
-      "Use Noootwo Design for UI, visual, artifact, or frontend design work after product path is clear; use Style Evidence Check only for high-risk style work.",
-      "Use Noootwo Review for focused code/project-health review before submit, release, or risky implementation.",
+      "Use Noootwo Workflow for non-trivial development tasks, lifecycle guardrails, Product Decision Interview routing, correction-loop routing, and specialist handoff.",
+      "Use Noootwo Product Decision Interview before design or implementation when real user, first loop, scope, main path, states, acceptance, or product choice is unclear.",
+      "Use Noootwo Design for UI, visual, artifact, or frontend design work after product path is clear; route unresolved user, path, state, acceptance, audience, or use-context decisions back to Product.",
+      "Use Noootwo Review for focused code/project-health review before submit, release, risky implementation, or skill/context-cost cleanup.",
       "Use Noootwo Docs to place verified workflow, product, design, review, release, or repository facts in the right documentation layer."
     ],
     "brandColor": "#3E6B5A"

@@ -1,6 +1,6 @@
 ---
 name: noootwo-review
-description: "Use for Noootwo code and project-health review: correctness, testability, architecture boundaries, lean/bloat, performance, AI-code/context cost, release readiness, maintainability, and refactoring discipline. Trigger before submit/release or when implementation risk, over-engineering, missing validation, or technical tradeoffs need review."
+description: "Use for Noootwo code and project-health review: correctness, testability, architecture boundaries, lean/bloat, performance, AI-code/skill context cost, release readiness, maintainability, and refactoring discipline. Trigger before submit/release or when implementation risk, over-engineering, missing validation, oversized skill flow, or technical tradeoffs need review."
 ---
 
 # Noootwo Review
@@ -22,10 +22,10 @@ Choose review lenses before reading too broadly. A narrow diff should use only t
 - `correctness`: behavior, contracts, data integrity, security, migrations, release breakage
 - `testability`: missing or brittle proof for changed behavior
 - `architecture boundary`: ownership, public interfaces, module/package boundaries, data ownership, duplicated source of truth
-- `lean/bloat`: over-engineering, YAGNI, unnecessary dependencies, redundant code, context-cost expansion
+- `lean/bloat`: over-engineering, YAGNI, unnecessary dependencies, redundant code, oversized skill flows, context-cost expansion
 - `performance`: loading, rendering, API latency, query cost, algorithm/runtime hotspots, resource use
 - `project health`: validation entrypoints, CI, release path, docs/status drift, observability, handoff risk
-- `AI-code/context cost`: large files, generic wrappers, hidden state, repeated rules, comments that overclaim
+- `AI-code/context cost`: large files, generic wrappers, hidden state, repeated rules, broad skill triggers, long question lists, comments that overclaim
 - `release readiness`: versioning, tags, publish/install steps, rollback, user-visible notes
 
 State which lenses were applied, which obvious lenses were skipped, and why.
@@ -53,6 +53,7 @@ Prioritize concrete risk over aesthetic preference:
 - missing tests around shared behavior
 - credible performance risk in loading, rendering, API latency, database/query cost, algorithm complexity, CPU, memory, or throughput
 - files that force agents to load too much context
+- skill instructions that make small tasks run long interviews, broad gates, or fixed questionnaires
 - docs, comments, or names that hide the real model
 - product-facing behavior that changed without a Product Checkpoint or acceptance criteria when the user path was ambiguous
 
@@ -83,6 +84,9 @@ Do not expand scope just because code can be improved. Review the current change
 Look specifically for agent-generated failure modes:
 
 - broad files that force future agents to load unrelated context
+- broad skill descriptions that steal small tasks from the direct path
+- fixed question lists that replace one material decision at a time
+- default workflow gates that are heavier than the task risk
 - duplicated rules across code, docs, prompts, or schemas
 - generic abstractions invented before the second concrete use
 - hidden state or side effects that make verification expensive

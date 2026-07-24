@@ -1,5 +1,10 @@
 # noootwo-review Releases
 
+## v0.7.1
+
+- Expanded lean/context-cost review to flag broad skill triggers, fixed question lists, oversized skill flows, and default gates heavier than task risk.
+- Clarified that Decision Interview should stay one material question at a time, not become a fixed questionnaire.
+
 ## v0.7.0
 
 - Reframed `noootwo-review` as Tech Lead + QA Architect for code quality, architecture-boundary review, technical judgment, test strategy, performance, maintainability, and release readiness.

@@ -1,6 +1,6 @@
 ---
 name: noootwo-product
-description: "Use for product discovery and product decisions before design or implementation: real user, scenario, first loop, scope, IA/main path, interaction/state model, acceptance criteria, Product Reality Check, Product Choice Challenge, and Product-to-Design Handoff. Trigger for greenfield ideas, confusing or rejected product direction, feature-list-only requests, or backend-shaped flows."
+description: "Use for product discovery and product decisions before design or implementation: Decision Interview, real user, scenario, first loop, scope, IA/main path, interaction/state model, acceptance criteria, Product Reality Check, Product Choice Challenge, and Product-to-Design Handoff. Trigger for greenfield ideas, unclear or rejected product direction, feature-list-only requests, backend-shaped flows, or UI work missing product path."
 ---
 
 # Noootwo Product
@@ -9,6 +9,7 @@ Use this skill to make product decisions clear before design or implementation. 
 
 Default to the lightest artifact that can unblock the next step:
 
+- `Decision Interview` when one or more product decisions must be confirmed before scope, design, or implementation.
 - `Product Discovery` for greenfield ideas, blank-project starts, broad product visions, or feature brainstorms.
 - `Product Checkpoint` for known product paths that need scope, flow, state, or acceptance clarity.
 - `Product Reality Check` when the output may be user-confusing, assumption-heavy, naive-AI, or repeatedly rejected.
@@ -33,11 +34,27 @@ Do not design for the database model, admin fields, or requester preference unle
 1. Read the nearest product truth first: request, `AGENTS.md`, README, `docs/status.md`, ADRs, active specs, screenshots, analytics, support notes, or current UI when available.
 2. Identify `real user`, `scenario`, `job/outcome`, `current friction`, `constraints`, and `unknowns`.
 3. Classify the decision layer: `user`, `use context`, `problem/opportunity`, `scope`, `IA/main path`, `interaction model`, `state model`, `acceptance`, or `validation`.
-4. Choose one output: Discovery, Checkpoint, Handoff, or Choice Challenge.
-5. Use Product Reality Check before handoff when the request is greenfield, confusing, strongly criticized, or likely to produce a fake-PM answer.
-6. Route clarified visual execution to `$noootwo-design`, technical judgment to `$noootwo-review`, durable facts to `$noootwo-docs`, and sequencing back to `$noootwo-workflow`.
+4. If a missing answer would change product direction, run Decision Interview before choosing the final output.
+5. Choose one output: Discovery, Checkpoint, Handoff, or Choice Challenge.
+6. Use Product Reality Check before handoff when the request is greenfield, confusing, strongly criticized, or likely to produce a fake-PM answer.
+7. Route clarified visual execution to `$noootwo-design`, technical judgment to `$noootwo-review`, durable facts to `$noootwo-docs`, and sequencing back to `$noootwo-workflow`.
 
 If the answer would change the product direction, ask one decisive question with 2-3 options and one recommended default. If the user delegates, state the assumption and proceed.
+
+## Decision Interview
+
+Use this when product ambiguity is high enough that acting now would likely waste work: greenfield ideas, vague requirements, feature-list-only requests, backend-shaped flows, rejected product direction, or UI/implementation work missing `real user`, `main path`, `states`, or `acceptance criteria`.
+
+Rules:
+
+- Inspect repo truth, current UI, docs, screenshots, analytics, or support notes first.
+- Do not ask the user for facts that can be discovered from the environment.
+- Ask only product tradeoffs that materially change scope, IA, flow, states, or acceptance.
+- Ask one highest-impact question at a time; include 2-3 meaningful options and one recommended default.
+- Wait for the user's answer unless they explicitly delegate; when delegated, record the assumption and continue.
+- Stop as soon as `real user`, `scenario`, `main path`, `scope cuts`, `states`, and `acceptance criteria` are enough for Product-to-Design Handoff or implementation planning.
+
+Do not turn Decision Interview into a fixed questionnaire. If the next question would not change the plan, proceed with a stated assumption.
 
 ## Product Discovery
 
@@ -60,6 +77,8 @@ Product Discovery
 ```
 
 `Product directions` must be materially different paths, not cosmetic variants. `Recommended first loop` must include start, action, feedback, and proof signal. `Scope cuts` should remove premature platform, community, admin, AI, analytics, monetization, or customization work unless required for the first loop.
+
+Use Decision Interview inside Product Discovery only when one unresolved decision blocks convergence.
 
 ## Product Checkpoint
 
@@ -134,6 +153,8 @@ Product Choice Challenge
 
 For each option, state user understanding, operation cost, fit, and risk. Use two options when a third is filler.
 
+Decision Interview may run several Product Choice Challenge turns, but each turn must resolve only one decision.
+
 ## Product Rules
 
 - Start from user need, context, and mental model before implementation shape.
@@ -157,6 +178,7 @@ Before product work is handed off, verify:
 - scope cuts did not remove required behavior
 - acceptance criteria describe user-visible outcomes
 - Product Reality Check ran or was intentionally skipped for low-risk work
+- Decision Interview stopped because the path is ready, the user delegated the decision, or no material question remains
 - unresolved product choices are routed to the user or `$noootwo-workflow`
 
 ## Reference Map

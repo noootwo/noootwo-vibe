@@ -17,6 +17,8 @@ Add `noootwo-product` as the fifth public skill. It acts as a product manager an
 
 Clarification accepted on 2026-07-17: `noootwo-product` also owns lightweight Product Discovery for greenfield software product ideas, blank-project starts, broad product visions, and product brainstorming before design or implementation. It should borrow the useful mechanics of brainstorming-style workflows: context-first intake, one decisive question at a time, 2-3 materially different options, a recommended default, and convergence to a first usable product loop. It should not inherit mandatory spec writing, commit, or formal review gates unless the user asks for those artifacts or risk requires them.
 
+Clarification accepted on 2026-07-24: `noootwo-product` owns Decision Interview for high-ambiguity product work. The loop checks discoverable facts first, asks only product tradeoffs that materially change the plan, asks one question at a time with 2-3 meaningful options and a recommended default, records delegated assumptions, and stops as soon as the path is ready for Product-to-Design Handoff or implementation planning. `noootwo-workflow` routes multi-question product ambiguity to Product instead of running a long interview itself.
+
 `noootwo-product` owns:
 
 - product idea discovery and first-loop framing
@@ -34,7 +36,9 @@ Do not add `noootwo-architecture`. Architecture remains a `noootwo-review` lens 
 ## Consequences
 
 - Workflow can route `Workflow -> Product -> Design` when a feature, flow, IA, interaction, state, or acceptance path is unclear.
+- Workflow can route unclear or multi-question product ambiguity into Product Decision Interview without making every task run a fixed questionnaire.
 - Design focuses on UI, visual systems, frontend execution, artifacts, and handoff after product path clarity.
+- Design returns to Product Decision Interview when real user, main path, states, acceptance, audience, or use context is still unresolved.
 - Review remains the owner for architecture boundaries, technical judgment, test strategy, performance, maintainability, code quality, and submit/release gates.
 - Docs persists stable Product, Design, Review, Workflow, release, and repository facts in the correct layer.
 - Product must stay low-friction: small copy/style fixes do not become PRDs, and challenges expose only the highest-impact product choice.

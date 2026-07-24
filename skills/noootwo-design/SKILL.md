@@ -5,7 +5,7 @@ description: "Use for UI/frontend/app visual execution after product path is cle
 
 # Noootwo Design
 
-Noootwo Design translates a clear product path into a stable visual system, implementation contract, reviewable artifact, and handoff. It does not define product scope. If `real user`, `main path`, `states`, or `acceptance criteria` are unclear, route to `$noootwo-product` before designing.
+Noootwo Design translates a clear product path into a stable visual system, implementation contract, reviewable artifact, and handoff. It does not define product scope. If `real user`, `main path`, `states`, or `acceptance criteria` are unclear, route to `$noootwo-product` Decision Interview before designing.
 
 Use the lightest flow that can prove the result:
 
@@ -53,8 +53,9 @@ Do not route by surface label alone. Dashboards, native screens, landing pages, 
 
 ## Hard Stops
 
-- Product path unclear: return to `$noootwo-product`.
-- Taste, brand, audience, or use-context tradeoff unresolved: stop at directions or user decision.
+- Product path unclear: return to `$noootwo-product` Decision Interview.
+- Audience, use-context, main path, state, or acceptance tradeoff unresolved: return to `$noootwo-product` Decision Interview.
+- Taste or brand tradeoff unresolved after product path is clear: stop at directions or user decision.
 - New structure, visual language, or hierarchy without exploration summary: do not implement.
 - High-character style claim without visual evidence, anti-example, mechanism translation, or low-confidence label: return to style discovery.
 - Non-trivial implementation without Design Contract and implementation plan: do not edit UI files.

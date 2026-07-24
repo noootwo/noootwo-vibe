@@ -1,5 +1,12 @@
 # noootwo-product Releases
 
+## v0.5.0
+
+- Added `Decision Interview` as the lightweight continuous-confirmation loop for high-ambiguity product work.
+- Required the loop to inspect repo/UI/docs facts first, ask only product tradeoffs, ask one material question at a time, offer 2-3 meaningful options with a recommended default, and stop once the path is ready.
+- Added eval prompts for ambiguous product requests, discoverable facts that should not be asked back to the user, and stopping once Product-to-Design Handoff is ready.
+- Kept the mechanism inside `noootwo-product` instead of adding a public `noootwo-grilling` skill.
+
 ## v0.4.0
 
 - Added `Product Reality Check` for user-confusing, assumption-heavy, naive-AI, greenfield, or repeatedly corrected product work.

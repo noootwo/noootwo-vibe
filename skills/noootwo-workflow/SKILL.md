@@ -1,6 +1,6 @@
 ---
 name: noootwo-workflow
-description: "Use for Noootwo multi-step AI development workflow: routing, lifecycle guardrails, planning, verification, correction-loop diagnosis, product/design/docs/review handoffs, onboarding, and release sequencing. Trigger when work is non-trivial, cross-skill, release-bound, recovery-oriented, or needs controlled execution."
+description: "Use for Noootwo multi-step AI development workflow: routing, lifecycle guardrails, planning, verification, correction-loop diagnosis, Product Decision Interview routing, product/design/docs/review handoffs, onboarding, and release sequencing. Trigger when work is non-trivial, cross-skill, release-bound, recovery-oriented, or needs controlled execution."
 ---
 
 # Noootwo Workflow
@@ -61,11 +61,13 @@ Skip it for small direct edits with an obvious verification path.
 
 If the highest-impact unresolved decision is about a product idea, real user, feature scope, information architecture, interaction model, states, acceptance criteria, or whether something should be built at all, route to `$noootwo-product` for Product Discovery or a Product Choice Challenge instead of deciding it inside workflow.
 
+Do not run a long product interview inside Workflow. If one checkpoint reveals more unresolved product decisions, hand off to `$noootwo-product` Decision Interview with the highest-impact ambiguity and the facts already checked.
+
 ## Skill Routing
 
 - Use this skill first when a project needs a skill inventory, foundation health check, gap plan, or multi-skill handoff.
 - Use `$noootwo-product` first when the task is a greenfield software product idea, blank-project product start, broad product vision, product brainstorm, or "what should this become" question.
-- Use `$noootwo-product` when requirements, feature scope, real user, user flow, information architecture, interaction model, onboarding, permissions, states, acceptance criteria, usability, cognitive cost, or a product choice is unclear.
+- Use `$noootwo-product` Decision Interview when requirements, feature scope, real user, user flow, information architecture, interaction model, onboarding, permissions, states, acceptance criteria, usability, cognitive cost, or product choices need one-at-a-time confirmation.
 - Use `$noootwo-design` when the product path is clear enough and the work changes UI, visual direction, artifact review, `.noootwo/` deliverables, design systems, screenshots, or frontend implementation handoff. For non-quick UI work, Product-to-Design Handoff should include real user, main path, states, and acceptance criteria.
 - Use `$noootwo-review` when the work needs maintainability judgment, refactoring, architecture-boundary judgment, code structure review, test strategy review, performance review, or a second pass before release.
 - Use `$noootwo-docs` when the work changes project state, public usage, product decisions, architecture decisions, README, AGENTS, docs, or release notes.
@@ -96,6 +98,7 @@ If the task is a bug or failing check, first establish root cause and reproducti
 - Use TDD or a repro-first path for bugfixes, behavior changes, public contracts, regression risk, or code whose behavior is not otherwise provable.
 - Do not duplicate long background context into multiple files.
 - Do not let implementation or UI work proceed on unclear product paths; route to `$noootwo-product` first when user task, scope, states, or acceptance criteria are ambiguous.
+- Do not ask repeated product questions from Workflow; route the question sequence to `$noootwo-product` once more than one material product decision remains.
 - Do not keep polishing after repeated user correction. One strong rejection triggers layer diagnosis; two related rejections trigger Product Reality Check or Style Evidence Check before more implementation.
 - Do not let documentation, implementation, and review drift apart; route to `$noootwo-docs` before closing work that changes project behavior or state.
 - Route to `$noootwo-review` before submit or release for code changes. Small diffs can be self-reviewed and directly fixed; larger or risky diffs need a structured review gate.
@@ -110,7 +113,7 @@ When routing to another Noootwo skill, pass a compact handoff packet:
 - verification command or missing verification path
 - decision needed from the specialist
 
-For `$noootwo-product`, include the raw product idea when present, suspected real user, desired outcome, unclear product choice, current flow evidence, assumptions, and whether UI or implementation is waiting on the answer.
+For `$noootwo-product`, include the raw product idea when present, suspected real user, desired outcome, unclear product choice, current flow evidence, assumptions, whether Decision Interview is needed, and whether UI or implementation is waiting on the answer.
 
 For `$noootwo-design`, include Product-to-Design Handoff when available: real user, scenario, main path, states, scope cuts, acceptance criteria, open product decisions, design constraints, current UI/artifacts, and review path.
 

@@ -1,5 +1,11 @@
 # noootwo-design Releases
 
+## v0.9.1
+
+- Routed unresolved real-user, main-path, state, acceptance, audience, or use-context decisions back to `noootwo-product` Decision Interview before UI implementation.
+- Clarified that Design consumes a ready Product-to-Design Handoff and keeps visual taste/brand decisions in directions or Style Evidence Check after product path clarity.
+- Preserved quick polish and existing design quality gates without adding a default interview to every UI task.
+
 ## v0.9.0
 
 - Added Style Evidence Check as a targeted high-risk layer for premium, niche, unusual, selected, or previously rejected style work.

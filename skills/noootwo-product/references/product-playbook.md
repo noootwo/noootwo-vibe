@@ -16,6 +16,18 @@ Use `product-reality-check.md` when output may be PM-shaped but user-confusing, 
 - Good shaping names the appetite, no-gos, and likely rabbit holes before a team commits to build.
 - Fast product exploration can borrow sprint mechanics: map the path, sketch alternatives, decide, prototype only when useful, and test the riskiest assumption.
 
+## Decision Interview Notes
+
+Use this only when a product decision blocks progress. The loop is:
+
+1. Inspect discoverable facts first.
+2. Ask one material tradeoff.
+3. Recommend a default with 2-3 meaningful options.
+4. Record the answer or delegated assumption.
+5. Stop when the path is ready for handoff or implementation.
+
+Do not ask a fixed intake list. The next question must change first loop, scope, main path, state treatment, or acceptance.
+
 ## Product Discovery Template
 
 Use this when starting from a product idea, not from an already-selected feature path.
