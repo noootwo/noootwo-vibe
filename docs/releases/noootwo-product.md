@@ -1,5 +1,13 @@
 # noootwo-product Releases
 
+## v0.5.2
+
+- Added deep Decision Interview for explicit grill-style/detail-confirmation requests, high-risk scope, previously rejected interpretations, or several dependent product choices.
+- Split the ledger into confirmed, delegated, deferred, rejected, and active-risk states.
+- Added cumulative ledger guidance: recap confirmed decisions, show checked facts, explain why the next question matters, ask conditional follow-ups, and stop with a convergence summary once the path is ready.
+- Added explicit final intent-fit confirmation and a handoff block requiring decision, owner, and evidence for material risk.
+- Added detailed-confirmation and workflow-handoff evals without creating a public `noootwo-grilling` skill.
+
 ## v0.5.0
 
 - Added `Decision Interview` as the lightweight continuous-confirmation loop for high-ambiguity product work.

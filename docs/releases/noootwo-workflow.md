@@ -1,5 +1,11 @@
 # noootwo-workflow Releases
 
+## v0.7.6
+
+- Preserved explicit grill-style/detail-confirmation requests as `interview_depth: deep` when routing to `noootwo-product`.
+- Added `references/product-interview-handoff.md` with initialized fields for checked facts, source paths, decision-ledger state, intent-fit status, and risk evidence.
+- Kept Workflow from conducting the product interview itself while preventing deep requests from being compressed into a light checkpoint.
+
 ## v0.7.5
 
 - Routed multi-question product ambiguity to `noootwo-product` Decision Interview instead of letting Workflow become a long product interview.

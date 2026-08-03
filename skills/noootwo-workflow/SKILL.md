@@ -99,6 +99,7 @@ If the task is a bug or failing check, first establish root cause and reproducti
 - Do not duplicate long background context into multiple files.
 - Do not let implementation or UI work proceed on unclear product paths; route to `$noootwo-product` first when user task, scope, states, or acceptance criteria are ambiguous.
 - Do not ask repeated product questions from Workflow; route the question sequence to `$noootwo-product` once more than one material product decision remains.
+- Preserve an explicit request for grill-style or detailed confirmation across routing; Workflow should pass the deep-interview signal to `$noootwo-product`, not compress it into a light checkpoint.
 - Do not keep polishing after repeated user correction. One strong rejection triggers layer diagnosis; two related rejections trigger Product Reality Check or Style Evidence Check before more implementation.
 - Do not let documentation, implementation, and review drift apart; route to `$noootwo-docs` before closing work that changes project behavior or state.
 - Route to `$noootwo-review` before submit or release for code changes. Small diffs can be self-reviewed and directly fixed; larger or risky diffs need a structured review gate.
@@ -113,7 +114,7 @@ When routing to another Noootwo skill, pass a compact handoff packet:
 - verification command or missing verification path
 - decision needed from the specialist
 
-For `$noootwo-product`, include the raw product idea when present, suspected real user, desired outcome, unclear product choice, current flow evidence, assumptions, whether Decision Interview is needed, and whether UI or implementation is waiting on the answer.
+For `$noootwo-product`, use `references/product-interview-handoff.md` and include the raw product idea when present, the user's explicit request for detailed or grill-style confirmation when present, `interview_depth: light | deep`, suspected real user, desired outcome, unclear product choice, current flow evidence with source paths, the initialized decision ledger (`confirmed`, `assumed`, `deferred`, `rejected`, `active risks`), intent-fit status, whether Decision Interview is needed, and whether UI or implementation is waiting on the answer. Do not route a deep packet with `intent fit: pending` or an open material risk as ready for design or implementation.
 
 For `$noootwo-design`, include Product-to-Design Handoff when available: real user, scenario, main path, states, scope cuts, acceptance criteria, open product decisions, design constraints, current UI/artifacts, and review path.
 
@@ -145,4 +146,5 @@ For deeper guidance, read:
 - `references/project-skill-audit.md` when deciding which Noootwo or local skills a project needs.
 - `references/project-foundation-check.md` when checking process health, missing project files, or handoff readiness.
 - `references/minimal-foundation-templates.md` only when a project lacks the minimal docs/process foundation.
+- `references/product-interview-handoff.md` when routing deep or detailed product confirmation through Workflow.
 - `references/workflow-playbook.md` when planning a multi-step implementation, diagnostic recovery, or release workflow.

@@ -1,6 +1,6 @@
 ---
 name: noootwo-product
-description: "Use for product discovery and product decisions before design or implementation: Decision Interview, real user, scenario, first loop, scope, IA/main path, interaction/state model, acceptance criteria, Product Reality Check, Product Choice Challenge, and Product-to-Design Handoff. Trigger for greenfield ideas, unclear or rejected product direction, feature-list-only requests, backend-shaped flows, or UI work missing product path."
+description: "Use for product discovery and product decisions before design or implementation: Decision Interview, real user, scenario, first loop, scope, IA/main path, interaction/state model, acceptance criteria, Product Reality Check, Product Choice Challenge, and Product-to-Design Handoff. Trigger for greenfield ideas, unclear or rejected product direction, feature-list-only requests, backend-shaped flows, UI work missing product path, or explicit requests for detailed sequential requirement confirmation."
 ---
 
 # Noootwo Product
@@ -34,12 +34,12 @@ Do not design for the database model, admin fields, or requester preference unle
 1. Read the nearest product truth first: request, `AGENTS.md`, README, `docs/status.md`, ADRs, active specs, screenshots, analytics, support notes, or current UI when available.
 2. Identify `real user`, `scenario`, `job/outcome`, `current friction`, `constraints`, and `unknowns`.
 3. Classify the decision layer: `user`, `use context`, `problem/opportunity`, `scope`, `IA/main path`, `interaction model`, `state model`, `acceptance`, or `validation`.
-4. If a missing answer would change product direction, run Decision Interview before choosing the final output.
+4. If a missing answer would change product direction, or the user explicitly asks for detailed sequential confirmation, run Decision Interview before choosing the final output.
 5. Choose one output: Discovery, Checkpoint, Handoff, or Choice Challenge.
 6. Use Product Reality Check before handoff when the request is greenfield, confusing, strongly criticized, or likely to produce a fake-PM answer.
 7. Route clarified visual execution to `$noootwo-design`, technical judgment to `$noootwo-review`, durable facts to `$noootwo-docs`, and sequencing back to `$noootwo-workflow`.
 
-If the answer would change the product direction, ask one decisive question with 2-3 options and one recommended default. If the user delegates, state the assumption and proceed.
+If the answer would change the product direction, ask one decisive question with 2-3 options and one recommended default. If the user delegates, state the assumption and proceed. If the user asks for a grill-style or highly detailed confirmation, use `deep Decision Interview`: keep a cumulative decision ledger, recap what is already confirmed before each next question, explain why the question matters, and continue with conditional follow-ups until the path is ready.
 
 ## Decision Interview
 
@@ -52,7 +52,13 @@ Rules:
 - Ask only product tradeoffs that materially change scope, IA, flow, states, or acceptance.
 - Ask one highest-impact question at a time; include 2-3 meaningful options and one recommended default.
 - Wait for the user's answer unless they explicitly delegate; when delegated, record the assumption and continue.
-- Stop as soon as `real user`, `scenario`, `main path`, `scope cuts`, `states`, and `acceptance criteria` are enough for Product-to-Design Handoff or implementation planning.
+- In `deep Decision Interview`, begin each turn with a short `confirmed so far` recap, name the one open decision, and state how its answer changes the plan.
+- Show the relevant discoverable facts that shaped the current question; do not make the user restate facts already present in the repo or current flow.
+- After each answer, classify it as confirmed, delegated assumption, deferred, rejected, active risk, or still ambiguous; use the result to choose the next question instead of restarting a checklist.
+- Before handoff, summarize confirmed decisions, assumptions, deferred items, rejected ideas, active risks, and the next artifact. Add a brief intent-fit check: what user problem the first loop solves and what it intentionally does not solve.
+- In deep mode, ask one explicit final intent-fit confirmation after the convergence summary unless the user delegated the final decision. Do not infer final fit from earlier goal statements. If the answer is no, reopen only the highest-impact mismatch; if yes, stop. Do not ask again unless a new contradiction appears.
+- Do not hand off with an unresolved active risk that would change the main path, trust boundary, scope, or acceptance. Resolve it with a decision, owner, and evidence; get explicit user acceptance; or mark it as an intentional out-of-scope cut.
+- Stop as soon as `real user`, `scenario`, `main path`, `scope cuts`, `states`, and `acceptance criteria` are enough for Product-to-Design Handoff or implementation planning and no unresolved material risk remains.
 
 Do not turn Decision Interview into a fixed questionnaire. If the next question would not change the plan, proceed with a stated assumption.
 
@@ -179,6 +185,7 @@ Before product work is handed off, verify:
 - acceptance criteria describe user-visible outcomes
 - Product Reality Check ran or was intentionally skipped for low-risk work
 - Decision Interview stopped because the path is ready, the user delegated the decision, or no material question remains
+- Deep Decision Interview recapped the accumulated decisions, separated deferred from rejected items, resolved or explicitly accepted material risks, and passed the intent-fit check before stopping
 - unresolved product choices are routed to the user or `$noootwo-workflow`
 
 ## Reference Map

@@ -6,8 +6,8 @@ It publishes five focused skills:
 
 | Skill | Purpose | Version |
 | --- | --- | --- |
-| `noootwo-workflow` | AI workflow control, lifecycle guardrails, specialist-first routing, Product Decision Interview routing, correction-loop routing, product-to-design handoff routing, project skill audits, foundation checks, task routing, planning, and closure | `0.7.5` |
-| `noootwo-product` | Product Decision Interview, product decision layers, greenfield discovery, real-user checkpoints, Product Reality Check, IA/main paths, interaction/state models, acceptance criteria, cognitive-cost review, product choices, and Product-to-Design Handoff | `0.5.0` |
+| `noootwo-workflow` | AI workflow control, lifecycle guardrails, specialist-first routing, Product Decision Interview routing, deep-interview signal preservation, correction-loop routing, product-to-design handoff routing, project skill audits, foundation checks, task routing, planning, and closure | `0.7.6` |
+| `noootwo-product` | Product Decision Interview, deep sequential confirmation, decision ledgers, intent-fit checks, product decision layers, greenfield discovery, real-user checkpoints, Product Reality Check, IA/main paths, interaction/state models, acceptance criteria, cognitive-cost review, product choices, and Product-to-Design Handoff | `0.5.2` |
 | `noootwo-design` | UI/frontend Design Read, Style Evidence Check, style stability, semantic token contracts, quick polish, `.noootwo/` harness, artifact review, anti-slop checks, and design handoff after product path clarity | `0.9.1` |
 | `noootwo-review` | Tech Lead + QA Architect review, architecture-boundary lens, pre-submit gates, performance review, lean/context-cost review, project-health review, maintainability, and implementation review | `0.7.1` |
 | `noootwo-docs` | Documentation state, docs audits, README/AGENTS/docs layering, product decision persistence, ADRs, context budgets, and release notes | `0.7.0` |
@@ -78,9 +78,9 @@ npx skills add ./skills/noootwo-design --list
 
 ## Skill Responsibilities
 
-Use `noootwo-workflow` first when the task is broad, multi-step, release-bound, needs routing, enters a repeated correction loop, or needs a project skill/foundation audit. It owns lifecycle guardrails for read-first, product/design/review/docs routing, TDD/repro-first, verification, submit, and release decisions while keeping small direct work lightweight. It routes greenfield product ideas, blank-project product starts, and multi-question product ambiguity to `noootwo-product` Decision Interview, then passes Product-to-Design Handoff and style-evidence risk to `noootwo-design` for non-quick UI work.
+Use `noootwo-workflow` first when the task is broad, multi-step, release-bound, needs routing, enters a repeated correction loop, or needs a project skill/foundation audit. It owns lifecycle guardrails for read-first, product/design/review/docs routing, TDD/repro-first, verification, submit, and release decisions while keeping small direct work lightweight. It routes greenfield product ideas, blank-project product starts, and multi-question product ambiguity to `noootwo-product` Decision Interview, preserves explicit deep-confirmation intent and its handoff ledger, then passes Product-to-Design Handoff and style-evidence risk to `noootwo-design` for non-quick UI work.
 
-Use `noootwo-product` when a software product idea, blank-project start, broad product vision, requirements, feature scope, real users, user flows, information architecture, interaction models, onboarding, permissions, states, acceptance criteria, usability, cognitive cost, or product choices need clarification. It can run Decision Interview one material question at a time, run Product Discovery, challenge the request with 2-3 product options, run Product Reality Check for user-confusing or naive-AI risk, converge on a recommended first loop, and produce Product-to-Design Handoff.
+Use `noootwo-product` when a software product idea, blank-project start, broad product vision, requirements, feature scope, real users, user flows, information architecture, interaction models, onboarding, permissions, states, acceptance criteria, usability, cognitive cost, or product choices need clarification. It can run Decision Interview one material question at a time, switch to deep sequential confirmation when requested or warranted, keep a decision ledger, run Product Discovery, challenge the request with 2-3 product options, run Product Reality Check for user-confusing or naive-AI risk, converge on a recommended first loop, and produce Product-to-Design Handoff.
 
 Use `noootwo-design` for UI, visual systems, frontend design, screenshots, artifact review, `.noootwo/` deliverables, and design implementation handoff after the product path is clear. Non-quick work declares Design Read and maps design decisions into semantic tokens, component behavior, states, and artifact review paths. If real user, main path, states, acceptance, audience, or use context is still unresolved, route back to `noootwo-product` Decision Interview. High-character or previously rejected style work uses Style Evidence Check before trusting style prose; direction exploration runs only when style or structure is genuinely unresolved. Quick polish stays lightweight and does not require completing the full `.noootwo/` harness.
 
@@ -144,10 +144,10 @@ python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scena
 
 Each child skill has its own `VERSION` file and tag prefix:
 
-- `noootwo-workflow@v0.7.4`
-- `noootwo-product@v0.4.0`
-- `noootwo-design@v0.9.0`
-- `noootwo-review@v0.7.0`
+- `noootwo-workflow@v0.7.6`
+- `noootwo-product@v0.5.2`
+- `noootwo-design@v0.9.1`
+- `noootwo-review@v0.7.1`
 - `noootwo-docs@v0.7.0`
 
 The root `VERSION` records the workspace version only. Do not use it as the release source for child skills.

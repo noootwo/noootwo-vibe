@@ -18,7 +18,12 @@ Use `product-reality-check.md` when output may be PM-shaped but user-confusing, 
 
 ## Decision Interview Notes
 
-Use this only when a product decision blocks progress. The loop is:
+Use this when a product decision blocks progress. Choose the lightest depth that still protects the outcome:
+
+- `light`: one or a few questions for ordinary ambiguity.
+- `deep`: explicit user request for grill-style/detail confirmation, high-risk scope, a previously rejected interpretation, or several dependent product choices.
+
+The shared loop is:
 
 1. Inspect discoverable facts first.
 2. Ask one material tradeoff.
@@ -27,6 +32,39 @@ Use this only when a product decision blocks progress. The loop is:
 5. Stop when the path is ready for handoff or implementation.
 
 Do not ask a fixed intake list. The next question must change first loop, scope, main path, state treatment, or acceptance.
+
+For `deep` mode, use a cumulative decision ledger rather than a questionnaire:
+
+```markdown
+Decision Ledger
+- Confirmed facts and decisions:
+- Delegated assumptions:
+- Deferred:
+- Rejected:
+- Active risks and resolution/owner/evidence:
+- Next decision:
+```
+
+Each turn should:
+
+1. Briefly recap the confirmed facts and decisions in the user's language.
+2. Show the relevant discoverable facts that shaped the current question, with a source path or an explicit statement that no such fact was found.
+3. Name the single highest-impact unresolved decision.
+4. Explain why that decision matters and what it changes.
+5. Ask one question with 2-3 meaningful options and a recommended default.
+6. Classify the answer and use it to choose a conditional follow-up. Treat an active risk as a decision that needs resolution or explicit acceptance, not as a note to carry silently.
+
+Do not repeat settled questions or ask small visual, technical, or naming details while user, scenario, first loop, scope, or acceptance remains unresolved. If an answer is ambiguous or conflicts with an earlier decision, ask one narrower follow-up instead of silently choosing.
+
+For the final convergence pass:
+
+- `deferred` means intentionally out of scope for this loop; do not treat it as a hidden requirement.
+- `rejected` means explicitly ruled out; do not reintroduce it under a new label.
+- `active risk` means a material uncertainty about user trust, scope, main path, or acceptance; resolve it with a decision, owner, and evidence, obtain explicit acceptance, or convert it into a deliberate scope cut before handoff. "Risk handled" without evidence is not a resolution.
+- State the intent-fit check plainly: "This first loop solves X for Y in situation Z; it deliberately does not solve A/B."
+- In deep mode, ask once whether that summary matches the user's intended problem unless the user delegated the final decision. Do not treat an earlier statement of the goal as the final fit confirmation. If the answer is no, reopen only the highest-impact mismatch.
+
+End with a convergence summary covering confirmed decisions, assumptions, deferred items, rejected ideas, risk treatment, handoff readiness, and intent fit. Do not continue once no material decision remains.
 
 ## Product Discovery Template
 

@@ -1,4 +1,4 @@
 interface:
   display_name: "Noootwo Workflow"
   short_description: "AI workflow routing, project audit, and execution control"
-  default_prompt: "Use $noootwo-workflow for non-trivial, cross-skill, recovery, or release-bound work. Choose the lightest direct/planned/diagnostic/release/onboarding/recovery flow, route unclear product paths or multi-question product ambiguity to Product Decision Interview, route non-quick UI with handoff to Design, route technical risk to Review, and close with verification, docs impact, and release state."
+  default_prompt: "Use $noootwo-workflow for non-trivial, cross-skill, recovery, or release-bound work. Choose the lightest direct/planned/diagnostic/release/onboarding/recovery flow, route unclear product paths or multi-question product ambiguity to Product Decision Interview, preserve an explicit grill-style/detail-confirmation request as interview_depth=deep with its checked facts and decision ledger, route non-quick UI with handoff to Design, route technical risk to Review, and close with verification, docs impact, and release state."
