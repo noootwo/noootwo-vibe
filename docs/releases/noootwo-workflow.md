@@ -1,5 +1,13 @@
 # noootwo-workflow Releases
 
+## v0.7.7
+
+- Added a paused `product-interview` execution mode for unresolved product choices.
+- Prevented Workflow from treating a recommended default, "continue", or a build request as user approval.
+- Added `execution_status` to the Product Interview Handoff and blocked Design/implementation routing until Product convergence or explicit delegation.
+- Routed product work through Product Clarity Gate first so clear requests do not enter a waiting state.
+- Preserved the user's presentation language through Product handoff and kept canonical English keys internal.
+
 ## v0.7.6
 
 - Preserved explicit grill-style/detail-confirmation requests as `interview_depth: deep` when routing to `noootwo-product`.

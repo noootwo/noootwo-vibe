@@ -22,7 +22,7 @@ Do not load every skill. Load a skill body only after a project fact makes it re
 | Signal | Required skill | Trigger |
 | --- | --- | --- |
 | broad task, unclear sequence, release, takeover, missing process foundation | `$noootwo-workflow` | route, plan, audit, and close the loop |
-| greenfield software product idea, blank-project product start, broad product vision, product brainstorming | `$noootwo-product` | run Product Discovery before design or implementation |
+| greenfield software product idea, blank-project product start, broad product vision, product brainstorming | `$noootwo-product` | run Clarity Gate; interview only for a material gap, otherwise emit the smallest useful product artifact |
 | requirements, feature scope, real user, user flow, IA, interaction model, onboarding, permissions, states, acceptance criteria, confusion risk | `$noootwo-product` | clarify product path and challenge high-impact choices |
 | UI, screenshots, visual system, `.noootwo/`, design handoff | `$noootwo-design` | inspect artifacts and design workflow evidence |
 | code structure, refactor, tests, maintainability, architecture, AI-generated code risk | `$noootwo-review` | classify code/project defects and propose smallest fix |

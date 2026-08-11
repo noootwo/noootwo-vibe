@@ -15,4 +15,4 @@ Optimize `noootwo-workflow`, `noootwo-docs`, and `noootwo-review` to `v0.2.0` wi
 
 - Default skill invocations stay lightweight while complex tasks have stronger guidance on demand.
 - Workflow, docs, and review now produce more explicit handoffs and verification expectations.
-- The public skill set remains exactly four skills, and Noootwo Design remains unchanged in this optimization pass.
+- At this decision point the public skill set remained four skills, and Noootwo Design remained unchanged; ADR 0005 later added `noootwo-product` as the fifth public skill.

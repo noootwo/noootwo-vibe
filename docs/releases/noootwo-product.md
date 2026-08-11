@@ -1,5 +1,14 @@
 # noootwo-product Releases
 
+## v0.5.3
+
+- Changed Decision Interview from a recommendation that could be mistaken for approval into an explicit interactive gate.
+- Require one question per turn, explicit user selection or delegation for every material choice, and a visible `awaiting_user_answer` / blocked execution state.
+- Treat generic requests such as "continue" or "start building" as non-answers to an open product choice.
+- Added a regression eval for premature implementation and aligned greenfield, feature-list, detailed-confirmation, and Workflow handoff evals.
+- Added Clarity Gate so coherent, detailed requests bypass the interview instead of receiving ceremonial questions.
+- Made user-facing interview turns language-adaptive: translate labels and explanations to the user's language, while retaining useful code and technical identifiers.
+
 ## v0.5.2
 
 - Added deep Decision Interview for explicit grill-style/detail-confirmation requests, high-risk scope, previously rejected interpretations, or several dependent product choices.

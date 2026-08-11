@@ -11,12 +11,12 @@ The risk is not only missing guidance. `noootwo-design` already carries a full `
 
 ## Decision
 
-Keep the four public skills unchanged. Improve daily adoption by adding small triggered controls instead of new public skills or default gates:
+Keep the existing public skills unchanged at this decision point. Improve daily adoption by adding small triggered controls instead of new public skills or default gates:
 
 - `noootwo-workflow` owns a lightweight alignment checkpoint for non-trivial work where one unresolved decision can materially change implementation.
 - `noootwo-review` owns an explicit review lens selector so narrow diffs stay narrow and broader audits choose their evidence surface deliberately.
 - `noootwo-design` keeps standard/deep/production gates, but quick polish does not require bootstrapping or completing the full `.noootwo/` harness.
-- Docs records this decision and release notes; no new large guide or fifth public skill is introduced.
+- Docs records this decision and release notes; no new large guide or public skill is introduced by this ADR. ADR 0005 later added `noootwo-product` as the fifth public skill.
 
 Clarification accepted on 2026-07-10: lightweight control does not mean important lifecycle gates are optional. `noootwo-workflow` should require short guardrail judgments at development, close, submit, release, and handoff points: read-first needs, TDD/repro-first needs, verification path, docs-after, and review/design follow-up. These are mandatory decisions, but only become visible process when the task is non-trivial, submit-bound, release-bound, or risky.
 

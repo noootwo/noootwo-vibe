@@ -122,9 +122,9 @@ Alignment Checkpoint
 - Outcome: user chose | user delegated to agent | no question needed.
 ```
 
-If the user is unavailable and the risk is acceptable, proceed with the recommended default and list it as an assumption. If the wrong answer could cause migration, release, data, security, or product-direction damage, stop for the decision.
+For ordinary low-risk implementation choices, an unavailable user may be handled with the recommended default recorded as an assumption. For a product-direction choice that the Clarity Gate found unresolved, absence, "continue", or a build request is not acceptance. Stop in `product-interview` mode until the user explicitly selects the choice or delegates it. Do not create that pause when the product request is already clear.
 
-If the unresolved decision is product-shaped, use `$noootwo-product` for Product Discovery or a Product Choice Challenge: real user, should/should-not build scope, main path, cognitive cost, states, and acceptance criteria.
+If a product-shaped decision may be unresolved, use `$noootwo-product` Clarity Gate first. Product starts Decision Interview only for a material gap; otherwise it may emit Product Discovery, Product Checkpoint, or a direct handoff without a user wait.
 
 ## Correction Loop
 
@@ -142,7 +142,7 @@ Correction loops are risk-triggered. Do not apply them to small copy edits, know
 | Signal | Route |
 | --- | --- |
 | unfamiliar project, missing process foundation, unclear skill needs | `$noootwo-workflow` onboarding mode |
-| greenfield software product idea, blank-project product start, broad product vision, product brainstorming, "what should this become" | `$noootwo-product` Product Discovery |
+| greenfield software product idea, blank-project product start, broad product vision, product brainstorming, "what should this become" | `$noootwo-product` Clarity Gate; Decision Interview only when material choices remain |
 | requirements, feature scope, user flow, IA, interaction model, onboarding, permissions, states, acceptance criteria, confusion risk | `$noootwo-product` |
 | UI, visual hierarchy, screenshots, `.noootwo/` | `$noootwo-design` |
 | README, AGENTS, docs, ADR, status, release notes | `$noootwo-docs` |
@@ -216,7 +216,7 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 1. Run lifecycle guardrails at the lightest useful level.
 2. Inspect repo truth before deciding.
 3. If skill needs or foundation are unclear, audit them before planning.
-4. Run an alignment checkpoint only when one unresolved decision can change the work.
+4. Run an alignment checkpoint only when one unresolved decision can change the work; if it is product-shaped, route to Product Clarity Gate and pause only when it finds a material gap.
 5. State the smallest viable path.
 6. Implement in slices that can be tested independently.
 7. Run the closest meaningful checks after each risky slice.
@@ -286,7 +286,7 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 - Collapse repeated status into a single status file instead of rewriting the same fact in README, AGENTS, and release notes.
 - Keep lifecycle guardrails as short decisions; only show them when the task, submit, release, or handoff risk justifies visibility.
 - Prefer one short alignment checkpoint over a long intake form.
-- Prefer Product Discovery over generic brainstorming when the ambiguity is a software product idea, first user, first loop, or product-scope question.
+- Prefer Product Decision Interview before Product Discovery only when the first user, first loop, or product scope is still open. A detailed, coherent request does not need an interview for ceremony.
 - Prefer one Product Choice Challenge over a full PRD unless the user asks for the larger artifact.
 
 ## Stop Conditions

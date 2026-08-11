@@ -23,15 +23,55 @@ Use this when a product decision blocks progress. Choose the lightest depth that
 - `light`: one or a few questions for ordinary ambiguity.
 - `deep`: explicit user request for grill-style/detail confirmation, high-risk scope, a previously rejected interpretation, or several dependent product choices.
 
-The shared loop is:
+## Clarity Gate
+
+Run this before starting the shared loop. Decision Interview is not a default ceremony.
+
+- `clear`: the request and checked repo truth establish the user or existing target, scenario, outcome, scope boundary, main path, relevant states, and observable acceptance with no material contradiction. Skip the interview and produce a compact Checkpoint, Handoff, or direct route.
+- `one-material-gap`: exactly one unresolved product choice would change user value, scope, main path, state behavior, trust, or acceptance. Run a light interview.
+- `ambiguous/high-risk`: several dependent choices, conflicting facts, rejected direction, or trust/payment/permission/data scope. Run a deep interview.
+- `explicit-interview`: the user asks for step-by-step confirmation or grill-style detail. Run a deep interview.
+
+Do not manufacture gaps from technical implementation details or low-impact preferences. An explicit user statement is confirmed unless it conflicts with evidence or has more than one reasonable product meaning.
+
+When the Clarity Gate selects light or deep, the shared loop is:
 
 1. Inspect discoverable facts first.
 2. Ask one material tradeoff.
 3. Recommend a default with 2-3 meaningful options.
-4. Record the answer or delegated assumption.
-5. Stop when the path is ready for handoff or implementation.
+4. Stop and wait for the user's answer.
+5. Record the answer or explicitly delegated assumption.
+6. Stop when the path is ready for handoff or implementation.
 
 Do not ask a fixed intake list. The next question must change first loop, scope, main path, state treatment, or acceptance.
+
+## Execution Gate
+
+When Decision Interview is active, the agent is in an awaiting-user state. The recommendation is an option, not approval. Do not apply this execution block to a clear request that was deliberately routed around the interview.
+
+- A request to build, start, continue, or follow best practices does not answer the current product question.
+- Only explicit delegation such as "you decide", "choose for me", or "use your recommended default and proceed" permits a delegated assumption.
+- Until the current question is answered or explicitly delegated, allow read-only fact inspection only. Do not edit files, create a design, write an implementation plan, route to Design, or claim a final product direction.
+- If another material choice remains after the answer, ask the next single conditional question and remain in the awaiting-user state.
+- The first response for an ambiguous product request is an interview turn, not a completed Product Discovery, Product Checkpoint, or handoff.
+
+This is an internal field contract, not literal user-facing copy. Render it in the user's language and hide raw machine-state labels unless the user asks for diagnostics or a handoff.
+
+For a Chinese conversation, use this readable shape:
+
+```markdown
+需求确认（第一个关键问题）
+- 已确认：
+- 已查到的事实：
+- 现在需要确认：
+- 为什么重要：
+- 可选方案：
+- 我的建议（尚未选择）：
+- 请你确认：
+- 当前状态：等待你的确认
+```
+
+For any language, use the user's normal vocabulary for headings and prose. Preserve code, API names, file paths, product names, and exact state identifiers when they need to stay copyable; do not translate those mechanically.
 
 For `deep` mode, use a cumulative decision ledger rather than a questionnaire:
 
@@ -70,6 +110,8 @@ End with a convergence summary covering confirmed decisions, assumptions, deferr
 
 Use this when starting from a product idea, not from an already-selected feature path.
 
+If the Clarity Gate says `clear`, this template may be produced directly. If a material product choice is still open, ask the interview question first rather than presenting a completed discovery as if it were user-approved.
+
 ```markdown
 Product Discovery
 - Product truth checked:
@@ -100,7 +142,7 @@ Field guidance:
 - `Rabbit holes`: likely complexity traps, such as marketplace dynamics, heavy admin tooling, unclear AI quality, sync, permissions, or monetization before value.
 - `First validation signal`: the behavior or evidence that would justify building the next slice.
 
-Ask one question at a time only when the answer changes the recommended first loop. If the user delegates the decision, state the assumption and proceed.
+Ask one question at a time when the answer changes the recommended first loop, scope, main path, states, or acceptance. If the user has not explicitly delegated the decision, wait for the answer even when the user has asked to start implementation. State a delegated assumption and proceed only after explicit delegation.
 
 ## Product Choice Challenge Template
 

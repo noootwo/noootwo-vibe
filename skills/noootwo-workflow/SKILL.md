@@ -59,15 +59,17 @@ Run the checkpoint in four steps:
 
 Skip it for small direct edits with an obvious verification path.
 
-If the highest-impact unresolved decision is about a product idea, real user, feature scope, information architecture, interaction model, states, acceptance criteria, or whether something should be built at all, route to `$noootwo-product` for Product Discovery or a Product Choice Challenge instead of deciding it inside workflow.
+If the highest-impact unresolved decision is about a product idea, real user, feature scope, information architecture, interaction model, states, acceptance criteria, or whether something should be built at all, route to `$noootwo-product` for its Clarity Gate. Product starts Decision Interview only when a material choice remains; a request whose user/target, scenario, outcome, scope boundary, main path, relevant states, and acceptance are already clear proceeds without an interview.
 
 Do not run a long product interview inside Workflow. If one checkpoint reveals more unresolved product decisions, hand off to `$noootwo-product` Decision Interview with the highest-impact ambiguity and the facts already checked.
+
+When Product's Clarity Gate opens Decision Interview, enter `product-interview` mode and pause execution. A plain request to build, continue, start, or follow best practices is not delegation of unresolved product choices. Until Product returns `ready_for_handoff` or the user explicitly delegates the choices, Workflow may inspect facts read-only but must not edit files, create implementation plans, route to Design, or begin implementation. Carry `waiting_on: user_answer` and `execution_status: blocked` in the handoff so downstream skills cannot mistake a recommendation for approval. Do not enter this pause for a clear request.
 
 ## Skill Routing
 
 - Use this skill first when a project needs a skill inventory, foundation health check, gap plan, or multi-skill handoff.
 - Use `$noootwo-product` first when the task is a greenfield software product idea, blank-project product start, broad product vision, product brainstorm, or "what should this become" question.
-- Use `$noootwo-product` Decision Interview when requirements, feature scope, real user, user flow, information architecture, interaction model, onboarding, permissions, states, acceptance criteria, usability, cognitive cost, or product choices need one-at-a-time confirmation.
+- Use `$noootwo-product` Decision Interview only when requirements, feature scope, real user, user flow, information architecture, interaction model, onboarding, permissions, states, acceptance criteria, usability, cognitive cost, or product choices still need one-at-a-time confirmation after the Clarity Gate.
 - Use `$noootwo-design` when the product path is clear enough and the work changes UI, visual direction, artifact review, `.noootwo/` deliverables, design systems, screenshots, or frontend implementation handoff. For non-quick UI work, Product-to-Design Handoff should include real user, main path, states, and acceptance criteria.
 - Use `$noootwo-review` when the work needs maintainability judgment, refactoring, architecture-boundary judgment, code structure review, test strategy review, performance review, or a second pass before release.
 - Use `$noootwo-docs` when the work changes project state, public usage, product decisions, architecture decisions, README, AGENTS, docs, or release notes.
@@ -96,6 +98,7 @@ If the task is a bug or failing check, first establish root cause and reproducti
 - Load only the files needed for the current slice; use references as navigation, not as default context dumps.
 - Before reading a long document, use local search first: `rg --files`, `rg -n` headings/keywords/paths, then bounded `sed` ranges. Read the whole file only for whole-document audits, consistency checks, or when targeted search fails.
 - Use TDD or a repro-first path for bugfixes, behavior changes, public contracts, regression risk, or code whose behavior is not otherwise provable.
+- Do not execute a product implementation while a Product Decision Interview is waiting for an answer. Product's recommended default is not a resolved decision; execution starts only after explicit user selection, explicit delegation, or a no-question-needed determination grounded in checked facts. A clear product request is not waiting merely because it is product-shaped.
 - Do not duplicate long background context into multiple files.
 - Do not let implementation or UI work proceed on unclear product paths; route to `$noootwo-product` first when user task, scope, states, or acceptance criteria are ambiguous.
 - Do not ask repeated product questions from Workflow; route the question sequence to `$noootwo-product` once more than one material product decision remains.
@@ -113,8 +116,10 @@ When routing to another Noootwo skill, pass a compact handoff packet:
 - known constraints and non-goals
 - verification command or missing verification path
 - decision needed from the specialist
+- execution status: blocked on user answer | ready for handoff | ready for execution
+- presentation language: infer from the user's latest message; preserve intentional technical terms
 
-For `$noootwo-product`, use `references/product-interview-handoff.md` and include the raw product idea when present, the user's explicit request for detailed or grill-style confirmation when present, `interview_depth: light | deep`, suspected real user, desired outcome, unclear product choice, current flow evidence with source paths, the initialized decision ledger (`confirmed`, `assumed`, `deferred`, `rejected`, `active risks`), intent-fit status, whether Decision Interview is needed, and whether UI or implementation is waiting on the answer. Do not route a deep packet with `intent fit: pending` or an open material risk as ready for design or implementation.
+For `$noootwo-product`, use `references/product-interview-handoff.md` and include the raw product idea when present, the user's explicit request for detailed or grill-style confirmation when present, Clarity Gate result, `interview_depth: none | light | deep`, presentation language, suspected real user, desired outcome, unclear product choice, current flow evidence with source paths, the initialized decision ledger (`confirmed`, `assumed`, `deferred`, `rejected`, `active risks`), intent-fit status, whether Decision Interview is needed, and whether UI or implementation is waiting on the answer. A pending packet is a pause state for Product, not a ready handoff. Do not route it to Design or implementation until Product marks `execution_status: ready_for_handoff` or the user explicitly delegates the remaining choices.
 
 For `$noootwo-design`, include Product-to-Design Handoff when available: real user, scenario, main path, states, scope cuts, acceptance criteria, open product decisions, design constraints, current UI/artifacts, and review path.
 
