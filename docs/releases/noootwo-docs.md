@@ -1,5 +1,12 @@
 # noootwo-docs Releases
 
+## v0.9.0
+
+- Restructured around a layer table, eight update rules with a completion criterion, a status budget, and anti-drift rules.
+- Added `docs/agents/` and `docs/experiments/` to the layer table.
+- Cut the description from 445 to 196 characters.
+
+
 ## v0.8.0
 
 - Added a hard docs-decision trigger: behavior, project state, release facts, product decisions, or agent instruction changes require an update or an intentional no-op before closure.

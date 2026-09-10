@@ -1,5 +1,13 @@
 # noootwo-design Releases
 
+## v0.11.0
+
+- Rewrote the body as a six-step flow — size, Design Read, direction, Design Contract, build, review — each with a completion criterion.
+- Cut the description from 584 to 195 characters and added the explicit return path: an unsettled product path invokes `noootwo-product`.
+- Consolidated 45 reference files into 9 grouped references, each named by a pointer: intake, direction, research, system, craft, review, translate, evidence, notes.
+- Carried forward the crafted review rules: bounded verification, hard bans, the browser-surfaces check, and separated final review.
+
+
 ## v0.10.0
 
 - Rewrote skill triggers with concrete UI verbs/nouns and explicit cross-routing back to Product and Workflow.

@@ -159,7 +159,7 @@ Source index for the ninth pass:
 
 Packaging and one-click installation pass, checked on 2026-08-12:
 
-- The official `skills` CLI supports repository shorthand, explicit child-skill selection with `--skill '*'`, global installation with `--global`, agent targeting with `--agent`, and update commands. The tested local installation copied all five Noootwo child skills into the standard `.agents/skills` layout.
+- The official `skills` CLI supports repository shorthand, explicit child-skill selection with `--skill '*'`, global installation with `--global`, agent targeting with `--agent`, and update commands. The tested local installation copied every Noootwo child skill into the standard `.agents/skills` layout.
 - `antfu/skills`, `vuejs-ai/skills`, and `flutter/agent-plugins` publish independent child directories under `skills/` and document a one-command aggregate install. Antfu explicitly uses `--skill='*'`; Flutter targets the universal `.agents/skills` location and also exposes native plugin metadata.
 - The Agent Skills specification requires each published unit to be a directory containing `SKILL.md`; `scripts/`, `references/`, and `assets/` are optional supporting directories. This matches the Noootwo Vibe child-skill layout.
 - The `skills` CLI resolves repository shorthand against the repository default branch. Therefore the default branch, not only a feature branch, must contain the published multi-skill workspace for `npx skills add noootwo/noootwo-vibe ...` to be a reliable one-click command.

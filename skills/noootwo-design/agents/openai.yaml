@@ -1,4 +1,3 @@
 interface:
   display_name: "Noootwo Design"
-  short_description: "UI design, Design Read, style stability, artifacts, tokens, and handoff"
-  default_prompt: "Use $noootwo-design for UI/frontend/app visual work after product path is clear. Keep quick polish light. If real user, main path, states, acceptance, audience, or use context is still unresolved, route back to Product Decision Interview. For non-quick work declare Design Read; use Style Evidence Check and direction exploration only when style, structure, or prior rejection makes the direction risky. Implementation-bound work needs a Design Contract, plan, and artifact review before ready."
+  short_description: "Design UI, artifacts, and visual systems"

@@ -2,15 +2,16 @@
 
 Noootwo Vibe is a multi-skill workspace for controlled AI-assisted software development.
 
-It publishes five focused skills:
+It publishes six focused skills — a router plus five specialists:
 
-| Skill | Purpose | Version |
-| --- | --- | --- |
-| `noootwo-workflow` | Mandatory task-start routing with concrete triggers (feature, product idea, multi-file, bugfix, release, handoff, recovery, rejection loop), lifecycle guardrails, routing-as-invocation to Product/Design/Review/Docs, rework diagnosis, paused interview routing only for unresolved choices, compact handoff packets, project skill audits, foundation checks, planning, and closure | `0.8.0` |
-| `noootwo-product` | Adaptive Product Clarity Gate, light single-question interview for one material gap, grilling-style deep Decision Interview with frontier rounds, fact self-serve, fixed question format, decision ledgers, frontier-empty confirmation gate, user-language presentation, product decision layers, greenfield discovery, real-user checkpoints, Product Reality Check, IA/main paths, interaction/state models, acceptance criteria, cognitive-cost review, product choices, and Product-to-Design Handoff | `0.6.0` |
-| `noootwo-design` | UI/frontend Design Read, Style Evidence Check, style stability, semantic token contracts, quick polish, `.noootwo/` harness, artifact review, anti-slop hard bans, bounded verification, separated final review, and design handoff after product path clarity | `0.10.0` |
-| `noootwo-review` | Tech Lead + QA Architect review, architecture-boundary lens, hard pre-submit/release gates, rework diagnosis, performance review, lean/context-cost review, project-health review, maintainability, and implementation review | `0.8.0` |
-| `noootwo-docs` | Documentation state, hard docs-decision trigger for behavior/release/agent changes, docs audits, README/AGENTS/docs layering, product decision persistence, ADRs, context budgets, and release notes | `0.8.0` |
+| Skill | Invocation | Purpose | Version |
+| --- | --- | --- | --- |
+| `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in | `0.1.0` |
+| `noootwo-workflow` | model-invoked | Runs one multi-step task through a controlled loop and invokes the other skills at each trigger | `0.9.0` |
+| `noootwo-product` | model-invoked | Settles real user, first loop, scope, main path, states, and acceptance before design or build | `0.7.0` |
+| `noootwo-design` | model-invoked | Turns a settled product path into direction, tokens, a Design Contract, and a reviewed artifact | `0.11.0` |
+| `noootwo-review` | model-invoked | Judges code before it ships, and diagnoses which layer failed when work is rejected | `0.9.0` |
+| `noootwo-docs` | model-invoked | Places each changed fact in its owning documentation layer | `0.9.0` |
 
 The repository root is not a published skill. It is the shared workspace for manifests, docs, validation, release helpers, and CI.
 
@@ -22,14 +23,14 @@ List all skills from the published repository:
 npx -y skills add noootwo/noootwo-vibe --list --full-depth
 ```
 
-Install all five skills globally for Codex:
+Install all six skills globally for Codex:
 
 ```bash
 npx -y skills add noootwo/noootwo-vibe --skill '*' --global --agent codex --yes
 ```
 
 The command uses the `skills` CLI's standard Agent Skills layout and installs the
-five child skills under `~/.agents/skills/`. Start a new task after installation
+six child skills under `~/.agents/skills/`. Start a new task after installation
 so the agent can discover them.
 
 Install one skill:
@@ -48,7 +49,7 @@ npx -y skills add /path/to/noootwo-vibe --skill '*' --global --agent codex --yes
 Update the globally installed Noootwo skills later with:
 
 ```bash
-npx -y skills update noootwo-workflow noootwo-product noootwo-design noootwo-review noootwo-docs --global --yes
+npx -y skills update noootwo-ask noootwo-workflow noootwo-product noootwo-design noootwo-review noootwo-docs --global --yes
 ```
 
 Single-skill local checks are also supported:
@@ -67,16 +68,18 @@ npx skills add ./skills/noootwo-design --list
 ├── VERSION
 ├── docs/
 │   ├── adr/
+│   ├── agents/          # skill authoring and invocation standards
+│   ├── experiments/     # recorded behaviour measurement
 │   ├── guides/
 │   ├── reference/
 │   ├── releases/
 │   └── status.md
-├── references/
 ├── scripts/
 │   ├── sync_local_install.py
 │   └── validate_skill_workspace.py
 ├── skills.json
 └── skills/
+    ├── noootwo-ask/
     ├── noootwo-workflow/
     ├── noootwo-product/
     ├── noootwo-design/
@@ -88,15 +91,17 @@ npx skills add ./skills/noootwo-design --list
 
 ## Skill Responsibilities
 
-Use `noootwo-workflow` first for a new feature, product idea, multi-file or cross-skill change, bugfix, refactor, release, onboarding or handoff, recovery after repeated failed fixes, or a correction loop after user rejection. It owns lifecycle guardrails for read-first, product/design/review/docs routing, TDD/repro-first, verification, submit, and release decisions while keeping small direct work lightweight. Routing is an invocation: when a specialist trigger matches it explicitly invokes `noootwo-product`, `noootwo-design`, `noootwo-review`, or `noootwo-docs`. It routes product-shaped work to `noootwo-product` Clarity Gate, preserves explicit grill-style/deep-confirmation intent and its handoff ledger, pauses execution only while a material choice awaits an answer, diagnoses the failed layer on rework, then passes Product-to-Design Handoff and style-evidence risk to `noootwo-design` for non-quick UI work.
+`noootwo-ask` is the only user-invoked skill. Type it when you are unsure which skill fits; it names the right one and the order to run them in, at no context cost to the agent.
 
-Use `noootwo-product` when a software product idea, blank-project start, broad product vision, requirements, feature scope, real users, user flows, information architecture, interaction models, onboarding, permissions, states, acceptance criteria, usability, cognitive cost, or product choices need clarification. It first classifies the brief as clear, one material gap, ambiguous/high-risk, or explicitly interview-driven. Clear, detailed requests move directly to the smallest useful artifact or implementation route; only unresolved material choices open an interactive Decision Interview. The interview uses light single questions for one material gap and grilling-style frontier rounds for deep confirmation: it asks every settled-prerequisite question per round with a recommended answer, resolves discoverable facts itself, keeps a decision ledger, and requires an explicit shared-understanding confirmation before handoff. It presents normal responses in the user's language, runs Product Discovery after material choices converge, and produces Product-to-Design Handoff.
+`noootwo-workflow` runs one multi-step task — a feature, a cross-file change, a bug, a refactor, a release, a handoff, or rework after a rejected fix. It reads the nearest repo truth, picks a mode, and invokes the specialist that owns each trigger: `noootwo-product` when product decisions are unsettled, `noootwo-design` for UI work, `noootwo-review` before submit or release, and `noootwo-docs` when facts changed. While a product decision is unsettled the loop stops until a shared understanding is confirmed.
 
-Use `noootwo-design` for UI, visual systems, frontend design, screenshots, artifact review, `.noootwo/` deliverables, and design implementation handoff after the product path is clear. Non-quick work declares Design Read and maps design decisions into semantic tokens, component behavior, states, and artifact review paths. If real user, main path, states, acceptance, audience, or use context is still unresolved, route back to `noootwo-product` Decision Interview. High-character or previously rejected style work uses Style Evidence Check before trusting style prose; direction exploration runs only when style or structure is genuinely unresolved. Quick polish stays lightweight and does not require completing the full `.noootwo/` harness.
+`noootwo-product` settles what should exist before anything is designed or built. It reads discoverable facts itself, names what is unsettled, and then grills the frontier — the questions answerable now — one round at a time, each question carrying options and a recommendation. It ends when the frontier is empty and the user confirms a shared understanding, then produces the Product-to-Design Handoff.
 
-Use `noootwo-review` when code quality, pre-submit review, performance review, lean/context-cost review, over-engineering, dependency bloat, project health, refactoring, test strategy, architecture hygiene, or maintainability risk matters. It also flags broad skill triggers, fixed question lists, or default gates that make small tasks too expensive. Architecture remains a review lens here; there is no separate `noootwo-architecture` skill.
+`noootwo-design` turns a settled product path into a visual system. It declares a Design Read, compares directions when style or structure is unresolved, writes a Design Contract before editing, reads the craft floor immediately before building, and reviews the rendered artifact in bounded passes. `ready` is never self-certified. When the real user, main path, states, or acceptance turn out to be unsettled, it invokes `noootwo-product`.
 
-Use `noootwo-docs` when a change affects project state, user-facing instructions, repository layout, documentation audits, product decisions, ADRs, release notes, or agent instructions.
+`noootwo-review` judges code before it ships and diagnoses rework. It selects lenses — correctness, testability, architecture boundary, lean, performance, project health, release readiness, rework diagnosis — and leads with findings ordered by severity. Architecture remains a review lens; there is no separate `noootwo-architecture` skill.
+
+`noootwo-docs` places each changed fact in its owning layer — README, AGENTS, status, ADR, guide, reference, experiment, or release notes — and removes the stale version in the same pass. A change to behaviour, state, release facts, or agent instructions needs a docs decision before the work is closed.
 
 ## Validation
 
@@ -124,6 +129,7 @@ npx -y skills add . --list
 npx -y skills add . --list --full-depth
 npx -y skills add ./skills/noootwo-workflow --list
 npx -y skills add ./skills/noootwo-product --list
+npx -y skills add ./skills/noootwo-ask --list
 npx -y skills add ./skills/noootwo-design --list
 npx -y skills add ./skills/noootwo-review --list
 npx -y skills add ./skills/noootwo-docs --list
@@ -154,11 +160,12 @@ python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scena
 
 Each child skill has its own `VERSION` file and tag prefix:
 
-- `noootwo-workflow@v0.8.0`
-- `noootwo-product@v0.6.0`
-- `noootwo-design@v0.10.0`
-- `noootwo-review@v0.8.0`
-- `noootwo-docs@v0.8.0`
+- `noootwo-ask@v0.1.0`
+- `noootwo-workflow@v0.9.0`
+- `noootwo-product@v0.7.0`
+- `noootwo-design@v0.11.0`
+- `noootwo-review@v0.9.0`
+- `noootwo-docs@v0.9.0`
 
 The root `VERSION` records the workspace version only. Do not use it as the release source for child skills.
 

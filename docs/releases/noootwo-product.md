@@ -1,5 +1,13 @@
 # noootwo-product Releases
 
+## v0.7.0
+
+- Rebuilt the skill on grilling mechanics: read the facts, check what is settled, grill the frontier in rounds, confirm a shared understanding, then hand off.
+- Adopted the canonical vocabulary from `docs/agents/skill-authoring.md`: frontier, settled, shared understanding, rework, slop. Retired the `clear` / `one-material-gap` / `ambiguous-high-risk` / `explicit-interview` state enum and the separate Choice Challenge turn.
+- Moved the decision layers, report templates, and grilling detail into `references/product-flow.md`; the reality check stays in `references/product-reality-check.md`.
+- Body reduced from 266 to 83 lines and the description from 600 to 188 characters.
+
+
 ## v0.6.0
 
 - Rebuilt deep Decision Interview on grilling mechanics: decision tree, frontier rounds, fixed `❓ Qn - **title**` question format with `➡️` recommended answers, and horizontal-rule separation between questions.

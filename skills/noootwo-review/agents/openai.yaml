@@ -1,4 +1,3 @@
 interface:
   display_name: "Noootwo Review"
-  short_description: "Code quality, lean review, and refactoring guardrails"
-  default_prompt: "Use $noootwo-review for focused code and project-health review before submit/release or risky implementation. Choose only relevant lenses: correctness, testability, architecture boundary, lean/bloat, performance, AI-code/skill context cost, or release readiness. Treat broad skill triggers, fixed question lists, and default gates heavier than task risk as lean/context-cost defects. Report concrete findings, smallest fixes, and verification gaps."
+  short_description: "Review code before it ships"

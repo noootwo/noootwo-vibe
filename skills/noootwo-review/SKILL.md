@@ -1,151 +1,90 @@
 ---
 name: noootwo-review
-description: "Use for code and project-health review: correctness, testability, architecture boundaries, lean/bloat, performance, AI-code/skill context cost, release readiness, maintainability, and refactoring discipline. Hard triggers: before submit or release of any code change; risky, public-contract, migration, or wide-blast-radius diffs; behavior change without covering tests; repeated rejection of the same implementation (rework diagnosis); over-engineering, dependency bloat, or oversized skill flow."
+description: "Use to judge code before it ships, and to diagnose rework. Covers correctness, testability, architecture boundaries, lean, performance, project health, and release readiness."
 ---
 
 # Noootwo Review
 
-Use this skill when the project needs code to stay easy to understand, change, test, and review. It is a Tech Lead and QA Architect skill for technical judgment, code health, and implementation review, not a style-only critique.
+Judge the change and the smallest structural move that removes real risk. This is a Tech Lead and QA Architect pass, not a style critique.
 
-Architecture, test strategy, performance, maintainability, and technical tradeoff judgment stay here as review lenses. Do not split them into a public `noootwo-architecture` skill.
+Architecture, test strategy, performance, and maintainability live here as lenses. Do not split them into a separate skill.
 
-It can report project-level defects when they affect engineering health, such as missing validation entrypoints, unclear CI, unreproducible release flow, unstable module boundaries, or duplicated sources of truth. It classifies those defects and hands ownership to `$noootwo-workflow` or `$noootwo-docs` when appropriate. Product behavior or user-flow questions route to `$noootwo-product` instead of being solved as code style.
+## When this runs
 
-It can also run a lean review for over-engineering, code bloat, unnecessary abstraction, avoidable dependencies, and AI-generated code expansion. Lean review reduces only unnecessary code; it never removes safety, validation, accessibility, or required behavior.
+Run it whenever code reaches submit or release, and whenever a diff is risky, public-contract, or wide in blast radius. Run it when the user rejects the same implementation twice: the `rework diagnosis` lens classifies which layer failed and names the skill that owns it.
 
-It can also run a performance review for frontend loading/rendering, backend/API latency, database/query cost, algorithm/runtime hotspots, resource use, and performance regression risk. Performance review requires evidence: baseline, trace, profiler output, query plan, benchmark, or a clearly reported verification gap.
+A code change that reaches submit or release without a review decision is not closed.
 
-## Review Lens Selector
+## Lenses
 
-Choose review lenses before reading too broadly. A narrow diff should use only the lenses that match the change; a project audit or release review may use several.
+Pick before reading widely. A narrow diff uses the lenses that match it; a project audit or release review may use several. State which you applied and which you skipped.
 
-- `correctness`: behavior, contracts, data integrity, security, migrations, release breakage
-- `testability`: missing or brittle proof for changed behavior
-- `architecture boundary`: ownership, public interfaces, module/package boundaries, data ownership, duplicated source of truth
-- `lean/bloat`: over-engineering, YAGNI, unnecessary dependencies, redundant code, oversized skill flows, context-cost expansion
-- `performance`: loading, rendering, API latency, query cost, algorithm/runtime hotspots, resource use
-- `project health`: validation entrypoints, CI, release path, docs/status drift, observability, handoff risk
-- `AI-code/context cost`: large files, generic wrappers, hidden state, repeated rules, broad skill triggers, long question lists, comments that overclaim
-- `release readiness`: versioning, tags, publish/install steps, rollback, user-visible notes
-- `rework diagnosis`: repeated rejection of the same implementation; classify whether product understanding, style understanding, implementation translation, or missing verification failed, and route to `$noootwo-product`, `$noootwo-design`, or back to verification
+| Lens | Looks for |
+| --- | --- |
+| `correctness` | behaviour, contracts, data integrity, security, migrations, release breakage |
+| `testability` | missing or brittle proof for changed behaviour |
+| `architecture boundary` | ownership, public interfaces, module boundaries, data ownership, duplicated truth |
+| `lean` | over-engineering, YAGNI, unnecessary dependencies, redundant code, context-cost growth |
+| `performance` | loading, rendering, latency, query cost, algorithmic hotspots, resource use |
+| `project health` | validation entry points, CI, release path, docs drift, handoff risk |
+| `release readiness` | versioning, tags, publish and install steps, rollback, user-visible notes |
+| `rework diagnosis` | which layer failed — product, design, implementation, or evidence |
 
-State which lenses were applied, which obvious lenses were skipped, and why.
+## Sizing
 
-## Pre-Submit Review Gate
+- **Small diff** — one to three lenses, self-review the changed files and the nearest tests, fix locally.
+- **Medium, broad, or risky diff** — structured review. Always include `correctness` and `testability` when behaviour changes.
+- **Release-bound diff** — add `release readiness` and the project-health evidence for versioning, tags, install, and rollback.
 
-Use this gate before submitting or releasing code changes, and when `$noootwo-workflow` routes a completed implementation for quality review. This gate is a hard trigger: a code change that reaches submit or release without a review decision is not closed.
+Make the smallest safe fix directly. Ask before a fix that expands scope, changes product behaviour, or chooses between real tradeoffs.
 
-- Small diff: choose one to three relevant lenses, self-review the changed files and nearest tests, directly fix local issues, and avoid a full project audit.
-- Medium, broad, or risky diff: run a structured review with relevant lenses. Include `correctness` and `testability` when behavior changes, plus `architecture boundary`, `lean/bloat`, or `AI-code/context cost` when structure or future maintenance is the risk.
-- Release-bound diff: include `release readiness` and project-health evidence for versioning, tags, install, rollback, and user-visible notes.
+## Method
 
-Ask the user before applying a review fix only when it expands scope, changes product behavior, introduces a larger refactor, adds/removes dependencies, or chooses between real tradeoffs. Route product behavior choices through `$noootwo-workflow` or `$noootwo-product`. Otherwise, make the smallest safe improvement directly.
+1. Read the changed files, the nearest tests, the callers, the public interfaces, and the docs describing the behaviour.
+2. Name the behaviour that must stay true, and the evidence that proves it.
+3. Classify the risk, then find the smallest structure that supports the current requirement.
+4. Separate defects from future improvements.
+5. Prefer a local fix unless the same friction appears in more than one place.
 
-## Review Stance
+## What to look for
 
-Prioritize concrete risk over aesthetic preference:
+Concrete risk first:
 
-- behavioral regressions
+- behavioural regressions
 - unclear ownership or module boundaries
-- changes that are too large to review safely
+- changes too large to review safely
 - duplication that causes repeated edits or drift
 - abstractions with no current pressure
-- over-engineered code, redundant layers, avoidable dependencies, and token-cost bloat
-- missing tests around shared behavior
-- credible performance risk in loading, rendering, API latency, database/query cost, algorithm complexity, CPU, memory, or throughput
-- files that force agents to load too much context
-- skill instructions that make small tasks run long interviews, broad gates, or fixed questionnaires
-- docs, comments, or names that hide the real model
-- product-facing behavior that changed without a Product Checkpoint or acceptance criteria when the user path was ambiguous
+- missing tests around shared behaviour
+- credible performance risk
+- files that force an agent to load unrelated context
+- skill instructions that make small tasks run long interviews or heavy gates
+- product behaviour that changed without settled acceptance criteria
 
-Do not expand scope just because code can be improved. Review the current change and the smallest structural move that reduces real risk.
+Agent-generated failure modes get their own attention: broad files, generic wrappers invented before the second use, hidden state and side effects, tests that mirror implementation details, and comments or docs that claim stability without a proving command.
 
-## First Pass
+## Output
 
-1. Select lenses from the Review Lens Selector.
-2. Read the changed files, nearest tests, callers, public interfaces, and docs that describe the behavior.
-3. Identify the behavior that must remain true and the evidence that proves it.
-4. Classify risk: `correctness`, `changeability`, `reviewability`, `testability`, `operability`, `performance`, or `context cost`.
-5. Identify the smallest structure that supports the current requirement.
-6. Separate defects from future improvements.
-7. Prefer local fixes unless the same friction appears in multiple places.
+Lead with findings, ordered by severity. For each: the file and line, why it matters, the concrete failure mode or maintenance cost, and the smallest fix.
 
-## Refactoring Rules
+If there are none, say so and name the remaining verification gaps.
 
-- Refactor only with a reason tied to changeability, correctness, reviewability, or repeated friction.
-- Keep behavior-preserving refactors separate from behavior changes when practical.
-- Add tests before risky refactors when the behavior is not already covered.
-- Extract abstractions only when they remove real duplication or clarify an existing concept.
-- Prefer focused modules and explicit interfaces over large multi-purpose files.
-- Keep generated or AI-assisted code boring at the boundaries: predictable names, simple data flow, clear failure paths.
-- Stop refactoring when the next move no longer has a current evidence-backed benefit.
+For a structured review, include the applied lenses, the skipped lenses and why, the evidence read, the findings, the verification gaps, and the owning skill for anything handed off.
 
-## AI Code Risk Checks
+Severity: `P0` data loss, security, or a broken release; `P1` a likely behavioural bug or broken contract; `P2` a maintainability issue likely to cause near-term mistakes; `P3` optional cleanup.
 
-Look specifically for agent-generated failure modes:
+## Hand off
 
-- broad files that force future agents to load unrelated context
-- broad skill descriptions that steal small tasks from the direct path
-- fixed question lists that replace one material decision at a time
-- default workflow gates that are heavier than the task risk
-- duplicated rules across code, docs, prompts, or schemas
-- generic abstractions invented before the second concrete use
-- hidden state or side effects that make verification expensive
-- tests that mirror implementation details but miss user-visible behavior
-- comments or docs that claim stability without a proving command
-- missing validation, CI, release, or status paths that make future changes expensive
-- code added for speculative future needs, hand-rolled standard-library behavior, custom platform features, or wrappers around one implementation
+- Product behaviour or acceptance unclear → invoke the `noootwo-product` skill.
+- Sequencing or scope control needed → invoke the `noootwo-workflow` skill.
+- Documentation or duplicated truth → invoke the `noootwo-docs` skill.
+- Visual or artifact quality → invoke the `noootwo-design` skill.
 
-## Output For Reviews
+To invoke one, read its `SKILL.md` and follow it.
 
-Lead with findings, ordered by severity. For each finding, include:
+## Reference
 
-- exact file/line when available
-- why it matters
-- concrete failure mode or maintenance cost
-- smallest actionable fix
-
-If there are no findings, say so and note remaining test or verification gaps.
-
-For structured reviews, include:
-
-- applied lenses
-- skipped lenses and reason when they looked plausible but were out of scope
-- evidence read
-- findings with smallest fix
-- verification gaps
-- handoff owner for workflow, docs, or design issues
-- handoff owner for product, workflow, docs, or design issues
-
-Use severity labels only when useful:
-
-- `P0`: data loss, security, broken release, or user-blocking regression
-- `P1`: likely behavioral bug, brittle migration, or broken contract
-- `P2`: maintainability issue likely to cause near-term mistakes
-- `P3`: optional cleanup or clarity improvement
-
-When reviewing the whole project rather than a narrow diff, add `Project Defects` after code findings. Examples: no validation entrypoint, no status document, release flow cannot be reproduced, skill routing is unclear, or duplicated truth sources create context cost.
-
-When the user asks for lean review, bloat review, YAGNI review, dependency trimming, token-cost reduction, or over-engineering cleanup, use `Lean Findings` from `references/lean-code-review.md` before broader review commentary.
-
-When the user asks for performance review, slow behavior, latency, throughput, LCP, INP, CLS, bundle size, render jank, N+1, query plans, caching, CPU, memory, algorithm hotspots, or performance regression risk, use `Performance Findings` from `references/performance-review.md` before optional cleanup.
-
-## Closure Gate
-
-Before approving, submitting, releasing, or finishing work, verify:
-
-- tests or checks cover the changed behavior
-- module boundaries match current responsibility
-- no speculative framework or dependency was added
-- small review issues were fixed directly, while large scope changes were routed back to `$noootwo-workflow` or the user
-- performance claims are backed by before/after evidence or recorded as verification gaps
-- public docs or release notes were routed to `$noootwo-docs` when needed
-- product behavior or acceptance ambiguity was routed to `$noootwo-product` when needed
-- broader workflow or skill routing was routed to `$noootwo-workflow` when needed
-
-For deeper guidance, read:
-
-- `references/code-quality-playbook.md` when planning a refactor, reviewing architecture, deciding whether to split files, or evaluating repeated AI implementation friction.
-- `references/lean-code-review.md` when reviewing over-engineering, redundant code, YAGNI violations, dependency bloat, or token-cost expansion.
-- `references/performance-review.md` when reviewing frontend loading/rendering, backend/API latency, database/query cost, algorithm/runtime hotspots, resource use, or performance regression risk.
-- `references/project-health-review.md` when reviewing project foundation, validation paths, release risk, CI, module boundaries, context cost, or repeated AI friction.
+- `references/code-quality-playbook.md` — refactors, architecture, splitting files, and repeated implementation friction.
+- `references/lean-code-review.md` — over-engineering, YAGNI, dependency bloat, and token-cost growth.
+- `references/performance-review.md` — loading, rendering, latency, query cost, and regression risk.
+- `references/project-health-review.md` — foundation, validation paths, CI, release risk, and module boundaries.

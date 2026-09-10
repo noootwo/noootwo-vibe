@@ -2,42 +2,33 @@
 
 - Repository: `noootwo/noootwo-vibe`
 - Branch model: feature work on `codex/*`, default branch `main`
-- Public skill set: `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-docs`
+- Public skill set: `noootwo-ask`, `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-docs`
 - Release model: independently versioned child skills listed in `skills.json`
 - Root `SKILL.md`: intentionally absent so default skill discovery lists all child skills
+- Invocation model: `noootwo-ask` is user-invoked; the other five are model-invoked
 
 ## Current Validation Surface
 
-Last verified: 2026-09-10 on the current worktree for mandatory task-start skill invocation, routing-as-invocation across Product/Design/Review/Docs, grilling-style frontier-round Decision Interview (fact self-serve, fixed question format, frontier-empty confirmation gate), single-gap light interview, workflow rework diagnosis, hard submit/release review and docs triggers, impeccable-derived bounded verification and hard bans in Design review, one-command five-skill installation, Product Reality Check, Style Evidence Check, and correction-loop routing.
+Last verified: 2026-09-11 on this worktree.
 
-- `python scripts/validate_skill_workspace.py .`
-- `python /Users/notwo/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/noootwo-product`
-- `python /Users/notwo/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/noootwo-design`
-- `python /Users/notwo/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/noootwo-workflow`
-- `python /Users/notwo/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/noootwo-review`
-- `python /Users/notwo/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/noootwo-docs`
-- `npx -y skills add . --list`
-- `npx -y skills add . --list --full-depth`
-- `python -m py_compile skills/noootwo-design/scripts/validate_noootwo_readiness.py skills/noootwo-design/scripts/eval_noootwo_artifacts.py`
-- `rg -n "Decision Interview|Product-to-Design|Style Evidence|Product Reality|question|fixed questionnaire|description:" skills README.md docs AGENTS.md .codex-plugin/plugin.json`
-- `wc -l AGENTS.md skills/noootwo-*/SKILL.md docs/status.md`
+- `python scripts/validate_skill_workspace.py .` — includes the authoring budgets: `description` ≤ 200 characters, `SKILL.md` ≤ 120 lines, ≤ 12 reference files each named by a pointer, `short_description` 25–64 characters, no `default_prompt`, and no bare `$noootwo-` reference inside a skill body
+- `python <skill-creator>/scripts/quick_validate.py skills/noootwo-*` for all six skills
+- `npx -y skills add . --list` and `--full-depth` — must list six skills
+- `python -m py_compile` on the design scripts
 - `git diff --check`
-
-Latest result: workspace validation, all five quick validations, aggregate and per-skill discovery, a clean five-skill install into a temporary Codex target, Python compile, line-budget checks, and `git diff --check` passed on this worktree. Discovery still emits existing npm config warnings but exits successfully.
+- Behaviour measurement: `docs/experiments/skill-behaviour-2026-09-11.md`
 
 ## Active Risks
 
-- GitHub plugin-style ingestion is packaging metadata; `skills` CLI discovery is the verified installation surface.
-- `noootwo-product` `v0.6.0` owns the adaptive Product Clarity Gate, light single-question interview for one material gap, and deep Decision Interview built on grilling mechanics: decision tree, frontier rounds with fixed question format, fact self-serve, recomputed frontier after each round, decision ledger, and an explicit shared-understanding/intent-fit confirmation gate before handoff. Clear, detailed requests bypass interview ceremony; only unresolved material choices block implementation or design handoff.
-- `noootwo-design` `v0.10.0` uses a shorter entrypoint plus on-demand references; non-quick UI work must declare Design Read and implementation-bound work must carry a Design Contract and artifact review path. Review now uses bounded verification (batched inspection, one fix batch, at most one confirm round), hard bans (eyebrow/kicker, numbered section markers, gradient text, hard offset shadows, system display face, emoji icons, cream/beige default, zero-blur halo), a browser-surfaces check, and separated final review. Direction exploration is risk-triggered. Unresolved user/path/state/acceptance/audience/use-context decisions return to Product. Deterministic anti-slop scanning scripts are deferred to a later round.
-- `noootwo-workflow` `v0.8.0` owns mandatory task-start routing with routing-as-invocation (explicitly invoke specialists, never only "consider" them), rework diagnosis after user rejection, compact handoff packets, preservation of deep-confirmation intent, and execution blocking only while `waiting_on: user_answer`.
-- `noootwo-review` `v0.8.0` adds a hard pre-submit/release review trigger, rework diagnosis lens, and risk-class handoff to Workflow specialists.
-- `noootwo-docs` `v0.8.0` adds a hard docs decision trigger for behavior/state/release/agent-instruction changes and keeps `docs/status.md` as a current-state snapshot.
-- Quick polish should stay lightweight; Design Read, semantic-token contracts, and artifact gates must not become full-harness cost for small local tweaks.
-- Product-to-Design Handoff must not hide unresolved real-user, main-path, state, acceptance, user-comprehension, or style-evidence risks.
-- Decision Interview must not become a fixed questionnaire or default ceremony for small code fixes, quick UI polish, docs tweaks, or detailed briefs whose product path is already clear. Frontier rounds replace one-question-at-a-time in deep mode; they must not ask questions whose prerequisites are unsettled, and must stop once the path is ready and the user has selected or delegated every material choice.
+- The five specialist skills were rewritten to `docs/agents/skill-authoring.md` in one pass. The behaviour measurement in `docs/experiments/` is the evidence for that rewrite; it is scenario-based, not a statistical claim about rework rates.
+- Deterministic enforcement — an engine, edit hooks, or detector rules as `pbakaus/impeccable` uses — is deliberately absent. It is the remaining structural gap between this suite and that project, recorded in [ADR 0006](adr/0006-skill-authoring-standard-and-router.md) for separate evaluation.
+- `noootwo-ask` is user-invoked through `policy.allow_implicit_invocation: false`. The repository does not set `disable-model-invocation`, because it ships as a Codex plugin and that validator requires the field to be `false`.
+- Skill budgets are defaults. Raising one is a deliberate change to `docs/agents/skill-authoring.md` and the validator together, with the reason recorded.
+- Quick polish must stay lightweight: Design Read, Design Contract, and artifact gates must not become full-harness cost for a small local tweak.
+- The Product-to-Design Handoff must not carry an unsettled decision that would change the real user, main path, states, acceptance, or trust boundary.
 
 ## Next Actions
 
-- Run full validation after every skill layout or metadata change.
+- Run the workspace validator after any change to skill layout, versions, metadata, descriptions, or references.
+- Re-run `docs/experiments/` scenarios when a skill's flow changes, and record the result beside the previous run.
 - Update `docs/releases/` and per-skill tags when publishing changed skills.

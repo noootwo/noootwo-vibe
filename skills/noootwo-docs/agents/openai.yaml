@@ -1,4 +1,3 @@
 interface:
   display_name: "Noootwo Docs"
-  short_description: "Documentation state and update steward"
-  default_prompt: "Use $noootwo-docs to update the owning documentation layer for verified workflow/product/design/review/release facts, keep status as a current snapshot, remove stale or duplicated claims, and avoid inventing product, design, or technical decisions."
+  short_description: "Keep documents true to the current state"

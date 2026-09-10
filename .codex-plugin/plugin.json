@@ -1,6 +1,6 @@
 {
   "name": "noootwo-vibe",
-  "version": "0.7.3",
+  "version": "0.8.0",
   "description": "A Noootwo multi-skill workspace for controlled AI software development, user-centered product decisions, design, code review, and documentation.",
   "author": {
     "name": "Noootwo",
@@ -22,7 +22,7 @@
   "interface": {
     "displayName": "Noootwo Vibe",
     "shortDescription": "AI development workflow skill suite",
-    "longDescription": "Noootwo Vibe bundles focused skills for lightweight AI workflow control, user-centered product scope and flow decisions, research-backed design work, lens-based code-health review, and documentation hygiene.",
+    "longDescription": "Noootwo Vibe bundles six focused skills: a router that names the right skill and order, lifecycle control for multi-step work, product decisions settled before anything is built, research-backed design work, lens-based code-health review, and documentation hygiene.",
     "developerName": "Noootwo",
     "category": "Development",
     "capabilities": [
@@ -30,11 +30,12 @@
       "Write"
     ],
     "defaultPrompt": [
-      "Use Noootwo Workflow for non-trivial development tasks, lifecycle guardrails, Product Decision Interview routing, correction-loop routing, and specialist handoff.",
-      "Use Noootwo Product Decision Interview before design or implementation when real user, first loop, scope, main path, states, acceptance, or product choice is unclear.",
-      "Use Noootwo Design for UI, visual, artifact, or frontend design work after product path is clear; route unresolved user, path, state, acceptance, audience, or use-context decisions back to Product.",
-      "Use Noootwo Review for focused code/project-health review before submit, release, risky implementation, or skill/context-cost cleanup.",
-      "Use Noootwo Docs to place verified workflow, product, design, review, release, or repository facts in the right documentation layer."
+      "Use $noootwo-ask when you want the right Noootwo skill for your situation and the order to run them in.",
+      "Use $noootwo-workflow to run one multi-step task across files or skills, with lifecycle guardrails and handoffs.",
+      "Use $noootwo-product to settle real user, first loop, scope, main path, states, and acceptance before design or build.",
+      "Use $noootwo-design for UI, visual, artifact, and frontend work once the product path is settled.",
+      "Use $noootwo-review to judge code before it ships, and to diagnose repeated rework.",
+      "Use $noootwo-docs to place changed behaviour, state, release facts, and agent instructions in the owning layer."
     ],
     "brandColor": "#3E6B5A"
   }

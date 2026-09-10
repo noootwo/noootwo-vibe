@@ -1,5 +1,15 @@
 # noootwo-workflow Releases
 
+## v0.9.0
+
+- Restructured the body into five steps with a completion criterion each: read repo truth, route, choose the mode, build in slices, close.
+- Replaced keyword-stuffed triggers with one trigger per branch, cutting the description from 541 to 180 characters.
+- Cross-skill routing now states the mechanism: read the named skill's `SKILL.md` and follow it. Bare `$noootwo-x` references are gone from the body and rejected by the validator.
+- Added the rework table, which maps an observed failure to the layer that owns it.
+- Kept the pause rule: while a product decision is unsettled, the loop stops.
+- Merged `product-interview-handoff.md` into `references/workflow-playbook.md`; five reference files become four.
+
+
 ## v0.8.0
 
 - Replaced vague "non-trivial" triggers with concrete task-start triggers: new feature, product idea, multi-file/cross-skill change, bugfix, refactor, release, onboarding/handoff, recovery, and correction-loop routing.

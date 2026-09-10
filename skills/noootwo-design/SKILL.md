@@ -1,121 +1,102 @@
 ---
 name: noootwo-design
-description: "Use for UI, frontend, app, or artifact visual work: new screens, redesign, restyle, component or token work, design-system adoption, screenshot or artifact critique, responsive/typography/motion polish, Design Read, Style Evidence Check, Design Contract, and implementation handoff. Trigger on UI files, visual defects, generic or AI-slop output, high-character or rejected style work, or any frontend implementation after the product path is clear; route unresolved real-user, main-path, state, acceptance, audience, or use-context decisions back to $noootwo-product."
+description: "Use for UI, visual, artifact, or frontend work: a new screen, a redesign, a restyle, tokens, components, screenshot critique, or responsive and typography polish. Requires a settled product path."
 ---
 
 # Noootwo Design
 
-Noootwo Design translates a clear product path into a stable visual system, implementation contract, reviewable artifact, and handoff. It does not define product scope. If `real user`, `main path`, `states`, or `acceptance criteria` are unclear, route to `$noootwo-product` Decision Interview before designing.
+Turn a settled product path into a visual system, a reviewable artifact, and a handoff. When the real user, main path, states, or acceptance are unsettled, invoke the `noootwo-product` skill first: read its `SKILL.md` and follow it.
 
-Use the lightest flow that can prove the result:
+## 1. Size the work
 
-`intake -> design read -> optional evidence/directions -> design contract -> implementation plan -> artifact -> review -> handoff`
+- `quick` — local polish inside the existing system. Read the current UI and tokens, make the change, check it.
+- `standard` — normal non-trivial UI. Design Read, one artifact, responsive and typography review.
+- `deep` — high-character, brand-heavy, or previously rejected work. Add evidence and directions.
+- `production` — implementing an approved design. Contract, tokens, components, states, artifact verification.
 
-## First Pass
+**Done when:** the mode is named and its proof of done is stated.
 
-1. Read nearest truth first: request, `AGENTS.md`, current UI, screenshots, existing `.noootwo/` files, and the Product-to-Design Handoff when present.
-2. Classify: `quick`, `adopt-project`, `standard`, `deep`, `production`, `extract-system`, or `review`.
-3. For non-quick UI work, declare `Design Read` before choosing a look.
-4. If high-character, niche, premium, unusual, user-selected, or previously rejected, run `Style Evidence Check` before trusting style prose.
-5. If direction-sensitive, compare materially different directions and stop for user choice or explicit delegated choice.
-6. If implementation-bound, create or update the Design Contract and implementation plan before UI edits.
-7. Before handoff, review an artifact, screenshot, preview, simulator, recording, or explicit accepted limitation.
+## 2. Design Read
 
-## Design Read
+Declare this before choosing a look, for every mode except `quick`:
 
-Use this for every non-quick UI task:
-
-```markdown
+```
 Design Read
 - Surface kind:
 - Audience:
 - Product posture:
 - Visual posture:
-- Variance:
-- Motion:
-- Density:
-- Existing system to preserve:
+- Variance / Motion / Density: low | medium | high
 ```
 
-The read turns brief signals into execution dials. `variance`, `motion`, and `density` should be low for operational tools and higher only when product context, audience, brand, or artifact family justifies it. Do not copy Antfu's UnoCSS taste by default; borrow the mechanism of explicit dials and stable tokens.
+Variance, motion, and density stay low for operational tools and rise only when audience, brand, or artifact family justify it.
 
-## Mode Routing
+**Done when:** each dial has a value and a reason.
 
-- `quick`: local polish that preserves the current system. Read current UI and existing system/tokens when present. No source mining, no three directions, no full harness.
-- `adopt-project`: first Noootwo pass on an existing project. Capture current UI, tokens, screenshots, constraints, and `.noootwo/` baseline.
-- `standard`: normal non-trivial UI work. Use Design Read, light exploration, directions only when the trigger applies, one artifact, responsive and typography review.
-- `deep`: high-character, brand-heavy, niche, or previously generic work. Use evidence-backed discovery, Style Evidence Check, directions when style or structure is unresolved, stronger critique, and lower confidence when evidence is thin.
-- `production`: approved design implementation. Translate the contract into tokens, components, states, stack notes, and artifact verification.
-- `extract-system`: refresh durable system memory and semantic tokens from working UI evidence.
-- `review`: judge artifact evidence and choose `ready`, `refine`, `pivot`, or `needs artifact`.
+## 3. Direction
 
-Do not route by surface label alone. Dashboards, native screens, landing pages, decks, posters, and live artifacts use the same decision flow when their risk shape is the same.
+Compare materially different directions when style or structure is unresolved, and stop for the user's choice. Read `references/direction.md` for the exploration method, the Style Evidence Check, and mechanism translation.
 
-## Hard Stops
+Read `references/research.md` first when the work is high-character, niche, premium, or previously rejected — a design claim needs a source, an artifact, or a screenshot.
 
-- Product path unclear: return to `$noootwo-product` Decision Interview.
-- Audience, use-context, main path, state, or acceptance tradeoff unresolved: return to `$noootwo-product` Decision Interview.
-- Taste or brand tradeoff unresolved after product path is clear: stop at directions or user decision.
-- New structure, visual language, or hierarchy without exploration summary: do not implement.
-- High-character style claim without visual evidence, anti-example, mechanism translation, or low-confidence label: return to style discovery.
-- Non-trivial implementation without Design Contract and implementation plan: do not edit UI files.
-- No reviewable artifact or accepted blocker: do not claim `ready`.
-- Layout, responsive, unreadable typography, or generic drift defects: return to the earliest stage that can fix them.
+**Done when:** one direction is chosen by the user, or the chosen direction is justified by evidence.
 
-Allowed exceptions: quick polish, explicit handoff-only analysis, or explicit user approval to skip a gate.
+## 4. Design Contract
 
-## Design Contract
+Write this before editing UI files, for `standard`, `deep`, and `production`:
 
-Implementation-bound work must produce:
-
-```markdown
+```
 Design Contract
 - Structure:
 - Type scale:
-- Color/token roles:
-- Component behavior:
+- Colour and token roles:
+- Component behaviour:
 - State treatment:
 - Motion:
 - Anti-slop risks:
-- Artifact/review path:
+- Artifact and review path:
 ```
 
-Use semantic roles, not adjectives. Stable decisions should become tokens, component rules, state behavior, and forbidden substitutions. A design is not implementation-ready if it cannot name its typography roles, layout model, component vocabulary, and artifact review path.
+Name semantic roles, not adjectives. Stable decisions become tokens, component rules, and state behaviour.
 
-## Artifact Review
+**Done when:** typography roles, layout model, component vocabulary, and the artifact review path are all named.
 
-Review the rendered thing, not the prose. Use:
+## 5. Build
 
-```markdown
+Read `references/craft.md` immediately before editing UI. It carries the quality floor and the hard bans.
+
+Read `references/translate.md` to turn the contract into stack-native implementation, assets, and handoff. Read `references/system.md` when the work touches tokens, a design system, or a new artifact family.
+
+**Done when:** the artifact runs and every contract item is visibly present.
+
+## 6. Review the artifact
+
+Review the rendered thing, never the prose. Read `references/review.md` for the rubric, gates, and bans.
+
+```
 Artifact Review
 - Evidence:
 - Strongest authored move:
 - Defects:
-- Generic drift:
-- Style understanding fit:
-- Product comprehension fit:
-- Responsive/type/state findings:
+- Slop drift:
 - Decision: ready | refine | pivot | needs artifact
 - Return action:
 ```
 
-`ready` requires artifact evidence and no blocking layout, readability, responsive, product-comprehension, style-understanding, or generic-drift defects. Non-ready work needs exactly one return action, such as `return to style discovery`, `return to directions`, `return to design contract`, `return to implementation plan`, `return to artifact`, `return to responsive pass`, `return to typography pass`, `return to stack pass`, or `return to handoff`.
+Verify in bounded passes: build fully, inspect once with a batch covering the relevant viewports together, fix everything it shows in one batch, then confirm with at most one more round and stop.
 
-## Anti-Slop Rules
+`ready` requires artifact evidence and no blocking layout, readability, responsive, product-comprehension, or slop-drift defect. Every other decision names exactly one return action.
 
-- Establish product-path truth before designing new UI structure.
-- Establish design-system truth before inventing aesthetics.
-- Prefer semantic tokens and component behavior over raw colors, decoration, or style adjectives.
-- Do not default to `Inter-only`, `system-only`, `hero + cards`, generic shadcn-like UI, or Flutter `Scaffold + AppBar + Card + ListView` without product and UI reason.
-- Do not replace one generic template with another.
-- Do not imitate a specific designer or artist signature. Borrow mechanisms and reject mimicry.
-- Do not let a polished style description replace visual evidence or a small spike when the requested taste is high-risk.
-- Visual evidence beats claims about quality.
+**Done when:** a decision is recorded against real evidence, and `ready` is never self-certified — prefer a reviewer that did not build the artifact.
 
-## Reference Map
+## Reference
 
-- State: `python scripts/noootwo_status.py <project>` for adoption, production, handoff, or workflow debugging; not required for quick polish.
-- Delivery validation: `python scripts/validate_noootwo_readiness.py <project>` and `python scripts/eval_noootwo_artifacts.py <project> --scenario all` for completed or implementation-bound `.noootwo/` work.
-- Main path: `references/design-read-and-contract.md`, `references/style-evidence-check.md`, `references/direction-exploration.md`, `references/detail-translation-pass.md`, `references/review-rubric.md`, and `references/target-stack-rules.md`.
-- Research: `references/impeccable-research-notes.md` when deciding whether to change review gates, scripts, or design-quality claims after an upstream skill update.
-- Use local search in `references/` for stack, color, typography, data UI, responsive, artifact-family, adoption, or source-specific guidance only when the task names that need.
+- `references/intake.md` — reading a request, the Design Read, harness sizing, and adopting an existing project.
+- `references/direction.md` — direction exploration, Style Evidence Check, and mechanism translation.
+- `references/research.md` — the research pass and its source pools.
+- `references/system.md` — tokens, design-system extraction, and artifact-family contracts.
+- `references/craft.md` — anti-slop, typography, colour, responsive, and data-UI craft floors.
+- `references/review.md` — scoring, gates, hard bans, and final review.
+- `references/translate.md` — stack-native implementation, assets, and handoff.
+- `references/evidence.md` — verified cases and distilled reference-skill rules.
+- `references/notes.md` — research notes and cost boundaries.

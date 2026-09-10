@@ -1,8 +1,13 @@
 # Workflow Playbook
 
+Lifecycle detail, routing, and the handoff packets for a multi-step task.
+
+
+## Workflow Playbook
+
 Use this only when the task is broad enough that a short direct path is not enough.
 
-## Contents
+### Contents
 
 - Practice Basis
 - Project Entry
@@ -17,14 +22,14 @@ Use this only when the task is broad enough that a short direct path is not enou
 - Cost Controls
 - Stop Conditions
 
-## Practice Basis
+### Practice Basis
 
 - Mature process skills use hard gates, red flags, and completion evidence instead of vague encouragement.
 - Agent skill guidance favors progressive disclosure: keep the entry file short and load deeper references only when useful.
 - Modern delivery practice favors small batches, clear ownership, and fresh verification over large speculative plans.
 - High-friction process lowers real usage. Add control only where it prevents a likely wrong decision, missed verification, or expensive rework.
 
-## Project Entry
+### Project Entry
 
 Use onboarding mode before normal execution when the project is unfamiliar, under-documented, or being taken over from another agent:
 
@@ -33,11 +38,11 @@ Use onboarding mode before normal execution when the project is unfamiliar, unde
 3. If gaps block safe work, use `minimal-foundation-templates.md` through `$noootwo-docs` to add the smallest useful file or section.
 4. Continue with direct, planned, diagnostic, release, or recovery mode.
 
-## Lifecycle Guardrails
+### Lifecycle Guardrails
 
 Use guardrails at development, close, submit, release, and handoff points. They are required judgments, not required ceremony. Small direct work can pass them internally; non-trivial, submit-bound, or release-bound work should show a short result.
 
-### Read-First Guard
+#### Read-First Guard
 
 Decide what repo truth must be checked before acting:
 
@@ -47,7 +52,7 @@ Decide what repo truth must be checked before acting:
 
 Do not run a full doc crawl for small local edits. Do not skip source-of-truth docs when behavior, public usage, release, architecture, or handoff state can drift.
 
-### Pre-Implementation Guard
+#### Pre-Implementation Guard
 
 Before editing, decide:
 
@@ -58,7 +63,7 @@ Before editing, decide:
 
 Use TDD or repro-first when the task is a bugfix, behavior change, public interface change, regression risk, data/migration risk, or hard-to-prove shared code. If no practical test exists, record the manual scenario or verification gap before editing.
 
-### During-Work Guard
+#### During-Work Guard
 
 Work in slices when the change is medium or larger:
 
@@ -69,7 +74,7 @@ Work in slices when the change is medium or larger:
 - update docs through `$noootwo-docs` when implementation changes user-visible behavior, state, release facts, or agent instructions
 - reroute to `$noootwo-review` when code shape, dependency shape, or context cost becomes the risk
 
-### Pre-Close / Pre-Submit Guard
+#### Pre-Close / Pre-Submit Guard
 
 Before finishing, committing, releasing, or handing off code changes, check:
 
@@ -93,7 +98,7 @@ Lifecycle Guardrails
 - Review: self-review | structured gate | not needed for non-code.
 ```
 
-## Alignment Checkpoint
+### Alignment Checkpoint
 
 Use this when a high-impact decision is unresolved and code inspection cannot decide it alone. It is intentionally smaller than a plan.
 
@@ -126,7 +131,7 @@ For ordinary low-risk implementation choices, an unavailable user may be handled
 
 If a product-shaped decision may be unresolved, use `$noootwo-product` Clarity Gate first. Product starts Decision Interview only for a material gap; otherwise it may emit Product Discovery, Product Checkpoint, or a direct handoff without a user wait.
 
-## Correction Loop
+### Correction Loop
 
 Use this when the user strongly rejects the result as confusing, not from the user's angle, stylistically misunderstood, generic, or unlike the selected direction.
 
@@ -137,7 +142,7 @@ Use this when the user strongly rejects the result as confusing, not from the us
 
 Correction loops are risk-triggered. Do not apply them to small copy edits, known quick polish, or a single preference tweak.
 
-## Routing Matrix
+### Routing Matrix
 
 | Signal | Route |
 | --- | --- |
@@ -152,7 +157,7 @@ Correction loops are risk-triggered. Do not apply them to small copy edits, know
 | user rejection of prior work, repeated correction loop | layer diagnosis, then explicit route to `$noootwo-product` / `$noootwo-design` / `$noootwo-review` / `$noootwo-docs` |
 | behavior, state, or release facts changed without a docs decision | `$noootwo-docs` before close |
 
-## Work Size
+### Work Size
 
 - `small`: one narrow file or behavior, existing tests/checks are clear.
 - `medium`: several files, public behavior changes, docs likely affected.
@@ -160,13 +165,13 @@ Correction loops are risk-triggered. Do not apply them to small copy edits, know
 
 Small work can proceed directly after inspection. Medium work needs a short plan. Large work needs staged checkpoints and explicit validation.
 
-## Mode Details
+### Mode Details
 
-### Direct
+#### Direct
 
 Use for one narrow behavior or doc fix. State the file, change, and check. Avoid adding a multi-step plan unless uncertainty appears.
 
-### Planned
+#### Planned
 
 Use for multi-file behavior, repo structure, public usage, or cross-skill work. Keep the plan short enough to fit in working memory:
 
@@ -177,7 +182,7 @@ Use for multi-file behavior, repo structure, public usage, or cross-skill work. 
 - verification commands
 - docs/review/release handoffs
 
-### Diagnostic
+#### Diagnostic
 
 Use for test failures, bugs, regressions, broken installs, or unexpected behavior. Do not fix before identifying evidence:
 
@@ -188,7 +193,7 @@ Use for test failures, bugs, regressions, broken installs, or unexpected behavio
 - single hypothesis to test
 - verifying command for the fix
 
-### Release
+#### Release
 
 Use when changing versions, tags, remotes, CI, local installs, or published packages. Always list:
 
@@ -199,7 +204,7 @@ Use when changing versions, tags, remotes, CI, local installs, or published pack
 - install/sync target
 - remote push evidence
 
-### Onboarding
+#### Onboarding
 
 Use for unfamiliar repositories, missing process foundation, or skill-selection uncertainty. Output a short audit before implementation:
 
@@ -209,11 +214,11 @@ Use for unfamiliar repositories, missing process foundation, or skill-selection 
 - minimal patch plan and owner skill
 - skills or process that are intentionally not needed
 
-### Recovery
+#### Recovery
 
 Use after prior agent drift, repeated failed fixes, unclear half-finished work, or context compaction. First reconstruct current state from files, git, commands, and artifacts. Treat summaries as hints, not proof.
 
-## Default Loop
+### Default Loop
 
 1. Run lifecycle guardrails at the lightest useful level.
 2. Inspect repo truth before deciding.
@@ -227,9 +232,9 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 10. Use `$noootwo-review` before submit/release for code changes, and for broad code structure, project-health gaps, architecture boundaries, or context-cost risk.
 11. Before closing non-direct work, answer: verified, TDD/repro considered, docs affected, product/design/review needed.
 
-## Handoff Packet Templates
+### Handoff Packet Templates
 
-### To `$noootwo-docs`
+#### To `$noootwo-docs`
 
 - Changed fact:
 - Owning layer suspected:
@@ -237,7 +242,7 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 - Validation or release evidence:
 - Known stale docs to check:
 
-### To `$noootwo-review`
+#### To `$noootwo-review`
 
 - Behavior or structure changed:
 - Files and nearest tests:
@@ -245,7 +250,7 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 - Verification command:
 - Specific judgment requested:
 
-### To `$noootwo-product`
+#### To `$noootwo-product`
 
 - Raw product idea:
 - Real user or suspected user:
@@ -255,7 +260,7 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 - Assumptions:
 - Acceptance or state question:
 
-### To `$noootwo-design`
+#### To `$noootwo-design`
 
 - UI/artifact surface:
 - Product-to-Design Handoff:
@@ -270,7 +275,7 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 - Reviewable artifact path:
 - Implementation boundary:
 
-### Correction Loop Packet
+#### Correction Loop Packet
 
 - User rejection:
 - Failed layer suspected:
@@ -279,7 +284,7 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 - Style Evidence Check needed:
 - One return action:
 
-## Cost Controls
+### Cost Controls
 
 - Load only files needed for the current slice.
 - Prefer manifests, status files, and focused references over reading long docs.
@@ -291,7 +296,7 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 - Prefer Product Decision Interview before Product Discovery only when the first user, first loop, or product scope is still open. A detailed, coherent request does not need an interview for ceremony.
 - Prefer one Product Choice Challenge over a full PRD unless the user asks for the larger artifact.
 
-## Stop Conditions
+### Stop Conditions
 
 Stop and ask or reroute when:
 
@@ -300,3 +305,50 @@ Stop and ask or reroute when:
 - the change would alter public behavior beyond the user's request
 - three fix attempts reveal new problems in different places
 - the work needs a specialist skill and continuing here would duplicate that skill
+
+
+## Product Interview Handoff
+
+Use this packet when `$noootwo-workflow` routes a product request to `$noootwo-product`, especially when the user requests grill-style or detailed sequential confirmation.
+
+```markdown
+Product Interview Handoff
+- Task class:
+- Raw product idea:
+- Explicit confirmation request:
+- Clarity Gate: clear | one-material-gap | ambiguous/high-risk | explicit-interview
+- Interview depth: none | light | deep
+- Presentation language: infer from the user's latest message; preserve intentional technical terms
+- Checked facts:
+  - Fact:
+    Source:
+  - If none were found: state that explicitly.
+- Decision ledger:
+  - Confirmed:
+  - Delegated assumptions:
+  - Deferred:
+  - Rejected:
+  - Active risks:
+    - Risk:
+      Status: open | resolved | explicitly accepted | converted to scope cut
+      Evidence:
+      Owner:
+- Intent fit: pending | confirmed | delegated
+- Decision Interview needed: yes | no
+- Waiting on:
+- Execution status: blocked | ready_for_handoff | ready_for_execution
+- Non-goals:
+```
+
+Rules:
+
+- Initialize every ledger field, even when it is empty.
+- Preserve the user's own wording for an explicit detailed-confirmation request.
+- A `clear` result means Decision Interview is not needed. Do not create a waiting state or expose an interview template; continue with the smallest appropriate Product artifact or execution route.
+- Every checked fact needs a source path, artifact, or an explicit `none found` note.
+- An active risk is not resolved without a decision, owner, and evidence. Evidence may be a user confirmation, delegated assumption, checked artifact, or deliberate scope cut.
+- `waiting on: user_answer` and `execution status: blocked` are the default while any material product choice is open. They explicitly stop implementation, design handoff, and implementation planning.
+- `ready_for_handoff` requires explicit user selections or explicit delegated assumptions for every material choice. A recommended default alone never changes the status.
+- `intent fit: pending` blocks Product-to-Design Handoff or implementation planning in deep mode until the user confirms or delegates the final fit.
+- User-facing Product responses use the presentation language and natural localized labels. Keep canonical English field names in this packet only when they are useful for cross-skill interoperability.
+- Workflow carries the packet to Product; Product owns the questions and updates the ledger.

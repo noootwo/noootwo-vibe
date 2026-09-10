@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ask Noootwo"
+  short_description: "Find the right skill or flow to reach for"
+policy:
+  allow_implicit_invocation: false

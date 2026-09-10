@@ -1,89 +1,64 @@
 ---
 name: noootwo-docs
-description: "Use for documentation maintenance: README, AGENTS, docs/status, ADRs, guides, reference docs, release notes, documentation audits, stale/duplicated/unverified docs, and placing product/design/review/workflow facts in the right layer. Hard trigger: any change to behavior, project state, release facts, product decisions, or agent instructions must get a docs decision (update or intentional no-op) before the work is called done."
+description: "Use when a change alters behaviour, project state, release facts, product decisions, or agent instructions, and the documents must stay true. Also for documentation audits and stale-claim cleanup."
 ---
 
 # Noootwo Docs
 
-Use this skill when documentation must reflect actual project state. The goal is not more documents; it is the right fact in the right layer, with stale facts removed.
+Put each fact in one owning layer, and remove the stale version. The goal is not more documents.
 
-Hard trigger: changed behavior, project state, release facts, product decisions, or agent instructions require a docs decision before closure — either update the owning layer or record an intentional no-op. Closing work with a silent docs drift is a defect.
+A change to behaviour, project state, release facts, product decisions, or agent instructions needs a docs decision before the work is called done — either an update to the owning layer, or a recorded decision that nothing changed. Silent drift is the defect this skill exists to catch.
 
-Keep the default path lightweight: inspect the change, update the owning layer, and avoid turning docs into a second implementation.
+## Layers
 
-When `$noootwo-workflow` finds missing project foundation, this skill owns placing the facts in the correct documentation layer. When `$noootwo-product`, `$noootwo-design`, or `$noootwo-review` produce stable decisions that need to persist, this skill owns the documentation placement. When `$noootwo-review` reports project defects about documentation or duplicated truth, this skill owns the documentation fix.
+| Layer | Owns |
+| --- | --- |
+| `README.md` | the stable public overview: install, usage, skill list, release model |
+| `AGENTS.md` | short always-on agent instructions; pointers to skills, not their bodies |
+| `docs/status.md` | current state: what is verified, what is at risk, what is next |
+| `docs/adr/` | durable decisions, with context, consequences, and status |
+| `docs/agents/` | the standards agents are written to: authoring and invocation |
+| `docs/guides/` | procedures users or agents repeat |
+| `docs/reference/` | stable commands, schemas, manifests, and APIs |
+| `docs/experiments/` | recorded measurement and its results |
+| `docs/releases/` | per-skill release notes, migrations, and tag history |
 
-## Document Layers
+If a repository uses different names, map by responsibility rather than forcing this layout.
 
-- `README.md`: stable public overview, install, usage, skill list, and release model.
-- `AGENTS.md`: short always-on instructions for agents; route to skills instead of duplicating their full bodies.
-- `docs/status.md`: current repository state, active risks, latest validation status, and next actions.
-- `docs/adr/`: durable workflow, product, architecture, or role-boundary decisions with context, decision, consequences, and status.
-- `docs/guides/`: how-to workflows that users or agents repeat.
-- `docs/reference/`: stable command, schema, manifest, or API references.
-- `docs/releases/`: per-skill release notes, migration notes, and tag history.
+## Update rules
 
-If a repository uses different names, map by responsibility rather than forcing this exact layout.
+1. Inspect the change before writing.
+2. Classify each changed fact: `usage`, `agent rule`, `current state`, `decision`, `procedure`, `reference`, `measurement`, or `release`.
+3. Pick one owning layer per fact.
+4. Update that layer; link rather than copy when another layer needs awareness.
+5. Revise or delete the stale claim in the same pass.
+6. Keep volatile state in `docs/status.md`, never in README or AGENTS.
+7. Record a lasting decision as an ADR once it is accepted.
+8. Write intent as intent. Label anything unbuilt as planned.
 
-## Status Budget
+**Done when:** every changed fact has one owning layer, and no neighbouring document still contradicts it.
 
-Keep `docs/status.md` as a current-state snapshot, not a work diary. Target 120 lines or fewer; if it reaches 200 lines, compress it before adding more.
+## Status budget
 
-Only keep current facts, latest validation evidence, active risks, and next actions there. Move version history to releases, durable decisions to ADRs, repeated procedures to guides or references, and raw research or old process notes out of the hot path.
+`docs/status.md` is a current-state snapshot, not a diary. Keep it at 120 lines or fewer; compress it before it reaches 200. Version history goes to releases, durable decisions to ADRs, procedures to guides, and raw research out of the hot path.
 
-## Update Rules
+## After any change
 
-1. Inspect the actual change before writing docs.
-2. Classify each changed fact as `usage`, `agent rule`, `current state`, `decision`, `procedure`, `reference`, or `release`.
-3. Pick one owning layer for each fact.
-4. Update that source of truth; link rather than copy when another layer needs awareness.
-5. Remove or revise stale claims in nearby docs during the same pass.
-6. Record volatile state in `docs/status.md`, not README or AGENTS.
-7. Record lasting product, architecture, or workflow decisions as ADRs.
-8. Keep AGENTS short enough to stay useful in every session.
-9. Do not claim validation, release, or readiness unless fresh evidence exists.
-10. When adopting a project, create the smallest useful docs foundation before adding detailed guides.
+Check whether it touched: install or usage instructions; repository or package layout; public commands; skill names, descriptions, or routing; validation, CI, release, tagging, or the local install flow; product decisions, user flows, acceptance criteria, or architecture decisions; project status or active risk.
 
-## After Any Completed Change
+If it touched one, update that layer. If it touched none, say that docs were checked and left unchanged.
 
-Check whether the change affects:
+## Anti-drift
 
-- install or usage instructions
-- repository or package layout
-- public commands or scripts
-- skill names, descriptions, or routing
-- validation, CI, release, tags, or local install flow
-- product decisions, user flows, acceptance criteria, architecture decisions, or project status
-- project foundation, skill audit, or project-health defects
+- Keep one authoritative copy of a command list; link the others.
+- Keep the same name everywhere the live repo uses it.
+- Drop stale examples unless a migration note explicitly keeps them.
+- Update the owning layer first, not the most visible one.
+- Never invent product scope, UI direction, or technical architecture here. When a judgment is missing, invoke the `noootwo-product`, `noootwo-design`, or `noootwo-review` skill: read its `SKILL.md` and follow it.
+- Search locally and read the relevant slice rather than loading a long document whole, unless the task is a whole-document audit.
 
-If yes, update the owning document before final handoff.
+## Reference
 
-If no, state that docs were checked and intentionally unchanged.
-
-## Freshness Rules
-
-- Prefer exact commands, paths, versions, and dates over vague status language.
-- Put temporary progress, active risks, and next actions in status docs.
-- Put durable decisions in ADRs after they are accepted, not as a chat recap.
-- Put stable Product Checkpoints, product decisions, and acceptance criteria in the owning product/spec/status layer only when they must persist.
-- Put repeated procedures in guides only after they are likely to be reused.
-- Put schemas, command references, and manifests in reference docs.
-- Put release/user migration notes in release docs before tagging.
-
-## Anti-Drift Rules
-
-- Do not write an operational diary in README.
-- Do not bury durable decisions in chat summaries.
-- Do not spread the same command list across README, AGENTS, and docs/reference.
-- Do not leave docs saying `noootwo-design` when the live repo/package is `noootwo-vibe`.
-- Do not preserve stale examples for backward compatibility unless the migration note says so explicitly.
-- Do not update README first just because it is visible; update the owning layer first.
-- Do not describe intent as fact. If something is planned, label it planned.
-- Do not default to reading or appending long documents wholesale; search locally first and read only the relevant slices unless doing a whole-document audit.
-- Do not let docs invent product scope, UI direction, or technical architecture. Route those judgments back to `$noootwo-product`, `$noootwo-design`, or `$noootwo-review`.
-
-For deeper guidance, read:
-
-- `references/context-budget.md` when a status doc, AGENTS file, skill body, reference, research note, or repeated context source is growing too large or costly to read.
-- `references/docs-layering.md` when changing multiple documentation levels, deciding whether to add an ADR, adopting a project, or cleaning up stale docs.
-- `references/docs-audit.md` when auditing documentation defects, stale claims, duplicated facts, wrong-layer content, or unverified claims.
+- `references/docs-layering.md` — choosing the layer, writing an ADR, and adopting a project.
+- `references/docs-audit.md` — finding stale claims, duplicated facts, and wrong-layer content.
+- `references/context-budget.md` — what to do when a status doc, AGENTS file, skill body, or reference grows too costly to read.

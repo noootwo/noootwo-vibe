@@ -1,5 +1,12 @@
 # noootwo-review Releases
 
+## v0.9.0
+
+- Restructured around a lens table, sizing rules, a five-step method, and a hand-off map.
+- Added the explicit hand-off phrasing used across the suite: invoke the owning skill by loading its `SKILL.md`.
+- Cut the description from 513 to 174 characters.
+
+
 ## v0.8.0
 
 - Added hard pre-submit/release triggers: any code change reaching submit or release needs a review decision; risky, public-contract, migration, or wide-blast-radius diffs always review.
