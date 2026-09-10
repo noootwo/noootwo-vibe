@@ -149,7 +149,7 @@ Risk: low evidence and high noise. Treat as a lead until confirmed by artifacts 
 
 ### Accessibility Fallback
 
-If the preferred foreign sources are inaccessible, use [research-source-fallback.md](research.md). Record the access result and do not silently replace evidence with imagined trends.
+If the preferred foreign sources are inaccessible, use [research](research.md). Record the access result and do not silently replace evidence with imagined trends.
 
 ### Query Pattern
 
@@ -169,9 +169,9 @@ Use this in deep mode before high-character UI. The goal is to discover usable s
 ### Workflow
 
 1. `Context Query Builder`: derive search queries from product type, user task, platform, target stack, audience, and constraints.
-2. `Source Accessibility Check`: record which preferred foreign sources are reachable; if blocked, use [research-source-fallback.md](research.md).
+2. `Source Accessibility Check`: record which preferred foreign sources are reachable; if blocked, use [research](research.md).
 3. `Surface Type Routing`: classify product UI, data UI, utility UI, native screen, campaign, launch, or editorial before selecting sources.
-4. `Community Signal Mining`: search source pools from [source-registry.md](research.md), including product-flow libraries, design systems, curated web galleries, domestic fallback sources, Figma/community signals, and developer forums.
+4. `Community Signal Mining`: search source pools from [research](research.md), including product-flow libraries, design systems, curated web galleries, domestic fallback sources, Figma/community signals, and developer forums.
 5. `Source Weighting`: rank evidence by credibility and task fit.
 6. `Influence Discovery` when useful: find relevant designers, artists, studios, products, movements, architecture, exhibition systems, or spatial references.
 7. `Pattern Clustering`: cluster findings into 3-5 mechanism groups instead of listing examples.

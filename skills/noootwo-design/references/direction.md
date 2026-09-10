@@ -5,7 +5,7 @@ Finding and comparing directions, checking style evidence, and translating refer
 
 ## Direction Exploration
 
-Direction work explores materially different art directions before drafting. Use [structured-design-spec.md](system.md) so every direction can become a concrete design language, not a vibe. Use [style-evidence-check.md](direction.md) for high-character, niche, premium, user-selected, or previously rejected directions.
+Direction work explores materially different art directions before drafting. Use [system](system.md) so every direction can become a concrete design language, not a vibe. Use [direction](direction.md) for high-character, niche, premium, user-selected, or previously rejected directions.
 
 ### When
 
@@ -68,7 +68,7 @@ If a required decision is unresolved, do not create artifacts, edit Flutter rout
 
 Use this when a requested direction is high-character, premium, niche, unusual, user-selected, or previously rejected. The goal is to avoid confident style prose that the agent cannot actually draw or implement.
 
-This is not a new full workflow. It tightens `agentic-style-discovery.md`, `direction-exploration.md`, `detail-translation-pass.md`, and `review-rubric.md`.
+This is not a new full workflow. It tightens `research.md`, `direction.md`, `translate.md`, and `review.md`.
 
 ### Check Shape
 
@@ -127,7 +127,7 @@ Write `.noootwo/style-calibration.md` with:
 
 - one style thesis
 - 5-7 dials: novelty, brand safety, density, typography contrast, motion presence, surface/material character, composition risk
-- 1-2 reference mechanisms from [verified-ui-casebook.md](evidence.md) when useful, with case links the user can open
+- 1-2 reference mechanisms from [evidence](evidence.md) when useful, with case links the user can open
 - one recommended calibration
 - what this rules out
 
@@ -250,7 +250,7 @@ Use this to convert references into reusable design mechanisms. Mechanisms are n
 
 ## Reference Board
 
-Use this for `deep` mode and high-end, niche, rare, brand-heavy, or Claude Design-like work. Build it from [agentic-style-discovery.md](research.md), not from generic moodboard collection.
+Use this for `deep` mode and high-end, niche, rare, brand-heavy, or Claude Design-like work. Build it from [research](research.md), not from generic moodboard collection.
 
 ### Core Rule
 
@@ -261,7 +261,7 @@ Deep mode must collect or explicitly declare the absence of 3-5 real source mech
 For each reference, record:
 
 - Source and evidence type
-- Evidence level from [agentic-style-discovery.md](research.md)
+- Evidence level from [research](research.md)
 - Mechanism to borrow
 - Do-not-copy boundary for influence sources
 - Design-system translation: color roles, type roles, layout model, component vocabulary, motion thesis, or data/state grammar

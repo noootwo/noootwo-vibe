@@ -32,11 +32,11 @@ Write `.noootwo/review.md` with artifact evidence, scores, calibration fit, styl
 
 ### Gates To Read When Relevant
 
-- Generic, Claude-like, framework, influence/cosplay, and forced-return checks: [review-gates.md](review.md)
-- Typography checks: [typography-craft-rubric.md](craft.md)
-- Responsive checks: [responsive-visual-gates.md](craft.md)
-- Dashboard, analytics, ops, finance, admin, or metric-heavy UI: [data-ui-rubric.md](craft.md)
-- Deep or style-sensitive work: [taste-fit-matrix.md](direction.md)
+- Generic, Claude-like, framework, influence/cosplay, and forced-return checks: [review](review.md)
+- Typography checks: [craft](craft.md)
+- Responsive checks: [craft](craft.md)
+- Dashboard, analytics, ops, finance, admin, or metric-heavy UI: [craft](craft.md)
+- Deep or style-sensitive work: [direction](direction.md)
 
 ### Readiness Gate
 
@@ -85,7 +85,7 @@ If multiple return actions are plausible and the choice changes cost, scope, or 
 
 ## Review Gates
 
-Use this when a review needs concrete failure checks. Keep `review-rubric.md` for scoring and decision rules.
+Use this when a review needs concrete failure checks. Keep `review.md` for scoring and decision rules.
 
 ### Generic And AI-Slop Flags
 
@@ -111,7 +111,7 @@ If 2 or more flags are present, the design cannot be `ready`. If 3 or more are p
 
 ### Color Calibration Flags
 
-Use [color-system-calibration.md](craft.md) before applying these flags. They are not automatic failures; they block `ready` only when they visibly damage hierarchy, brand fit, artifact cohesion, or accessibility.
+Use [craft](craft.md) before applying these flags. They are not automatic failures; they block `ready` only when they visibly damage hierarchy, brand fit, artifact cohesion, or accessibility.
 
 - `dead neutral stack`: canvas, surface, border, and muted text use generic black/white/gray values without product reason.
 - `foreign semantic color`: error, warning, success, selected, or focus colors look imported from another system or fail non-color communication.

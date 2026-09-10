@@ -76,7 +76,7 @@ Do not hand off as design-ready when:
 
 Use this when the compact `Product Checkpoint` is not enough.
 
-For layer diagnosis and Product-to-Design readiness, use `product-decision-layers.md` first. This playbook gives deeper discovery, option framing, state, acceptance, and anti-pattern checks.
+For layer diagnosis and Product-to-Design readiness, use `product-flow.md` first. This playbook gives deeper discovery, option framing, state, acceptance, and anti-pattern checks.
 
 Use `product-reality-check.md` when output may be PM-shaped but user-confusing, naive-AI, assumption-heavy, or repeatedly corrected.
 

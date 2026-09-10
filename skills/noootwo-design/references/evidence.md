@@ -139,7 +139,7 @@ Flag these as Claude-like convergence, even if they look polished:
 
 ## Impeccable Style Details
 
-Use this as craft guidance distilled from current impeccable design skills. Borrow the mechanisms, not the dependency or wording. For the 2026 mechanism-level pass (durable truth split, deterministic detectors, bounded verification, separated reviewer), read [impeccable-research-notes.md](evidence.md).
+Use this as craft guidance distilled from current impeccable design skills. Borrow the mechanisms, not the dependency or wording. For the 2026 mechanism-level pass (durable truth split, deterministic detectors, bounded verification, separated reviewer), read [evidence](evidence.md).
 
 ### Typography
 
@@ -190,7 +190,7 @@ Ask whether the interface would be instantly recognized as AI-generated. If yes,
 
 ## Impeccable Research Notes
 
-Recorded 2026-09 after a fresh pass over upstream `pbakaus/impeccable` (skill v4.3.1 / CLI 4.1.0, https://github.com/pbakaus/impeccable). Use this note when updating Noootwo Design's workflow, review gates, scripts, or public design-quality claims. It explains why that skill feels stronger than the prompt-only `.impeccable.md` version we borrowed from earlier (see `impeccable-style-details.md` for the distilled craft rules).
+Recorded 2026-09 after a fresh pass over upstream `pbakaus/impeccable` (skill v4.3.1 / CLI 4.1.0, https://github.com/pbakaus/impeccable). Use this note when updating Noootwo Design's workflow, review gates, scripts, or public design-quality claims. It explains why that skill feels stronger than the prompt-only `.impeccable.md` version we borrowed from earlier (see `evidence.md` for the distilled craft rules).
 
 ### What Changed Upstream
 
@@ -217,13 +217,13 @@ Impeccable stopped being "one design-context file plus a few commands" and becam
 ### Mechanisms To Borrow (not wording or dependencies)
 
 1. **Enumerated deterministic anti-slop scan**
-   Extend `scripts/check_visual_gates.py` (already Playwright-based) with a small named rule set: overused fonts, gradient text, AI palette, cream/beige default, nested cards, monotonous spacing, bounce/elastic easing, pulsing dots, icon-tile stacks, hero-eyebrow chips, kicker-above-heading, numbered section labels, hard offset shadows, system display face, emoji-only icons, dark glow/radial halo, side-tab borders. Run it as evidence before `ready`; treat findings as advisory until confirmed by screenshot/DOM review. This converts `review-gates.md` flags into reproducible findings.
+   Extend `scripts/check_visual_gates.py` (already Playwright-based) with a small named rule set: overused fonts, gradient text, AI palette, cream/beige default, nested cards, monotonous spacing, bounce/elastic easing, pulsing dots, icon-tile stacks, hero-eyebrow chips, kicker-above-heading, numbered section labels, hard offset shadows, system display face, emoji-only icons, dark glow/radial halo, side-tab borders. Run it as evidence before `ready`; treat findings as advisory until confirmed by screenshot/DOM review. This converts `review.md` flags into reproducible findings.
 2. **Enforce durable truth split**
    We already have `.noootwo/product-facts.md`, `system.md`, `design-tokens.md`, briefs, and surfaces. The discipline to borrow: visual contracts must be derived from product facts + existing system evidence; no aesthetic decisions are inferred inside the design contract without a recorded evidence path. `noootwo_status.py` should report missing or stale product-facts as a gate.
 3. **Craft floor with absolute bans**
-   Keep `anti-slop.md` and `review-gates.md`; make sure the force-return rules include new absolute bans that are hard to miss: no eyebrow/kicker above every heading, no numbered section markers as decoration, no hard offset shadows unless the world is truly neobrutalist, no system display face for an own-world page, no emoji/unicode glyphs standing in for icons, no cream/beige default surface, no gradient text. Add the cheap "built vs assembled" check: theme the browser surfaces the model usually skips (text selection, caret, custom scrollbars, focus ring, underline offset, tabular numerals).
+   Keep `craft.md` and `review.md`; make sure the force-return rules include new absolute bans that are hard to miss: no eyebrow/kicker above every heading, no numbered section markers as decoration, no hard offset shadows unless the world is truly neobrutalist, no system display face for an own-world page, no emoji/unicode glyphs standing in for icons, no cream/beige default surface, no gradient text. Add the cheap "built vs assembled" check: theme the browser surfaces the model usually skips (text selection, caret, custom scrollbars, focus ring, underline offset, tabular numerals).
 4. **Bounded verification loop**
-   In `review-rubric.md` loop rules, prefer one batched inspection (desktop + mobile on web, shipped device classes on native) followed by one fix batch and at most one confirm round. Do not spend polish loops on a direction that needs a structural pivot.
+   In `review.md` loop rules, prefer one batched inspection (desktop + mobile on web, shipped device classes on native) followed by one fix batch and at most one confirm round. Do not spend polish loops on a direction that needs a structural pivot.
 5. **Separated final reviewer**
    Prefer final review from a reviewer that does not inherit the generator's framing when the harness supports a fresh agent. Without one, step fully out of the build context before evaluating and disclose substitution in one line at finish. The generator never self-certifies `ready`.
 6. **Drift, reported not silently repaired**

@@ -5,7 +5,7 @@ Extracting, specifying, and stabilising a design system and its semantic tokens.
 
 ## Design System Setup
 
-Set up `.noootwo/system.md` before task-specific design work. Use [structured-design-spec.md](system.md) so the result is a design contract, not a mood summary.
+Set up `.noootwo/system.md` before task-specific design work. Use [system](system.md) so the result is a design contract, not a mood summary.
 
 ### Purpose
 
@@ -21,7 +21,7 @@ The memory must not become a second source of truth. It records what is confirme
 4. Brand guidelines, logos, press kits, or product pages
 5. Design files, decks, annotated frames, or existing prototypes
 6. User-provided references
-7. Fallback lineages from [style-lineages.md](direction.md) when brand evidence is incomplete
+7. Fallback lineages from [direction](direction.md) when brand evidence is incomplete
 
 ### Required Output
 
@@ -78,8 +78,8 @@ Update `.noootwo/system.md` with:
 
 Persistent design memory lives in `.noootwo/system.md`.
 
-Read [design-system-setup.md](system.md) first when the file is missing, stale, or still pending extraction.
-Use [structured-design-spec.md](system.md) to write extracted facts as role-based design instructions.
+Read [system](system.md) first when the file is missing, stale, or still pending extraction.
+Use [system](system.md) to write extracted facts as role-based design instructions.
 
 ### Source Priority
 
@@ -164,7 +164,7 @@ Use [structured-design-spec.md](system.md) to write extracted facts as role-base
 
 Use this format when extracting a design system, writing directions, or preparing handoff. It borrows the useful structure of `DESIGN.md`-style design instructions without depending on any external repository, brand template, or live fetch.
 
-For non-quick UI work, start with `design-read-and-contract.md`. The Design Read sets surface kind, audience, product posture, visual posture, variance, motion, density, and the existing system to preserve. This spec expands that read into implementation-ready roles.
+For non-quick UI work, start with `intake.md`. The Design Read sets surface kind, audience, product posture, visual posture, variance, motion, density, and the existing system to preserve. This spec expands that read into implementation-ready roles.
 
 Research basis: `DESIGN.md`-style repositories such as `VoltAgent/awesome-design-md` show that agents follow UI intent better when visual systems are written as color roles, typography roles, component rules, spacing rules, and do/don't constraints. Noootwo absorbs that format only; it does not require that repository or copy its brand-specific specs. Current public design-system guidance also supports role-based translation: Figma describes primitive, semantic, and component token layers; Atlassian frames tokens as single-source usage names for design decisions; Carbon frames motion as productive feedback and expression rather than decoration.
 

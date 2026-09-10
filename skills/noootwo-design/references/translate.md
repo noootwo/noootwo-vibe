@@ -9,7 +9,7 @@ Use this when the chosen direction is visually right but the implemented UI stil
 
 This is not a new mode. It is an implementation-stage reinforcement layer for `production` work, or for review loops where the artifact is close but still feels like a polished default.
 
-Do not use this pass to rescue a misunderstood style. If the visual evidence, selected direction, and implementation contract do not describe the same mechanisms, return to `style-evidence-check.md` or style discovery first.
+Do not use this pass to rescue a misunderstood style. If the visual evidence, selected direction, and implementation contract do not describe the same mechanisms, return to `direction.md` or style discovery first.
 
 ### Research Basis
 
@@ -103,7 +103,7 @@ This should happen on artifacts, not only in prose.
 
 #### 5. Color Calibration Pass
 
-Use [color-system-calibration.md](craft.md) when color drift is part of the generic feel. Check:
+Use [craft](craft.md) when color drift is part of the generic feel. Check:
 
 - neutral temperature across canvas, surface, border, and muted text
 - shadow hue and whether depth should be shadow, glow, border, or plane contrast
@@ -323,7 +323,7 @@ If a live artifact cannot be produced:
 
 Noootwo Design should choose the fastest path to a reviewable artifact without losing stack-native design quality.
 
-Read [canvas-artifact-loop.md](translate.md) before choosing a path.
+Read [translate](translate.md) before choosing a path.
 
 ### Decision Order
 
@@ -336,7 +336,7 @@ Read [canvas-artifact-loop.md](translate.md) before choosing a path.
 
 Use when the design is headed into an existing browser-based product or a web prototype.
 
-Read [web-react-vue.md](translate.md).
+Read [translate](translate.md).
 
 Rules:
 
@@ -363,7 +363,7 @@ Rules:
 
 Use when the target app is Flutter or when Flutter will implement the approved design.
 
-Read [flutter.md](translate.md).
+Read [translate](translate.md).
 
 Rules:
 
@@ -378,7 +378,7 @@ Rules:
 
 Use when the approved design will be implemented in native iOS, macOS, Android, or Compose Multiplatform.
 
-Read [native.md](translate.md).
+Read [translate](translate.md).
 
 Rules:
 
