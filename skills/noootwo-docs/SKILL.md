@@ -1,11 +1,13 @@
 ---
 name: noootwo-docs
-description: "Use for Noootwo documentation maintenance: README, AGENTS, docs/status, ADRs, guides, reference docs, release notes, documentation audits, stale/duplicated/unverified docs, and placing product/design/review/workflow facts in the right layer."
+description: "Use for documentation maintenance: README, AGENTS, docs/status, ADRs, guides, reference docs, release notes, documentation audits, stale/duplicated/unverified docs, and placing product/design/review/workflow facts in the right layer. Hard trigger: any change to behavior, project state, release facts, product decisions, or agent instructions must get a docs decision (update or intentional no-op) before the work is called done."
 ---
 
 # Noootwo Docs
 
 Use this skill when documentation must reflect actual project state. The goal is not more documents; it is the right fact in the right layer, with stale facts removed.
+
+Hard trigger: changed behavior, project state, release facts, product decisions, or agent instructions require a docs decision before closure — either update the owning layer or record an intentional no-op. Closing work with a silent docs drift is a defect.
 
 Keep the default path lightweight: inspect the change, update the owning layer, and avoid turning docs into a second implementation.
 

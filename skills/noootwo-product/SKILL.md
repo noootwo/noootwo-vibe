@@ -1,6 +1,6 @@
 ---
 name: noootwo-product
-description: "Use for product discovery and product decisions before design or implementation: Decision Interview, real user, scenario, first loop, scope, IA/main path, interaction/state model, acceptance criteria, Product Reality Check, Product Choice Challenge, and Product-to-Design Handoff. Trigger for greenfield ideas, unclear or rejected product direction, feature-list-only requests, backend-shaped flows, UI work missing product path, or explicit requests for detailed sequential requirement confirmation."
+description: "Use before design or implementation whenever real user, scenario, first loop, scope, IA/main path, interaction/state model, states, or acceptance criteria are unclear; for new product ideas, greenfield starts, feature-list-only requests, backend-shaped flows, rejected product direction, ambiguous scope, onboarding/permission/payment uncertainty, or explicit grill-style/detailed sequential confirmation. Runs Clarity Gate, Decision Interview with frontier rounds, Product Discovery, Product Checkpoint, Product Reality Check, Product Choice Challenge, and Product-to-Design Handoff."
 ---
 
 # Noootwo Product
@@ -39,7 +39,7 @@ Do not design for the database model, admin fields, or requester preference unle
 6. Use Product Reality Check before handoff only when a greenfield path is still unproven or user-confusing, the direction was strongly criticized, or the output is likely to produce a fake-PM answer.
 7. Route clarified visual execution to `$noootwo-design`, technical judgment to `$noootwo-review`, durable facts to `$noootwo-docs`, and sequencing back to `$noootwo-workflow`.
 
-If the Clarity Gate finds one material gap, ask one decisive question with 2-3 options and one recommended default, then wait. A recommended default is not a user decision. Treat a request to build, start, continue, or use best practices as permission to work only after the product path is confirmed; it is not delegation of unresolved product choices. Only explicit language such as "you decide", "choose for me", or "use your recommended default and proceed" counts as delegation, and the resulting assumption must be recorded. If the Clarity Gate finds multiple dependent gaps, high risk, a rejected direction, or an explicit request for step-by-step confirmation, use `deep Decision Interview`: keep a cumulative decision ledger, recap what is already confirmed before each next question, explain why the question matters, and continue with conditional follow-ups until the path is ready.
+If the Clarity Gate finds one material gap, ask one decisive question with 2-3 options and one recommended default, then wait. A recommended default is not a user decision. Treat a request to build, start, continue, or use best practices as permission to work only after the product path is confirmed; it is not delegation of unresolved product choices. Only explicit language such as "you decide", "choose for me", or "use your recommended default and proceed" counts as delegation, and the resulting assumption must be recorded. If the Clarity Gate finds multiple dependent gaps, high risk, a rejected direction, or an explicit request for grill-style confirmation, use `deep Decision Interview`: organize the open choices as a decision tree, ask the whole settled frontier each round with a recommended answer per question, wait for the user, then recompute the frontier until it is empty and the intent fit is confirmed.
 
 ## Clarity Gate
 
@@ -62,12 +62,12 @@ Clarity rules:
 
 When activated, Decision Interview is an interactive gate, not a report that the agent can complete alone. When the Clarity Gate says `clear`, this section does not apply.
 
-- When the gate is open, the current response must be a `Decision Interview Turn`: one question, the relevant facts, the current ledger, and the reason the question matters.
+- When the gate is open, the current response must be a `Decision Interview Turn`. In `one-material-gap` mode it is one question; in `deep Decision Interview` it is one frontier round: every question whose prerequisites are already settled, each with a recommended answer, separated by a horizontal rule.
 - While `Interview state: awaiting_user_answer`, do not implement, edit files, create a design, write an implementation plan, hand off to Design, or present a final product conclusion. Read-only inspection of repo truth is allowed when it informs the next question.
 - Do not treat silence, `continue`, `start`, `build it`, `help me do it`, or `follow best practices` as an answer to the current question. Re-state or narrow the same question when needed.
 - Every material decision must be either explicitly selected by the user or explicitly delegated. The agent's recommendation, a guessed preference, or the original goal statement cannot close the decision.
-- If a user answer contains several choices, classify all of them in the ledger but ask at most one follow-up question for the highest-impact unresolved choice.
-- After the user answers, keep the interview state as `awaiting_user_answer` whenever another material choice remains. Only change it to `converged` after the path is ready and the final intent-fit check is confirmed, or to `delegated` after explicit delegation.
+- If a user answer contains several choices, classify all of them in the ledger. Recompute the frontier: newly unblocked questions join the next round; questions whose prerequisites are still open stay waiting.
+- After the user answers, keep the interview state as `awaiting_user_answer` whenever the frontier still holds an open material choice. Change it to `converged` only after the frontier is empty, the shared-understanding summary is confirmed or delegated, and the final intent-fit check is confirmed; or to `delegated` after explicit delegation.
 
 The following is a semantic contract, not text that must be printed verbatim. Machine-facing state names remain canonical in the handoff, but normal user-facing responses must use the user's language and natural wording.
 
@@ -99,23 +99,37 @@ Use equivalent labels in the user's primary language. Do not expose raw labels s
 
 Use this when product ambiguity is high enough that acting now would likely waste work: greenfield ideas with an unspecified first user or loop, vague requirements, feature-list-only requests, backend-shaped flows, rejected product direction, or UI/implementation work missing `real user`, `main path`, `states`, or `acceptance criteria`.
 
-Rules:
+Organize the open choices as a decision tree. The frontier is every decision whose prerequisites are already settled: questions you can ask now without guessing answers you have not heard. Work the tree in rounds.
 
-- Inspect repo truth, current UI, docs, screenshots, analytics, or support notes first.
-- Do not ask the user for facts that can be discovered from the environment.
-- Ask only product tradeoffs that materially change scope, IA, flow, states, or acceptance.
-- Ask one highest-impact question at a time; include 2-3 meaningful options and one recommended default.
-- Wait for the user's answer by default. A build request or an instruction to continue does not override this wait. When the user explicitly delegates the current choice, record the assumption and continue.
-- In `deep Decision Interview`, begin each turn with a short `confirmed so far` recap, name the one open decision, and state how its answer changes the plan.
-- Show the relevant discoverable facts that shaped the current question; do not make the user restate facts already present in the repo or current flow.
-- After each answer, classify it as confirmed, delegated assumption, deferred, rejected, active risk, or still ambiguous; use the result to choose the next question instead of restarting a checklist.
-- Use the following decision gates in order, skipping only a gate settled by repo evidence or an explicit user answer: real user and moment of use, user outcome, first loop, scope and non-goals, main path and IA, interaction and state behavior, then observable acceptance. These are routing gates, not a questionnaire to dump into one response.
-- Before handoff, summarize confirmed decisions, assumptions, deferred items, rejected ideas, active risks, and the next artifact. Add a brief intent-fit check: what user problem the first loop solves and what it intentionally does not solve.
-- In deep mode, ask one explicit final intent-fit confirmation after the convergence summary unless the user delegated the final decision. Do not infer final fit from earlier goal statements. If the answer is no, reopen only the highest-impact mismatch; if yes, stop. Do not ask again unless a new contradiction appears.
+Round rules:
+
+- Ask the whole frontier in one round. Number each question, give your recommended answer, and separate questions with a horizontal rule. A question whose answer depends on another open question belongs to a later round, not this one.
+- Begin each round with a short `confirmed so far` recap and a one-line statement of what this round settles.
+- After the user answers, recompute the frontier. Settled decisions push it outward; unsettled prerequisites keep their dependents waiting. Never silently assume an unanswered branch.
+- The frontier is empty only when every branch of the decision tree is settled, deferred, rejected, or explicitly accepted as a risk.
+
+Fact rules:
+
+- Inspect repo truth, current UI, docs, screenshots, analytics, or support notes first. Finding facts is your job, never the user's.
+- Do not ask the user for facts that can be discovered from the environment. If a frontier question needs a discoverable fact, resolve it yourself before the round, or state the blocking fact and ask the rest of the frontier now.
+- Show the discoverable facts that shaped each question; do not make the user restate facts already present in the repo or current flow.
+
+Question rules:
+
+- Ask only product tradeoffs that materially change scope, IA, flow, states, or acceptance. Include 2-3 meaningful options and one recommended default per question.
+- Format each question as: `❓ Qn - **<question title>**: <question body>`, then `➡️ <recommended answer>`, then a horizontal rule between questions. This is a semantic contract; localize the wording, keep the shape.
+- Wait for the user's answers by default. A build request or an instruction to continue does not override this wait. When the user explicitly delegates the current choice, record the assumption and continue.
+- After each answer, classify it as confirmed, delegated assumption, deferred, rejected, active risk, or still ambiguous; use the result to choose the next round instead of restarting a checklist.
+- Use the following decision gates in order, skipping only a gate settled by repo evidence or an explicit user answer: real user and moment of use, user outcome, first loop, scope and non-goals, main path and IA, interaction and state behavior, then observable acceptance. These gates organize the tree; they are not a questionnaire to dump into one response.
+
+Convergence rules:
+
+- When the frontier is empty, summarize the shared understanding: confirmed decisions, assumptions, deferred items, rejected ideas, active risks, and the next artifact. Add a brief intent-fit check: what user problem the first loop solves and what it intentionally does not solve.
+- Ask one explicit final intent-fit confirmation after that summary unless the user delegated the final decision. Do not infer final fit from earlier goal statements. If the answer is no, reopen only the highest-impact mismatch; if yes, stop. Do not ask again unless a new contradiction appears.
 - Do not hand off with an unresolved active risk that would change the main path, trust boundary, scope, or acceptance. Resolve it with a decision, owner, and evidence; get explicit user acceptance; or mark it as an intentional out-of-scope cut.
 - Stop as soon as `real user`, `scenario`, `main path`, `scope cuts`, `states`, and `acceptance criteria` are enough for Product-to-Design Handoff or implementation planning, every material choice is explicit or delegated, the final intent fit is confirmed or delegated, and no unresolved material risk remains.
 
-Do not turn Decision Interview into a fixed questionnaire. If the next question would not change the plan, proceed with a stated assumption only when the user has explicitly delegated that level of detail. Otherwise, leave it as a non-material open note and keep the agent from inventing a product decision.
+Do not turn Decision Interview into a fixed questionnaire. If a would-be question does not change the plan, proceed with a stated assumption only when the user has explicitly delegated that level of detail. Otherwise, leave it as a non-material open note and keep the agent from inventing a product decision.
 
 ## Product Discovery
 
@@ -216,7 +230,7 @@ Product Choice Challenge
 
 For each option, state user understanding, operation cost, fit, and risk. Use two options when a third is filler.
 
-Decision Interview may run several Product Choice Challenge turns, but each turn must resolve only one decision. Showing the recommended option does not count as `user chose`.
+A Product Choice Challenge is the carrier of a single frontier question: Decision Interview may run several of them across rounds, but each turn resolves only one decision. Showing the recommended option does not count as `user chose`.
 
 ## Product Rules
 

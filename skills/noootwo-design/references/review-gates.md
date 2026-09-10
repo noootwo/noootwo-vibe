@@ -11,6 +11,17 @@ Use this when a review needs concrete failure checks. Keep `review-rubric.md` fo
 - gradient-led styling with weak composition underneath
 - generic AI landing page, generic SaaS page, or obvious shadcn derivative
 
+## Hard Bans (no brief earns them back)
+
+- eyebrow/kicker label above every heading
+- decorative numbered section markers (01 / 02 / 03) when the sequence carries no information
+- gradient text; emphasis comes from weight or size
+- hard offset shadows (`box-shadow: 4px 4px 0`) outside a genuinely neobrutalist world
+- system display face (Impact, Arial Black, platform sans) as the display voice of an own-world page
+- emoji or unicode glyphs standing in for an icon system
+- cream/beige page background reached for by reflex instead of a deliberate palette
+- zero-blur colored halo shadows used as depth
+
 If 2 or more flags are present, the design cannot be `ready`. If 3 or more are present, default to `pivot`.
 
 ## Color Calibration Flags
@@ -61,6 +72,10 @@ Any `style preserved only at the surface, not in the mechanism`, `tokens exist b
 - Web/React/Vue: unmodified UI-kit components, shadcn-like card walls, Lucide icon grids, generic fade-up motion
 - Flutter: default `Scaffold + AppBar + Card + ListView`, Material seed colors without art direction, no sliver or native motion strategy in a high-character app
 - SwiftUI/Compose/native: default platform surfaces without token reinterpretation or native transition/state feedback
+
+## Browser Surfaces Check
+
+Theme the browser surfaces models usually skip: text selection, caret, custom scrollbars, focus rings, underline offsets, and tabular numerals in data. Unthemed defaults on a styled page are a strong "assembled, not built" signal and block `ready` when the page claims craft.
 
 ## Forced Return Rules
 

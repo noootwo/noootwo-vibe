@@ -6,11 +6,11 @@ It publishes five focused skills:
 
 | Skill | Purpose | Version |
 | --- | --- | --- |
-| `noootwo-workflow` | AI workflow control, lifecycle guardrails, clarity-gated Product routing, paused interview routing only for unresolved choices, deep-interview signal preservation, correction-loop routing, product-to-design handoff routing, project skill audits, foundation checks, task routing, planning, and closure | `0.7.7` |
-| `noootwo-product` | Adaptive Product Clarity Gate, interactive Decision Interview only for unresolved choices, explicit selection gates, deep sequential confirmation, user-language presentation, decision ledgers, intent-fit checks, product decision layers, greenfield discovery, real-user checkpoints, Product Reality Check, IA/main paths, interaction/state models, acceptance criteria, cognitive-cost review, product choices, and Product-to-Design Handoff | `0.5.3` |
-| `noootwo-design` | UI/frontend Design Read, Style Evidence Check, style stability, semantic token contracts, quick polish, `.noootwo/` harness, artifact review, anti-slop checks, and design handoff after product path clarity | `0.9.1` |
-| `noootwo-review` | Tech Lead + QA Architect review, architecture-boundary lens, pre-submit gates, performance review, lean/context-cost review, project-health review, maintainability, and implementation review | `0.7.1` |
-| `noootwo-docs` | Documentation state, docs audits, README/AGENTS/docs layering, product decision persistence, ADRs, context budgets, and release notes | `0.7.0` |
+| `noootwo-workflow` | Mandatory task-start routing with concrete triggers (feature, product idea, multi-file, bugfix, release, handoff, recovery, rejection loop), lifecycle guardrails, routing-as-invocation to Product/Design/Review/Docs, rework diagnosis, paused interview routing only for unresolved choices, compact handoff packets, project skill audits, foundation checks, planning, and closure | `0.8.0` |
+| `noootwo-product` | Adaptive Product Clarity Gate, light single-question interview for one material gap, grilling-style deep Decision Interview with frontier rounds, fact self-serve, fixed question format, decision ledgers, frontier-empty confirmation gate, user-language presentation, product decision layers, greenfield discovery, real-user checkpoints, Product Reality Check, IA/main paths, interaction/state models, acceptance criteria, cognitive-cost review, product choices, and Product-to-Design Handoff | `0.6.0` |
+| `noootwo-design` | UI/frontend Design Read, Style Evidence Check, style stability, semantic token contracts, quick polish, `.noootwo/` harness, artifact review, anti-slop hard bans, bounded verification, separated final review, and design handoff after product path clarity | `0.10.0` |
+| `noootwo-review` | Tech Lead + QA Architect review, architecture-boundary lens, hard pre-submit/release gates, rework diagnosis, performance review, lean/context-cost review, project-health review, maintainability, and implementation review | `0.8.0` |
+| `noootwo-docs` | Documentation state, hard docs-decision trigger for behavior/release/agent changes, docs audits, README/AGENTS/docs layering, product decision persistence, ADRs, context budgets, and release notes | `0.8.0` |
 
 The repository root is not a published skill. It is the shared workspace for manifests, docs, validation, release helpers, and CI.
 
@@ -88,9 +88,9 @@ npx skills add ./skills/noootwo-design --list
 
 ## Skill Responsibilities
 
-Use `noootwo-workflow` first when the task is broad, multi-step, release-bound, needs routing, enters a repeated correction loop, or needs a project skill/foundation audit. It owns lifecycle guardrails for read-first, product/design/review/docs routing, TDD/repro-first, verification, submit, and release decisions while keeping small direct work lightweight. It routes product-shaped work to `noootwo-product` Clarity Gate, preserves explicit deep-confirmation intent and its handoff ledger, pauses execution only while a material choice awaits an answer, then passes Product-to-Design Handoff and style-evidence risk to `noootwo-design` for non-quick UI work.
+Use `noootwo-workflow` first for a new feature, product idea, multi-file or cross-skill change, bugfix, refactor, release, onboarding or handoff, recovery after repeated failed fixes, or a correction loop after user rejection. It owns lifecycle guardrails for read-first, product/design/review/docs routing, TDD/repro-first, verification, submit, and release decisions while keeping small direct work lightweight. Routing is an invocation: when a specialist trigger matches it explicitly invokes `noootwo-product`, `noootwo-design`, `noootwo-review`, or `noootwo-docs`. It routes product-shaped work to `noootwo-product` Clarity Gate, preserves explicit grill-style/deep-confirmation intent and its handoff ledger, pauses execution only while a material choice awaits an answer, diagnoses the failed layer on rework, then passes Product-to-Design Handoff and style-evidence risk to `noootwo-design` for non-quick UI work.
 
-Use `noootwo-product` when a software product idea, blank-project start, broad product vision, requirements, feature scope, real users, user flows, information architecture, interaction models, onboarding, permissions, states, acceptance criteria, usability, cognitive cost, or product choices need clarification. It first classifies the brief as clear, one material gap, ambiguous/high-risk, or explicitly interview-driven. Clear, detailed requests move directly to the smallest useful artifact or implementation route; only unresolved material choices open an interactive Decision Interview. The interview asks one question at a time, waits for explicit selection or delegation, keeps a decision ledger, presents normal responses in the user's language, runs Product Discovery after material choices converge, and produces Product-to-Design Handoff.
+Use `noootwo-product` when a software product idea, blank-project start, broad product vision, requirements, feature scope, real users, user flows, information architecture, interaction models, onboarding, permissions, states, acceptance criteria, usability, cognitive cost, or product choices need clarification. It first classifies the brief as clear, one material gap, ambiguous/high-risk, or explicitly interview-driven. Clear, detailed requests move directly to the smallest useful artifact or implementation route; only unresolved material choices open an interactive Decision Interview. The interview uses light single questions for one material gap and grilling-style frontier rounds for deep confirmation: it asks every settled-prerequisite question per round with a recommended answer, resolves discoverable facts itself, keeps a decision ledger, and requires an explicit shared-understanding confirmation before handoff. It presents normal responses in the user's language, runs Product Discovery after material choices converge, and produces Product-to-Design Handoff.
 
 Use `noootwo-design` for UI, visual systems, frontend design, screenshots, artifact review, `.noootwo/` deliverables, and design implementation handoff after the product path is clear. Non-quick work declares Design Read and maps design decisions into semantic tokens, component behavior, states, and artifact review paths. If real user, main path, states, acceptance, audience, or use context is still unresolved, route back to `noootwo-product` Decision Interview. High-character or previously rejected style work uses Style Evidence Check before trusting style prose; direction exploration runs only when style or structure is genuinely unresolved. Quick polish stays lightweight and does not require completing the full `.noootwo/` harness.
 
@@ -154,11 +154,11 @@ python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scena
 
 Each child skill has its own `VERSION` file and tag prefix:
 
-- `noootwo-workflow@v0.7.7`
-- `noootwo-product@v0.5.3`
-- `noootwo-design@v0.9.1`
-- `noootwo-review@v0.7.1`
-- `noootwo-docs@v0.7.0`
+- `noootwo-workflow@v0.8.0`
+- `noootwo-product@v0.6.0`
+- `noootwo-design@v0.10.0`
+- `noootwo-review@v0.8.0`
+- `noootwo-docs@v0.8.0`
 
 The root `VERSION` records the workspace version only. Do not use it as the release source for child skills.
 

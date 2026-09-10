@@ -149,6 +149,8 @@ Correction loops are risk-triggered. Do not apply them to small copy edits, know
 | refactor, maintainability, architecture, code review | `$noootwo-review` |
 | multi-step coordination, sequencing, release flow | `$noootwo-workflow` |
 | bug, failing check, surprising runtime behavior | `$noootwo-workflow` diagnostic mode first, then specialist |
+| user rejection of prior work, repeated correction loop | layer diagnosis, then explicit route to `$noootwo-product` / `$noootwo-design` / `$noootwo-review` / `$noootwo-docs` |
+| behavior, state, or release facts changed without a docs decision | `$noootwo-docs` before close |
 
 ## Work Size
 

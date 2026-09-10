@@ -1,6 +1,6 @@
 ---
 name: noootwo-design
-description: "Use for UI/frontend/app visual execution after product path is clear: Design Read, Style Evidence Check, direction exploration when style or structure is unresolved, Design Contract, artifact review, semantic tokens, quick polish, design-system adoption, screenshot critique, and implementation handoff."
+description: "Use for UI, frontend, app, or artifact visual work: new screens, redesign, restyle, component or token work, design-system adoption, screenshot or artifact critique, responsive/typography/motion polish, Design Read, Style Evidence Check, Design Contract, and implementation handoff. Trigger on UI files, visual defects, generic or AI-slop output, high-character or rejected style work, or any frontend implementation after the product path is clear; route unresolved real-user, main-path, state, acceptance, audience, or use-context decisions back to $noootwo-product."
 ---
 
 # Noootwo Design
@@ -117,4 +117,5 @@ Artifact Review
 - State: `python scripts/noootwo_status.py <project>` for adoption, production, handoff, or workflow debugging; not required for quick polish.
 - Delivery validation: `python scripts/validate_noootwo_readiness.py <project>` and `python scripts/eval_noootwo_artifacts.py <project> --scenario all` for completed or implementation-bound `.noootwo/` work.
 - Main path: `references/design-read-and-contract.md`, `references/style-evidence-check.md`, `references/direction-exploration.md`, `references/detail-translation-pass.md`, `references/review-rubric.md`, and `references/target-stack-rules.md`.
+- Research: `references/impeccable-research-notes.md` when deciding whether to change review gates, scripts, or design-quality claims after an upstream skill update.
 - Use local search in `references/` for stack, color, typography, data UI, responsive, artifact-family, adoption, or source-specific guidance only when the task names that need.

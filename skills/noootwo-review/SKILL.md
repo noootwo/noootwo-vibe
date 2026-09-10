@@ -1,6 +1,6 @@
 ---
 name: noootwo-review
-description: "Use for Noootwo code and project-health review: correctness, testability, architecture boundaries, lean/bloat, performance, AI-code/skill context cost, release readiness, maintainability, and refactoring discipline. Trigger before submit/release or when implementation risk, over-engineering, missing validation, oversized skill flow, or technical tradeoffs need review."
+description: "Use for code and project-health review: correctness, testability, architecture boundaries, lean/bloat, performance, AI-code/skill context cost, release readiness, maintainability, and refactoring discipline. Hard triggers: before submit or release of any code change; risky, public-contract, migration, or wide-blast-radius diffs; behavior change without covering tests; repeated rejection of the same implementation (rework diagnosis); over-engineering, dependency bloat, or oversized skill flow."
 ---
 
 # Noootwo Review
@@ -27,12 +27,13 @@ Choose review lenses before reading too broadly. A narrow diff should use only t
 - `project health`: validation entrypoints, CI, release path, docs/status drift, observability, handoff risk
 - `AI-code/context cost`: large files, generic wrappers, hidden state, repeated rules, broad skill triggers, long question lists, comments that overclaim
 - `release readiness`: versioning, tags, publish/install steps, rollback, user-visible notes
+- `rework diagnosis`: repeated rejection of the same implementation; classify whether product understanding, style understanding, implementation translation, or missing verification failed, and route to `$noootwo-product`, `$noootwo-design`, or back to verification
 
 State which lenses were applied, which obvious lenses were skipped, and why.
 
 ## Pre-Submit Review Gate
 
-Use this gate before submitting or releasing code changes, and when `$noootwo-workflow` routes a completed implementation for quality review.
+Use this gate before submitting or releasing code changes, and when `$noootwo-workflow` routes a completed implementation for quality review. This gate is a hard trigger: a code change that reaches submit or release without a review decision is not closed.
 
 - Small diff: choose one to three relevant lenses, self-review the changed files and nearest tests, directly fix local issues, and avoid a full project audit.
 - Medium, broad, or risky diff: run a structured review with relevant lenses. Include `correctness` and `testability` when behavior changes, plus `architecture boundary`, `lean/bloat`, or `AI-code/context cost` when structure or future maintenance is the risk.

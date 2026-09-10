@@ -1,6 +1,6 @@
 ---
 name: noootwo-workflow
-description: "Use for Noootwo multi-step AI development workflow: routing, lifecycle guardrails, planning, verification, correction-loop diagnosis, Product Decision Interview routing, product/design/docs/review handoffs, onboarding, and release sequencing. Trigger when work is non-trivial, cross-skill, release-bound, recovery-oriented, or needs controlled execution."
+description: "Use at the start of any new feature, product idea, multi-file or cross-skill change, bugfix or failing check, refactor, release/version/tag/publish, project onboarding or handoff, recovery after repeated failed fixes, or correction-loop routing after a user rejection. Runs lifecycle guardrails, repo-truth reading, mode selection, specialist routing, planning, verification, documentation, and submit/release closure. Routes to $noootwo-product, $noootwo-design, $noootwo-review, and $noootwo-docs when their triggers match."
 ---
 
 # Noootwo Workflow
@@ -67,6 +67,8 @@ When Product's Clarity Gate opens Decision Interview, enter `product-interview` 
 
 ## Skill Routing
 
+Routing is an invocation, not a thought. When a specialist trigger matches, explicitly invoke `$noootwo-product`, `$noootwo-design`, `$noootwo-review`, or `$noootwo-docs` at that moment. If the skill is unavailable in the current harness, say so in one line and follow the closest fallback instead of silently skipping.
+
 - Use this skill first when a project needs a skill inventory, foundation health check, gap plan, or multi-skill handoff.
 - Use `$noootwo-product` first when the task is a greenfield software product idea, blank-project product start, broad product vision, product brainstorm, or "what should this become" question.
 - Use `$noootwo-product` Decision Interview only when requirements, feature scope, real user, user flow, information architecture, interaction model, onboarding, permissions, states, acceptance criteria, usability, cognitive cost, or product choices still need one-at-a-time confirmation after the Clarity Gate.
@@ -80,6 +82,8 @@ If two skills apply, use this order unless the user says otherwise:
 `workflow -> product when needed -> design/review/docs specialist -> workflow closure`
 
 If the task is a bug or failing check, first establish root cause and reproduction before routing to implementation or review.
+
+When the user rejects prior work, diagnose the failed layer before another small edit: product misunderstanding routes to `$noootwo-product` (Clarity Gate or Product Reality Check), style/visual misunderstanding routes to `$noootwo-design` (Style Evidence Check), implementation translation routes to `$noootwo-design` detail pass or `$noootwo-review`, and stale documentation routes to `$noootwo-docs`. State the diagnosis and the invoked skill; do not keep polishing the same layer.
 
 ## Planning Rules
 
@@ -119,11 +123,13 @@ When routing to another Noootwo skill, pass a compact handoff packet:
 - execution status: blocked on user answer | ready for handoff | ready for execution
 - presentation language: infer from the user's latest message; preserve intentional technical terms
 
-For `$noootwo-product`, use `references/product-interview-handoff.md` and include the raw product idea when present, the user's explicit request for detailed or grill-style confirmation when present, Clarity Gate result, `interview_depth: none | light | deep`, presentation language, suspected real user, desired outcome, unclear product choice, current flow evidence with source paths, the initialized decision ledger (`confirmed`, `assumed`, `deferred`, `rejected`, `active risks`), intent-fit status, whether Decision Interview is needed, and whether UI or implementation is waiting on the answer. A pending packet is a pause state for Product, not a ready handoff. Do not route it to Design or implementation until Product marks `execution_status: ready_for_handoff` or the user explicitly delegates the remaining choices.
+Specialist packets:
 
-For `$noootwo-design`, include Product-to-Design Handoff when available: real user, scenario, main path, states, scope cuts, acceptance criteria, open product decisions, design constraints, current UI/artifacts, and review path.
-
-For correction loops, include what the user rejected, whether the failure is likely product, style understanding, implementation translation, artifact review, or unclear evidence, and whether Product Reality Check or Style Evidence Check is required.
+- To `$noootwo-product`: use `references/product-interview-handoff.md`; include the raw idea, any explicit grill-style/detail-confirmation request, Clarity Gate result, `interview_depth`, checked facts with sources, initialized decision ledger, intent-fit status, and whether UI or implementation is waiting. A pending packet is a pause state, not a ready handoff.
+- To `$noootwo-design`: include the Product-to-Design Handoff when available (real user, scenario, main path, states, scope cuts, acceptance criteria, open product decisions, design constraints), current UI/artifacts, and the review path.
+- To `$noootwo-review`: include behavior/structure changed, files and nearest tests, risk class, verification command, and the specific judgment requested.
+- To `$noootwo-docs`: include the changed fact, owning layer, files/commands touched, validation or release evidence, and known stale docs to check.
+- Correction loops: include what the user rejected, the suspected failed layer (product, style understanding, implementation translation, artifact review, unclear evidence), and whether Product Reality Check or Style Evidence Check is required.
 
 When control returns, close the loop by checking whether docs, review, release, or user confirmation is still missing.
 

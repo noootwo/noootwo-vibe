@@ -36,14 +36,14 @@ Do not manufacture gaps from technical implementation details or low-impact pref
 
 When the Clarity Gate selects light or deep, the shared loop is:
 
-1. Inspect discoverable facts first.
-2. Ask one material tradeoff.
-3. Recommend a default with 2-3 meaningful options.
-4. Stop and wait for the user's answer.
-5. Record the answer or explicitly delegated assumption.
-6. Stop when the path is ready for handoff or implementation.
+1. Inspect discoverable facts first; facts are the agent's job, not the user's.
+2. Organize open choices as a decision tree; the frontier is every question whose prerequisites are settled.
+3. `light`: ask the single material tradeoff. `deep`: ask the whole frontier in one round, each question numbered with 2-3 meaningful options and a recommended answer, questions separated by a horizontal rule.
+4. Stop and wait for the user's answers.
+5. Record each answer or explicitly delegated assumption, recompute the frontier, and repeat until it is empty.
+6. Confirm the shared understanding and intent fit, then stop when the path is ready for handoff or implementation.
 
-Do not ask a fixed intake list. The next question must change first loop, scope, main path, state treatment, or acceptance.
+Do not ask a fixed intake list. Every question must change first loop, scope, main path, state treatment, or acceptance.
 
 ## Execution Gate
 
@@ -52,7 +52,7 @@ When Decision Interview is active, the agent is in an awaiting-user state. The r
 - A request to build, start, continue, or follow best practices does not answer the current product question.
 - Only explicit delegation such as "you decide", "choose for me", or "use your recommended default and proceed" permits a delegated assumption.
 - Until the current question is answered or explicitly delegated, allow read-only fact inspection only. Do not edit files, create a design, write an implementation plan, route to Design, or claim a final product direction.
-- If another material choice remains after the answer, ask the next single conditional question and remain in the awaiting-user state.
+- If the recomputed frontier still holds an open choice after the answers, run the next frontier round and remain in the awaiting-user state. A question whose prerequisite is still open waits for a later round.
 - The first response for an ambiguous product request is an interview turn, not a completed Product Discovery, Product Checkpoint, or handoff.
 
 This is an internal field contract, not literal user-facing copy. Render it in the user's language and hide raw machine-state labels unless the user asks for diagnostics or a handoff.
@@ -85,14 +85,14 @@ Decision Ledger
 - Next decision:
 ```
 
-Each turn should:
+Each deep round should:
 
 1. Briefly recap the confirmed facts and decisions in the user's language.
-2. Show the relevant discoverable facts that shaped the current question, with a source path or an explicit statement that no such fact was found.
-3. Name the single highest-impact unresolved decision.
-4. Explain why that decision matters and what it changes.
-5. Ask one question with 2-3 meaningful options and a recommended default.
-6. Classify the answer and use it to choose a conditional follow-up. Treat an active risk as a decision that needs resolution or explicit acceptance, not as a note to carry silently.
+2. Show the discoverable facts that shaped this round's questions, with a source path or an explicit statement that no such fact was found.
+3. Ask every frontier question in this round, numbered (`❓ Qn - **<question title>**: <question body>`), each with 2-3 meaningful options and a recommended answer (`➡️ <recommended answer>`), separated by a horizontal rule.
+4. Explain in one line why each question matters and what it changes.
+5. Never include a question whose prerequisite is still open; park it for a later round.
+6. After the answers, classify each one and recompute the frontier. Treat an active risk as a decision that needs resolution or explicit acceptance, not as a note to carry silently.
 
 Do not repeat settled questions or ask small visual, technical, or naming details while user, scenario, first loop, scope, or acceptance remains unresolved. If an answer is ambiguous or conflicts with an earlier decision, ask one narrower follow-up instead of silently choosing.
 
@@ -104,7 +104,7 @@ For the final convergence pass:
 - State the intent-fit check plainly: "This first loop solves X for Y in situation Z; it deliberately does not solve A/B."
 - In deep mode, ask once whether that summary matches the user's intended problem unless the user delegated the final decision. Do not treat an earlier statement of the goal as the final fit confirmation. If the answer is no, reopen only the highest-impact mismatch.
 
-End with a convergence summary covering confirmed decisions, assumptions, deferred items, rejected ideas, risk treatment, handoff readiness, and intent fit. Do not continue once no material decision remains.
+End with a convergence summary covering confirmed decisions, assumptions, deferred items, rejected ideas, risk treatment, handoff readiness, and intent fit. The convergence summary is produced only when the frontier is empty; do not continue once no material decision remains.
 
 ## Product Discovery Template
 
@@ -142,7 +142,7 @@ Field guidance:
 - `Rabbit holes`: likely complexity traps, such as marketplace dynamics, heavy admin tooling, unclear AI quality, sync, permissions, or monetization before value.
 - `First validation signal`: the behavior or evidence that would justify building the next slice.
 
-Ask one question at a time when the answer changes the recommended first loop, scope, main path, states, or acceptance. If the user has not explicitly delegated the decision, wait for the answer even when the user has asked to start implementation. State a delegated assumption and proceed only after explicit delegation.
+Ask the settled frontier when any answer changes the recommended first loop, scope, main path, states, or acceptance: one question for a single material gap, the whole frontier in one round for several dependent gaps. If the user has not explicitly delegated the decision, wait for the answer even when the user has asked to start implementation. State a delegated assumption and proceed only after explicit delegation.
 
 ## Product Choice Challenge Template
 

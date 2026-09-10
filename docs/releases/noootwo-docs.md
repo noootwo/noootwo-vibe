@@ -1,5 +1,11 @@
 # noootwo-docs Releases
 
+## v0.8.0
+
+- Added a hard docs-decision trigger: behavior, project state, release facts, product decisions, or agent instruction changes require an update or an intentional no-op before closure.
+- Positioned silent docs drift at closure as a defect.
+
+
 ## v0.7.0
 
 - Added status budget rules: `docs/status.md` stays a current-state snapshot with a 120-line target and 200-line hard stop.

@@ -63,8 +63,16 @@ If multiple return actions are plausible and the choice changes cost, scope, or 
 
 ## Loop Rules
 
+- Verify in bounded passes, not an open-ended loop: build fully, inspect once with a batched round (desktop and mobile together on web; the shipped device classes on native), fix everything the inspection shows in one batch, then confirm with at most one more round and stop.
 - Maximum 2 full review loops before escalating the trade-off to the user.
 - Separate "cleaner than before" from "distinctive enough to keep".
 - Do not spend polish loops on a direction that needs a structural pivot.
 - Do not spend polish loops on an artifact whose style evidence and rendered result do not match.
 - If the reviewer cannot name the memorable move, the design cannot be `ready`.
+
+## Reviewer Separation
+
+- Prefer final review from a reviewer that does not inherit the generator's framing, transcript, or optimism. Use a fresh agent when the harness supports one.
+- Without a subagent, step fully out of the build context before evaluating, and disclose the substitution in one line at finish.
+- The generator never self-certifies `ready`; the reviewer's findings are the only list worked from.
+- When the user supplies evidence against a `ready` verdict (their screenshot, a named mismatch), that evidence outranks the capture: reopen the review with a fresh reviewer instead of patching inline and self-certifying.

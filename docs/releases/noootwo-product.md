@@ -1,5 +1,15 @@
 # noootwo-product Releases
 
+## v0.6.0
+
+- Rebuilt deep Decision Interview on grilling mechanics: decision tree, frontier rounds, fixed `❓ Qn - **title**` question format with `➡️` recommended answers, and horizontal-rule separation between questions.
+- Facts are the agent's job: discoverable repo/UI/doc facts are resolved before each round, and only product decisions wait for the user.
+- After each round the frontier is recomputed; dependent questions whose prerequisite is still open wait for a later round.
+- Added a shared-understanding confirmation gate: the interview ends only when the frontier is empty and the intent-fit check is confirmed or delegated.
+- `one-material-gap` stays a single decisive question; clear requests bypass the interview entirely.
+- Refreshed references, agent prompt, and evals: frontier round, fact self-serve, confirmation gate, single-gap, and updated ambiguous/detailed-confirmation/workflow-handoff evals.
+
+
 ## v0.5.3
 
 - Changed Decision Interview from a recommendation that could be mistaken for approval into an explicit interactive gate.

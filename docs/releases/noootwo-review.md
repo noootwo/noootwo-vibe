@@ -1,5 +1,11 @@
 # noootwo-review Releases
 
+## v0.8.0
+
+- Added hard pre-submit/release triggers: any code change reaching submit or release needs a review decision; risky, public-contract, migration, or wide-blast-radius diffs always review.
+- Added a `rework diagnosis` lens for repeated rejection of the same implementation, routing to Product, Design, or verification.
+
+
 ## v0.7.1
 
 - Expanded lean/context-cost review to flag broad skill triggers, fixed question lists, oversized skill flows, and default gates heavier than task risk.

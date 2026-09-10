@@ -4,7 +4,7 @@ Use `$noootwo-product` on a Chinese request with one material unresolved product
 
 Expected behavior:
 
-- Keep the interview one-question-at-a-time and wait for an explicit choice.
+- Keep the single material gap as one question with a recommended answer, and wait for an explicit choice.
 - Use Chinese for headings, explanations, option descriptions, and the waiting message.
 - Preserve intentional technical terms, API names, file paths, and code identifiers where translating them would reduce precision.
 - Describe the waiting state naturally, such as "当前状态：等待你的确认", rather than printing raw labels such as `Decision Interview Turn`, `Interview state`, or `blocked on user confirmation`.

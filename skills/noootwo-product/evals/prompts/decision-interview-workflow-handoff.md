@@ -1,13 +1,13 @@
 # Eval Prompt: Workflow Preserves Deep Interview
 
-Start with `$noootwo-workflow` on a broad product request where the user explicitly says: "Please confirm the details like grill, one question at a time, until the result matches what I mean."
+Start with `$noootwo-workflow` on a broad product request where the user explicitly says: "Please grill me on the details until the result matches what I mean."
 
 Expected behavior:
 
 - Workflow routes the product ambiguity to `$noootwo-product` instead of conducting a long product interview itself.
 - The handoff preserves the Clarity Gate result, `interview_depth: deep`, the user's explicit confirmation request, presentation language, checked facts with source paths, and the current decision ledger.
 - The handoff initializes every ledger field, even when empty, using the structured Product Interview Handoff packet.
-- Product asks one material question per turn, carries confirmed decisions forward, and distinguishes deferred, rejected, and active-risk states.
+- Product works the interview in frontier rounds, carries confirmed decisions forward, and distinguishes deferred, rejected, and active-risk states.
 - The initial Product turn is an execution stop: `waiting_on: user_answer` and `execution_status: blocked`; a recommended default is not approval.
 - Product runs one explicit intent-fit confirmation before handoff unless the user delegated the final decision; it does not infer final fit from earlier goal statements.
 - Product does not hand off while an unresolved active risk would change the main path, trust boundary, scope, or acceptance.

@@ -1,5 +1,14 @@
 # noootwo-workflow Releases
 
+## v0.8.0
+
+- Replaced vague "non-trivial" triggers with concrete task-start triggers: new feature, product idea, multi-file/cross-skill change, bugfix, refactor, release, onboarding/handoff, recovery, and correction-loop routing.
+- Added routing-as-invocation: specialist triggers must explicitly invoke `$noootwo-product` / `$noootwo-design` / `$noootwo-review` / `$noootwo-docs`; unavailable skills are declared with a fallback instead of silent substitution.
+- Added rework diagnosis after user rejection: diagnose the failed layer and route to the matching skill instead of polishing the same layer.
+- Compacted the handoff contract into per-specialist packets.
+- Added workflow evals for wake-on-feature, specialist invocation, interview pause, and rework diagnosis.
+
+
 ## v0.7.7
 
 - Added a paused `product-interview` execution mode for unresolved product choices.

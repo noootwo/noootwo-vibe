@@ -1,5 +1,14 @@
 # noootwo-design Releases
 
+## v0.10.0
+
+- Rewrote skill triggers with concrete UI verbs/nouns and explicit cross-routing back to Product and Workflow.
+- Added bounded verification to review rules: build fully, one batched inspection round, one fix batch, at most one confirm round.
+- Added separated final review: prefer a fresh reviewer that does not inherit the generator's framing; the generator never self-certifies `ready`.
+- Added hard bans and a browser-surfaces check to review gates (eyebrow/kicker, numbered section markers, gradient text, hard offset shadows, system display face, emoji icons, cream/beige default, zero-blur halo).
+- Recorded the impeccable 2026 research note as the evidence basis for these mechanisms; deterministic scan scripts deferred.
+
+
 ## v0.9.1
 
 - Routed unresolved real-user, main-path, state, acceptance, audience, or use-context decisions back to `noootwo-product` Decision Interview before UI implementation.

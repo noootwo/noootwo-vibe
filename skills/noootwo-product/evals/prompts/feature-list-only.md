@@ -6,7 +6,7 @@ Expected behavior:
 
 - Detect that the request is feature-list-shaped.
 - Run Decision Interview before Product Checkpoint or design because the list does not establish a real-user scenario.
-- Ask for the decisive real-user scenario one question at a time and wait unless the user explicitly delegates it.
+- Run the Clarity Gate; with several dependent gaps, work the settled frontier in rounds with recommended answers and wait unless the user explicitly delegates.
 - Convert the list into IA/main path, interaction model, states, and scope cuts.
 - Define acceptance criteria as observable user outcomes.
 
