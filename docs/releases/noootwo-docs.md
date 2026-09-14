@@ -1,5 +1,11 @@
 # noootwo-docs Releases
 
+## v0.9.1
+
+- Split a single instruction that invoked three skills at once into one-hop routes per layer, matching the invocation model's one-skill-per-instruction rule.
+- Added the optimization layer to the routing: technical, performance, and optimization judgment belongs to `noootwo-review`.
+
+
 ## v0.9.0
 
 - Restructured around a layer table, eight update rules with a completion criterion, a status budget, and anti-drift rules.

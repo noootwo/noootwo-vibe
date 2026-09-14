@@ -6,11 +6,17 @@ Use this when the question is broader than a code diff: can this project be safe
 
 | Area | Risk question |
 | --- | --- |
+| Agent entry | Is there an `AGENTS.md` or equivalent with short always-on rules, skill routing, and repo constraints? |
+| Public usage | Does the README state the purpose, install or run basics, and the validation entrypoint? |
+| Decisions | Are durable workflow and architecture choices recorded as ADRs or a decision log, separate from status? |
+| Current state | Is there a status document naming the active state, the last validation, and the next actions? |
 | Validation entry | Is there a known command or checklist that proves core health? |
 | Tests | Are behavior-critical paths covered or at least discoverable? |
 | CI | Does automation run the release-relevant checks? |
 | Module boundaries | Can likely changes be made without loading unrelated areas? |
 | Release path | Can version, tag, publish, and install steps be reproduced? |
+| Releases | Do release notes or a changelog record version history and migration notes? |
+| Versions | Is the version source of truth explicit, with a stated release policy? |
 | Runtime/preview | Can a reviewer or agent inspect the result locally? |
 | Performance baseline | Are there budgets, benchmarks, traces, query plans, or load checks for performance-sensitive paths? |
 | Observability | Can latency, errors, saturation, slow queries, and hot paths be inspected after release? |

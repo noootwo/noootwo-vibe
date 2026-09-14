@@ -1,5 +1,11 @@
 # noootwo-product Releases
 
+## v0.7.1
+
+- Fact-finding now bridges to `noootwo-research` when a fact exists only outside the repository — a competitor's behaviour, a user expectation, or prior art.
+- Added a return rule: when the request is not a product decision, name the layer and route in one hop.
+
+
 ## v0.7.0
 
 - Rebuilt the skill on grilling mechanics: read the facts, check what is settled, grill the frontier in rounds, confirm a shared understanding, then hand off.

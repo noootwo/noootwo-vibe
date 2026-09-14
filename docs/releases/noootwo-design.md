@@ -1,5 +1,13 @@
 # noootwo-design Releases
 
+## v0.12.0
+
+- Moved the research method and source pools out to `noootwo-research`; the design skill now invokes it instead of carrying its own research file.
+- Added `references/design-discovery.md` for what stays design-specific: surface routing, the discovery pass, influence discovery, evidence weighting for taste, fit scoring, and the `.noootwo/style-discovery.md` output contract.
+- The artifact contract is unchanged: `.noootwo/style-discovery.md` and `.noootwo/reference-board.md` keep their paths and field names because the readiness, bootstrap, status, and eval scripts read them field by field.
+- Added a return rule naming the layer and the owning skill for work that is not design.
+
+
 ## v0.11.0
 
 - Rewrote the body as a six-step flow — size, Design Read, direction, Design Contract, build, review — each with a completion criterion.

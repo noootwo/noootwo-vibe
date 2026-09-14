@@ -58,6 +58,43 @@ Source index for the third pass:
 - Google Engineering Practices review docs: `https://google.github.io/eng-practices/review/reviewer/looking-for.html`
 - GitHub pull request review docs: `https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests`
 - Fowler on internal quality: `https://martinfowler.com/articles/is-quality-worth-cost.html`
+
+Fourth-pass debug skill research, checked on 2026-09-14:
+
+- `obra/superpowers` (`skills/systematic-debugging`, plus `root-cause-tracing`, `defense-in-depth`, and `verification-before-completion`) is the most-copied debug skill in the ecosystem. It contributes the Iron Law — no fix before root-cause investigation — the four-phase loop, the rule that three failed fixes mean questioning the architecture rather than attempting a fourth, and a gate against claiming completion without fresh evidence. Its weakness, for this workspace, is that "evidence" stays a process promise: nothing requires the raw output to appear.
+- The locally installed `pua` and `pua-debugging` skills are a motivation layer, not a method — `pua-debugging` names `superpowers:systematic-debugging` as the method it pairs with. Two mechanisms transferred: the anti-rationalization table, and the structured exit report (confirmed facts, ruled-out options, narrowed scope, next step, handoff). The coercive rhetoric and the level system did not.
+- `ujjwal502/debugduck` contributes the mechanisms that survived into `noootwo-debug`: predict every checkpoint before instrumenting and trace the whole path in one pass, a hypothesis ledger with per-hypothesis refutation, `[observed]`/`[inferred]`/`[assumed]` labels on claims, and the toggle test as the cheapest causality proof. Its `evals/RESULTS.md` is the strongest available measurement: on four seeded bugs with decoys, the no-skill agent reproduced 4/4 and found the true root cause 4/4, while the measured gap appeared in proving the fix (toggle 4/4 vs 2/4; failing-first regression test 3/3 vs 0/3).
+- `wshobson/agents` `parallel-debugging` states confirming and falsifying evidence for every hypothesis before investigating it, and `developer-essentials/skills/debugging-strategies` adds symptom-to-first-move routing. The multi-agent topology was not adopted.
+- `nai0om/buddhist-method` (name three plausible causes before touching anything) and `summerliuuu/no-no-debug` (log errors, review them, gate before changing code) supplied supporting discipline, not structure.
+- `anthropics/skills` publishes no general debugging skill; the nearest is `webapp-testing`. No mechanism was taken from it.
+
+The design consequence recorded here and in [ADR 0007](../adr/0007-add-debug-skill-and-normalize-workflow.md): skill weight goes to proving the cause, proving the fix, and keeping the fix the size of the cause — not to re-teaching reproduction, which current models already perform.
+
+Access note: `raw.githubusercontent.com` intermittently returned empty bodies during this pass, so file contents were read through the GitHub contents API instead. The `pua` family is no longer installed; its `SKILL.md` files were read from the local backup snapshots under `~/.codex/skills_cleanup_backup_*` and `~/.codex/skills_backup_*`.
+
+Fifth-pass borrow audit, checked on 2026-09-14:
+
+Run as part of the `noootwo-research` work recorded in [ADR 0008](../adr/0008-add-research-and-onboard-skills-and-the-capability-bridge.md). The question was not "what is interesting" but "which mechanism prevents a repeated, concrete failure in this suite".
+
+| Mechanism | Source | Failure it prevents | Gate result |
+| --- | --- | --- | --- |
+| breadth-first fan-out, then depth into the survivors, with one capped follow-up round | `dzhng/deep-research` | reading the first result deeply and locking in the wrong candidate | adopted → `research-method.md` |
+| recency window for "current" claims, multi-source aggregation, and engagement over volume | `mvanhorn/last30days` | deciding a "what is popular / advanced now" question from stale training memory | adopted → `research-method.md`, `source-pools.md` |
+| package "how to operate this suite" as its own skill instead of hiding it in a router or scheduler | `obra/superpowers` `using-superpowers` | the meta capability becoming invisible and the scheduler accumulating method | adopted → `noootwo-onboard` |
+| state confirming and falsifying evidence before investigating | `wshobson/agents` `parallel-debugging` | investigations that can only confirm | already adopted → `noootwo-debug` `hypotheses.md` |
+| process skill before implementation skill when two apply | `obra/superpowers` `using-superpowers` | implementation starting before the ordering decision is made | already adopted → `noootwo-workflow` route order |
+| hard gate against claiming completion without fresh evidence | `obra/superpowers` `verification-before-completion` | self-reported success | already adopted → `noootwo-debug` Gate B |
+| writing-for-agents authoring standard with enforced budgets | `mattpocock/skills` | skill bodies drifting into policy documents | already adopted → ADR 0006 |
+| enumerate deterministic detector rules and run them at edit time | `pbakaus/impeccable` | mechanical slop reaching review | rejected: fails the budget and cheap-mode criteria; tracked in ADR 0006 |
+| a separate performance skill | ecosystem performance skills are domain packs (WordPress, Core Web Vitals, scroll jank); `obra/superpowers` ships none | — | rejected: `AGENTS.md` and ADR 0005 already assign performance to `noootwo-review`; adopted the missing optimization loop instead |
+| coercive pressure rhetoric and a level system | local `pua` / `pua-debugging` | thrashing and premature giving-up | rejected in ADR 0007; the anti-rationalization table and the structured exit report were the parts worth keeping |
+| vendoring an engine, CLI, or hook manifests | `pbakaus/impeccable` | — | rejected: would make quick mode depend on a toolchain |
+
+Adopted in this pass: the research skill itself (`research-method.md`, `source-pools.md`, `tech-selection.md`, `borrow-audit.md`), `noootwo-onboard`, the review optimization loop, the capability bridge in `docs/agents/invocation.md`, and the validator's bridge invariants.
+
+Proposals recorded, not implemented: a machine-readable capability manifest (rejected for now — the map plus string-level validator checks is enough, and a second source of truth costs more than it returns); and ordering, hand-off content, and loop-rule enforcement beyond name checks, which no cheap check can decide.
+
+Access note: this pass reused the source list above. Star counts and README descriptions were treated as leads; every adopted mechanism was read in the source file or repository before adoption.
 - Refactoring: `https://refactoring.com/`
 
 Fourth-pass lean-review enhancement, checked on 2026-07-06:

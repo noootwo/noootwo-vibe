@@ -68,7 +68,7 @@ If a required decision is unresolved, do not create artifacts, edit Flutter rout
 
 Use this when a requested direction is high-character, premium, niche, unusual, user-selected, or previously rejected. The goal is to avoid confident style prose that the agent cannot actually draw or implement.
 
-This is not a new full workflow. It tightens `research.md`, `direction.md`, `translate.md`, and `review.md`.
+This is not a new full workflow. It tightens `design-discovery.md`, `direction.md`, `translate.md`, and `review.md`.
 
 ### Check Shape
 
@@ -250,7 +250,7 @@ Use this to convert references into reusable design mechanisms. Mechanisms are n
 
 ## Reference Board
 
-Use this for `deep` mode and high-end, niche, rare, brand-heavy, or Claude Design-like work. Build it from [research](research.md), not from generic moodboard collection.
+Use this for `deep` mode and high-end, niche, rare, brand-heavy, or Claude Design-like work. Build it from the discovery pass in [design-discovery](design-discovery.md), not from generic moodboard collection.
 
 ### Core Rule
 
@@ -261,7 +261,7 @@ Deep mode must collect or explicitly declare the absence of 3-5 real source mech
 For each reference, record:
 
 - Source and evidence type
-- Evidence level from [research](research.md)
+- Evidence level from the source pool that produced it
 - Mechanism to borrow
 - Do-not-copy boundary for influence sources
 - Design-system translation: color roles, type roles, layout model, component vocabulary, motion thesis, or data/state grammar

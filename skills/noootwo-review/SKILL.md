@@ -1,6 +1,6 @@
 ---
 name: noootwo-review
-description: "Use to judge code before it ships, and to diagnose rework. Covers correctness, testability, architecture boundaries, lean, performance, project health, and release readiness."
+description: "Use to judge code before it ships, to diagnose rework, and to optimize speed, size, or cost. Covers correctness, testability, architecture, lean, performance, project health, and release readiness."
 ---
 
 # Noootwo Review
@@ -46,6 +46,20 @@ Make the smallest safe fix directly. Ask before a fix that expands scope, change
 4. Separate defects from future improvements.
 5. Prefer a local fix unless the same friction appears in more than one place.
 
+## Optimization work
+
+When the request is to make something faster, smaller, or cheaper, this is a measured change rather than a bug hunt. Read `references/optimization-loop.md` and run it in order:
+
+1. Name the metric and its budget before touching code.
+2. Take a reproducible baseline with a named command.
+3. Localize with a profile, trace, query plan, or bundle report — not with intuition.
+4. Change the smallest thing that moves the metric.
+5. Prove before and after, then leave the guard that keeps it.
+
+Stop when the budget is met, or when the next change costs more than it returns. A metric that moved without an explanation is not a win; it is a coincidence to investigate. When the symptom is a regression against a previously working state, that is a failure with a cause — invoke the `noootwo-debug` skill instead.
+
+**Done when:** the metric moved with a reproducible before/after, and a guard exists or its absence is recorded.
+
 ## What to look for
 
 Concrete risk first:
@@ -79,6 +93,8 @@ Severity: `P0` data loss, security, or a broken release; `P1` a likely behaviour
 - Sequencing or scope control needed → invoke the `noootwo-workflow` skill.
 - Documentation or duplicated truth → invoke the `noootwo-docs` skill.
 - Visual or artifact quality → invoke the `noootwo-design` skill.
+- A defect's cause is unknown and the fix needs proof → invoke the `noootwo-debug` skill.
+- The judgment needs outside evidence — a library, a benchmark, prior art → invoke the `noootwo-research` skill.
 
 To invoke one, read its `SKILL.md` and follow it.
 
@@ -87,4 +103,5 @@ To invoke one, read its `SKILL.md` and follow it.
 - `references/code-quality-playbook.md` — refactors, architecture, splitting files, and repeated implementation friction.
 - `references/lean-code-review.md` — over-engineering, YAGNI, dependency bloat, and token-cost growth.
 - `references/performance-review.md` — loading, rendering, latency, query cost, and regression risk.
+- `references/optimization-loop.md` — metric, budget, baseline, localization, before/after proof, and the guard.
 - `references/project-health-review.md` — foundation, validation paths, CI, release risk, and module boundaries.

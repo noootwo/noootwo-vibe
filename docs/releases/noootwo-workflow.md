@@ -1,5 +1,24 @@
 # noootwo-workflow Releases
 
+## v0.11.0
+
+- Finished the scheduler normalization: `noootwo-workflow` owns order, scope, stop conditions, and handoffs, and no longer carries method a specialist owns.
+- Onboarding moved out. `project-skill-audit.md` and `minimal-foundation-templates.md` became `noootwo-onboard`; `project-foundation-check.md` was deleted because `noootwo-review`'s project-health lens already covered the same surface.
+- Added routing and hand-off packets for `noootwo-research` and `noootwo-onboard`.
+- Added a return rule naming the layer and the owning skill when work belongs to a specialist.
+- Added optimization to the review route and updated the playbook's project-entry, mode, and default-loop steps to delegate.
+
+
+## v0.10.0
+
+- Normalized the skill as a scheduler: it owns order, scope, stop conditions, and handoffs; specialist skills own the work.
+- Diagnostic mode is now a delegation — a bug, failure, or regression invokes the `noootwo-debug` skill, and the loop stops while the cause is unproven.
+- The playbook's routing matrix, mode details, default loop, stop conditions, and handoff packets point at `$noootwo-debug` instead of carrying a diagnosis method.
+- Removed the duplicated build method from the slice step: each slice runs the check its owning skill names.
+- Added a `noootwo-debug` handoff packet.
+- Rewrote the description around scheduling: `schedule` replaces `run`, and a bare bug is no longer one of its triggers because `noootwo-debug` owns it.
+
+
 ## v0.9.0
 
 - Restructured the body into five steps with a completion criterion each: read repo truth, route, choose the mode, build in slices, close.

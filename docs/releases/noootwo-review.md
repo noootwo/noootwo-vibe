@@ -1,5 +1,14 @@
 # noootwo-review Releases
 
+## v0.10.0
+
+- Performance and optimization stay here, per ADR 0005 and `AGENTS.md`; no separate performance skill is added.
+- Added `references/optimization-loop.md`: metric and budget, reproducible baseline, evidence-led localization, the smallest change, before/after proof, and the guard that keeps it.
+- Added an optimization section to the body and the trigger words to the description, so "make it faster, smaller, or cheaper" reaches this skill instead of the debug flow.
+- Absorbed the project-foundation audit rows that were duplicated in `noootwo-workflow`: agent entry, public usage, decisions, releases, and version sources now live in the single project-health surface.
+- Added hand-offs to `noootwo-debug` for an unknown cause and to `noootwo-research` for outside evidence.
+
+
 ## v0.9.0
 
 - Restructured around a lens table, sizing rules, a five-step method, and a hand-off map.

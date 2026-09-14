@@ -54,7 +54,10 @@ If it touched one, update that layer. If it touched none, say that docs were che
 - Keep the same name everywhere the live repo uses it.
 - Drop stale examples unless a migration note explicitly keeps them.
 - Update the owning layer first, not the most visible one.
-- Never invent product scope, UI direction, or technical architecture here. When a judgment is missing, invoke the `noootwo-product`, `noootwo-design`, or `noootwo-review` skill: read its `SKILL.md` and follow it.
+- Never invent product scope, UI direction, or technical architecture here. When a judgment is missing, name the layer and route in one hop, then read the named skill's `SKILL.md` and follow it:
+  - Product scope → invoke the `noootwo-product` skill.
+  - UI direction → invoke the `noootwo-design` skill.
+  - Technical, performance, or optimization judgment → invoke the `noootwo-review` skill.
 - Search locally and read the relevant slice rather than loading a long document whole, unless the task is a whole-document audit.
 
 ## Reference

@@ -16,6 +16,9 @@ EXPECTED_SKILLS = [
     "noootwo-design",
     "noootwo-review",
     "noootwo-docs",
+    "noootwo-debug",
+    "noootwo-research",
+    "noootwo-onboard",
 ]
 
 # The only user-invoked skill. Everything else stays reachable by the model.
@@ -37,6 +40,7 @@ AGENT_SHORT_RE = re.compile(r'^\s{2}short_description:\s*"?(.*?)"?\s*$', re.MULT
 AGENT_PROMPT_RE = re.compile(r'^\s{2}default_prompt:', re.MULTILINE)
 AGENT_POLICY_RE = re.compile(r'^\s{2}allow_implicit_invocation:\s*(true|false)\s*$', re.MULTILINE)
 BARE_SKILL_REF_RE = re.compile(r"\\?\$(noootwo-[a-z0-9-]+)")
+NAMED_SKILL_RE = re.compile(r"`(noootwo-[a-z0-9-]+)`")
 
 
 def add(errors: list[str], message: str) -> None:
@@ -260,6 +264,13 @@ def validate_skill_body(skill_dir: Path, errors: list[str]) -> None:
                 f"{name} SKILL.md uses bare ${match.group(1)}; write a load instruction instead",
             )
 
+    # A named sibling that does not exist is a broken bridge: the call can never
+    # be made, and the reader cannot tell whether the skill was renamed or invented.
+    body = raw.split("\n---", 1)[-1]
+    for match in sorted(set(NAMED_SKILL_RE.findall(body))):
+        if match not in EXPECTED_SKILLS:
+            add(errors, f"{name} SKILL.md names `{match}`, which is not a public skill")
+
     validate_references(skill_dir, raw, errors)
 
 
@@ -320,6 +331,62 @@ def validate_design_module(root: Path, errors: list[str]) -> None:
             add(errors, f"noootwo-design missing {relative}")
 
 
+def parse_capability_map(text: str) -> dict[str, set[str]]:
+    """Return owner -> declared callers, read from the capability map table."""
+    permissions: dict[str, set[str]] = {}
+    if "### Capability map" not in text:
+        return permissions
+    section = text.split("### Capability map", 1)[1].split("### Call contract", 1)[0]
+    for line in section.splitlines():
+        cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+        if len(cells) != 4:
+            continue
+        owner = NAMED_SKILL_RE.fullmatch(cells[1])
+        if owner is None:
+            continue
+        permissions[owner.group(1)] = set(NAMED_SKILL_RE.findall(cells[2]))
+    return permissions
+
+
+def validate_capability_map(root: Path, errors: list[str]) -> dict[str, set[str]]:
+    """The capability map is the bridge's public contract; keep it in sync."""
+    path = root / "docs" / "agents" / "invocation.md"
+    if not path.is_file():
+        add(errors, f"missing capability map: {path}")
+        return {}
+    text = path.read_text(encoding="utf-8")
+    named = set(NAMED_SKILL_RE.findall(text))
+    for skill in EXPECTED_SKILLS:
+        if skill not in named:
+            add(errors, f"docs/agents/invocation.md capability map does not name {skill}")
+    for skill in sorted(named):
+        if skill not in EXPECTED_SKILLS:
+            add(errors, f"docs/agents/invocation.md names `{skill}`, which is not a public skill")
+    return parse_capability_map(text)
+
+
+def validate_call_permissions(
+    root: Path, permissions: dict[str, set[str]], errors: list[str]
+) -> None:
+    """Naming a skill in a body is the instruction to load it, so the map must allow it."""
+    for name in EXPECTED_SKILLS:
+        if name in ROUTER_SKILLS:
+            continue
+        skill_md = root / "skills" / name / "SKILL.md"
+        if not skill_md.is_file():
+            continue
+        body = skill_md.read_text(encoding="utf-8").split("\n---", 1)[-1]
+        for target in sorted(set(NAMED_SKILL_RE.findall(body)) - {name}):
+            allowed = permissions.get(target)
+            if allowed is None:
+                add(errors, f"{name} calls `{target}`, which has no capability map row")
+            elif name not in allowed:
+                add(
+                    errors,
+                    f"{name} calls `{target}`, but the capability map does not list {name} as a caller of `{target}`",
+                )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Validate the Noootwo Vibe skill workspace.")
     parser.add_argument("target", nargs="?", default=".", help="Repository root to validate.")
@@ -332,6 +399,8 @@ def main() -> int:
     manifest_items = validate_manifest(root, errors)
     validate_skill_set(root, manifest_items, errors)
     validate_design_module(root, errors)
+    permissions = validate_capability_map(root, errors)
+    validate_call_permissions(root, permissions, errors)
 
     if errors:
         print("Skill workspace validation failed:")

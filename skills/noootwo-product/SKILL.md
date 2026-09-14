@@ -13,7 +13,7 @@ Settle what should exist before anything is designed or built. This is a product
 
 Read the request, `AGENTS.md`, README, `docs/status.md`, active specs, screenshots, analytics, and the current UI. Note the real user, scenario, outcome, constraints, and what is still unknown.
 
-Finding facts is your job. Ask the user only for decisions.
+Finding facts is your job. Ask the user only for decisions. When a fact exists only outside the repository — a competitor's behaviour, a user expectation, prior art — invoke the `noootwo-research` skill: read its `SKILL.md` and follow it.
 
 **Done when:** every discoverable fact bearing on the next step has a source, or is recorded as not found.
 
@@ -81,3 +81,7 @@ Read `references/product-reality-check.md` when the loop is unproven, the user i
 
 - `references/product-flow.md` — decision layers, grilling detail, and the Product Checkpoint, Discovery, Choice Challenge, and handoff templates.
 - `references/product-reality-check.md` — the check for unproven, confusing, or rejected product paths.
+
+## Return
+
+When the request is not a product decision, name the layer and invoke the owner in one hop: `noootwo-debug` for a failure, `noootwo-research` for outside evidence, `noootwo-design` for a visual system, `noootwo-review` for code or performance judgment, `noootwo-onboard` for an unfamiliar project.

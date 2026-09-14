@@ -1,6 +1,6 @@
 # Invocation Model
 
-How the Noootwo skills reach each other and the user, and why the set is shaped this way. Read it when adding, splitting, renaming, or re-scoping a skill.
+How the Noootwo skills reach each other and the user, and why the set is shaped this way. Read it when adding, splitting, renaming, or re-scoping a skill, and when one skill needs another's capability.
 
 ## The one axis: who can reach it
 
@@ -30,6 +30,9 @@ This repository does **not** set `disable-model-invocation`. It ships as a Codex
 | `noootwo-design` | model-invoked | UI, visual, and artifact work after the product path is settled |
 | `noootwo-review` | model-invoked | code and project-health review, and diagnosing rework |
 | `noootwo-docs` | model-invoked | placing changed facts in the right documentation layer |
+| `noootwo-debug` | model-invoked | proving a cause and bounding the fix when something is broken |
+| `noootwo-research` | model-invoked | settling a decision that only external evidence can settle |
+| `noootwo-onboard` | model-invoked | entering an unfamiliar project and auditing which skills it needs |
 
 Only `noootwo-ask` is user-invoked, because only it exists purely to orient a human. Every other skill must be reachable by the agent and by its siblings.
 
@@ -48,6 +51,47 @@ When a skill's step requires another skill, write it as an instruction to load t
 Naming the mechanism is what gets it fired. A bare `$noootwo-design` left in prose is read as a label, not as a command, so the step quietly does not happen. Inside a `SKILL.md` body this phrasing is mandatory; `$name` belongs only in the router and in human-facing docs.
 
 One skill per instruction. A step needing two skills is two instructions.
+
+## The capability bridge
+
+Every capability has exactly one owner. A caller invokes the owner; it never re-implements the capability itself.
+
+### Capability map
+
+| Capability | Owner | Callable by | Returned |
+| --- | --- | --- | --- |
+| proving the cause of a failure, and bounding the fix to it | `noootwo-debug` | `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-docs`, `noootwo-research`, `noootwo-onboard` | the evidence chain, the proven cause, the fix scope, the toggle and regression proof, and what remains unproven |
+| settling a decision that external evidence decides, and surveying prior art | `noootwo-research` | `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-docs`, `noootwo-debug`, `noootwo-onboard` | sources with evidence levels, the mechanisms found, applicability and boundaries, counterexamples, and a `.noootwo/research/<slug>.md` brief at `deep` |
+| entering an unfamiliar project and auditing its skill set | `noootwo-onboard` | `noootwo-ask`, `noootwo-workflow`, `noootwo-product` | required, optional, and not-needed skills with triggers; foundation gaps; the smallest unblocking patch |
+| settling product decisions | `noootwo-product` | `noootwo-workflow`, `noootwo-design`, `noootwo-review`, `noootwo-docs`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard` | settled, delegated, deferred, and rejected decisions, plus the Product-to-Design Handoff |
+| turning a settled product path into a reviewed artifact | `noootwo-design` | `noootwo-workflow`, `noootwo-product`, `noootwo-review`, `noootwo-docs`, `noootwo-research`, `noootwo-onboard` | Design Read, Design Contract, and an Artifact Review decision against artifact evidence |
+| judging code and project health, including performance work | `noootwo-review` | `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-docs`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard` | severity-ordered findings, the lenses applied, evidence read, verification gaps, and the owning skill for each handoff |
+| placing a changed fact in its owning layer | `noootwo-docs` | `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard` | the updated owning layer, or a recorded decision that nothing changed |
+| ordering, scope, stop conditions, and handoffs | `noootwo-workflow` | the human, `noootwo-ask`, and every specialist handing sequencing back: `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-docs`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard` | mode, sequence, handoffs, and the close report |
+
+A skill body may name a sibling only when that sibling's row lists the caller. Naming a skill is the instruction to load it, so an undeclared name is a call the bridge never authorized. `noootwo-ask` is exempt: it names skills as hints for the human and can never fire one.
+
+### Call contract
+
+- Write a call as one instruction naming the mechanism: invoke the owning skill, read its `SKILL.md`, and follow it. A step needing two skills is two ordered instructions.
+- Hand over the minimum: the question or artifact, the evidence already gathered, and the constraint the answer must respect. Do not paste a sibling's method back to it.
+- The callee owns its method and its decision. The caller owns order, scope, stop conditions, and the final report.
+- The callee returns its own artifact plus what it did not decide. Silence about the boundary is how two skills both claim a decision.
+- When the work is not the callee's, it names the failed layer and re-routes in one hop instead of doing the job itself.
+
+### Loop rules
+
+- A callee never calls back the caller for the same decision.
+- Re-entry needs new evidence or a genuinely unanswered question; dissatisfaction is not a reason to re-enter.
+- One round trip per layer per trigger. A second bounce goes to `noootwo-workflow`'s layer diagnosis, not into another call.
+- `noootwo-ask` is never fired by a skill. It exists for the human, and a skill that hints at it wastes the turn.
+
+### Shared material
+
+- A capability's method lives in exactly one place: the owning skill.
+- Material that two or more skills need, and that belongs to none of them, lives in a plain file outside the skill system — `docs/agents/` or the repository's `references/` — and each skill points at it.
+- A skill body names the loader instruction, never a bare `$name`.
+- `scripts/validate_skill_workspace.py` enforces the mechanical half: every skill named in a `SKILL.md` must exist, every public skill must appear in the capability map, every skill named in the map must exist, and every sibling named in a skill body must be listed as a caller in the map row it points at.
 
 ## Splitting by invocation
 

@@ -31,12 +31,9 @@ Use this only when the task is broad enough that a short direct path is not enou
 
 ### Project Entry
 
-Use onboarding mode before normal execution when the project is unfamiliar, under-documented, or being taken over from another agent:
+Use onboarding before normal execution when the project is unfamiliar, under-documented, or being taken over from another agent. Invoke `$noootwo-onboard` by loading its `SKILL.md`: it owns the skill audit, routes the foundation health judgment to `$noootwo-review`, and patches the smallest gap.
 
-1. Run `project-skill-audit.md` to decide required Noootwo skills and optional local skills from repo evidence.
-2. Run `project-foundation-check.md` if the project lacks obvious operating instructions, validation commands, release policy, or current state.
-3. If gaps block safe work, use `minimal-foundation-templates.md` through `$noootwo-docs` to add the smallest useful file or section.
-4. Continue with direct, planned, diagnostic, release, or recovery mode.
+Workflow keeps the scheduling: it resumes with direct, planned, release, or recovery mode once onboarding returns. A bug routes to `$noootwo-debug`; a decision that needs outside evidence routes to `$noootwo-research`.
 
 ### Lifecycle Guardrails
 
@@ -57,11 +54,11 @@ Do not run a full doc crawl for small local edits. Do not skip source-of-truth d
 Before editing, decide:
 
 - whether an alignment checkpoint is needed
-- whether TDD or repro-first is required
+- whether the change needs a failing test first, and whether a bug routes to `$noootwo-debug`
 - which specialist skill owns product, design, docs, review, or release evidence
 - what command or scenario will prove the change
 
-Use TDD or repro-first when the task is a bugfix, behavior change, public interface change, regression risk, data/migration risk, or hard-to-prove shared code. If no practical test exists, record the manual scenario or verification gap before editing.
+Use a failing test first when the task is a behavior change, public interface change, regression risk, data/migration risk, or hard-to-prove shared code. A bugfix goes to `$noootwo-debug`, which owns the reproduction and the cause gate. If no practical test exists, record the manual scenario or verification gap before editing.
 
 #### During-Work Guard
 
@@ -146,14 +143,15 @@ Correction loops are risk-triggered. Do not apply them to small copy edits, know
 
 | Signal | Route |
 | --- | --- |
-| unfamiliar project, missing process foundation, unclear skill needs | `$noootwo-workflow` onboarding mode |
+| unfamiliar project, takeover, missing process foundation, unclear skill needs | `$noootwo-onboard` |
+| a decision blocked by outside evidence: design direction, stack or library choice, market or user expectation, prior art | `$noootwo-research` |
 | greenfield software product idea, blank-project product start, broad product vision, product brainstorming, "what should this become" | `$noootwo-product` Clarity Gate; Decision Interview only when material choices remain |
 | requirements, feature scope, user flow, IA, interaction model, onboarding, permissions, states, acceptance criteria, confusion risk | `$noootwo-product` |
 | UI, visual hierarchy, screenshots, `.noootwo/` | `$noootwo-design` |
 | README, AGENTS, docs, ADR, status, release notes | `$noootwo-docs` |
 | refactor, maintainability, architecture, code review | `$noootwo-review` |
 | multi-step coordination, sequencing, release flow | `$noootwo-workflow` |
-| bug, failing check, surprising runtime behavior | `$noootwo-workflow` diagnostic mode first, then specialist |
+| bug, failing check, surprising runtime behavior, regression, flaky or CI-only failure | `$noootwo-debug` first, then specialist |
 | user rejection of prior work, repeated correction loop | layer diagnosis, then explicit route to `$noootwo-product` / `$noootwo-design` / `$noootwo-review` / `$noootwo-docs` |
 | behavior, state, or release facts changed without a docs decision | `$noootwo-docs` before close |
 
@@ -182,16 +180,15 @@ Use for multi-file behavior, repo structure, public usage, or cross-skill work. 
 - verification commands
 - docs/review/release handoffs
 
-#### Diagnostic
+#### Diagnostic — delegated
 
-Use for test failures, bugs, regressions, broken installs, or unexpected behavior. Do not fix before identifying evidence:
+Test failures, bugs, regressions, broken installs, and unexpected behavior belong to `$noootwo-debug`. Invoke it by loading its `SKILL.md`; it owns the evidence chain and the two gates.
 
-- observed symptom and command/output
-- reproduction path
-- recent changes or likely boundary
-- working comparison if one exists
-- single hypothesis to test
-- verifying command for the fix
+Workflow keeps what scheduling needs:
+
+- the reproduction is the entry condition, not a workflow output
+- nothing is scheduled, reviewed, documented, or handed off as a fix while the cause is unproven
+- a fix that outgrows its declared scope comes back here as a sequencing decision
 
 #### Release
 
@@ -204,15 +201,11 @@ Use when changing versions, tags, remotes, CI, local installs, or published pack
 - install/sync target
 - remote push evidence
 
-#### Onboarding
+#### Onboarding — delegated
 
-Use for unfamiliar repositories, missing process foundation, or skill-selection uncertainty. Output a short audit before implementation:
+Unfamiliar repositories, takeovers, missing process foundation, and skill-selection uncertainty belong to `$noootwo-onboard`. Invoke it by loading its `SKILL.md`.
 
-- required Noootwo skills and why
-- optional local skills and exact triggers
-- missing or weak foundation files
-- minimal patch plan and owner skill
-- skills or process that are intentionally not needed
+Workflow keeps the sequencing: no implementation planning starts until the skill map and the blocking foundation gaps are known.
 
 #### Recovery
 
@@ -222,15 +215,16 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 
 1. Run lifecycle guardrails at the lightest useful level.
 2. Inspect repo truth before deciding.
-3. If skill needs or foundation are unclear, audit them before planning.
+3. If the skill set or the foundation is unclear, invoke `$noootwo-onboard` before planning.
 4. Run an alignment checkpoint only when one unresolved decision can change the work; if it is product-shaped, route to Product Clarity Gate and pause only when it finds a material gap.
 5. State the smallest viable path.
-6. Implement in slices that can be tested independently.
-7. Run the closest meaningful checks after each risky slice.
-8. Route to `$noootwo-product` before design or implementation when the task is a product idea or when the real user, product scope, main path, states, or acceptance criteria are unclear.
-9. Update docs through `$noootwo-docs` when behavior, state, usage, product decision, or release changes.
-10. Use `$noootwo-review` before submit/release for code changes, and for broad code structure, project-health gaps, architecture boundaries, or context-cost risk.
-11. Before closing non-direct work, answer: verified, TDD/repro considered, docs affected, product/design/review needed.
+6. Route a bug, failure, or regression to `$noootwo-debug`. Schedule the fix only after its cause gate closes, and keep the declared scope as the unit of review.
+7. Implement in slices that can be tested independently.
+8. Run the closest meaningful checks after each risky slice.
+9. Route to `$noootwo-product` before design or implementation when the task is a product idea or when the real user, product scope, main path, states, or acceptance criteria are unclear.
+10. Update docs through `$noootwo-docs` when behavior, state, usage, product decision, or release changes.
+11. Use `$noootwo-review` before submit/release for code changes, and for broad code structure, project-health gaps, architecture boundaries, or context-cost risk.
+12. Before closing non-direct work, answer: verified, repro or evidence recorded, docs affected, product/design/debug/review needed.
 
 ### Handoff Packet Templates
 
@@ -249,6 +243,31 @@ Use after prior agent drift, repeated failed fixes, unclear half-finished work, 
 - Risk class:
 - Verification command:
 - Specific judgment requested:
+
+#### To `$noootwo-debug`
+
+- Symptom and raw failure:
+- Expected vs actual:
+- Reproduction command or steps:
+- Environment or boundary suspected:
+- What changed since it last worked:
+- What workflow still owns: sequencing, scope, handoff
+
+#### To `$noootwo-research`
+
+- Decision this unblocks:
+- What would change the answer:
+- Domain: design and UI | product and market | tech stack | prior art
+- Cost dial: quick | standard | deep
+- Constraints the answer must respect:
+- What workflow still owns: sequencing, scope, handoff
+
+#### To `$noootwo-onboard`
+
+- Why the project is unfamiliar: new repo | takeover | missing process
+- Repo facts already read:
+- The first change intended:
+- Known constraints or conventions:
 
 #### To `$noootwo-product`
 
@@ -303,7 +322,7 @@ Stop and ask or reroute when:
 - a high-impact product or architecture choice is unresolved
 - the verification path is missing and cannot be inferred
 - the change would alter public behavior beyond the user's request
-- three fix attempts reveal new problems in different places
+- three fix attempts reveal new problems in different places — hand the cause back to `$noootwo-debug` instead of scheduling a fourth
 - the work needs a specialist skill and continuing here would duplicate that skill
 
 

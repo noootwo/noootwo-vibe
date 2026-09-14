@@ -37,7 +37,7 @@ Variance, motion, and density stay low for operational tools and rise only when 
 
 Compare materially different directions when style or structure is unresolved, and stop for the user's choice. Read `references/direction.md` for the exploration method, the Style Evidence Check, and mechanism translation.
 
-Read `references/research.md` first when the work is high-character, niche, premium, or previously rejected — a design claim needs a source, an artifact, or a screenshot.
+Read `references/design-discovery.md` for the discovery pass and the `.noootwo/style-discovery.md` contract. When the work is high-character, niche, premium, or previously rejected, invoke the `noootwo-research` skill first: read its `SKILL.md` and follow it — a design claim needs a source, an artifact, or a screenshot.
 
 **Done when:** one direction is chosen by the user, or the chosen direction is justified by evidence.
 
@@ -89,11 +89,15 @@ Verify in bounded passes: build fully, inspect once with a batch covering the re
 
 **Done when:** a decision is recorded against real evidence, and `ready` is never self-certified — prefer a reviewer that did not build the artifact.
 
+## Return
+
+When this is not design work, name the failed layer and invoke the owning skill in one hop: `noootwo-product` for an unsettled product path, `noootwo-review` for code or performance judgment, `noootwo-debug` for a failure that needs a proven cause.
+
 ## Reference
 
 - `references/intake.md` — reading a request, the Design Read, harness sizing, and adopting an existing project.
 - `references/direction.md` — direction exploration, Style Evidence Check, and mechanism translation.
-- `references/research.md` — the research pass and its source pools.
+- `references/design-discovery.md` — the discovery pass, influence discovery, fit scoring, and the `.noootwo/style-discovery.md` contract.
 - `references/system.md` — tokens, design-system extraction, and artifact-family contracts.
 - `references/craft.md` — anti-slop, typography, colour, responsive, and data-UI craft floors.
 - `references/review.md` — scoring, gates, hard bans, and final review.

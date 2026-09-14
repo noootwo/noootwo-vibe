@@ -14,16 +14,18 @@ Every skill, `AGENTS.md`, and pointed-at doc is written to `docs/agents/skill-au
 
 ## Repository Rules
 
-- Keep the public skill set exactly: `noootwo-ask`, `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-docs`.
-- Do not add `noootwo-architecture`; architecture, technical judgment, testing strategy, performance, and maintainability stay under `noootwo-review`.
+- Keep the public skill set exactly: `noootwo-ask`, `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-docs`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard`.
+- `noootwo-workflow` schedules; specialists do the work. Do not let a route, mode, or reference in `noootwo-workflow` take over the method owned by a specialist skill.
+- Do not add `noootwo-architecture`; architecture, technical judgment, testing strategy, performance and optimization, and maintainability stay under `noootwo-review`. Do not add a separate performance skill.
+- Every capability has one owner. When a skill needs another's capability, it invokes it and reads its `SKILL.md`; the capability map in `docs/agents/invocation.md` is the source of truth, and the validator enforces it.
 - Only `noootwo-ask` is user-invoked. Every other skill stays reachable by the model and by its siblings.
 - Do not add a root `SKILL.md`; it prevents default discovery of all child skills.
 - Keep per-skill versions in `skills/<skill>/VERSION` and mirror them in `skills.json`.
 - Record a durable change to the skill model as an ADR in `docs/adr/`.
 
-## Design-Specific Rule
+## Research Rule
 
-Before changing `noootwo-design` aesthetics, workflow modes, stack playbooks, review gates, or claims about design quality, do a current research pass.
+Before changing `noootwo-design` aesthetics, workflow modes, stack playbooks, review gates, public claims, or a stack or library choice, settle it with the `noootwo-research` skill rather than from memory: invoke it, read its `SKILL.md`, and follow it.
 
 - Prefer official docs, framework docs, designer and developer community evidence, and artifacts with visible screenshots or running examples.
 - Use X/Twitter, Reddit, HN, Figma, Flutter, React, Vue, and native app communities as signals, not as single-source truth.
