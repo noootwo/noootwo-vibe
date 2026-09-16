@@ -14,10 +14,43 @@ If no URL, screenshot, artifact, or platform documentation can be recorded, the 
 
 ## Design and UI
 
-- **Product flow and app screens**: Mobbin, Page Flows, Screenlane, ScreensDesign, Appshots.
-- **Web, campaign, and art direction**: Godly, Siteinspire, Awwwards, Land-book, Savee, Httpster, Minimal Gallery.
-- **Product craft and design systems**: Linear, Vercel Geist, Stripe, Apple HIG, Material, Shopify Polaris, GitHub Primer, Atlassian, IBM Carbon.
-- **Motion and native craft**: Rive, GSAP, Motion, Flutter Wonderous, SwiftUI docs, Jetpack Compose docs.
+Probed 2026-09-17 by HTTP request and by rendering each page in a real headless browser. Reachability is what this probe observed; re-check it in your own pass and record the result, because a source can change without notice.
+
+Order the search by what survives without a subscription, and treat the domestic pool as first-class rather than as a consolation.
+
+### Product flows and app screens
+
+- **Free and reachable without a login** — ScreensDesign (`/explore/` and its screen-type, flow, and element indexes). Real mobile app screens with direct image URLs. No free agent interface; capture in a browser.
+- **Free with an account** — Pttrns (mobile patterns), Appshots (flows and apps). Both gate the library behind a signup; a logged-in browser session is enough.
+- **Free preview only** — Refero. Anonymous search returns real results and then gates the remainder behind a login. Its MCP is a paid plan, so treat it as human-facing evidence.
+- **Paid and agent-native** — the Mobbin MCP (`https://api.mobbin.com/mcp`, Pro and above) and the Refero MCP (`https://api.refero.design/mcp`). The Mobbin free tier explicitly excludes search, flows, and MCP. Use these only when the user already has access; the free path must not depend on them.
+- **Blocked, do not plan around** — Screenlane, Page Flows, Land-book, and UXArchive answer with a Cloudflare challenge that a real headless browser also fails to clear. `minimal.gallery` does not resolve. Record them as unreachable rather than as candidates.
+
+### Web, campaign, and art direction
+
+- **Free and agent-readable** — the Siteinspire MCP at `https://www.siteinspire.com/api/mcp`. It answers without credentials, exposes eight read-only tools, and returns real screenshot URLs; its robots file allowlists user-directed agent user agents on that path. Its coverage is websites and marketing surfaces, not in-app product screens.
+- **Free and human-facing** — Awwwards, Savee, Recent (formerly Godly), Httpster, Landingfolio, Interface In Game, Collect UI. Browse or capture them in a browser; none publishes an agent interface.
+
+### Product craft, design systems, and real product code
+
+This tier decides product UI when no case library is reachable, and it is the only tier that always works offline.
+
+- **Design systems and platform guidance** — Apple HIG, Material 3, Fluent 2, Shopify Polaris, GitHub Primer, IBM Carbon, Atlassian, Ant Design, Semi, Arco, TDesign, Vant, NutUI.
+- **Publish status of `llms.txt`** — only Ant Design serves a genuine `llms.txt`. Polaris, Fluent 2, TDesign, Semi, 即时设计, and MasterGo return an application shell or a 404 at that path, so do not describe them as agent-indexed.
+- **Cloneable product source** — reading the real implementation outranks a screenshot for tokens, component anatomy, and state behaviour. Permissive or readable examples: shadcn/ui (MIT), Supabase (Apache-2.0), Appsmith (Apache-2.0), Grafana (AGPL-3.0), Plane (AGPL-3.0), Outline, Chatwoot, Directus, n8n.
+
+### Motion and native craft
+
+Probed 2026-09-17. Decide the register before searching: a source only transfers inside its own register, and the register rule lives in the design skill's `references/motion.md`.
+
+- **Published platform values** — Material 3 motion overview, easing-and-duration, transitions, transition patterns, and the M3 Expressive motion theming article; Apple HIG motion. All reachable, all carrying real duration, easing, and spring values. The Carbon motion page is currently unreachable; do not cite it.
+- **Libraries that publish agent-readable indexes** — Motion (`motion.dev/llms.txt`), GSAP (`gsap.com/llms.txt`, docs served as markdown), Aceternity UI (`ui.aceternity.com/llms.txt` plus a JSON catalog at `ui.aceternity.com/api/components` reporting component counts and a last-updated date), Magic UI, React Bits, Animata (`animata.design/llms.txt`, open source and shadcn-installable), and 21st.dev. All reachable and genuine as of the probe; these are index files, not marketing pages.
+- **Curated demos and interaction showcases** — Codrops, Awwwards, Savee, Recent, Dribbble. Human-facing; capture in a browser.
+- **Restrained and designed register** — easings.net, cubic-bezier.com, transitions.dev, and the published demos of vaulted primitives such as Vaul and Sonner. Use these when the target is Quiet or Present rather than Expressive.
+- **Distilled skills worth imitating** (MIT, read before writing a motion language): `LottieFiles/motion-design-skill` for timing, easing, choreography, registers, and the three-layer model; `kylezantos/design-motion-principles` for the frequency gate and the audit stance; `Meet-Miyani/compose-skill` for Compose animation APIs, `AnimationSpec`, and local-state rules; `199-biotechnologies/motion-dev-animations-skill` for spring physics and gesture work; `bendrape1-byte/silk-design` for consistency as a craft mechanism, and as a counterexample to motion-by-default.
+- **Unreachable from this environment** — `react-spring.dev` does not resolve, `developer.chrome.com` View Transitions docs do not resolve, LottieFiles and Uiverse return 403, and `motion-primitives.com` rate-limits. Use the platform's own documentation for view transitions instead of citing a blocked page.
+- **Implementation references** — Motion, GSAP, Rive, Flutter Wonderous, SwiftUI animation docs, Jetpack Compose state-animation docs.
+
 - **Influence discovery** (deep or high-character work only): spatial and light references from installation, exhibition, and architecture practice; information and diagram references from editorial design, cartography, notation systems, and scientific visualisation.
 
 Best for: direction, layout, density, typography, motion, and native component vocabulary.

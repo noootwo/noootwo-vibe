@@ -38,10 +38,19 @@ Status: pending; required for deep mode before high-character directions
 
 ## Source Evidence
 
+- Capture directory: `.noootwo/references/`, or `none` with the reason
 - URL or artifact 1: TBD
 - URL or artifact 2: TBD
 - URL or artifact 3: TBD
 - Screenshot or visual proof location: TBD
+
+## Reference Lock
+
+- Build target: TBD
+- Primaries: TBD
+- Must not drift: TBD
+- Rejected surface styling: TBD
+- Conflict resolution: which source dominates, and what the others contribute
 
 ## Style Evidence Check
 

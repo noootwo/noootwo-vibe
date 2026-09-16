@@ -24,8 +24,11 @@ Sources reviewed for this mechanism:
 - Material Color Utilities, WCAG, and MDN color mixing guidance support color-system calibration through role-based tones, contrast checks, and perceptual color spaces such as HCT or OKLCH when practical.
   - Sources: https://github.com/material-foundation/material-color-utilities, https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html, https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix
   - Evidence level: official implementation plus standards/platform documentation
-- Carbon motion overview: components may include microinteractions, but product teams still need an overarching motion system so the product feels coherent rather than assembled.
-  - Source: https://carbondesignsystem.com/elements/motion/overview/
+- Material 3 motion: components may include microinteractions, but product teams still need an overarching motion system, with published duration and easing tokens, so the product feels coherent rather than assembled.
+  - Sources: https://m3.material.io/styles/motion/overview and https://m3.material.io/styles/motion/easing-and-duration
+  - Evidence level: official
+- Apple HIG motion: motion communicates status, feedback, and spatial relationships, and must respect the system's reduced-motion setting rather than being added for decoration.
+  - Source: https://developer.apple.com/design/human-interface-guidelines/motion
   - Evidence level: official
 - Android Compose Material 3 guidance: shape, theming, interaction state, and state animations are first-class implementation concerns rather than afterthought polish.
   - Sources: https://developer.android.com/develop/ui/compose/designsystems/material3 and https://developer.android.com/develop/ui/compose/styles/state-animations
@@ -387,6 +390,47 @@ Rules:
 - review previews, simulator screenshots, or emulator screenshots when possible
 - when previews are blocked, produce reference frames plus implementation notes that name native components and transitions
 - avoid generic native defaults when the brief asks for distinctive or high-character UI
+
+### Native Motion
+
+Read [motion](motion.md) for the archetype, duration scale, easing catalog, and choreography rules. This section maps them onto native primitives.
+
+Compose, pick the API before writing the animation:
+
+| Question | API |
+| --- | --- |
+| Appear or disappear | `AnimatedVisibility` |
+| Switch between composables | `AnimatedContent` or `Crossfade` |
+| Size change | `Modifier.animateContentSize()` |
+| Several properties together | `updateTransition` |
+| Different timing per property | `Animatable` with sequential `animateTo` |
+| Single property toward a target | `animate*AsState` |
+| Gesture-driven | `Animatable` with `animateTo` and `snapTo` |
+| List insert, remove, reorder | `Modifier.animateItem()` |
+
+| Spec | Use | Key detail |
+| --- | --- | --- |
+| `spring` | General purpose, interruption-safe | Holds velocity when the target changes; tune `dampingRatio` for bounciness and `stiffness` for speed |
+| `tween` | Exact duration control | `durationMillis`, `delayMillis`, `easing` |
+| `keyframes` | Specific values at timestamps | `value at millis using easing` |
+| `keyframesWithSplines` | Smooth 2D paths | `Offset at fraction` |
+
+SwiftUI reaches for `withAnimation` and `.transition` for state changes, `matchedGeometryEffect` for shared-element continuity, and spring parameters rather than fixed curves when the motion should survive interruption.
+
+Flutter uses implicit animations (`AnimatedContainer`, `AnimatedOpacity`, `AnimatedSwitcher`) for single-property change, explicit `AnimationController` when choreography needs a timeline, and `Hero` for shared-element routes. Reach for Rive or Lottie only when the asset is authored motion, and keep the rest of the screen's motion in the same archetype.
+
+**Animation state is local UI state.** Keep tween progress, shake counters, and removal phases inside the composable, view, or widget. Business and view-model state carries meaning, never animation phase.
+
+Reduced motion is a platform setting, not a preference to skip:
+
+| Platform | Signal |
+| --- | --- |
+| Web | `prefers-reduced-motion` media query |
+| iOS, macOS | Reduce Motion accessibility setting |
+| Android | Remove animations scale, or an explicit user preference |
+| Flutter | `MediaQuery.disableAnimations` and the platform accessibility flags |
+
+The fallback keeps state information: a crossfade or instant change replaces spatial movement, ambient layers hold still, and nothing is conveyed by the missing motion alone.
 
 ### Existing Application Refinement
 

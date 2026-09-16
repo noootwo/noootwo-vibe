@@ -263,7 +263,9 @@ def validate_deep_mode(target_root: Path) -> list[str]:
                 [
                     "source accessibility",
                     "source evidence",
+                    "capture directory",
                     "evidence levels",
+                    "reference lock",
                     "rejected surfaces",
                     "preservation contract",
                 ],
@@ -279,6 +281,8 @@ def validate_deep_mode(target_root: Path) -> list[str]:
                 [
                     "source url or artifact",
                     "borrowed mechanism",
+                    "capture path",
+                    "landed as",
                     "selected mechanisms",
                     "preservation contract",
                 ],
@@ -378,6 +382,100 @@ def validate_detail_translation_gate(target_root: Path) -> list[str]:
     return errors
 
 
+SOURCE_BLOCK_RE = re.compile(r"^##\s+(?:Optional\s+)?Source\b.*$", re.IGNORECASE | re.MULTILINE)
+MOTION_SECTION_RE = re.compile(r"^##\s+Motion\b(.*?)(?=^##\s|\Z)", re.IGNORECASE | re.MULTILINE | re.DOTALL)
+MOTION_STATES = ["enter", "exit", "expand", "reorder", "success", "error"]
+UNREACHABLE_VALUES = {"unreachable", "url-only", "url only", "none", "blocked", "login required"}
+
+
+def validate_reference_capture(target_root: Path) -> list[str]:
+    errors: list[str] = []
+    relative = Path(".noootwo/reference-board.md")
+    content = read_if_exists(target_root, relative)
+    if not content:
+        return errors
+
+    blocks = SOURCE_BLOCK_RE.split(content)[1:]
+    require(errors, len(blocks) >= 3, f"{relative} needs at least 3 captured sources for deep work")
+
+    unreachable = 0
+    for index, block in enumerate(blocks, start=1):
+        label = f"{relative} source {index}"
+        for field in ("Accessibility result", "Borrowed mechanism", "Capture path", "Landed as"):
+            value = (field_value(block, field) or "").strip()
+            require(
+                errors,
+                bool(value) and "TBD" not in value.upper(),
+                f"{label} missing {field.lower()}",
+            )
+
+        capture = (field_value(block, "Capture path") or "").strip()
+        if (
+            not capture
+            or capture.lower() in UNREACHABLE_VALUES
+            or "TBD" in capture.upper()
+            or "<slug>" in capture
+        ):
+            if capture and capture.lower() in UNREACHABLE_VALUES:
+                unreachable += 1
+            continue
+        candidate = (target_root / capture.replace("`", "")).resolve()
+        require(errors, candidate.exists(), f"{label} capture path does not exist: {capture}")
+
+    if blocks and unreachable == len(blocks):
+        style = read_if_exists(target_root, Path(".noootwo/style-discovery.md"))
+        confidence = (field_value(style, "Confidence") or "").strip().lower()
+        require(
+            errors,
+            confidence == "low",
+            f"{relative} has no captured sources, so .noootwo/style-discovery.md must mark confidence low",
+        )
+
+    return errors
+
+
+def validate_motion_contract(target_root: Path) -> list[str]:
+    errors: list[str] = []
+    relative = Path(".noootwo/design-tokens.md")
+    content = read_if_exists(target_root, relative)
+    if not content:
+        return errors
+
+    brief = read_if_exists(target_root, Path(".noootwo/brief.md"))
+    spec = read_if_exists(target_root, Path(".noootwo/specs/active-design.md"))
+    if extract_artifact_family(brief, spec) == "fixed-canvas graphic":
+        return errors
+
+    match = MOTION_SECTION_RE.search(content)
+    if not match:
+        return [f"{relative} is missing a Motion section"]
+    motion = match.group(1)
+
+    for field in ("Personality", "Signature easing", "Duration scale", "Reduced-motion fallback"):
+        value = field_value(motion, field) or ""
+        require(
+            errors,
+            bool(value) and "TBD" not in value.upper(),
+            f"{relative} missing motion {field.lower()}",
+        )
+
+    scale = field_value(motion, "Duration scale") or ""
+    require(
+        errors,
+        "TBD" not in scale.upper() and bool(re.search(r"\d+\s*ms", scale, re.IGNORECASE)),
+        f"{relative} motion duration scale needs real millisecond values",
+    )
+
+    transitions = field_value(motion, "State transitions") or ""
+    require(
+        errors,
+        "TBD" not in transitions and all(state in transitions.lower() for state in MOTION_STATES),
+        f"{relative} motion state transitions need enter, exit, expand, reorder, success, and error values",
+    )
+
+    return errors
+
+
 def validate_style_evidence_gate(target_root: Path) -> list[str]:
     errors: list[str] = []
 
@@ -460,6 +558,11 @@ def main() -> int:
         action="store_true",
         help="Require the full generic workflow closure: brief, direction decision, implementation verification, and evidence-backed review.",
     )
+    parser.add_argument(
+        "--motion-gate",
+        action="store_true",
+        help="Also require a complete motion contract in .noootwo/design-tokens.md. Implied by --deep-mode and --implementation-gate.",
+    )
     args = parser.parse_args()
 
     target_root = Path(args.target).resolve()
@@ -474,8 +577,11 @@ def main() -> int:
     errors.extend(validate_review(target_root, args.allow_non_ready, args.deep_mode, args.strict_workflow))
     if args.deep_mode:
         errors.extend(validate_deep_mode(target_root))
+        errors.extend(validate_reference_capture(target_root))
     if args.implementation_gate:
         errors.extend(validate_implementation_gate(target_root, args.strict_workflow))
+    if args.motion_gate or args.deep_mode or args.implementation_gate:
+        errors.extend(validate_motion_contract(target_root))
     if args.detail_translation_gate:
         errors.extend(validate_implementation_gate(target_root, args.strict_workflow))
         errors.extend(validate_detail_translation_gate(target_root))

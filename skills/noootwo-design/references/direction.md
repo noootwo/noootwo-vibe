@@ -304,6 +304,8 @@ Use these lineages when the brand needs a stronger point of view or when brand e
 - Use these as fallback structure, not as permission to ignore confirmed brand assets
 - Prefer open or broadly available type options when naming examples
 - Extend the lineage across typography, color, component language, motion, and interaction
+- Take the lineage's motion archetype, duration scale, and signature curve from [motion](motion.md); a lineage used as a direction without real reference evidence does not count as evidence on its own
+- Record the archetype in the direction and in `.noootwo/design-tokens.md`, or record the reason for overriding it
 - If you choose not to use a lineage, explain why the current brand system is already strong enough
 - Treat example stacks as starting points, not defaults to repeat across every generation
 

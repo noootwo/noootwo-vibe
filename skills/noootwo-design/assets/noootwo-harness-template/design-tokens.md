@@ -67,11 +67,16 @@ Status: pending; fill or refresh when a direction moves toward implementation
 
 ## Motion
 
-- Duration: TBD
-- Easing: TBD
-- Main interaction move: TBD
-- Reduced-motion fallback: TBD
+- Personality: TBD  one of premium, corporate, playful, energetic
+- Signature easing: TBD
+- Duration scale: TBD  quick, standard, and slow as millisecond values
+- Distance scaling: TBD  how travel distance adjusts duration
+- Enter/exit asymmetry: TBD
+- Choreography stagger: TBD  delay per element and the total ceiling
+- Three layers: primary TBD; secondary TBD; ambient TBD
+- Reduced-motion fallback: TBD  per target platform
 - State transitions: enter TBD; exit TBD; expand TBD; reorder TBD; success TBD; error TBD
+- Main interaction move: TBD
 - Forbidden motion moves: TBD
 
 ## Component Vocabulary

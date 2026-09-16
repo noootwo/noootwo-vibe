@@ -191,6 +191,46 @@ Any of these prevents `ready`:
 - Do not let clean spacing compensate for weak type hierarchy.
 
 
+## Motion Craft Rubric
+
+Use this before marking `standard`, `deep`, or `production` work ready, and whenever an artifact animates. The reference values live in [motion](motion.md); this is the floor.
+
+### Required Decisions
+
+Record these in `.noootwo/directions.md`, `.noootwo/design-tokens.md`, or `.noootwo/review.md`:
+
+- Personality archetype, and the lineage it came from or the recorded reason for overriding it.
+- Signature easing, plus a three-value duration scale with real numbers.
+- The three motion layers: primary, secondary, ambient.
+- Stagger budget and total ceiling for any multi-element entrance.
+- Reduced-motion fallback, named per target platform.
+- Duration and easing for enter, exit, expand, reorder, success, and error.
+
+### Hard Bans
+
+Any of these prevents `ready`:
+
+- Linear easing on spatial movement; keep linear for spinners and progress bars.
+- Opacity-only treatment for a meaningful state change; pair it with position, scale, or colour.
+- Motion crossing more than one third of the screen without an intermediate keyframe.
+- Animation without a reduced-motion fallback.
+
+### Failure Flags
+
+- Register above the surface's kind: expressive or theatrical motion on a quiet product screen.
+- Interactive controls on high-frequency paths carrying long transitions.
+- Motion present on a layout whose structure is still generic.
+- Many small animated elements competing where one orchestrated moment would carry the direction.
+- Duration chosen by feel rather than from the element table.
+- Native screens using default platform transitions where the direction demanded authored motion.
+
+### Review Action
+
+- If the direction is right and the motion craft fails, set decision `refine` and `Return action: return to motion pass`.
+- If the motion thesis is the point of view and it fails structurally, set decision `pivot` or return to directions.
+- Confirm any automated motion finding against a screenshot, preview, or DOM inspection before it blocks `ready`.
+
+
 ## Color System Calibration
 
 Use this when a UI feels cheap, assembled, template-like, or visually detached because the color system does not carry a coherent product temperature across surfaces, text, shadows, semantic states, gradients, icons, or illustration.

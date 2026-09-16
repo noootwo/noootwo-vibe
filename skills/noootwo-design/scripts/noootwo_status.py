@@ -61,6 +61,8 @@ ARTIFACT_EVIDENCE_RE = re.compile(
     r"(artifact reviewed|screenshot|preview|recording|visual proof|simulator|device|url)\s*:\s*(?!\s*(?:TBD|pending|none|no)\s*$).+",
     re.IGNORECASE,
 )
+MOTION_SECTION_RE = re.compile(r"^##\s+Motion\b(.*?)(?=^##\s|\Z)", re.IGNORECASE | re.MULTILINE | re.DOTALL)
+MOTION_SCALE_RE = re.compile(r"duration scale\s*:\s*.*?\d+\s*ms", re.IGNORECASE | re.DOTALL)
 
 
 def read_text(path: Path) -> str:
@@ -80,6 +82,40 @@ def file_state(root: Path, relative: str) -> str:
         return "incomplete"
     if not content.strip():
         return "empty"
+    return "complete"
+
+
+def reference_state(root: Path) -> str:
+    directory = root / ".noootwo" / "references"
+    if not directory.is_dir():
+        return "missing"
+    sources = [path for path in directory.iterdir() if path.is_dir()]
+    if not sources:
+        return "empty"
+    captures = 0
+    for source in sources:
+        source_note = source / "source.md"
+        if not source_note.exists():
+            continue
+        content = read_text(source_note)
+        if "unreachable" in content.lower() or any(child.suffix == ".png" for child in source.iterdir()):
+            captures += 1
+    return f"{captures}/{len(sources)} sources captured"
+
+
+def motion_state(root: Path) -> str:
+    content = read_text(root / ".noootwo/design-tokens.md")
+    if not content:
+        return "missing"
+    match = MOTION_SECTION_RE.search(content)
+    if not match:
+        return "missing section"
+    motion = match.group(1)
+    if TBD_RE.search(motion):
+        return "incomplete"
+    scale = MOTION_SCALE_RE.search(motion)
+    if not scale:
+        return "incomplete"
     return "complete"
 
 
@@ -111,7 +147,13 @@ def infer_mode(root: Path) -> str:
     return "standard"
 
 
-def blockers(root: Path) -> list[str]:
+FIXED_CANVAS_RE = re.compile(
+    r"^\s*-\s*Artifact family\s*:\s*fixed-canvas graphic\s*$",
+    re.IGNORECASE | re.MULTILINE,
+)
+
+
+def blockers(root: Path, inferred_mode: str) -> list[str]:
     results: list[str] = []
     directions = read_text(root / ".noootwo/directions.md")
     spec = read_text(root / ".noootwo/specs/active-design.md")
@@ -161,6 +203,20 @@ def blockers(root: Path) -> list[str]:
 
     if file_state(root, ".noootwo/review.md") == "complete" and not ARTIFACT_EVIDENCE_RE.search(review):
         results.append("review lacks artifact/screenshot/preview evidence")
+
+    if inferred_mode == "deep":
+        if file_state(root, ".noootwo/reference-board.md") != "missing":
+            reference_status = reference_state(root)
+            if reference_status in {"missing", "empty"}:
+                results.append("no captured reference sources under .noootwo/references/")
+
+        fixed_canvas = bool(FIXED_CANVAS_RE.search(read_text(root / ".noootwo/brief.md")))
+        if (
+            not fixed_canvas
+            and motion_state(root) != "complete"
+            and file_state(root, ".noootwo/design-tokens.md") != "missing"
+        ):
+            results.append("motion contract in .noootwo/design-tokens.md is missing or incomplete")
 
     return results
 
@@ -218,7 +274,7 @@ def main() -> int:
 
     root = Path(args.target).resolve()
     inferred_mode = infer_mode(root)
-    block_list = blockers(root)
+    block_list = blockers(root, inferred_mode)
 
     print(f"Noootwo status for: {root}")
     print(f"Suggested mode: {inferred_mode}")
@@ -226,6 +282,11 @@ def main() -> int:
     print("Files:")
     for relative in KEY_FILES:
         print(f"  - {relative}: {file_state(root, relative)}")
+
+    print("")
+    print("Evidence:")
+    print(f"  - .noootwo/references/: {reference_state(root)}")
+    print(f"  - motion contract: {motion_state(root)}")
 
     print("")
     if block_list:

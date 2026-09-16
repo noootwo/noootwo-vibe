@@ -9,11 +9,11 @@ It publishes nine focused skills — a router plus eight specialists:
 | `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in | `0.1.2` |
 | `noootwo-workflow` | model-invoked | Schedules one multi-step task and invokes the specialist that owns each trigger | `0.11.0` |
 | `noootwo-product` | model-invoked | Settles real user, first loop, scope, main path, states, and acceptance before design or build | `0.7.1` |
-| `noootwo-design` | model-invoked | Turns a settled product path into direction, tokens, a Design Contract, and a reviewed artifact | `0.12.0` |
+| `noootwo-design` | model-invoked | Turns a settled product path into direction, tokens, a Design Contract, and a reviewed artifact | `0.13.0` |
 | `noootwo-review` | model-invoked | Judges code before it ships, diagnoses rework, and runs optimization against a metric and a budget | `0.10.0` |
 | `noootwo-docs` | model-invoked | Places each changed fact in its owning documentation layer | `0.9.1` |
 | `noootwo-debug` | model-invoked | Proves the cause of a failure before any fix, and bounds the fix to that cause | `0.1.1` |
-| `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, and borrows mechanisms instead of surfaces | `0.1.0` |
+| `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, and borrows mechanisms instead of surfaces | `0.2.0` |
 | `noootwo-onboard` | model-invoked | Enters an unfamiliar project and audits which skills it needs | `0.1.0` |
 
 The repository root is not a published skill. It is the shared workspace for manifests, docs, validation, release helpers, and CI.
@@ -103,7 +103,7 @@ npx skills add ./skills/noootwo-design --list
 
 `noootwo-product` settles what should exist before anything is designed or built. It reads discoverable facts itself, names what is unsettled, and then grills the frontier — the questions answerable now — one round at a time, each question carrying options and a recommendation. It ends when the frontier is empty and the user confirms a shared understanding, then produces the Product-to-Design Handoff.
 
-`noootwo-design` turns a settled product path into a visual system. It declares a Design Read, compares directions when style or structure is unresolved, writes a Design Contract before editing, reads the craft floor immediately before building, and reviews the rendered artifact in bounded passes. `ready` is never self-certified. When the real user, main path, states, or acceptance turn out to be unsettled, it invokes `noootwo-product`.
+`noootwo-design` turns a settled product path into a visual system. It declares a Design Read, compares directions when style or structure is unresolved, writes a Design Contract before editing, reads the craft floor immediately before building, and reviews the rendered artifact in bounded passes. For `deep` work it captures the references a direction leans on into `.noootwo/references/` with their provenance, extracts real values from a reachable page with its own zero-dependency Chrome extractor, locks the build target, and reports token and motion drift against that baseline afterwards. Motion is a language rather than a field: a personality archetype, a register set by the surface, a millisecond duration scale, an easing catalog, choreography budgets, and per-platform reduced-motion fallbacks. `ready` is never self-certified. When the real user, main path, states, or acceptance turn out to be unsettled, it invokes `noootwo-product`.
 
 `noootwo-review` judges code before it ships and diagnoses rework. It selects lenses — correctness, testability, architecture boundary, lean, performance, project health, release readiness, rework diagnosis — and leads with findings ordered by severity. Architecture remains a review lens; there is no separate `noootwo-architecture` skill.
 
@@ -111,7 +111,7 @@ npx skills add ./skills/noootwo-design --list
 
 `noootwo-debug` turns a symptom into a proven cause before any file changes. It pins expected against actual with the raw failure, reproduces on demand, localizes with numbered checkpoints or bisection, then closes two gates: no edit until the cause is proven and competing hypotheses are refuted by named experiments, and no claim of a fix until a toggle test and a failing-first regression test prove it. It keeps the fix the size of the cause and hands anything larger back to the user as a decision.
 
-`noootwo-research` settles a decision that only outside evidence can settle — a design direction, a stack or library choice, a competitor or user expectation, or prior art. It names the decision and what would flip it, sizes the pass into `quick`, `standard`, or `deep`, draws on domain source pools with an access record and a fallback ladder, extracts transferable mechanisms rather than surfaces, and requires two independent sources plus a counterexample before a claim decides anything. Every pass also surveys existing skills and public prior art against a four-part adoption gate.
+`noootwo-research` settles a decision that only outside evidence can settle — a design direction, a stack or library choice, a competitor or user expectation, or prior art. It names the decision and what would flip it, sizes the pass into `quick`, `standard`, or `deep`, draws on domain source pools with an access record and a fallback ladder, extracts transferable mechanisms rather than surfaces, and requires two independent sources plus a counterexample before a claim decides anything. Its pools record what a probe actually observed: which case libraries are free, which need an account, which are paid, which are blocked, and which motion libraries publish a genuine agent-readable index. Every pass also surveys existing skills and public prior art against a four-part adoption gate.
 
 `noootwo-onboard` enters a project you do not know. It reads the nearest evidence, audits which skills the project needs and which it deliberately does not, routes the foundation health judgment to `noootwo-review`'s project-health lens, and adds the single missing file that unblocks the work rather than scaffolding.
 
@@ -178,11 +178,11 @@ Each child skill has its own `VERSION` file and tag prefix:
 - `noootwo-ask@v0.1.2`
 - `noootwo-workflow@v0.11.0`
 - `noootwo-product@v0.7.1`
-- `noootwo-design@v0.12.0`
+- `noootwo-design@v0.13.0`
 - `noootwo-review@v0.10.0`
 - `noootwo-docs@v0.9.1`
 - `noootwo-debug@v0.1.1`
-- `noootwo-research@v0.1.0`
+- `noootwo-research@v0.2.0`
 - `noootwo-onboard@v0.1.0`
 
 The root `VERSION` records the workspace version only. Do not use it as the release source for child skills.

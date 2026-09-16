@@ -254,10 +254,15 @@ Define the role of each type style.
 
 #### 9. Motion And Interaction
 
+Read [motion](motion.md) for the archetypes, duration scale, easing catalog, choreography budgets, and the four hard bans. This section records the values that became durable truth for this product.
+
+- Archetype and the lineage it derives from, or the recorded reason for overriding it.
 - Motion thesis: what motion explains, such as continuity, hierarchy, state change, or identity.
-- Durations and easing: enter, exit, reorder, expand, error, success.
+- Signature easing plus the three-value duration scale, with real numbers.
+- Durations and easing per state: enter, exit, reorder, expand, error, success.
+- The three layers: primary, secondary, ambient.
 - Interaction motif: swipe, drag, reveal, stack, expand, zoom, morph, command, or step-through.
-- Reduced motion: acceptable fallback.
+- Reduced motion: the fallback per target platform.
 - Forbidden motion: generic fade-up on every element, bounce without product reason, animation over weak layout.
 
 #### 10. Imagery, Iconography, And Language

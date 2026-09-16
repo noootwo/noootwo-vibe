@@ -1,5 +1,22 @@
 # noootwo-design Releases
 
+## v0.13.0
+
+- Added `references/motion.md`: four personality archetypes with real durations, curves, and overshoot; the lineage-to-archetype mapping; a signature motion identity of one curve, three durations, and one entrance pattern; an element duration table with distance scaling and enter-longer-than-exit; an easing catalog; material modifiers; the three motion layers; choreography and stagger budgets; the frequency gate; reduced motion; and a troubleshooting table.
+- Motion stopped being an empty contract. `craft.md` gained a motion rubric with four hard bans, `translate.md` gained the Compose, SwiftUI, and Flutter mapping plus per-platform reduced-motion signals, and `system.md` now points at the reference values.
+- Added `scripts/extract_design_tokens.mjs`: a zero-dependency extractor that drives the local Chrome over the DevTools Protocol, reads computed styles, probes interactive elements for hover deltas, and emits markdown, raw JSON, and optional W3C DTCG tokens.
+- Case capture is now part of deep mode: every source lands in `.noootwo/references/<slug>/` with provenance, accessibility result, and licence; an unreachable source is recorded and the pass continues.
+- Added reference lock and anti-averaging: name the build target and what must not drift, and let one reference dominate rather than averaging several.
+- Harness contract: `reference-board.md` gained `Capture path` and `Landed as` per source, `style-discovery.md` gained `Capture directory` and a `Reference Lock` section, `design-tokens.md` carries a required motion contract, and `references/README.md` documents the capture directory.
+- Gates: the readiness validator checks the new fields under `--deep-mode` and `--implementation-gate`, and `check_visual_gates.py` gained five advisory motion rules that need screenshot or DOM confirmation before they change a decision.
+- Fixed a stale citation: the Carbon motion page is unreachable, so the motion sources now point at Material 3 motion and Apple HIG motion.
+- Added a motion register — Invisible, Quiet, Present, Expressive, Theatrical — set by the surface rather than the mood, so restraint and expressiveness are both available and neither is the silent default.
+- Added the motion sourcing procedure: fix the register, collect two or three examples in it, record each as trigger, moving property, duration, curve, layer relationship, and meaning, then adapt rather than paste.
+- Added library selection guidance, including when CSS alone is enough and why scroll-hijacking libraries belong on marketing surfaces rather than product screens.
+- Recorded `bendrape1-byte/silk-design` as a counterexample: its consistency mechanism is borrowed, its "never ship a static page" default is not.
+- Added six motion and four case-capture eval scenarios.
+
+
 ## v0.12.0
 
 - Moved the research method and source pools out to `noootwo-research`; the design skill now invokes it instead of carrying its own research file.

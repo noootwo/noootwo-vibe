@@ -127,7 +127,8 @@ Status: pending extraction; replace this template with project-specific truth be
 
 ## Motion Language
 
-- Motion character: TBD
+- Motion character: TBD  archetype, signature easing, and the three-value duration scale
+- Duration and easing source: TBD  the captured values in `.noootwo/design-tokens.md`, or the recorded inference
 - State feedback patterns: TBD
 - Interaction constraints: TBD
 - Main interaction motif: TBD

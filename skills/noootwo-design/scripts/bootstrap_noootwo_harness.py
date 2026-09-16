@@ -30,6 +30,7 @@ PROFILE_FILES = {
         "style-discovery.md",
         "reference-board.md",
         "style-calibration.md",
+        "references/README.md",
     },
     "production": {
         "system.md",
@@ -61,6 +62,7 @@ PROFILE_FILES["full"] = {
     "handoff/implementation.md",
     "handoff/acceptance.md",
     "handoff/assets.md",
+    "references/README.md",
 }
 
 

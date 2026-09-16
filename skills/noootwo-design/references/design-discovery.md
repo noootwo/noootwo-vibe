@@ -18,18 +18,55 @@ Classify the surface before choosing sources:
 
 ## The pass
 
-1. **Context query builder** — derive search queries from product type, user task, platform, target stack, audience, and constraints.
+1. **Context query builder** — derive search queries from product type, user task, platform, target stack, audience, and constraints. Write each query as what is visible on screen, not as an abstract goal: `[product category] + [screen type] + [visible UI components] + [user state or action]`. `trust patterns` and `good onboarding` are not queries; `signup screen with progress indicator, phone number input, security message, and continue button` is.
 2. **Source accessibility check** — record which pools are reachable; use the fallback ladder when they are not, and record the substitution.
 3. **Community signal mining** — search the design pools the research skill names, including product-flow libraries, design systems, curated galleries, and the domestic fallback.
-4. **Source weighting** — rank evidence by credibility and by fit to this surface.
-5. **Influence discovery** — when useful, find relevant designers, studios, products, movements, architecture, exhibition, or spatial systems.
-6. **Pattern clustering** — cluster findings into three to five mechanism groups instead of listing examples.
-7. **Style evidence check** — record the style claim, the visual evidence, the anti-example, the borrowed mechanism, the implementation translation, the confidence, and whether a spike is needed. The check shape lives in `direction.md`.
-8. **Mechanism transfer** — translate each cluster into UI primitives: grid, rail, surface, type scale, data grammar, state model, motion primitive, native component vocabulary.
-9. **Preservation contract** — state what must survive translation, what may vary, and what must never be substituted.
-10. **Fit scoring** — score each candidate territory for scenario fit, practicality, distinctiveness, implementation cost, and brand risk.
-11. **Artifact spike** — produce two or three small visual spikes for the best territories before investing in a polished draft. One spike only means low confidence.
-12. **Evaluator pass** — reject slop, trend cosplay, artist or designer cosplay, crude styling, weak utility, typography failure, responsive failure, and stack-incredible directions.
+4. **Case capture** — resolve the platform (app or web), route each query to single screens or to multi-step flows, then run two or three queries at a time and write the observations down before starting the next batch. Screens are large; a batch that is not recorded is a batch that gets dropped.
+5. **Source weighting** — rank evidence by credibility and by fit to this surface.
+6. **Influence discovery** — when useful, find relevant designers, studios, products, movements, architecture, exhibition, or spatial systems.
+7. **Pattern clustering** — cluster findings into three to five mechanism groups instead of listing examples.
+8. **Style evidence check** — record the style claim, the visual evidence, the anti-example, the borrowed mechanism, the implementation translation, the confidence, and whether a spike is needed. The check shape lives in `direction.md`.
+9. **Mechanism transfer** — translate each cluster into UI primitives: grid, rail, surface, type scale, data grammar, state model, motion primitive, native component vocabulary.
+10. **Preservation contract** — state what must survive translation, what may vary, and what must never be substituted.
+11. **Reference lock** — name the build target and what must not drift before drafting.
+12. **Fit scoring** — score each candidate territory for scenario fit, practicality, distinctiveness, implementation cost, and brand risk.
+13. **Artifact spike** — produce two or three small visual spikes for the best territories before investing in a polished draft. One spike only means low confidence.
+14. **Evaluator pass** — reject slop, trend cosplay, artist or designer cosplay, crude styling, weak utility, typography failure, responsive failure, and stack-incredible directions.
+
+## Case capture
+
+Every reference the direction leans on gets captured locally, so the direction can be re-opened, re-checked, and compared after the build.
+
+For each source, write `.noootwo/references/<slug>/source.md` and capture `NN-<label>.png` beside it. `source.md` records:
+
+- `url`: the page or artifact the reference came from.
+- `captured`: date, and the tool used.
+- `evidence level`: the rung from the weighting table below.
+- `accessibility`: `reachable`, `login required`, `fallback`, or `unreachable`, with the result actually observed in this pass.
+- `attribution and licence`: product or studio name, and any stated reuse limit.
+- `capture`: the screenshot paths, or `unreachable` when none could be taken.
+
+When a source is unreachable or behind a login, record `capture: unreachable`, keep the URL, and continue with the sources that remain. A blocked source narrows the evidence; it never cancels the pass.
+
+Captured screenshots are personal reference held in the project's `.noootwo/` harness. They are not committed, not redistributed, and never a target to reproduce pixel for pixel. Borrow the mechanism — space, density, rhythm, state grammar, motion behaviour — and leave the artwork, brand assets, and exact composition behind.
+
+When the direction carries motion, the capture set includes motion examples: two or three references in the same register, each recorded as a mechanism — trigger, moving property, duration, curve, layer relationship, and what it communicates. The register and the sourcing procedure live in [motion](motion.md); the pool of motion libraries and showcases lives in the `noootwo-research` skill's source pools. A component library's demo is strong evidence of craft and weak evidence of fit, so it is adapted or dropped rather than pasted.
+
+## Reference lock
+
+Before drafting, name the target and the invariants:
+
+```markdown
+Reference Lock
+- Build target: existing UI | user screenshot | design file | captured reference | approved spike
+- Primaries: the one or two sources that carry the direction
+- Must not drift: canvas, typography, accent roles, layout, media, density, motion
+- Rejected surface styling: what is deliberately not taken
+```
+
+Without a lock, a direction is still prose. When references conflict, pick one dominant direction and let the others contribute narrow details; averaging them into a safe middle is the failure this step exists to prevent.
+
+After the build, capture the finished surface the same way and compare it against the captured baseline with `scripts/extract_design_tokens.mjs --compare`. Drift is reported, not silently repaired.
 
 ## Influence discovery
 
@@ -69,8 +106,10 @@ Write `.noootwo/style-discovery.md` with:
 - Foreign sources tried
 - Domestic fallback sources when used
 - Evidence URLs or screenshots
+- Capture directory
 - Evidence levels
 - Style Evidence Check
+- Reference lock
 - Pattern clusters
 - Borrowed mechanisms
 - Influence shortlist when used
@@ -82,6 +121,6 @@ Write `.noootwo/style-discovery.md` with:
 - Spike comparison
 - Recommended territories
 
-Then update `.noootwo/reference-board.md` with the selected sources and mechanisms.
+Then update `.noootwo/reference-board.md` with the selected sources and mechanisms, including each source's capture path and what it landed as.
 
-The readiness validator reads this file field by field. Keep the section and field names exactly as listed. If source accessibility, URL or artifact evidence, evidence levels, the Style Evidence Check, or rejected surfaces are missing, return to discovery before drafting — a missing field is a failed gate, not a formatting detail.
+The readiness validator reads this file field by field. Keep the section and field names exactly as listed. If source accessibility, URL or artifact evidence, the capture directory, evidence levels, the Style Evidence Check, the reference lock, or rejected surfaces are missing, return to discovery before drafting — a missing field is a failed gate, not a formatting detail.

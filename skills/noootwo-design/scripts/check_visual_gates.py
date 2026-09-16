@@ -55,6 +55,74 @@ CHECK_JS = """
     .slice(0, 12)
     .map(describe);
 
+  // Motion findings are advisory evidence, not gate failures. Confirm each one
+  // against a screenshot or DOM inspection before it changes a review decision.
+  const motion = { linearSpatial: [], slowInteraction: [], noReducedMotion: [], opacityOnlyState: [], endlessLoops: [] };
+
+  const reducedMotionHandled = Array.from(document.styleSheets).some((sheet) => {
+    let rules;
+    try {
+      rules = sheet.cssRules;
+    } catch {
+      return false;
+    }
+    return Array.from(rules ?? []).some((rule) => (rule.conditionText || '').includes('prefers-reduced-motion'));
+  });
+
+  const interactiveSelector = 'button, [role="button"], a[href], input, select, textarea, summary, [data-state]';
+  const spatialProperties = ['transform', 'translate', 'top', 'left', 'right', 'bottom', 'margin', 'width', 'height', 'inset'];
+
+  let animationSeen = false;
+  for (const el of document.querySelectorAll('body *')) {
+    const rect = el.getBoundingClientRect();
+    if (rect.width < 2 || rect.height < 2) continue;
+    let style;
+    try {
+      style = window.getComputedStyle(el);
+    } catch {
+      continue;
+    }
+
+    const properties = (style.transitionProperty || '').split(',').map((part) => part.trim());
+    const timings = (style.transitionTimingFunction || '').split(',').map((part) => part.trim());
+    const durations = (style.transitionDuration || '').split(',').map((part) => part.trim());
+    const hasTransition = durations.some((value) => value && value !== '0s');
+    if (hasTransition) animationSeen = true;
+    if (style.animationName && style.animationName !== 'none') animationSeen = true;
+
+    const movesSpace = properties.some((property) => spatialProperties.some((token) => property.includes(token)));
+    if (movesSpace && timings.includes('linear')) {
+      motion.linearSpatial.push(describe(el));
+    }
+
+    const isInteractive = el.matches(interactiveSelector);
+    if (isInteractive && hasTransition) {
+      const longest = durations.reduce((max, value) => {
+        const seconds = value.endsWith('ms') ? parseFloat(value) / 1000 : parseFloat(value);
+        return Number.isFinite(seconds) ? Math.max(max, seconds) : max;
+      }, 0);
+      if (longest > 0.5) motion.slowInteraction.push(describe(el));
+    }
+
+    const meaningfulStateChange = isInteractive || el.hasAttribute('data-state') || el.getAttribute('aria-expanded') !== null;
+    if (meaningfulStateChange && hasTransition && properties.length > 0 && properties.every((property) => property === 'opacity')) {
+      motion.opacityOnlyState.push(describe(el));
+    }
+
+    if (style.animationIterationCount === 'infinite') {
+      const insideControl = el.closest('button, [role="button"], a[href], input, select, label');
+      const isAmbient = el.getAttribute('aria-hidden') === 'true' || el.closest('[aria-hidden="true"]');
+      if (insideControl && !isAmbient) motion.endlessLoops.push(describe(el));
+    }
+  }
+
+  for (const key of Object.keys(motion)) {
+    motion[key] = motion[key].slice(0, 8);
+  }
+  if (animationSeen && !reducedMotionHandled) {
+    motion.noReducedMotion.push({ tag: 'document', text: 'animation present with no prefers-reduced-motion rule', left: 0, right: 0, width: 0, scrollWidth: 0, clientWidth: 0 });
+  }
+
   const clippedText = Array.from(document.querySelectorAll('body *'))
     .filter((el) => {
       const text = (el.textContent || '').replace(/\\s+/g, ' ').trim();
@@ -73,7 +141,8 @@ CHECK_JS = """
     bodyScrollWidth: body.scrollWidth,
     overflowX,
     offscreenCritical,
-    clippedText
+    clippedText,
+    motion
   };
 }
 """
@@ -164,8 +233,25 @@ def main() -> int:
 
         browser.close()
 
+    motion_labels = {
+        "linearSpatial": "spatial movement on a linear curve",
+        "slowInteraction": "interactive control with a transition longer than 500ms",
+        "noReducedMotion": "animation present with no prefers-reduced-motion rule",
+        "opacityOnlyState": "state change carried by opacity alone",
+        "endlessLoops": "endless animation inside a control",
+    }
+    motion_findings: dict[str, list[dict]] = {}
+    for result in results:
+        for key, label in motion_labels.items():
+            entries = (result.get("motion") or {}).get(key) or []
+            if not entries:
+                continue
+            bucket = motion_findings.setdefault(label, [])
+            if not any(item["viewport"] == result["label"] for item in bucket):
+                bucket.append({"viewport": result["label"], "examples": entries[:3], "count": len(entries)})
+
     if args.json:
-        print(json.dumps({"results": results, "failures": failures}, indent=2))
+        print(json.dumps({"results": results, "failures": failures, "motionFindings": motion_findings}, indent=2))
     else:
         for result in results:
             print(
@@ -173,6 +259,15 @@ def main() -> int:
                 f"scrollWidth={result['scrollWidth']} overflowX={result['overflowX']} "
                 f"offscreenCritical={len(result['offscreenCritical'])} clippedText={len(result['clippedText'])}"
             )
+        if motion_findings:
+            print("Motion findings (advisory; confirm against a screenshot or DOM before changing a decision):")
+            for label, entries in motion_findings.items():
+                viewports = ", ".join(entry["viewport"] for entry in entries)
+                examples = entries[0]["examples"]
+                sample = examples[0]["tag"] if examples else "-"
+                print(f"  - {label} [{viewports}] first seen on <{sample}>")
+        else:
+            print("Motion findings: none.")
         if failures:
             print("Visual gate failed:")
             for failure in failures:
