@@ -1,6 +1,6 @@
 ---
 name: noootwo-research
-description: "Use when a decision needs evidence that only exists outside the repo: a design direction, a stack or library choice, a competitor or user expectation, or prior art. Extract mechanisms, not surfaces."
+description: "Use when a decision needs outside evidence: design, stack or library, competitor, user expectation, prior art, or whether to borrow a public skill. Extract mechanisms, not surfaces."
 ---
 
 # Noootwo Research

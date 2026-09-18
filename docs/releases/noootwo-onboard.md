@@ -1,5 +1,9 @@
 # noootwo-onboard Releases
 
+## v0.1.1
+
+- Made the trigger clearer for unfamiliar repositories and agent takeovers, and kept the "do not load every skill" boundary.
+
 ## v0.1.0
 
 - Initial public skill: enter an unfamiliar repository, or decide which skills a project needs.

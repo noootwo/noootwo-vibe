@@ -16,6 +16,13 @@ If no URL, screenshot, artifact, or platform documentation can be recorded, the 
 
 Probed 2026-09-17 by HTTP request and by rendering each page in a real headless browser. Reachability is what this probe observed; re-check it in your own pass and record the result, because a source can change without notice.
 
+### Agent skills and plugin prior art
+
+- **OpenAI Product Design plugin** — accessible in the local plugin cache for this workspace. It is a private plugin, not a copyable skill. Borrow its mechanisms and description technique: minimum brief, project-local product context, Explore / Design / Build boundary, existing-flow audit, and the rule that screenshots are not QA by themselves. Do not copy its plugin structure, Sites/Browser workflow, prototype templates, prompts, or brand wording. Use it primarily when changing `noootwo-product` or the product-to-design handoff.
+- **`feitangyuan/motion-web`** — reachable at `https://github.com/feitangyuan/motion-web`, licensed CC BY-NC 4.0. Borrow mechanisms and ideas only: motion is a main material, a great mechanic on a default page is a failed page, stillness ratio is a timeline signal rather than an easing problem, and following lag is `speed / k`. Do not copy its SKILL, cases, scripts, assets, or prompts into a commercial skill.
+
+Order the search by what survives without a subscription, and treat the domestic pool as first-class rather than as a consolation.
+
 Order the search by what survives without a subscription, and treat the domestic pool as first-class rather than as a consolation.
 
 ### Product flows and app screens

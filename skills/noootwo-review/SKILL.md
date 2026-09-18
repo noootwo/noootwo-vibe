@@ -1,6 +1,6 @@
 ---
 name: noootwo-review
-description: "Use to judge code before it ships, to diagnose rework, and to optimize speed, size, or cost. Covers correctness, testability, architecture, lean, performance, project health, and release readiness."
+description: "Use before submit or release, and for risky, public-contract, wide-blast-radius, slow, bloated, or twice-rejected diffs; act as Tech Lead and QA Architect, not style critique."
 ---
 
 # Noootwo Review

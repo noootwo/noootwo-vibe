@@ -1,6 +1,6 @@
 ---
 name: noootwo-workflow
-description: "Use to schedule one multi-step task: a feature, a cross-file change, a refactor, a release, a handoff, or rework after a rejected fix. Owns order, scope, stop conditions, and handoffs."
+description: "Use to schedule a multi-step task, refactor, release, handoff, or rework after rejection; owns order, scope, stop conditions, and handoffs. Direct one-file edits stay direct."
 ---
 
 # Noootwo Workflow

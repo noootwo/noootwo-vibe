@@ -1,6 +1,6 @@
 ---
 name: noootwo-design
-description: "Use for UI, visual, artifact, or frontend: screens, redesigns, restyles, tokens, components, screenshot critique, or responsive, typography, motion, or animation polish. Needs a settled product path."
+description: "Use for UI, visual, artifact, or frontend work after product path is settled: screens, redesigns, tokens, components, critique, motion and interaction polish, or replicating a reference."
 ---
 
 # Noootwo Design

@@ -87,6 +87,20 @@ If multiple return actions are plausible and the choice changes cost, scope, or 
 
 Use this when a review needs concrete failure checks. Keep `review.md` for scoring and decision rules.
 
+### Source Fidelity QA
+
+Run this only when the direction records `Reference intent: replicate` or the user explicitly asks to match a visual source. It does not apply to `borrow-mechanism` or ordinary redesign work.
+
+Put the reference and the implementation side by side in the same viewport and state, then check:
+
+- fonts: family, fallback, weight, size, line height, letter spacing, optical weight, wrapping, truncation
+- layout: grid tracks, margins, padding, section gaps, component spacing, radii, shadows or elevation
+- colour: sampled or inferred palette, gradients, opacity, semantic states, contrast
+- assets: image subject, crop, scale, sharpness, masks, logos, icons; no div art, emoji, text glyphs, or code-native stand-ins for visible source assets
+- copy and content: app-specific text, empty, loading, error, permission, and success states
+
+Distinguish fidelity defects from intentional mechanism translation. A deliberate `borrow-mechanism` adaptation is not a fidelity defect; a faithful `replicate` that silently changes the source is.
+
 ### Generic And AI-Slop Flags
 
 - `Inter-only` or `system-only` typography without brand reason

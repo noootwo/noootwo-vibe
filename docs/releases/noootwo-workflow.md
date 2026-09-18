@@ -1,5 +1,9 @@
 # noootwo-workflow Releases
 
+## v0.11.1
+
+- Tightened the description around multi-step work while making explicit that direct one-file edits stay direct.
+
 ## v0.11.0
 
 - Finished the scheduler normalization: `noootwo-workflow` owns order, scope, stop conditions, and handoffs, and no longer carries method a specialist owns.

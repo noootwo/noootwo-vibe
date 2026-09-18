@@ -45,6 +45,7 @@ For each source, write `.noootwo/references/<slug>/source.md` and capture `NN-<l
 - `accessibility`: `reachable`, `login required`, `fallback`, or `unreachable`, with the result actually observed in this pass.
 - `attribution and licence`: product or studio name, and any stated reuse limit.
 - `capture`: the screenshot paths, or `unreachable` when none could be taken.
+- `reference intent`: `replicate`, `redesign`, or `borrow-mechanism`, and why.
 
 When a source is unreachable or behind a login, record `capture: unreachable`, keep the URL, and continue with the sources that remain. A blocked source narrows the evidence; it never cancels the pass.
 
@@ -59,6 +60,7 @@ Before drafting, name the target and the invariants:
 ```markdown
 Reference Lock
 - Build target: existing UI | user screenshot | design file | captured reference | approved spike
+- Reference intent: replicate | redesign | borrow-mechanism
 - Primaries: the one or two sources that carry the direction
 - Must not drift: canvas, typography, accent roles, layout, media, density, motion
 - Rejected surface styling: what is deliberately not taken

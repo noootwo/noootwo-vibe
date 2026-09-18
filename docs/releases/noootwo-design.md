@@ -1,5 +1,12 @@
 # noootwo-design Releases
 
+## v0.14.0
+
+- Rewrote the motion philosophy so the still page and motion are co-equal completion criteria.
+- Added Source Fidelity QA for explicit `replicate` references, and a `Reference intent` field in discovery.
+- Added an optional `--probe-motion` mode to `extract_design_tokens.mjs` for stillness-ratio evidence without new dependencies.
+- Sharpened the description toward reference replication and motion handfeel fixes.
+
 ## v0.13.0
 
 - Added `references/motion.md`: four personality archetypes with real durations, curves, and overshoot; the lineage-to-archetype mapping; a signature motion identity of one curve, three durations, and one entrance pattern; an element duration table with distance scaling and enter-longer-than-exit; an easing catalog; material modifiers; the three motion layers; choreography and stagger budgets; the frequency gate; reduced motion; and a troubleshooting table.

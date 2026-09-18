@@ -38,6 +38,7 @@ const USAGE = `Usage: node extract_design_tokens.mjs <url> [options]
   --wait <ms>         settle time after load, default 4000
   --chrome <path>     explicit Chrome binary
   --timeout <ms>      overall budget, default 45000
+  --probe-motion <selector>  sample a moving element and report stillness ratio
   --quiet             suppress the markdown summary on stdout
 `;
 
@@ -49,12 +50,13 @@ function parseArgs(argv) {
     dtcg: null,
     compare: null,
     chrome: null,
+    probeMotion: null,
     viewport: { width: 1440, height: 900 },
     wait: 4000,
     timeout: 45000,
     quiet: false,
   };
-  const takesValue = new Set(['--out', '--json', '--dtcg', '--compare', '--viewport', '--wait', '--chrome', '--timeout']);
+  const takesValue = new Set(['--out', '--json', '--dtcg', '--compare', '--viewport', '--wait', '--chrome', '--timeout', '--probe-motion']);
 
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -78,6 +80,8 @@ function parseArgs(argv) {
         options.wait = Number(value);
       } else if (arg === '--timeout') {
         options.timeout = Number(value);
+      } else if (arg === '--probe-motion') {
+        options.probeMotion = value;
       } else {
         options[arg.slice(2)] = value;
       }
@@ -306,6 +310,35 @@ function probeInPage(index) {
   };
 }
 
+async function probeMotionInPage(selector, durationMs, intervalMs) {
+  const el = document.querySelector(selector);
+  if (!el) return { found: false, selector };
+  const samples = [];
+  const startedAt = performance.now();
+  const read = () => {
+    const style = getComputedStyle(el);
+    const rect = el.getBoundingClientRect();
+    samples.push({
+      at: Math.round(performance.now() - startedAt),
+      opacity: Number(style.opacity),
+      transform: style.transform,
+      x: Math.round(rect.left),
+      y: Math.round(rect.top),
+    });
+  };
+  read();
+  await new Promise((resolve) => {
+    const timer = setInterval(() => {
+      read();
+      if (performance.now() - startedAt >= durationMs) {
+        clearInterval(timer);
+        resolve();
+      }
+    }, intervalMs);
+  });
+  return { found: true, selector, samples };
+}
+
 function connectCdp(wsUrl) {
   const socket = new WebSocket(wsUrl);
   const pending = new Map();
@@ -489,6 +522,21 @@ function buildMarkdown(observation) {
   }
 
   lines.push('Breakpoints:', '', list(observation.breakpoints.map((value) => ({ value, count: 0 })), (entry) => `${entry.value}px`), '');
+  if (observation.motionProbe) {
+    const probe = observation.motionProbe;
+    lines.push('## Motion Probe', '');
+    if (!probe.found) {
+      lines.push(`- selector not found: \`${probe.selector}\``);
+    } else {
+      lines.push(`- selector: \`${probe.selector}\``);
+      lines.push(`- observed duration: ${probe.observedDurationMs ?? 0}ms`);
+      lines.push(`- stillness ratio: ${probe.stillnessRatio ?? 1}`);
+      lines.push(`- max travel delta from first sample: ${probe.maxDelta ?? 0}px`);
+      lines.push('');
+      lines.push('A high stillness ratio on a stretch the user expected to move is a timeline problem, not an easing problem.');
+    }
+    lines.push('');
+  }
   lines.push('## Reading This');
   lines.push('');
   lines.push('Observed values are evidence of what a source did, not a target to copy. Map each borrowed value to a role in `.noootwo/design-tokens.md`, then confirm it against a screenshot before the artifact claims `ready`.');
@@ -623,6 +671,30 @@ async function main() {
         entry.hover = null;
       }
       delete entry.center;
+    }
+
+    if (options.probeMotion) {
+      const probeResult = await client.send('Runtime.evaluate', {
+        expression: `(${probeMotionInPage.toString()})(${JSON.stringify(options.probeMotion)}, 1200, 120)`,
+        returnByValue: true,
+        awaitPromise: true,
+      });
+      const probe = probeResult.result?.result?.value ?? { found: false, selector: options.probeMotion };
+      if (probe.samples?.length) {
+        const samples = probe.samples;
+        let still = 0;
+        for (let i = 1; i < samples.length; i += 1) {
+          const a = samples[i - 1];
+          const b = samples[i];
+          const changed = a.x !== b.x || a.y !== b.y || a.opacity !== b.opacity || a.transform !== b.transform;
+          if (!changed) still += 1;
+        }
+        const observedDuration = samples.length > 1 ? samples.at(-1).at - samples[0].at : 0;
+        probe.stillnessRatio = samples.length > 1 ? Number((still / (samples.length - 1)).toFixed(2)) : 1;
+        probe.observedDurationMs = observedDuration;
+        probe.maxDelta = Math.max(0, ...samples.map((entry) => Math.abs(entry.x - samples[0].x) + Math.abs(entry.y - samples[0].y)));
+      }
+      observation.motionProbe = probe;
     }
 
     if (options.json) {

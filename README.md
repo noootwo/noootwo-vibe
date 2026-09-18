@@ -6,15 +6,15 @@ It publishes nine focused skills — a router plus eight specialists:
 
 | Skill | Invocation | Purpose | Version |
 | --- | --- | --- | --- |
-| `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in | `0.1.2` |
-| `noootwo-workflow` | model-invoked | Schedules one multi-step task and invokes the specialist that owns each trigger | `0.11.0` |
-| `noootwo-product` | model-invoked | Settles real user, first loop, scope, main path, states, and acceptance before design or build | `0.7.1` |
-| `noootwo-design` | model-invoked | Turns a settled product path into direction, tokens, a Design Contract, and a reviewed artifact | `0.13.0` |
-| `noootwo-review` | model-invoked | Judges code before it ships, diagnoses rework, and runs optimization against a metric and a budget | `0.10.0` |
-| `noootwo-docs` | model-invoked | Places each changed fact in its owning documentation layer | `0.9.1` |
-| `noootwo-debug` | model-invoked | Proves the cause of a failure before any fix, and bounds the fix to that cause | `0.1.1` |
-| `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, and borrows mechanisms instead of surfaces | `0.2.0` |
-| `noootwo-onboard` | model-invoked | Enters an unfamiliar project and audits which skills it needs | `0.1.0` |
+| `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in | `0.1.3` |
+| `noootwo-workflow` | model-invoked | Schedules one multi-step task and invokes the specialist that owns each trigger | `0.11.1` |
+| `noootwo-product` | model-invoked | Settles real user, first loop, scope, main path, states, and acceptance before design or build | `0.8.0` |
+| `noootwo-design` | model-invoked | Turns a settled product path into direction, tokens, a Design Contract, and a reviewed artifact | `0.14.0` |
+| `noootwo-review` | model-invoked | Judges code before it ships, diagnoses rework, and runs optimization against a metric and a budget | `0.10.1` |
+| `noootwo-docs` | model-invoked | Places each changed fact in its owning documentation layer | `0.9.2` |
+| `noootwo-debug` | model-invoked | Proves the cause of a failure before any fix, and bounds the fix to that cause | `0.1.2` |
+| `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, and borrows mechanisms instead of surfaces | `0.3.0` |
+| `noootwo-onboard` | model-invoked | Enters an unfamiliar project and audits which skills it needs | `0.1.1` |
 
 The repository root is not a published skill. It is the shared workspace for manifests, docs, validation, release helpers, and CI.
 
@@ -175,15 +175,15 @@ python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scena
 
 Each child skill has its own `VERSION` file and tag prefix:
 
-- `noootwo-ask@v0.1.2`
-- `noootwo-workflow@v0.11.0`
-- `noootwo-product@v0.7.1`
-- `noootwo-design@v0.13.0`
-- `noootwo-review@v0.10.0`
-- `noootwo-docs@v0.9.1`
-- `noootwo-debug@v0.1.1`
-- `noootwo-research@v0.2.0`
-- `noootwo-onboard@v0.1.0`
+- `noootwo-ask@v0.1.3`
+- `noootwo-workflow@v0.11.1`
+- `noootwo-product@v0.8.0`
+- `noootwo-design@v0.14.0`
+- `noootwo-review@v0.10.1`
+- `noootwo-docs@v0.9.2`
+- `noootwo-debug@v0.1.2`
+- `noootwo-research@v0.3.0`
+- `noootwo-onboard@v0.1.1`
 
 The root `VERSION` records the workspace version only. Do not use it as the release source for child skills.
 

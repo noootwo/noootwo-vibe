@@ -1,5 +1,9 @@
 # noootwo-docs Releases
 
+## v0.9.2
+
+- Added the first principle that documents exist to prevent drift, not to record activity, and tightened the description around stale claims.
+
 ## v0.9.1
 
 - Split a single instruction that invoked three skills at once into one-hop routes per layer, matching the invocation model's one-skill-per-instruction rule.

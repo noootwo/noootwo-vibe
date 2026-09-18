@@ -222,3 +222,23 @@ Use this to prevent Noootwo Design from becoming too expensive for ordinary UI w
 Escalate from standard to deep only when the user asks for strong taste, niche/high-end direction, brand shift, or a previous standard result was too generic.
 
 De-escalate from deep when the user prioritizes speed, implementation certainty, or staying close to an existing shipped interface.
+
+## Product Design And Motion Web Borrow Notes
+
+Recorded 2026-09-18 after comparing the OpenAI Product Design plugin and `feitangyuan/motion-web` with the current skill. The full suite map lives in `docs/agents/borrow-audit.md`.
+
+### What Is Borrowed
+
+- Product Design's Explore / Design / Build boundary and Source Fidelity QA are added only where they fit Noootwo's project-local model. `replicate` is a reference intent, not the default; `borrow-mechanism` stays the default.
+- motion-web's "still frame and motion are co-equal completion criteria" and "stillness ratio is a timeline signal" are rewritten into `motion.md` and a light optional probe in `extract_design_tokens.mjs`.
+
+### What Is Rejected
+
+- Product Design's global user context, Sites/Browser-specific workflow, prototype templates, and share/deploy paths.
+- motion-web's full cases, scripts, assets, and Playwright oracle suite; the source is CC BY-NC 4.0 and out of cost scope.
+
+### Cost Boundary
+
+- The new motion probe is optional and only used for motion-heavy or explicitly diagnostic passes.
+- Source Fidelity QA runs only for `Reference intent: replicate`.
+- No new required dependency or reference file is added.

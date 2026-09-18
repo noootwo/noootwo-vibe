@@ -1,6 +1,6 @@
 ---
 name: noootwo-docs
-description: "Use when a change alters behaviour, project state, release facts, product decisions, or agent instructions, and the documents must stay true. Also for documentation audits and stale-claim cleanup."
+description: "Use when a change alters behaviour, state, release facts, product decisions, or agent instructions, and when docs have drifted or claims are stale. Place each fact once; do not add documents."
 ---
 
 # Noootwo Docs

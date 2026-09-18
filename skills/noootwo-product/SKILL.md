@@ -1,6 +1,6 @@
 ---
 name: noootwo-product
-description: "Use before design or build when the real user, first loop, scope, main path, states, or acceptance are unsettled, and for new product ideas, feature-list requests, or backend-shaped flows."
+description: "Use before design or build when user, first loop, scope, main path, states, or acceptance are unsettled; also for new ideas, feature lists, backend flows, and auditing existing UX."
 ---
 
 # Noootwo Product
@@ -65,6 +65,10 @@ Hand off when every material decision is settled or delegated and no carried ris
 
 When UI work is next, invoke the `noootwo-design` skill: read its `SKILL.md` and follow it.
 
+## Existing-flow audit
+
+When the user asks to audit, critique, or fix an existing onboarding or product flow, read `references/product-audit.md` after the current facts are clear. Capture the flow before judging it, keep every finding tied to a step, and separate product-flow friction from visual or code defects.
+
 ## Reality check
 
 Read `references/product-reality-check.md` when the loop is unproven, the user is confused, or the direction has already been rejected once.
@@ -81,6 +85,7 @@ Read `references/product-reality-check.md` when the loop is unproven, the user i
 
 - `references/product-flow.md` — decision layers, grilling detail, and the Product Checkpoint, Discovery, Choice Challenge, and handoff templates.
 - `references/product-reality-check.md` — the check for unproven, confusing, or rejected product paths.
+- `references/product-audit.md` — minimum brief, project-local product context, and existing-flow audit for onboarding and product surfaces.
 
 ## Return
 

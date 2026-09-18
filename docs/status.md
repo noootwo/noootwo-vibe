@@ -9,7 +9,7 @@
 
 ## Current Validation Surface
 
-Last verified: 2026-09-17 on this worktree.
+Last verified: 2026-09-18 on this worktree.
 
 - `python scripts/validate_skill_workspace.py .` — includes the authoring budgets: `description` ≤ 200 characters, `SKILL.md` ≤ 120 lines, ≤ 12 reference files each named by a pointer, `short_description` 25–64 characters, no `default_prompt`, and no bare `$noootwo-` reference inside a skill body
 - `python scripts/validate_skill_workspace.py .` — also enforces the capability bridge: every skill named in a `SKILL.md` must exist, every public skill must appear in the `docs/agents/invocation.md` capability map, and every skill named there must exist
@@ -19,6 +19,7 @@ Last verified: 2026-09-17 on this worktree.
 - `git diff --check`
 - Behaviour measurement: `docs/experiments/skill-behaviour-2026-09-11.md`
 - `node --check` on `skills/noootwo-design/scripts/extract_design_tokens.mjs`, plus an end-to-end extraction against a foreign product site and a domestic design system
+- `docs/agents/borrow-audit.md` maps the prior art each skill was compared against; the Product Design plugin maps primarily to `noootwo-product`, and motion-web maps primarily to `noootwo-design`.
 
 ## Active Risks
 

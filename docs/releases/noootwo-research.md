@@ -1,5 +1,11 @@
 # noootwo-research Releases
 
+## v0.3.0
+
+- Added OpenAI Product Design plugin and `feitangyuan/motion-web` to the prior-art source pool with licence boundaries.
+- Reframed source pools as a broader prior-art map for the whole Noootwo suite, not only design and motion.
+- Sharpened the description toward "whether to borrow a public skill".
+
 ## v0.2.0
 
 - Reordered the design and UI source pools by what survives without a subscription, with a domestic-first emphasis, and recorded the access probe of 2026-09-16 and 2026-09-17.

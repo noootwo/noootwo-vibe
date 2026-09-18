@@ -1,5 +1,9 @@
 # noootwo-ask Releases
 
+## v0.1.3
+
+- Sharpened the router description so it does not turn a UI mention into a product or design decision.
+
 ## v0.1.2
 
 - Names eight specialists instead of six, adding `$noootwo-research` and `$noootwo-onboard`.

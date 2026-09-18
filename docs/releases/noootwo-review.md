@@ -1,5 +1,9 @@
 # noootwo-review Releases
 
+## v0.10.1
+
+- Sharpened the trigger as a Tech Lead and QA Architect pass, with explicit negative routing away from style critique.
+
 ## v0.10.0
 
 - Performance and optimization stay here, per ADR 0005 and `AGENTS.md`; no separate performance skill is added.

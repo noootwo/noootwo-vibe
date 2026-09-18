@@ -1,5 +1,11 @@
 # noootwo-product Releases
 
+## v0.8.0
+
+- Added `references/product-audit.md` for existing onboarding and product-flow audits.
+- Added a minimum brief and project-local product context snapshot to keep Product Design-style grounding project-scoped instead of global.
+- Sharpened the description toward new ideas, backend flows, and existing UX audit requests.
+
 ## v0.7.1
 
 - Fact-finding now bridges to `noootwo-research` when a fact exists only outside the repository — a competitor's behaviour, a user expectation, or prior art.

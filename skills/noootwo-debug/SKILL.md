@@ -1,6 +1,6 @@
 ---
 name: noootwo-debug
-description: "Use when something is broken, failing, flaky, or wrong: a bug, stack trace, failing test, regression, CI-only failure, or behaviour that used to work. Proves the cause before any fix."
+description: "Use for broken, failing, flaky, intermittent, CI-only, or previously working behaviour; prove the cause before fixing, and keep the fix the same size as the cause."
 ---
 
 # Noootwo Debug

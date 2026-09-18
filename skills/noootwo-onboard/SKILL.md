@@ -1,6 +1,6 @@
 ---
 name: noootwo-onboard
-description: "Use when entering an unfamiliar repository, taking over work from another agent, or deciding which skills a project needs. Audits the skill set and the foundation the work depends on."
+description: "Use when entering an unfamiliar repository, taking over from another agent, or deciding which skills a project needs; read nearest evidence first and do not load every skill."
 ---
 
 # Noootwo Onboard

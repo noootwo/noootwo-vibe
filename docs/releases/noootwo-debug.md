@@ -1,5 +1,9 @@
 # noootwo-debug Releases
 
+## v0.1.2
+
+- Sharpened the description around intermittent, CI-only, and previously working failures, and the same-size fix boundary.
+
 ## v0.1.1
 
 - Tightened the trigger: `slower than expected` left the description, because optimization is not a failure. A regression — behaviour that used to work — is still this skill's work.

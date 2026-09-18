@@ -2,7 +2,7 @@
 
 The shared motion base: how this product behaves over time. Read it for `standard`, `deep`, and `production` work, and whenever a direction, token set, or artifact claims motion.
 
-Motion is part of the direction, not a finishing pass. A direction that names structure, type, and colour but no motion is incomplete, and motion added after the layout has settled into a generic shape reads as garnish.
+Motion is a main material, not a finishing pass. The still page and its motion are two things that must both be true at the end: a great mechanic on a default-looking page is a failed page, and if the page would embarrass with motion switched off, it is not done. A direction that names structure, type, and colour but no motion is incomplete, and motion added after the layout has settled into a generic shape reads as garnish.
 
 ## Personality
 
@@ -182,6 +182,16 @@ Four rules are absolute and live with the quality floor in [craft](craft.md). Re
 | Cheap or flat | Missing secondary and ambient layers | Add shadow motion and background life |
 | Distracting | Too many elements moving | Apply the element rule, reduce amplitude |
 | No personality | Generic easing everywhere | Commit to one archetype |
+
+## Motion Probe
+
+When the artifact is heavy in motion or the user reports that a stretch feels dead, loose, or not following the pointer, capture evidence before changing curves. Use `scripts/extract_design_tokens.mjs --probe-motion <selector>` when the page is reachable, or record the limitation.
+
+Read the probe as a timing measurement, not a style verdict:
+
+- A high stillness ratio in a scroll-driven stretch is a timeline problem, not an easing problem.
+- Steady-state lag behind a moving target is `speed / k`; tune the filter or lead, not the spring.
+- An interaction can work without being discoverable. If a first-time visitor would not find a reveal or gesture, that is an affordance defect before it is a motion polish task.
 
 ## Sources
 
