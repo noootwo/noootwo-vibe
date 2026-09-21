@@ -12,13 +12,11 @@ Use this when reviewing maintainability, planning a refactor, or deciding whethe
 - Lean-Review Lens
 - Performance-Review Lens
 - Project-Health Lens
-- Refactoring Heuristics
-- Refactor Decision Gate
 - AI-Generated Code Smells
 - Review Severity
 - Anti-Patterns
 - Review Output Template
-- Refactor Plan Shape
+- Refactor scope and loop: [refactoring-loop.md](refactoring-loop.md)
 
 ## Practice Basis
 
@@ -137,33 +135,6 @@ Use `project-health-review.md` when the risk is not inside one code block but in
 
 Report these as `Project Defects` and route ownership instead of turning the code review into a docs rewrite.
 
-## Refactoring Heuristics
-
-- Start from observable behavior and keep it covered.
-- Prefer small behavior-preserving steps.
-- Extract only a concept that already exists in the code.
-- Split a file when responsibilities force unrelated context to be loaded together.
-- Inline an abstraction when it hides simple flow or has only one weak use.
-- Keep data transformation explicit at boundaries.
-- Separate mechanical moves from semantic changes when possible.
-
-## Refactor Decision Gate
-
-Refactor now only when at least one is true:
-
-- current behavior is hard to verify because boundaries are unclear
-- the same concept has at least two real implementations drifting apart
-- repeated edits require loading unrelated context
-- the current shape already caused a bug, missed test, or review confusion
-- a small extraction will make the requested change safer now
-
-Defer or reject when:
-
-- the abstraction only supports hypothetical future variants
-- the rewrite bundles behavior changes with cleanup without a test boundary
-- the current file is large but the requested change touches one clear area
-- the fix is mainly naming preference without failure mode
-
 ## AI-Generated Code Smells
 
 - overly broad manager/controller/service files
@@ -226,7 +197,7 @@ Lean Findings
 Handoff
 - `$noootwo-workflow`: sequencing, release, or unresolved decision ownership.
 - `$noootwo-product`: product behavior, user flow, states, or acceptance ambiguity.
-- `$noootwo-docs`: documentation/source-of-truth update ownership.
+- `$noootwo-state`: documentation/source-of-truth update ownership.
 - `$noootwo-design`: artifact or UI-quality review ownership.
 
 Summary
@@ -234,13 +205,3 @@ Summary
 ```
 
 If there are no findings, say that directly and still list verification gaps or residual risk.
-
-## Refactor Plan Shape
-
-When recommending a refactor, keep it small:
-
-1. Behavior to preserve.
-2. Test or command that proves preservation.
-3. Mechanical move or extraction.
-4. Minimal semantic change, if any.
-5. Cleanup of docs/tests only if the public behavior or workflow changed.

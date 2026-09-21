@@ -39,6 +39,7 @@ const USAGE = `Usage: node extract_design_tokens.mjs <url> [options]
   --chrome <path>     explicit Chrome binary
   --timeout <ms>      overall budget, default 45000
   --probe-motion <selector>  sample a moving element and report stillness ratio
+  --screenshot <file> write a viewport PNG screenshot
   --quiet             suppress the markdown summary on stdout
 `;
 
@@ -49,6 +50,7 @@ function parseArgs(argv) {
     json: null,
     dtcg: null,
     compare: null,
+    screenshot: null,
     chrome: null,
     probeMotion: null,
     viewport: { width: 1440, height: 900 },
@@ -56,7 +58,7 @@ function parseArgs(argv) {
     timeout: 45000,
     quiet: false,
   };
-  const takesValue = new Set(['--out', '--json', '--dtcg', '--compare', '--viewport', '--wait', '--chrome', '--timeout', '--probe-motion']);
+  const takesValue = new Set(['--out', '--json', '--dtcg', '--compare', '--viewport', '--wait', '--chrome', '--timeout', '--probe-motion', '--screenshot']);
 
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -651,6 +653,16 @@ async function main() {
         `the page did not render (${href || 'no url'}, ${observation.elementCount} elements). ` +
           'Record this source as unreachable rather than treating the capture as evidence.',
       );
+    }
+
+    if (options.screenshot) {
+      const shot = await client.send('Page.captureScreenshot', { format: 'png' });
+      const data = shot.result?.data;
+      if (!data) {
+        throw new Error('screenshot capture returned no data; record this source as unreachable');
+      }
+      mkdirSync(dirname(options.screenshot), { recursive: true });
+      writeFileSync(options.screenshot, Buffer.from(data, 'base64'));
     }
 
     for (const entry of observation.interactive) {

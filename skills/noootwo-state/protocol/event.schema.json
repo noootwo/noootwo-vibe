@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noootwo.dev/schemas/noootwo-state-event-v1.schema.json",
+  "title": "Noootwo State event v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol",
+    "event_id",
+    "event_type",
+    "occurred_at",
+    "domain",
+    "work_id",
+    "session_id",
+    "attempt_id",
+    "actor",
+    "basis",
+    "payload",
+    "idempotency_key"
+  ],
+  "properties": {
+    "protocol": { "const": "noootwo.state-event/0.1" },
+    "event_id": { "type": "string", "minLength": 1 },
+    "event_type": {
+      "enum": [
+        "state.created",
+        "state.updated",
+        "state.read",
+        "event.appended",
+        "format.selected",
+        "decision.recorded",
+        "narrative.recorded",
+        "release.recorded",
+        "evidence.recorded",
+        "procedure.recorded",
+        "blocker.opened",
+        "blocker.resolved",
+        "waiting",
+        "acceptance.requested",
+        "acceptance.received",
+        "completed",
+        "abandoned"
+      ]
+    },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "domain": { "type": "string", "minLength": 1 },
+    "work_id": { "type": "string", "minLength": 1 },
+    "session_id": { "type": "string", "minLength": 1 },
+    "attempt_id": { "type": "string", "minLength": 1 },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "name"],
+      "properties": {
+        "kind": { "enum": ["user", "caller", "harness"] },
+        "name": { "type": "string", "minLength": 1 }
+      }
+    },
+    "basis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "goal_hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "state_hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "artifact_hashes": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+        }
+      }
+    },
+    "payload": { "type": "object", "additionalProperties": true },
+    "idempotency_key": { "type": "string", "minLength": 1 }
+  }
+}

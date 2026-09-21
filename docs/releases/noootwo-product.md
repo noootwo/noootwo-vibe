@@ -1,5 +1,9 @@
 # noootwo-product Releases
 
+## v0.9.0
+
+- Project-local product context now persists through `noootwo-state` as an abstract record instead of writing `.noootwo/product-context.md` directly.
+
 ## v0.8.0
 
 - Added `references/product-audit.md` for existing onboarding and product-flow audits.

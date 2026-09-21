@@ -100,7 +100,7 @@ Read `references/fix-scope.md` for the scope ledger, the right-layer rule, and t
 
 ## 7. Close
 
-Report the chain: the cause, the proof, the scope, the verification, and what stays open. When behaviour, state, or release facts changed, invoke the `noootwo-docs` skill to place them: read its `SKILL.md` and follow it. When the fix reaches submit or release, invoke the `noootwo-review` skill: read its `SKILL.md` and follow it.
+Report the chain: the cause, the proof, the scope, the verification, and what stays open. When behaviour, state, or release facts changed, invoke the `noootwo-state` skill to place them: read its `SKILL.md` and follow it. When the fix reaches submit or release, invoke the `noootwo-review` skill: read its `SKILL.md` and follow it.
 
 **Done when:** the chain is in the answer, and the docs and review triggers are invoked or recorded as not applying.
 
@@ -115,3 +115,5 @@ Report the chain: the cause, the proof, the scope, the verification, and what st
 - `references/evidence-chain.md` — the chain artifact, raw-evidence rules, the toggle procedure, the worked example.
 - `references/hypotheses.md` — the hypothesis ledger, discriminating experiments, the assumption audit, intermittent failures.
 - `references/fix-scope.md` — the scope ledger, the right layer, mitigation versus real fix, siblings, cleanup.
+
+Missing skill fallback: first try `npx -y skills add noootwo/noootwo-vibe --global --agent codex --skill <name> --yes`; if install fails, take the smallest direct fallback and mark the record `skill-missing: <name>` (for persistence, write the owning file directly).

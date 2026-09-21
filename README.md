@@ -2,19 +2,20 @@
 
 Noootwo Vibe is a multi-skill workspace for controlled AI-assisted software development.
 
-It publishes nine focused skills — a router plus eight specialists:
+It publishes ten focused skills — a router plus nine specialists:
 
 | Skill | Invocation | Purpose | Version |
 | --- | --- | --- | --- |
-| `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in | `0.1.3` |
-| `noootwo-workflow` | model-invoked | Schedules one multi-step task and invokes the specialist that owns each trigger | `0.11.1` |
-| `noootwo-product` | model-invoked | Settles real user, first loop, scope, main path, states, and acceptance before design or build | `0.8.0` |
-| `noootwo-design` | model-invoked | Turns a settled product path into direction, tokens, a Design Contract, and a reviewed artifact | `0.14.0` |
-| `noootwo-review` | model-invoked | Judges code before it ships, diagnoses rework, and runs optimization against a metric and a budget | `0.10.1` |
-| `noootwo-docs` | model-invoked | Places each changed fact in its owning documentation layer | `0.9.2` |
-| `noootwo-debug` | model-invoked | Proves the cause of a failure before any fix, and bounds the fix to that cause | `0.1.2` |
-| `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, and borrows mechanisms instead of surfaces | `0.3.0` |
-| `noootwo-onboard` | model-invoked | Enters an unfamiliar project and audits which skills it needs | `0.1.1` |
+| `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in | `0.2.0` |
+| `noootwo-workflow` | model-invoked | Reads current project state, matches the correct installed skill, and schedules one next step at a time | `0.13.0` |
+| `noootwo-product` | model-invoked | Settles real user, first loop, scope, main path, states, and acceptance before design or build | `0.9.0` |
+| `noootwo-design` | model-invoked | Turns a settled product path into direction, tokens, a Design Contract, and a reviewed artifact | `0.15.0` |
+| `noootwo-tdd` | model-invoked | Owns red-green-refactor and test quality for behavior-changing code | `0.2.0` |
+| `noootwo-review` | model-invoked | Judges code before it ships, owns refactor/optimization review, re-testing, and user acceptance | `0.12.0` |
+| `noootwo-state` | model-invoked | Reads and records project state and context, and chooses the storage form | `0.1.0` |
+| `noootwo-debug` | model-invoked | Proves the cause of a failure before any fix, and bounds the fix to that cause | `0.2.0` |
+| `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, and borrows mechanisms instead of surfaces | `0.4.0` |
+| `noootwo-onboard` | model-invoked | Enters an unfamiliar project and audits which skills it needs | `0.2.0` |
 
 The repository root is not a published skill. It is the shared workspace for manifests, docs, validation, release helpers, and CI.
 
@@ -26,14 +27,14 @@ List all skills from the published repository:
 npx -y skills add noootwo/noootwo-vibe --list --full-depth
 ```
 
-Install all nine skills globally for Codex:
+Install all ten skills globally for Codex:
 
 ```bash
 npx -y skills add noootwo/noootwo-vibe --skill '*' --global --agent codex --yes
 ```
 
 The command uses the `skills` CLI's standard Agent Skills layout and installs the
-nine child skills under `~/.agents/skills/`. Start a new task after installation
+ten child skills under `~/.agents/skills/`. Start a new task after installation
 so the agent can discover them.
 
 Install one skill:
@@ -52,7 +53,7 @@ npx -y skills add /path/to/noootwo-vibe --skill '*' --global --agent codex --yes
 Update the globally installed Noootwo skills later with:
 
 ```bash
-npx -y skills update noootwo-ask noootwo-workflow noootwo-product noootwo-design noootwo-review noootwo-docs noootwo-debug noootwo-research noootwo-onboard --global --yes
+npx -y skills update noootwo-ask noootwo-workflow noootwo-product noootwo-design noootwo-tdd noootwo-review noootwo-state noootwo-debug noootwo-research noootwo-onboard --global --yes
 ```
 
 Single-skill local checks are also supported:
@@ -86,8 +87,9 @@ npx skills add ./skills/noootwo-design --list
     ├── noootwo-workflow/
     ├── noootwo-product/
     ├── noootwo-design/
+    ├── noootwo-tdd/
     ├── noootwo-review/
-    ├── noootwo-docs/
+    ├── noootwo-state/
     ├── noootwo-debug/
     ├── noootwo-research/
     └── noootwo-onboard/
@@ -99,15 +101,17 @@ npx skills add ./skills/noootwo-design --list
 
 `noootwo-ask` is the only user-invoked skill. Type it when you are unsure which skill fits; it names the right one and the order to run them in, at no context cost to the agent.
 
-`noootwo-workflow` schedules one multi-step task — a feature, a cross-file change, a bug, a refactor, a release, a handoff, or rework after a rejected fix. It owns order, scope, stop conditions, and handoffs; the specialists own the work. It reads the nearest repo truth, picks a mode, and invokes the skill that owns each trigger: `noootwo-debug` when something is broken, `noootwo-research` when a decision needs outside evidence, `noootwo-onboard` for an unfamiliar project, `noootwo-product` when product decisions are unsettled, `noootwo-design` for UI work, `noootwo-review` before submit or release, and `noootwo-docs` when facts changed. While a product decision is unsettled, or a cause is unproven, the loop stops.
+`noootwo-workflow` is the evidence-driven orchestrator. It reads current repo truth and project state through `noootwo-state`, matches the right owner from the available skill descriptions and artifact shape, and schedules one next step at a time. It owns order, scope, stop conditions, and handoffs; the specialists and matching installed skills own the work. It can invoke other installed skills for slides, documents, or media work without adding them to the Noootwo public set. When the owner is ambiguous or absent, it stops with one or two candidates instead of guessing.
 
 `noootwo-product` settles what should exist before anything is designed or built. It reads discoverable facts itself, names what is unsettled, and then grills the frontier — the questions answerable now — one round at a time, each question carrying options and a recommendation. It ends when the frontier is empty and the user confirms a shared understanding, then produces the Product-to-Design Handoff.
 
 `noootwo-design` turns a settled product path into a visual system. It declares a Design Read, compares directions when style or structure is unresolved, writes a Design Contract before editing, reads the craft floor immediately before building, and reviews the rendered artifact in bounded passes. For `deep` work it captures the references a direction leans on into `.noootwo/references/` with their provenance, extracts real values from a reachable page with its own zero-dependency Chrome extractor, locks the build target, and reports token and motion drift against that baseline afterwards. Motion is a language rather than a field: a personality archetype, a register set by the surface, a millisecond duration scale, an easing catalog, choreography budgets, and per-platform reduced-motion fallbacks. `ready` is never self-certified. When the real user, main path, states, or acceptance turn out to be unsettled, it invokes `noootwo-product`.
 
-`noootwo-review` judges code before it ships and diagnoses rework. It selects lenses — correctness, testability, architecture boundary, lean, performance, project health, release readiness, rework diagnosis — and leads with findings ordered by severity. Architecture remains a review lens; there is no separate `noootwo-architecture` skill.
+`noootwo-tdd` owns the test-first loop for behavior-changing code. It requires a failing test first, the minimal implementation, a full green test command, and refactoring only after green. It rejects production-first, tests-after, manual-test-only, and “too simple to test” reasoning.
 
-`noootwo-docs` places each changed fact in its owning layer — README, AGENTS, status, ADR, guide, reference, experiment, or release notes — and removes the stale version in the same pass. A change to behaviour, state, release facts, or agent instructions needs a docs decision before the work is closed.
+`noootwo-review` judges code before it ships and diagnoses rework. It selects lenses — correctness, testability, architecture boundary, lean, performance, project health, release readiness, rework diagnosis — and owns refactoring, optimization, re-testing, and the user acceptance gate. Architecture remains a review lens; there is no separate `noootwo-architecture` skill.
+
+`noootwo-state` owns project state and context persistence. It receives an abstract record request, chooses JSON/JSONL for queryable state and Markdown for narrative facts, then writes, validates, and reads the record. Other skills own content; this skill owns the form and location.
 
 `noootwo-debug` turns a symptom into a proven cause before any file changes. It pins expected against actual with the raw failure, reproduces on demand, localizes with numbered checkpoints or bisection, then closes two gates: no edit until the cause is proven and competing hypotheses are refuted by named experiments, and no claim of a fix until a toggle test and a failing-first regression test prove it. It keeps the fix the size of the cause and hands anything larger back to the user as a decision.
 
@@ -143,8 +147,9 @@ npx -y skills add ./skills/noootwo-workflow --list
 npx -y skills add ./skills/noootwo-product --list
 npx -y skills add ./skills/noootwo-ask --list
 npx -y skills add ./skills/noootwo-design --list
+npx -y skills add ./skills/noootwo-tdd --list
 npx -y skills add ./skills/noootwo-review --list
-npx -y skills add ./skills/noootwo-docs --list
+npx -y skills add ./skills/noootwo-state --list
 npx -y skills add ./skills/noootwo-debug --list
 npx -y skills add ./skills/noootwo-research --list
 npx -y skills add ./skills/noootwo-onboard --list
@@ -175,15 +180,16 @@ python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scena
 
 Each child skill has its own `VERSION` file and tag prefix:
 
-- `noootwo-ask@v0.1.3`
-- `noootwo-workflow@v0.11.1`
-- `noootwo-product@v0.8.0`
-- `noootwo-design@v0.14.0`
-- `noootwo-review@v0.10.1`
-- `noootwo-docs@v0.9.2`
-- `noootwo-debug@v0.1.2`
-- `noootwo-research@v0.3.0`
-- `noootwo-onboard@v0.1.1`
+- `noootwo-ask@v0.2.0`
+- `noootwo-workflow@v0.13.0`
+- `noootwo-product@v0.9.0`
+- `noootwo-design@v0.15.0`
+- `noootwo-tdd@v0.2.0`
+- `noootwo-review@v0.12.0`
+- `noootwo-state@v0.1.0`
+- `noootwo-debug@v0.2.0`
+- `noootwo-research@v0.4.0`
+- `noootwo-onboard@v0.2.0`
 
 The root `VERSION` records the workspace version only. Do not use it as the release source for child skills.
 

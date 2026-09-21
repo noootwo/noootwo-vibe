@@ -31,7 +31,7 @@ The signals below are written for a software repository. For another kind of pro
 | requirements, feature scope, user flow, IA, interaction model, permissions, states, acceptance criteria, confusion risk | `$noootwo-product` | clarify the product path and challenge high-impact choices |
 | UI, screenshots, visual system, `.noootwo/`, design handoff | `$noootwo-design` | declare the Design Read, contract the design, review the artifact |
 | code structure, refactor, tests, maintainability, architecture, performance and optimization work, AI-generated code risk | `$noootwo-review` | classify defects and judge before submit or release |
-| docs, status, README, AGENTS, ADR, or release facts changed or drifted | `$noootwo-docs` | place facts in the owning layer and remove stale claims |
+| docs, status, README, AGENTS, ADR, or release facts changed or drifted | `$noootwo-state` | place facts in the owning layer and remove stale claims |
 
 ## Local skill scan
 
@@ -74,6 +74,6 @@ Routing Order
 - Treating `$noootwo-design` as a general frontend code-quality review skill.
 - Letting `$noootwo-design` define feature scope or user paths that `$noootwo-product` should settle first.
 - Letting generic brainstorming own product discovery when `$noootwo-product` should find the first user and first loop.
-- Letting `$noootwo-review` write docs instead of handing defects to `$noootwo-docs`.
+- Letting `$noootwo-review` write docs instead of handing defects to `$noootwo-state`.
 - Running a bug fix here instead of routing to `$noootwo-debug`.
 - Adding a new public skill before proving a stable, repeated trigger.

@@ -1,5 +1,9 @@
 # noootwo-onboard Releases
 
+## v0.2.0
+
+- Project facts and foundation placement now route to `noootwo-state`; onboarding stays a routing and audit skill and no longer writes project state files.
+
 ## v0.1.1
 
 - Made the trigger clearer for unfamiliar repositories and agent takeovers, and kept the "do not load every skill" boundary.

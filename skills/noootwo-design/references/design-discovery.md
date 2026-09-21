@@ -47,6 +47,8 @@ For each source, write `.noootwo/references/<slug>/source.md` and capture `NN-<l
 - `capture`: the screenshot paths, or `unreachable` when none could be taken.
 - `reference intent`: `replicate`, `redesign`, or `borrow-mechanism`, and why.
 
+Take the screenshot in the same extractor pass that captures the values: `scripts/extract_design_tokens.mjs <url> --screenshot .noootwo/references/<slug>/NN-<label>.png`.
+
 When a source is unreachable or behind a login, record `capture: unreachable`, keep the URL, and continue with the sources that remain. A blocked source narrows the evidence; it never cancels the pass.
 
 Captured screenshots are personal reference held in the project's `.noootwo/` harness. They are not committed, not redistributed, and never a target to reproduce pixel for pixel. Borrow the mechanism — space, density, rhythm, state grammar, motion behaviour — and leave the artwork, brand assets, and exact composition behind.

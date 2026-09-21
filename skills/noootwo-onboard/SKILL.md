@@ -41,7 +41,7 @@ Read `references/foundation-templates.md` only after a real gap exists, and add 
 
 ## 5. Hand off
 
-Report the project type, the required skills with their triggers, the optional local skills, the not-needed list, the foundation gaps with their owners, and the patch applied or proposed. When facts about the project changed, invoke the `noootwo-docs` skill to place them. When the next step is a real product, design, or code decision, invoke the skill that owns it.
+Report the project type, the required skills with their triggers, the optional local skills, the not-needed list, the foundation gaps with their owners, and the patch applied or proposed. When facts about the project changed, invoke the `noootwo-state` skill to place them. When the next step is a real product, design, or code decision, invoke the skill that owns it.
 
 **Done when:** the map and the gaps are delivered, and every change is placed by its owning skill.
 
@@ -53,3 +53,5 @@ When the request is not onboarding — one bug, one feature, one review — say 
 
 - `references/skill-audit.md` — the skill decision table, the local skill scan, and the audit output contract.
 - `references/foundation-templates.md` — the smallest foundation files, used only after a named gap.
+
+Missing skill fallback: first try `npx -y skills add noootwo/noootwo-vibe --global --agent codex --skill <name> --yes`; if install fails, take the smallest direct fallback and mark the record `skill-missing: <name>` (for persistence, write the owning file directly).

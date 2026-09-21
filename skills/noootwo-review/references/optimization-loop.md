@@ -59,3 +59,10 @@ Optimization
 ## When to stop
 
 Stop when the budget is met, when the next change costs more than it returns, or when the remaining cost is structural — that becomes an architecture decision, reported rather than smuggled into this pass. Say which one applies.
+
+
+## Close and acceptance
+
+- After the change, run the relevant test command, not only a benchmark.
+- Record the re-test result and any verification gap.
+- Do not commit, push, tag, or publish until the review gate and user acceptance are complete.

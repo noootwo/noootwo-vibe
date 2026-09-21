@@ -1,5 +1,9 @@
 # noootwo-research Releases
 
+## v0.4.0
+
+- Deep briefs now persist through `noootwo-state` instead of `.noootwo/research/<slug>.md`, and durable findings hand off to the state skill.
+
 ## v0.3.0
 
 - Added OpenAI Product Design plugin and `feitangyuan/motion-web` to the prior-art source pool with licence boundaries.

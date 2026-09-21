@@ -1,5 +1,9 @@
 # noootwo-debug Releases
 
+## v0.2.0
+
+- Behaviour, state, and release facts now route to `noootwo-state` at close instead of a local docs owner.
+
 ## v0.1.2
 
 - Sharpened the description around intermittent, CI-only, and previously working failures, and the same-size fix boundary.

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noootwo.dev/schemas/noootwo-state-v1.schema.json",
+  "title": "Noootwo State current snapshot v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol",
+    "schema_version",
+    "work_id",
+    "session_id",
+    "attempt_id",
+    "updated_at",
+    "stage",
+    "waiting_on",
+    "goal",
+    "settled",
+    "unsettled",
+    "open_blockers",
+    "last_owner",
+    "last_result",
+    "next_trigger",
+    "last_event_id",
+    "state_hash",
+    "artifact_hashes",
+    "entries"
+  ],
+  "properties": {
+    "protocol": { "const": "noootwo.state/0.1" },
+    "schema_version": { "type": "integer", "minimum": 1, "maximum": 1 },
+    "work_id": { "type": "string", "minLength": 1 },
+    "session_id": { "type": "string", "minLength": 1 },
+    "attempt_id": { "type": "string", "minLength": 1 },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "stage": {
+      "enum": [
+        "routing",
+        "blocked",
+        "building",
+        "evaluating",
+        "accepting",
+        "done",
+        "abandoned"
+      ]
+    },
+    "waiting_on": { "enum": ["none", "user", "caller", "external"] },
+    "goal": { "type": "string", "minLength": 1 },
+    "settled": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
+    "unsettled": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
+    "open_blockers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "message", "status", "opened_at"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "message": { "type": "string" },
+          "owner": { "type": "string" },
+          "opened_at": { "type": "string", "format": "date-time" },
+          "status": { "enum": ["open", "resolved"] }
+        }
+      }
+    },
+    "last_owner": { "type": "string" },
+    "last_result": { "type": "string" },
+    "next_trigger": { "type": "string" },
+    "last_event_id": { "type": "string", "minLength": 1 },
+    "state_hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "artifact_hashes": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+    },
+    "entries": { "type": "object", "additionalProperties": true }
+  }
+}

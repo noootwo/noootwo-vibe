@@ -4,6 +4,8 @@ This file records, per Noootwo skill, the external sources we have compared agai
 
 Use this file before changing a skill's trigger, description, philosophy, or borrowed mechanism. Read the actual source, not just its README, before changing a row.
 
+Project-centric companion: `docs/reference/borrowed-skills.md` lists every external source and where it landed; this file lists every Noootwo skill and what it adopted or rejected. Read the companion for the archive, this map for the next maintenance decision.
+
 ## Evaluation axes
 
 For every candidate source we ask four questions:
@@ -27,11 +29,11 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 
 ### noootwo-workflow
 
-- Current role: one controlled loop, routing, scope, stop conditions.
-- Prior art: mature process skills; agent skill guidance; obra/superpowers-style gate wording.
-- Adopt: hard gates as judgments, bounded modes, read-first ladder, specialist handoff.
-- Reject: adding a heavyweight plan for direct edits; turning guardrails into ceremony.
-- Next pass: tighten the read-first ladder and mode table, keep `direct` nearly free.
+- Current role: evidence-driven re-entrant orchestration, one-next-step scheduling, scope, stop conditions, and external-skill discovery.
+- Prior art: Superpowers orchestration/executing-plans, writing-plans, subagent-driven-development; skill-discovery routers.
+- Adopt: read current project state before stage, match one owner by intent/artifact, keep direct cheap, stop on ambiguity, and persist `.noootwo/workflow-state.md`.
+- Reject: fixed keyword routing tables, full DAG pre-planning, adding external skills to the Noootwo public set.
+- Next pass: measure routing precision and mid-project resumption across eval scenarios.
 
 ### noootwo-product
 
@@ -64,21 +66,29 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 - Reject: paid MCP as required, full motion-web cases/scripts/assets, surface copying.
 - Next pass: sharpen motion philosophy, add source-fidelity QA for explicit replication, and add a light motion probe without new dependencies.
 
+### noootwo-tdd
+
+- Current role: red-green-refactor and test-quality discipline for behavior-changing code.
+- Prior art: Superpowers `test-driven-development` and `writing-good-tests`.
+- Adopt: must observe RED, minimal GREEN, full suite, mutation check, independent expectations, no mock-behavior assertions, explicit non-code exceptions.
+- Reject: verbatim Superpowers wording, production-first, tests-after, manual-test rationalization.
+- Next pass: measure feature/bugfix/refactor scenarios against hidden verifiers.
+
 ### noootwo-review
 
-- Current role: code, architecture, performance, maintainability, and release review.
-- Prior art: Ponytail lean-code-review ladder; web.dev/vitals, Lighthouse, SRE, OpenTelemetry, k6, PostgreSQL docs, JMH and related benchmark guidance.
-- Adopt: seven-rung lean review ladder, measurable performance evidence, severity output, separated review.
-- Reject: vendoring Ponytail or benchmark tools; adding a separate architecture or performance skill.
-- Next pass: sharpen the "Tech Lead / QA Architect, not style critique" trigger.
+- Current role: code, architecture, performance, maintainability, refactoring, optimization, re-test, and user acceptance.
+- Prior art: Ponytail lean-code-review ladder; Superpowers requesting/receiving code review and verification-before-completion; web.dev/vitals, Lighthouse, SRE, OpenTelemetry, k6, PostgreSQL docs, JMH and related benchmark guidance.
+- Adopt: seven-rung lean review ladder, measurable performance evidence, severity output, behavior-preserving refactor loop, re-test gate, and explicit user acceptance before submit/publish.
+- Reject: vendoring Ponytail or benchmark tools; adding a separate architecture or performance skill; allowing a refactor to ship without re-testing.
+- Next pass: measure scope control, missing-test handoff, and acceptance-gate scenarios.
 
-### noootwo-docs
+### noootwo-state
 
-- Current role: keep documents true and place changed facts in the owning layer.
-- Prior art: docs-as-code and technical-writing practice; Diátaxis-style separation of tutorial, how-to, reference, and decision material.
-- Adopt: single owner per fact, context budget, stale-claim audit.
-- Reject: more documents as the default answer.
-- Next pass: add a first principle that documents exist to prevent future drift, not to record activity.
+- Current role: own abstract project state/context persistence and choose the storage form.
+- Prior art: Kungfu's JSON Schema and hash bindings, TRACE's append-only NDJSON, Claude Code's append/load SessionStore, and mnemo's JSONL source plus Markdown projection.
+- Adopt: one owner per fact, property-only format selection, append-only events, schema/hash/idempotency validation, and cheap field/tail reads.
+- Reject: domain-specific vocabulary inside this skill, a database as the source of truth, and Node/jq dependencies for the query path.
+- Next pass: add eval coverage for format selection, stale-record replacement, and cross-session resume.
 
 ### noootwo-debug
 

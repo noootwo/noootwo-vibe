@@ -25,7 +25,7 @@ No decision named means no research. "Learn about X" is not a decision; "which o
 
 - `quick` — a directed lookup, one or two sources. One sentence plus the source, in the conversation, no file.
 - `standard` — a real comparison across several sources. An evidence brief in the conversation, no file.
-- `deep` — a high-cost or high-risk decision, a direction already rejected, or a claim you will publish. Write `.noootwo/research/<slug>.md` and require visible artifacts.
+- `deep` — a high-cost or high-risk decision, a direction already rejected, or a claim you will publish. Persist the brief through the `noootwo-state` skill and require visible artifacts.
 
 Size by the cost of being wrong, not by how interesting the question is.
 
@@ -68,7 +68,7 @@ For a stack or library decision, read `references/tech-selection.md` and score t
 ## 7. Record
 
 - `quick` and `standard` — one brief in the conversation: decision, finding, sources with evidence levels, the mechanism, the boundary, the counterexample, the confidence, and what would change the answer.
-- `deep` — the same brief at `.noootwo/research/<slug>.md`, plus the visible artifacts and the sources that were unreachable.
+- `deep` — the same brief persisted through `noootwo-state`, plus the visible artifacts and the sources that were unreachable.
 
 Confidence is `high`, `medium`, or `low`. Missing visual or artifact evidence caps confidence at `low`, and a `low` finding does not become a contract or an implementation plan.
 
@@ -84,7 +84,7 @@ Adopt only what prevents a repeated, concrete failure, fits the budget, keeps th
 
 ## 9. Hand off
 
-Report the finding and its boundary. When the decision is a product decision, invoke the `noootwo-product` skill: read its `SKILL.md` and follow it. When the finding changes a durable fact, invoke the `noootwo-docs` skill to place it. When it changes a visual direction, invoke the `noootwo-design` skill.
+Report the finding and its boundary. When the decision is a product decision, invoke the `noootwo-product` skill: read its `SKILL.md` and follow it. When the finding changes a durable fact, invoke the `noootwo-state` skill to place it. When it changes a visual direction, invoke the `noootwo-design` skill.
 
 When the request is not research at all — a local lookup, a bug, or an implementation — say so in one line and re-route instead of running a pass.
 
@@ -96,3 +96,5 @@ When the request is not research at all — a local lookup, a bug, or an impleme
 - `references/source-pools.md` — where to look by domain, the fallback ladder, and the access record.
 - `references/tech-selection.md` — evaluating libraries and stacks, and when to choose the boring option.
 - `references/borrow-audit.md` — comparing existing skills and public prior art, the adoption gate, and the do-not-copy list.
+
+Missing skill fallback: first try `npx -y skills add noootwo/noootwo-vibe --global --agent codex --skill <name> --yes`; if install fails, take the smallest direct fallback and mark the record `skill-missing: <name>` (for persistence, write the owning file directly).

@@ -2,10 +2,10 @@
 
 - Repository: `noootwo/noootwo-vibe`
 - Branch model: feature work on `codex/*`, default branch `main`
-- Public skill set: `noootwo-ask`, `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-docs`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard`
+- Public skill set: `noootwo-ask`, `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-tdd`, `noootwo-review`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard`
 - Release model: independently versioned child skills listed in `skills.json`
 - Root `SKILL.md`: intentionally absent so default skill discovery lists all child skills
-- Invocation model: `noootwo-ask` is user-invoked; the other eight are model-invoked
+- Invocation model: `noootwo-ask` is user-invoked; the other nine are model-invoked
 
 ## Current Validation Surface
 
@@ -13,9 +13,11 @@ Last verified: 2026-09-18 on this worktree.
 
 - `python scripts/validate_skill_workspace.py .` — includes the authoring budgets: `description` ≤ 200 characters, `SKILL.md` ≤ 120 lines, ≤ 12 reference files each named by a pointer, `short_description` 25–64 characters, no `default_prompt`, and no bare `$noootwo-` reference inside a skill body
 - `python scripts/validate_skill_workspace.py .` — also enforces the capability bridge: every skill named in a `SKILL.md` must exist, every public skill must appear in the `docs/agents/invocation.md` capability map, and every skill named there must exist
-- `python <skill-creator>/scripts/quick_validate.py skills/noootwo-*` for all nine skills
-- `npx -y skills add . --list` and `--full-depth` — must list nine skills
-- `python -m py_compile` on the design scripts
+- `python <skill-creator>/scripts/quick_validate.py skills/noootwo-*` for all ten skills
+- `npx -y skills add . --list` and `--full-depth` — must list ten skills
+- `python -m py_compile` on the design and state scripts
+- `sh -n skills/noootwo-state/scripts/noootwo-state.sh`
+- `python skills/noootwo-state/scripts/noootwo_state.py --self-test`
 - `git diff --check`
 - Behaviour measurement: `docs/experiments/skill-behaviour-2026-09-11.md`
 - `node --check` on `skills/noootwo-design/scripts/extract_design_tokens.mjs`, plus an end-to-end extraction against a foreign product site and a domestic design system
@@ -32,6 +34,8 @@ Last verified: 2026-09-18 on this worktree.
 - `noootwo-debug` v0.1.1, `noootwo-research` v0.1.0, and `noootwo-onboard` v0.1.0 are written from a research pass, not from a measured behaviour probe. Their gates are asserted, not yet shown to change what an agent does; the probes below are the evidence that would settle them.
 - The capability bridge is enforced mechanically at the name level only. It cannot check ordering, hand-off content, or the loop rules; those stay review questions.
 - `noootwo-review` now owns optimization work. The boundary with `noootwo-debug` is a description change and one sentence in each body, not yet a measured routing result.
+- `noootwo-workflow` now discovers installed external skills and reads/writes project state through `noootwo-state`. Its routing and timing behavior are new and should be measured in the workflow evals before being treated as stable.
+- `noootwo-tdd` is new and its red-green-refactor discipline is asserted, not yet measured across feature, bugfix, and refactor scenarios.
 - `noootwo-design` v0.13.0 adds case capture and a motion language. The extractor needs Node 22+ and a local Chrome; without both, a deep pass records a degraded capture rather than inventing values.
 - The motion rules added to `check_visual_gates.py` are advisory by design. An intentional brand curve can trip one, so a finding needs screenshot or DOM confirmation before it changes a decision.
 - The native motion guidance in `translate.md` is drawn from platform documentation, not from a measured SwiftUI or Compose project. A device check is still owed.

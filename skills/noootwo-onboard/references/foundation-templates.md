@@ -15,7 +15,7 @@ The default file names below assume a software repository. In another kind of pr
 - Use `$noootwo-debug` when something is broken, failing, flaky, or wrong: prove the cause before fixing.
 - Use `$noootwo-research` when a decision needs outside evidence: a direction, a stack or library, a market expectation.
 - Use `$noootwo-review` to judge code before it ships, including performance and optimization work.
-- Use `$noootwo-docs` to place changed facts in the owning layer.
+- Use `$noootwo-state` to place changed facts in the owning layer.
 - Use `$noootwo-onboard` when entering an unfamiliar repository or deciding which skills it needs.
 ```
 
@@ -103,4 +103,4 @@ Use ADRs for durable choices, not task logs.
 - Do not generate every template by default.
 - Prefer the one missing file that unblocks the current project.
 - Mark unknown facts as `unknown`, not invented certainty.
-- Route content placement to `$noootwo-docs` before writing multi-layer docs.
+- Route content placement to `$noootwo-state` before writing multi-layer docs.

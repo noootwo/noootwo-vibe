@@ -34,8 +34,9 @@ jobs:
           npx -y skills add ./skills/noootwo-workflow --list
           npx -y skills add ./skills/noootwo-product --list
           npx -y skills add ./skills/noootwo-design --list
+          npx -y skills add ./skills/noootwo-tdd --list
           npx -y skills add ./skills/noootwo-review --list
-          npx -y skills add ./skills/noootwo-docs --list
+          npx -y skills add ./skills/noootwo-state --list
 
       - name: Verify skill workspace
         run: python scripts/validate_skill_workspace.py .
@@ -49,7 +50,13 @@ jobs:
             skills/noootwo-design/scripts/validate_noootwo_readiness.py \
             skills/noootwo-design/scripts/check_visual_gates.py \
             skills/noootwo-design/scripts/eval_noootwo_artifacts.py \
-            skills/noootwo-design/scripts/noootwo_status.py
+            skills/noootwo-design/scripts/noootwo_status.py \
+            skills/noootwo-state/scripts/noootwo_state.py
+
+      - name: Verify Noootwo State scripts
+        run: |
+          sh -n skills/noootwo-state/scripts/noootwo-state.sh
+          python skills/noootwo-state/scripts/noootwo_state.py --self-test
 
       - name: Verify Noootwo Design harness bootstrap
         run: |

@@ -16,7 +16,7 @@ If a fact is already in the repo, read it before asking. Ask only for decisions,
 
 ## Project-local product context
 
-When the same product context will be reused by design or research, record it in `.noootwo/product-context.md`:
+When the same product context will be reused by design or research, invoke the `noootwo-state` skill to persist it; submit the following content as an abstract record instead of writing `.noootwo/product-context.md` directly:
 
 - product URL or app entry point
 - target platform and main task

@@ -5,26 +5,28 @@ description: "Use before submit or release, and for risky, public-contract, wide
 
 # Noootwo Review
 
-Judge the change and the smallest structural move that removes real risk. This is a Tech Lead and QA Architect pass, not a style critique.
-
-Architecture, test strategy, performance, and maintainability live here as lenses. Do not split them into a separate skill.
+Judge the change and the smallest structural move that removes real risk. Architecture, test strategy, performance, maintainability, refactoring, optimization, and acceptance live here as review lenses.
 
 ## When this runs
 
-Run it whenever code reaches submit or release, and whenever a diff is risky, public-contract, or wide in blast radius. Run it when the user rejects the same implementation twice: the `rework diagnosis` lens classifies which layer failed and names the skill that owns it.
+Run when code reaches submit or release, when a diff is risky, public-contract, or wide in blast radius, and when the same implementation is rejected twice. A code change reaching submit or release without a review decision is not closed.
 
-A code change that reaches submit or release without a review decision is not closed.
+## Scope
+
+- Default scope is the current change or current diff.
+- Full-project review or large refactor runs only when the user explicitly asks for it.
+- Make the smallest safe fix directly. Ask before expanding scope, changing product behavior, or choosing between real tradeoffs.
 
 ## Lenses
 
-Pick before reading widely. A narrow diff uses the lenses that match it; a project audit or release review may use several. State which you applied and which you skipped.
+Pick before reading widely. State which you applied and which you skipped.
 
 | Lens | Looks for |
 | --- | --- |
 | `correctness` | behaviour, contracts, data integrity, security, migrations, release breakage |
 | `testability` | missing or brittle proof for changed behaviour |
-| `architecture boundary` | ownership, public interfaces, module boundaries, data ownership, duplicated truth |
-| `lean` | over-engineering, YAGNI, unnecessary dependencies, redundant code, context-cost growth |
+| `architecture boundary` | ownership, public interfaces, module boundaries, duplicated truth |
+| `lean` | over-engineering, YAGNI, redundant code, context-cost growth |
 | `performance` | loading, rendering, latency, query cost, algorithmic hotspots, resource use |
 | `project health` | validation entry points, CI, release path, docs drift, handoff risk |
 | `release readiness` | versioning, tags, publish and install steps, rollback, user-visible notes |
@@ -32,37 +34,27 @@ Pick before reading widely. A narrow diff uses the lenses that match it; a proje
 
 ## Sizing
 
-- **Small diff** — one to three lenses, self-review the changed files and the nearest tests, fix locally.
-- **Medium, broad, or risky diff** — structured review. Always include `correctness` and `testability` when behaviour changes.
-- **Release-bound diff** — add `release readiness` and the project-health evidence for versioning, tags, install, and rollback.
-
-Make the smallest safe fix directly. Ask before a fix that expands scope, changes product behaviour, or chooses between real tradeoffs.
+- Small diff — one to three lenses, self-review changed files and nearest tests, fix locally.
+- Medium, broad, or risky diff — structured review; include correctness and testability when behavior changes.
+- Release-bound diff — add release readiness and project-health evidence.
 
 ## Method
 
-1. Read the changed files, the nearest tests, the callers, the public interfaces, and the docs describing the behaviour.
-2. Name the behaviour that must stay true, and the evidence that proves it.
-3. Classify the risk, then find the smallest structure that supports the current requirement.
+1. Read changed files, nearest tests, callers, public interfaces, and behavior docs.
+2. Name the behavior that must stay true and the evidence proving it.
+3. Classify risk, then find the smallest structure supporting the current requirement.
 4. Separate defects from future improvements.
 5. Prefer a local fix unless the same friction appears in more than one place.
 
+## Refactoring work
+
+When structure needs to change without changing behavior, read `references/refactoring-loop.md` and follow it. Do not bundle semantic changes with cleanup. After refactoring, rerun the full relevant test command and return through `references/review-gate.md`.
+
 ## Optimization work
 
-When the request is to make something faster, smaller, or cheaper, this is a measured change rather than a bug hunt. Read `references/optimization-loop.md` and run it in order:
-
-1. Name the metric and its budget before touching code.
-2. Take a reproducible baseline with a named command.
-3. Localize with a profile, trace, query plan, or bundle report — not with intuition.
-4. Change the smallest thing that moves the metric.
-5. Prove before and after, then leave the guard that keeps it.
-
-Stop when the budget is met, or when the next change costs more than it returns. A metric that moved without an explanation is not a win; it is a coincidence to investigate. When the symptom is a regression against a previously working state, that is a failure with a cause — invoke the `noootwo-debug` skill instead.
-
-**Done when:** the metric moved with a reproducible before/after, and a guard exists or its absence is recorded.
+When the request is faster, smaller, or cheaper, read `references/optimization-loop.md`. Name the metric and budget, baseline, localize, change the smallest thing, prove before/after, and leave a guard. A regression against a previously working state belongs to `noootwo-debug`.
 
 ## What to look for
-
-Concrete risk first:
 
 - behavioural regressions
 - unclear ownership or module boundaries
@@ -71,37 +63,38 @@ Concrete risk first:
 - abstractions with no current pressure
 - missing tests around shared behaviour
 - credible performance risk
-- files that force an agent to load unrelated context
-- skill instructions that make small tasks run long interviews or heavy gates
-- product behaviour that changed without settled acceptance criteria
+- files that force unrelated context to load
+- product behavior changed without settled acceptance
+- redundant code left "for later"
 
-Agent-generated failure modes get their own attention: broad files, generic wrappers invented before the second use, hidden state and side effects, tests that mirror implementation details, and comments or docs that claim stability without a proving command.
+Agent-generated failure modes: broad files, premature wrappers, hidden state, tests that mirror implementation details, and claims of stability without a proving command.
 
 ## Output
 
-Lead with findings, ordered by severity. For each: the file and line, why it matters, the concrete failure mode or maintenance cost, and the smallest fix.
+Lead with findings ordered by severity: file and line, why it matters, concrete failure mode, smallest fix. If none, say so and name remaining verification gaps.
 
-If there are none, say so and name the remaining verification gaps.
+Structured review includes applied/skipped lenses, evidence read, findings, verification gaps, re-test evidence, acceptance state, and handoff owners.
 
-For a structured review, include the applied lenses, the skipped lenses and why, the evidence read, the findings, the verification gaps, and the owning skill for anything handed off.
-
-Severity: `P0` data loss, security, or a broken release; `P1` a likely behavioural bug or broken contract; `P2` a maintainability issue likely to cause near-term mistakes; `P3` optional cleanup.
+Severity: `P0` data loss, security, or broken release; `P1` likely behavioral bug or broken contract; `P2` near-term maintainability risk; `P3` optional cleanup.
 
 ## Hand off
 
-- Product behaviour or acceptance unclear → invoke the `noootwo-product` skill.
-- Sequencing or scope control needed → invoke the `noootwo-workflow` skill.
-- Documentation or duplicated truth → invoke the `noootwo-docs` skill.
-- Visual or artifact quality → invoke the `noootwo-design` skill.
-- A defect's cause is unknown and the fix needs proof → invoke the `noootwo-debug` skill.
-- The judgment needs outside evidence — a library, a benchmark, prior art → invoke the `noootwo-research` skill.
+- Missing or brittle tests → invoke `noootwo-tdd` by reading its `SKILL.md` and following it.
+- Product behavior or acceptance unclear → invoke `noootwo-product`.
+- Sequencing or scope control → invoke `noootwo-workflow`.
+- State, context, or duplicated truth → invoke `noootwo-state`.
+- Visual or artifact quality → invoke `noootwo-design`.
+- Unknown defect cause → invoke `noootwo-debug`.
+- Outside evidence needed → invoke `noootwo-research`.
 
-To invoke one, read its `SKILL.md` and follow it.
+## References
 
-## Reference
-
-- `references/code-quality-playbook.md` — refactors, architecture, splitting files, and repeated implementation friction.
+- `references/code-quality-playbook.md` — lens detail, severity, architecture, AI-code smells, and review output.
 - `references/lean-code-review.md` — over-engineering, YAGNI, dependency bloat, and token-cost growth.
 - `references/performance-review.md` — loading, rendering, latency, query cost, and regression risk.
-- `references/optimization-loop.md` — metric, budget, baseline, localization, before/after proof, and the guard.
+- `references/optimization-loop.md` — metric, budget, baseline, localization, before/after proof, and guard.
 - `references/project-health-review.md` — foundation, validation paths, CI, release risk, and module boundaries.
+- `references/review-gate.md` — scope, TDD precondition, re-test, and user acceptance gate.
+- `references/refactoring-loop.md` — behavior-preserving refactor steps and scope control.
+
+Missing skill fallback: first try `npx -y skills add noootwo/noootwo-vibe --global --agent codex --skill <name> --yes`; if install fails, take the smallest direct fallback and mark the record `skill-missing: <name>` (for persistence, write the owning file directly).

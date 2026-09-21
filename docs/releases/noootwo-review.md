@@ -1,5 +1,14 @@
 # noootwo-review Releases
 
+## v0.12.0
+
+- Added `references/review-gate.md` for scope, TDD precondition, re-test, and user acceptance.
+- Added `references/refactoring-loop.md` and moved refactor-specific rules out of `code-quality-playbook.md`.
+- Added a hard user acceptance gate: non-direct code changes and refactor/optimization work must wait for explicit acceptance before commit, push, tag, or publish.
+- Routed missing or brittle tests to `noootwo-tdd`.
+- Updated optimization done conditions to include re-test and acceptance.
+- Durable state, context, and documentation placement now route to `noootwo-state`; review hands changed facts to the state skill instead of writing docs.
+
 ## v0.10.1
 
 - Sharpened the trigger as a Tech Lead and QA Architect pass, with explicit negative routing away from style critique.

@@ -1,5 +1,10 @@
 # noootwo-ask Releases
 
+## v0.2.0
+
+- Added `noootwo-tdd` to the main flow, choosing table, and standalone list.
+- Replaced the `noootwo-docs` slot with `noootwo-state` for record and context placement, and updated the public set to ten skills.
+
 ## v0.1.3
 
 - Sharpened the router description so it does not turn a UI mention into a product or design decision.

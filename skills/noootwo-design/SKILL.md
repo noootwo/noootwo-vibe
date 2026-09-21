@@ -39,7 +39,7 @@ Compare materially different directions when style or structure is unresolved, a
 
 Read `references/design-discovery.md` for the discovery pass and the `.noootwo/style-discovery.md` contract. When the work is high-character, niche, premium, or previously rejected, invoke the `noootwo-research` skill first: read its `SKILL.md` and follow it — a design claim needs a source, an artifact, or a screenshot.
 
-For `deep` work, capture every reference the direction leans on into `.noootwo/references/<slug>/`, with a `source.md` recording URL, date, evidence level, accessibility result, and licence; capture real values from a live source with `scripts/extract_design_tokens.mjs` when a page or running product is reachable, and record inaccessible sources as `capture: unreachable`. Lock the build target and what must not drift before drafting, and let one direction dominate instead of averaging several. `standard` work stays on the lighter path in `references/design-discovery.md`.
+For `deep` work, capture every reference the direction leans on into `.noootwo/references/<slug>/`, with a `source.md` recording URL, date, evidence level, accessibility result, and licence; capture real values from a live source with `scripts/extract_design_tokens.mjs` and its `NN-<label>.png` screenshot with `--screenshot` when a page or running product is reachable, and record inaccessible sources as `capture: unreachable`. Lock the build target and what must not drift before drafting, and let one direction dominate instead of averaging several. `standard` work stays on the lighter path in `references/design-discovery.md`.
 
 When the direction carries motion, set the register from the surface before looking for examples, then source two or three in that register and record each as a mechanism rather than a look. Expressive motion on a quiet product screen is drift, not ambition.
 
@@ -70,6 +70,8 @@ Name semantic roles, not adjectives. Stable decisions become tokens, component r
 Read `references/craft.md` immediately before editing UI. It carries the quality floor and the hard bans. Read `references/motion.md` when the direction carries motion or the artifact animates.
 
 Read `references/translate.md` to turn the contract into stack-native implementation, assets, and handoff. Read `references/system.md` when the work touches tokens, a design system, or a new artifact family.
+
+When a direction, token set, or review outcome becomes durable, invoke the `noootwo-state` skill to persist it: read its `SKILL.md` and follow it, and submit an abstract record instead of writing shared project state directly.
 
 **Done when:** the artifact runs and every contract item is visibly present.
 
@@ -110,3 +112,5 @@ When this is not design work, name the failed layer and invoke the owning skill 
 - `references/evidence.md` — verified cases and distilled reference-skill rules.
 - `references/notes.md` — research notes and cost boundaries.
 - `scripts/extract_design_tokens.mjs` — capture real colours, type, spacing, shape, and motion values from a live page, and report drift against a saved baseline.
+
+Missing skill fallback: first try `npx -y skills add noootwo/noootwo-vibe --global --agent codex --skill <name> --yes`; if install fails, take the smallest direct fallback and mark the record `skill-missing: <name>` (for persistence, write the owning file directly).

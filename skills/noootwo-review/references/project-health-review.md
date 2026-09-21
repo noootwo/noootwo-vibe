@@ -50,7 +50,7 @@ Verification Gaps
 
 Handoff
 - `$noootwo-workflow`: routing/process gap.
-- `$noootwo-docs`: documentation/source-of-truth gap.
+- `$noootwo-state`: documentation/source-of-truth gap.
 ```
 
 ## Boundaries

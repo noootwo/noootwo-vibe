@@ -24,17 +24,20 @@ This repository does **not** set `disable-model-invocation`. It ships as a Codex
 
 | Skill | Invocation | Role |
 | --- | --- | --- |
-| `noootwo-ask` | user-invoked | router: names the other five and when to reach for each |
+| `noootwo-ask` | user-invoked | router: names the other skills and when to reach for each |
 | `noootwo-workflow` | model-invoked | lifecycle guardrails and running a multi-step task |
 | `noootwo-product` | model-invoked | settling product decisions before design or build |
 | `noootwo-design` | model-invoked | UI, visual, and artifact work after the product path is settled |
-| `noootwo-review` | model-invoked | code and project-health review, and diagnosing rework |
-| `noootwo-docs` | model-invoked | placing changed facts in the right documentation layer |
+| `noootwo-tdd` | model-invoked | red-green-refactor and test quality for behavior-changing code |
+| `noootwo-review` | model-invoked | code and project-health review, refactoring, optimization, and acceptance |
+| `noootwo-state` | model-invoked | recording and reading project state/context and choosing storage format |
 | `noootwo-debug` | model-invoked | proving a cause and bounding the fix when something is broken |
 | `noootwo-research` | model-invoked | settling a decision that only external evidence can settle |
 | `noootwo-onboard` | model-invoked | entering an unfamiliar project and auditing which skills it needs |
 
 Only `noootwo-ask` is user-invoked, because only it exists purely to orient a human. Every other skill must be reachable by the agent and by its siblings.
+
+`noootwo-workflow` may discover and invoke other installed skills as execution resources when the task belongs outside the Noootwo set, such as slides, documents, or media work. Those skills are not added to the public set or the capability map.
 
 ## Router
 
@@ -52,6 +55,13 @@ Naming the mechanism is what gets it fired. A bare `$noootwo-design` left in pro
 
 One skill per instruction. A step needing two skills is two instructions.
 
+## Missing-skill fallback
+
+A skill can be installed alone. When a named skill is missing, follow
+`docs/agents/dependency-fallback.md`: try to install it from the published workspace,
+and if install fails take the smallest direct fallback and mark the record
+`skill-missing: <name>`. Do not silently degrade or impersonate the missing owner.
+
 ## The capability bridge
 
 Every capability has exactly one owner. A caller invokes the owner; it never re-implements the capability itself.
@@ -60,14 +70,15 @@ Every capability has exactly one owner. A caller invokes the owner; it never re-
 
 | Capability | Owner | Callable by | Returned |
 | --- | --- | --- | --- |
-| proving the cause of a failure, and bounding the fix to it | `noootwo-debug` | `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-docs`, `noootwo-research`, `noootwo-onboard` | the evidence chain, the proven cause, the fix scope, the toggle and regression proof, and what remains unproven |
-| settling a decision that external evidence decides, and surveying prior art | `noootwo-research` | `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-docs`, `noootwo-debug`, `noootwo-onboard` | sources with evidence levels, the mechanisms found, applicability and boundaries, counterexamples, and a `.noootwo/research/<slug>.md` brief at `deep` |
+| proving the cause of a failure, and bounding the fix to it | `noootwo-debug` | `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-state`, `noootwo-research`, `noootwo-onboard` | the evidence chain, the proven cause, the fix scope, the toggle and regression proof, and what remains unproven |
+| settling a decision that external evidence decides, and surveying prior art | `noootwo-research` | `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-state`, `noootwo-debug`, `noootwo-onboard` | sources with evidence levels, the mechanisms found, applicability and boundaries, counterexamples, and a `deep` brief persisted through `noootwo-state` |
 | entering an unfamiliar project and auditing its skill set | `noootwo-onboard` | `noootwo-ask`, `noootwo-workflow`, `noootwo-product` | required, optional, and not-needed skills with triggers; foundation gaps; the smallest unblocking patch |
-| settling product decisions | `noootwo-product` | `noootwo-workflow`, `noootwo-design`, `noootwo-review`, `noootwo-docs`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard` | settled, delegated, deferred, and rejected decisions, plus the Product-to-Design Handoff |
-| turning a settled product path into a reviewed artifact | `noootwo-design` | `noootwo-workflow`, `noootwo-product`, `noootwo-review`, `noootwo-docs`, `noootwo-research`, `noootwo-onboard` | Design Read, Design Contract, and an Artifact Review decision against artifact evidence |
-| judging code and project health, including performance work | `noootwo-review` | `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-docs`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard` | severity-ordered findings, the lenses applied, evidence read, verification gaps, and the owning skill for each handoff |
-| placing a changed fact in its owning layer | `noootwo-docs` | `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard` | the updated owning layer, or a recorded decision that nothing changed |
-| ordering, scope, stop conditions, and handoffs | `noootwo-workflow` | the human, `noootwo-ask`, and every specialist handing sequencing back: `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-docs`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard` | mode, sequence, handoffs, and the close report |
+| settling product decisions | `noootwo-product` | `noootwo-workflow`, `noootwo-design`, `noootwo-review`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard` | settled, delegated, deferred, and rejected decisions, plus the Product-to-Design Handoff |
+| turning a settled product path into a reviewed artifact | `noootwo-design` | `noootwo-workflow`, `noootwo-product`, `noootwo-review`, `noootwo-state`, `noootwo-research`, `noootwo-onboard` | Design Read, Design Contract, and an Artifact Review decision against artifact evidence |
+| running red-green-refactor and keeping tests honest | `noootwo-tdd` | `noootwo-workflow`, `noootwo-review` | the green test evidence, the minimal implementation, and the behavior-preserving refactor baseline |
+| judging code and project health, including performance work | `noootwo-review` | `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard` | severity-ordered findings, the lenses applied, evidence read, verification gaps, and the owning skill for each handoff |
+| recording and reading project state/context and choosing storage format | `noootwo-state` | `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-tdd`, `noootwo-review`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard` | the stored record, the chosen form and location, the read result, or a recorded decision that nothing changed |
+| ordering, scope, stop conditions, and handoffs | `noootwo-workflow` | the human, `noootwo-ask`, and every specialist handing sequencing back: `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard`, `noootwo-tdd` | mode, sequence, handoffs, and the close report |
 
 A skill body may name a sibling only when that sibling's row lists the caller. Naming a skill is the instruction to load it, so an undeclared name is a call the bridge never authorized. `noootwo-ask` is exempt: it names skills as hints for the human and can never fire one.
 

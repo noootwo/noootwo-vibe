@@ -1,5 +1,15 @@
 # noootwo-workflow Releases
 
+## v0.13.0
+
+- Replaced the fixed Noootwo routing table with evidence-driven orchestration.
+- Added `references/route-by-signal.md` to match one owner by intent, artifact shape, current blockers, and available skill descriptions.
+- Added `references/orchestration.md` for one-next-step scheduling and explicit stop conditions.
+- Allowed workflow to discover and invoke other installed skills for slides, documents, or media work without adding them to the Noootwo public set.
+- When no owner is clear or two owners tie, workflow stops with one or two candidates instead of guessing.
+- Routed behavior-changing code through the new `noootwo-tdd` skill before `noootwo-review`.
+- Workflow state and scheduling now read and write through `noootwo-state` instead of a local `.noootwo/workflow-state.md`; reads use the state helper (`state --field`, `events --last`, `summary`).
+
 ## v0.11.1
 
 - Tightened the description around multi-step work while making explicit that direct one-file edits stay direct.
@@ -36,7 +46,7 @@
 ## v0.8.0
 
 - Replaced vague "non-trivial" triggers with concrete task-start triggers: new feature, product idea, multi-file/cross-skill change, bugfix, refactor, release, onboarding/handoff, recovery, and correction-loop routing.
-- Added routing-as-invocation: specialist triggers must explicitly invoke `$noootwo-product` / `$noootwo-design` / `$noootwo-review` / `$noootwo-docs`; unavailable skills are declared with a fallback instead of silent substitution.
+- Added routing-as-invocation: specialist triggers must explicitly invoke `$noootwo-product` / `$noootwo-design` / `$noootwo-review` / `$noootwo-state`; unavailable skills are declared with a fallback instead of silent substitution.
 - Added rework diagnosis after user rejection: diagnose the failed layer and route to the matching skill instead of polishing the same layer.
 - Compacted the handoff contract into per-specialist packets.
 - Added workflow evals for wake-on-feature, specialist invocation, interview pause, and rework diagnosis.

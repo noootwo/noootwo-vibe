@@ -1,5 +1,9 @@
 # noootwo-design Releases
 
+## v0.15.0
+
+- Durable directions, token sets, and review outcomes now hand off to `noootwo-state`; design's own `.noootwo/` working artifacts remain design-owned.
+
 ## v0.14.0
 
 - Rewrote the motion philosophy so the still page and motion are co-equal completion criteria.

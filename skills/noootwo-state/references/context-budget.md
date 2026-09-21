@@ -4,7 +4,7 @@ Use this when a documentation source is becoming expensive to read, when a statu
 
 ## Principle
 
-Documentation should make the next task cheaper. If a file is read often, it must be short, scoped, and good at routing to deeper material. Long evidence, history, and research belong behind searchable names, not in always-read entrypoints.
+Documentation should make the next task cheaper. If a file is read often, it must be short, scoped, and good at routing to deeper material. Long evidence, history, and raw material belong behind searchable names, not in always-read entrypoints.
 
 ## Heat Layers
 
@@ -14,25 +14,25 @@ Documentation should make the next task cheaper. If a file is read often, it mus
 | Status snapshot | `docs/status.md` or equivalent project status | target under 120 lines; hard stop at 200 lines |
 | On-demand references | `references/`, `docs/reference/`, skill-specific playbooks | one topic per file; clear read trigger near the top |
 | Durable history | `docs/releases/`, `docs/adr/` | concise dated records, not session transcripts |
-| Cold evidence | raw research, long logs, screenshots, old task notes | searchable storage or out of repo; do not load by default |
+| Cold evidence | raw evidence, long logs, screenshots, old task notes | searchable storage or out of repo; do not load by default |
 
 ## Placement Table
 
 | Fact | Owner |
 | --- | --- |
-| Current repository state, current risks, latest validation, next actions | `docs/status.md` |
+| Current repository state, current risks, current validation, next actions | `docs/status.md` |
 | Version changes, user-visible migration notes, tag history | `docs/releases/` |
-| Durable product, workflow, architecture, or role-boundary decisions | `docs/adr/` |
+| Durable choices, boundaries, and role decisions | `docs/adr/` |
 | Repeated workflows and how-to procedures | `docs/guides/` |
 | Stable commands, schemas, manifests, field lists, API references | `docs/reference/` |
-| Raw research, old process notes, transcripts, long command output | cold storage, archive, or deletion |
+| Raw evidence, old process notes, transcripts, long command output | cold storage, archive, or deletion |
 
 ## Status Compression Rules
 
 When `docs/status.md` grows past the target budget:
 
 1. Keep only the current project identity, live validation surface, active risks, and next actions.
-2. Replace older validation runs with the latest verified command set and date.
+2. Replace older validation runs with the current verified command set and date.
 3. Remove completed risks from status after their release note, ADR, or reference owner exists.
 4. Move historical version details to release notes.
 5. Move stable decisions to ADRs.
