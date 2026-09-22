@@ -432,7 +432,38 @@ Any of these forces `refine`:
 
 ### Lightweight Automation
 
-Use `scripts/check_visual_gates.py` when a local URL or static HTML file is available. The script checks overflow and obvious clipped text across the required viewports. It is a guardrail, not a substitute for design judgment.
+Use `scripts/check_visual_gates.py` when a local URL or static HTML file is available. The script checks overflow, obvious clipped text, and a small advisory interface set across the required viewports. It is web-artifact only; for Flutter, SwiftUI, and Compose, use the platform notes below and a real preview or device. It is a guardrail, not a substitute for design judgment, and its interface findings need source, accessibility-tree, or keyboard confirmation before they change a decision.
+
+
+## Interaction And Accessibility Gate
+
+Use this before `ready` on any non-trivial UI artifact. Accessibility is part of visual quality, not a separate compliance pass. Platform equivalents matter more than web syntax.
+
+### Required Checks
+
+- Every action and input has an accessible name. Web: visible label, `aria-label`, or `aria-labelledby`; Flutter: `Semantics` label; SwiftUI: `accessibilityLabel`; Compose: `contentDescription` or semantic text.
+- Every critical action is reachable by keyboard, switch control, remote, or the platform's primary non-pointer path. No gesture-only or hover-only action without an equivalent.
+- Focus and selection are visible, ordered, and never covered by sticky headers, sheets, or overlays. Web uses `:focus-visible`; Flutter and native use focus traversal and selection states.
+- Touch targets meet the platform floor: about `40px` on web, `48dp` on Android and Flutter Material, `44pt` on iOS. Extend the hit area without enlarging the visible control when the direction needs a small shape.
+- State is never carried by colour alone. Pair semantic colour with text, icon, shape, position, or an explicit message.
+- Async feedback such as validation, save, or toast is announced or otherwise exposed. Web: `aria-live`; Flutter: `SemanticsService.announce` or a live region; iOS and Android: platform notification or focus movement.
+- Text scale and zoom remain available. Web must not disable zoom; Flutter, SwiftUI, and Compose must survive the system text-scale range without clipping the task.
+- Reduced motion preserves meaning: replace spatial movement with a crossfade or instant state change, and keep the state information visible.
+- Destructive actions have confirmation or undo. Long content, long identifiers, and empty values have a defined rendering instead of breaking the layout.
+- Decorative media is hidden from assistive technology; meaningful media has a label, caption, or transcript as appropriate.
+
+### Platform Notes
+
+- **Web**: use semantic HTML before ARIA; `<button>` for actions and `<a>` for navigation; do not put click handlers on `div` or `span`; keep paste and zoom enabled; lazy-load below-fold images and keep dimensions stable.
+- **Flutter**: prefer `Semantics`, `Tooltip`, `MergeSemantics`, `FocusTraversalGroup`, and platform focus behavior; respect `MediaQuery.textScaler` and `MediaQuery.disableAnimations`; keep Material and Cupertino interaction expectations.
+- **SwiftUI**: use accessibility labels, hints, actions, Dynamic Type, and Reduce Motion; preserve native navigation, focus, and minimum hit areas.
+- **Compose**: use semantics, content descriptions, roles, focus order, and Material touch targets; respect system text scale and animator duration scale.
+
+### Review Action
+
+- A missing accessible name, keyboard path, focus indicator, or reduced-motion fallback on a critical action is a `refine`, not a cosmetic note.
+- A gesture-only or hover-only critical action is `refine` until an equivalent exists.
+- If the platform artifact is unavailable, record the limitation and choose `needs artifact` or `refine`; do not mark accessibility verified from code alone.
 
 
 ## Data Ui Rubric
@@ -442,6 +473,18 @@ Use this for dashboards, analytics, monitoring, finance, ops workbenches, admin 
 ### Core Rule
 
 Charts and metrics cannot be decorative. They must help the user decide, diagnose, compare, prioritize, or act.
+
+### Data Presentation Matrix
+
+| Data | Preferred rendering | Platform note |
+| --- | --- | --- |
+| Path or identifier | mono or stable-width text; truncate visually and preserve the full value in a tooltip, copy action, or detail view | keep the full value available to assistive technology; do not let truncation hide the only copy path |
+| Time or date | relative age in dense rows, absolute value in the detail or tooltip | use `Intl.DateTimeFormat`, Flutter `DateFormat`, SwiftUI format styles, or Android locale formatters |
+| Number or unit | locale-aware formatting, visible unit, tabular figures for comparison | use `Intl.NumberFormat`, Flutter `NumberFormat`, SwiftUI `FormatStyle`, or Android locale formatting |
+| Status | icon, text, and semantic colour together | never use colour alone; map one status to one glyph and one label |
+| Badge or chip | one compact fact, low-noise surface, clear label | do not turn every fact into a pill; long labels wrap or move to detail |
+| Icon | pair with a label for non-trivial actions; decorative icons stay hidden | icon-only controls still need an accessible name |
+| Missing or partial data | explicit empty, pending, partial, or unavailable state | do not render a zero, dash, or blank cell that changes meaning |
 
 ### Required Checks
 

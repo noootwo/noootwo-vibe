@@ -105,6 +105,7 @@ When this is not design work, name the failed layer and invoke the owning skill 
 - `references/direction.md` — direction exploration, Style Evidence Check, and mechanism translation.
 - `references/design-discovery.md` — the discovery pass, influence discovery, fit scoring, and the `.noootwo/style-discovery.md` contract.
 - `references/motion.md` — personality archetypes, duration scale, easing catalog, choreography budgets, and the motion bans.
+- `references/motion-libraries.md` — the register gate, per-platform motion tools, licence and dependency checks, and adapt-or-reject recipes.
 - `references/system.md` — tokens, design-system extraction, and artifact-family contracts.
 - `references/craft.md` — anti-slop, typography, colour, responsive, and data-UI craft floors.
 - `references/review.md` — scoring, gates, hard bans, and final review.

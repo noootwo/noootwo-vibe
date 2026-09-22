@@ -56,15 +56,15 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 - Prior art: `dzhng/deep-research`, `mvanhorn/last30days`, `obra/superpowers`, `pbakaus/impeccable`, `mattpocock/skills`, `anthropics/skills`, OpenAI Product Design, `feitangyuan/motion-web`.
 - Adopt: breadth/depth control, evidence ladder, mechanism extraction, borrow-audit gate.
 - Reject: copying source wording, paid MCP as default path, dependencies that tax cheap modes.
-- Next pass: turn `source-pools.md` into a broader prior-art map for every Noootwo skill, not only design and motion.
+- Next pass: keep expanding `source-pools.md` across product, stack, community, and domain-specific pools; the motion pool now carries licence and maintenance checks.
 
 ### noootwo-design
 
 - Current role: UI, visual, artifact, and frontend work after product path is settled.
-- Prior art: Anthropic frontend-design, impeccable, `ddruids/mobbin-skill`, `dembrandt`, `designlang`, `tinte`, `LottieFiles/motion-design-skill`, `kylezantos/design-motion-principles`, `Meet-Miyani/compose-skill`, Refero, and `feitangyuan/motion-web`.
-- Adopt: case capture, computed-style extraction, drift gate, motion language, reference lock, anti-averaging.
-- Reject: paid MCP as required, full motion-web cases/scripts/assets, surface copying.
-- Next pass: sharpen motion philosophy, add source-fidelity QA for explicit replication, and add a light motion probe without new dependencies.
+- Prior art: Anthropic frontend-design, impeccable, `ddruids/mobbin-skill`, `dembrandt`, `designlang`, `tinte`, `LottieFiles/motion-design-skill`, `kylezantos/design-motion-principles`, `Meet-Miyani/compose-skill`, Refero, `feitangyuan/motion-web`, `Leonxlnx/taste-skill`, `vercel-labs/web-interface-guidelines`, `antfu-design`, and `jakubkrehel/make-interfaces-feel-better`.
+- Adopt: case capture, computed-style extraction, drift gate, motion language, reference lock, anti-averaging, interaction/accessibility gates, data-presentation rules, component-state matrix, and image-intake discipline.
+- Reject: paid MCP as required, full motion-web cases/scripts/assets, mandatory image generation, mandatory scroll animation, and surface copying.
+- Next pass: run the motion, interface-quality, and case-capture evals; turn any measured failure into a rule change before adding more guidance.
 
 ### noootwo-tdd
 

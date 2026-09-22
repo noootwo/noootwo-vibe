@@ -1,5 +1,11 @@
 # noootwo-research Releases
 
+## v0.5.0
+
+- Expanded the motion source pool with Vue Bits, Motion for Vue, and `@formkit/auto-animate`, plus licence and maintenance caveats.
+- Recorded that React Bits and Vue Bits are separate projects with an MIT + Commons Clause boundary, that their component dependencies vary, and that the component source must not be vendored into Noootwo.
+- Recorded the 2026-09-22 Android documentation access failure and added platform implementation references for Flutter, SwiftUI, and Compose.
+
 ## v0.4.0
 
 - Deep briefs now persist through `noootwo-state` instead of `.noootwo/research/<slug>.md`, and durable findings hand off to the state skill.

@@ -13,6 +13,7 @@ Choose one owning location for each persisted fact. The location follows the fac
 | Reference | exact fields, commands, schemas, manifests | narrative reasoning |
 | Release record | versioned change and migration notes | current active work |
 | Cold evidence | raw evidence, long logs, old notes | anything read on every task |
+| Legacy archive | superseded source files moved during migration | current truth or hot reads |
 
 If a repository uses different names, map to responsibility instead of forcing these names.
 

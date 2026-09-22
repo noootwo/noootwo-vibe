@@ -79,6 +79,21 @@ For each important component, record:
 
 This prevents "used the right component, wrong expression" failures.
 
+#### 2A. State Matrix
+
+Every important component records its states, not only its default skin. Use the platform's native state vocabulary instead of forcing web pseudo-classes onto a native control.
+
+| State | Web | Flutter | iOS | Android |
+| --- | --- | --- | --- | --- |
+| Default and hover | `:hover`, pointer feedback | hover only where the platform supports it | pointer hover on iPad or macOS | hover only where the platform supports it |
+| Focus and keyboard | `:focus-visible`, visible ring, logical order | `FocusNode`, traversal, focus highlight | focus engine, Full Keyboard Access | Compose focus, traversal, focus indicator |
+| Pressed and selected | `:active`, selected state | `InkWell`, `GestureDetector`, selected widget state | pressed and selected control states | `clickable` and selected state |
+| Disabled and loading | disabled attribute, busy state | disabled widget, progress state | disabled control, progress state | disabled control, progress state |
+| Empty and partial | empty copy plus recovery action | empty widget with the same action | empty view with the same action | empty state with the same action |
+| Error and success | inline message, semantic colour plus text | inline error and success state | inline message, accessibility announcement | inline error and success state |
+
+For each component, record what changes visually, what changes in the accessibility tree, and what stays stable so the layout does not jump.
+
 #### 3. Default Override Pass
 
 Run an explicit pass for framework or UI-kit defaults that often survive translation:
@@ -253,6 +268,20 @@ For each asset, capture:
 - Do not claim a product visual language without product visuals or screenshots
 - If assets are missing, say so in the handoff bundle
 - For digital products, UI screenshots often matter more than abstract brand adjectives
+
+
+## Asset And Performance Budget
+
+Record this with the handoff when the artifact uses media, fonts, long lists, or motion. It is a design constraint, not only an implementation note.
+
+- **Images**: intrinsic width and height or a stable aspect ratio; responsive source sizes; lazy loading below the fold; a decoded size that matches the rendered size. Flutter should use `cacheWidth` or `cacheHeight` when the rendered size is known.
+- **Fonts**: family and fallback that preserve metrics; subset or variable strategy; `font-display` and preload only for critical text; a CJK fallback that does not break line height.
+- **Motion and video**: compressed video instead of animated GIF where possible; poster or still fallback; no autoplay longer than five seconds without pause, stop, or hide; reduced-motion equivalent named.
+- **Long lists**: a stable item key; virtualisation or lazy building above the platform's comfort threshold; no per-frame layout reads or writes. Flutter uses `ListView.builder` or slivers; web uses virtualisation or `content-visibility`; native uses platform list recycling.
+- **Animation cost**: animate transform and opacity when the platform offers compositor-friendly properties; never animate layout properties for movement; use `will-change` only on elements that are actually animating and remove it afterwards.
+- **Flutter specifics**: prefer `const` widgets, `RepaintBoundary` only around genuinely expensive subtrees, and profile on a real device before trading clarity for micro-optimisation.
+
+If a budget cannot be met, record the tradeoff and the fallback. Do not hide it in implementation prose.
 
 
 ## Canvas Artifact Loop
@@ -480,6 +509,7 @@ Use this when the target artifact is browser-based.
 - For React, use Motion or CSS transitions when motion carries the concept.
 - For Vue/Nuxt, use `<Transition>`, `<TransitionGroup>`, CSS transitions, or existing animation utilities.
 - Use GSAP only when scroll staging, timelines, or choreography justify the dependency.
+- Before adding a motion runtime or copying a registry component, read `references/motion.md` and `references/motion-libraries.md`; keep the register gate, licence check, and dependency ceiling.
 
 ### Smell Checks
 
@@ -522,6 +552,7 @@ Use this when the target stack is Flutter.
 - Use `Hero`, implicit animations, explicit animations, gestures, or page transitions when motion carries meaning.
 - Use `CustomPainter`, shaders, Rive, or Lottie only when they support the chosen art direction.
 - Prefer reusable widgets and theme extensions over one-off styling.
+- Follow the motion ladder in `references/motion-libraries.md`: built-in widgets first, then the Flutter `animations` package, then `flutter_animate` for chained micro-effects, and Rive or Lottie only for authored assets.
 
 ### Smell Checks
 
@@ -557,6 +588,14 @@ Use this for SwiftUI, Jetpack Compose, or platform-native UI implementation.
 
 - Map direction into platform tokens: color, typography, spacing, shape, elevation/surface, motion, and component vocabulary.
 - Preserve dynamic type, reduced motion, safe areas, accessibility labels, and platform interaction idioms.
+
+### Motion Ladder
+
+- Web: CSS and platform APIs first, then Motion or auto-animate, then GSAP or a copy-in registry only when the register earns it.
+- Flutter: built-in implicit and explicit animation, `Hero`, and `AnimatedSwitcher` first; then the Flutter team's `animations` package; `flutter_animate` is optional.
+- SwiftUI: native animation, transition, and matched geometry first; then `PhaseAnimator`, `KeyframeAnimator`, or Pow; Rive and Lottie are for authored assets.
+- Compose: `animate*AsState`, `AnimatedVisibility`, `AnimatedContent`, shared elements, and `animateItem` first; Rive and Lottie are for authored assets.
+- Read `references/motion-libraries.md` for the full map, licence and dependency checks, and rejection rules. Verify API names against the target platform version.
 
 ### SwiftUI Moves
 

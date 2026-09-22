@@ -9,12 +9,12 @@ It publishes ten focused skills — a router plus nine specialists:
 | `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in | `0.2.0` |
 | `noootwo-workflow` | model-invoked | Reads current project state, matches the correct installed skill, and schedules one next step at a time | `0.13.0` |
 | `noootwo-product` | model-invoked | Settles real user, first loop, scope, main path, states, and acceptance before design or build | `0.9.0` |
-| `noootwo-design` | model-invoked | Turns a settled product path into direction, tokens, a Design Contract, and a reviewed artifact | `0.15.0` |
+| `noootwo-design` | model-invoked | Turns a settled product path into direction, tokens, a Design Contract, and a reviewed artifact | `0.17.0` |
 | `noootwo-tdd` | model-invoked | Owns red-green-refactor and test quality for behavior-changing code | `0.2.0` |
 | `noootwo-review` | model-invoked | Judges code before it ships, owns refactor/optimization review, re-testing, and user acceptance | `0.12.0` |
-| `noootwo-state` | model-invoked | Reads and records project state and context, and chooses the storage form | `0.1.0` |
+| `noootwo-state` | model-invoked | Reads and records project state and context, and chooses the storage form | `0.2.0` |
 | `noootwo-debug` | model-invoked | Proves the cause of a failure before any fix, and bounds the fix to that cause | `0.2.0` |
-| `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, and borrows mechanisms instead of surfaces | `0.4.0` |
+| `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, and borrows mechanisms instead of surfaces | `0.5.0` |
 | `noootwo-onboard` | model-invoked | Enters an unfamiliar project and audits which skills it needs | `0.2.0` |
 
 The repository root is not a published skill. It is the shared workspace for manifests, docs, validation, release helpers, and CI.
@@ -105,7 +105,7 @@ npx skills add ./skills/noootwo-design --list
 
 `noootwo-product` settles what should exist before anything is designed or built. It reads discoverable facts itself, names what is unsettled, and then grills the frontier — the questions answerable now — one round at a time, each question carrying options and a recommendation. It ends when the frontier is empty and the user confirms a shared understanding, then produces the Product-to-Design Handoff.
 
-`noootwo-design` turns a settled product path into a visual system. It declares a Design Read, compares directions when style or structure is unresolved, writes a Design Contract before editing, reads the craft floor immediately before building, and reviews the rendered artifact in bounded passes. For `deep` work it captures the references a direction leans on into `.noootwo/references/` with their provenance, extracts real values from a reachable page with its own zero-dependency Chrome extractor, locks the build target, and reports token and motion drift against that baseline afterwards. Motion is a language rather than a field: a personality archetype, a register set by the surface, a millisecond duration scale, an easing catalog, choreography budgets, and per-platform reduced-motion fallbacks. `ready` is never self-certified. When the real user, main path, states, or acceptance turn out to be unsettled, it invokes `noootwo-product`.
+`noootwo-design` turns a settled product path into a visual system. It declares a Design Read, compares directions when style or structure is unresolved, writes a Design Contract before editing, reads the craft floor immediately before building, and reviews the rendered artifact in bounded passes. For `deep` work it captures the references a direction leans on into `.noootwo/references/` with their provenance, extracts real values from a reachable page with its own zero-dependency Chrome extractor, locks the build target, and reports token and motion drift against that baseline afterwards. Motion is a language rather than a field: a personality archetype, a register set by the surface, a millisecond duration scale, an easing catalog, choreography budgets, and per-platform reduced-motion fallbacks. The craft floor also carries an interaction and accessibility gate, a data-presentation matrix, screenshot/design-image intake, a component state matrix, and an asset/performance budget, with Flutter and native equivalents rather than web-only rules. `ready` is never self-certified. When the real user, main path, states, or acceptance turn out to be unsettled, it invokes `noootwo-product`.
 
 `noootwo-tdd` owns the test-first loop for behavior-changing code. It requires a failing test first, the minimal implementation, a full green test command, and refactoring only after green. It rejects production-first, tests-after, manual-test-only, and “too simple to test” reasoning.
 
@@ -183,12 +183,12 @@ Each child skill has its own `VERSION` file and tag prefix:
 - `noootwo-ask@v0.2.0`
 - `noootwo-workflow@v0.13.0`
 - `noootwo-product@v0.9.0`
-- `noootwo-design@v0.15.0`
+- `noootwo-design@v0.17.0`
 - `noootwo-tdd@v0.2.0`
 - `noootwo-review@v0.12.0`
-- `noootwo-state@v0.1.0`
+- `noootwo-state@v0.2.0`
 - `noootwo-debug@v0.2.0`
-- `noootwo-research@v0.4.0`
+- `noootwo-research@v0.5.0`
 - `noootwo-onboard@v0.2.0`
 
 The root `VERSION` records the workspace version only. Do not use it as the release source for child skills.

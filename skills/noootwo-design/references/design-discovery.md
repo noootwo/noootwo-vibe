@@ -55,6 +55,26 @@ Captured screenshots are personal reference held in the project's `.noootwo/` ha
 
 When the direction carries motion, the capture set includes motion examples: two or three references in the same register, each recorded as a mechanism — trigger, moving property, duration, curve, layer relationship, and what it communicates. The register and the sourcing procedure live in [motion](motion.md); the pool of motion libraries and showcases lives in the `noootwo-research` skill's source pools. A component library's demo is strong evidence of craft and weak evidence of fit, so it is adapted or dropped rather than pasted.
 
+## Screenshot And Design-Image Intake
+
+When the user supplies a screenshot, design image, Figma frame, or device capture instead of a live URL, run the same discovery discipline on the image before writing UI code.
+
+Record these fields in `.noootwo/style-discovery.md` or the reference's `source.md`:
+
+- `viewport`: source width, height, device family, scale, safe area, and whether it is a desktop, tablet, phone, or mixed board.
+- `layout`: grid, margins, gutters, container behaviour, alignment model, and the elements that establish hierarchy.
+- `typography`: visible families if identifiable, size relationships, weight, case, line height, measure, and numeric treatment. Mark inferred values as inferred.
+- `colour and material`: canvas, surface, text, accent, semantic roles, border, shadow, texture, and light direction.
+- `components and states`: inventory of the components shown and which states are visible. Missing states are gaps, not defaults.
+- `imagery and iconography`: subject, crop, aspect ratio, treatment, icon family and weight, and whether the asset is real or decorative.
+- `motion cues`: any arrows, trails, before/after frames, scroll position, or annotation that implies timing, trigger, or direction. Never infer a full motion system from a still image alone.
+- `provenance and licence`: who supplied the image, whether it is a design file, screenshot, generated concept, or public reference, and any reuse boundary.
+- `confidence`: confirmed, inferred, or proposed, with the missing evidence named.
+
+For a Figma or other design-file source, read variables, styles, and component names when access exists before relying on pixels. For Flutter, SwiftUI, or Compose work, capture the target frame in a real preview or device when possible and map the image to platform tokens rather than translating web pixel values directly.
+
+An image shows appearance; it does not prove interaction, accessibility, responsive behaviour, or data states. Those remain explicit gaps until a running artifact, design file, or user decision supplies them.
+
 ## Reference lock
 
 Before drafting, name the target and the invariants:

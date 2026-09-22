@@ -23,6 +23,18 @@ Borrowing rule (from `AGENTS.md`): borrow repeatable mechanisms, never leaked pr
 
 - **`feitangyuan/motion-web`** (`https://github.com/feitangyuan/motion-web`, CC BY-NC 4.0) — motion as a main material, "a great mechanic on a default page is a failed page", stillness ratio as a timeline signal rather than an easing problem, and following lag as `speed / k`. Landed in `noootwo-design` motion language. Status: adopted mechanisms only; no SKILL/cases/scripts/assets copied.
 
+- **`DavidHDev/react-bits` and `DavidHDev/vue-bits`** — separate copy-in motion registries for React and Vue. Compared for agent-readable indexes, install model, dependency variance, and licence. Status: discovery and comparison only; no component source vendored, because both use MIT + Commons Clause.
+
+- **`magicuidesign/magicui` and `codse/animata`** — MIT React/Tailwind motion registries. Compared for the expressive-register boundary and shadcn-installable packaging. Status: source-pool entries, not dependencies.
+
+- **`formkit/auto-animate`** — zero-dependency list enter, exit, and reorder primitive. Landed as a low-cost Quiet-register option in `noootwo-design` `motion-libraries.md`. Status: adopted as guidance, not vendored.
+
+- **`vercel-labs/web-interface-guidelines`** (MIT, reachable 2026-09-22) — accessibility, focus, forms, animation, typography, content handling, images, performance, navigation state, touch, safe areas, dark mode, locale, and hydration checks. Landed in `noootwo-design` `craft.md`, `translate.md`, `design-discovery.md`, and the advisory interface checks in `check_visual_gates.py`. Status: adopted mechanisms, not copied wording.
+
+- **`Leonxlnx/taste-skill`** (MIT, reachable 2026-09-22) — brief inference, redesign audit, image-to-code extraction, and style-family variants. Adopted the brief/read-first discipline and the image-intake sequence; rejected mandatory image generation, mandatory scroll animation, the double-bezel default, and marketing-specific pre-flight prescriptions as universal rules. Landed in `noootwo-design` discovery and interface-quality guidance.
+
+- **`antfu-design` and `jakubkrehel/make-interfaces-feel-better`** — data-presentation matrix, concentric radius, optical alignment, image outline, interruptible transitions, hit-area discipline, and sparse `will-change`. Landed in `noootwo-design` `craft.md` and `translate.md`. Status: mechanisms adopted, framework-specific class recipes not copied.
+
 - **`DietrichGebert/ponytail`** (`https://github.com/DietrichGebert/ponytail`, MIT) — seven-rung minimal-code review ladder and lean-review tags. Vendored as a `SOURCE.md` record only, not the full repo. Landed in `noootwo-review` lean-review lens. Status: adopted.
 
 - **`OpenAI Product Design` plugin** (private) — minimum brief, project-local product context, Explore/Design/Build boundary, existing-flow audit, and "screenshots are not QA by themselves". Landed in `noootwo-product` and the product-to-design handoff. Status: adopted mechanisms; plugin structure/prompts not copied.

@@ -123,6 +123,114 @@ CHECK_JS = """
     motion.noReducedMotion.push({ tag: 'document', text: 'animation present with no prefers-reduced-motion rule', left: 0, right: 0, width: 0, scrollWidth: 0, clientWidth: 0 });
   }
 
+  // Interface findings are advisory evidence, not gate failures. Confirm each
+  // one against the source, accessibility tree, or a manual keyboard pass.
+  const interfaceChecks = { unlabeledControls: [], imagesMissingAlt: [], imagesMissingDimensions: [], transitionAll: [], outlineRemoved: [], smallTouchTargets: [], zoomDisabled: [] };
+
+  const isHidden = (el) => {
+    if (el.getAttribute('aria-hidden') === 'true') return true;
+    const style = window.getComputedStyle(el);
+    return style.display === 'none' || style.visibility === 'hidden' || Number(style.opacity) === 0;
+  };
+
+  const accessibleName = (el) => {
+    const aria = (el.getAttribute('aria-label') || '').trim();
+    if (aria) return aria;
+    const labelledby = el.getAttribute('aria-labelledby');
+    if (labelledby) {
+      const joined = labelledby
+        .split(/\\s+/)
+        .map((id) => (document.getElementById(id)?.textContent || '').trim())
+        .filter(Boolean)
+        .join(' ');
+      if (joined) return joined;
+    }
+    const title = (el.getAttribute('title') || '').trim();
+    if (title) return title;
+    if (el.labels && el.labels.length) {
+      const label = Array.from(el.labels).map((item) => (item.textContent || '').trim()).filter(Boolean).join(' ');
+      if (label) return label;
+    }
+    if (el.tagName.toLowerCase() === 'input' && ['submit', 'button', 'reset'].includes(el.type)) {
+      const value = (el.getAttribute('value') || '').trim();
+      if (value) return value;
+    }
+    const text = (el.textContent || '').replace(/\\s+/g, ' ').trim();
+    if (text) return text;
+    const imageAlt = (el.querySelector?.('img[alt]')?.getAttribute('alt') || '').trim();
+    return imageAlt;
+  };
+
+  const controls = Array.from(document.querySelectorAll('button, [role="button"], a[href], input, select, textarea, summary'))
+    .filter((el) => !isHidden(el));
+
+  for (const el of controls) {
+    if (el.tagName.toLowerCase() === 'input' && el.type === 'hidden') continue;
+    if (!accessibleName(el)) interfaceChecks.unlabeledControls.push(describe(el));
+  }
+
+  for (const image of document.querySelectorAll('img')) {
+    if (isHidden(image)) continue;
+    if (!image.hasAttribute('alt')) interfaceChecks.imagesMissingAlt.push(describe(image));
+    const hasAttributeSize = image.hasAttribute('width') && image.hasAttribute('height');
+    const style = window.getComputedStyle(image);
+    const hasAspectRatio = style.aspectRatio && style.aspectRatio !== 'auto';
+    if (!hasAttributeSize && !hasAspectRatio) interfaceChecks.imagesMissingDimensions.push(describe(image));
+  }
+
+  for (const el of document.querySelectorAll('body *')) {
+    const rect = el.getBoundingClientRect();
+    if (rect.width < 2 || rect.height < 2 || isHidden(el)) continue;
+    const style = window.getComputedStyle(el);
+    const durations = (style.transitionDuration || '').split(',').map((value) => value.trim());
+    const properties = (style.transitionProperty || '').split(',').map((value) => value.trim());
+    const hasDuration = durations.some((value) => value && value !== '0s');
+    if (hasDuration && properties.some((property) => property === 'all')) interfaceChecks.transitionAll.push(describe(el));
+  }
+
+  if (window.innerWidth <= 768) {
+    for (const el of controls) {
+      const style = window.getComputedStyle(el);
+      if (style.display === 'inline') continue;
+      const rect = el.getBoundingClientRect();
+      if (rect.width < 40 || rect.height < 40) interfaceChecks.smallTouchTargets.push(describe(el));
+    }
+  }
+
+  let focusReplacementSeen = false;
+  let outlineRemovalSeen = false;
+  for (const sheet of Array.from(document.styleSheets)) {
+    let rules;
+    try {
+      rules = sheet.cssRules;
+    } catch {
+      continue;
+    }
+    for (const rule of Array.from(rules ?? [])) {
+      const selector = rule.selectorText || '';
+      const text = rule.cssText || '';
+      const removesOutline = /outline\\s*:\\s*(none|0)\\b/i.test(text);
+      const addsFocusVisual = /outline\\s*:\\s*(?!none|0)/i.test(text) || /box-shadow\\s*:/i.test(text);
+      if ((selector.includes(':focus-visible') || selector.includes(':focus')) && addsFocusVisual) focusReplacementSeen = true;
+      if (removesOutline && (selector.includes(':focus') || selector.includes('*'))) outlineRemovalSeen = true;
+    }
+  }
+  if (outlineRemovalSeen && !focusReplacementSeen) {
+    interfaceChecks.outlineRemoved.push({ tag: 'stylesheet', text: 'outline removal with no focus rule', left: 0, right: 0, width: 0, scrollWidth: 0, clientWidth: 0 });
+  }
+
+  const viewportMeta = document.querySelector('meta[name="viewport"]');
+  if (viewportMeta) {
+    const content = (viewportMeta.getAttribute('content') || '').toLowerCase();
+    const noScale = content.includes('user-scalable=no') || content.includes('user-scalable=0');
+    const maxScale = content.match(/maximum-scale\\s*=\\s*([0-9.]+)/);
+    if (noScale || (maxScale && parseFloat(maxScale[1]) < 2)) interfaceChecks.zoomDisabled.push(describe(viewportMeta));
+  }
+
+  for (const key of Object.keys(interfaceChecks)) {
+    interfaceChecks[key] = interfaceChecks[key].slice(0, 8);
+  }
+
   const clippedText = Array.from(document.querySelectorAll('body *'))
     .filter((el) => {
       const text = (el.textContent || '').replace(/\\s+/g, ' ').trim();
@@ -142,7 +250,8 @@ CHECK_JS = """
     overflowX,
     offscreenCritical,
     clippedText,
-    motion
+    motion,
+    interfaceChecks
   };
 }
 """
@@ -172,7 +281,7 @@ def parse_viewport(value: str) -> tuple[str, int, int]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Check Noootwo responsive visual gates for a local URL or static HTML file."
+        description="Check Noootwo responsive visual gates and advisory interface checks for a local URL or static HTML file."
     )
     parser.add_argument("target", help="Local URL or HTML file path to inspect.")
     parser.add_argument(
@@ -250,8 +359,27 @@ def main() -> int:
             if not any(item["viewport"] == result["label"] for item in bucket):
                 bucket.append({"viewport": result["label"], "examples": entries[:3], "count": len(entries)})
 
+    interface_labels = {
+        "unlabeledControls": "interactive control without an accessible name",
+        "imagesMissingAlt": "image without alt text",
+        "imagesMissingDimensions": "image without stable dimensions or aspect ratio",
+        "transitionAll": "transition: all on an animated element",
+        "outlineRemoved": "outline removed with no focus rule",
+        "smallTouchTargets": "interactive target smaller than 40px on a narrow viewport",
+        "zoomDisabled": "viewport meta disables or limits zoom",
+    }
+    interface_findings: dict[str, list[dict]] = {}
+    for result in results:
+        for key, label in interface_labels.items():
+            entries = (result.get("interfaceChecks") or {}).get(key) or []
+            if not entries:
+                continue
+            bucket = interface_findings.setdefault(label, [])
+            if not any(item["viewport"] == result["label"] for item in bucket):
+                bucket.append({"viewport": result["label"], "examples": entries[:3], "count": len(entries)})
+
     if args.json:
-        print(json.dumps({"results": results, "failures": failures, "motionFindings": motion_findings}, indent=2))
+        print(json.dumps({"results": results, "failures": failures, "motionFindings": motion_findings, "interfaceFindings": interface_findings}, indent=2))
     else:
         for result in results:
             print(
@@ -268,6 +396,15 @@ def main() -> int:
                 print(f"  - {label} [{viewports}] first seen on <{sample}>")
         else:
             print("Motion findings: none.")
+        if interface_findings:
+            print("Interface findings (advisory; confirm against source, accessibility tree, or a keyboard pass before changing a decision):")
+            for label, entries in interface_findings.items():
+                viewports = ", ".join(entry["viewport"] for entry in entries)
+                examples = entries[0]["examples"]
+                sample = examples[0]["tag"] if examples else "-"
+                print(f"  - {label} [{viewports}] first seen on <{sample}>")
+        else:
+            print("Interface findings: none.")
         if failures:
             print("Visual gate failed:")
             for failure in failures:

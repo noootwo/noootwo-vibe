@@ -1,5 +1,11 @@
 # noootwo-state Releases
 
+## v0.2.0
+
+- Added an abstract `migrate` command that ingests old files through a migration manifest and converts them into the current state format without interpreting their content.
+- Each manifest entry supplies the old `path` plus `request_id`, `fact_type`, `query_profile`, `mutability`, and `lifespan`; the skill persists the content and records the old path as `replaces`.
+- Moved sources are archived under `.noootwo/state/legacy/<path>` by default; `--keep` leaves the source in place.
+
 ## v0.1.0
 
 - Replaced `noootwo-docs` with `noootwo-state`.

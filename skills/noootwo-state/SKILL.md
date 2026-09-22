@@ -39,6 +39,14 @@ Run `scripts/noootwo_state.py check`. Confirm the schema is valid, `schema_versi
 
 A record written during a degraded fallback carries a `skill-missing: <name>` marker. When the named skill becomes available, absorb the marked record through a normal request and remove the marker.
 
+## 6. Migrate legacy records
+
+To take over old files, submit a migration manifest and run `scripts/noootwo_state.py migrate --manifest <file>`.
+
+The manifest is abstract: `protocol` is `noootwo.migrate/0.1` and `entries` names each old `path` plus the abstract properties the new record needs: `request_id`, `fact_type`, `query_profile`, `mutability`, `lifespan`, and optional `owner_skill`, `domain`, and `destination`.
+
+The command reads each old file as content, persists it through the normal form selection, records the old path as `replaces`, and by default archives the source to `.noootwo/state/legacy/<path>`. Pass `--keep` to leave the source in place. The caller supplies the classification; this skill does not interpret the content.
+
 **Done when:** the fact is in exactly one owning location, is readable through the intended query path, is validated, and stale duplicates are removed or linked.
 
 ## References

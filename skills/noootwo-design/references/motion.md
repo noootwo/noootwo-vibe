@@ -154,16 +154,18 @@ Published libraries are strong evidence of craft and weak evidence of fit. A lib
 
 Reach for the smallest tool that carries the direction.
 
+Read [motion-libraries](motion-libraries.md) before adding a runtime or copying a registry component. It carries the register gate, the per-platform ladder, the licence and dependency checks, and the intent recipes. A copy-in component is the last rung, not the first.
+
 | Need | Reach for |
 | --- | --- |
 | State change, hover, focus | CSS transitions and keyframes; no library |
-| Enter, exit, layout shift in React or Vue | Motion, using layout and gesture primitives |
+| Enter, exit, layout shift in React or Vue | Motion for layout and gesture; `auto-animate` for list enter and exit |
 | Scroll-linked staging, pinned scenes, SVG drawing | GSAP with ScrollTrigger |
 | Authored character or illustration motion | Rive, or Lottie when the asset already exists as one |
 | Native screen transitions | Platform primitives before any third-party runtime |
 | Cross-document or route transitions | The View Transitions API where the stack supports it |
 
-Two cautions. Smooth-scroll libraries that take over the scroll wheel belong on marketing and portfolio surfaces, not on product screens, where they fight keyboard, assistive technology, and long scrolling lists. And "one library for everything" is not a direction: a stack carrying Motion, GSAP, Lottie, and a scroll hijack usually means the motion thesis was never decided.
+Two cautions. Smooth-scroll libraries that take over the scroll wheel belong on marketing and portfolio surfaces, not on product screens, where they fight keyboard, assistive technology, and long scrolling lists. And "one library for everything" is not a direction: a stack carrying Motion, GSAP, Lottie, and a scroll hijack usually means the motion thesis was never decided. Check the licence and dependency cost before adopting a copy-in component; a registry demo is evidence of craft, not of fit.
 
 ## Reduced Motion
 

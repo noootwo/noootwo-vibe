@@ -9,7 +9,7 @@
 
 ## Current Validation Surface
 
-Last verified: 2026-09-18 on this worktree.
+Last verified: 2026-09-22 on this worktree.
 
 - `python scripts/validate_skill_workspace.py .` — includes the authoring budgets: `description` ≤ 200 characters, `SKILL.md` ≤ 120 lines, ≤ 12 reference files each named by a pointer, `short_description` 25–64 characters, no `default_prompt`, and no bare `$noootwo-` reference inside a skill body
 - `python scripts/validate_skill_workspace.py .` — also enforces the capability bridge: every skill named in a `SKILL.md` must exist, every public skill must appear in the `docs/agents/invocation.md` capability map, and every skill named there must exist
@@ -21,6 +21,7 @@ Last verified: 2026-09-18 on this worktree.
 - `git diff --check`
 - Behaviour measurement: `docs/experiments/skill-behaviour-2026-09-11.md`
 - `node --check` on `skills/noootwo-design/scripts/extract_design_tokens.mjs`, plus an end-to-end extraction against a foreign product site and a domestic design system
+- `node --check` on the `CHECK_JS` payload from `skills/noootwo-design/scripts/check_visual_gates.py`; the advisory interface rules still need an artifact run with Playwright for end-to-end proof
 - `docs/agents/borrow-audit.md` maps the prior art each skill was compared against; the Product Design plugin maps primarily to `noootwo-product`, and motion-web maps primarily to `noootwo-design`.
 
 ## Active Risks
@@ -39,12 +40,15 @@ Last verified: 2026-09-18 on this worktree.
 - `noootwo-design` v0.13.0 adds case capture and a motion language. The extractor needs Node 22+ and a local Chrome; without both, a deep pass records a degraded capture rather than inventing values.
 - The motion rules added to `check_visual_gates.py` are advisory by design. An intentional brand curve can trip one, so a finding needs screenshot or DOM confirmation before it changes a decision.
 - The native motion guidance in `translate.md` is drawn from platform documentation, not from a measured SwiftUI or Compose project. A device check is still owed.
-- Motion register and sourcing were added after the first motion pass, so the six motion eval scenarios are newer than the rest and have not been run either.
+- Motion register and sourcing were added after the first motion pass, so the seven motion, four interface-quality, and four case-capture scenarios are newer than the rest and have not been run either.
+- The motion library map records licences, dependencies, and maintenance state as of 2026-09-22. Registry entries and platform APIs move; a pass re-checks them before adopting a tool.
+- The interface checks added to `check_visual_gates.py` are advisory and web-only. Flutter, SwiftUI, and Compose accessibility and state parity are prose gates until a real device or preview artifact is reviewed.
+- The screenshot/design-image intake is a contract, not a vision pipeline. It records what is visible and marks the rest as inferred or missing; it does not invent interaction or accessibility states from a still image.
 - Several motion libraries publish genuine agent-readable indexes as of the 2026-09-17 probe. An index can disappear or move, so a pass records what it actually read.
 - The `noReducedMotion` advisory rule reads `document.styleSheets`, which cannot inspect cross-origin stylesheets. A site that handles reduced motion in a CDN stylesheet can therefore produce a false finding; it stays advisory for that reason.
 - A project already in flight in `deep` mode will be asked for motion values it never recorded the first time. That is a behaviour change for in-flight work, not a defect, and it appears only when `--deep-mode`, `--implementation-gate`, or `--motion-gate` is passed.
 - The free case-library access results were probed on 2026-09-16 and 2026-09-17. Gates and plans change without notice, so a pass records its own reachability result rather than trusting the recorded one.
-- `noootwo-design` sits at 110 of 120 `SKILL.md` lines and 10 of 12 reference files. The next addition must compress existing prose.
+- `noootwo-design` sits at 117 of 120 `SKILL.md` lines and 11 of 12 reference files. The next addition must compress existing prose or replace a reference rather than add another.
 
 ## Next Actions
 
@@ -53,6 +57,6 @@ Last verified: 2026-09-18 on this worktree.
 - Run the `noootwo-debug` scenarios under `skills/noootwo-debug/evals/prompts/` on seeded bugs with a hidden verifier and a decoy, and record the result in `docs/experiments/`.
 - Run the `noootwo-research` scenarios under `skills/noootwo-research/evals/prompts/`, including the case where research should not fire, and record the result in `docs/experiments/`.
 - Run the `noootwo-onboard` scenarios under `skills/noootwo-onboard/evals/prompts/`, and the optimization scenario under `skills/noootwo-review/evals/prompts/`.
-- Run the six motion and four case-capture scenarios under `skills/noootwo-design/evals/prompts/`, and record the results in `docs/experiments/`.
+- Run the seven motion, four interface-quality, and four case-capture scenarios under `skills/noootwo-design/evals/prompts/`, and record the results in `docs/experiments/`.
 - Exercise `extract_design_tokens.mjs` and the advisory motion rules on a real project artifact, and record the false-positive rate for the deliberately-deviating brand-curve case.
 - Update `docs/releases/` and per-skill tags when publishing changed skills.

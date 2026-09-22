@@ -1,5 +1,21 @@
 # noootwo-design Releases
 
+## v0.17.0
+
+- Added an Interaction and Accessibility Gate to `craft.md` with web, Flutter, SwiftUI, and Compose equivalents for accessible names, keyboard paths, focus, touch targets, state without colour alone, announcements, text scale, reduced motion, and destructive actions.
+- Added a Data Presentation Matrix for paths, time, numbers, status, badges, icons, and missing data.
+- Added a Component State Matrix and an Asset and Performance Budget to `translate.md`, including Flutter-specific image, list, semantics, text-scale, and reduced-motion notes.
+- Added screenshot and design-image intake to `design-discovery.md`, so an image source is extracted into viewport, layout, type, colour, component, state, image, motion-cue, provenance, and confidence fields before implementation.
+- Extended the web-only `check_visual_gates.py` with seven advisory interface checks: missing accessible names, missing alt text, unstable image dimensions, `transition: all`, removed outlines with no focus rule, small narrow-viewport touch targets, and disabled or limited zoom. Findings never block `ready` without source, accessibility-tree, or keyboard confirmation, and Flutter, SwiftUI, and Compose use the platform gates instead.
+- Added four eval scenarios: screenshot reference without extraction, accessibility and interaction gap, long content and localization, and Flutter motion and state parity.
+
+## v0.16.0
+
+- Added `references/motion-libraries.md`, an on-demand map from the motion register to the smallest web, Flutter, SwiftUI, or Compose tool that can carry it.
+- The map records copy-in registries, runtime primitives, licence boundaries, dependency cost, maintenance state, reduced-motion fallbacks, and the domestic access path.
+- `motion.md` and `translate.md` now point to the map, and `translate.md` gained the per-platform motion ladder. Quick work stays unchanged.
+- Added the `library-demo-into-quiet-product` eval so a flashy registry demo cannot be pasted into a quiet product surface without the register, licence, dependency, and retuning checks.
+
 ## v0.15.0
 
 - Durable directions, token sets, and review outcomes now hand off to `noootwo-state`; design's own `.noootwo/` working artifacts remain design-owned.

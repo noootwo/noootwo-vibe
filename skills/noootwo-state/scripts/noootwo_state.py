@@ -7,6 +7,7 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import sys
 import tempfile
 import uuid
@@ -48,6 +49,11 @@ EVENT_TYPES = {
     "completed",
     "abandoned",
 }
+REQUEST_REQUIRED = {"request_id", "fact_type", "query_profile", "mutability", "lifespan", "content"}
+FACT_TYPES = {"state", "event", "decision", "narrative", "release", "evidence", "procedure"}
+QUERY_PROFILES = {"field", "tail", "search", "human"}
+MUTABILITIES = {"current", "append-only", "immutable"}
+LIFESPANS = {"hot", "durable", "cold"}
 HASH_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
 ISO_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}")
 
@@ -347,27 +353,21 @@ def choose_form(request: dict) -> str:
     return "state"
 
 
-def request_command(root: Path, args: argparse.Namespace) -> None:
-    if args.json_request:
-        request = json.loads(args.json_request)
-    elif args.request_file:
-        request = json.loads(Path(args.request_file).read_text(encoding="utf-8"))
-    else:
-        raise SystemExit("request requires --json-request or --request-file")
-
-    required = {"request_id", "fact_type", "query_profile", "mutability", "lifespan", "content"}
-    missing = sorted(required - set(request))
+def validate_request(request: dict) -> None:
+    missing = sorted(REQUEST_REQUIRED - set(request))
     if missing:
         raise SystemExit(f"request missing fields: {', '.join(missing)}")
-    if request["fact_type"] not in {"state", "event", "decision", "narrative", "release", "evidence", "procedure"}:
+    if request["fact_type"] not in FACT_TYPES:
         raise SystemExit("invalid fact_type")
-    if request["query_profile"] not in {"field", "tail", "search", "human"}:
+    if request["query_profile"] not in QUERY_PROFILES:
         raise SystemExit("invalid query_profile")
-    if request["mutability"] not in {"current", "append-only", "immutable"}:
+    if request["mutability"] not in MUTABILITIES:
         raise SystemExit("invalid mutability")
-    if request["lifespan"] not in {"hot", "durable", "cold"}:
+    if request["lifespan"] not in LIFESPANS:
         raise SystemExit("invalid lifespan")
 
+
+def apply_request(root: Path, request: dict, destination: Path | None = None, source: str | None = None) -> str:
     replaces = request.get("replaces") or []
     if isinstance(replaces, str):
         replaces = [replaces]
@@ -387,16 +387,16 @@ def request_command(root: Path, args: argparse.Namespace) -> None:
         payload = {"request_id": request["request_id"], "replaces": replaces}
     elif form == "cold":
         if isinstance(request["content"], str):
-            destination = Path(args.destination) if args.destination else state_dir(root) / "evidence" / f"{request['request_id']}.md"
+            destination = Path(destination) if destination else state_dir(root) / "evidence" / f"{request['request_id']}.md"
             content = request["content"]
         else:
-            destination = Path(args.destination) if args.destination else state_dir(root) / "evidence" / f"{request['request_id']}.json"
+            destination = Path(destination) if destination else state_dir(root) / "evidence" / f"{request['request_id']}.json"
             content = json.dumps(request["content"], indent=2, ensure_ascii=False)
         atomic_write(destination, content if content.endswith("\n") else content + "\n")
         event_type = "evidence.recorded"
         payload = {"request_id": request["request_id"], "destination": str(destination), "replaces": replaces}
     else:
-        destination = Path(args.destination) if args.destination else state_dir(root) / "records" / f"{request['request_id']}.md"
+        destination = Path(destination) if destination else state_dir(root) / "records" / f"{request['request_id']}.md"
         content = request["content"]
         if not isinstance(content, str):
             content = json.dumps(content, indent=2, ensure_ascii=False)
@@ -404,10 +404,65 @@ def request_command(root: Path, args: argparse.Namespace) -> None:
         event_type = f"{request['fact_type']}.recorded"
         payload = {"request_id": request["request_id"], "destination": str(destination), "replaces": replaces}
 
+    if source:
+        payload["source"] = source
+
     event = new_event(state, event_type, request.get("domain", "state"), payload, "caller", request.get("owner_skill", "caller"))
     append_event(root, state, event)
     save_state(root, state)
-    print(event["event_id"])
+    return event["event_id"]
+
+
+def request_command(root: Path, args: argparse.Namespace) -> None:
+    if args.json_request:
+        request = json.loads(args.json_request)
+    elif args.request_file:
+        request = json.loads(Path(args.request_file).read_text(encoding="utf-8"))
+    else:
+        raise SystemExit("request requires --json-request or --request-file")
+    validate_request(request)
+    event_id = apply_request(root, request, destination=Path(args.destination) if args.destination else None)
+    print(event_id)
+
+
+def migrate_command(root: Path, args: argparse.Namespace) -> None:
+    manifest = json.loads(Path(args.manifest).read_text(encoding="utf-8"))
+    if manifest.get("protocol") != "noootwo.migrate/0.1":
+        raise SystemExit("unsupported migration protocol")
+    entries = manifest.get("entries")
+    if not isinstance(entries, list) or not entries:
+        raise SystemExit("migration manifest must contain a non-empty entries array")
+    for entry in entries:
+        missing = sorted({"path", "request_id", "fact_type", "query_profile", "mutability", "lifespan"} - set(entry))
+        if missing:
+            raise SystemExit(f"migration entry missing fields: {', '.join(missing)}")
+        source = Path(entry["path"])
+        if source.is_absolute():
+            raise SystemExit(f"migration path must be relative: {source}")
+        full = root / source
+        if not full.is_file():
+            raise SystemExit(f"migration source not found: {source}")
+        request = {
+            "request_id": entry["request_id"],
+            "fact_type": entry["fact_type"],
+            "query_profile": entry["query_profile"],
+            "mutability": entry["mutability"],
+            "lifespan": entry["lifespan"],
+            "content": full.read_text(encoding="utf-8"),
+            "owner_skill": entry.get("owner_skill", "migrate"),
+            "domain": entry.get("domain", "state"),
+            "replaces": [str(source)],
+        }
+        validate_request(request)
+        destination = Path(entry["destination"]) if entry.get("destination") else None
+        apply_request(root, request, destination=destination, source=str(source))
+        if getattr(args, "keep", False):
+            print(f"migrated {source}")
+        else:
+            legacy = state_dir(root) / "legacy" / source
+            legacy.parent.mkdir(parents=True, exist_ok=True)
+            shutil.move(str(full), str(legacy))
+            print(f"migrated {source} -> {legacy}")
 
 
 def self_test() -> None:
@@ -438,6 +493,30 @@ def self_test() -> None:
         request_command(root, argparse.Namespace(json_request=json.dumps(evidence), request_file=None, destination=None))
         if not (state_dir(root) / "evidence" / "ev_1.json").is_file():
             raise SystemExit("cold evidence was not written")
+        old = root / "old.md"
+        old.write_text("old markdown\n", encoding="utf-8")
+        manifest_path = root / "migrate.json"
+        manifest_path.write_text(json.dumps({
+            "protocol": "noootwo.migrate/0.1",
+            "entries": [
+                {
+                    "path": "old.md",
+                    "request_id": "mig_1",
+                    "fact_type": "narrative",
+                    "query_profile": "human",
+                    "mutability": "immutable",
+                    "lifespan": "durable",
+                    "owner_skill": "caller",
+                }
+            ],
+        }), encoding="utf-8")
+        migrate_command(root, argparse.Namespace(manifest=str(manifest_path), keep=False))
+        if old.exists():
+            raise SystemExit("migration did not archive source")
+        if not (state_dir(root) / "legacy" / "old.md").is_file():
+            raise SystemExit("migration did not write legacy archive")
+        if not (state_dir(root) / "records" / "mig_1.md").is_file():
+            raise SystemExit("migration did not write converted record")
         check_command(root, argparse.Namespace())
         render_command(root, argparse.Namespace())
         if not (state_dir(root) / "summary.md").is_file():
@@ -484,6 +563,10 @@ def build_parser() -> argparse.ArgumentParser:
     p_request.add_argument("--request-file")
     p_request.add_argument("--destination")
 
+    p_migrate = sub.add_parser("migrate")
+    p_migrate.add_argument("--manifest", required=True)
+    p_migrate.add_argument("--keep", action="store_true")
+
     sub.add_parser("check")
     sub.add_parser("render")
     return parser
@@ -511,6 +594,8 @@ def main() -> int:
         render_command(root, args)
     elif args.command == "request":
         request_command(root, args)
+    elif args.command == "migrate":
+        migrate_command(root, args)
     else:
         parser.print_help()
         return 2
