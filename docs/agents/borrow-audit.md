@@ -77,10 +77,10 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 ### noootwo-review
 
 - Current role: code, architecture, performance, maintainability, refactoring, optimization, re-test, and user acceptance.
-- Prior art: Ponytail lean-code-review ladder; Superpowers requesting/receiving code review and verification-before-completion; web.dev/vitals, Lighthouse, SRE, OpenTelemetry, k6, PostgreSQL docs, JMH and related benchmark guidance.
-- Adopt: seven-rung lean review ladder, measurable performance evidence, severity output, behavior-preserving refactor loop, re-test gate, and explicit user acceptance before submit/publish.
-- Reject: vendoring Ponytail or benchmark tools; adding a separate architecture or performance skill; allowing a refactor to ship without re-testing.
-- Next pass: measure scope control, missing-test handoff, and acceptance-gate scenarios.
+- Prior art: Martin Fowler's *Refactoring* 2nd edition, the online catalog, *Workflows of Refactoring*, *Definition of Refactoring*, *Code Smell*, *Self-Testing Code*, *Technical Debt*, and *Design Stamina Hypothesis*; Ponytail lean-code-review ladder; Superpowers requesting/receiving code review and verification-before-completion; web.dev/vitals, Lighthouse, SRE, OpenTelemetry, k6, PostgreSQL docs, JMH and related benchmark guidance.
+- Adopt: two hats, six refactoring workflows, small behavior-preserving catalog moves, green-baseline safety, economic payback, structural dispositions, measurable performance evidence, severity output, re-test gate, and explicit user acceptance before submit/publish.
+- Reject: refactoring as a separate backlog of every smell, large-bang cleanup, refactoring without tests, and adding a separate architecture or performance skill.
+- Next pass: measure workflow selection, structural-debt disposition, two-hats separation, and the review-is-part-of-done gate.
 
 ### noootwo-state
 

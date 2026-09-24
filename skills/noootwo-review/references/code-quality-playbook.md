@@ -17,6 +17,7 @@ Use this when reviewing maintainability, planning a refactor, or deciding whethe
 - Anti-Patterns
 - Review Output Template
 - Refactor scope and loop: [refactoring-loop.md](refactoring-loop.md)
+- Refactoring philosophy and workflows: [refactoring-workflows.md](refactoring-workflows.md)
 
 ## Practice Basis
 
@@ -55,7 +56,7 @@ Select lenses before expanding the review surface:
 | `AI-code/context cost` | generated structure may force future agents to load too much or trust duplicated rules | file size, wrapper layers, prompts, schemas, docs overlap |
 | `release readiness` | version, tag, publish, install, rollback, or user-visible release note matters | manifest, VERSION, tags, release docs, install checks |
 
-For a narrow diff, two or three lenses are usually enough. Do not turn an implementation review into a project audit unless the user asked for it or release/project-health evidence makes it necessary.
+For a narrow diff, two or three lenses are usually enough. Do not turn an implementation review into a project audit; use a triggered Structure Sweep for repository-level shape, and keep the change review focused on the touched path and its boundary.
 
 ## Pre-Submit Review Gate
 
@@ -77,7 +78,7 @@ Do not ask the user about local cleanup that has one safe answer. Ask before rev
 
 Route product behavior choices to `$noootwo-workflow` or `$noootwo-product`. Route technical architecture choices through the `architecture boundary` lens here.
 
-For release-bound code, include `release readiness` and check versioning, tags, install path, rollback/handoff notes, docs or release notes, and the closest validation command. For non-code diffs, record why the review gate is not applicable instead of forcing a code review.
+For release-bound code, include `release readiness` and check versioning, tags, install path, rollback/handoff notes, docs or release notes, and the closest validation command. Run or consume a Structure Sweep when the release trigger applies. For non-code diffs, record why the review gate is not applicable instead of forcing a code review.
 
 ## Risk Model
 

@@ -7,11 +7,11 @@ It publishes ten focused skills — a router plus nine specialists:
 | Skill | Invocation | Purpose | Version |
 | --- | --- | --- | --- |
 | `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in | `0.2.0` |
-| `noootwo-workflow` | model-invoked | Reads current project state, matches the correct installed skill, and schedules one next step at a time | `0.13.0` |
+| `noootwo-workflow` | model-invoked | Reads current project state, matches the correct installed skill, and schedules one next step at a time | `0.14.0` |
 | `noootwo-product` | model-invoked | Settles real user, first loop, scope, main path, states, and acceptance before design or build | `0.9.0` |
 | `noootwo-design` | model-invoked | Turns a settled product path into direction, tokens, a Design Contract, and a reviewed artifact | `0.17.0` |
-| `noootwo-tdd` | model-invoked | Owns red-green-refactor and test quality for behavior-changing code | `0.2.0` |
-| `noootwo-review` | model-invoked | Judges code before it ships, owns refactor/optimization review, re-testing, and user acceptance | `0.12.0` |
+| `noootwo-tdd` | model-invoked | Owns red-green-refactor and test quality for behavior-changing code | `0.3.0` |
+| `noootwo-review` | model-invoked | Judges code before it ships, owns the refactoring health loop, optimization review, re-testing, and user acceptance | `0.13.0` |
 | `noootwo-state` | model-invoked | Reads and records project state and context, and chooses the storage form | `0.2.0` |
 | `noootwo-debug` | model-invoked | Proves the cause of a failure before any fix, and bounds the fix to that cause | `0.2.0` |
 | `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, and borrows mechanisms instead of surfaces | `0.5.0` |
@@ -107,9 +107,9 @@ npx skills add ./skills/noootwo-design --list
 
 `noootwo-design` turns a settled product path into a visual system. It declares a Design Read, compares directions when style or structure is unresolved, writes a Design Contract before editing, reads the craft floor immediately before building, and reviews the rendered artifact in bounded passes. For `deep` work it captures the references a direction leans on into `.noootwo/references/` with their provenance, extracts real values from a reachable page with its own zero-dependency Chrome extractor, locks the build target, and reports token and motion drift against that baseline afterwards. Motion is a language rather than a field: a personality archetype, a register set by the surface, a millisecond duration scale, an easing catalog, choreography budgets, and per-platform reduced-motion fallbacks. The craft floor also carries an interaction and accessibility gate, a data-presentation matrix, screenshot/design-image intake, a component state matrix, and an asset/performance budget, with Flutter and native equivalents rather than web-only rules. `ready` is never self-certified. When the real user, main path, states, or acceptance turn out to be unsettled, it invokes `noootwo-product`.
 
-`noootwo-tdd` owns the test-first loop for behavior-changing code. It requires a failing test first, the minimal implementation, a full green test command, and refactoring only after green. It rejects production-first, tests-after, manual-test-only, and “too simple to test” reasoning.
+`noootwo-tdd` owns the test-first loop for behavior-changing code. It requires a failing test first, the minimal implementation, a full green test command, and refactoring only after green. Red and green are the adding-function hat; the post-green refactor is the refactoring hat, and the two never mix. It rejects production-first, tests-after, manual-test-only, and “too simple to test” reasoning.
 
-`noootwo-review` judges code before it ships and diagnoses rework. It selects lenses — correctness, testability, architecture boundary, lean, performance, project health, release readiness, rework diagnosis — and owns refactoring, optimization, re-testing, and the user acceptance gate. Architecture remains a review lens; there is no separate `noootwo-architecture` skill.
+`noootwo-review` judges the change and keeps the codebase healthy. It runs after every non-direct behavior change, before a hard implementation as preparatory refactoring, before submit or release, and during a triggered Structure Sweep. It follows Fowler's two hats, six refactoring workflows, small catalog moves, green-baseline safety, and economic payback; every structural finding is fixed, recorded as an opportunity or planned/long-term work, or accepted with a reason. It also owns optimization, re-testing, project health, and the user acceptance gate. Architecture remains a review lens; there is no separate `noootwo-architecture` skill.
 
 `noootwo-state` owns project state and context persistence. It receives an abstract record request, chooses JSON/JSONL for queryable state and Markdown for narrative facts, then writes, validates, and reads the record. Other skills own content; this skill owns the form and location.
 
@@ -181,11 +181,11 @@ python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scena
 Each child skill has its own `VERSION` file and tag prefix:
 
 - `noootwo-ask@v0.2.0`
-- `noootwo-workflow@v0.13.0`
+- `noootwo-workflow@v0.14.0`
 - `noootwo-product@v0.9.0`
 - `noootwo-design@v0.17.0`
-- `noootwo-tdd@v0.2.0`
-- `noootwo-review@v0.12.0`
+- `noootwo-tdd@v0.3.0`
+- `noootwo-review@v0.13.0`
 - `noootwo-state@v0.2.0`
 - `noootwo-debug@v0.2.0`
 - `noootwo-research@v0.5.0`

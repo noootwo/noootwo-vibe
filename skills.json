@@ -14,7 +14,7 @@
     {
       "name": "noootwo-workflow",
       "path": "skills/noootwo-workflow",
-      "version": "0.13.0",
+      "version": "0.14.0",
       "status": "public",
       "dependencies": [
         "noootwo-state",
@@ -55,7 +55,7 @@
     {
       "name": "noootwo-tdd",
       "path": "skills/noootwo-tdd",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "status": "public",
       "dependencies": [
         "noootwo-workflow",
@@ -66,7 +66,7 @@
     {
       "name": "noootwo-review",
       "path": "skills/noootwo-review",
-      "version": "0.12.0",
+      "version": "0.13.0",
       "status": "public",
       "dependencies": [
         "noootwo-tdd",

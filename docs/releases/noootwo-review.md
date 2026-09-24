@@ -1,5 +1,13 @@
 # noootwo-review Releases
 
+## v0.13.0
+
+- Rebuilt the review model around Martin Fowler's *Refactoring* healthy cycle: two hats, six refactoring workflows, small behavior-preserving catalog moves, green-baseline safety, and economic payback.
+- Review is now mandatory after every non-direct behavior change before the work is reported done, with preparatory refactoring available before a hard implementation and a triggered Structure Sweep before release.
+- Added `references/refactoring-workflows.md` and rewrote `refactoring-loop.md` around preparatory, TDD, litter-pickup, comprehension, planned, and long-term refactoring.
+- Every structural finding now gets a disposition: `fixed now`, `opportunity`, `planned`, `long-term`, or `accepted`; non-local items persist through `noootwo-state` instead of disappearing as future improvements.
+- Added evals for workflow selection, preparatory refactoring, structural debt disposition, two-hats separation, and the corrected current-scope behavior.
+
 ## v0.12.0
 
 - Added `references/review-gate.md` for scope, TDD precondition, re-test, and user acceptance.

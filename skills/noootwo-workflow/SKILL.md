@@ -39,7 +39,9 @@ Use `references/orchestration.md`. Decide one next step at a time. Specialist sk
 
 Precedence is limited to blockers and stage continuity:
 
-`debug/research/product blocker -> design -> tdd/implementation -> review -> retest -> acceptance -> state/release`
+`debug/research/product blocker -> design -> review/preparatory when structure blocks -> tdd/implementation -> review/post-green -> retest -> acceptance -> state/release`
+
+Review is not only a release gate. After every non-direct behavior change, the loop returns to `noootwo-review` before the work can be reported done. Before release, a triggered Structure Sweep belongs to the same review owner.
 
 Do not precompute a full DAG or pile on condition tables.
 
@@ -55,6 +57,7 @@ Answer before calling the work done:
 
 - Did the closest meaningful verification run, or is the gap explicit?
 - Did a specialist or matching installed skill need to run, and was it invoked?
+- For a non-direct code change, did `noootwo-review` run and dispose of every structural finding as fixed, opportunity, planned, long-term, or accepted?
 - Did behavior, state, or release facts change, and did `noootwo-state` place them?
 - Is user acceptance still required before commit, push, tag, or publish?
 

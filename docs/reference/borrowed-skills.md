@@ -37,6 +37,8 @@ Borrowing rule (from `AGENTS.md`): borrow repeatable mechanisms, never leaked pr
 
 - **`DietrichGebert/ponytail`** (`https://github.com/DietrichGebert/ponytail`, MIT) — seven-rung minimal-code review ladder and lean-review tags. Vendored as a `SOURCE.md` record only, not the full repo. Landed in `noootwo-review` lean-review lens. Status: adopted.
 
+- **Martin Fowler, *Refactoring* 2nd edition and the refactoring.com catalog** (`https://martinfowler.com/books/refactoring.html`, `https://refactoring.com/`, `https://martinfowler.com/articles/workflowsOfRefactoring/`, `https://martinfowler.com/bliki/DefinitionOfRefactoring.html`, `https://martinfowler.com/bliki/CodeSmell.html`, `https://martinfowler.com/bliki/SelfTestingCode.html`, `https://martinfowler.com/bliki/TechnicalDebt.html`, `https://martinfowler.com/bliki/DesignStaminaHypothesis.html`) — the definition of refactoring, small behavior-preserving transformations, two hats, the six workflows of refactoring, code smells, the catalog vocabulary, self-testing code, technical debt, and the design stamina hypothesis. Landed in `noootwo-review`, `noootwo-tdd`, and the workflow close gate. Status: adopted as mechanism and philosophy; no book text or catalog wording copied wholesale.
+
 - **`OpenAI Product Design` plugin** (private) — minimum brief, project-local product context, Explore/Design/Build boundary, existing-flow audit, and "screenshots are not QA by themselves". Landed in `noootwo-product` and the product-to-design handoff. Status: adopted mechanisms; plugin structure/prompts not copied.
 
 - **`LottieFiles/motion-design-skill`** — timing, easing, choreography, registers, and the three-layer model. Landed in `noootwo-design` motion language. Status: adopted.

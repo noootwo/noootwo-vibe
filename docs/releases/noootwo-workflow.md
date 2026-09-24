@@ -1,5 +1,11 @@
 # noootwo-workflow Releases
 
+## v0.14.0
+
+- Review is now part of done: non-direct behavior changes return to `noootwo-review` after green, before the workflow reports completion.
+- The precedence now includes preparatory refactoring before a hard change and a Structure Sweep before release.
+- The Close gate checks that every structural finding has a disposition, and the review handoff packet carries the selected refactoring workflow and structural disposition.
+
 ## v0.13.0
 
 - Replaced the fixed Noootwo routing table with evidence-driven orchestration.

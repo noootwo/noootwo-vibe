@@ -29,7 +29,7 @@ This repository does **not** set `disable-model-invocation`. It ships as a Codex
 | `noootwo-product` | model-invoked | settling product decisions before design or build |
 | `noootwo-design` | model-invoked | UI, visual, and artifact work after the product path is settled |
 | `noootwo-tdd` | model-invoked | red-green-refactor and test quality for behavior-changing code |
-| `noootwo-review` | model-invoked | code and project-health review, refactoring, optimization, and acceptance |
+| `noootwo-review` | model-invoked | change review, the refactoring health loop, structure sweeps, optimization, and acceptance |
 | `noootwo-state` | model-invoked | recording and reading project state/context and choosing storage format |
 | `noootwo-debug` | model-invoked | proving a cause and bounding the fix when something is broken |
 | `noootwo-research` | model-invoked | settling a decision that only external evidence can settle |
@@ -76,7 +76,7 @@ Every capability has exactly one owner. A caller invokes the owner; it never re-
 | settling product decisions | `noootwo-product` | `noootwo-workflow`, `noootwo-design`, `noootwo-review`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard` | settled, delegated, deferred, and rejected decisions, plus the Product-to-Design Handoff |
 | turning a settled product path into a reviewed artifact | `noootwo-design` | `noootwo-workflow`, `noootwo-product`, `noootwo-review`, `noootwo-state`, `noootwo-research`, `noootwo-onboard` | Design Read, Design Contract, and an Artifact Review decision against artifact evidence |
 | running red-green-refactor and keeping tests honest | `noootwo-tdd` | `noootwo-workflow`, `noootwo-review` | the green test evidence, the minimal implementation, and the behavior-preserving refactor baseline |
-| judging code and project health, including performance work | `noootwo-review` | `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard` | severity-ordered findings, the lenses applied, evidence read, verification gaps, and the owning skill for each handoff |
+| judging the change and keeping code structure healthy, including performance work | `noootwo-review` | `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard` | severity-ordered findings, the lenses applied, evidence read, verification gaps, structural dispositions, and the owning skill for each handoff |
 | recording and reading project state/context and choosing storage format | `noootwo-state` | `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-tdd`, `noootwo-review`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard` | the stored record, the chosen form and location, the read result, or a recorded decision that nothing changed |
 | ordering, scope, stop conditions, and handoffs | `noootwo-workflow` | the human, `noootwo-ask`, and every specialist handing sequencing back: `noootwo-product`, `noootwo-design`, `noootwo-review`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard`, `noootwo-tdd` | mode, sequence, handoffs, and the close report |
 

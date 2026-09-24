@@ -1,21 +1,35 @@
 ---
 name: noootwo-review
-description: "Use before submit or release, and for risky, public-contract, wide-blast-radius, slow, bloated, or twice-rejected diffs; act as Tech Lead and QA Architect, not style critique."
+description: "Use after non-direct code changes and before submit/release, and when structure slows change: run refactoring workflows, remove structural debt, and judge performance, project health, and acceptance."
 ---
 
 # Noootwo Review
 
-Judge the change and the smallest structural move that removes real risk. Architecture, test strategy, performance, maintainability, refactoring, optimization, and acceptance live here as review lenses.
+Judge the change, then improve the structure that the change exposed. Architecture, test strategy, performance, maintainability, refactoring, optimization, and acceptance live here as review lenses.
 
 ## When this runs
 
-Run when code reaches submit or release, when a diff is risky, public-contract, or wide in blast radius, and when the same implementation is rejected twice. A code change reaching submit or release without a review decision is not closed.
+- After every non-direct behavior change, before the work is reported done.
+- Before implementation when the existing structure makes the change hard: preparatory refactoring comes first.
+- Before submit or release, and when the same implementation is rejected twice.
+- When the same area is revised repeatedly, context cost grows, or a structure trigger fires.
+
+A code change reaching submit or release without a review decision is not closed.
 
 ## Scope
 
-- Default scope is the current change or current diff.
-- Full-project review or large refactor runs only when the user explicitly asks for it.
-- Make the smallest safe fix directly. Ask before expanding scope, changing product behavior, or choosing between real tradeoffs.
+- Default change review scope is the current diff, its nearest callers, tests, and boundary.
+- Refactoring inside the touched path is part of reviewing the change, not scope expansion.
+- A full-project Structure Sweep runs only on a trigger or when the user explicitly asks.
+- Ask before changing product behavior or choosing between real tradeoffs.
+
+## Two hats
+
+Never mix behavior change with cleanup. The adding-function hat changes behavior and tests; the refactoring hat preserves observable behavior and requires a green baseline. Switch hats deliberately, keep each step small, and return to green after every refactoring step.
+
+## Healthy cycle
+
+Read `references/refactoring-workflows.md` before structural work. Use all six workflows together: preparatory before a hard change; TDD, litter-pickup, and comprehension while working; planned for a known larger area; long-term for restructuring that spans iterations. Planned-only refactoring is a smell. Refactor where the economic payback is credible, not everywhere a smell appears.
 
 ## Lenses
 
@@ -26,6 +40,7 @@ Pick before reading widely. State which you applied and which you skipped.
 | `correctness` | behaviour, contracts, data integrity, security, migrations, release breakage |
 | `testability` | missing or brittle proof for changed behaviour |
 | `architecture boundary` | ownership, public interfaces, module boundaries, duplicated truth |
+| `structure health` | file/module/directory shape, cycles, duplication, dead code, context cost, repeated edit friction |
 | `lean` | over-engineering, YAGNI, redundant code, context-cost growth |
 | `performance` | loading, rendering, latency, query cost, algorithmic hotspots, resource use |
 | `project health` | validation entry points, CI, release path, docs drift, handoff risk |
@@ -40,15 +55,15 @@ Pick before reading widely. State which you applied and which you skipped.
 
 ## Method
 
-1. Read changed files, nearest tests, callers, public interfaces, and behavior docs.
+1. Read changed files, nearest tests, callers, public interfaces, behavior docs, and the structure the change touched.
 2. Name the behavior that must stay true and the evidence proving it.
-3. Classify risk, then find the smallest structure supporting the current requirement.
-4. Separate defects from future improvements.
-5. Prefer a local fix unless the same friction appears in more than one place.
+3. Use code smells to investigate, not to justify a mechanical rewrite.
+4. Choose the smallest catalog move that removes the real pressure, then run the relevant tests.
+5. Fix what can be fixed safely now; record every other structural finding with a disposition.
 
 ## Refactoring work
 
-When structure needs to change without changing behavior, read `references/refactoring-loop.md` and follow it. Do not bundle semantic changes with cleanup. After refactoring, rerun the full relevant test command and return through `references/review-gate.md`.
+When structure needs to change without changing behavior, read `references/refactoring-workflows.md` and `references/refactoring-loop.md` and follow them. Do not bundle semantic changes with cleanup. After refactoring, rerun the full relevant test command and return through `references/review-gate.md`.
 
 ## Optimization work
 
@@ -66,6 +81,8 @@ When the request is faster, smaller, or cheaper, read `references/optimization-l
 - files that force unrelated context to load
 - product behavior changed without settled acceptance
 - redundant code left "for later"
+- a large file, directory, or module that the current change made harder to understand or modify
+- structural debt recorded as "future improvement" with no trigger or disposition
 
 Agent-generated failure modes: broad files, premature wrappers, hidden state, tests that mirror implementation details, and claims of stability without a proving command.
 
@@ -73,7 +90,9 @@ Agent-generated failure modes: broad files, premature wrappers, hidden state, te
 
 Lead with findings ordered by severity: file and line, why it matters, concrete failure mode, smallest fix. If none, say so and name remaining verification gaps.
 
-Structured review includes applied/skipped lenses, evidence read, findings, verification gaps, re-test evidence, acceptance state, and handoff owners.
+Structured review includes applied/skipped lenses, evidence read, findings, verification gaps, re-test evidence, acceptance state, refactoring disposition, and handoff owners.
+
+Refactoring disposition: `fixed now`, `opportunity`, `planned`, `long-term`, or `accepted`; every structural finding gets one.
 
 Severity: `P0` data loss, security, or broken release; `P1` likely behavioral bug or broken contract; `P2` near-term maintainability risk; `P3` optional cleanup.
 
@@ -96,5 +115,6 @@ Severity: `P0` data loss, security, or broken release; `P1` likely behavioral bu
 - `references/project-health-review.md` — foundation, validation paths, CI, release risk, and module boundaries.
 - `references/review-gate.md` — scope, TDD precondition, re-test, and user acceptance gate.
 - `references/refactoring-loop.md` — behavior-preserving refactor steps and scope control.
+- `references/refactoring-workflows.md` — two hats, the six workflows, code smells, catalog vocabulary, structural health, and the debt ledger.
 
 Missing skill fallback: first try `npx -y skills add noootwo/noootwo-vibe --global --agent codex --skill <name> --yes`; if install fails, take the smallest direct fallback and mark the record `skill-missing: <name>` (for persistence, write the owning file directly).

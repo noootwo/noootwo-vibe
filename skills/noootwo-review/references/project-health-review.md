@@ -2,6 +2,21 @@
 
 Use this when the question is broader than a code diff: can this project be safely changed, verified, reviewed, released, and handed off by future agents?
 
+## Structure Sweep
+
+Run a Structure Sweep when at least one trigger is true:
+
+- a release or release-candidate is being prepared;
+- the same area has been revised repeatedly or has caused repeated review confusion;
+- a file, module, directory, or dependency graph has grown enough to increase context cost;
+- a new package, module, or boundary was introduced;
+- the user asks for a whole-project health review;
+- the debt ledger contains a `planned` or `long-term` item that is now due.
+
+The sweep is bounded. Read the repository shape, not every line: ownership, directory depth, import direction and cycles, fan-in/fan-out, duplicated concepts, dead code, test gaps, config/docs duplication, and context cost. Report a ranked debt ledger and recommend the smallest safe move for the top items. Do not turn the sweep into a rewrite.
+
+The ledger is not a backlog of every smell. Follow the disposition model in [refactoring-workflows.md](refactoring-workflows.md): `opportunity` is picked up on the next visit, `planned` gets a bounded pass, `long-term` records a rough end-state and moves through ordinary work, and `accepted` records why the code is not worth changing now.
+
 ## Review Surface
 
 | Area | Risk question |
@@ -58,13 +73,13 @@ Handoff
 - Do not write docs in the review result; identify the defect and owner.
 - Do not invent architecture work without evidence from code, tests, or repeated friction.
 - Do not treat missing process as a blocker if the current task has a clear, low-risk verification path.
-- Do not expand a narrow code review into a full project audit unless requested or release risk is present.
+- Do not expand a narrow code review into a full project audit unless a Structure Sweep trigger is present.
 
 ## Quick Checks
 
 - Search for validation commands in README, package files, scripts, CI, and docs/reference.
 - Search for performance budgets, benchmark commands, load tests, tracing/metrics docs, and query-plan workflows when the project has performance-sensitive paths.
 - Compare version sources against release notes and manifest files.
-- Inspect the largest or most changed files only when they are in the current path.
+- Inspect the largest or most changed files in the current path during change review; inspect repository-wide shape during a triggered Structure Sweep.
 - Look for repeated rules across README, AGENTS, status, prompts, schemas, and config.
 - Check whether release claims have tags, commands, or CI evidence.
