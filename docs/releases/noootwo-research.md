@@ -1,5 +1,9 @@
 # noootwo-research Releases
 
+## v0.6.0
+
+- Updated current source-reference paths from `noootwo-review` to `noootwo-code-health`; no research behavior changed.
+
 ## v0.5.0
 
 - Expanded the motion source pool with Vue Bits, Motion for Vue, and `@formkit/auto-animate`, plus licence and maintenance caveats.

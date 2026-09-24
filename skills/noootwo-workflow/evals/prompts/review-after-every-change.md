@@ -5,7 +5,7 @@ Prompt: "Add a small validated export option, make sure tests pass, and tell me 
 Expected:
 
 - Routes the behavior change through `noootwo-tdd`.
-- After green, returns to `noootwo-review` before reporting the work done.
+- After green, returns to `noootwo-code-health` before reporting the work done.
 - The review checks the touched path, chooses a refactoring workflow when structure pressure exists, and disposes of every structural finding.
 - Only then reports the result and asks for acceptance before submit or release.
 

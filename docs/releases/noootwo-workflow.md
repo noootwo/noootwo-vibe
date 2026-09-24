@@ -1,5 +1,10 @@
 # noootwo-workflow Releases
 
+## v0.15.0
+
+- Updated review scheduling and close-gate handoffs from `noootwo-review` to `noootwo-code-health`.
+- The workflow now points at the renamed `noootwo-code-health` skill for post-green and Structure Sweep work.
+
 ## v0.14.0
 
 - Review is now part of done: non-direct behavior changes return to `noootwo-review` after green, before the workflow reports completion.

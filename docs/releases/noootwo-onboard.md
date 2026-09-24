@@ -1,5 +1,9 @@
 # noootwo-onboard Releases
 
+## v0.3.0
+
+- Updated the foundation-health handoff from `noootwo-review` to `noootwo-code-health`.
+
 ## v0.2.0
 
 - Project facts and foundation placement now route to `noootwo-state`; onboarding stays a routing and audit skill and no longer writes project state files.

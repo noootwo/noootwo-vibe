@@ -6,6 +6,6 @@ Expected:
 
 - Workflow reads current state through `noootwo-state` if present, git status, and current artifacts.
 - It does not rerun `noootwo-product` or `noootwo-design`.
-- It routes the changed code through `noootwo-review`, or through `noootwo-tdd` first if tests are missing.
+- It routes the changed code through `noootwo-code-health`, or through `noootwo-tdd` first if tests are missing.
 
 Fails when: it restarts the full product/design lifecycle, or assumes the project is at an earlier stage.

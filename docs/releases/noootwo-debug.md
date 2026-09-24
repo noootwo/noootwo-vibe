@@ -1,5 +1,9 @@
 # noootwo-debug Releases
 
+## v0.3.0
+
+- Updated code-health and optimization handoffs from `noootwo-review` to `noootwo-code-health`.
+
 ## v0.2.0
 
 - Behaviour, state, and release facts now route to `noootwo-state` at close instead of a local docs owner.

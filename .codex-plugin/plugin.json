@@ -1,7 +1,7 @@
 {
   "name": "noootwo-vibe",
-  "version": "0.15.0",
-  "description": "A Noootwo multi-skill workspace for controlled AI software development, user-centered product decisions, design, code review, and project state persistence.",
+  "version": "0.16.0",
+  "description": "A Noootwo multi-skill workspace for controlled AI software development, user-centered product decisions, design, code health, and project state persistence.",
   "author": {
     "name": "Noootwo",
     "url": "https://github.com/noootwo/noootwo-vibe"
@@ -14,7 +14,8 @@
     "software-development",
     "product-management",
     "documentation",
-    "code-review",
+    "code-health",
+    "refactoring",
     "design",
     "skills"
   ],
@@ -22,7 +23,7 @@
   "interface": {
     "displayName": "Noootwo Vibe",
     "shortDescription": "AI development workflow skill suite",
-    "longDescription": "Noootwo Vibe bundles ten focused skills: a router that names the right skill and order, lifecycle scheduling for multi-step work, test-first red-green-refactor, evidence-chain debugging that proves a cause before any fix, evidence-based research that settles outside decisions, project onboarding and skill audits, product decisions settled before anything is built, research-backed design work, lens-based change review, the refactoring health loop, structure sweeps, optimization, and abstract project state and context persistence.",
+    "longDescription": "Noootwo Vibe bundles ten focused skills: a router that names the right skill and order, lifecycle scheduling for multi-step work, test-first red-green-refactor, evidence-chain debugging that proves a cause before any fix, evidence-based research that settles outside decisions, project onboarding and skill audits, product decisions settled before anything is built, research-backed design work, code health with change review and the refactoring health loop, structure sweeps, optimization, and abstract project state and context persistence.",
     "developerName": "Noootwo",
     "category": "Development",
     "capabilities": [
@@ -35,7 +36,7 @@
       "Use $noootwo-product to settle real user, first loop, scope, main path, states, and acceptance before design or build.",
       "Use $noootwo-design for UI, visual, artifact, and frontend work once the product path is settled.",
       "Use $noootwo-tdd for behavior-changing code: failing test first, minimal implementation, full green, then refactor.",
-      "Use $noootwo-review to judge code before it ships, and to diagnose repeated rework.",
+      "Use $noootwo-code-health to keep code elegant and healthy: review changes, run refactoring workflows, remove structural debt, and gate acceptance.",
       "Use $noootwo-state to read, record, or update project state and context, and to choose the storage form for each fact.",
       "Use $noootwo-debug when something is broken, failing, flaky, or wrong: it proves the cause before any fix.",
       "Use $noootwo-research when a decision needs evidence from outside the repo: a direction, a stack or library, a market expectation.",

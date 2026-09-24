@@ -1,5 +1,7 @@
 # noootwo-review Releases
 
+This skill was renamed to `noootwo-code-health` in v0.14.0. This file is kept as historical release record.
+
 ## v0.13.0
 
 - Rebuilt the review model around Martin Fowler's *Refactoring* healthy cycle: two hats, six refactoring workflows, small behavior-preserving catalog moves, green-baseline safety, and economic payback.

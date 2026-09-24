@@ -14,7 +14,7 @@ The default file names below assume a software repository. In another kind of pr
 - Use `$noootwo-design` for UI, visual, artifact, and frontend work once the product path is settled.
 - Use `$noootwo-debug` when something is broken, failing, flaky, or wrong: prove the cause before fixing.
 - Use `$noootwo-research` when a decision needs outside evidence: a direction, a stack or library, a market expectation.
-- Use `$noootwo-review` to judge code before it ships, including performance and optimization work.
+- Use `$noootwo-code-health` to judge code before it ships, including performance and optimization work.
 - Use `$noootwo-state` to place changed facts in the owning layer.
 - Use `$noootwo-onboard` when entering an unfamiliar repository or deciding which skills it needs.
 ```

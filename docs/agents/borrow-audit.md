@@ -74,7 +74,7 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 - Reject: verbatim Superpowers wording, production-first, tests-after, manual-test rationalization.
 - Next pass: measure feature/bugfix/refactor scenarios against hidden verifiers.
 
-### noootwo-review
+### noootwo-code-health
 
 - Current role: code, architecture, performance, maintainability, refactoring, optimization, re-test, and user acceptance.
 - Prior art: Martin Fowler's *Refactoring* 2nd edition, the online catalog, *Workflows of Refactoring*, *Definition of Refactoring*, *Code Smell*, *Self-Testing Code*, *Technical Debt*, and *Design Stamina Hypothesis*; Ponytail lean-code-review ladder; Superpowers requesting/receiving code review and verification-before-completion; web.dev/vitals, Lighthouse, SRE, OpenTelemetry, k6, PostgreSQL docs, JMH and related benchmark guidance.

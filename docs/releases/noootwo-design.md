@@ -1,5 +1,9 @@
 # noootwo-design Releases
 
+## v0.18.0
+
+- Updated current references from `noootwo-review` to `noootwo-code-health`; no design behavior changed.
+
 ## v0.17.0
 
 - Added an Interaction and Accessibility Gate to `craft.md` with web, Flutter, SwiftUI, and Compose equivalents for accessible names, keyboard paths, focus, touch targets, state without colour alone, announcements, text scale, reduced motion, and destructive actions.

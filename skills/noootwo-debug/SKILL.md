@@ -5,7 +5,7 @@ description: "Use for broken, failing, flaky, intermittent, CI-only, or previous
 
 # Noootwo Debug
 
-Turn a symptom into a proven cause, then the smallest fix that removes it. One evidence chain, not a hunt: every link carries raw output, and no file changes until the chain closes. Making something faster, smaller, or cheaper is optimization, not a failure — that work belongs to the `noootwo-review` skill.
+Turn a symptom into a proven cause, then the smallest fix that removes it. One evidence chain, not a hunt: every link carries raw output, and no file changes until the chain closes. Making something faster, smaller, or cheaper is optimization, not a failure — that work belongs to the `noootwo-code-health` skill.
 
 When the expected behaviour is itself unsettled — what the thing should do is a decision, not a fact — invoke the `noootwo-product` skill first: read its `SKILL.md` and follow it.
 
@@ -100,7 +100,7 @@ Read `references/fix-scope.md` for the scope ledger, the right-layer rule, and t
 
 ## 7. Close
 
-Report the chain: the cause, the proof, the scope, the verification, and what stays open. When behaviour, state, or release facts changed, invoke the `noootwo-state` skill to place them: read its `SKILL.md` and follow it. When the fix reaches submit or release, invoke the `noootwo-review` skill: read its `SKILL.md` and follow it.
+Report the chain: the cause, the proof, the scope, the verification, and what stays open. When behaviour, state, or release facts changed, invoke the `noootwo-state` skill to place them: read its `SKILL.md` and follow it. When the fix reaches submit or release, invoke the `noootwo-code-health` skill: read its `SKILL.md` and follow it.
 
 **Done when:** the chain is in the answer, and the docs and review triggers are invoked or recorded as not applying.
 

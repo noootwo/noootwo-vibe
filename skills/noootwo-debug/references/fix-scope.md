@@ -51,4 +51,4 @@ Name what each option leaves unproven. The choice is the user's, not the agent's
 
 ## What not to solve here
 
-A fix that grows into a refactor, an architecture change, or a product behaviour change has left this task. Report the cause and the evidence, then hand it over: `noootwo-review` judges whether the larger change is warranted, `noootwo-product` settles what the behaviour should be. Proving the cause was the job; the fix is allowed to be small.
+A fix that grows into a refactor, an architecture change, or a product behaviour change has left this task. Report the cause and the evidence, then hand it over: `noootwo-code-health` judges whether the larger change is warranted, `noootwo-product` settles what the behaviour should be. Proving the cause was the job; the fix is allowed to be small.

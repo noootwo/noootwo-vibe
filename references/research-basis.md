@@ -86,7 +86,7 @@ Run as part of the `noootwo-research` work recorded in [ADR 0008](../adr/0008-ad
 | hard gate against claiming completion without fresh evidence | `obra/superpowers` `verification-before-completion` | self-reported success | already adopted → `noootwo-debug` Gate B |
 | writing-for-agents authoring standard with enforced budgets | `mattpocock/skills` | skill bodies drifting into policy documents | already adopted → ADR 0006 |
 | enumerate deterministic detector rules and run them at edit time | `pbakaus/impeccable` | mechanical slop reaching review | rejected: fails the budget and cheap-mode criteria; tracked in ADR 0006 |
-| a separate performance skill | ecosystem performance skills are domain packs (WordPress, Core Web Vitals, scroll jank); `obra/superpowers` ships none | — | rejected: `AGENTS.md` and ADR 0005 already assign performance to `noootwo-review`; adopted the missing optimization loop instead |
+| a separate performance skill | ecosystem performance skills are domain packs (WordPress, Core Web Vitals, scroll jank); `obra/superpowers` ships none | — | rejected: `AGENTS.md` and ADR 0005 already assign performance to `noootwo-code-health`; adopted the missing optimization loop instead |
 | coercive pressure rhetoric and a level system | local `pua` / `pua-debugging` | thrashing and premature giving-up | rejected in ADR 0007; the anti-rationalization table and the structured exit report were the parts worth keeping |
 | vendoring an engine, CLI, or hook manifests | `pbakaus/impeccable` | — | rejected: would make quick mode depend on a toolchain |
 
@@ -109,7 +109,7 @@ Source index for the fourth pass:
 - Local PDF: `/Users/notwo/Downloads/为什么你的AI代码越来越冗余？答案在这套七层流程里.pdf`
 - Ponytail repository: `https://github.com/DietrichGebert/ponytail`
 - Ponytail license: `https://github.com/DietrichGebert/ponytail/blob/main/LICENSE`
-- Ponytail source note: `skills/noootwo-review/references/external/ponytail/SOURCE.md`
+- Ponytail source note: `skills/noootwo-code-health/references/external/ponytail/SOURCE.md`
 
 Fifth-pass design color-system calibration, checked on 2026-07-06:
 

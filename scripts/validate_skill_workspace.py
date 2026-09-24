@@ -15,7 +15,7 @@ EXPECTED_SKILLS = [
     "noootwo-product",
     "noootwo-design",
     "noootwo-tdd",
-    "noootwo-review",
+    "noootwo-code-health",
     "noootwo-state",
     "noootwo-debug",
     "noootwo-research",
@@ -311,7 +311,7 @@ def validate_skill_set(root: Path, manifest_items: list[dict], errors: list[str]
         add(errors, "missing skills directory")
         return
     if (skills_root / "noootwo-architecture").exists():
-        add(errors, "noootwo-architecture must not exist; architecture belongs to noootwo-review lenses")
+        add(errors, "noootwo-architecture must not exist; architecture belongs to noootwo-code-health lenses")
     actual = sorted(path.name for path in skills_root.iterdir() if path.is_dir() and not path.name.startswith("."))
     expected_sorted = sorted(EXPECTED_SKILLS)
     if actual != expected_sorted:

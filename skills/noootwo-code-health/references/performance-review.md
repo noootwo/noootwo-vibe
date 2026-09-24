@@ -165,4 +165,4 @@ Route ownership:
 
 - `$noootwo-workflow`: decide whether performance work belongs in current scope, release gates, or future hardening.
 - `$noootwo-state`: record stable performance commands, budgets, dashboards, or known gaps in the right documentation layer.
-- `$noootwo-review`: classify findings and verify performance fixes preserve correctness.
+- `$noootwo-code-health`: classify findings and verify performance fixes preserve correctness.

@@ -6,7 +6,7 @@
     {
       "name": "noootwo-ask",
       "path": "skills/noootwo-ask",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "status": "public",
       "dependencies": [],
       "tagPrefix": "noootwo-ask@"
@@ -14,14 +14,14 @@
     {
       "name": "noootwo-workflow",
       "path": "skills/noootwo-workflow",
-      "version": "0.14.0",
+      "version": "0.15.0",
       "status": "public",
       "dependencies": [
         "noootwo-state",
         "noootwo-product",
         "noootwo-design",
         "noootwo-tdd",
-        "noootwo-review",
+        "noootwo-code-health",
         "noootwo-debug",
         "noootwo-research",
         "noootwo-onboard"
@@ -31,7 +31,7 @@
     {
       "name": "noootwo-product",
       "path": "skills/noootwo-product",
-      "version": "0.9.0",
+      "version": "0.10.0",
       "status": "public",
       "dependencies": [
         "noootwo-research",
@@ -43,7 +43,7 @@
     {
       "name": "noootwo-design",
       "path": "skills/noootwo-design",
-      "version": "0.17.0",
+      "version": "0.18.0",
       "status": "public",
       "dependencies": [
         "noootwo-product",
@@ -55,7 +55,7 @@
     {
       "name": "noootwo-tdd",
       "path": "skills/noootwo-tdd",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "status": "public",
       "dependencies": [
         "noootwo-workflow",
@@ -64,9 +64,9 @@
       "tagPrefix": "noootwo-tdd@"
     },
     {
-      "name": "noootwo-review",
-      "path": "skills/noootwo-review",
-      "version": "0.13.0",
+      "name": "noootwo-code-health",
+      "path": "skills/noootwo-code-health",
+      "version": "0.14.0",
       "status": "public",
       "dependencies": [
         "noootwo-tdd",
@@ -77,7 +77,7 @@
         "noootwo-debug",
         "noootwo-research"
       ],
-      "tagPrefix": "noootwo-review@"
+      "tagPrefix": "noootwo-code-health@"
     },
     {
       "name": "noootwo-state",
@@ -90,19 +90,19 @@
     {
       "name": "noootwo-debug",
       "path": "skills/noootwo-debug",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "status": "public",
       "dependencies": [
         "noootwo-product",
         "noootwo-state",
-        "noootwo-review"
+        "noootwo-code-health"
       ],
       "tagPrefix": "noootwo-debug@"
     },
     {
       "name": "noootwo-research",
       "path": "skills/noootwo-research",
-      "version": "0.5.0",
+      "version": "0.6.0",
       "status": "public",
       "dependencies": [
         "noootwo-product",
@@ -114,10 +114,10 @@
     {
       "name": "noootwo-onboard",
       "path": "skills/noootwo-onboard",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "status": "public",
       "dependencies": [
-        "noootwo-review",
+        "noootwo-code-health",
         "noootwo-state"
       ],
       "tagPrefix": "noootwo-onboard@"

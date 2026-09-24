@@ -36,7 +36,7 @@ This is project-local, not a global user profile. Do not copy unrelated past pro
    - product-flow friction: the task is unclear, too long, or blocked
    - state/acceptance gaps: empty, error, permission, success states do not name the next action
    - visual or interaction defects: route to `noootwo-design`
-   - code or performance defects: route to `noootwo-review`
+   - code or performance defects: route to `noootwo-code-health`
 6. Rank by severity and product leverage, not by how easy the screenshot was to obtain.
 
 ## Output

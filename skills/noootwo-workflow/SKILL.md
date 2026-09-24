@@ -41,7 +41,7 @@ Precedence is limited to blockers and stage continuity:
 
 `debug/research/product blocker -> design -> review/preparatory when structure blocks -> tdd/implementation -> review/post-green -> retest -> acceptance -> state/release`
 
-Review is not only a release gate. After every non-direct behavior change, the loop returns to `noootwo-review` before the work can be reported done. Before release, a triggered Structure Sweep belongs to the same review owner.
+Review is not only a release gate. After every non-direct behavior change, the loop returns to `noootwo-code-health` before the work can be reported done. Before release, a triggered Structure Sweep belongs to the same review owner.
 
 Do not precompute a full DAG or pile on condition tables.
 
@@ -57,7 +57,7 @@ Answer before calling the work done:
 
 - Did the closest meaningful verification run, or is the gap explicit?
 - Did a specialist or matching installed skill need to run, and was it invoked?
-- For a non-direct code change, did `noootwo-review` run and dispose of every structural finding as fixed, opportunity, planned, long-term, or accepted?
+- For a non-direct code change, did `noootwo-code-health` run and dispose of every structural finding as fixed, opportunity, planned, long-term, or accepted?
 - Did behavior, state, or release facts change, and did `noootwo-state` place them?
 - Is user acceptance still required before commit, push, tag, or publish?
 
@@ -71,7 +71,7 @@ When the user rejects a previous attempt, diagnose the failed layer before chang
 | --- | --- | --- |
 | They wanted something different, or scope is wrong | product | `noootwo-product` |
 | Direction or visual language is wrong | design | `noootwo-design` |
-| Intent was right and execution is not | implementation | `noootwo-tdd` detail pass, or `noootwo-review` |
+| Intent was right and execution is not | implementation | `noootwo-tdd` detail pass, or `noootwo-code-health` |
 | Documents or project state no longer match reality | state | `noootwo-state` |
 | A regression or failure has no proven cause | evidence | `noootwo-debug` |
 

@@ -16,10 +16,10 @@ Use this only to break a stage tie:
 2. `noootwo-research` for a decision that only outside evidence can settle.
 3. `noootwo-product` for an unsettled real user, scope, main path, state, or acceptance.
 4. `noootwo-design` for UI/visual/artifact work when the product path is settled but direction is not.
-5. `noootwo-review` preparatory mode when the existing structure makes the requested change hard.
-6. `noootwo-tdd` for behavior-changing code, then `noootwo-review` after green before the work is reported done.
+5. `noootwo-code-health` preparatory mode when the existing structure makes the requested change hard.
+6. `noootwo-tdd` for behavior-changing code, then `noootwo-code-health` after green before the work is reported done.
 7. `noootwo-state` after behavior, state, release facts, or instructions change, including unresolved structural findings.
-8. `noootwo-review` Structure Sweep before release, then release ordering when the user asks to tag or publish.
+8. `noootwo-code-health` Structure Sweep before release, then release ordering when the user asks to tag or publish.
 
 Do not turn this into a large condition table. If the current evidence points to a different owner, the evidence wins.
 

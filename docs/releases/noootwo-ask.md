@@ -1,5 +1,9 @@
 # noootwo-ask Releases
 
+## v0.3.0
+
+- Updated the router from `noootwo-review` to `noootwo-code-health`; the target capability is unchanged.
+
 ## v0.2.0
 
 - Added `noootwo-tdd` to the main flow, choosing table, and standalone list.

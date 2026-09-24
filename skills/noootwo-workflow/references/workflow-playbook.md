@@ -7,7 +7,7 @@ Compact guardrail and handoff packet reference. Routing and scheduling live in `
 - Read repo truth before deciding; smallest read that covers risk.
 - Do not edit while product or debug is unresolved.
 - Behavior-changing code uses `noootwo-tdd` before review.
-- Non-direct behavior changes return to `noootwo-review` after green, before the work is reported done.
+- Non-direct behavior changes return to `noootwo-code-health` after green, before the work is reported done.
 - Review/refactor/optimization must re-run tests, dispose of structural findings, and stop for user acceptance before submit or publish.
 - Update docs through `noootwo-state` when facts change.
 - Direct single-file work stays direct; do not add ceremony.
@@ -23,7 +23,7 @@ Keep packets short. Workflow carries scope and sequencing; the specialist owns m
 - Scope boundary:
 - What workflow still owns:
 
-### To `noootwo-review`
+### To `noootwo-code-health`
 
 - Behavior or structure changed:
 - Files and nearest tests:

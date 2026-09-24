@@ -97,7 +97,7 @@ Verify in bounded passes: build fully, inspect once with a batch covering the re
 
 ## Return
 
-When this is not design work, name the failed layer and invoke the owning skill in one hop: `noootwo-product` for an unsettled product path, `noootwo-review` for code or performance judgment, `noootwo-debug` for a failure that needs a proven cause.
+When this is not design work, name the failed layer and invoke the owning skill in one hop: `noootwo-product` for an unsettled product path, `noootwo-code-health` for code or performance judgment, `noootwo-debug` for a failure that needs a proven cause.
 
 ## Reference
 

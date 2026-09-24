@@ -1,5 +1,9 @@
 # noootwo-product Releases
 
+## v0.10.0
+
+- Updated code and performance handoffs from `noootwo-review` to `noootwo-code-health`.
+
 ## v0.9.0
 
 - Project-local product context now persists through `noootwo-state` as an abstract record instead of writing `.noootwo/product-context.md` directly.

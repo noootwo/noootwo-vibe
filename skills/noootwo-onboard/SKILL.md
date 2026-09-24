@@ -27,7 +27,7 @@ Read `references/skill-audit.md` for the decision table and the output contract.
 
 ## 3. Route the health judgment
 
-The foundation itself — validation entry, tests, CI, decisions, release path, runtime preview, version sources, context cost, risk log — is judged by the `noootwo-review` skill's project-health lens. Invoke it: read its `SKILL.md` and follow it, and hand over the repo facts already read rather than re-reading them.
+The foundation itself — validation entry, tests, CI, decisions, release path, runtime preview, version sources, context cost, risk log — is judged by the `noootwo-code-health` skill's project-health lens. Invoke it: read its `SKILL.md` and follow it, and hand over the repo facts already read rather than re-reading them.
 
 Do not classify foundation health here. One surface, one owner.
 

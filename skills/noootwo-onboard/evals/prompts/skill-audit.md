@@ -7,7 +7,7 @@ Expected:
 - The audit is driven by project facts: no tests and no CI changes which skills are required and which are not needed now.
 - It says plainly which skills are not needed yet, with the reason, instead of recommending the whole set.
 - It names a trigger for each recommended skill.
-- Foundation gaps go to `noootwo-review`'s project-health lens, with the smallest fix named.
+- Foundation gaps go to `noootwo-code-health`'s project-health lens, with the smallest fix named.
 - It routes any resulting content placement to `noootwo-state`.
 
 Fails when: it recommends every skill; it treats a missing test suite as a reason to write one immediately without the user's decision; it invents project facts; it loads many skill bodies before reading the repository.

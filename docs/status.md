@@ -2,7 +2,7 @@
 
 - Repository: `noootwo/noootwo-vibe`
 - Branch model: feature work on `codex/*`, default branch `main`
-- Public skill set: `noootwo-ask`, `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-tdd`, `noootwo-review`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard`
+- Public skill set: `noootwo-ask`, `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-tdd`, `noootwo-code-health`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard`
 - Release model: independently versioned child skills listed in `skills.json`
 - Root `SKILL.md`: intentionally absent so default skill discovery lists all child skills
 - Invocation model: `noootwo-ask` is user-invoked; the other nine are model-invoked
@@ -23,7 +23,8 @@ Last verified: 2026-09-24 on this worktree.
 - `node --check` on `skills/noootwo-design/scripts/extract_design_tokens.mjs`, plus an end-to-end extraction against a foreign product site and a domestic design system
 - `node --check` on the `CHECK_JS` payload from `skills/noootwo-design/scripts/check_visual_gates.py`; the advisory interface rules still need an artifact run with Playwright for end-to-end proof
 - `docs/agents/borrow-audit.md` maps the prior art each skill was compared against; the Product Design plugin maps primarily to `noootwo-product`, and motion-web maps primarily to `noootwo-design`.
-- `noootwo-review` now follows the Fowler refactoring health loop; the deciding sources and boundaries are recorded in `docs/reference/borrowed-skills.md` and ADR 0015.
+- `noootwo-code-health` now follows the Fowler refactoring health loop; the deciding sources and boundaries are recorded in `docs/reference/borrowed-skills.md` and ADR 0015.
+- `noootwo-code-health` is the renamed `noootwo-review` skill (`v0.14.0`). The old `noootwo-review@v0.13.0` tag remains as history; current docs and routing use the new name.
 
 ## Active Risks
 
@@ -35,11 +36,11 @@ Last verified: 2026-09-24 on this worktree.
 - The Product-to-Design Handoff must not carry an unsettled decision that would change the real user, main path, states, acceptance, or trust boundary.
 - `noootwo-debug`, `noootwo-research`, and `noootwo-onboard` are written from a research pass, not from a measured behaviour probe. Their gates are asserted, not yet shown to change what an agent does; the probes below are the evidence that would settle them.
 - The capability bridge is enforced mechanically at the name level only. It cannot check ordering, hand-off content, or the loop rules; those stay review questions.
-- `noootwo-review` now owns the Fowler refactoring health loop, including preparatory review, post-green review, and triggered Structure Sweeps. The workflow model is evidence-backed, but its effect on real rework and structural-debt closure is still asserted rather than measured.
+- `noootwo-code-health` now owns the Fowler refactoring health loop, including preparatory review, post-green review, and triggered Structure Sweeps. The workflow model is evidence-backed, but its effect on real rework and structural-debt closure is still asserted rather than measured.
 - `noootwo-workflow` now treats review as part of done and checks that every structural finding has a disposition before closing a non-direct code change. This routing behavior needs the new workflow eval run before it is treated as stable.
 - `noootwo-tdd` now separates the adding-function hat from the refactoring hat and no longer defers a large touched file by default. The two-hats and debt-disposition behavior still needs scenario measurement.
 - `noootwo-design` adds case capture and a motion language. The extractor needs Node 22+ and a local Chrome; without both, a deep pass records a degraded capture rather than inventing values.
-- `noootwo-review/SKILL.md` is at the 120-line limit. `planned`: the next review change must compress or replace an existing line before adding another.
+- `noootwo-code-health/SKILL.md` is at the 120-line limit. `planned`: the next review change must compress or replace an existing line before adding another.
 - The largest skill files are the design extractor and the design translation/craft references (roughly 500-742 lines). This release does not touch them; `opportunity`: split only when that path is next changed and the context cost is proven.
 - The motion rules added to `check_visual_gates.py` are advisory by design. An intentional brand curve can trip one, so a finding needs screenshot or DOM confirmation before it changes a decision.
 - The native motion guidance in `translate.md` is drawn from platform documentation, not from a measured SwiftUI or Compose project. A device check is still owed.
@@ -59,7 +60,7 @@ Last verified: 2026-09-24 on this worktree.
 - Re-run `docs/experiments/` scenarios when a skill's flow changes, and record the result beside the previous run.
 - Run the `noootwo-debug` scenarios under `skills/noootwo-debug/evals/prompts/` on seeded bugs with a hidden verifier and a decoy, and record the result in `docs/experiments/`.
 - Run the `noootwo-research` scenarios under `skills/noootwo-research/evals/prompts/`, including the case where research should not fire, and record the result in `docs/experiments/`.
-- Run the `noootwo-onboard` scenarios under `skills/noootwo-onboard/evals/prompts/`, and the optimization scenario under `skills/noootwo-review/evals/prompts/`.
+- Run the `noootwo-onboard` scenarios under `skills/noootwo-onboard/evals/prompts/`, and the optimization scenario under `skills/noootwo-code-health/evals/prompts/`.
 - Run the new refactoring-workflow, preparatory-refactoring, structural-debt, two-hats, and review-after-every-change scenarios.
 - Run the seven motion, four interface-quality, and four case-capture scenarios under `skills/noootwo-design/evals/prompts/`, and record the results in `docs/experiments/`.
 - Exercise `extract_design_tokens.mjs` and the advisory motion rules on a real project artifact, and record the false-positive rate for the deliberately-deviating brand-curve case.

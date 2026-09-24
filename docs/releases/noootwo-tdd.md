@@ -1,5 +1,9 @@
 # noootwo-tdd Releases
 
+## v0.4.0
+
+- Updated the post-green review handoff from `noootwo-review` to `noootwo-code-health`.
+
 ## v0.3.0
 
 - Aligned the refactor step with the review healthy cycle: red and green are the adding-function hat, the post-green refactor is the refactoring hat, and the two never mix.

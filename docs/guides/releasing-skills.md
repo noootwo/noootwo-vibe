@@ -5,7 +5,7 @@
 3. Update `docs/releases/<skill>.md` with user-visible changes and migration notes.
 4. Run workspace validation and skill discovery checks from `README.md`, including a clean install of all child skills with `--skill '*'`.
 5. Commit the change.
-6. Create a tag using the skill's `tagPrefix` from `skills.json`, for example `noootwo-review@vX.Y.Z`.
+6. Create a tag using the skill's `tagPrefix` from `skills.json`, for example `noootwo-code-health@vX.Y.Z`.
 7. Push the branch and tags.
 8. Sync both local install roots for a release batch:
 

@@ -1,11 +1,11 @@
 ---
-name: noootwo-review
-description: "Use after non-direct code changes and before submit/release, and when structure slows change: run refactoring workflows, remove structural debt, and judge performance, project health, and acceptance."
+name: noootwo-code-health
+description: "Use after non-direct code changes and before submit/release, and when code should become more elegant or healthy: refactoring workflows, structural debt, review, optimization, and acceptance."
 ---
 
-# Noootwo Review
+# Noootwo Code Health
 
-Judge the change, then improve the structure that the change exposed. Architecture, test strategy, performance, maintainability, refactoring, optimization, and acceptance live here as review lenses.
+Keep code elegant and healthy: judge the change, then improve the structure it exposed. Architecture, test strategy, performance, maintainability, refactoring, optimization, and acceptance live here as review lenses.
 
 ## When this runs
 

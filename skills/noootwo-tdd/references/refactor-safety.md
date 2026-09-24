@@ -1,6 +1,6 @@
 # Refactor Safety
 
-Refactoring changes structure, not behavior. The proof of that difference is a green test command before and after. The structural workflow and philosophy live in `noootwo-review` `references/refactoring-workflows.md`; this file owns the safety inside the TDD loop.
+Refactoring changes structure, not behavior. The proof of that difference is a green test command before and after. The structural workflow and philosophy live in `noootwo-code-health` `references/refactoring-workflows.md`; this file owns the safety inside the TDD loop.
 
 ## Two hats
 
@@ -26,7 +26,7 @@ Red and green are the adding-function hat. The refactor step is the refactoring 
 
 - Run the full relevant test command.
 - Diff behavior evidence: same public inputs and outputs, same side effects, no new contracts.
-- Return to `noootwo-review` or `noootwo-workflow` for the review gate. Record any remaining structural finding with a disposition instead of leaving it as an untracked future improvement. Do not self-certify submit or release.
+- Return to `noootwo-code-health` or `noootwo-workflow` for the review gate. Record any remaining structural finding with a disposition instead of leaving it as an untracked future improvement. Do not self-certify submit or release.
 
 ## Defer when
 

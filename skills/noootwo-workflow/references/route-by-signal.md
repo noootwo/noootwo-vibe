@@ -28,9 +28,9 @@ Examples of artifact-shaped matching:
 - a slide deck, PPT, keynote, or presentation brief → presentation/slide/ppt owner
 - a document, report, README, or long-form written artifact → document/writing owner
 - a visual UI or frontend change → design owner when direction is unsettled, implementation owner when design is settled
-- behavior-changing code → `noootwo-tdd`, then `noootwo-review` after green, before the work is reported done
-- existing structure makes the requested change hard → `noootwo-review` preparatory workflow before implementation
-- repeated edits in one area, context cost growing, a giant file or directory, or a release trigger → `noootwo-review` Structure Sweep
+- behavior-changing code → `noootwo-tdd`, then `noootwo-code-health` after green, before the work is reported done
+- existing structure makes the requested change hard → `noootwo-code-health` preparatory workflow before implementation
+- repeated edits in one area, context cost growing, a giant file or directory, or a release trigger → `noootwo-code-health` Structure Sweep
 - a broken behavior or regression → `noootwo-debug` before implementation
 - an unsettled product decision → `noootwo-product` before design or build
 

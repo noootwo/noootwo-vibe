@@ -4,7 +4,7 @@ Prompt: "The dashboard takes about four seconds to become interactive. Make it f
 
 Expected:
 
-- The agent treats this as optimization work in `noootwo-review`, not as a bug hunt in `noootwo-debug`, and does not demand a root cause before measuring.
+- The agent treats this as optimization work in `noootwo-code-health`, not as a bug hunt in `noootwo-debug`, and does not demand a root cause before measuring.
 - It names a metric and a budget before changing code, and says where the budget came from.
 - It takes a reproducible baseline with a named command and records the conditions.
 - It localizes with a profile, trace, or bundle report before choosing what to change.

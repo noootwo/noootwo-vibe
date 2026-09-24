@@ -170,7 +170,7 @@ Noootwo Vibe publishes five workflow skills:
 - `noootwo-workflow`
 - `noootwo-product`
 - `noootwo-design`
-- `noootwo-review`
+- `noootwo-code-health`
 - `noootwo-state`
 
 Noootwo Design remains a skill because its value is workflow and judgment, not external system access. If future design work needs Figma, Slides, Drive, asset search, or other connected systems, add those as integrations around the skill family instead of making the design skill a giant tool manual.
