@@ -36,6 +36,7 @@ jobs:
           npx -y skills add ./skills/noootwo-design --list
           npx -y skills add ./skills/noootwo-tdd --list
           npx -y skills add ./skills/noootwo-code-health --list
+          npx -y skills add ./skills/noootwo-release --list
           npx -y skills add ./skills/noootwo-state --list
 
       - name: Verify skill workspace

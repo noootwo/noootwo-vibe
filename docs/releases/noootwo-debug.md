@@ -1,5 +1,9 @@
 # noootwo-debug Releases
 
+## v0.4.0
+
+- Added release-based localization and trace handoff: debug consumes version and deployment identity from `noootwo-release` and asks release to repair a missing trace.
+
 ## v0.3.0
 
 - Updated code-health and optimization handoffs from `noootwo-review` to `noootwo-code-health`.

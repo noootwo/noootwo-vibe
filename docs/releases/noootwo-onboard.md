@@ -1,5 +1,9 @@
 # noootwo-onboard Releases
 
+## v0.4.0
+
+- Split foundation routing: code-health gaps go to `noootwo-code-health`; release path, version source, artifact, deployment trace, and rollback gaps go to `noootwo-release`.
+
 ## v0.3.0
 
 - Updated the foundation-health handoff from `noootwo-review` to `noootwo-code-health`.

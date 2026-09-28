@@ -45,6 +45,7 @@ Fallbacks, when the code cannot be re-run or the path is unknown:
 
 - **Bisect the code path** — one checkpoint at the midpoint; a correct state there puts the cause downstream.
 - **Bisect history** — `git bisect run <repro command>` when it used to work.
+- **Bisect by release** — compare version and deployment traces across releases; when the trace is missing, invoke `noootwo-release` to define or repair it.
 - **Bisect the input** — halve the input, the config, or the test data; keep halving.
 - **Differential debugging** — diff a working case against a broken one and treat the differences as the suspect list.
 
@@ -100,7 +101,7 @@ Read `references/fix-scope.md` for the scope ledger, the right-layer rule, and t
 
 ## 7. Close
 
-Report the chain: the cause, the proof, the scope, the verification, and what stays open. When behaviour, state, or release facts changed, invoke the `noootwo-state` skill to place them: read its `SKILL.md` and follow it. When the fix reaches submit or release, invoke the `noootwo-code-health` skill: read its `SKILL.md` and follow it.
+Report the chain: the cause, the proof, the scope, the verification, and what stays open. When behaviour, state, or release facts changed, invoke the `noootwo-state` skill to place them: read its `SKILL.md` and follow it. When the fix reaches submit or release, invoke the `noootwo-code-health` skill: read its `SKILL.md` and follow it. When a version or deployment trace is missing, invoke the `noootwo-release` skill: read its `SKILL.md` and follow it.
 
 **Done when:** the chain is in the answer, and the docs and review triggers are invoked or recorded as not applying.
 

@@ -9,6 +9,7 @@ Compact guardrail and handoff packet reference. Routing and scheduling live in `
 - Behavior-changing code uses `noootwo-tdd` before review.
 - Non-direct behavior changes return to `noootwo-code-health` after green, before the work is reported done.
 - Review/refactor/optimization must re-run tests, dispose of structural findings, and stop for user acceptance before submit or publish.
+- Release work goes to `noootwo-release` after code-health readiness; version, artifact, deployment trace, rollback, and release-health evidence come back through `noootwo-state`.
 - Update docs through `noootwo-state` when facts change.
 - Direct single-file work stays direct; do not add ceremony.
 
@@ -33,6 +34,16 @@ Keep packets short. Workflow carries scope and sequencing; the specialist owns m
 - Structural findings and disposition:
 - Refactor/acceptance state:
 - Specific judgment requested:
+
+### To `noootwo-release`
+
+- Readiness decision and gaps from code-health:
+- Current version source and release policy:
+- Commit, artifact, and environment facts:
+- Changelog or release-note state:
+- Deployment-trace and observability surface:
+- Rollback or forward-fix constraints:
+- Specific release decision requested:
 
 ### To `noootwo-debug`
 

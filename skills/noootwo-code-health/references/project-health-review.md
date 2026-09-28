@@ -2,6 +2,8 @@
 
 Use this when the question is broader than a code diff: can this project be safely changed, verified, reviewed, released, and handed off by future agents?
 
+Release-path detail — version source, artifact identity, deployment trace, provenance, rollback, and release health — is owned by `noootwo-release`. This lens checks only whether the evidence exists and whether a missing piece blocks safe change.
+
 ## Structure Sweep
 
 Run a Structure Sweep when at least one trigger is true:

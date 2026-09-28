@@ -7,7 +7,7 @@ description: "Find the right Noootwo skill for the situation and the order to ru
 
 You do not remember every skill, so ask.
 
-Nine skills do the work; this one tells you which to reach for. A **flow** is a path through them. Most work runs along the main flow; the rest is an on-ramp or standalone.
+Ten skills do the work; this one tells you which to reach for. A **flow** is a path through them. Most work runs along the main flow; the rest is an on-ramp or standalone.
 
 ## The main flow: idea to shipped
 
@@ -15,7 +15,8 @@ Nine skills do the work; this one tells you which to reach for. A **flow** is a 
 2. `$noootwo-design` — turn the settled product path into interface: direction, typography, colour, layout, motion, and a Design Contract. Reach for it on any UI, visual, artifact, or frontend work.
 3. `$noootwo-tdd` — write code the right way when behavior changes: a failing test first, the smallest implementation, green tests, and refactor only after green.
 4. `$noootwo-code-health` — judge the code before it ships: correctness, testability, architecture boundaries, lean, performance, refactoring, optimization, and user acceptance.
-5. `$noootwo-state` — record or read what changed in project state and context. Reach for it whenever behaviour, project state, release facts, or agent instructions changed.
+5. `$noootwo-release` — turn a ready change into an identified release: version, tag, artifact, deployment trace, provenance, rollback, and release health.
+6. `$noootwo-state` — record or read what changed in project state and context. Reach for it whenever behaviour, project state, release facts, or agent instructions changed.
 
 ## On-ramps
 
@@ -26,7 +27,7 @@ Start here, then merge onto the main flow.
 - **A decision needs evidence from outside the repo** → `$noootwo-research`: a design direction, a stack or library choice, a competitor or user expectation, or prior art.
 - **You are new to this project** → `$noootwo-onboard`: it audits which skills the project needs and what foundation is missing.
 - **The last attempt was rejected** → `$noootwo-workflow`. It diagnoses which layer failed — product, design, implementation, or evidence — and routes to the skill that owns it, instead of another round of the same polish.
-- **Releasing or tagging** → `$noootwo-workflow` for sequencing, `$noootwo-code-health` before the tag, `$noootwo-state` for release notes.
+- **Releasing, tagging, deploying, rolling back, or tracing a version** → `$noootwo-release`; use `$noootwo-workflow` for sequencing and `$noootwo-state` for release records.
 
 ## Standalone
 
@@ -34,6 +35,7 @@ Start here, then merge onto the main flow.
 - `$noootwo-design` alone, for a visual critique of something already built.
 - `$noootwo-tdd` alone, when you are writing or changing behavior-code and want the test-first loop.
 - `$noootwo-code-health` alone, to review a branch or PR against a fixed point.
+- `$noootwo-release` alone, to prepare a version, tag, artifact, deployment trace, rollback path, or release-health check.
 - `$noootwo-state` alone, for a state/context audit or a stale-record cleanup.
 - `$noootwo-debug` alone, for one failure you want proven and fixed without a wider change.
 - `$noootwo-research` alone, to settle one decision with sourced evidence.
@@ -47,6 +49,7 @@ Start here, then merge onto the main flow.
 | The product path is settled and the interface is not | `$noootwo-design` |
 | You are about to write or change behavior-code | `$noootwo-tdd` |
 | The code is written and needs judgment before shipping | `$noootwo-code-health` |
+| A version, tag, artifact, deployment trace, or rollback path is needed | `$noootwo-release` |
 | Something changed and state or context must stay true | `$noootwo-state` |
 | Something is broken and the cause is not yet proven | `$noootwo-debug` |
 | A decision needs evidence that only exists outside the repo | `$noootwo-research` |
@@ -54,6 +57,6 @@ Start here, then merge onto the main flow.
 | You do not know the project, or which skills it needs | `$noootwo-onboard` |
 | You are unsure, or the task spans several of the above | `$noootwo-workflow` |
 
-`$noootwo-design` returns to `$noootwo-product` when the real user, main path, states, or acceptance turn out to be unsettled. `$noootwo-tdd` returns to `$noootwo-workflow` for sequencing and to `$noootwo-debug` when a failing test exposes an existing bug. `$noootwo-code-health` returns to `$noootwo-product` for behaviour choices and to `$noootwo-workflow` for sequencing.
+`$noootwo-design` returns to `$noootwo-product` when the real user, main path, states, or acceptance turn out to be unsettled. `$noootwo-tdd` returns to `$noootwo-workflow` for sequencing and to `$noootwo-debug` when a failing test exposes an existing bug. `$noootwo-code-health` returns to `$noootwo-product` for behaviour choices and to `$noootwo-workflow` for sequencing. `$noootwo-release` returns to `$noootwo-workflow` when readiness is missing or not ready.
 
 Missing skill fallback: first try `npx -y skills add noootwo/noootwo-vibe --global --agent codex --skill <name> --yes`; if install fails, take the smallest direct fallback and mark the record `skill-missing: <name>` (for persistence, write the owning file directly).

@@ -1,5 +1,9 @@
 # noootwo-ask Releases
 
+## v0.4.0
+
+- Added `noootwo-release` to the main flow, on-ramps, standalone routing, and choosing-between table for version, tag, deployment, rollback, and release-trace work.
+
 ## v0.3.0
 
 - Updated the router from `noootwo-review` to `noootwo-code-health`; the target capability is unchanged.

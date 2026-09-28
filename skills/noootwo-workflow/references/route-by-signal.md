@@ -31,6 +31,7 @@ Examples of artifact-shaped matching:
 - behavior-changing code → `noootwo-tdd`, then `noootwo-code-health` after green, before the work is reported done
 - existing structure makes the requested change hard → `noootwo-code-health` preparatory workflow before implementation
 - repeated edits in one area, context cost growing, a giant file or directory, or a release trigger → `noootwo-code-health` Structure Sweep
+- version, tag, changelog, artifact, deployment trace, rollback, provenance, or release health → `noootwo-release` after code-health readiness
 - a broken behavior or regression → `noootwo-debug` before implementation
 - an unsettled product decision → `noootwo-product` before design or build
 

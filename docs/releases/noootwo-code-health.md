@@ -1,5 +1,10 @@
 # noootwo-code-health Releases
 
+## v0.15.0
+
+- Changed release readiness into a release-evidence lens: version, artifact, deployment trace, rollback, and release notes are now owned by `noootwo-release`.
+- Added the release handoff for version, artifact, deployment trace, rollback, and release-health gaps. Compressed the body to stay within the 120-line budget.
+
 ## v0.14.0
 
 - Renamed the skill from `noootwo-review` to `noootwo-code-health`; the old `noootwo-review` tag and release file remain as history.

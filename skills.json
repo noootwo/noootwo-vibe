@@ -6,7 +6,7 @@
     {
       "name": "noootwo-ask",
       "path": "skills/noootwo-ask",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "status": "public",
       "dependencies": [],
       "tagPrefix": "noootwo-ask@"
@@ -14,7 +14,7 @@
     {
       "name": "noootwo-workflow",
       "path": "skills/noootwo-workflow",
-      "version": "0.15.0",
+      "version": "0.16.0",
       "status": "public",
       "dependencies": [
         "noootwo-state",
@@ -22,6 +22,7 @@
         "noootwo-design",
         "noootwo-tdd",
         "noootwo-code-health",
+        "noootwo-release",
         "noootwo-debug",
         "noootwo-research",
         "noootwo-onboard"
@@ -66,7 +67,7 @@
     {
       "name": "noootwo-code-health",
       "path": "skills/noootwo-code-health",
-      "version": "0.14.0",
+      "version": "0.15.0",
       "status": "public",
       "dependencies": [
         "noootwo-tdd",
@@ -75,9 +76,21 @@
         "noootwo-state",
         "noootwo-design",
         "noootwo-debug",
-        "noootwo-research"
+        "noootwo-research",
+        "noootwo-release"
       ],
       "tagPrefix": "noootwo-code-health@"
+    },
+    {
+      "name": "noootwo-release",
+      "path": "skills/noootwo-release",
+      "version": "0.1.0",
+      "status": "public",
+      "dependencies": [
+        "noootwo-state",
+        "noootwo-workflow"
+      ],
+      "tagPrefix": "noootwo-release@"
     },
     {
       "name": "noootwo-state",
@@ -90,12 +103,13 @@
     {
       "name": "noootwo-debug",
       "path": "skills/noootwo-debug",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "status": "public",
       "dependencies": [
         "noootwo-product",
         "noootwo-state",
-        "noootwo-code-health"
+        "noootwo-code-health",
+        "noootwo-release"
       ],
       "tagPrefix": "noootwo-debug@"
     },
@@ -114,10 +128,11 @@
     {
       "name": "noootwo-onboard",
       "path": "skills/noootwo-onboard",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "status": "public",
       "dependencies": [
         "noootwo-code-health",
+        "noootwo-release",
         "noootwo-state"
       ],
       "tagPrefix": "noootwo-onboard@"

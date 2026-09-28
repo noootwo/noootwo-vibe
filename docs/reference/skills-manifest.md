@@ -1,6 +1,6 @@
 # Skills Manifest Reference
 
-`skills.json` is the source of truth for the ten public skills.
+`skills.json` is the source of truth for the eleven public skills.
 
 Fields:
 
@@ -16,7 +16,7 @@ Fields:
 
 The workspace validator checks that the manifest matches the filesystem.
 
-The expected public skill order is `noootwo-ask`, `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-tdd`, `noootwo-code-health`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard`. The order is load-bearing: the validator compares the manifest against it. Do not add `noootwo-architecture` or a separate performance skill; architecture, technical judgment, tests, and performance remain `noootwo-code-health` lenses.
+The expected public skill order is `noootwo-ask`, `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-tdd`, `noootwo-code-health`, `noootwo-release`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard`. The order is load-bearing: the validator compares the manifest against it. Do not add `noootwo-architecture` or a separate performance skill; architecture, technical judgment, tests, and performance remain `noootwo-code-health` lenses. Do not add a separate versioning or deployment skill; those remain `noootwo-release`.
 
 The capability map in [the invocation model](../agents/invocation.md) records which skill owns which capability, and the validator checks that every public skill appears there.
 

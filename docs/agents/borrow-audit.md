@@ -82,6 +82,14 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 - Reject: refactoring as a separate backlog of every smell, large-bang cleanup, refactoring without tests, and adding a separate architecture or performance skill.
 - Next pass: measure workflow selection, structural-debt disposition, two-hats separation, and the review-is-part-of-done gate.
 
+### noootwo-release
+
+- Current role: release engineering ownership — version policy, tags, immutable artifact identity, deployment traces, provenance, rollback, and release health.
+- Prior art: Semantic Versioning 2.0.0; Keep a Changelog 1.1.0; Conventional Commits 1.0.0; The Twelve-Factor App Build/Release/Run; OpenTelemetry resource conventions; SLSA provenance levels; GitHub artifact attestations; Sentry Releases; DORA four keys.
+- Adopt: one version source of truth, SemVer compatibility classification, append-only changelog and release ledger, build-once promotion, immutable artifact identity, deployment markers, explicit provenance gaps, rollback/forward-fix, and version-based release health.
+- Reject: using a mutable tag as a release identity, rebuilding per environment, claiming provenance without evidence, binding the skill to one CI vendor, and adding separate versioning or deployment skills.
+- Next pass: run the release evals and validate the deployment-trace contract against one real project artifact.
+
 ### noootwo-state
 
 - Current role: own abstract project state/context persistence and choose the storage form.

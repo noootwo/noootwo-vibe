@@ -44,14 +44,14 @@ Pick before reading widely. State which you applied and which you skipped.
 | `lean` | over-engineering, YAGNI, redundant code, context-cost growth |
 | `performance` | loading, rendering, latency, query cost, algorithmic hotspots, resource use |
 | `project health` | validation entry points, CI, release path, docs drift, handoff risk |
-| `release readiness` | versioning, tags, publish and install steps, rollback, user-visible notes |
+| `release evidence` | version, artifact, deployment trace, rollback, and release notes owned by `noootwo-release` |
 | `rework diagnosis` | which layer failed — product, design, implementation, or evidence |
 
 ## Sizing
 
 - Small diff — one to three lenses, self-review changed files and nearest tests, fix locally.
 - Medium, broad, or risky diff — structured review; include correctness and testability when behavior changes.
-- Release-bound diff — add release readiness and project-health evidence.
+- Release-bound diff — add release evidence and project-health evidence.
 
 ## Method
 
@@ -82,9 +82,7 @@ When the request is faster, smaller, or cheaper, read `references/optimization-l
 - product behavior changed without settled acceptance
 - redundant code left "for later"
 - a large file, directory, or module that the current change made harder to understand or modify
-- structural debt recorded as "future improvement" with no trigger or disposition
-
-Agent-generated failure modes: broad files, premature wrappers, hidden state, tests that mirror implementation details, and claims of stability without a proving command.
+- structural debt left without a trigger, disposition, or release consequence
 
 ## Output
 
@@ -105,6 +103,7 @@ Severity: `P0` data loss, security, or broken release; `P1` likely behavioral bu
 - Visual or artifact quality → invoke `noootwo-design`.
 - Unknown defect cause → invoke `noootwo-debug`.
 - Outside evidence needed → invoke `noootwo-research`.
+- Version, tag, artifact, deployment trace, rollback, or release health → invoke `noootwo-release`.
 
 ## References
 

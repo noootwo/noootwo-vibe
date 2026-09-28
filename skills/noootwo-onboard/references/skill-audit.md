@@ -31,6 +31,7 @@ The signals below are written for a software repository. For another kind of pro
 | requirements, feature scope, user flow, IA, interaction model, permissions, states, acceptance criteria, confusion risk | `$noootwo-product` | clarify the product path and challenge high-impact choices |
 | UI, screenshots, visual system, `.noootwo/`, design handoff | `$noootwo-design` | declare the Design Read, contract the design, review the artifact |
 | code structure, refactor, tests, maintainability, architecture, performance and optimization work, AI-generated code risk | `$noootwo-code-health` | classify defects and judge before submit or release |
+| versioning, tag, artifact, deployment trace, provenance, rollback, release health | `$noootwo-release` | own release engineering and produce the Release Plan |
 | docs, status, README, AGENTS, ADR, or release facts changed or drifted | `$noootwo-state` | place facts in the owning layer and remove stale claims |
 
 ## Local skill scan
@@ -61,6 +62,7 @@ Not Needed Now
 
 Foundation
 - owned by `$noootwo-code-health` project-health lens: findings, evidence, gaps.
+- owned by `$noootwo-release`: version, artifact, deployment trace, provenance, rollback, and release-health gaps.
 
 Routing Order
 1. ...

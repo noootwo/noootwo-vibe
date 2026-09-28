@@ -1,5 +1,10 @@
 # noootwo-workflow Releases
 
+## v0.16.0
+
+- Added `noootwo-release` to the release stage after code-health readiness, with release sequencing, scope, and close-gate checks.
+- Added the release handoff packet for readiness, version source, artifact, environment, changelog, deployment trace, and rollback facts.
+
 ## v0.15.0
 
 - Updated review scheduling and close-gate handoffs from `noootwo-review` to `noootwo-code-health`.

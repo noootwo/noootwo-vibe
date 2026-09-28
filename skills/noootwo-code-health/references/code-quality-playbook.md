@@ -78,7 +78,7 @@ Do not ask the user about local cleanup that has one safe answer. Ask before rev
 
 Route product behavior choices to `$noootwo-workflow` or `$noootwo-product`. Route technical architecture choices through the `architecture boundary` lens here.
 
-For release-bound code, include `release readiness` and check versioning, tags, install path, rollback/handoff notes, docs or release notes, and the closest validation command. Run or consume a Structure Sweep when the release trigger applies. For non-code diffs, record why the review gate is not applicable instead of forcing a code review.
+For release-bound code, include `release evidence` and confirm that `noootwo-release` produced the version, artifact identity, deployment trace, rollback path, and release record. Run or consume a Structure Sweep when the release trigger applies. For non-code diffs, record why the review gate is not applicable instead of forcing a code review.
 
 ## Risk Model
 
