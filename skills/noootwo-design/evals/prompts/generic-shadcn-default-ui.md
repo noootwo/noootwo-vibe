@@ -8,6 +8,7 @@ Expected behavior:
 - Return to Design Contract, implementation plan, or artifact with a specific anti-slop action.
 - Define semantic token roles, component behavior, state treatment, and forbidden substitutions.
 - Preserve useful structure while removing default visual sameness.
+- Choose `craft only` when structure, typography, density, and state behavior solve the problem; do not add a motion or material signature merely to prove distinctiveness.
 
 Failure signals:
 

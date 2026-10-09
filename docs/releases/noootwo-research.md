@@ -1,5 +1,10 @@
 # noootwo-research Releases
 
+## v0.6.1
+
+- Added `emilkowalski/skills`, `alchaincyf/huashu-art-motion`, Shaders, and Paper Shaders to the motion and native-craft source pool with licence, paid-service, asset, and fallback boundaries.
+- Recorded that these are evidence or execution options only after a design intervention candidate survives; their availability is not a reason to add motion, shaders, or dependencies.
+
 ## v0.6.0
 
 - Updated current source-reference paths from `noootwo-review` to `noootwo-code-health`; no research behavior changed.

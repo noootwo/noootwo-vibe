@@ -60,11 +60,11 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 
 ### noootwo-design
 
-- Current role: UI, visual, artifact, and frontend work after product path is settled.
-- Prior art: Anthropic frontend-design, impeccable, `ddruids/mobbin-skill`, `dembrandt`, `designlang`, `tinte`, `LottieFiles/motion-design-skill`, `kylezantos/design-motion-principles`, `Meet-Miyani/compose-skill`, Refero, `feitangyuan/motion-web`, `Leonxlnx/taste-skill`, `vercel-labs/web-interface-guidelines`, `antfu-design`, and `jakubkrehel/make-interfaces-feel-better`.
-- Adopt: case capture, computed-style extraction, drift gate, motion language, reference lock, anti-averaging, interaction/accessibility gates, data-presentation rules, component-state matrix, and image-intake discipline.
-- Reject: paid MCP as required, full motion-web cases/scripts/assets, mandatory image generation, mandatory scroll animation, and surface copying.
-- Next pass: run the motion, interface-quality, and case-capture evals; turn any measured failure into a rule change before adding more guidance.
+- Current role: UI, visual, contextual intervention, artifact, and frontend work after product path is settled.
+- Prior art: Anthropic frontend-design, impeccable, `ddruids/mobbin-skill`, `dembrandt`, `designlang`, `tinte`, `LottieFiles/motion-design-skill`, `kylezantos/design-motion-principles`, `emilkowalski/skills`, `alchaincyf/huashu-art-motion`, `Meet-Miyani/compose-skill`, Refero, `feitangyuan/motion-web`, `Leonxlnx/taste-skill`, `vercel-labs/web-interface-guidelines`, `antfu-design`, `jakubkrehel/make-interfaces-feel-better`, Shaders, and Paper Shaders.
+- Adopt: case capture, computed-style extraction, drift gate, contextual `leave simple | craft only | add moment` decisions, opportunity gates with rejected candidates, motion language, reference lock, anti-averaging, interaction/accessibility gates, data-presentation rules, component-state matrix, and image-intake discipline.
+- Reject: paid MCP as required, full motion-web cases/scripts/assets, huashu's video engine/assets/character frames, mandatory image generation, mandatory scroll animation, scanning every task for effects, and surface copying.
+- Next pass: run the four contextual-intervention evals, then the motion, interface-quality, and case-capture evals; record whether the model correctly chooses restraint as well as expression.
 
 ### noootwo-tdd
 
@@ -76,11 +76,11 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 
 ### noootwo-code-health
 
-- Current role: code, architecture, performance, maintainability, refactoring, optimization, re-test, and user acceptance.
-- Prior art: Martin Fowler's *Refactoring* 2nd edition, the online catalog, *Workflows of Refactoring*, *Definition of Refactoring*, *Code Smell*, *Self-Testing Code*, *Technical Debt*, and *Design Stamina Hypothesis*; Ponytail lean-code-review ladder; Superpowers requesting/receiving code review and verification-before-completion; web.dev/vitals, Lighthouse, SRE, OpenTelemetry, k6, PostgreSQL docs, JMH and related benchmark guidance.
-- Adopt: two hats, six refactoring workflows, small behavior-preserving catalog moves, green-baseline safety, economic payback, structural dispositions, measurable performance evidence, severity output, re-test gate, and explicit user acceptance before submit/publish.
-- Reject: refactoring as a separate backlog of every smell, large-bang cleanup, refactoring without tests, and adding a separate architecture or performance skill.
-- Next pass: measure workflow selection, structural-debt disposition, two-hats separation, and the review-is-part-of-done gate.
+- Current role: pre-implementation integration design, code, architecture, performance, maintainability, refactoring, optimization, re-test, and user acceptance.
+- Prior art: Martin Fowler's *Refactoring* 2nd edition, the online catalog, *Workflows of Refactoring*, *Definition of Refactoring*, *Code Smell*, *Self-Testing Code*, *Technical Debt*, *Design Stamina Hypothesis*, *Is Design Dead?*, *Yagni*, *Branch by Abstraction*, and *Strangler Fig*; Google Engineering Practices and Design Docs at Google; Michael Feathers' seams and design-for-testability material; Thoughtworks Lightweight Architecture Decision Records; Ponytail lean-code-review ladder; Superpowers requesting/receiving code review and verification-before-completion; web.dev/vitals, Lighthouse, SRE, OpenTelemetry, k6, PostgreSQL docs, JMH and related benchmark guidance.
+- Adopt: an Integration Read and compact Change Shape before a non-obvious implementation; seam, ownership, contract, reuse, reversibility, test-seam, and smallest-first-slice decisions; a skip rule for obvious local changes; two hats; six refactoring workflows; small behavior-preserving catalog moves; green-baseline safety; economic payback; structural dispositions; measurable performance evidence; severity output; re-test gate; and explicit user acceptance before submit/publish.
+- Reject: big design up front, speculative abstractions, mandatory design documents when no tradeoff exists, implementation manuals disguised as design docs, refactoring as a separate backlog of every smell, large-bang cleanup, refactoring without tests, and adding a separate architecture or performance skill.
+- Next pass: measure integration-read trigger and skip behavior, Change Shape quality, workflow selection, structural-debt disposition, two-hats separation, and the review-is-part-of-done gate.
 
 ### noootwo-release
 
@@ -129,4 +129,6 @@ Record rejections in this file so the same proposal does not return every quarte
 
 - OpenAI Product Design is a private plugin. Borrow mechanisms and description technique; do not copy its plugin structure, workflows, prompts, or brand wording.
 - `feitangyuan/motion-web` is CC BY-NC 4.0. Borrow mechanisms and ideas; do not copy its SKILL, cases, scripts, or assets into a commercial skill.
+- `emilkowalski/skills` and `alchaincyf/huashu-art-motion` are MIT. Borrow the opportunity gate, motion-map, recipe-card, and independent-review mechanisms; do not copy prompts, video engines, assets, character frames, or surface styling.
+- `Shaders` free components are MIT; Pro presets/editor/MCP are paid and optional. `Paper Shaders` is Apache-2.0. Neither is a default dependency, and both require licence, performance, and fallback checks.
 - Named open-source skills may be MIT or otherwise permissive; still borrow mechanisms, not leaked prompts or surface styling.

@@ -19,19 +19,20 @@ Classify the surface before choosing sources:
 ## The pass
 
 1. **Context query builder** — derive search queries from product type, user task, platform, target stack, audience, and constraints. Write each query as what is visible on screen, not as an abstract goal: `[product category] + [screen type] + [visible UI components] + [user state or action]`. `trust patterns` and `good onboarding` are not queries; `signup screen with progress indicator, phone number input, security message, and continue button` is.
-2. **Source accessibility check** — record which pools are reachable; use the fallback ladder when they are not, and record the substitution.
-3. **Community signal mining** — search the design pools the research skill names, including product-flow libraries, design systems, curated galleries, and the domestic fallback.
-4. **Case capture** — resolve the platform (app or web), route each query to single screens or to multi-step flows, then run two or three queries at a time and write the observations down before starting the next batch. Screens are large; a batch that is not recorded is a batch that gets dropped.
-5. **Source weighting** — rank evidence by credibility and by fit to this surface.
-6. **Influence discovery** — when useful, find relevant designers, studios, products, movements, architecture, exhibition, or spatial systems.
-7. **Pattern clustering** — cluster findings into three to five mechanism groups instead of listing examples.
-8. **Style evidence check** — record the style claim, the visual evidence, the anti-example, the borrowed mechanism, the implementation translation, the confidence, and whether a spike is needed. The check shape lives in `direction.md`.
-9. **Mechanism transfer** — translate each cluster into UI primitives: grid, rail, surface, type scale, data grammar, state model, motion primitive, native component vocabulary.
-10. **Preservation contract** — state what must survive translation, what may vary, and what must never be substituted.
-11. **Reference lock** — name the build target and what must not drift before drafting.
-12. **Fit scoring** — score each candidate territory for scenario fit, practicality, distinctiveness, implementation cost, and brand risk.
-13. **Artifact spike** — produce two or three small visual spikes for the best territories before investing in a polished draft. One spike only means low confidence.
-14. **Evaluator pass** — reject slop, trend cosplay, artist or designer cosplay, crude styling, weak utility, typography failure, responsive failure, and stack-incredible directions.
+2. **Intervention decision** — decide `leave simple`, `craft only`, or `add moment` before sourcing. Deep work pays for discovery only when a candidate survives the frequency, purpose, speed, and function gates.
+3. **Source accessibility check** — record which pools are reachable; use the fallback ladder when they are not, and record the substitution.
+4. **Community signal mining** — search the design pools the research skill names, including product-flow libraries, design systems, curated galleries, and the domestic fallback.
+5. **Case capture** — resolve the platform (app or web), route each query to single screens or to multi-step flows, then run two or three queries at a time and write the observations down before starting the next batch. Screens are large; a batch that is not recorded is a batch that gets dropped.
+6. **Source weighting** — rank evidence by credibility and by fit to this surface.
+7. **Influence discovery** — when useful, find relevant designers, studios, products, movements, architecture, exhibition, or spatial systems.
+8. **Pattern clustering** — cluster findings into three to five mechanism groups instead of listing examples.
+9. **Style evidence check** — record the style claim, the visual evidence, the anti-example, the borrowed mechanism, the implementation translation, the confidence, and whether a spike is needed. The check shape lives in `direction.md`.
+10. **Mechanism transfer** — translate each cluster into UI primitives: grid, rail, surface, type scale, data grammar, state model, motion primitive, native component vocabulary.
+11. **Preservation contract** — state what must survive translation, what may vary, and what must never be substituted.
+12. **Reference lock** — name the build target and what must not drift before drafting.
+13. **Fit scoring** — score each candidate territory for scenario fit, practicality, distinctiveness, implementation cost, and brand risk.
+14. **Artifact spike** — produce two or three small visual spikes for the best territories before investing in a polished draft. One spike only means low confidence.
+15. **Evaluator pass** — reject slop, trend cosplay, artist or designer cosplay, crude styling, weak utility, typography failure, responsive failure, and stack-incredible directions.
 
 ## Case capture
 
@@ -53,7 +54,7 @@ When a source is unreachable or behind a login, record `capture: unreachable`, k
 
 Captured screenshots are personal reference held in the project's `.noootwo/` harness. They are not committed, not redistributed, and never a target to reproduce pixel for pixel. Borrow the mechanism — space, density, rhythm, state grammar, motion behaviour — and leave the artwork, brand assets, and exact composition behind.
 
-When the direction carries motion, the capture set includes motion examples: two or three references in the same register, each recorded as a mechanism — trigger, moving property, duration, curve, layer relationship, and what it communicates. The register and the sourcing procedure live in [motion](motion.md); the pool of motion libraries and showcases lives in the `noootwo-research` skill's source pools. A component library's demo is strong evidence of craft and weak evidence of fit, so it is adapted or dropped rather than pasted.
+When the intervention decision is `add moment`, the capture set includes motion or material examples: two or three references in the same register, each recorded as a mechanism — trigger, moving property, duration, curve, layer relationship, and what it communicates. The register and the sourcing procedure live in [motion](motion.md); the pool of motion libraries and showcases lives in the `noootwo-research` skill's source pools. A component library's demo is strong evidence of craft and weak evidence of fit, so it is adapted or dropped rather than pasted.
 
 ## Screenshot And Design-Image Intake
 
@@ -124,6 +125,7 @@ Score each territory 1–5 on scenario fit, practicality and task clarity, disti
 Write `.noootwo/style-discovery.md` with:
 
 - Source accessibility
+- Intervention decision
 - Surface type
 - Search queries
 - Source pool

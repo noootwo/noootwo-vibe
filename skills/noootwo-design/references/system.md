@@ -45,6 +45,7 @@ Update `.noootwo/system.md` with:
 - `Color roles`
 - `Component patterns`
 - `Layout density`
+- `Design intervention`
 - `Motion language`
 - `Shape, material, and depth`
 - `Imagery, iconography, and language`
@@ -133,6 +134,7 @@ Use [system](system.md) to write extracted facts as role-based design instructio
 - `Color roles`
 - `Component patterns`
 - `Layout density`
+- `Design intervention`
 - `Motion language`
 - `Shape, material, and depth`
 - `Imagery, iconography, and language`
@@ -164,7 +166,7 @@ Use [system](system.md) to write extracted facts as role-based design instructio
 
 Use this format when extracting a design system, writing directions, or preparing handoff. It borrows the useful structure of `DESIGN.md`-style design instructions without depending on any external repository, brand template, or live fetch.
 
-For non-quick UI work, start with `intake.md`. The Design Read sets surface kind, audience, product posture, visual posture, variance, motion, density, and the existing system to preserve. This spec expands that read into implementation-ready roles.
+For non-quick UI work, start with `intake.md`. The Design Read sets surface kind, audience, product posture, visual posture, intervention, variance, motion, density, and the existing system to preserve. This spec expands that read into implementation-ready roles.
 
 Research basis: `DESIGN.md`-style repositories such as `VoltAgent/awesome-design-md` show that agents follow UI intent better when visual systems are written as color roles, typography roles, component rules, spacing rules, and do/don't constraints. Noootwo absorbs that format only; it does not require that repository or copy its brand-specific specs. Current public design-system guidance also supports role-based translation: Figma describes primitive, semantic, and component token layers; Atlassian frames tokens as single-source usage names for design decisions; Carbon frames motion as productive feedback and expression rather than decoration.
 
@@ -252,9 +254,14 @@ Define the role of each type style.
 - Data grammar: axes, units, legends, thresholds, missing data, exception priority.
 - Naming: component names should describe product function, not decorative metaphor.
 
-#### 9. Motion And Interaction
+#### 9. Design Intervention, Motion, And Interaction
 
-Read [motion](motion.md) for the archetypes, duration scale, easing catalog, choreography budgets, and the four hard bans. This section records the values that became durable truth for this product.
+Read [motion](motion.md) for the contextual decision, opportunity gates, archetypes, duration scale, easing catalog, choreography budgets, and the four hard bans.
+
+- Intervention decision and rationale: `leave simple`, `craft only`, or `add moment`.
+- Product function, frequency, task risk, and emotional or brand value.
+- Candidate and rejected opportunities; when nothing survives, the craft mechanism that carries the result.
+- Authored move for `add moment`: one primary, optional support, source or platform rule, boundary, and fallback.
 
 - Archetype and the lineage it derives from, or the recorded reason for overriding it.
 - Motion thesis: what motion explains, such as continuity, hierarchy, state change, or identity.
@@ -294,7 +301,7 @@ For each selected direction, explicitly name:
 - `must preserve`: the 1-3 mechanisms that define the direction
 - `allowed variation`: what may change in implementation without losing the direction
 - `forbidden substitution`: what would collapse the design into a generic fallback
-- `signature mechanism`: the single most distinctive transferable behavior
+- `signature mechanism`: the most distinctive transferable behavior, or the deliberate restraint that keeps the product clear
 - `token target`: the semantic token rules that need to exist
 - `component target`: the component vocabulary that needs to exist
 - `motion target`: the motion rule that needs to exist

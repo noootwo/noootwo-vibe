@@ -37,6 +37,8 @@ Borrowing rule (from `AGENTS.md`): borrow repeatable mechanisms, never leaked pr
 
 - **`DietrichGebert/ponytail`** (`https://github.com/DietrichGebert/ponytail`, MIT) — seven-rung minimal-code review ladder and lean-review tags. Vendored as a `SOURCE.md` record only, not the full repo. Landed in `noootwo-code-health` lean-review lens. Status: adopted.
 
+- **Martin Fowler, *Is Design Dead?* and *Yagni*; Google Engineering Practices and Design Docs at Google; Michael Feathers, *Working Effectively with Legacy Code*** (`https://martinfowler.com/articles/designDead.html`, `https://martinfowler.com/bliki/Yagni.html`, `https://google.github.io/eng-practices/review/reviewer/looking-for.html`, `https://www.industrialempathy.com/posts/design-docs-at-google/`, `https://www.informit.com/articles/article.aspx?p=359417`) — planned design before a particular task, reversible decisions, the YAGNI boundary against speculative features, integration design as part of code health, seams and design for testability, and the design-doc stop rule when no real tradeoff exists. Landed in the `noootwo-code-health` Integration Read and Change Shape. Status: adopted mechanisms; no source text copied.
+
 - **Martin Fowler, *Refactoring* 2nd edition and the refactoring.com catalog** (`https://martinfowler.com/books/refactoring.html`, `https://refactoring.com/`, `https://martinfowler.com/articles/workflowsOfRefactoring/`, `https://martinfowler.com/bliki/DefinitionOfRefactoring.html`, `https://martinfowler.com/bliki/CodeSmell.html`, `https://martinfowler.com/bliki/SelfTestingCode.html`, `https://martinfowler.com/bliki/TechnicalDebt.html`, `https://martinfowler.com/bliki/DesignStaminaHypothesis.html`) — the definition of refactoring, small behavior-preserving transformations, two hats, the six workflows of refactoring, code smells, the catalog vocabulary, self-testing code, technical debt, and the design stamina hypothesis. Landed in `noootwo-code-health`, `noootwo-tdd`, and the workflow close gate. Status: adopted as mechanism and philosophy; no book text or catalog wording copied wholesale.
 
 - **Release engineering standards** — Semantic Versioning 2.0.0, Keep a Changelog 1.1.0, Conventional Commits 1.0.0, The Twelve-Factor App Build/Release/Run, OpenTelemetry resource conventions, SLSA provenance levels, GitHub artifact attestations, Sentry Releases, and DORA's four keys. Landed in `noootwo-release`. Status: adopted as standards and mechanisms; no toolchain or vendor binding.
@@ -46,6 +48,10 @@ Borrowing rule (from `AGENTS.md`): borrow repeatable mechanisms, never leaked pr
 - **`LottieFiles/motion-design-skill`** — timing, easing, choreography, registers, and the three-layer model. Landed in `noootwo-design` motion language. Status: adopted.
 
 - **`kylezantos/design-motion-principles`** — the frequency gate and the audit stance for motion. Landed in `noootwo-design`. Status: adopted.
+
+- **`emilkowalski/skills`** (`https://github.com/emilkowalski/skills`, MIT) — the animation-opportunity sweep, four-question gate, output cap, and required rejected-candidate list. Landed in `noootwo-design` contextual intervention and motion opportunity guidance. Status: adopted mechanisms; no prompts or skill components copied.
+
+- **`alchaincyf/huashu-art-motion`** (`https://github.com/alchaincyf/huashu-art-motion`, MIT) — reference breakdown, motion maps, style recipes with known weaknesses, and independent output review. Landed in `noootwo-design` motion guidance. Status: adopted mechanisms; video runtime, assets, character frames, audio pipeline, and prompts not copied.
 
 - **`Meet-Miyani/compose-skill`** — Compose animation APIs, `AnimationSpec`, and local-state rules. Landed in `noootwo-design`. Status: adopted.
 
@@ -65,6 +71,8 @@ Borrowing rule (from `AGENTS.md`): borrow repeatable mechanisms, never leaked pr
 
 - **`material-foundation/material-color-utilities`** (`https://github.com/material-foundation/material-color-utilities`) — color-engineering reference (OKLCH/HCT as practical tools, not mandatory dependencies). Landed in `noootwo-design` craft guidance. Status: adopted.
 
+- **`shader-effects-inc/shaders`** (`https://github.com/shader-effects-inc/shaders`, MIT free library; Pro services optional) and **`paper-design/shaders`** (`https://github.com/paper-design/shaders`, Apache-2.0) — expressive WebGPU/Canvas material options with licence, performance, fallback, and paid-service boundaries. Landed in `noootwo-design` motion libraries. Status: optional mechanism sources, not dependencies.
+
 ## Local installed skills (mechanism sources, not shipped)
 
 These informed mechanism design but were never copied into the workspace.
@@ -80,6 +88,6 @@ Borrowed as ideas, not as skill bodies: Diataxis (docs layering), Nygard-style A
 
 ## Reference pools (evidence sources, not skills)
 
-Design galleries, design systems, and product-flow libraries used as evidence pools: Apple HIG, Material 3, Fluent 2, IBM Carbon, Atlassian, Ant Design, Semi, Arco, TDesign, Vant, NutUI, Shopify Polaris, GitHub Primer, Mobbin, Refero, Siteinspire, ScreensDesign, Pttrns, Appshots, Awwwards, Savee, Codrops, Motion, GSAP, Rive, easings.net, cubic-bezier.com, transitions.dev, Animata, React Bits, and the domestic fallback set (MasterGo, 即时设计, UI 中国, 站酷, 花瓣, 掘金, B 站, 小红书, V2EX).
+Design galleries, design systems, and product-flow libraries used as evidence pools: Apple HIG, Material 3, Fluent 2, IBM Carbon, Atlassian, Ant Design, Semi, Arco, TDesign, Vant, NutUI, Shopify Polaris, GitHub Primer, Mobbin, Refero, Siteinspire, ScreensDesign, Pttrns, Appshots, Awwwards, Savee, Codrops, Motion, GSAP, Shaders, Paper Shaders, Rive, easings.net, cubic-bezier.com, transitions.dev, Animata, React Bits, and the domestic fallback set (MasterGo, 即时设计, UI 中国, 站酷, 花瓣, 掘金, B 站, 小红书, V2EX).
 
 The authoritative adopt/reject detail and license boundaries live in `docs/agents/borrow-audit.md`; the per-domain source pools and reachability notes live in `skills/noootwo-research/references/source-pools.md`.

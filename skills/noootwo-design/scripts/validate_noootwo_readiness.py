@@ -451,27 +451,90 @@ def validate_motion_contract(target_root: Path) -> list[str]:
         return [f"{relative} is missing a Motion section"]
     motion = match.group(1)
 
-    for field in ("Personality", "Signature easing", "Duration scale", "Reduced-motion fallback"):
-        value = field_value(motion, field) or ""
+    intervention_decision = (field_value(motion, "Intervention decision") or "").strip().lower()
+    require(
+        errors,
+        intervention_decision in {"leave simple", "craft only", "add moment"},
+        f"{relative} intervention decision must be leave simple, craft only, or add moment",
+    )
+    for field in ("Decision rationale", "Candidate moments and rejected opportunities"):
+        require(errors, has_meaningful_value(motion, field), f"{relative} missing intervention {field.lower()}")
+
+    if intervention_decision in {"leave simple", "craft only"}:
         require(
             errors,
-            bool(value) and "TBD" not in value.upper(),
-            f"{relative} missing motion {field.lower()}",
+            has_meaningful_value(motion, "Craft sufficiency evidence"),
+            f"{relative} missing craft sufficiency evidence for {intervention_decision}",
+        )
+    if intervention_decision == "add moment":
+        authored_move = (field_value(motion, "Authored move") or "").strip().lower()
+        require(
+            errors,
+            authored_move not in {"", "none", "not applicable", "n/a", "tbd"},
+            f"{relative} missing authored move for add moment",
+        )
+        require(
+            errors,
+            has_meaningful_value(motion, "Authored move evidence and fallback"),
+            f"{relative} missing authored move evidence and fallback",
         )
 
-    scale = field_value(motion, "Duration scale") or ""
-    require(
-        errors,
-        "TBD" not in scale.upper() and bool(re.search(r"\d+\s*ms", scale, re.IGNORECASE)),
-        f"{relative} motion duration scale needs real millisecond values",
-    )
+    if intervention_decision == "add moment":
+        for field in ("Personality", "Signature easing", "Duration scale", "Reduced-motion fallback"):
+            value = field_value(motion, field) or ""
+            require(
+                errors,
+                bool(value) and "TBD" not in value.upper(),
+                f"{relative} missing motion {field.lower()}",
+            )
 
-    transitions = field_value(motion, "State transitions") or ""
-    require(
-        errors,
-        "TBD" not in transitions and all(state in transitions.lower() for state in MOTION_STATES),
-        f"{relative} motion state transitions need enter, exit, expand, reorder, success, and error values",
-    )
+        scale = field_value(motion, "Duration scale") or ""
+        require(
+            errors,
+            "TBD" not in scale.upper() and bool(re.search(r"\d+\s*ms", scale, re.IGNORECASE)),
+            f"{relative} motion duration scale needs real millisecond values",
+        )
+
+        transitions = field_value(motion, "State transitions") or ""
+        require(
+            errors,
+            "TBD" not in transitions and all(state in transitions.lower() for state in MOTION_STATES),
+            f"{relative} motion state transitions need enter, exit, expand, reorder, success, and error values",
+        )
+
+    review = read_if_exists(target_root, Path(".noootwo/review.md"))
+    if review:
+        for field in (
+            "Intervention decision",
+            "Decision rationale",
+            "Candidate moments and rejected opportunities",
+            "Intervention fit",
+        ):
+            require(errors, has_meaningful_value(review, field), f".noootwo/review.md missing {field.lower()}")
+        review_decision = (field_value(review, "Intervention decision") or "").strip().lower()
+        require(
+            errors,
+            review_decision == intervention_decision,
+            ".noootwo/review.md intervention decision must match .noootwo/design-tokens.md",
+        )
+        if intervention_decision in {"leave simple", "craft only"}:
+            require(
+                errors,
+                has_meaningful_value(review, "Craft sufficiency evidence"),
+                f".noootwo/review.md missing craft sufficiency evidence for {intervention_decision}",
+            )
+        if intervention_decision == "add moment":
+            authored_move = (field_value(review, "Authored move") or "").strip().lower()
+            require(
+                errors,
+                authored_move not in {"", "none", "not applicable", "n/a", "tbd"},
+                ".noootwo/review.md missing authored move for add moment",
+            )
+            require(
+                errors,
+                has_meaningful_value(review, "Authored move evidence and fallback"),
+                ".noootwo/review.md missing authored move evidence and fallback",
+            )
 
     return errors
 
@@ -561,7 +624,7 @@ def main() -> int:
     parser.add_argument(
         "--motion-gate",
         action="store_true",
-        help="Also require a complete motion contract in .noootwo/design-tokens.md. Implied by --deep-mode and --implementation-gate.",
+        help="Also require the contextual intervention decision and the conditional motion contract in .noootwo/design-tokens.md. Implied by --deep-mode and --implementation-gate.",
     )
     args = parser.parse_args()
 

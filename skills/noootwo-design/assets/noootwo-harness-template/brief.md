@@ -28,6 +28,8 @@ Status: pending; overwrite this file for the current active design task
 - Audience: TBD
 - Product posture: TBD
 - Visual posture: TBD
+- Intervention: leave simple, craft only, or add moment: TBD
+- Product function, frequency, risk, and emotional or brand value: TBD
 - Variance: TBD
 - Motion: TBD
 - Density: TBD

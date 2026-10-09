@@ -12,6 +12,13 @@ Status: pending; replace with a real review before any ready/handoff claim
 
 ## Findings
 
+- Intervention decision: leave simple, craft only, or add moment: TBD
+- Decision rationale: TBD
+- Candidate moments and rejected opportunities: TBD
+- Craft sufficiency evidence: TBD
+- Authored move: none or primary plus optional support: TBD
+- Authored move evidence and fallback: TBD
+- Intervention fit: TBD
 - Strongest authored move: TBD
 - Weakest or most fragile move: TBD
 - Mismatch between intent and rendered result: TBD
@@ -47,6 +54,7 @@ Status: pending; replace with a real review before any ready/handoff claim
 ## Artifact Review Summary
 
 - Evidence: TBD
+- Intervention decision and fit: TBD
 - Strongest authored move: TBD
 - Defects: TBD
 - Generic drift: TBD

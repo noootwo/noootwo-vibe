@@ -1,5 +1,9 @@
 # noootwo-onboard Releases
 
+## v0.4.1
+
+- The project foundation template now routes non-obvious implementation integration design to `noootwo-code-health` before code review.
+
 ## v0.4.0
 
 - Split foundation routing: code-health gaps go to `noootwo-code-health`; release path, version source, artifact, deployment trace, and rollback gaps go to `noootwo-release`.

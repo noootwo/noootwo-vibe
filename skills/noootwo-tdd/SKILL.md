@@ -19,7 +19,7 @@ Run for any code that changes behavior: a new feature, a bug fix, or a refactor.
 4. Run the test again and confirm green, then run the closest full test command.
 5. Refactor only after green, and keep green. Do not add behavior while refactoring.
 
-A test that passes immediately proves nothing. If the failure is an existing bug or an unrelated layer, stop and return to `noootwo-workflow`; do not write around it here.
+A test that passes immediately proves nothing. If the implementation shape or seam is unsettled, return to `noootwo-workflow`; do not invent architecture inside the red-green loop. If the failure is an existing bug or an unrelated layer, stop and return to `noootwo-workflow`; do not write around it here.
 
 ## Hard rules
 

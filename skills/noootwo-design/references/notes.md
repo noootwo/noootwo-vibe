@@ -47,11 +47,11 @@ Measured 2026-09-16 to 2026-09-17 from this machine, by HTTP probe and by render
 
 Added after the first motion pass, because a motion language without sources of ideas still asks the agent to invent.
 
-Probed 2026-09-17: several motion and component libraries publish genuine agent-readable indexes rather than marketing pages. Motion serves `motion.dev/llms.txt`; GSAP serves its documentation as markdown under `gsap.com/llms.txt`; Aceternity UI serves both an index and a JSON catalog at `ui.aceternity.com/api/components`, reporting 111 components, 176 examples, and a last-updated date; Magic UI, React Bits, Animata, and 21st.dev each serve an index file as well. That is the cheap path to real motion ideas: read the index, open a few examples in the target register, and record the mechanism.
+Probed 2026-09-17; Shaders and Paper Shaders were rechecked on 2026-10-09. Several motion and component libraries publish genuine agent-readable indexes rather than marketing pages. Motion serves `motion.dev/llms.txt`; GSAP serves its documentation as markdown under `gsap.com/llms.txt`; Aceternity UI serves both an index and a JSON catalog at `ui.aceternity.com/api/components`; Magic UI, React Bits, Animata, 21st.dev, and Shaders publish agent-readable indexes; Paper Shaders publishes its component and GLSL reference on its site. Use these only after the intervention decision selects `add moment`: read the index, open a few examples in the target register, and record the mechanism.
 
 Curated demonstration sites stay human-facing: Codrops, Awwwards, Savee, Recent, and Dribbble. Capture them in a browser like any other reference.
 
-**Register is the correction that keeps this honest.** The first motion pass carried personality archetypes and a frequency gate, both of which push toward restraint. On a marketing or portfolio surface that push is wrong: motion is part of the product there. So motion now names a register — Invisible, Quiet, Present, Expressive, Theatrical — set by the surface rather than by the mood, with product UI defaulting to Quiet and Theatrical requiring an explicit decision.
+**Intervention comes before register.** `leave simple` and `craft only` can be correct outcomes. When an authored moment survives the gates, register — Invisible, Quiet, Present, Expressive, Theatrical — is set by the surface rather than the mood, with product UI defaulting to Quiet and Theatrical requiring an explicit decision.
 
 `bendrape1-byte/silk-design` (MIT) is the counterexample kept on purpose. It reaches for motion by default and states "never ship a static page", which is right for the surfaces it targets and wrong as a universal rule. Its transferable mechanism is consistency: one reveal configuration reused everywhere is what reads as craft. Its default is not adopted.
 
@@ -66,14 +66,14 @@ When Node or Chrome is missing, the pass degrades to screenshots plus a recorded
 ### Cost Boundary
 
 - `quick`: no capture, no motion contract, no extractor.
-- `standard`: motion contract applies; reference capture does not.
-- `deep`: capture, extractor, reference lock, and the full motion contract apply.
-- `production`: the motion contract is checked before handoff, and the artifact is compared against the captured values.
+- `standard`: the intervention decision applies; reference capture does not, and full motion values are required only for `add moment`.
+- `deep`: capture, extractor, reference lock, and the full intervention decision apply; the complete motion contract applies only for `add moment`.
+- `production`: the intervention decision is checked before handoff, and any authored move is compared against the captured values or fallback.
 - Automated motion findings stay advisory and need a screenshot or DOM confirmation before they change a review decision.
 
 ### Verification Plan
 
-Four motion scenarios and four case-capture scenarios live under `evals/prompts/`. The readiness validator reads `.noootwo/reference-board.md` per source and the Motion section of `.noootwo/design-tokens.md` field by field when `--deep-mode` or `--implementation-gate` is passed.
+Four contextual-intervention scenarios, the existing motion scenarios, and four case-capture scenarios live under `evals/prompts/`. The readiness validator reads `.noootwo/reference-board.md` per source and the intervention fields plus the conditional motion contract in `.noootwo/design-tokens.md` when `--deep-mode` or `--implementation-gate` is passed.
 
 
 ## Workflow Research Notes
@@ -195,7 +195,7 @@ Use this to prevent Noootwo Design from becoming too expensive for ordinary UI w
 ### Modes
 
 - `quick`: local polish. No source mining, no 3 directions, no spike comparison, no full harness completion. Use current UI, existing system/tokens when present, and one artifact or screenshot when available.
-- `standard`: normal UI design. Light calibration, 3 directions, 1 artifact, typography and responsive review before ready.
+- `standard`: normal UI design. Contextual intervention decision, light calibration, 1-3 relevant opportunity candidates, source lookup only after a candidate passes the gates, 1 artifact, typography and responsive review before ready.
 - `deep`: high-end, niche, brand-heavy, Claude Design-like, or major redesign work. Source accessibility, evidence-backed discovery, 2-3 artifact spikes, screenshot comparison, typography and responsive gates.
 - `production`: approved design implementation. Token mapping, stack playbook, screenshot or preview acceptance.
 - `detail-translation`: not a standalone mode. It is an implementation-stage reinforcement layer for surfaces that otherwise drift back to defaults.
@@ -213,6 +213,8 @@ Use this to prevent Noootwo Design from becoming too expensive for ordinary UI w
 - Use the detail-translation layer only for implementation-bound work, production review, or post-review drift. Do not make it the default cost of quick polish or early direction exploration.
 - Use readiness validation for delivery and handoff confidence, not as the first step of ordinary UI work.
 - Skip the spec/plan gate only for quick polish, explicit handoff-only work, or explicit user approval to proceed without the gate.
+- `leave simple` and `craft only` are valid outcomes and do not trigger external source mining, direction menus, or new tools.
+- Only an `add moment` that survives the frequency, purpose, speed, and function gates may trigger a source lookup, library comparison, or expressive artifact spike.
 - If time or environment blocks source mining, screenshots, or target-stack previews, record the limitation and reduce readiness confidence.
 - If only 1 deep spike is possible, mark the exploration as low-confidence and do not claim full territory comparison.
 - Prefer existing project preview tools before adding new dependencies.
@@ -222,6 +224,28 @@ Use this to prevent Noootwo Design from becoming too expensive for ordinary UI w
 Escalate from standard to deep only when the user asks for strong taste, niche/high-end direction, brand shift, or a previous standard result was too generic.
 
 De-escalate from deep when the user prioritizes speed, implementation certainty, or staying close to an existing shipped interface.
+
+## Contextual Intervention Borrow Notes
+
+Recorded 2026-10-09 after comparing the three user-provided articles with the current design skill.
+
+### What Is Borrowed
+
+- `emilkowalski/skills`: the opportunity sweep, four-question gate, output cap, and required rejected-candidate list.
+- `alchaincyf/huashu-art-motion`: motion maps, style recipes with known weaknesses, and independent output review without adopting its video runtime, assets, or character work.
+- `Shaders` and `Paper Shaders`: optional visual materials after a candidate passes the register and intervention gates, with licence, performance, and fallback boundaries stated in `motion-libraries.md`.
+
+### What Is Rejected
+
+- Installing or requiring any of these tools, paid Shaders Pro features, MCP access, sound libraries, or video engines by default.
+- Scanning effects for every task, or treating a missing authored moment as an incomplete design.
+- Copying article prompts, library demos, proprietary surfaces, artwork, or project assets.
+
+### Cost Boundary
+
+- Quick polish does no opportunity scan.
+- Standard does the cheapest internal pass and searches only after a candidate survives.
+- Deep pays for capture, comparison, and spikes when the product context supports them.
 
 ## Product Design And Motion Web Borrow Notes
 

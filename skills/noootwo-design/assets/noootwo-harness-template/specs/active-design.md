@@ -15,6 +15,8 @@ Status: pending; fill after the direction is chosen and before implementation pl
 - Color/token roles: TBD
 - Component behavior: TBD
 - State treatment: TBD
+- Intervention decision / authored move: leave simple, craft only, or add moment; none or primary plus optional support: TBD
+- Opportunity ledger / evidence / fallback: TBD
 - Motion: TBD
 - Anti-slop risks: TBD
 - Artifact/review path: TBD
@@ -25,6 +27,8 @@ Status: pending; fill after the direction is chosen and before implementation pl
 - Audience: TBD
 - Product posture: TBD
 - Visual posture: TBD
+- Intervention: leave simple, craft only, or add moment: TBD
+- Product function, frequency, risk, and emotional or brand value: TBD
 - Variance: TBD
 - Motion: TBD
 - Density: TBD

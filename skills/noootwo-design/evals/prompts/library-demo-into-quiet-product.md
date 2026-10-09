@@ -6,6 +6,7 @@ Expected behavior:
 
 - Name the surface's register as Quiet, with Invisible on high-frequency controls, before evaluating the component.
 - Reject the expressive component or reduce it to a platform-native state change that fits the existing motion scale.
+- `leave simple` or `craft only` is a valid outcome when the component adds no user value.
 - If an expressive move survives, tie it to a product reason, record it as an exception, and check the licence and dependency cost.
 - Keep the page's scroll behaviour native and preserve reduced-motion and keyboard behaviour.
 

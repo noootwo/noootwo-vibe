@@ -1,5 +1,10 @@
 # noootwo-product Releases
 
+## v0.10.1
+
+- When code work is next and the seam is not obvious, the product handoff now invokes `noootwo-code-health` for an Integration Read before implementation.
+- The return path names implementation shape as a code-health judgment, alongside code and performance.
+
 ## v0.10.0
 
 - Updated code and performance handoffs from `noootwo-review` to `noootwo-code-health`.

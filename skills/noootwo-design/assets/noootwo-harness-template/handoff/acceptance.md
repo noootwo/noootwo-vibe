@@ -6,6 +6,13 @@ Status: pending; define completion checks for the implementation agent
 
 - TBD
 
+## Intervention Checks
+
+- Decision and rationale match the product function, frequency, task risk, and emotional or brand value: TBD
+- `leave simple` or `craft only` has craft-sufficiency evidence and rejected opportunities: TBD
+- `add moment` has visible artifact proof, source or platform evidence, boundary, and fallback: TBD
+- No authored move was added only to make a routine surface feel more designed: TBD
+
 ## Workflow Completion
 
 - Approved design spec exists and was followed: TBD
@@ -47,8 +54,8 @@ Status: pending; define completion checks for the implementation agent
 - Must-preserve mechanism is visible in the final artifact: TBD
 - Allowed variation stayed within the selected direction: TBD
 - Forbidden substitutions were avoided: TBD
-- Signature mechanism survived token, component, and motion translation: TBD
-- Component and motion targets were implemented or explicitly accepted as limitations: TBD
+- Authored or craft mechanism survived token, component, and motion translation: TBD
+- Component and motion targets were implemented, marked not applicable, or explicitly accepted as limitations: TBD
 
 ## Default Override Checks
 

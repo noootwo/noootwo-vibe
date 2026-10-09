@@ -8,6 +8,7 @@ Status: pending; keep this short and refresh it before directions for taste-sens
 
 ## Dials
 
+- Intervention: leave simple, craft only, or add moment: TBD
 - Novelty: TBD / 5
 - Brand safety: TBD / 5
 - Density: TBD / 5

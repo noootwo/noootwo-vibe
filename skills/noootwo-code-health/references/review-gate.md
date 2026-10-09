@@ -1,15 +1,25 @@
 # Review Gate
 
-Use after every non-direct behavior change, before implementation when structure blocks the change, and before submit, release, or implementation handoff. This is the decision boundary for scope, verification, refactoring, and user acceptance.
+Use before implementation when the integration shape is non-obvious, after every non-direct behavior change, and before submit, release, or implementation handoff. This is the decision boundary for scope, verification, refactoring, and user acceptance.
 
 ## When the gate is mandatory
 
 - A behavior-changing code change was reported done.
+- A non-obvious change needs a seam, contract, or data-flow decision before implementation.
 - A change is about to be submitted, released, or handed off.
 - The same area is being revised repeatedly, context cost is growing, or the same implementation was rejected twice.
 - A Structure Sweep trigger fired.
 
-A code change reaching submit or release without a review decision is not closed. Direct single-file edits with an obvious check may close normally, but they still follow the same two-hat and verification rules internally.
+A code change reaching submit or release without a review decision is not closed. Direct single-file edits with an obvious check may close normally, but they still follow the same two-hat and verification rules internally. A local change with an obvious seam and no contract, data, or migration impact also skips the Integration Read.
+
+## Integration Read gate
+
+Before implementing a non-obvious behavior change:
+
+- read `integration-read.md` and produce a Change Shape;
+- name the seam, owning boundary, contract, reuse decision, reversibility, test seam, smallest first slice, and rejected alternatives or why none existed;
+- do not write production behavior until the shape is settled or explicitly deferred; a material or hard-to-reverse tradeoff waits for the user's choice;
+- a preparatory refactor is the next step only when the Change Shape shows it makes the behavior change safe.
 
 ## Scope
 
@@ -69,4 +79,4 @@ Direct single-file edits with an obvious check and no structural change may clos
 
 ## Output
 
-For a structured review include applied lenses, skipped lenses and why, evidence read, findings, verification gaps, re-test evidence, refactoring disposition, acceptance state, and owning skill for each handoff.
+For an Integration Read include the Change Shape, one-way doors, smallest first slice, and what would change the shape. For a structured review include applied lenses, skipped lenses and why, evidence read, findings, verification gaps, re-test evidence, refactoring disposition, acceptance state, and owning skill for each handoff.

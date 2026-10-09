@@ -1,6 +1,6 @@
 ---
 name: noootwo-design
-description: "Use for UI, visual, artifact, or frontend work after product path is settled: screens, redesigns, tokens, components, critique, motion and interaction polish, or replicating a reference."
+description: "Use for UI, visual, artifact, or frontend work after product path is settled: screens, redesigns, tokens, components, critique, contextual motion decisions, or reference replication."
 ---
 
 # Noootwo Design
@@ -26,10 +26,11 @@ Design Read
 - Audience:
 - Product posture:
 - Visual posture:
+- Intervention / context: leave simple | craft only | add moment — product function, frequency, risk, and emotional or brand value
 - Variance / Motion / Density: low | medium | high
 ```
 
-Variance, motion, and density stay low for operational tools and rise only when audience, brand, or artifact family justify it.
+Variance, motion, and density follow the exact feature and moment. Dense, high-frequency, evidence-heavy, or keyboard-driven work stays simple; rare first-use, completion, explanation, launch, and brand moments may justify more.
 
 **Done when:** each dial has a value and a reason.
 
@@ -41,7 +42,7 @@ Read `references/design-discovery.md` for the discovery pass and the `.noootwo/s
 
 For `deep` work, capture every reference the direction leans on into `.noootwo/references/<slug>/`, with a `source.md` recording URL, date, evidence level, accessibility result, and licence; capture real values from a live source with `scripts/extract_design_tokens.mjs` and its `NN-<label>.png` screenshot with `--screenshot` when a page or running product is reachable, and record inaccessible sources as `capture: unreachable`. Lock the build target and what must not drift before drafting, and let one direction dominate instead of averaging several. `standard` work stays on the lighter path in `references/design-discovery.md`.
 
-When the direction carries motion, set the register from the surface before looking for examples, then source two or three in that register and record each as a mechanism rather than a look. Expressive motion on a quiet product screen is drift, not ambition.
+For standard, deep, and production work, read `references/motion.md` before the contract and make an intervention decision. `leave simple` and `craft only` are valid outcomes; only a candidate that passes frequency, purpose, speed, and function gates may trigger source research, a tool, or an authored moment.
 
 **Done when:** one direction is chosen by the user, or the chosen direction is justified by evidence.
 
@@ -56,7 +57,8 @@ Design Contract
 - Colour and token roles:
 - Component behaviour:
 - State treatment:
-- Motion: archetype, signature easing, duration scale, layers, choreography
+- Intervention / authored move / ledger: leave simple | craft only | add moment; none | primary plus optional support; candidates, rejected opportunities, source or platform rule, fallback
+- Motion: when `add moment`, name archetype, signature easing, duration scale, layers, and choreography; otherwise `not applicable`
 - Anti-slop risks:
 - Artifact and review path:
 ```
@@ -67,7 +69,7 @@ Name semantic roles, not adjectives. Stable decisions become tokens, component r
 
 ## 5. Build
 
-Read `references/craft.md` immediately before editing UI. It carries the quality floor and the hard bans. Read `references/motion.md` when the direction carries motion or the artifact animates.
+Read `references/craft.md` immediately before editing UI. It carries the quality floor and the hard bans. Read `references/motion.md` for the intervention decision and whenever the artifact animates.
 
 Read `references/translate.md` to turn the contract into stack-native implementation, assets, and handoff. Read `references/system.md` when the work touches tokens, a design system, or a new artifact family.
 
@@ -104,8 +106,8 @@ When this is not design work, name the failed layer and invoke the owning skill 
 - `references/intake.md` — reading a request, the Design Read, harness sizing, and adopting an existing project.
 - `references/direction.md` — direction exploration, Style Evidence Check, and mechanism translation.
 - `references/design-discovery.md` — the discovery pass, influence discovery, fit scoring, and the `.noootwo/style-discovery.md` contract.
-- `references/motion.md` — personality archetypes, duration scale, easing catalog, choreography budgets, and the motion bans.
-- `references/motion-libraries.md` — the register gate, per-platform motion tools, licence and dependency checks, and adapt-or-reject recipes.
+- `references/motion.md` — contextual intervention, opportunity gates, signature motion identity, duration, easing, choreography, and the motion bans.
+- `references/motion-libraries.md` — the register gate, per-platform motion and material tools, licence and dependency checks, and adapt-or-reject recipes.
 - `references/system.md` — tokens, design-system extraction, and artifact-family contracts.
 - `references/craft.md` — anti-slop, typography, colour, responsive, and data-UI craft floors.
 - `references/review.md` — scoring, gates, hard bans, and final review.

@@ -14,6 +14,8 @@ Status: pending; generate for direction-sensitive standard or deep design work
 - Audience: TBD
 - Product posture: TBD
 - Visual posture: TBD
+- Intervention: leave simple, craft only, or add moment: TBD
+- Product function, frequency, risk, and emotional or brand value: TBD
 - Variance: TBD
 - Motion: TBD
 - Density: TBD
@@ -44,6 +46,7 @@ Status: pending; generate for direction-sensitive standard or deep design work
 - Must preserve: TBD
 - Allowed variation: TBD
 - Forbidden substitution: TBD
+- Authored move: none or primary plus optional support: TBD
 - Signature mechanism: TBD
 - Token target: TBD
 - Component target: TBD

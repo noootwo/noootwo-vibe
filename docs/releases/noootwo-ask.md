@@ -1,5 +1,10 @@
 # noootwo-ask Releases
 
+## v0.5.0
+
+- Reordered the main flow so `noootwo-code-health` appears before `noootwo-tdd`: shape a non-obvious implementation, then write behavior-code, then return to code-health for review.
+- Added the standalone and choosing-between cases for implementation shape, backend design, and frontend integration.
+
 ## v0.4.0
 
 - Added `noootwo-release` to the main flow, on-ramps, standalone routing, and choosing-between table for version, tag, deployment, rollback, and release-trace work.

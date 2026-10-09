@@ -9,7 +9,7 @@
 
 ## Current Validation Surface
 
-Last verified: 2026-09-28 on this worktree.
+Last verified: 2026-10-09 on this worktree.
 
 - `python scripts/validate_skill_workspace.py .` — includes the authoring budgets: `description` ≤ 200 characters, `SKILL.md` ≤ 120 lines, ≤ 12 reference files each named by a pointer, `short_description` 25–64 characters, no `default_prompt`, and no bare `$noootwo-` reference inside a skill body
 - `python scripts/validate_skill_workspace.py .` — also enforces the capability bridge: every skill named in a `SKILL.md` must exist, every public skill must appear in the `docs/agents/invocation.md` capability map, and every skill named there must exist
@@ -22,9 +22,15 @@ Last verified: 2026-09-28 on this worktree.
 - Behaviour measurement: `docs/experiments/skill-behaviour-2026-09-11.md`
 - `node --check` on `skills/noootwo-design/scripts/extract_design_tokens.mjs`, plus an end-to-end extraction against a foreign product site and a domestic design system
 - `node --check` on the `CHECK_JS` payload from `skills/noootwo-design/scripts/check_visual_gates.py`; the advisory interface rules still need an artifact run with Playwright for end-to-end proof
+- `python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scenario leave-simple-justified` — validates a justified no-motion result
+- `python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scenario craft-only-justified` — validates a craft-only intervention
+- `python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scenario add-moment-proof` — validates an authored moment and its evidence
+- `python skills/noootwo-design/scripts/validate_noootwo_readiness.py <project> --motion-gate` — now validates the intervention decision and only requires full motion values for `add moment`
 - `docs/agents/borrow-audit.md` maps the prior art each skill was compared against; the Product Design plugin maps primarily to `noootwo-product`, and motion-web maps primarily to `noootwo-design`.
-- `noootwo-code-health` now follows the Fowler refactoring health loop; the deciding sources and boundaries are recorded in `docs/reference/borrowed-skills.md` and ADR 0015.
-- `noootwo-code-health` is the renamed `noootwo-review` skill (`v0.14.0` rename, currently `v0.15.0`). The old `noootwo-review@v0.13.0` tag remains as history; current docs and routing use the new name.
+- `docs/adr/0018-contextual-design-intervention.md` records `leave simple | craft only | add moment` as the design decision before motion, source research, or new material.
+- `docs/adr/0019-code-health-integration-read.md` records the pre-implementation Integration Read and Change Shape, including the trigger, skip rule, research evidence, and boundaries.
+- `noootwo-code-health` now follows the Fowler refactoring health loop and the bounded Integration Read; the deciding sources, boundaries, and stop rule are recorded in `docs/reference/borrowed-skills.md`, ADR 0015, and ADR 0019.
+- `noootwo-code-health` is the renamed `noootwo-review` skill (`v0.14.0` rename, currently `v0.16.0`). The old `noootwo-review@v0.13.0` tag remains as history; current docs and routing use the new name.
 - `noootwo-release` is new. It owns versioning, tags, immutable artifacts, deployment traces, provenance, rollback, and release health; code-health keeps the ship-readiness gate.
 
 ## Active Risks
@@ -37,24 +43,25 @@ Last verified: 2026-09-28 on this worktree.
 - The Product-to-Design Handoff must not carry an unsettled decision that would change the real user, main path, states, acceptance, or trust boundary.
 - `noootwo-debug`, `noootwo-research`, and `noootwo-onboard` are written from a research pass, not from a measured behaviour probe. Their gates are asserted, not yet shown to change what an agent does; the probes below are the evidence that would settle them.
 - The capability bridge is enforced mechanically at the name level only. It cannot check ordering, hand-off content, or the loop rules; those stay review questions.
-- `noootwo-code-health` now owns the Fowler refactoring health loop, including preparatory review, post-green review, and triggered Structure Sweeps. The workflow model is evidence-backed, but its effect on real rework and structural-debt closure is still asserted rather than measured.
+- `noootwo-code-health` owns the Fowler refactoring health loop and the pre-implementation Integration Read. The mechanism is evidence-backed, but the real effect on rework, seam choice, and structural-debt closure is still asserted rather than measured.
+- The Integration Read can over-trigger on ordinary local changes. The skip rule is explicit, but the positive, skip, and product-boundary evals must run before the trigger is treated as stable.
 - `noootwo-workflow` now treats review as part of done and checks that every structural finding has a disposition before closing a non-direct code change. This routing behavior needs the new workflow eval run before it is treated as stable.
-- `noootwo-tdd` now separates the adding-function hat from the refactoring hat and no longer defers a large touched file by default. The two-hats and debt-disposition behavior still needs scenario measurement.
+- `noootwo-tdd` now separates the adding-function hat from the refactoring hat, returns to workflow when the implementation seam is unsettled, and no longer defers a large touched file by default. The two-hats, return-on-unsettled-shape, and debt-disposition behavior still needs scenario measurement.
 - `noootwo-release` is a new release-engineering contract. Its version, artifact, deployment-trace, rollback, and provenance rules are evidence-backed, but the release evals and a real deployment trace still need to be run before the behavior is treated as proven.
-- `noootwo-design` adds case capture and a motion language. The extractor needs Node 22+ and a local Chrome; without both, a deep pass records a degraded capture rather than inventing values.
+- `noootwo-design` now starts with a contextual intervention decision before motion, source research, or material work. The model still needs scenario measurement to prove that it chooses restraint as reliably as expression. The extractor needs Node 22+ and a local Chrome; without both, a deep pass records a degraded capture rather than inventing values.
 - `noootwo-code-health/SKILL.md` is at 119/120 lines. `planned`: the next code-health change must compress or replace an existing line before adding another.
 - The largest skill files are the design extractor and the design translation/craft references (roughly 500-742 lines). This release does not touch them; `opportunity`: split only when that path is next changed and the context cost is proven.
 - The motion rules added to `check_visual_gates.py` are advisory by design. An intentional brand curve can trip one, so a finding needs screenshot or DOM confirmation before it changes a decision.
 - The native motion guidance in `translate.md` is drawn from platform documentation, not from a measured SwiftUI or Compose project. A device check is still owed.
-- Motion register and sourcing were added after the first motion pass, so the seven motion, four interface-quality, and four case-capture scenarios are newer than the rest and have not been run either.
-- The motion library map records licences, dependencies, and maintenance state as of 2026-09-22. Registry entries and platform APIs move; a pass re-checks them before adopting a tool.
+- Motion register and sourcing were added after the first motion pass. The new contextual-intervention scenarios join the existing motion, interface-quality, and case-capture scenarios and still need behaviour measurement.
+- The motion library map records licences, dependencies, and maintenance state as of 2026-09-22; Shaders and Paper Shaders were checked on 2026-10-09. Registry entries and platform APIs move; a pass re-checks them before adopting a tool.
 - The interface checks added to `check_visual_gates.py` are advisory and web-only. Flutter, SwiftUI, and Compose accessibility and state parity are prose gates until a real device or preview artifact is reviewed.
 - The screenshot/design-image intake is a contract, not a vision pipeline. It records what is visible and marks the rest as inferred or missing; it does not invent interaction or accessibility states from a still image.
 - Several motion libraries publish genuine agent-readable indexes as of the 2026-09-17 probe. An index can disappear or move, so a pass records what it actually read.
 - The `noReducedMotion` advisory rule reads `document.styleSheets`, which cannot inspect cross-origin stylesheets. A site that handles reduced motion in a CDN stylesheet can therefore produce a false finding; it stays advisory for that reason.
-- A project already in flight in `deep` mode will be asked for motion values it never recorded the first time. That is a behaviour change for in-flight work, not a defect, and it appears only when `--deep-mode`, `--implementation-gate`, or `--motion-gate` is passed.
+- A project already in flight in `deep` mode will now be asked for an intervention decision it never recorded. That is a behaviour change for in-flight work, not a defect, and it appears only when `--deep-mode`, `--implementation-gate`, or `--motion-gate` is passed. Full motion values are required only when the decision is `add moment`.
 - The free case-library access results were probed on 2026-09-16 and 2026-09-17. Gates and plans change without notice, so a pass records its own reachability result rather than trusting the recorded one.
-- `noootwo-design` sits at 117 of 120 `SKILL.md` lines and 11 of 12 reference files. The next addition must compress existing prose or replace a reference rather than add another.
+- `noootwo-design` sits at 119 of 120 `SKILL.md` lines and 11 of 12 reference files. The next change must replace or compress existing prose before adding a line or using the final reference slot.
 
 ## Next Actions
 
@@ -63,8 +70,9 @@ Last verified: 2026-09-28 on this worktree.
 - Run the `noootwo-debug` scenarios under `skills/noootwo-debug/evals/prompts/` on seeded bugs with a hidden verifier and a decoy, and record the result in `docs/experiments/`.
 - Run the `noootwo-research` scenarios under `skills/noootwo-research/evals/prompts/`, including the case where research should not fire, and record the result in `docs/experiments/`.
 - Run the `noootwo-onboard` scenarios under `skills/noootwo-onboard/evals/prompts/`, and the optimization scenario under `skills/noootwo-code-health/evals/prompts/`.
+- Run the new Integration Read positive, skip, and product-boundary scenarios under `skills/noootwo-code-health/evals/prompts/`.
 - Run the new refactoring-workflow, preparatory-refactoring, structural-debt, two-hats, and review-after-every-change scenarios.
 - Run the new release scenarios under `skills/noootwo-release/evals/prompts/` and the workflow release-routing scenario.
-- Run the seven motion, four interface-quality, and four case-capture scenarios under `skills/noootwo-design/evals/prompts/`, and record the results in `docs/experiments/`.
+- Run the four contextual-intervention scenarios, then the existing motion, interface-quality, and case-capture scenarios under `skills/noootwo-design/evals/prompts/`, and record the results in `docs/experiments/`.
 - Exercise `extract_design_tokens.mjs` and the advisory motion rules on a real project artifact, and record the false-positive rate for the deliberately-deviating brand-curve case.
 - Update `docs/releases/` and per-skill tags when publishing changed skills.

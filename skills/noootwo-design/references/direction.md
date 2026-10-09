@@ -16,6 +16,7 @@ Produce 3 directions only when the choice would materially change implementation
 - multiple plausible structures, densities, moods, or component languages fit the product
 - high-character, premium, niche, unusual, selected, or previously rejected style needs evidence before implementation
 - the user strongly rejects the current style as generic, not advanced, not unique, or not matching the chosen direction
+- the intervention decision is unresolved and the choice materially changes structure, information expression, or product identity
 
 Skip directions for `quick`, `review`, `extract-system`, handoff-only, explicit stay-close polish, and standard work where product path plus visual posture already make one implementation path clear.
 
@@ -34,21 +35,23 @@ Write `.noootwo/directions.md` with:
 - user decision gate: whether a choice is required, the exact question, options, recommendation, user selection, and whether the user delegated the choice
 - 3 named directions
 - surface type and why the chosen source pool fits
-- for each direction: source evidence, borrowed mechanism, anti-example, design-spec delta, type/color/density, component/shape language, motion thesis, artifact strategy, and mimicry risk to reject
-- for each direction: must-preserve, allowed-variation, forbidden-substitution, token target, component target, and motion target
+- for each direction: source evidence, borrowed mechanism, anti-example, design-spec delta, type/color/density, component/shape language, motion thesis or explicit no-motion rationale, artifact strategy, and mimicry risk to reject
+- for each direction: design thesis, authored move when justified, must-preserve, allowed-variation, forbidden-substitution, token target, component target, and motion target
 
 ### Internal Preflight
 
 Before drafting, confirm:
 
-- the 3 directions differ in type, structure, density, mood, component language, and motion
-- each direction has a design-spec delta: color roles, type roles, layout model, component vocabulary, motion thesis, and forbidden moves
+- the 3 directions differ in design thesis, information expression, type, structure, density, component language, and motion where motion is relevant
+- each direction has a design-spec delta: color roles, type roles, layout model, component vocabulary, motion thesis or no-motion rationale, and forbidden moves
+- each direction states whether its intervention is `leave simple`, `craft only`, or `add moment`; no direction creates motion merely to look more designed
 - each direction states what must survive translation into tokens and implementation, what may vary, and what must never be substituted
 - product UI directions use product/design-system evidence, while campaign UI directions may use more experimental art-direction evidence
 - each direction names how it becomes reviewable
 - each direction includes at least one openable case link the user can inspect
 - high-character directions have visual evidence or are explicitly marked low confidence with a spike requirement
 - each direction has stack translation
+- each direction names one visible authored move if it claims `add moment`; `leave simple` and `craft only` instead name the structural, typographic, state, or detail mechanism that prevents generic drift
 - each direction defines font logic, scale, weight roles, line-height, letter-spacing, and mobile display cap
 - no direction is only a palette swap
 - no direction defaults to generic SaaS, shadcn-card-wall, or Flutter/native defaults without product reason
@@ -62,6 +65,19 @@ If a direction cannot be summarized as implementation rules another agent could 
 If a direction's evidence and claimed style point to different mechanisms, return to style discovery before writing the spec.
 
 If a required decision is unresolved, do not create artifacts, edit Flutter routes, write handoff, or enter production.
+
+
+## Intervention And Signature Move
+
+Direction work is not a mandate to add a signature effect. It resolves a visual or structural choice that materially changes implementation. Use the intervention decision from [motion](motion.md) before deciding whether a signature move belongs in the direction.
+
+- `leave simple`: the direction wins through clarity, layout, hierarchy, density, and state integrity. Record why more expression would make the product worse.
+- `craft only`: the direction improves the actual task through typography, spacing, component behavior, material restraint, and micro-detail. Record the rejected expressive options.
+- `add moment`: one primary authored move carries identity, explanation, continuity, or emotional payoff. At most one supporting move may reinforce it.
+
+An authored move is a repeatable product behavior, not a one-off decoration. It can be motion, material, spatial composition, typography, data grammar, sound, or haptics only when the candidate has passed the relevant product and accessibility gates. Component-library defaults are baseline support, not the authored move.
+
+For every `add moment`, record `source + mechanism + boundary + fallback`. A missing source keeps the move at low confidence and blocks `ready`; it does not block a well-supported `leave simple` or `craft only` direction.
 
 
 ## Style Evidence Check
@@ -304,8 +320,8 @@ Use these lineages when the brand needs a stronger point of view or when brand e
 - Use these as fallback structure, not as permission to ignore confirmed brand assets
 - Prefer open or broadly available type options when naming examples
 - Extend the lineage across typography, color, component language, motion, and interaction
-- Take the lineage's motion archetype, duration scale, and signature curve from [motion](motion.md); a lineage used as a direction without real reference evidence does not count as evidence on its own
-- Record the archetype in the direction and in `.noootwo/design-tokens.md`, or record the reason for overriding it
+- When the lineage earns motion, take its archetype, duration scale, and signature curve from [motion](motion.md); otherwise record the explicit no-motion reason. A lineage used as a direction without real reference evidence does not count as evidence on its own
+- Record the archetype and intervention decision in the direction and `.noootwo/design-tokens.md`, or record the reason for choosing `leave simple` or `craft only`
 - If you choose not to use a lineage, explain why the current brand system is already strong enough
 - Treat example stacks as starting points, not defaults to repeat across every generation
 

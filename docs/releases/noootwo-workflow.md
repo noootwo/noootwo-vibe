@@ -1,5 +1,12 @@
 # noootwo-workflow Releases
 
+## v0.17.0
+
+- Added the pre-implementation `noootwo-code-health` Integration Read to the precedence and route-by-signal guidance when a change's seam is non-obvious.
+- Routed the resulting Change Shape into direct TDD, preparatory refactoring, or the owning product, design, research, or stopped-change handoff.
+- Added the Change Shape and test seam to the TDD handoff packet, and the new mode to the code-health packet.
+- The close gate now checks that a non-direct code change was shaped before implementation when the seam was not obvious.
+
 ## v0.16.0
 
 - Added `noootwo-release` to the release stage after code-health readiness, with release sequencing, scope, and close-gate checks.

@@ -38,7 +38,7 @@ Noootwo Design should not produce work that looks instantly AI-generated or gene
   - dense vs airy hierarchy
   - uppercase display vs sentence-case body
 - If the product needs character, do not solve it with color alone. Start with typography and rhythm.
-- If motion, color, and components do not reinforce the same point of view as the type system, the direction is incomplete.
+- If motion is selected, color and components must reinforce the same point of view as the type system; motion is not required when the intervention decision favors clarity or restraint.
 
 ### Density And Composition Rules
 
@@ -76,7 +76,7 @@ Noootwo Design should not produce work that looks instantly AI-generated or gene
 Before calling a design ready, ask:
 
 - Would this still feel specific if the logo disappeared?
-- What is the one unforgettable thing in this direction?
+- What is the authored move or craft mechanism users should remember, and is an authored move actually appropriate here?
 - Is the strongest decision typography, composition, product evidence, or all three?
 - Does the first screen avoid the default AI landing-page pattern?
 - Does this look like a product with a design system, or like a prompt artifact?
@@ -92,7 +92,7 @@ Use this reference to keep design directions bold, coordinated, and memorable.
 - Pick a clear aesthetic direction before drafting
 - Calibrate the style target before generating directions when the taste target is ambiguous
 - Commit to a strong point of view rather than averaging multiple safe choices
-- Every direction should answer: what is the one unforgettable thing?
+- Every direction should answer what carries its identity: an authored move, a structural mechanism, or deliberate craft restraint
 - When the user asks for high-end or niche UI, ground the direction in visual references or verified mechanisms, not abstract adjectives alone
 - The final judgment must happen against an artifact, screenshot, or preview whenever possible
 
@@ -142,7 +142,7 @@ Before entering draft mode, confirm:
 
 - What is the tone extreme?
 - Which style calibration does this direction inherit?
-- What is the one unforgettable thing?
+- What is the authored move or craft mechanism, or why is a simpler intervention better?
 - What is the typography contrast?
 - What is the motion thesis?
 - What is the background/detail thesis?

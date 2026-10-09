@@ -328,7 +328,7 @@ Use polish mode only after the direction is fundamentally right.
 - Review component defaults and micro-details, not only page composition.
 - Check responsive or platform-specific breakpoints.
 - Remove generic library defaults.
-- Preserve the one unforgettable move.
+- Preserve the selected authored or craft move, or the recorded reason for deliberate restraint.
 
 ### Screenshot Review Requirements
 

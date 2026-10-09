@@ -23,6 +23,8 @@ Status: pending; fill this after a design direction has passed review
 - Audience: TBD
 - Product posture: TBD
 - Visual posture: TBD
+- Intervention: leave simple, craft only, or add moment: TBD
+- Product function, frequency, risk, and emotional or brand value: TBD
 - Variance: TBD
 - Motion: TBD
 - Density: TBD
@@ -37,6 +39,7 @@ Status: pending; fill this after a design direction has passed review
 - Must preserve: TBD
 - Allowed variation: TBD
 - Forbidden substitution: TBD
+- Authored move: none or primary plus optional support: TBD
 - Signature mechanism: TBD
 - Token target: TBD
 - Component target: TBD
@@ -59,6 +62,7 @@ Status: pending; fill this after a design direction has passed review
 - Layout model and density: TBD
 - Shape, material, and depth rules: TBD
 - Component vocabulary: TBD
+- Intervention decision and authored move: TBD
 - Motion thesis: TBD
 - Imagery, iconography, and language rules: TBD
 - Forbidden moves: TBD
@@ -113,6 +117,7 @@ Status: pending; fill this after a design direction has passed review
 
 ## Motion Guidance
 
+- Intervention decision, authored move, evidence, and fallback: TBD
 - TBD
 
 ## Default Override Pass

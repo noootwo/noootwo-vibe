@@ -43,6 +43,15 @@ Status: pending extraction; replace this template with project-specific truth be
 - Target qualities: distinctive TBD; niche TBD; practical TBD; simple TBD; efficient TBD; premium TBD; current TBD
 - Anti-position: TBD
 
+## Design Intervention
+
+- Decision: leave simple, craft only, or add moment: TBD
+- Product function, frequency, risk, and emotional or brand value: TBD
+- Candidate and rejected opportunities: TBD
+- Craft sufficiency evidence: TBD
+- Authored move: none or primary plus optional support: TBD
+- Authored move evidence, boundary, and fallback: TBD
+
 ## Design Tokens
 
 - Source file: `.noootwo/design-tokens.md`

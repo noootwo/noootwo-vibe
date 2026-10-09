@@ -12,6 +12,7 @@ TBD_RE = re.compile(r"(?<!`)\bTBD\b(?!`)")
 USER_DELEGATED_RE = re.compile(r"user delegated choice to agent\s*:\s*(?:yes|true|delegated)", re.IGNORECASE)
 APPROVED_RE = re.compile(r"approved by user\s*:\s*(?:yes|true|approved)", re.IGNORECASE)
 PLAN_APPROVED_RE = re.compile(r"user approved or delegated implementation plan\s*:\s*(?:yes|true|approved|delegated)", re.IGNORECASE)
+INTERVENTION_VALUES = {"leave simple", "craft only", "add moment"}
 
 
 def read(root: Path, relative: str) -> str:
@@ -47,6 +48,49 @@ def field_value(content: str, label: str) -> str | None:
     if not match:
         return None
     return match.group(1).strip()
+
+
+def intervention_value(review: str) -> str:
+    return (field_value(review, "Intervention decision") or "").strip().lower()
+
+
+def validate_intervention_record(review: str, expected: str) -> list[str]:
+    errors: list[str] = []
+    decision = intervention_value(review)
+    require(errors, decision in INTERVENTION_VALUES, "review intervention decision must be leave simple, craft only, or add moment")
+    require(errors, decision == expected, f"review intervention decision must be {expected}")
+    require(errors, has_value(review, "Decision rationale"), "review missing intervention decision rationale")
+    require(errors, has_value(review, "Candidate moments and rejected opportunities"), "review missing candidate and rejected opportunity record")
+    require(errors, has_value(review, "Intervention fit"), "review missing intervention fit")
+
+    if expected in {"leave simple", "craft only"}:
+        require(errors, has_value(review, "Craft sufficiency evidence"), f"review missing craft evidence for {expected}")
+    if expected == "add moment":
+        authored = (field_value(review, "Authored move") or "").strip().lower()
+        require(errors, authored not in {"", "none", "not applicable", "n/a", "tbd"}, "review missing authored move for add moment")
+        require(errors, has_value(review, "Authored move evidence and fallback"), "review missing authored move evidence and fallback")
+    return errors
+
+
+def eval_leave_simple_justified(root: Path) -> list[str]:
+    review = read(root, ".noootwo/review.md")
+    if not review:
+        return ["missing .noootwo/review.md"]
+    return validate_intervention_record(review, "leave simple")
+
+
+def eval_craft_only_justified(root: Path) -> list[str]:
+    review = read(root, ".noootwo/review.md")
+    if not review:
+        return ["missing .noootwo/review.md"]
+    return validate_intervention_record(review, "craft only")
+
+
+def eval_add_moment_proof(root: Path) -> list[str]:
+    review = read(root, ".noootwo/review.md")
+    if not review:
+        return ["missing .noootwo/review.md"]
+    return validate_intervention_record(review, "add moment")
 
 
 def eval_missing_exploration(root: Path) -> list[str]:
@@ -171,6 +215,9 @@ SCENARIOS = {
     "implementation-closure": eval_implementation_closure,
     "style-prose-without-visual-evidence": eval_style_prose_without_visual_evidence,
     "visual-direction-implemented-as-default-ui": eval_visual_direction_implemented_as_default_ui,
+    "leave-simple-justified": eval_leave_simple_justified,
+    "craft-only-justified": eval_craft_only_justified,
+    "add-moment-proof": eval_add_moment_proof,
 }
 
 DEFAULT_SCENARIOS = [

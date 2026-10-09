@@ -39,6 +39,8 @@ If the behavior has no credible automated proof, the refactoring hat cannot be w
 
 This is a cycle, not a menu. Preparatory refactoring comes before a hard change; TDD refactoring comes after green; litter-pickup and comprehension refactoring happen whenever the code is being touched; planned and long-term refactoring handle the work that cannot honestly fit in one touch.
 
+An Integration Read decides which of these workflows applies before implementation. Preparatory Refactoring is one possible Change Shape disposition, not the whole pre-implementation pass; the read can also conclude that direct TDD is safe or that the task belongs to another owner.
+
 ## Code Smells
 
 A code smell is a surface indication that usually corresponds to a deeper problem. It is quick to spot, it is not automatically a defect, and some smells are fine in context.

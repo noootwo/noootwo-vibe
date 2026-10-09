@@ -1,6 +1,6 @@
-# Motion Libraries And Platform Primitives
+# Motion, Material, And Platform Primitives
 
-Read this only when a direction needs motion and the implementation choice is still open. `motion.md` owns the register, duration scale, easing, choreography, and bans; this file owns the smallest tool that can carry them.
+Read this only after the intervention decision selects `add moment` and the implementation choice is still open. `motion.md` owns the contextual decision, register, duration scale, easing, choreography, and bans; this file owns the smallest tool or material that can carry them.
 
 ## Register Gate
 
@@ -11,8 +11,8 @@ Choose the register before evaluating any library. A strong demo is not evidence
 | Invisible | CSS state changes, platform-native state changes, no runtime | effect registries, scroll libraries, spring toys |
 | Quiet | CSS/WAAPI, Motion layout and values, auto-animate, platform-native transitions | marquee, magnetic button, cursor trail, scroll hijack |
 | Present | Motion, auto-animate, platform-native transitions, Rive or Lottie for an authored asset | several runtimes in one direction |
-| Expressive | Motion, GSAP for scroll or timelines, copy-in registries, Rive or Lottie | using every available runtime at once |
-| Theatrical | GSAP timelines, WebGL or Canvas, authored Rive or Lottie assets | any of these on a product screen without a product reason |
+| Expressive | Motion, GSAP for scroll or timelines, copy-in registries, Rive or Lottie, or an authored Shaders/Paper Shaders material | using every available runtime at once |
+| Theatrical | GSAP timelines, WebGL or Canvas, WebGPU shader components, authored Rive or Lottie assets | any of these on a product screen without a product reason |
 
 If the register is Invisible or Quiet, a copy-in effect component starts as a rejection unless the direction records a product reason and an exception.
 
@@ -24,6 +24,16 @@ If the register is Invisible or Quiet, a copy-in effect component starts as a re
 4. **Authored asset runtime** — Rive or Lottie only when the motion is drawn or exported, not when it is a UI transition.
 
 Never start at rung three or four. "The demo looked good" answers a different question from "this surface needs this motion".
+
+## Experience Materials
+
+Motion, material, sound, and haptics are separate optional layers. Add them only when the selected intervention has a named user value and the cheaper static or platform treatment cannot carry it.
+
+- Prefer CSS, Canvas, image, or platform feedback before a runtime or GPU layer.
+- A shader is an authored visual material, not evidence that a generic layout has become designed. It belongs on Present or higher registers with a product reason.
+- Sound and haptics come from platform primitives first, never autoplay unexpectedly, and respect mute, silent mode, system haptics, and reduced-motion choices.
+- Every expressive material needs a fallback that preserves hierarchy, state information, and task completion on unsupported GPUs, low-power devices, reduced motion, and older browsers.
+- Record the library's licence, dependency cost, performance boundary, mobile behavior, and whether the user already has any paid service it requires.
 
 ## Intent Map
 
@@ -53,6 +63,8 @@ Scroll-linked staging belongs on marketing, launch, and portfolio surfaces. On p
 | Magic UI | MIT; React and Tailwind; active September 2026 | landing-page components and effects | not a product-UI default |
 | Animata | MIT; React and Tailwind; shadcn-installable | about 130 expressive animated primitives | not a product-UI default |
 | GSAP | standard GSAP licence; active September 2026 | scroll timelines, pinned scenes, complex sequencing | check licence terms for the intended distribution; not needed for ordinary state changes |
+| Shaders | MIT free WebGPU component library; Pro presets/MCP are paid and optional; active October 2026 | authored textures, materials, distortions, transitions, and hero atmosphere on expressive web surfaces | web/WebGPU only; require static or CSS fallback, performance and mobile review, and a product reason; never require Pro |
+| Paper Shaders | Apache-2.0; zero-dependency React components and GLSL; active October 2026 | filters, dithering, texture, grain, gradients, and lightweight expressive material | not a product-UI default; verify bundle/runtime cost, fallback, and licence notices before shipping |
 | Flutter `animations` | BSD-3; Flutter team package; 3.0.0 published August 2026 | Material container transform, shared axis, and fade through | first-party package, but still prefer built-in widgets when they carry the moment |
 | `flutter_animate` | BSD-3; 4.5.2 published November 2024 | chained micro-effects without an `AnimationController` | maintenance is slower than the platform; optional, not the default |
 | Pow | MIT; SwiftUI; active April 2026 | optional SwiftUI change effects and transitions | platform-native SwiftUI remains the first choice |
@@ -89,4 +101,4 @@ Before adding a library or copying a registry component, record these answers:
 
 ## Sources
 
-Probed 2026-09-22 by repository metadata, package registries, and the libraries' own agent-readable indexes. React Bits, Vue Bits, Magic UI, Animata, Motion, auto-animate, Flutter `animations`, `flutter_animate`, Pow, Rive, and Lottie were checked for licence, maintenance state, and packaging model. Android platform documentation was unreachable from this environment; platform API names remain a verification item.
+Probed 2026-09-22 by repository metadata, package registries, and the libraries' own agent-readable indexes. React Bits, Vue Bits, Magic UI, Animata, Motion, auto-animate, Flutter `animations`, `flutter_animate`, Pow, Rive, and Lottie were checked for licence, maintenance state, and packaging model. Shaders and Paper Shaders were rechecked on 2026-10-09. Android platform documentation was unreachable from this environment; platform API names remain a verification item.

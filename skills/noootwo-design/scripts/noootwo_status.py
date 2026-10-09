@@ -71,6 +71,15 @@ def read_text(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
 
+def field_value(content: str, label: str) -> str:
+    pattern = re.compile(
+        rf"^\s*-\s*{re.escape(label)}\s*:\s*(.+?)\s*$",
+        re.IGNORECASE | re.MULTILINE,
+    )
+    match = pattern.search(content)
+    return match.group(1).strip() if match else ""
+
+
 def file_state(root: Path, relative: str) -> str:
     path = root / relative
     if not path.exists():
@@ -111,11 +120,21 @@ def motion_state(root: Path) -> str:
     if not match:
         return "missing section"
     motion = match.group(1)
-    if TBD_RE.search(motion):
+    decision = field_value(motion, "Intervention decision").lower()
+    if decision not in {"leave simple", "craft only", "add moment"}:
         return "incomplete"
-    scale = MOTION_SCALE_RE.search(motion)
-    if not scale:
+    required = ["Decision rationale", "Candidate moments and rejected opportunities"]
+    if decision in {"leave simple", "craft only"}:
+        required.append("Craft sufficiency evidence")
+    if decision == "add moment":
+        required.extend(["Authored move", "Authored move evidence and fallback"])
+    if any(not field_value(motion, label) or "TBD" in field_value(motion, label).upper() for label in required):
         return "incomplete"
+    if decision == "add moment":
+        if TBD_RE.search(motion):
+            return "incomplete"
+        if not MOTION_SCALE_RE.search(motion):
+            return "incomplete"
     return "complete"
 
 
@@ -216,7 +235,9 @@ def blockers(root: Path, inferred_mode: str) -> list[str]:
             and motion_state(root) != "complete"
             and file_state(root, ".noootwo/design-tokens.md") != "missing"
         ):
-            results.append("motion contract in .noootwo/design-tokens.md is missing or incomplete")
+            results.append("design intervention decision in .noootwo/design-tokens.md is missing or incomplete")
+            if field_value(read_text(root / ".noootwo/design-tokens.md"), "Intervention decision").lower() == "add moment":
+                results.append("motion contract for add moment is missing or incomplete")
 
     return results
 

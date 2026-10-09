@@ -23,6 +23,15 @@ Status: pending; required for deep mode before high-character directions
 - Product UI, data UI, utility UI, native screen, campaign, launch, editorial, or other: TBD
 - Source pool restriction for this surface: TBD
 
+## Intervention Decision
+
+- Product function, frequency, task risk, and emotional or brand value: TBD
+- Candidate and rejected opportunities: TBD
+- Decision: leave simple, craft only, or add moment: TBD
+- Decision rationale: TBD
+- Craft sufficiency evidence: TBD
+- Authored move, source, boundary, and fallback when relevant: TBD
+
 ## Search Queries
 
 - TBD

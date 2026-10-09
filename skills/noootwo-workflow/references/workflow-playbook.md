@@ -6,6 +6,7 @@ Compact guardrail and handoff packet reference. Routing and scheduling live in `
 
 - Read repo truth before deciding; smallest read that covers risk.
 - Do not edit while product or debug is unresolved.
+- Non-obvious code changes use `noootwo-code-health` for an Integration Read before `noootwo-tdd`; obvious local seams go directly to TDD.
 - Behavior-changing code uses `noootwo-tdd` before review.
 - Non-direct behavior changes return to `noootwo-code-health` after green, before the work is reported done.
 - Review/refactor/optimization must re-run tests, dispose of structural findings, and stop for user acceptance before submit or publish.
@@ -19,6 +20,7 @@ Keep packets short. Workflow carries scope and sequencing; the specialist owns m
 
 ### To `noootwo-tdd`
 
+- Change Shape and test seam:
 - Behavior to change:
 - Current test command:
 - Scope boundary:
@@ -26,6 +28,8 @@ Keep packets short. Workflow carries scope and sequencing; the specialist owns m
 
 ### To `noootwo-code-health`
 
+- Mode: Integration Read | review | Structure Sweep | optimization
+- If Integration Read: settled product/design path, requirement, candidate seams, contracts/data/migration, constraints, and specific judgment requested
 - Behavior or structure changed:
 - Files and nearest tests:
 - Risk class:

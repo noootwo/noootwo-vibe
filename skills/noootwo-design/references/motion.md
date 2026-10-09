@@ -2,11 +2,47 @@
 
 The shared motion base: how this product behaves over time. Read it for `standard`, `deep`, and `production` work, and whenever a direction, token set, or artifact claims motion.
 
-Motion is a main material, not a finishing pass. The still page and its motion are two things that must both be true at the end: a great mechanic on a default-looking page is a failed page, and if the page would embarrass with motion switched off, it is not done. A direction that names structure, type, and colour but no motion is incomplete, and motion added after the layout has settled into a generic shape reads as garnish.
+Motion is one design material among several, not a finishing pass or a default sign of effort. The still page and any motion must both be true at the end: a mechanic on a default-looking page has not solved the design, and a page that only feels authored while moving has no durable identity. Motion added after the layout has settled into a generic shape reads as garnish.
+
+## Intervention Decision
+
+Decide whether this product, feature, and moment should stay simple, receive craft-only work, or gain an authored moment before designing motion at all.
+
+```markdown
+Intervention Decision
+- Product/feature and user:
+- Frequency, task risk, emotional and brand value:
+- Candidate moments:
+- Decision: leave simple | craft only | add moment
+- Why:
+- Rejected opportunities:
+```
+
+Use this surface heuristic, then override it with product evidence:
+
+| Surface or moment | Default | Why |
+| --- | --- | --- |
+| Keyboard path, command menu, batch action, high-frequency navigation | Leave simple | Delay and attention cost repeat on every use |
+| Data table, monitor, analytics reading surface, control room | Leave simple or craft only | Motion competes with reading and comparison |
+| Settings, form, configuration, maintenance flow | Craft only | Hierarchy, wording, validation, focus, and feedback carry the value |
+| Occasional modal, sheet, toast, list change | Craft only or a small state move | Continuity helps only when the change is not frequent |
+| First use, onboarding, empty state, success, completion | Consider add moment | Rare moments can carry explanation, orientation, or emotion |
+| Launch, brand story, portfolio, campaign hero | Consider add moment | Expression is part of the product job when performance and fallback are proven |
+
+`leave simple` and `craft only` are successful design decisions, not missing work. Record why the simpler treatment is better. `add moment` requires one primary authored move and at most one supporting move; it does not require every screen or feature to inherit the same spectacle.
+
+Use the minimum intervention ladder:
+
+1. Fix hierarchy, grouping, wording, and state clarity.
+2. Use immediate platform feedback such as focus, pressed, validation, or status change.
+3. Use state continuity when a change would otherwise teleport or lose context.
+4. Add motion, material, sound, or haptics only when the first three cannot deliver the named user value.
+
+Do not search for sources, tools, or effects until a candidate has passed the gates below. A missing authored moment is not a defect when the product context favors clarity, speed, or reading.
 
 ## Personality
 
-Pick one archetype per direction and hold it. The archetype sets default duration, default easing, and how much overshoot is allowed.
+When motion is selected, pick one archetype per direction and hold it. The archetype sets default duration, default easing, and how much overshoot is allowed.
 
 | Archetype | Duration | Easing | Overshoot |
 | --- | --- | --- | --- |
@@ -17,7 +53,7 @@ Pick one archetype per direction and hold it. The archetype sets default duratio
 
 ## Register
 
-Personality says how the motion feels. Register says how much attention it asks for. Decide the register before looking for examples, because a reference only helps inside its own register.
+Personality says how the motion feels. Register says how much attention it asks for. For a selected `add moment`, decide the register before looking for examples, because a reference only helps inside its own register.
 
 | Register | What it does | Fits | Typical shape |
 | --- | --- | --- | --- |
@@ -31,7 +67,7 @@ The register follows the surface, not the mood of the moment. Product UI default
 
 Motion that is impressive in isolation usually belongs two registers above the surface it landed on. When a direction reaches for Expressive on a product screen, the reasoning has to be about the product, not about how the animation looks.
 
-`references/craft.md` and the frequency gate below are what keep the register honest; the register is what stops restraint from turning into a page that never moves at all.
+`references/craft.md` and the gates below keep the register honest. The register does not create an obligation to animate; the intervention decision determines whether motion exists at all.
 
 ## Lineage Mapping
 
@@ -47,11 +83,13 @@ Each style lineage carries one archetype. This is the default; a direction may o
 
 ## Signature Motion Identity
 
-Define three constants per direction and reuse them everywhere:
+When a direction earns an authored motion moment, define three constants and reuse them everywhere:
 
 1. **Signature easing** — one curve for about 80% of animations.
 2. **Duration scale** — exactly three values: `quick`, `standard`, `slow`.
 3. **Entrance pattern** — one entry style used consistently.
+
+The authored move belongs to the product or flow, not automatically to every local feature. Component-library defaults can support it, but cannot be counted as the move. When no motion is selected, the authored move may instead be structural, typographic, material, or a state behavior.
 
 ## Duration Scale
 
@@ -123,6 +161,22 @@ Stagger budgets, with the total staying under the stated ceiling:
 | Dramatic | 100-200ms | under 600ms | Hero moments |
 | Wave | 30-60ms | under 500ms | Data visualisation |
 
+For a high-dynamic artifact, record a motion map before implementation: trigger, beat, primary change, supporting layers, hold, transition, settle, and exit. The map should show where the piece is still and where the motion carries meaning; a continuous effect with no rest beats is not a timeline.
+
+## Opportunity Sweep
+
+Use this only after the intervention decision names a relevant candidate. Sweep the seams that most often justify motion, then stop:
+
+- **Feedback gaps** — press, hold, validation, or destructive confirmation.
+- **Teleporting state** — content, routes, accordions, lists, and status changes that appear or disappear without continuity.
+- **Missing spatial story** — popovers, sheets, drawers, and toasts whose origin or dismissal path is unclear.
+- **Group entrance** — a rare grid or list that would otherwise arrive as an undifferentiated block.
+- **Gesture seams** — drag, swipe, reorder, and dismissal that need physics or boundary feedback.
+- **Delight budget** — first-run, empty, success, completion, and celebration.
+- **Identity moment** — launch hero, product story, brand reveal, or authored illustration where expression is the job.
+
+Apply these caps: at most 3 candidates for one view, 5-7 for a whole product. Keep the candidate ledger even when nothing survives. The required rejected section is what separates design judgment from an effects wishlist.
+
 ## Frequency Gate
 
 Ask how often the user triggers the interaction before animating it.
@@ -136,9 +190,32 @@ Ask how often the user triggers the interaction before animating it.
 
 The best animation goes unnoticed. When users remark on the animation itself during routine work, it is too prominent for that surface.
 
+## Purpose Gate
+
+Every surviving candidate names one purpose. If none applies, reject it:
+
+- **Feedback** — confirming that the interface heard the user.
+- **Spatial consistency** — showing where something came from or went.
+- **State indication** — making a change legible.
+- **Preventing a jarring change** — bridging content that appears, disappears, or moves.
+- **Explanation** — teaching how something works; marketing and onboarding only when it does not delay the task.
+- **Delight** — allowed only at a rare or first-time moment.
+
+"It looks cool" is not a purpose.
+
+## Speed And Function Gates
+
+The motion must work within the duration budget in this file. If it only works when slow and showy, reject it or reduce it.
+
+Motion must help the task. Reject decoration on high-frequency controls, information the user is reading or comparing, critical error paths, and any interaction where movement reduces precision or accessibility. A simple state change, static composition, or typographic device may be the better intervention.
+
+If any gate fails, return to `leave simple`, `craft only`, or a smaller platform-native move. Do not lower a gate to keep a visually attractive effect.
+
 ## Sourcing Motion Ideas
 
 A direction gets better when it borrows a mechanism from a motion that already works, instead of inventing one from adjectives. Source the idea before writing the animation:
+
+Source only after the intervention decision and gates have produced a surviving `add moment`. `leave simple` and `craft only` do not trigger a source search or a new tool.
 
 1. **Fix the register and the archetype first.** A reference only transfers inside its own register; an Expressive reference will mislead a Quiet screen.
 2. **Collect two or three examples, not one.** Look for the same moment handled differently — an entrance, a state change, a list reorder, a page transition.
@@ -162,6 +239,8 @@ Read [motion-libraries](motion-libraries.md) before adding a runtime or copying 
 | Enter, exit, layout shift in React or Vue | Motion for layout and gesture; `auto-animate` for list enter and exit |
 | Scroll-linked staging, pinned scenes, SVG drawing | GSAP with ScrollTrigger |
 | Authored character or illustration motion | Rive, or Lottie when the asset already exists as one |
+| Expressive texture, material, distortion, or hero atmosphere | Shaders or Paper Shaders only after the register, fallback, and performance checks |
+| Sound or haptic confirmation | Platform audio or haptic primitives; optional library only after product approval and licence review |
 | Native screen transitions | Platform primitives before any third-party runtime |
 | Cross-document or route transitions | The View Transitions API where the stack supports it |
 
@@ -197,6 +276,6 @@ Read the probe as a timing measurement, not a style verdict:
 
 ## Sources
 
-Distilled from the publicly published mechanisms of `LottieFiles/motion-design-skill` (MIT) for duration, easing, choreography, the three-layer model, and the register tables; `kylezantos/design-motion-principles` (MIT) for the frequency gate; Material 3 motion, M3 Expressive motion theming, and Apple HIG motion for the curve table and the transition patterns. Values are starting points a direction adapts, never a house style to repeat.
+Distilled from the publicly published mechanisms of `LottieFiles/motion-design-skill` (MIT) for duration, easing, choreography, the three-layer model, and the register tables; `kylezantos/design-motion-principles` (MIT) for the frequency gate; `emilkowalski/skills` (MIT) for the opportunity sweep, four gates, output cap, and rejected-candidate ledger; `alchaincyf/huashu-art-motion` (MIT) for motion maps, style recipes, known weaknesses, and independent output review; Material 3 motion, M3 Expressive motion theming, and Apple HIG motion for the curve table and transition patterns. Values are starting points a direction adapts, never a house style to repeat.
 
 `bendrape1-byte/silk-design` (MIT) takes the opposite stance — reach for motion by default and never ship a static page. Its transferable mechanism is consistency: one reveal configuration used everywhere reads as craft. Its default is not adopted here, because a product surface earns more from a lower register than from a smooth-scroll baseline, and scroll hijacking costs keyboard and assistive-technology behaviour.

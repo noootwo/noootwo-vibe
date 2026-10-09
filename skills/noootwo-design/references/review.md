@@ -28,7 +28,17 @@ Thresholds:
 
 ### Output
 
-Write `.noootwo/review.md` with artifact evidence, scores, calibration fit, style understanding fit, product comprehension fit, user decision gate, generic/Claude/framework/designer-grade flags, role critique, memorable move, viewport evidence, typography evidence, data evidence when relevant, default-override review, micro-detail pass, readiness gate, decision, return action, and next action.
+Write `.noootwo/review.md` with artifact evidence, intervention decision and fit, scores, calibration fit, style understanding fit, product comprehension fit, user decision gate, generic/Claude/framework/designer-grade flags, role critique, authored move or deliberate absence, viewport evidence, typography evidence, data evidence when relevant, default-override review, micro-detail pass, readiness gate, decision, return action, and next action.
+
+### Intervention Review
+
+Review the decision before reviewing the decoration:
+
+- `leave simple`: the product function, frequency, risk, and artifact evidence must justify the absence of an authored moment. Confirm hierarchy, state feedback, and craft are strong; an empty or underdesigned result still fails.
+- `craft only`: the artifact must show the specific structural, typographic, state, or detail problems that were improved. Aesthetic adjectives without artifact evidence do not pass.
+- `add moment`: the authored move must be visible, tied to a named purpose, supported by a source or platform rule, and safe under fallback, performance, and accessibility checks.
+
+A governed absence of an authored move is a valid `ready` result when the decision and craft evidence support it. A missing authored moment on an `add moment` contract is not.
 
 ### Gates To Read When Relevant
 
@@ -52,6 +62,10 @@ Before `ready`, confirm:
 - implementation-bound work records default-override review and micro-detail review when generic drift was a risk
 - full redesign has recorded user-selected direction
 - required user decision gates are resolved or delegated
+- the intervention decision is recorded in the design tokens and review, and both records agree
+- `leave simple` or `craft only` records craft-sufficiency evidence and rejected opportunities
+- `add moment` records one primary authored move, its evidence or platform rule, and its fallback
+- an authored move is not required merely because the artifact is new or visually quiet
 
 If this fails, use `needs artifact` or `refine`, not `ready`.
 
@@ -73,7 +87,7 @@ If multiple return actions are plausible and the choice changes cost, scope, or 
 - Separate "cleaner than before" from "distinctive enough to keep".
 - Do not spend polish loops on a direction that needs a structural pivot.
 - Do not spend polish loops on an artifact whose style evidence and rendered result do not match.
-- If the reviewer cannot name the memorable move, the design cannot be `ready`.
+- If the contract selects an authored move, the reviewer must name it and its proof; otherwise the reviewer names the craft mechanism that carries the design.
 
 ### Reviewer Separation
 

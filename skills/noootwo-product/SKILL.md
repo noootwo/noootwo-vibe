@@ -65,6 +65,8 @@ Hand off when every material decision is settled or delegated and no carried ris
 
 When UI work is next, invoke the `noootwo-design` skill: read its `SKILL.md` and follow it.
 
+When code work is next and the seam is not obvious, invoke the `noootwo-code-health` skill for an Integration Read before implementation: read its `SKILL.md` and follow it.
+
 ## Existing-flow audit
 
 When the user asks to audit, critique, or fix an existing onboarding or product flow, read `references/product-audit.md` after the current facts are clear. Capture the flow before judging it, keep every finding tied to a step, and separate product-flow friction from visual or code defects.
@@ -89,6 +91,6 @@ Read `references/product-reality-check.md` when the loop is unproven, the user i
 
 ## Return
 
-When the request is not a product decision, name the layer and invoke the owner in one hop: `noootwo-debug` for a failure, `noootwo-research` for outside evidence, `noootwo-design` for a visual system, `noootwo-code-health` for code or performance judgment, `noootwo-onboard` for an unfamiliar project.
+When the request is not a product decision, name the layer and invoke the owner in one hop: `noootwo-debug` for a failure, `noootwo-research` for outside evidence, `noootwo-design` for a visual system, `noootwo-code-health` for implementation shape, code, or performance judgment, `noootwo-onboard` for an unfamiliar project.
 
 Missing skill fallback: first try `npx -y skills add noootwo/noootwo-vibe --global --agent codex --skill <name> --yes`; if install fails, take the smallest direct fallback and mark the record `skill-missing: <name>` (for persistence, write the owning file directly).

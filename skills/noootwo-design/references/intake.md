@@ -29,6 +29,7 @@ Design Read
 - Audience:
 - Product posture:
 - Visual posture:
+- Intervention / context: leave simple | craft only | add moment — product function, frequency, risk, and emotional or brand value
 - Variance:
 - Motion:
 - Density:
@@ -41,6 +42,8 @@ Field rules:
 - `Audience`: first-time, expert, maintainer, operator, buyer, creator, student, teacher, parent, admin, or other specific role.
 - `Product posture`: what the product must communicate through use: trust, speed, control, calm, scrutiny, play, status, clarity, or another task-relevant stance.
 - `Visual posture`: the visual language that supports the product posture, not a fashion label.
+- `Intervention`: whether this exact product, feature, and moment should stay simple, receive craft-only work, or earn an authored moment.
+- `Context`: the user frequency, task risk, emotional or brand value, platform, and performance constraints that make the intervention appropriate.
 - `Variance`: 1-10. Low means symmetric and predictable; high means asymmetric and expressive.
 - `Motion`: 1-10. Low means hover/active only; high means staged or spatial motion with reduced-motion fallback.
 - `Density`: 1-10. Low means airy and guided; high means compact and repeated-use friendly.
@@ -58,6 +61,8 @@ Use these as defaults, then override only with product evidence:
 | Fixed canvas or deck | 5-9 | 1-6 | depends on format |
 
 High variance must collapse cleanly on mobile. Motion above basic hover/active must honor reduced motion. High density must still preserve hit areas, readable line-height, and state clarity.
+
+These dials are starting ranges, not instructions to add expression. A dense surface can still receive important craft and a first-use moment can still choose `leave simple` when the product evidence supports it.
 
 ### Semantic Token Contract
 
@@ -84,6 +89,8 @@ Design Contract
 - Color/token roles:
 - Component behavior:
 - State treatment:
+- Intervention decision / authored move: leave simple | craft only | add moment; none | primary plus optional support
+- Opportunity ledger / evidence / fallback: chosen, rejected, source or platform rule
 - Motion:
 - Anti-slop risks:
 - Artifact/review path:
@@ -96,6 +103,9 @@ Rules:
 - `Color/token roles`: define canvas, surface, text, accent, semantic, and data roles.
 - `Component behavior`: state how shell, navigation, forms, lists, cards, tables, dialogs, and actions behave.
 - `State treatment`: loading, empty, error, success, permission, focus, disabled, hover, pressed, selected, offline.
+- `Intervention decision`: choose the smallest treatment that solves the product problem; record why more expression would not help when choosing `leave simple` or `craft only`.
+- `Authored move`: only for `add moment`; name one primary move and an optional support. For other decisions, write `none` and rely on the craft-sufficiency evidence.
+- `Opportunity ledger`: record candidates, rejected opportunities, the source or platform rule, and the fallback for any authored move.
 - `Motion`: what motion explains and what it must not distract from.
 - `Anti-slop risks`: name the likely generic fallback for this stack and product.
 - `Artifact/review path`: screenshot, running page, simulator, preview URL, fixed export, deck flow, recording, or accepted blocker.
@@ -156,7 +166,7 @@ The brief defines the problem, audience, and constraints. It does not prescribe 
 - `Novelty target`
 - `Brand-safety tolerance`
 - `Motion appetite`
-- `One unforgettable thing`
+- `Authored move or craft mechanism, or why simple restraint is better`
 - `Must feel like`
 - `Must not feel like`
 - `Design objectives`
@@ -169,8 +179,8 @@ The brief defines the problem, audience, and constraints. It does not prescribe 
 - Separate hard constraints from preferences
 - If the user asks for "better" or "more polished", translate that into explicit design objectives
 - If the ask is ambiguous, the brief should expose the ambiguity instead of hiding it
-- If the user does not specify style ambition, default to a strong, opinionated direction and record that assumption explicitly
-- If the user does not specify a memorable move, write a provisional `one unforgettable thing` so the draft has a non-generic center of gravity
+- If the user does not specify style ambition, choose the smallest intervention that fits the product, feature, frequency, and risk, and record that assumption explicitly
+- If the user does not specify a memorable move, do not invent one; use the intervention decision to decide whether identity belongs in structure, craft, or a rare authored moment
 - If the user wants high-end, niche, rare, or Claude Design-like work, require visual references or select credible mechanism references from [evidence](evidence.md)
 - If the target stack is Flutter, SwiftUI, Compose, React, Vue, or another app framework, record the artifact expectation before direction work begins
 - If the brief contains taste adjectives but no concrete style choices, run [direction](direction.md) before direction exploration

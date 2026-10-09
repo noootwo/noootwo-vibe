@@ -1,5 +1,9 @@
 # noootwo-tdd Releases
 
+## v0.5.0
+
+- When the implementation shape or seam is unsettled, TDD now returns to `noootwo-workflow` instead of inventing architecture inside the red-green loop.
+
 ## v0.4.0
 
 - Updated the post-green review handoff from `noootwo-review` to `noootwo-code-health`.

@@ -39,9 +39,9 @@ Use `references/orchestration.md`. Decide one next step at a time. Specialist sk
 
 Precedence is limited to blockers and stage continuity:
 
-`debug/research/product blocker -> design -> code-health/preparatory when structure blocks -> tdd/implementation -> code-health/post-green -> release when publishing -> state/release -> acceptance`
+`debug/research/product blocker -> design -> code-health/shape when the seam is non-obvious -> preparatory-refactor when structure blocks -> tdd/implementation -> code-health/post-green -> release when publishing -> state/release -> acceptance`
 
-Code-health is not only a release gate. After every non-direct behavior change, the loop returns to `noootwo-code-health` before the work can be reported done. Before release, a triggered Structure Sweep belongs to code-health. Once readiness is established, versioning, tags, artifacts, deployment traces, provenance, rollback, and release health belong to `noootwo-release`.
+Code-health is not only a release gate. When a non-direct code change has a non-obvious seam, it shapes the change before TDD: `noootwo-code-health` produces a Change Shape, and its result may be direct TDD, a preparatory refactor, or a handoff to product, design, research, or a stopped change. A local change with an obvious seam and no contract, data, or migration impact skips that pass. After every non-direct behavior change, the loop returns to `noootwo-code-health` before the work can be reported done. Before release, a triggered Structure Sweep belongs to code-health. Once readiness is established, versioning, tags, artifacts, deployment traces, provenance, rollback, and release health belong to `noootwo-release`.
 
 Do not precompute a full DAG or pile on condition tables.
 
@@ -57,7 +57,7 @@ Answer before calling the work done:
 
 - Did the closest meaningful verification run, or is the gap explicit?
 - Did a specialist or matching installed skill need to run, and was it invoked?
-- For a non-direct code change, did `noootwo-code-health` run and dispose of every structural finding as fixed, opportunity, planned, long-term, or accepted?
+- For a non-direct code change, did `noootwo-code-health` shape the implementation when the seam was non-obvious, and after green dispose of every structural finding as fixed, opportunity, planned, long-term, or accepted?
 - For release work, did `noootwo-release` produce the Release Plan and did `noootwo-state` receive the release record and deployment evidence?
 - Did behavior, state, or release facts change, and did `noootwo-state` place them?
 - Is user acceptance still required before commit, push, tag, or publish?

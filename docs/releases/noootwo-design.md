@@ -1,5 +1,17 @@
 # noootwo-design Releases
 
+## v0.19.0
+
+- Replaced the implicit "add motion when the direction carries it" posture with a contextual intervention decision: `leave simple`, `craft only`, or `add moment`.
+- Added product-function, frequency, task-risk, emotional, brand, platform, and performance context to the Design Read.
+- Added a bounded opportunity sweep, four gates, candidate caps, and a required rejected-candidate ledger. Source research and new tools start only after a candidate survives.
+- Added minimum-intervention rules so hierarchy, platform feedback, state continuity, and craft are tried before motion, shaders, sound, or haptics.
+- Made `leave simple` and `craft only` valid readiness outcomes with craft-sufficiency evidence instead of forcing motion values or an authored move.
+- Added conditional `add moment` requirements: one primary move, at most one support, source or platform evidence, boundary, and fallback.
+- Added Shaders, Paper Shaders, and optional sensory-material boundaries. Shaders Pro is never required; all expressive materials need static or platform fallbacks.
+- Added four contextual-intervention evals, three artifact-eval scenarios, and readiness validation for intervention records.
+- Migration: projects using `--motion-gate`, `--deep-mode`, or `--implementation-gate` must record the intervention decision. Full motion values are now required only for `add moment`.
+
 ## v0.18.0
 
 - Updated current references from `noootwo-review` to `noootwo-code-health`; no design behavior changed.

@@ -13,8 +13,8 @@ Ten skills do the work; this one tells you which to reach for. A **flow** is a p
 
 1. `$noootwo-product` — settle what should exist: real user, first loop, scope, main path, states, acceptance. Run this whenever those are unclear. It ends on a shared understanding you confirm.
 2. `$noootwo-design` — turn the settled product path into interface: direction, typography, colour, layout, motion, and a Design Contract. Reach for it on any UI, visual, artifact, or frontend work.
-3. `$noootwo-tdd` — write code the right way when behavior changes: a failing test first, the smallest implementation, green tests, and refactor only after green.
-4. `$noootwo-code-health` — judge the code before it ships: correctness, testability, architecture boundaries, lean, performance, refactoring, optimization, and user acceptance.
+3. `$noootwo-code-health` — before implementation, shape a non-obvious change into the existing code: seam, ownership, contracts, reuse, migration, and test seam. After green, it judges the result and disposes of structural findings.
+4. `$noootwo-tdd` — write code the right way when behavior changes: a failing test first, the smallest implementation, green tests, and refactor only after green.
 5. `$noootwo-release` — turn a ready change into an identified release: version, tag, artifact, deployment trace, provenance, rollback, and release health.
 6. `$noootwo-state` — record or read what changed in project state and context. Reach for it whenever behaviour, project state, release facts, or agent instructions changed.
 
@@ -34,7 +34,7 @@ Start here, then merge onto the main flow.
 - `$noootwo-product` alone, when you want the interview and nothing else.
 - `$noootwo-design` alone, for a visual critique of something already built.
 - `$noootwo-tdd` alone, when you are writing or changing behavior-code and want the test-first loop.
-- `$noootwo-code-health` alone, to review a branch or PR against a fixed point.
+- `$noootwo-code-health` alone, to shape a non-obvious implementation before coding, or to review a branch or PR against a fixed point.
 - `$noootwo-release` alone, to prepare a version, tag, artifact, deployment trace, rollback path, or release-health check.
 - `$noootwo-state` alone, for a state/context audit or a stale-record cleanup.
 - `$noootwo-debug` alone, for one failure you want proven and fixed without a wider change.
@@ -47,7 +47,8 @@ Start here, then merge onto the main flow.
 | --- | --- |
 | The user or the first loop is unclear | `$noootwo-product` |
 | The product path is settled and the interface is not | `$noootwo-design` |
-| You are about to write or change behavior-code | `$noootwo-tdd` |
+| You know what to build but not how it should fit the existing code | `$noootwo-code-health` |
+| The implementation shape and seam are settled | `$noootwo-tdd` |
 | The code is written and needs judgment before shipping | `$noootwo-code-health` |
 | A version, tag, artifact, deployment trace, or rollback path is needed | `$noootwo-release` |
 | Something changed and state or context must stay true | `$noootwo-state` |
