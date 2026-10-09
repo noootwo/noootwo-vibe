@@ -32,6 +32,7 @@ Last verified: 2026-10-09 on this worktree.
 - `noootwo-code-health` now follows the Fowler refactoring health loop and the bounded Integration Read; the deciding sources, boundaries, and stop rule are recorded in `docs/reference/borrowed-skills.md`, ADR 0015, and ADR 0019.
 - `noootwo-code-health` is the renamed `noootwo-review` skill (`v0.14.0` rename, currently `v0.16.0`). The old `noootwo-review@v0.13.0` tag remains as history; current docs and routing use the new name.
 - `noootwo-release` is new. It owns versioning, tags, immutable artifacts, deployment traces, provenance, rollback, and release health; code-health keeps the ship-readiness gate.
+- Release batch `0.18.0` was published on 2026-10-09 from commit `7469470cf368aff43be44af096ed7d5f352d4270`. Child tags: `noootwo-ask@v0.5.0`, `noootwo-workflow@v0.17.0`, `noootwo-product@v0.10.1`, `noootwo-design@v0.19.0`, `noootwo-tdd@v0.5.0`, `noootwo-code-health@v0.16.0`, `noootwo-research@v0.6.1`, `noootwo-onboard@v0.4.1`. A clean install found eleven skills, and both local install roots match the released child versions.
 
 ## Active Risks
 
@@ -62,6 +63,7 @@ Last verified: 2026-10-09 on this worktree.
 - A project already in flight in `deep` mode will now be asked for an intervention decision it never recorded. That is a behaviour change for in-flight work, not a defect, and it appears only when `--deep-mode`, `--implementation-gate`, or `--motion-gate` is passed. Full motion values are required only when the decision is `add moment`.
 - The free case-library access results were probed on 2026-09-16 and 2026-09-17. Gates and plans change without notice, so a pass records its own reachability result rather than trusting the recorded one.
 - `noootwo-design` sits at 119 of 120 `SKILL.md` lines and 11 of 12 reference files. The next change must replace or compress existing prose before adding a line or using the final reference slot.
+- The `0.18.0` batch passed workspace, skill, script-syntax, CLI, discovery, and clean-install checks. Model behaviour evals for contextual design and the Integration Read remain unrun, and the installer's third-party panel showed `noootwo-design` as Med Risk; no independent security audit was performed.
 
 ## Next Actions
 
@@ -75,4 +77,4 @@ Last verified: 2026-10-09 on this worktree.
 - Run the new release scenarios under `skills/noootwo-release/evals/prompts/` and the workflow release-routing scenario.
 - Run the four contextual-intervention scenarios, then the existing motion, interface-quality, and case-capture scenarios under `skills/noootwo-design/evals/prompts/`, and record the results in `docs/experiments/`.
 - Exercise `extract_design_tokens.mjs` and the advisory motion rules on a real project artifact, and record the false-positive rate for the deliberately-deviating brand-curve case.
-- Update `docs/releases/` and per-skill tags when publishing changed skills.
+- For the next release, update the changed skill VERSIONs, mirrors, release notes, and child tags before pushing; the `0.18.0` batch is already published.
