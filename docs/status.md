@@ -9,7 +9,7 @@
 
 ## Current Validation Surface
 
-Last verified: 2026-10-18 on this worktree for workspace, skill, script-syntax, design smoke, and local discovery checks. The clean install from GitHub was last verified on 2026-10-09.
+Last verified: 2026-10-18 on this worktree for workspace, skill, script-syntax, design smoke, local discovery, and clean-install checks.
 
 - `python scripts/validate_skill_workspace.py .` — includes the authoring budgets: `description` ≤ 200 characters, `SKILL.md` ≤ 120 lines, ≤ 12 reference files each named by a pointer, `short_description` 25–64 characters, no `default_prompt`, and no bare `$noootwo-` reference inside a skill body
 - `python scripts/validate_skill_workspace.py .` — also enforces the capability bridge: every skill named in a `SKILL.md` must exist, every public skill must appear in the `docs/agents/invocation.md` capability map, and every skill named there must exist
@@ -36,7 +36,7 @@ Last verified: 2026-10-18 on this worktree for workspace, skill, script-syntax, 
 - `noootwo-code-health` is the renamed `noootwo-review` skill (`v0.14.0` rename, currently `v0.17.0`). The old `noootwo-review@v0.13.0` tag remains as history; current docs and routing use the new name.
 - `noootwo-release` owns versioning, tags, immutable artifacts, deployment traces, provenance, rollback, and release health; code-health keeps the ship-readiness gate. Release now requires a Release Check for the exact commit.
 - Release batch `0.18.0` was published on 2026-10-09 from commit `7469470cf368aff43be44af096ed7d5f352d4270`. Child tags: `noootwo-ask@v0.5.0`, `noootwo-workflow@v0.17.0`, `noootwo-product@v0.10.1`, `noootwo-design@v0.19.0`, `noootwo-tdd@v0.5.0`, `noootwo-code-health@v0.16.0`, `noootwo-research@v0.6.1`, `noootwo-onboard@v0.4.1`. A clean install found eleven skills, and both local install roots match the released child versions.
-- Current worktree: `noootwo-ask@v0.5.1`, `noootwo-workflow@v0.18.0`, `noootwo-tdd@v0.6.0`, `noootwo-code-health@v0.17.0`, `noootwo-release@v0.2.0`, `noootwo-design@v0.19.1`, and `noootwo-debug@v0.5.0` are prepared but not yet released. Design fixes the explicit-motion-request downgrade; debug adds the Systemic Close; the code-development skills add Change Check / Release Check depth.
+- Release batch `0.19.0` was published on 2026-10-18 from commit `5d62af29526026c27ef487468223a3b67fbd5978`. Child tags: `noootwo-ask@v0.5.1`, `noootwo-workflow@v0.18.0`, `noootwo-tdd@v0.6.0`, `noootwo-code-health@v0.17.0`, `noootwo-release@v0.2.0`, `noootwo-design@v0.19.1`, `noootwo-debug@v0.5.0`. A clean install from GitHub found eleven skills; both `~/.agents/skills` and `~/.codex/skills` match every released child version. Design fixes the explicit-motion-request downgrade; debug adds the Systemic Close; the code-development skills add Change Check / Release Check depth.
 
 ## Active Risks
 
@@ -70,7 +70,7 @@ Last verified: 2026-10-18 on this worktree for workspace, skill, script-syntax, 
 - A project already in flight in `deep` mode will now be asked for an intervention decision and user motion intent it never recorded. That is a behaviour change for in-flight work, not a defect, and it appears only when `--deep-mode`, `--implementation-gate`, or `--motion-gate` is passed. A requested motion outcome now requires `add moment` or explicit user acceptance of no authored motion.
 - The free case-library access results were probed on 2026-09-16 and 2026-09-17. Gates and plans change without notice, so a pass records its own reachability result rather than trusting the recorded one.
 - `noootwo-design` sits at 119 of 120 `SKILL.md` lines and 11 of 12 reference files. The next change must replace or compress existing prose before adding a line or using the final reference slot.
-- The `0.18.0` batch passed workspace, skill, script-syntax, CLI, discovery, and clean-install checks. Model behaviour evals for contextual design and the Integration Read remain unrun, and the installer's third-party panel showed `noootwo-design` as Med Risk; no independent security audit was performed. The current Change Check / Release Check batch still owes its model behaviour evals.
+- The `0.19.0` batch passed workspace, skill, script-syntax, design smoke, local discovery, GitHub clean-install, and both local-root version checks. Model behaviour evals for Change Check / Release Check, the explicit-motion-request fix, and Systemic Close remain unrun. The installer reported `noootwo-workflow` as High Risk (`Gen`) and Med Risk (`Snyk`), with Med Risk also reported for design, debug, product, release, and research; no independent security audit was performed.
 
 ## Next Actions
 
@@ -87,4 +87,4 @@ Last verified: 2026-10-18 on this worktree for workspace, skill, script-syntax, 
 - Run the six contextual-intervention scenarios, then the existing motion, interface-quality, and case-capture scenarios under `skills/noootwo-design/evals/prompts/`, and record the results in `docs/experiments/`.
 - Run the explicit-motion-request and installed-motion-runtime scenarios against a real project with `motion` already installed; the expected result is an artifact-visible authored move using the right tool, or a recorded equivalent/rejection.
 - Exercise `extract_design_tokens.mjs` and the advisory motion rules on a real project artifact, and record the false-positive rate for the deliberately-deviating brand-curve case.
-- For the next release, update the changed skill VERSIONs, mirrors, release notes, and child tags before pushing; the `0.18.0` batch is already published.
+- For the next release, update the changed skill VERSIONs, mirrors, release notes, and child tags before pushing; the `0.19.0` batch is already published.
