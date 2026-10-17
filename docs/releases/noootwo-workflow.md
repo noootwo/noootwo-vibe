@@ -1,5 +1,12 @@
 # noootwo-workflow Releases
 
+## v0.18.0
+
+- Added the Change Check / Release Check split to scheduling and the close gate.
+- After one requirement, the loop returns to `noootwo-code-health` for a scoped Change Check; the full suite and Structure Sweep wait for the Release Check.
+- The Release Check runs once before release or a ship-readiness submit gate and can use CI evidence for the exact commit.
+- Added release-check-once and updated review-after-every-change evals so workflow cannot turn every requirement into a full audit.
+
 ## v0.17.0
 
 - Added the pre-implementation `noootwo-code-health` Integration Read to the precedence and route-by-signal guidance when a change's seam is non-obvious.

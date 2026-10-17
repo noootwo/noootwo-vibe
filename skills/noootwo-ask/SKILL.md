@@ -13,7 +13,7 @@ Ten skills do the work; this one tells you which to reach for. A **flow** is a p
 
 1. `$noootwo-product` — settle what should exist: real user, first loop, scope, main path, states, acceptance. Run this whenever those are unclear. It ends on a shared understanding you confirm.
 2. `$noootwo-design` — turn the settled product path into interface: direction, typography, colour, layout, motion, and a Design Contract. Reach for it on any UI, visual, artifact, or frontend work.
-3. `$noootwo-code-health` — before implementation, shape a non-obvious change into the existing code: seam, ownership, contracts, reuse, migration, and test seam. After green, it judges the result and disposes of structural findings.
+3. `$noootwo-code-health` — before implementation, shape a non-obvious change into the existing code: seam, ownership, contracts, reuse, migration, and test seam. After green, it runs a scoped Change Check; before release, it runs the full Release Check and disposes of structural findings.
 4. `$noootwo-tdd` — write code the right way when behavior changes: a failing test first, the smallest implementation, green tests, and refactor only after green.
 5. `$noootwo-release` — turn a ready change into an identified release: version, tag, artifact, deployment trace, provenance, rollback, and release health.
 6. `$noootwo-state` — record or read what changed in project state and context. Reach for it whenever behaviour, project state, release facts, or agent instructions changed.
@@ -49,7 +49,8 @@ Start here, then merge onto the main flow.
 | The product path is settled and the interface is not | `$noootwo-design` |
 | You know what to build but not how it should fit the existing code | `$noootwo-code-health` |
 | The implementation shape and seam are settled | `$noootwo-tdd` |
-| The code is written and needs judgment before shipping | `$noootwo-code-health` |
+| One requirement is done and needs a scoped check | `$noootwo-code-health` |
+| The release is being prepared and needs a full gate | `$noootwo-code-health` Release Check, then `$noootwo-release` |
 | A version, tag, artifact, deployment trace, or rollback path is needed | `$noootwo-release` |
 | Something changed and state or context must stay true | `$noootwo-state` |
 | Something is broken and the cause is not yet proven | `$noootwo-debug` |

@@ -173,6 +173,22 @@ Source index for the seventh pass:
 - Anthropic Claude Code skills: `https://docs.anthropic.com/en/docs/claude-code/skills`
 - Google Engineering Practices review docs: `https://google.github.io/eng-practices/review/reviewer/looking-for.html`
 
+Debug systemic-close pass, checked 2026-10-11:
+
+- James Reason's system approach treats accidents as consequences of interacting latent conditions and failed defenses rather than a single unsafe act; it supports asking why existing controls allowed the defect and where the same condition remains (`Human error: models and management`, BMJ 2000, doi:10.1136/bmj.320.7237.768).
+- Nancy Leveson's STAMP models safety as a control problem, where accidents arise when control structures fail to enforce constraints across components and interactions; it supports the failed-control layer for complex systems (`Engineering a Safer World`, MIT Press, 2011, doi:10.7551/mitpress/8179.001.0001).
+- Chris Argyris's double-loop learning separates correcting an action from changing the governing assumptions and policies that produced it; it supports the learning-loop question (`Double Loop Learning in Organizations`, Harvard Business Review, September 1977).
+- Google SRE's blameless postmortem practice connects root causes to preventive action, review, priority, and shared learning; it supports making recurrence barriers reviewable rather than leaving them as prose (`Postmortem Culture: Learning from Failure`, Google SRE Book, 2017).
+- Erik Hollnagel's Safety-II shifts attention from only failures to how successful performance varies and can still carry latent unsafe conditions; it supports near-miss and fragile-success search (`Safety-I and Safety-II`, Ashgate/Routledge, 2014).
+
+Source index for the debug systemic-close pass:
+
+- Reason, `Human error: models and management`: `https://pmc.ncbi.nlm.nih.gov/articles/PMC1117770/`
+- Leveson, `Engineering a Safer World`: `https://doi.org/10.7551/mitpress/8179.001.0001`
+- Argyris, `Double Loop Learning in Organizations`: `https://hbr.org/1977/09/double-loop-learning-in-organizations`
+- Google SRE, `Postmortem Culture: Learning from Failure`: `https://sre.google/sre-book/postmortem-culture/`
+- Hollnagel, `Safety-I and Safety-II`: ISBN 9781472423085 (Ashgate/Routledge, 2014)
+
 Source index for the eighth pass:
 
 - Google People + AI Guidebook user needs and mental models: `https://pair.withgoogle.com/`
@@ -208,6 +224,22 @@ Source index for the packaging pass:
 - Antfu skills collection: `https://github.com/antfu/skills`
 - Vue skills collection: `https://github.com/vuejs-ai/skills`
 - Flutter agent plugins: `https://github.com/flutter/agent-plugins`
+
+Verification-depth pass, checked 2026-10-18:
+
+- ISTQB CTFL v4.0.1 supports risk-based testing and impact analysis for regression scope; exhaustive testing is impossible, so scope and thoroughness should follow risk.
+- Microsoft Test Impact Analysis supports selecting tests relevant to a commit, falling back to all tests when the change cannot be understood, and running full tests periodically.
+- Meta's Predictive Test Selection reports a 2x reduction in testing infrastructure cost while retaining over 95% of individual test failures and over 99.9% of faulty changes; the residual miss rate is a boundary, not a reason to skip the release gate.
+- Google Engineering Practices' "Small CLs" and SmartBear's Cisco study support bounded review scope: small self-contained changes are reviewed more thoroughly, and review effectiveness drops beyond roughly 200–400 lines.
+- Together these support a scoped Change Check after one requirement, risk-triggered escalation, and one full Release Check before shipping. They do not justify claiming a specific token or time saving for this repository.
+
+Source index for the verification-depth pass:
+
+- ISTQB CTFL syllabus v4.0.1: `https://www.istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf`
+- Microsoft Test Impact Analysis: `https://learn.microsoft.com/en-us/azure/devops/pipelines/test/test-impact-analysis?view=azure-devops`
+- Meta Predictive Test Selection: `https://arxiv.org/abs/1810.05286`
+- Google Engineering Practices, Small CLs: `https://google.github.io/eng-practices/review/developer/small-cls.html`
+- SmartBear code-review study summary: `https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/`
 
 ## Mechanisms Borrowed
 

@@ -46,6 +46,7 @@ Status: pending extraction; replace this template with project-specific truth be
 ## Design Intervention
 
 - Decision: leave simple, craft only, or add moment: TBD
+- User motion or material intent: requested, not requested, or declined: TBD
 - Product function, frequency, risk, and emotional or brand value: TBD
 - Candidate and rejected opportunities: TBD
 - Craft sufficiency evidence: TBD

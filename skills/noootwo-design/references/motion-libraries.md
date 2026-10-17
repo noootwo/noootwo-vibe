@@ -2,6 +2,13 @@
 
 Read this only after the intervention decision selects `add moment` and the implementation choice is still open. `motion.md` owns the contextual decision, register, duration scale, easing, choreography, and bans; this file owns the smallest tool or material that can carry them.
 
+## Intent And Installed Tools
+
+- A user request for motion, a named library, or shader/material rendering puts that option in scope. Evaluate it explicitly; do not silently omit it because CSS is simpler.
+- Read project dependencies before rejecting a runtime. An installed library is a first-class implementation path for the capability it uniquely provides, such as Motion for layout, presence, spring, and gesture-aware transitions.
+- Choosing CSS instead of a named or installed tool is an `equivalent alternative` and needs a reason. Declining a tool is `rejected with reason`. Silence is not a decision.
+- `add moment` must name its implementation tool and trigger. "No new dependency" is not a user goal unless the user said it is.
+
 ## Register Gate
 
 Choose the register before evaluating any library. A strong demo is not evidence of fit.

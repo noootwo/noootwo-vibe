@@ -68,11 +68,15 @@ Status: pending; fill or refresh when a direction moves toward implementation
 ## Motion
 
 - Intervention decision: leave simple, craft only, or add moment: TBD
+- User motion intent: requested, not requested, or declined: TBD
+- User accepted no authored motion: yes, no, or not applicable: TBD
 - Decision rationale: TBD
 - Candidate moments and rejected opportunities: TBD
 - Craft sufficiency evidence: TBD
 - Authored move: none or primary plus optional support: TBD
 - Authored move evidence and fallback: TBD
+- Motion trigger and implementation tool: TBD
+- Library or material decision: selected, equivalent alternative, or rejected with reason: TBD
 - Personality: TBD  one of premium, corporate, playful, energetic
 - Signature easing: TBD
 - Duration scale: TBD  quick, standard, and slow as millisecond values

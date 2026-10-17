@@ -1,5 +1,10 @@
 # noootwo-ask Releases
 
+## v0.5.1
+
+- The main flow now distinguishes a scoped Change Check after one requirement from the full Release Check before shipping.
+- The choosing table routes release preparation through code-health's Release Check before `noootwo-release`.
+
 ## v0.5.0
 
 - Reordered the main flow so `noootwo-code-health` appears before `noootwo-tdd`: shape a non-obvious implementation, then write behavior-code, then return to code-health for review.

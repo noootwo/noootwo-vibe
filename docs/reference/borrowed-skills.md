@@ -9,7 +9,7 @@ Borrowing rule (from `AGENTS.md`): borrow repeatable mechanisms, never leaked pr
 
 ## Skill suites and individual agent skills
 
-- **`obra/superpowers`** — the most-copied skill suite in the ecosystem. Borrowed `systematic-debugging` (Iron Law: no fix before root-cause investigation; four-phase loop; three failed fixes means question the architecture; fresh-evidence completion gate), `test-driven-development` (observe RED, minimal GREEN, full suite, mutation check), `using-superpowers` (a capability about operating the suite belongs in its own skill), `verification-before-completion`, `writing-skills`, `brainstorming`, `executing-plans`, `writing-plans`, and requesting/receiving code review. Landed in `noootwo-debug`, `noootwo-tdd`, `noootwo-workflow`, `noootwo-onboard`, `noootwo-product`, and `noootwo-code-health`. Status: adopted.
+- **`obra/superpowers`** — the most-copied skill suite in the ecosystem. Borrowed `systematic-debugging` (Iron Law: no fix before root-cause investigation; four-phase loop; three failed fixes means question the architecture; fresh-evidence completion gate), `test-driven-development` (observe RED, minimal GREEN, relevant-suite proof, mutation check), `using-superpowers` (a capability about operating the suite belongs in its own skill), `verification-before-completion`, `writing-skills`, `brainstorming`, `executing-plans`, `writing-plans`, and requesting/receiving code review. Landed in `noootwo-debug`, `noootwo-tdd`, `noootwo-workflow`, `noootwo-onboard`, `noootwo-product`, and `noootwo-code-health`. Status: adopted.
 
 - **`pbakaus/impeccable`** (`https://github.com/pbakaus/impeccable`, v4.3.1 / CLI 4.1.0) — source-first design system. Borrowed: engine + context loader separation, source-first workflows, bounded verification, and craft rules for design. Rejected: vendoring the engine/CLI and deterministic scan scripts (fails the budget and cheap-mode criteria). Landed in `noootwo-design`. Status: adopted mechanisms, rejected toolchain.
 
@@ -79,12 +79,22 @@ These informed mechanism design but were never copied into the workspace.
 
 - **Superpowers local skills**: `using-superpowers`, `systematic-debugging`, `verification-before-completion`, `writing-plans`, `requesting-code-review`, `writing-good-tests`, `brainstorming`, `executing-plans`, `optimize`, `audit` — hard gates, red flags, output contracts, verification-before-completion, and progressive disclosure.
 - **`pua` / `pua-debugging`** — a motivation layer, not a method; it names `superpowers:systematic-debugging` as its paired method. Borrowed the anti-rationalization table and the structured exit report. The coercive rhetoric and level system were not borrowed.
+
+- **James Reason — latent conditions and defense layers** — `Human error: models and management`, BMJ 2000, doi:10.1136/bmj.320.7237.768. Supports asking why existing controls allowed the defect and where the same latent condition remains. Landed in `noootwo-debug` `systemic-prevention.md`. Status: adopted as a causal lens.
+
+- **Nancy Leveson — STAMP control model** — `Engineering a Safer World: Systems Thinking Applied to Safety`, MIT Press, 2011, doi:10.7551/mitpress/8179.001.0001. Supports inspecting failed control constraints across components and interactions. Landed in `noootwo-debug`. Status: adopted as a complex-system lens.
+
+- **Chris Argyris — double-loop learning** — `Double Loop Learning in Organizations`, Harvard Business Review, September 1977. Supports separating local correction from changing the governing assumption, rule, or policy that keeps producing the class. Landed in `noootwo-debug`. Status: adopted as the learning-loop lens.
+
+- **Google SRE — blameless postmortem and preventive action** — `Postmortem Culture: Learning from Failure`, Google SRE Book, 2017. Supports systemic contributing causes, action priority, review, and preventing recurrence. Landed in `noootwo-debug`. Status: adopted as an operational practice.
+
+- **Erik Hollnagel — Safety-II** — `Safety-I and Safety-II: The Past and Future of Safety Management`, Ashgate/Routledge, 2014. Supports near-miss and fragile-success analysis: working paths can carry the same latent condition without having failed yet. Landed in `noootwo-debug`. Status: adopted as a search lens.
 - **bundled `documents` skill** — render/test evidence before completion claims.
 - **`Kungfu`** — JSON Schema and hash bindings; **`TRACE`** — append-only NDJSON; **`Claude Code` SessionStore** — append/load session state; **`mnemo`** — JSONL source plus Markdown projection. Landed in `noootwo-state` persistence design.
 
 ## Methodology and practice sources (not skills)
 
-Borrowed as ideas, not as skill bodies: Diataxis (docs layering), Nygard-style ADRs, Google Engineering Practices and GitHub review guidance, Martin Fowler / refactoring.com (behavior-preserving refactors, internal quality), DORA small-batch delivery, Shape Up, Google Ventures Design Sprint (map/sketch/decide/prototype/test convergence), producttalk Opportunity Solution Trees, NN/g AI-design study guide, and Microsoft Human-AI Interaction guidelines.
+Borrowed as ideas, not as skill bodies: Diataxis (docs layering), Nygard-style ADRs, Google Engineering Practices and GitHub review guidance, Martin Fowler / refactoring.com (behavior-preserving refactors, internal quality), DORA small-batch delivery, Shape Up, Google Ventures Design Sprint (map/sketch/decide/prototype/test convergence), producttalk Opportunity Solution Trees, NN/g AI-design study guide, Microsoft Human-AI Interaction guidelines, ISTQB risk-based testing, Microsoft Test Impact Analysis, and Meta Predictive Test Selection (change-scoped verification with an escalation boundary).
 
 ## Reference pools (evidence sources, not skills)
 

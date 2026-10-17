@@ -24,6 +24,7 @@ Status: pending; fill this after a design direction has passed review
 - Product posture: TBD
 - Visual posture: TBD
 - Intervention: leave simple, craft only, or add moment: TBD
+- User motion or material intent: requested, not requested, or declined: TBD
 - Product function, frequency, risk, and emotional or brand value: TBD
 - Variance: TBD
 - Motion: TBD
@@ -117,7 +118,9 @@ Status: pending; fill this after a design direction has passed review
 
 ## Motion Guidance
 
+- User motion intent and accepted outcome: TBD
 - Intervention decision, authored move, evidence, and fallback: TBD
+- Motion trigger, implementation tool, and library or material decision: TBD
 - TBD
 
 ## Default Override Pass

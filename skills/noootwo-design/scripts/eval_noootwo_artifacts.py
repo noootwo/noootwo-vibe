@@ -57,8 +57,17 @@ def intervention_value(review: str) -> str:
 def validate_intervention_record(review: str, expected: str) -> list[str]:
     errors: list[str] = []
     decision = intervention_value(review)
+    user_intent = (field_value(review, "User motion intent") or "").strip().lower()
+    accepted_no_motion = (field_value(review, "User accepted no authored motion") or "").strip().lower()
     require(errors, decision in INTERVENTION_VALUES, "review intervention decision must be leave simple, craft only, or add moment")
     require(errors, decision == expected, f"review intervention decision must be {expected}")
+    require(errors, user_intent in {"requested", "not requested", "declined"}, "review user motion intent must be requested, not requested, or declined")
+    require(errors, accepted_no_motion in {"yes", "no", "not applicable", "n/a"}, "review user accepted no authored motion must be yes, no, or not applicable")
+    require(
+        errors,
+        not (user_intent == "requested" and decision != "add moment" and accepted_no_motion != "yes"),
+        f"review explicit motion request cannot use {decision or 'an invalid decision'} without the user accepting no authored motion",
+    )
     require(errors, has_value(review, "Decision rationale"), "review missing intervention decision rationale")
     require(errors, has_value(review, "Candidate moments and rejected opportunities"), "review missing candidate and rejected opportunity record")
     require(errors, has_value(review, "Intervention fit"), "review missing intervention fit")
@@ -69,6 +78,10 @@ def validate_intervention_record(review: str, expected: str) -> list[str]:
         authored = (field_value(review, "Authored move") or "").strip().lower()
         require(errors, authored not in {"", "none", "not applicable", "n/a", "tbd"}, "review missing authored move for add moment")
         require(errors, has_value(review, "Authored move evidence and fallback"), "review missing authored move evidence and fallback")
+        tool = (field_value(review, "Motion trigger and implementation tool") or "").strip().lower()
+        require(errors, tool not in {"", "none", "not applicable", "n/a", "tbd"}, "review missing motion trigger and implementation tool for add moment")
+        library_decision = (field_value(review, "Library or material decision") or "").strip().lower()
+        require(errors, library_decision not in {"", "none", "not applicable", "n/a", "tbd"}, "review missing library or material decision for add moment")
     return errors
 
 
@@ -91,6 +104,17 @@ def eval_add_moment_proof(root: Path) -> list[str]:
     if not review:
         return ["missing .noootwo/review.md"]
     return validate_intervention_record(review, "add moment")
+
+
+def eval_explicit_motion_request_honored(root: Path) -> list[str]:
+    review = read(root, ".noootwo/review.md")
+    if not review:
+        return ["missing .noootwo/review.md"]
+    errors = validate_intervention_record(review, "add moment")
+    user_intent = (field_value(review, "User motion intent") or "").strip().lower()
+    if user_intent != "requested":
+        errors.append("explicit-motion-request-honored requires User motion intent: requested")
+    return errors
 
 
 def eval_missing_exploration(root: Path) -> list[str]:
@@ -218,6 +242,7 @@ SCENARIOS = {
     "leave-simple-justified": eval_leave_simple_justified,
     "craft-only-justified": eval_craft_only_justified,
     "add-moment-proof": eval_add_moment_proof,
+    "explicit-motion-request-honored": eval_explicit_motion_request_honored,
 }
 
 DEFAULT_SCENARIOS = [

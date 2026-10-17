@@ -1,6 +1,6 @@
 ---
 name: noootwo-code-health
-description: "Use before a non-obvious backend, frontend, or cross-boundary change to shape its seam; after changes or before release for review, refactoring, structure, performance, and acceptance."
+description: "Use before a non-obvious change to shape its seam; after each change for a scoped review; before release for a full structure, performance, and acceptance gate."
 ---
 
 # Noootwo Code Health
@@ -10,16 +10,27 @@ Keep code elegant and healthy: shape a non-obvious change into the existing code
 ## When this runs
 
 - Before implementation of a non-obvious change: run an Integration Read and produce a Change Shape before TDD.
-- After every non-direct behavior change, before the work is reported done.
+- After every non-direct behavior change: run a Change Check before the work is reported done.
+- Before release or a ship-readiness submit gate: run a Release Check once for the exact commit.
 - Before implementation when the existing structure makes the change hard: preparatory refactoring is a Change Shape disposition.
-- Before submit or release, and when the same implementation is rejected twice.
-- When the same area is revised repeatedly, context cost grows, or a structure trigger fires.
+- When the same implementation is rejected twice, or a Structure Sweep trigger fires.
 
-Skip the Integration Read for a local change with an obvious seam and no contract, data, or migration impact. A code change reaching submit or release without a review decision is not closed.
+Skip the Integration Read for a local change with an obvious seam and no contract, data, or migration impact. A Change Check is not a Release Check.
+
+## Verification depth
+
+Match verification to **blast radius**, not diff size or task length.
+
+- **Change Check** — the default after one requirement: current diff, changed behavior, nearest callers, and affected tests; one to three lenses; the closest meaningful command, plus the nearest integration check only when a seam is crossed. No full-suite or whole-repo audit.
+- **Escalated Check** — when the change touches a public contract, shared data/schema/migration, auth or security boundary, shared module with broad callers, build/release config, or an unclear/flaky impact path: add the impacted suites and only the lenses that risk requires.
+- **Release Check** — before release or a ship-readiness submit gate: full automated suite, full Structure Sweep, release evidence, and named verification gaps. Existing CI for the exact commit may satisfy it; do not rerun the same full suite locally.
+
+Escalate on evidence, not anxiety. Stop when the evidence covers the blast radius; state the remaining gap instead of widening the audit.
 
 ## Scope
 
-- Change review scope is the current diff, nearest callers, tests, and boundary.
+- Change Check scope is the current diff, nearest callers, tests, and boundary.
+- Release Check scope is the full project and release surface.
 - Integration Read scope is the nearest seams, contracts, data owners, and existing patterns.
 - Refactoring inside the touched path is part of the change; a full Structure Sweep runs only on a trigger or explicit request.
 - Ask before changing product behavior or choosing between real tradeoffs.
@@ -62,9 +73,7 @@ Pick before reading widely. State which you applied and which you skipped.
 | `release evidence` | version, artifact, deployment trace, rollback, release notes owned by `noootwo-release` |
 | `rework diagnosis` | which layer failed — product, design, implementation, or evidence |
 
-## Sizing and method
-
-Small diff: one to three lenses, changed files and nearest tests, fix locally. Medium, broad, or risky diff: structured review, with correctness and testability when behavior changes. Release-bound diff: add release evidence and project-health evidence.
+## Method
 
 1. Read changed files, nearest tests, callers, interfaces, behavior docs, and the structure the change touched.
 2. Name the behavior that must stay true and the evidence proving it.
@@ -73,23 +82,13 @@ Small diff: one to three lenses, changed files and nearest tests, fix locally. M
 
 ## Refactoring and optimization
 
-Refactoring needs `references/refactoring-workflows.md` and `references/refactoring-loop.md`; never bundle it with semantic change, and rerun the full relevant test command afterward. Optimization needs `references/optimization-loop.md`: name the metric and budget, baseline, localize, prove before/after, leave a guard. A regression against a working state belongs to `noootwo-debug`.
-
-## What to look for
-
-- behavioral regressions, unclear ownership, or boundaries the change cannot respect
-- changes too large to review safely, duplication, dead code, or abstractions with no current pressure
-- missing tests around shared behavior or credible performance risk
-- files that force unrelated context to load, or product behavior changed without settled acceptance
-- structural debt left without a trigger, disposition, or release consequence
+Refactoring needs `references/refactoring-workflows.md` and `references/refactoring-loop.md`; never bundle it with semantic change, and rerun the command that covered the refactored behavior and nearest boundary. Optimization needs `references/optimization-loop.md`: name the metric and budget, baseline, localize, prove before/after, leave a guard. A regression against a working state belongs to `noootwo-debug`.
 
 ## Output
 
-For an Integration Read, lead with the Change Shape, the one-way doors, the smallest first slice, and what would change the shape. For a review, lead with findings ordered by severity: file and line, why it matters, concrete failure mode, smallest fix. If none, say so and name remaining verification gaps.
+For an Integration Read, lead with the Change Shape, one-way doors, smallest first slice, and what would change the shape. For a review, lead with findings ordered by severity: file and line, why it matters, failure mode, smallest fix. If none, say so and name verification gaps.
 
-A structured review includes applied/skipped lenses, evidence read, findings, verification gaps, re-test evidence, acceptance state, refactoring disposition, and handoff owners.
-
-Refactoring disposition: `fixed now`, `opportunity`, `planned`, `long-term`, or `accepted`; every structural finding gets one.
+Include `Verification: change | escalated | release`, applied/skipped lenses, evidence read, re-test evidence, acceptance state, refactoring disposition, and handoff owners. Every structural finding gets `fixed now`, `opportunity`, `planned`, `long-term`, or `accepted`.
 
 Severity: `P0` data loss, security, or broken release; `P1` likely behavioral bug or broken contract; `P2` near-term maintainability risk; `P3` optional cleanup.
 
@@ -112,7 +111,7 @@ Severity: `P0` data loss, security, or broken release; `P1` likely behavioral bu
 - `references/performance-review.md` — loading, rendering, latency, query cost, and regression risk.
 - `references/optimization-loop.md` — metric, budget, baseline, localization, before/after proof, and guard.
 - `references/project-health-review.md` — foundation, validation paths, CI, release risk, and module boundaries.
-- `references/review-gate.md` — scope, integration/TDD preconditions, re-test, and user acceptance gate.
+- `references/review-gate.md` — verification depth, scope, TDD preconditions, re-test, and user acceptance.
 - `references/refactoring-loop.md` — behavior-preserving refactor steps and scope control.
 - `references/refactoring-workflows.md` — two hats, the six workflows, code smells, catalog vocabulary, structural health, and the debt ledger.
 

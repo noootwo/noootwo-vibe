@@ -33,7 +33,7 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 - Prior art: Superpowers orchestration/executing-plans, writing-plans, subagent-driven-development; skill-discovery routers.
 - Adopt: read current project state before stage, match one owner by intent/artifact, keep direct cheap, stop on ambiguity, and persist `.noootwo/workflow-state.md`.
 - Reject: fixed keyword routing tables, full DAG pre-planning, adding external skills to the Noootwo public set.
-- Next pass: measure routing precision and mid-project resumption across eval scenarios.
+- Next pass: measure routing precision, mid-project resumption, and the Change Check / Release Check boundary across eval scenarios.
 
 ### noootwo-product
 
@@ -64,13 +64,13 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 - Prior art: Anthropic frontend-design, impeccable, `ddruids/mobbin-skill`, `dembrandt`, `designlang`, `tinte`, `LottieFiles/motion-design-skill`, `kylezantos/design-motion-principles`, `emilkowalski/skills`, `alchaincyf/huashu-art-motion`, `Meet-Miyani/compose-skill`, Refero, `feitangyuan/motion-web`, `Leonxlnx/taste-skill`, `vercel-labs/web-interface-guidelines`, `antfu-design`, `jakubkrehel/make-interfaces-feel-better`, Shaders, and Paper Shaders.
 - Adopt: case capture, computed-style extraction, drift gate, contextual `leave simple | craft only | add moment` decisions, opportunity gates with rejected candidates, motion language, reference lock, anti-averaging, interaction/accessibility gates, data-presentation rules, component-state matrix, and image-intake discipline.
 - Reject: paid MCP as required, full motion-web cases/scripts/assets, huashu's video engine/assets/character frames, mandatory image generation, mandatory scroll animation, scanning every task for effects, and surface copying.
-- Next pass: run the four contextual-intervention evals, then the motion, interface-quality, and case-capture evals; record whether the model correctly chooses restraint as well as expression.
+- Next pass: run the six contextual-intervention evals, then the motion, interface-quality, and case-capture evals; record whether the model correctly chooses restraint as well as expression, and whether an explicit motion request can no longer collapse to zero motion.
 
 ### noootwo-tdd
 
 - Current role: red-green-refactor and test-quality discipline for behavior-changing code.
 - Prior art: Superpowers `test-driven-development` and `writing-good-tests`.
-- Adopt: must observe RED, minimal GREEN, full suite, mutation check, independent expectations, no mock-behavior assertions, explicit non-code exceptions.
+- Adopt: must observe RED, minimal GREEN, relevant-suite proof, mutation check, independent expectations, no mock-behavior assertions, explicit non-code exceptions. The full suite belongs to the Release Check.
 - Reject: verbatim Superpowers wording, production-first, tests-after, manual-test rationalization.
 - Next pass: measure feature/bugfix/refactor scenarios against hidden verifiers.
 
@@ -80,7 +80,7 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 - Prior art: Martin Fowler's *Refactoring* 2nd edition, the online catalog, *Workflows of Refactoring*, *Definition of Refactoring*, *Code Smell*, *Self-Testing Code*, *Technical Debt*, *Design Stamina Hypothesis*, *Is Design Dead?*, *Yagni*, *Branch by Abstraction*, and *Strangler Fig*; Google Engineering Practices and Design Docs at Google; Michael Feathers' seams and design-for-testability material; Thoughtworks Lightweight Architecture Decision Records; Ponytail lean-code-review ladder; Superpowers requesting/receiving code review and verification-before-completion; web.dev/vitals, Lighthouse, SRE, OpenTelemetry, k6, PostgreSQL docs, JMH and related benchmark guidance.
 - Adopt: an Integration Read and compact Change Shape before a non-obvious implementation; seam, ownership, contract, reuse, reversibility, test-seam, and smallest-first-slice decisions; a skip rule for obvious local changes; two hats; six refactoring workflows; small behavior-preserving catalog moves; green-baseline safety; economic payback; structural dispositions; measurable performance evidence; severity output; re-test gate; and explicit user acceptance before submit/publish.
 - Reject: big design up front, speculative abstractions, mandatory design documents when no tradeoff exists, implementation manuals disguised as design docs, refactoring as a separate backlog of every smell, large-bang cleanup, refactoring without tests, and adding a separate architecture or performance skill.
-- Next pass: measure integration-read trigger and skip behavior, Change Shape quality, workflow selection, structural-debt disposition, two-hats separation, and the review-is-part-of-done gate.
+- Next pass: measure integration-read trigger and skip behavior, Change Shape quality, Change Check versus Release Check scope, workflow selection, structural-debt disposition, two-hats separation, and the review-is-part-of-done gate.
 
 ### noootwo-release
 
@@ -88,7 +88,7 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 - Prior art: Semantic Versioning 2.0.0; Keep a Changelog 1.1.0; Conventional Commits 1.0.0; The Twelve-Factor App Build/Release/Run; OpenTelemetry resource conventions; SLSA provenance levels; GitHub artifact attestations; Sentry Releases; DORA four keys.
 - Adopt: one version source of truth, SemVer compatibility classification, append-only changelog and release ledger, build-once promotion, immutable artifact identity, deployment markers, explicit provenance gaps, rollback/forward-fix, and version-based release health.
 - Reject: using a mutable tag as a release identity, rebuilding per environment, claiming provenance without evidence, binding the skill to one CI vendor, and adding separate versioning or deployment skills.
-- Next pass: run the release evals and validate the deployment-trace contract against one real project artifact.
+- Next pass: run the release evals, confirm a green Change Check cannot pass as release readiness, and validate the deployment-trace contract against one real project artifact.
 
 ### noootwo-state
 
@@ -100,11 +100,11 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 
 ### noootwo-debug
 
-- Current role: prove the cause before fixing.
-- Prior art: root-cause analysis and debugging skills; scientific-method and falsification practice.
-- Adopt: hypothesis ledger, evidence chain, toggle, bounded fix.
-- Reject: fixing from stack-trace inference before a reproducible cause.
-- Next pass: make description include user complaint phrases like intermittent, CI-only, or previously working.
+- Current role: prove the cause before fixing, bound the fix, then close systemically to prevent recurrence.
+- Prior art: root-cause analysis and debugging skills; scientific-method and falsification practice; James Reason's latent conditions and defenses; Nancy Leveson's STAMP control model; Chris Argyris's double-loop learning; Google SRE's blameless postmortem and preventive action; Erik Hollnagel's Safety-II.
+- Adopt: hypothesis ledger, evidence chain, toggle, bounded fix, Systemic Close, mechanism/control/learning layers, sibling and near-miss search, proportional recurrence barriers, and explicit learning-loop ownership.
+- Reject: fixing from stack-trace inference before a reproducible cause; a local patch with no systemic close; blaming people; inventing latent risk without a concrete path or hypothesis; turning every small defect into an architecture program.
+- Next pass: run the systemic-close, recurring-bug, near-miss, and proportionality evals on real defects and record whether the close finds concrete latent paths without bloating the fix.
 
 ### noootwo-onboard
 

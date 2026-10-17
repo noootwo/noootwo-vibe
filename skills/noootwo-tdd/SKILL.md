@@ -16,10 +16,12 @@ Run for any code that changes behavior: a new feature, a bug fix, or a refactor.
 1. Write one failing test for the missing behavior.
 2. Run it and watch it fail for the right reason: the behavior is missing, not a typo, setup error, or an existing defect.
 3. Write the smallest implementation that makes that test pass.
-4. Run the test again and confirm green, then run the closest full test command.
+4. Run the test again and confirm green, then run the relevant test command for the touched behavior and nearest boundary.
 5. Refactor only after green, and keep green. Do not add behavior while refactoring.
 
 A test that passes immediately proves nothing. If the implementation shape or seam is unsettled, return to `noootwo-workflow`; do not invent architecture inside the red-green loop. If the failure is an existing bug or an unrelated layer, stop and return to `noootwo-workflow`; do not write around it here.
+
+The full suite is a Release Check, not the TDD exit. Use the project's affected-test entry point when it exists; otherwise run the package or module suite that owns the behavior, then the nearest integration test when a seam is crossed.
 
 ## Hard rules
 
@@ -39,7 +41,7 @@ A test that passes immediately proves nothing. If the implementation shape or se
 
 ## Done when
 
-The test was seen failing for the right reason, the minimal implementation made it green, the full relevant test command is green, and no untested behavior change was smuggled in.
+The test was seen failing for the right reason, the minimal implementation made it green, the relevant test command is green, and no untested behavior change was smuggled in.
 
 ## Hand off
 

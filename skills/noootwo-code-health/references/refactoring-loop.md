@@ -55,7 +55,7 @@ Use the catalog as vocabulary, not as ceremony. The default first moves are Extr
 
 ## Close the loop
 
-1. Run the full relevant test command.
+1. Run the relevant command that covered the refactored behavior and nearest boundary; the Release Check owns the full suite.
 2. Confirm behavior evidence still matches.
 3. Record the workflow used, the catalog move, behavior preserved, tests run, and scope.
 4. Record every remaining structural finding with a disposition: `opportunity`, `planned`, `long-term`, or `accepted`.

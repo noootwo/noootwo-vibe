@@ -26,7 +26,7 @@ Design Read
 - Audience:
 - Product posture:
 - Visual posture:
-- Intervention / context: leave simple | craft only | add moment — product function, frequency, risk, and emotional or brand value
+- Intervention / context / intent: leave simple | craft only | add moment — product function, frequency, risk, emotional or brand value, and whether the user explicitly requested motion or material
 - Variance / Motion / Density: low | medium | high
 ```
 
@@ -42,7 +42,7 @@ Read `references/design-discovery.md` for the discovery pass and the `.noootwo/s
 
 For `deep` work, capture every reference the direction leans on into `.noootwo/references/<slug>/`, with a `source.md` recording URL, date, evidence level, accessibility result, and licence; capture real values from a live source with `scripts/extract_design_tokens.mjs` and its `NN-<label>.png` screenshot with `--screenshot` when a page or running product is reachable, and record inaccessible sources as `capture: unreachable`. Lock the build target and what must not drift before drafting, and let one direction dominate instead of averaging several. `standard` work stays on the lighter path in `references/design-discovery.md`.
 
-For standard, deep, and production work, read `references/motion.md` before the contract and make an intervention decision. `leave simple` and `craft only` are valid outcomes; only a candidate that passes frequency, purpose, speed, and function gates may trigger source research, a tool, or an authored moment.
+For standard, deep, and production work, read `references/motion.md` before the contract and make an intervention decision. `leave simple` and `craft only` are valid only when the user accepts them or a concrete blocker prevents motion; an explicit motion or material request defaults to `add moment`.
 
 **Done when:** one direction is chosen by the user, or the chosen direction is justified by evidence.
 
@@ -58,7 +58,7 @@ Design Contract
 - Component behaviour:
 - State treatment:
 - Intervention / authored move / ledger: leave simple | craft only | add moment; none | primary plus optional support; candidates, rejected opportunities, source or platform rule, fallback
-- Motion: when `add moment`, name archetype, signature easing, duration scale, layers, and choreography; otherwise `not applicable`
+- Motion: when `add moment`, name the implementation tool and trigger, archetype, easing, duration, layers, and choreography; otherwise `not applicable`
 - Anti-slop risks:
 - Artifact and review path:
 ```

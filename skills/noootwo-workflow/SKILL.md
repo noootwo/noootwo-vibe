@@ -9,7 +9,7 @@ Run one task through one re-entrant loop:
 
 `read current state -> match one owner -> specialist runs -> collect result -> update state -> next step or stop`
 
-Workflow schedules. It owns order, scope, stop conditions, and handoffs; the specialist or matching installed skill owns the work itself.
+Workflow schedules. It owns order, verification depth, scope, stop conditions, and handoffs; the specialist or matching installed skill owns the work itself.
 
 ## 1. Read current state
 
@@ -39,9 +39,9 @@ Use `references/orchestration.md`. Decide one next step at a time. Specialist sk
 
 Precedence is limited to blockers and stage continuity:
 
-`debug/research/product blocker -> design -> code-health/shape when the seam is non-obvious -> preparatory-refactor when structure blocks -> tdd/implementation -> code-health/post-green -> release when publishing -> state/release -> acceptance`
+`debug/research/product blocker -> design -> code-health/shape when the seam is non-obvious -> preparatory-refactor when structure blocks -> tdd/implementation -> code-health/change-check -> next change or code-health/release-check -> release when publishing -> state/release -> acceptance`
 
-Code-health is not only a release gate. When a non-direct code change has a non-obvious seam, it shapes the change before TDD: `noootwo-code-health` produces a Change Shape, and its result may be direct TDD, a preparatory refactor, or a handoff to product, design, research, or a stopped change. A local change with an obvious seam and no contract, data, or migration impact skips that pass. After every non-direct behavior change, the loop returns to `noootwo-code-health` before the work can be reported done. Before release, a triggered Structure Sweep belongs to code-health. Once readiness is established, versioning, tags, artifacts, deployment traces, provenance, rollback, and release health belong to `noootwo-release`.
+Code-health is not only a release gate. When a non-direct code change has a non-obvious seam, it shapes the change before TDD: `noootwo-code-health` produces a Change Shape, and its result may be direct TDD, a preparatory refactor, or a handoff to product, design, research, or a stopped change. A local change with an obvious seam and no contract, data, or migration impact skips that pass. After every non-direct behavior change, the loop returns to `noootwo-code-health` for a Change Check before the work can be reported done. That check stays on the diff, changed behavior, nearest callers, affected tests, and one to three lenses; it escalates only when blast radius requires it. Before release or a ship-readiness submit gate, code-health runs a Release Check once for the exact commit: full suite or CI evidence, full Structure Sweep, release evidence, and named gaps. Once readiness is established, versioning, tags, artifacts, deployment traces, provenance, rollback, and release health belong to `noootwo-release`.
 
 Do not precompute a full DAG or pile on condition tables.
 
@@ -55,9 +55,9 @@ For non-direct, cross-skill, or external-skill work, invoke the `noootwo-state` 
 
 Answer before calling the work done:
 
-- Did the closest meaningful verification run, or is the gap explicit?
+- Did the required verification depth run — Change Check, escalation when the blast radius required it, and Release Check at the release boundary — or is the gap explicit?
 - Did a specialist or matching installed skill need to run, and was it invoked?
-- For a non-direct code change, did `noootwo-code-health` shape the implementation when the seam was non-obvious, and after green dispose of every structural finding as fixed, opportunity, planned, long-term, or accepted?
+- For a non-direct code change, did `noootwo-code-health` shape the implementation when the seam was non-obvious, run a scoped Change Check after green, and run a Release Check only when the task reached release?
 - For release work, did `noootwo-release` produce the Release Plan and did `noootwo-state` receive the release record and deployment evidence?
 - Did behavior, state, or release facts change, and did `noootwo-state` place them?
 - Is user acceptance still required before commit, push, tag, or publish?

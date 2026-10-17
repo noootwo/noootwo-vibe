@@ -26,6 +26,7 @@ Status: pending; required for deep mode before high-character directions
 ## Intervention Decision
 
 - Product function, frequency, task risk, and emotional or brand value: TBD
+- User motion or material intent: requested, not requested, or declined: TBD
 - Candidate and rejected opportunities: TBD
 - Decision: leave simple, craft only, or add moment: TBD
 - Decision rationale: TBD

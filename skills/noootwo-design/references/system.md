@@ -260,8 +260,9 @@ Read [motion](motion.md) for the contextual decision, opportunity gates, archety
 
 - Intervention decision and rationale: `leave simple`, `craft only`, or `add moment`.
 - Product function, frequency, task risk, and emotional or brand value.
+- User motion or material intent and whether no authored motion was explicitly accepted.
 - Candidate and rejected opportunities; when nothing survives, the craft mechanism that carries the result.
-- Authored move for `add moment`: one primary, optional support, source or platform rule, boundary, and fallback.
+- Authored move for `add moment`: one primary, optional support, source or platform rule, boundary, fallback, trigger, implementation tool, and library/material decision.
 
 - Archetype and the lineage it derives from, or the recorded reason for overriding it.
 - Motion thesis: what motion explains, such as continuity, hierarchy, state change, or identity.

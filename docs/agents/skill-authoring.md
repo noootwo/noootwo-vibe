@@ -71,6 +71,8 @@ A coined word recruits no priors: you pay in definition tokens what a pretrained
 | **shared understanding** | the exit condition of an interview: the agent's summary matches what the user meant |
 | **rework** | work redone because an earlier layer failed; the failure this suite exists to prevent |
 | **slop** | output that is generic, decorative, or assembled rather than designed |
+| **Change Check** | the diff-scoped verification after one requirement; no full-suite or whole-repo audit by default |
+| **Release Check** | the full verification once before release or a ship-readiness submit gate |
 
 Anchored words already in use — `artifact`, `trace`, `layer`, `seam` — stay.
 

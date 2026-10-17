@@ -30,6 +30,7 @@ Design Read
 - Product posture:
 - Visual posture:
 - Intervention / context: leave simple | craft only | add moment — product function, frequency, risk, and emotional or brand value
+- User motion or material intent: requested | not requested | declined
 - Variance:
 - Motion:
 - Density:
@@ -43,6 +44,7 @@ Field rules:
 - `Product posture`: what the product must communicate through use: trust, speed, control, calm, scrutiny, play, status, clarity, or another task-relevant stance.
 - `Visual posture`: the visual language that supports the product posture, not a fashion label.
 - `Intervention`: whether this exact product, feature, and moment should stay simple, receive craft-only work, or earn an authored moment.
+- `User motion or material intent`: an explicit request defaults the requested scope to `add moment`; moderation changes register and count, not whether motion exists.
 - `Context`: the user frequency, task risk, emotional or brand value, platform, and performance constraints that make the intervention appropriate.
 - `Variance`: 1-10. Low means symmetric and predictable; high means asymmetric and expressive.
 - `Motion`: 1-10. Low means hover/active only; high means staged or spatial motion with reduced-motion fallback.
@@ -90,6 +92,7 @@ Design Contract
 - Component behavior:
 - State treatment:
 - Intervention decision / authored move: leave simple | craft only | add moment; none | primary plus optional support
+- User motion or material intent and accepted outcome: requested | not requested | declined; add moment | no authored motion accepted
 - Opportunity ledger / evidence / fallback: chosen, rejected, source or platform rule
 - Motion:
 - Anti-slop risks:

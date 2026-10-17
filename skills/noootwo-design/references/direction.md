@@ -45,6 +45,7 @@ Before drafting, confirm:
 - the 3 directions differ in design thesis, information expression, type, structure, density, component language, and motion where motion is relevant
 - each direction has a design-spec delta: color roles, type roles, layout model, component vocabulary, motion thesis or no-motion rationale, and forbidden moves
 - each direction states whether its intervention is `leave simple`, `craft only`, or `add moment`; no direction creates motion merely to look more designed
+- if the user explicitly requested motion or material, the direction defaults to `add moment` unless the user accepted no authored motion or a platform blocker prevents it
 - each direction states what must survive translation into tokens and implementation, what may vary, and what must never be substituted
 - product UI directions use product/design-system evidence, while campaign UI directions may use more experimental art-direction evidence
 - each direction names how it becomes reviewable
@@ -52,6 +53,7 @@ Before drafting, confirm:
 - high-character directions have visual evidence or are explicitly marked low confidence with a spike requirement
 - each direction has stack translation
 - each direction names one visible authored move if it claims `add moment`; `leave simple` and `craft only` instead name the structural, typographic, state, or detail mechanism that prevents generic drift
+- each `add moment` names its implementation tool and records `selected`, `equivalent alternative`, or `rejected with reason` for any user-named or already-installed library or shader
 - each direction defines font logic, scale, weight roles, line-height, letter-spacing, and mobile display cap
 - no direction is only a palette swap
 - no direction defaults to generic SaaS, shadcn-card-wall, or Flutter/native defaults without product reason

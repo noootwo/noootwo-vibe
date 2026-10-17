@@ -73,7 +73,7 @@ When Node or Chrome is missing, the pass degrades to screenshots plus a recorded
 
 ### Verification Plan
 
-Four contextual-intervention scenarios, the existing motion scenarios, and four case-capture scenarios live under `evals/prompts/`. The readiness validator reads `.noootwo/reference-board.md` per source and the intervention fields plus the conditional motion contract in `.noootwo/design-tokens.md` when `--deep-mode` or `--implementation-gate` is passed.
+Six contextual-intervention scenarios, the existing motion scenarios, and four case-capture scenarios live under `evals/prompts/`. The readiness validator reads `.noootwo/reference-board.md` per source and the intervention fields plus the conditional motion contract in `.noootwo/design-tokens.md` when `--deep-mode` or `--implementation-gate` is passed.
 
 
 ## Workflow Research Notes
@@ -246,6 +246,10 @@ Recorded 2026-10-09 after comparing the three user-provided articles with the cu
 - Quick polish does no opportunity scan.
 - Standard does the cheapest internal pass and searches only after a candidate survives.
 - Deep pays for capture, comparison, and spikes when the product context supports them.
+
+### Real-Project Regression Recorded 2026-10-10
+
+An explicit user request for motion on a real product surface was silently downgraded to `craft only`. The implementation used only a few CSS transitions while an installed Motion runtime and the recommended material options were left unused. The fix adds a User Intent Gate, requires an implementation tool and trigger for `add moment`, and requires installed or user-named libraries to be selected, replaced by a recorded equivalent, or rejected with a concrete reason. The model-behaviour result still needs a real-project rerun.
 
 ## Product Design And Motion Web Borrow Notes
 

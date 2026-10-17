@@ -1,5 +1,11 @@
 # noootwo-tdd Releases
 
+## v0.6.0
+
+- Replaced the ambiguous "full relevant test command" with the relevant test command for the touched behavior and nearest boundary.
+- The full suite is now owned by the Release Check; TDD uses the project's affected-test entry point, the package or module suite, and the nearest integration test when a seam is crossed.
+- Updated the test-quality guidance, refactor safety, and evals to keep one requirement's proof proportional.
+
 ## v0.5.0
 
 - When the implementation shape or seam is unsettled, TDD now returns to `noootwo-workflow` instead of inventing architecture inside the red-green loop.

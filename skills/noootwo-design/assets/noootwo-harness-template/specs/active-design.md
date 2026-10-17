@@ -28,6 +28,7 @@ Status: pending; fill after the direction is chosen and before implementation pl
 - Product posture: TBD
 - Visual posture: TBD
 - Intervention: leave simple, craft only, or add moment: TBD
+- User motion or material intent: requested, not requested, or declined: TBD
 - Product function, frequency, risk, and emotional or brand value: TBD
 - Variance: TBD
 - Motion: TBD

@@ -16,7 +16,7 @@ Own release engineering: version, artifact, release record, deployment trace, ro
 
 ## Inputs
 
-- The readiness decision and known gaps from the upstream ship-readiness gate.
+- The readiness decision, Release Check evidence, and known gaps from the upstream ship-readiness gate.
 - The project's current version source, release policy, CI or deploy commands, artifact system, environments, and observability.
 - If readiness is missing, not ready, or the next owner is unclear, invoke `noootwo-workflow`: read its `SKILL.md` and follow it.
 
@@ -40,6 +40,7 @@ Release Plan
 - Deployment markers:
 - Rollback or forward-fix:
 - Post-release health checks:
+- Release Check evidence:
 - Verification gaps:
 ```
 
@@ -61,6 +62,7 @@ Release Plan
 - A tag points to a version; it never creates one. Prefer annotated tags for release identifiers.
 - Build once, promote the same artifact, and keep environment differences in configuration.
 - A release is immutable and append-only. Any change creates a new release ID.
+- A Change Check is not release readiness. Before the Release Plan, require a Release Check for the exact commit: full suite or CI evidence, full Structure Sweep, release evidence, and named gaps. If it is missing, invoke `noootwo-workflow` instead of releasing.
 - Record at least artifact digest, commit SHA, build identity, environment, and build time.
 - A missing SBOM, attestation, or signature is a recorded gap, never a claim of provenance.
 - Rollback or forward-fix is mandatory in the release plan. Use expand/contract migrations for irreversible changes.
@@ -69,7 +71,7 @@ Release Plan
 
 ## Done when
 
-The Release Plan is complete, the version and artifact identity are consistent, the deployment trace is defined or verified, rollback is explicit, post-release health checks are named, and every gap is recorded through `noootwo-state`.
+The Release Plan is complete, the Release Check evidence covers the exact commit, the version and artifact identity are consistent, the deployment trace is defined or verified, rollback is explicit, post-release health checks are named, and every gap is recorded through `noootwo-state`.
 
 ## Hand off
 

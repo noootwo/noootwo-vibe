@@ -1,5 +1,13 @@
 # noootwo-design Releases
 
+## v0.19.1
+
+- Fixed a real-project failure where an explicit user request for motion was silently downgraded to `craft only`, producing only a few CSS transitions while an installed Motion runtime and the recommended material options were left unused.
+- Added a User Intent Gate: explicit requests for motion, animation, liveliness, fancy, a named library, or shader/material rendering default the requested scope to `add moment`. `leave simple` or `craft only` now requires the user to accept no authored motion.
+- Added implementation-tool and library/material decision records to the motion contract and review. An installed or user-named runtime must be selected, replaced by a recorded equivalent, or rejected with a concrete reason.
+- Added two manual evals, one artifact-eval scenario, and readiness/status coverage for explicit motion intent, zero-motion downgrades, and installed-runtime use.
+- Migration: completed projects using `--motion-gate` must add `User motion intent`, `User accepted no authored motion`, `Motion trigger and implementation tool`, and `Library or material decision` to the Motion section and review.
+
 ## v0.19.0
 
 - Replaced the implicit "add motion when the direction carries it" posture with a contextual intervention decision: `leave simple`, `craft only`, or `add moment`.

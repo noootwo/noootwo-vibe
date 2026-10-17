@@ -1,5 +1,13 @@
 # noootwo-code-health Releases
 
+## v0.17.0
+
+- Split verification into three evidence depths: `change`, `escalated`, and `release`.
+- A completed requirement now gets a Change Check scoped to the diff, changed behavior, nearest callers, affected tests, and one to three lenses. It does not run the full suite or a whole-project Structure Sweep.
+- A wide blast radius escalates the check only to the affected suites and lenses. A long task or a large diff does not by itself trigger a Release Check.
+- Before release or a ship-readiness submit gate, one Release Check runs the full suite or uses CI evidence for the exact commit, performs the full Structure Sweep, and records release evidence and gaps.
+- Updated the review gate, refactoring re-test, output contract, and evals to name the verification depth explicitly.
+
 ## v0.16.0
 
 - Added the pre-implementation Integration Read and its compact Change Shape: intent and invariants, seam and ownership, contracts, reuse, reversibility, test seam, smallest first slice, and rejected alternatives.

@@ -9,6 +9,8 @@ Status: pending; define completion checks for the implementation agent
 ## Intervention Checks
 
 - Decision and rationale match the product function, frequency, task risk, and emotional or brand value: TBD
+- An explicit motion or material request produced a visible authored move, or the user explicitly accepted no authored motion: TBD
+- Any installed or user-named motion library or shader is selected, replaced by a recorded equivalent, or rejected with a concrete reason: TBD
 - `leave simple` or `craft only` has craft-sufficiency evidence and rejected opportunities: TBD
 - `add moment` has visible artifact proof, source or platform evidence, boundary, and fallback: TBD
 - No authored move was added only to make a routine surface feel more designed: TBD

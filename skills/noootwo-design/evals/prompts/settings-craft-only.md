@@ -1,10 +1,11 @@
 # Eval Prompt: Settings Need Craft, Not A Spectacle
 
-Use `$noootwo-design` on a settings or configuration screen whose real problems are grouping, hierarchy, terminology, control states, and feedback placement.
+Use `$noootwo-design` on a settings or configuration screen whose real problems are grouping, hierarchy, terminology, control states, and feedback placement. The user has not asked for motion.
 
 Expected behavior:
 
 - Select `craft only` and explain why the product task does not justify an authored moment.
+- Record that motion was not requested or that the user accepted no authored motion.
 - Fix the actual hierarchy, grouping, copy, state, focus, validation, and responsive behavior.
 - Keep any platform feedback immediate and compatible with keyboard and assistive technology.
 - Record the rejected opportunities and why they would add cost without improving the task.

@@ -29,6 +29,8 @@ Examples of artifact-shaped matching:
 - a document, report, README, or long-form written artifact → document/writing owner
 - a visual UI or frontend change → design owner when direction is unsettled; `noootwo-code-health` Integration Read when direction is settled but the seam is not; `noootwo-tdd` when both are settled
 - behavior-changing code with an obvious local seam and no contract, data, or migration impact → `noootwo-tdd`, then `noootwo-code-health` after green
+- one completed requirement → `noootwo-code-health` Change Check, not a full-project audit
+- a release or ship-readiness submit gate → `noootwo-code-health` Release Check, then `noootwo-release`
 - a new requirement needs an implementation shape, backend design, frontend integration, a new API/data/event contract, a migration, or a cross-module seam → `noootwo-code-health` Integration Read before `noootwo-tdd`
 - existing structure makes the requested change hard → `noootwo-code-health` Change Shape; preparatory refactoring is one disposition
 - repeated edits in one area, context cost growing, a giant file or directory, or a release trigger → `noootwo-code-health` Structure Sweep

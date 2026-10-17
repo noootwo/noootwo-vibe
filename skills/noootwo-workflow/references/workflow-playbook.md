@@ -8,9 +8,10 @@ Compact guardrail and handoff packet reference. Routing and scheduling live in `
 - Do not edit while product or debug is unresolved.
 - Non-obvious code changes use `noootwo-code-health` for an Integration Read before `noootwo-tdd`; obvious local seams go directly to TDD.
 - Behavior-changing code uses `noootwo-tdd` before review.
-- Non-direct behavior changes return to `noootwo-code-health` after green, before the work is reported done.
-- Review/refactor/optimization must re-run tests, dispose of structural findings, and stop for user acceptance before submit or publish.
-- Release work goes to `noootwo-release` after code-health readiness; version, artifact, deployment trace, rollback, and release-health evidence come back through `noootwo-state`.
+- Non-direct behavior changes return to `noootwo-code-health` for a scoped Change Check after green, before the work is reported done.
+- A Release Check runs once before release or a ship-readiness submit gate; it owns the full suite, full Structure Sweep, release evidence, and named gaps.
+- Review/refactor/optimization must re-run the relevant tests, dispose of structural findings, and stop for user acceptance before submit or publish.
+- Release work goes to `noootwo-release` after the Release Check; version, artifact, deployment trace, rollback, and release-health evidence come back through `noootwo-state`.
 - Update docs through `noootwo-state` when facts change.
 - Direct single-file work stays direct; do not add ceremony.
 
@@ -29,6 +30,7 @@ Keep packets short. Workflow carries scope and sequencing; the specialist owns m
 ### To `noootwo-code-health`
 
 - Mode: Integration Read | review | Structure Sweep | optimization
+- Verification depth: change | escalated | release
 - If Integration Read: settled product/design path, requirement, candidate seams, contracts/data/migration, constraints, and specific judgment requested
 - Behavior or structure changed:
 - Files and nearest tests:
@@ -42,6 +44,7 @@ Keep packets short. Workflow carries scope and sequencing; the specialist owns m
 ### To `noootwo-release`
 
 - Readiness decision and gaps from code-health:
+- Release Check evidence: full suite or CI for the exact commit, Structure Sweep, named gaps
 - Current version source and release policy:
 - Commit, artifact, and environment facts:
 - Changelog or release-note state:

@@ -18,7 +18,7 @@ A test is useful only when it can fail for the right reason and can be rerun by 
 
 ## After green
 
-- Run the full relevant suite, not only the new test.
+- Run the relevant suite for the touched behavior and nearest boundary, not only the new test. A full repository suite belongs to the Release Check.
 - Mutate a behavior-bearing line once and verify a test fails. Restore it immediately.
 - Leave a guard only where it protects a real boundary. Do not add coverage for framework behavior or generated plumbing.
 

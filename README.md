@@ -6,15 +6,15 @@ It publishes eleven focused skills — a router plus ten specialists:
 
 | Skill | Invocation | Purpose | Version |
 | --- | --- | --- | --- |
-| `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in | `0.5.0` |
-| `noootwo-workflow` | model-invoked | Reads current project state, matches the correct installed skill, and schedules shape-before-implementation and review | `0.17.0` |
+| `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in | `0.5.1` |
+| `noootwo-workflow` | model-invoked | Reads current project state, matches the correct installed skill, and schedules shape-before-implementation, scoped Change Checks, and the full Release Check | `0.18.0` |
 | `noootwo-product` | model-invoked | Settles real user, first loop, scope, main path, states, and acceptance before design or build | `0.10.1` |
-| `noootwo-design` | model-invoked | Turns a settled product path into a contextual visual intervention, tokens, a Design Contract, and a reviewed artifact | `0.19.0` |
-| `noootwo-tdd` | model-invoked | Owns red-green-refactor and test quality for behavior-changing code | `0.5.0` |
-| `noootwo-code-health` | model-invoked | Shapes a non-obvious change into existing code, then keeps it elegant and healthy: review, refactoring, structure sweeps, optimization, and acceptance | `0.16.0` |
-| `noootwo-release` | model-invoked | Owns versioning, tags, immutable artifacts, deployment traces, provenance, rollback, and release health | `0.1.0` |
+| `noootwo-design` | model-invoked | Turns a settled product path into a contextual visual intervention, tokens, a Design Contract, and a reviewed artifact | `0.19.1` |
+| `noootwo-tdd` | model-invoked | Owns red-green-refactor and relevant-test evidence for behavior-changing code | `0.6.0` |
+| `noootwo-code-health` | model-invoked | Shapes a non-obvious change, runs a scoped Change Check after each requirement, and a full Release Check before release | `0.17.0` |
+| `noootwo-release` | model-invoked | Consumes the Release Check and owns versioning, tags, immutable artifacts, deployment traces, provenance, rollback, and release health | `0.2.0` |
 | `noootwo-state` | model-invoked | Reads and records project state and context, and chooses the storage form | `0.2.0` |
-| `noootwo-debug` | model-invoked | Proves the cause of a failure before any fix, and bounds the fix to that cause | `0.4.0` |
+| `noootwo-debug` | model-invoked | Proves the cause, bounds the fix, and closes systemically to prevent recurrence | `0.5.0` |
 | `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, and borrows mechanisms instead of surfaces | `0.6.1` |
 | `noootwo-onboard` | model-invoked | Enters an unfamiliar project and audits which skills it needs | `0.4.1` |
 
@@ -103,21 +103,21 @@ npx skills add ./skills/noootwo-design --list
 
 `noootwo-ask` is the only user-invoked skill. Type it when you are unsure which skill fits; it names the right one and the order to run them in, at no context cost to the agent.
 
-`noootwo-workflow` is the evidence-driven orchestrator. It reads current repo truth and project state through `noootwo-state`, matches the right owner from the available skill descriptions and artifact shape, and schedules one next step at a time. It owns order, scope, stop conditions, and handoffs; the specialists and matching installed skills own the work. For a non-obvious code change, it schedules `noootwo-code-health` to shape the seam before `noootwo-tdd`; an obvious local edit skips that pass. It can invoke other installed skills for slides, documents, or media work without adding them to the Noootwo public set. When the owner is ambiguous or absent, it stops with one or two candidates instead of guessing.
+`noootwo-workflow` is the evidence-driven orchestrator. It reads current repo truth and project state through `noootwo-state`, matches the right owner from the available skill descriptions and artifact shape, and schedules one next step at a time. It owns order, verification depth, scope, stop conditions, and handoffs; the specialists and matching installed skills own the work. For a non-obvious code change, it schedules `noootwo-code-health` to shape the seam before `noootwo-tdd`; an obvious local edit skips that pass. After one requirement, code-health runs a Change Check scoped to the diff and blast radius; before release, it runs one Release Check with the full suite or CI evidence, a full Structure Sweep, and release evidence. It can invoke other installed skills for slides, documents, or media work without adding them to the Noootwo public set. When the owner is ambiguous or absent, it stops with one or two candidates instead of guessing.
 
 `noootwo-product` settles what should exist before anything is designed or built. It reads discoverable facts itself, names what is unsettled, and then grills the frontier — the questions answerable now — one round at a time, each question carrying options and a recommendation. It ends when the frontier is empty and the user confirms a shared understanding, then produces the Product-to-Design Handoff.
 
-`noootwo-design` turns a settled product path into a contextual visual intervention. It declares a Design Read, decides whether the exact feature and moment should `leave simple`, use `craft only`, or `add moment`, and only then considers motion, shaders, sound, or haptics. A candidate must pass frequency, purpose, speed, and function gates before source research or a new tool starts; rejected opportunities stay visible. `leave simple` and `craft only` remain valid outcomes when the product needs clarity or speed. The skill writes a Design Contract before editing, reads the craft floor immediately before building, and reviews the rendered artifact in bounded passes. For `deep` work it captures the references a direction leans on, extracts real values from a reachable page with its zero-dependency Chrome extractor, locks the build target, and reports drift against that baseline afterwards. When an authored moment is selected, motion is a language rather than a field: personality, register, millisecond scale, easing, choreography, and reduced-motion fallback. `ready` is never self-certified. When the real user, main path, states, or acceptance turn out to be unsettled, it invokes `noootwo-product`.
+`noootwo-design` turns a settled product path into a contextual visual intervention. It declares a Design Read, decides whether the exact feature and moment should `leave simple`, use `craft only`, or `add moment`, and only then considers motion, shaders, sound, or haptics. A candidate must pass frequency, purpose, speed, and function gates before source research or a new tool starts; rejected opportunities stay visible. `leave simple` and `craft only` remain valid outcomes when the product needs clarity or speed, but an explicit user request for motion or material defaults to `add moment` and cannot be silently downgraded. The implementation must name its tool and trigger; an installed or user-named library or shader is selected, replaced by a recorded equivalent, or rejected with a concrete reason. The skill writes a Design Contract before editing, reads the craft floor immediately before building, and reviews the rendered artifact in bounded passes. For `deep` work it captures the references a direction leans on, extracts real values from a reachable page with its zero-dependency Chrome extractor, locks the build target, and reports drift against that baseline afterwards. When an authored moment is selected, motion is a language rather than a field: personality, register, millisecond scale, easing, choreography, and reduced-motion fallback. `ready` is never self-certified. When the real user, main path, states, or acceptance turn out to be unsettled, it invokes `noootwo-product`.
 
-`noootwo-tdd` owns the test-first loop for behavior-changing code. It requires a failing test first, the minimal implementation, a full green test command, and refactoring only after green. Red and green are the adding-function hat; the post-green refactor is the refactoring hat, and the two never mix. When the implementation shape or seam is unsettled, it returns to workflow instead of inventing architecture inside the loop. It rejects production-first, tests-after, manual-test-only, and “too simple to test” reasoning.
+`noootwo-tdd` owns the test-first loop for behavior-changing code. It requires a failing test first, the minimal implementation, relevant-test proof, and refactoring only after green. Red and green are the adding-function hat; the post-green refactor is the refactoring hat, and the two never mix. The full suite is a Release Check, not the TDD exit. When the implementation shape or seam is unsettled, it returns to workflow instead of inventing architecture inside the loop. It rejects production-first, tests-after, manual-test-only, and “too simple to test” reasoning.
 
-`noootwo-code-health` keeps code elegant and healthy in two passes. Before implementation, when a change's seam or integration is non-obvious, it runs an Integration Read and produces a compact Change Shape: seam and ownership, contracts, reuse, reversibility, test seam, smallest first slice, and rejected alternatives. It skips that pass for an obvious local change with no contract, data, or migration impact. After the change, it reviews the diff and its boundary, follows Fowler's two hats, six refactoring workflows, small catalog moves, green-baseline safety, and economic payback, and disposes of every structural finding as fixed, opportunity, planned, long-term, or accepted. It also owns optimization, re-testing, project health, and the user acceptance gate. Architecture and integration design remain code-health lenses; there is no separate `noootwo-architecture` skill.
+`noootwo-code-health` keeps code elegant and healthy in two passes. Before implementation, when a change's seam or integration is non-obvious, it runs an Integration Read and produces a compact Change Shape: seam and ownership, contracts, reuse, reversibility, test seam, smallest first slice, and rejected alternatives. It skips that pass for an obvious local change with no contract, data, or migration impact. After one requirement, it runs a Change Check on the current diff, changed behavior, nearest callers, affected tests, and one to three lenses; it escalates only when blast radius requires it. Before release, it runs one Release Check with the full suite or CI evidence, a full Structure Sweep, release evidence, and named gaps. It follows Fowler's two hats, six refactoring workflows, small catalog moves, green-baseline safety, and economic payback, and disposes of every structural finding as fixed, opportunity, planned, long-term, or accepted. It also owns optimization, re-testing, project health, and the user acceptance gate. Architecture and integration design remain code-health lenses; there is no separate `noootwo-architecture` skill.
 
-`noootwo-release` owns release engineering. It turns a ready change into an identified, immutable release: version source and compatibility, tag semantics, artifact identity and provenance, changelog and release notes, deployment markers, rollback or forward-fix, and release health by version. It consumes code-health's readiness decision, persists release facts through `noootwo-state`, and uses existing CI or deployment tools as execution resources without binding the suite to one vendor.
+`noootwo-release` owns release engineering. It turns a ready change into an identified, immutable release: version source and compatibility, tag semantics, artifact identity and provenance, changelog and release notes, deployment markers, rollback or forward-fix, and release health by version. It consumes code-health's Release Check readiness decision, persists release facts through `noootwo-state`, and uses existing CI or deployment tools as execution resources without binding the suite to one vendor.
 
 `noootwo-state` owns project state and context persistence. It receives an abstract record request, chooses JSON/JSONL for queryable state and Markdown for narrative facts, then writes, validates, and reads the record. Other skills own content; this skill owns the form and location.
 
-`noootwo-debug` turns a symptom into a proven cause before any file changes. It pins expected against actual with the raw failure, reproduces on demand, localizes with numbered checkpoints or bisection, then closes two gates: no edit until the cause is proven and competing hypotheses are refuted by named experiments, and no claim of a fix until a toggle test and a failing-first regression test prove it. It keeps the fix the size of the cause and hands anything larger back to the user as a decision.
+`noootwo-debug` turns a symptom into a proven cause before any file changes. It pins expected against actual with the raw failure, reproduces on demand, localizes with numbered checkpoints or bisection, then closes two gates: no edit until the cause is proven and competing hypotheses are refuted by named experiments, and no claim of a fix until a toggle test and a failing-first regression test prove it. It keeps the fix the size of the cause, then writes a Systemic Close: why the system allowed the defect, whether sibling or near-miss paths share it, which recurrence barrier and owner exist, and what learning loop changes if the class returns. Larger structural work is handed to the owning skill instead of expanded inside the fix.
 
 `noootwo-research` settles a decision that only outside evidence can settle — a design direction, a stack or library choice, a competitor or user expectation, or prior art. It names the decision and what would flip it, sizes the pass into `quick`, `standard`, or `deep`, draws on domain source pools with an access record and a fallback ladder, extracts transferable mechanisms rather than surfaces, and requires two independent sources plus a counterexample before a claim decides anything. Its pools record what a probe actually observed: which case libraries are free, which need an account, which are paid, which are blocked, and which motion libraries publish a genuine agent-readable index. Every pass also surveys existing skills and public prior art against a four-part adoption gate.
 
@@ -182,21 +182,22 @@ python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scena
 python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scenario leave-simple-justified
 python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scenario craft-only-justified
 python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scenario add-moment-proof
+python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scenario explicit-motion-request-honored
 ```
 
 ## Release Model
 
 Each child skill has its own `VERSION` file and tag prefix:
 
-- `noootwo-ask@v0.5.0`
-- `noootwo-workflow@v0.17.0`
+- `noootwo-ask@v0.5.1`
+- `noootwo-workflow@v0.18.0`
 - `noootwo-product@v0.10.1`
-- `noootwo-design@v0.19.0`
-- `noootwo-tdd@v0.5.0`
-- `noootwo-code-health@v0.16.0`
-- `noootwo-release@v0.1.0`
+- `noootwo-design@v0.19.1`
+- `noootwo-tdd@v0.6.0`
+- `noootwo-code-health@v0.17.0`
+- `noootwo-release@v0.2.0`
 - `noootwo-state@v0.2.0`
-- `noootwo-debug@v0.4.0`
+- `noootwo-debug@v0.5.0`
 - `noootwo-research@v0.6.1`
 - `noootwo-onboard@v0.4.1`
 

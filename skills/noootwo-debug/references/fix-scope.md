@@ -45,7 +45,7 @@ Name what each option leaves unproven. The choice is the user's, not the agent's
 
 ## Siblings and cleanup
 
-- **Hunt siblings** — search for the same mistake elsewhere. Bugs of a kind travel in packs: the same misused helper, the same schema assumption, the same off-by-one in three files.
+- **Hunt siblings** — search for the same mistake elsewhere. Bugs of a kind travel in packs: the same misused helper, the same schema assumption, the same off-by-one in three files. Record the search scope and results; they feed the Systemic Close in `systemic-prevention.md`.
 - **Remove the instrumentation** — probes, prints, hardcoded values, commented-out code, loosened timeouts, skipped tests. Leaving them is how a debug session becomes a permanent behaviour change.
 - **Read the final diff line by line** — as a reviewer, not as the author. If the diff and the scope ledger disagree, the ledger wins or the user decides.
 

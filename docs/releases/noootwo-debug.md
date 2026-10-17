@@ -1,5 +1,13 @@
 # noootwo-debug Releases
 
+## v0.5.0
+
+- Added the Systemic Close as Step 8, organized around eight questions: after the incident is closed, debug asks why the defect existed, why existing controls missed it, where sibling or near-miss paths share the condition, which barrier prevents recurrence, and what learning loop changes if the class returns.
+- Added `references/systemic-prevention.md` with eight causal questions, mechanism/control/learning layers, proportional response, sibling and fragile-success search, the recurrence-barrier ladder, and the academic basis from Reason, Leveson, Argyris, Google SRE, and Hollnagel.
+- Added four eval scenarios: systemic close required, recurring bug double-loop, near-miss/fragile success, and trivial one-off proportionality.
+- Scoped the post-fix broader check to the fix's blast radius; the full suite belongs to the Release Check when the fix is release-bound.
+- Migration: completed debug reports now need a Systemic Close. An isolated defect may record `no credible latent path`; it may not omit the close.
+
 ## v0.4.0
 
 - Added release-based localization and trace handoff: debug consumes version and deployment identity from `noootwo-release` and asks release to repair a missing trace.

@@ -452,10 +452,27 @@ def validate_motion_contract(target_root: Path) -> list[str]:
     motion = match.group(1)
 
     intervention_decision = (field_value(motion, "Intervention decision") or "").strip().lower()
+    user_motion_intent = (field_value(motion, "User motion intent") or "").strip().lower()
+    accepted_no_motion = (field_value(motion, "User accepted no authored motion") or "").strip().lower()
     require(
         errors,
         intervention_decision in {"leave simple", "craft only", "add moment"},
         f"{relative} intervention decision must be leave simple, craft only, or add moment",
+    )
+    require(
+        errors,
+        user_motion_intent in {"requested", "not requested", "declined"},
+        f"{relative} user motion intent must be requested, not requested, or declined",
+    )
+    require(
+        errors,
+        accepted_no_motion in {"yes", "no", "not applicable", "n/a"},
+        f"{relative} user accepted no authored motion must be yes, no, or not applicable",
+    )
+    require(
+        errors,
+        not (user_motion_intent == "requested" and intervention_decision != "add moment" and accepted_no_motion != "yes"),
+        f"{relative} explicit motion request cannot use {intervention_decision or 'an invalid decision'} without the user accepting no authored motion",
     )
     for field in ("Decision rationale", "Candidate moments and rejected opportunities"):
         require(errors, has_meaningful_value(motion, field), f"{relative} missing intervention {field.lower()}")
@@ -477,6 +494,18 @@ def validate_motion_contract(target_root: Path) -> list[str]:
             errors,
             has_meaningful_value(motion, "Authored move evidence and fallback"),
             f"{relative} missing authored move evidence and fallback",
+        )
+        implementation_tool = (field_value(motion, "Motion trigger and implementation tool") or "").strip().lower()
+        require(
+            errors,
+            implementation_tool not in {"", "none", "not applicable", "n/a", "tbd"},
+            f"{relative} missing motion trigger and implementation tool for add moment",
+        )
+        library_decision = (field_value(motion, "Library or material decision") or "").strip().lower()
+        require(
+            errors,
+            library_decision not in {"", "none", "not applicable", "n/a", "tbd"},
+            f"{relative} missing library or material decision for add moment",
         )
 
     if intervention_decision == "add moment":
@@ -512,10 +541,27 @@ def validate_motion_contract(target_root: Path) -> list[str]:
         ):
             require(errors, has_meaningful_value(review, field), f".noootwo/review.md missing {field.lower()}")
         review_decision = (field_value(review, "Intervention decision") or "").strip().lower()
+        review_user_intent = (field_value(review, "User motion intent") or "").strip().lower()
+        review_accepted_no_motion = (field_value(review, "User accepted no authored motion") or "").strip().lower()
         require(
             errors,
             review_decision == intervention_decision,
             ".noootwo/review.md intervention decision must match .noootwo/design-tokens.md",
+        )
+        require(
+            errors,
+            review_user_intent == user_motion_intent,
+            ".noootwo/review.md user motion intent must match .noootwo/design-tokens.md",
+        )
+        require(
+            errors,
+            review_accepted_no_motion == accepted_no_motion,
+            ".noootwo/review.md user-accepted no-motion value must match .noootwo/design-tokens.md",
+        )
+        require(
+            errors,
+            not (review_user_intent == "requested" and review_decision != "add moment" and review_accepted_no_motion != "yes"),
+            ".noootwo/review.md explicit motion request cannot end without an authored move or explicit user acceptance",
         )
         if intervention_decision in {"leave simple", "craft only"}:
             require(
@@ -534,6 +580,18 @@ def validate_motion_contract(target_root: Path) -> list[str]:
                 errors,
                 has_meaningful_value(review, "Authored move evidence and fallback"),
                 ".noootwo/review.md missing authored move evidence and fallback",
+            )
+            review_tool = (field_value(review, "Motion trigger and implementation tool") or "").strip().lower()
+            require(
+                errors,
+                review_tool not in {"", "none", "not applicable", "n/a", "tbd"},
+                ".noootwo/review.md missing motion trigger and implementation tool for add moment",
+            )
+            review_library = (field_value(review, "Library or material decision") or "").strip().lower()
+            require(
+                errors,
+                review_library not in {"", "none", "not applicable", "n/a", "tbd"},
+                ".noootwo/review.md missing library or material decision for add moment",
             )
 
     return errors

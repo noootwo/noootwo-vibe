@@ -8,10 +8,20 @@ Motion is one design material among several, not a finishing pass or a default s
 
 Decide whether this product, feature, and moment should stay simple, receive craft-only work, or gain an authored moment before designing motion at all.
 
+### User Intent Gate
+
+Apply this before the product heuristic, because an explicit user request is the strongest available evidence of desired experience:
+
+- A request for motion, animation, liveliness, fancy, a named motion library, or shader/material rendering defaults the requested scope to `add moment`.
+- Moderation changes register, count, and amplitude, not whether motion exists. `适度`, `自然`, or `别过度` means one primary move and at most one support, not zero motion.
+- `leave simple` or `craft only` is allowed only when the user accepts that outcome or a concrete safety, performance, or platform blocker makes the request impossible. Record that as a user decision; do not silently downgrade the request.
+- A motion request is satisfied by an artifact-visible move, not by an explanation, a generic component transition, or a list of rejected ideas.
+
 ```markdown
 Intervention Decision
 - Product/feature and user:
 - Frequency, task risk, emotional and brand value:
+- User motion or material intent: requested | not requested | declined
 - Candidate moments:
 - Decision: leave simple | craft only | add moment
 - Why:
@@ -29,7 +39,7 @@ Use this surface heuristic, then override it with product evidence:
 | First use, onboarding, empty state, success, completion | Consider add moment | Rare moments can carry explanation, orientation, or emotion |
 | Launch, brand story, portfolio, campaign hero | Consider add moment | Expression is part of the product job when performance and fallback are proven |
 
-`leave simple` and `craft only` are successful design decisions, not missing work. Record why the simpler treatment is better. `add moment` requires one primary authored move and at most one supporting move; it does not require every screen or feature to inherit the same spectacle.
+`leave simple` and `craft only` are successful design decisions, not missing work, when the user has not requested motion or has accepted a simpler outcome. Record why the simpler treatment is better. `add moment` requires one primary authored move and at most one supporting move; it does not require every screen or feature to inherit the same spectacle.
 
 Use the minimum intervention ladder:
 
@@ -38,7 +48,7 @@ Use the minimum intervention ladder:
 3. Use state continuity when a change would otherwise teleport or lose context.
 4. Add motion, material, sound, or haptics only when the first three cannot deliver the named user value.
 
-Do not search for sources, tools, or effects until a candidate has passed the gates below. A missing authored moment is not a defect when the product context favors clarity, speed, or reading.
+Do not search for sources, tools, or effects until a candidate has passed the gates below. A missing authored moment is not a defect when the user has not requested motion and the product context favors clarity, speed, or reading.
 
 ## Personality
 
@@ -88,6 +98,7 @@ When a direction earns an authored motion moment, define three constants and reu
 1. **Signature easing** — one curve for about 80% of animations.
 2. **Duration scale** — exactly three values: `quick`, `standard`, `slow`.
 3. **Entrance pattern** — one entry style used consistently.
+4. **Implementation tool** — CSS/platform, an already-installed runtime, or a new library/material, with the trigger each tool carries.
 
 The authored move belongs to the product or flow, not automatically to every local feature. Component-library defaults can support it, but cannot be counted as the move. When no motion is selected, the authored move may instead be structural, typographic, material, or a state behavior.
 
@@ -217,6 +228,8 @@ A direction gets better when it borrows a mechanism from a motion that already w
 
 Source only after the intervention decision and gates have produced a surviving `add moment`. `leave simple` and `craft only` do not trigger a source search or a new tool.
 
+Inspect project dependencies before rejecting a runtime. An installed motion library is the first choice for the capability it uniquely provides. When the user names a library or shader, record `selected`, `equivalent alternative`, or `rejected with reason`; silence is not a decision.
+
 1. **Fix the register and the archetype first.** A reference only transfers inside its own register; an Expressive reference will mislead a Quiet screen.
 2. **Collect two or three examples, not one.** Look for the same moment handled differently — an entrance, a state change, a list reorder, a page transition.
 3. **Name the mechanism.** For each example record what triggers it, which property moves, its duration and curve, how the layers relate, and what it communicates. "Cards settle 40ms after the shadow" is a mechanism; "smooth and premium" is not.
@@ -265,6 +278,8 @@ Four rules are absolute and live with the quality floor in [craft](craft.md). Re
 | No personality | Generic easing everywhere | Commit to one archetype |
 
 ## Motion Probe
+
+When the user reports that requested motion is missing or barely visible, treat it as an intervention-contract failure, not a polish request. Re-open the User Intent Gate, select `add moment` unless the user accepted otherwise, resolve the implementation tool and artifact trigger, then verify the rendered result.
 
 When the artifact is heavy in motion or the user reports that a stretch feels dead, loose, or not following the pointer, capture evidence before changing curves. Use `scripts/extract_design_tokens.mjs --probe-motion <selector>` when the page is reachable, or record the limitation.
 

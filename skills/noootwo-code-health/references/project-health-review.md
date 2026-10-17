@@ -17,6 +17,8 @@ Run a Structure Sweep when at least one trigger is true:
 
 The sweep is bounded. Read the repository shape, not every line: ownership, directory depth, import direction and cycles, fan-in/fan-out, duplicated concepts, dead code, test gaps, config/docs duplication, and context cost. Report a ranked debt ledger and recommend the smallest safe move for the top items. Do not turn the sweep into a rewrite.
 
+A Change Check does not run this sweep. It stays on the touched path; the sweep belongs to the Release Check or a named trigger.
+
 The ledger is not a backlog of every smell. Follow the disposition model in [refactoring-workflows.md](refactoring-workflows.md): `opportunity` is picked up on the next visit, `planned` gets a bounded pass, `long-term` records a rough end-state and moves through ordinary work, and `accepted` records why the code is not worth changing now.
 
 ## Review Surface

@@ -24,7 +24,7 @@ Red and green are the adding-function hat. The refactor step is the refactoring 
 
 ## After the change
 
-- Run the full relevant test command.
+- Run the relevant command that covered the refactored behavior and nearest boundary; the Release Check owns the full suite.
 - Diff behavior evidence: same public inputs and outputs, same side effects, no new contracts.
 - Return to `noootwo-code-health` or `noootwo-workflow` for the review gate. Record any remaining structural finding with a disposition instead of leaving it as an untracked future improvement. Do not self-certify submit or release.
 

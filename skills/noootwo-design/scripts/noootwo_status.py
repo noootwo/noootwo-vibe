@@ -123,14 +123,26 @@ def motion_state(root: Path) -> str:
     decision = field_value(motion, "Intervention decision").lower()
     if decision not in {"leave simple", "craft only", "add moment"}:
         return "incomplete"
-    required = ["Decision rationale", "Candidate moments and rejected opportunities"]
+    user_intent = field_value(motion, "User motion intent").lower()
+    accepted_no_motion = field_value(motion, "User accepted no authored motion").lower()
+    if user_intent not in {"requested", "not requested", "declined"}:
+        return "incomplete"
+    if accepted_no_motion not in {"yes", "no", "not applicable", "n/a"}:
+        return "incomplete"
+    if user_intent == "requested" and decision != "add moment" and accepted_no_motion != "yes":
+        return "incomplete"
+    required = ["Decision rationale", "Candidate moments and rejected opportunities", "User motion intent", "User accepted no authored motion"]
     if decision in {"leave simple", "craft only"}:
         required.append("Craft sufficiency evidence")
     if decision == "add moment":
-        required.extend(["Authored move", "Authored move evidence and fallback"])
+        required.extend(["Authored move", "Authored move evidence and fallback", "Motion trigger and implementation tool", "Library or material decision"])
     if any(not field_value(motion, label) or "TBD" in field_value(motion, label).upper() for label in required):
         return "incomplete"
     if decision == "add moment":
+        if field_value(motion, "Motion trigger and implementation tool").lower() in {"none", "not applicable", "n/a"}:
+            return "incomplete"
+        if field_value(motion, "Library or material decision").lower() in {"none", "not applicable", "n/a"}:
+            return "incomplete"
         if TBD_RE.search(motion):
             return "incomplete"
         if not MOTION_SCALE_RE.search(motion):

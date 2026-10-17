@@ -40,6 +40,8 @@ Review the decision before reviewing the decoration:
 
 A governed absence of an authored move is a valid `ready` result when the decision and craft evidence support it. A missing authored moment on an `add moment` contract is not.
 
+If the user explicitly requested motion, animation, liveliness, fancy, a named library, or shader/material rendering, zero motion is not ready unless the user accepted that outcome. Review the implementation tool too: an installed runtime or user-named library must be selected, replaced with a recorded equivalent, or rejected with a concrete reason.
+
 ### Gates To Read When Relevant
 
 - Generic, Claude-like, framework, influence/cosplay, and forced-return checks: [review](review.md)
@@ -63,8 +65,10 @@ Before `ready`, confirm:
 - full redesign has recorded user-selected direction
 - required user decision gates are resolved or delegated
 - the intervention decision is recorded in the design tokens and review, and both records agree
+- an explicit motion or material request records whether the user accepted no authored motion
 - `leave simple` or `craft only` records craft-sufficiency evidence and rejected opportunities
-- `add moment` records one primary authored move, its evidence or platform rule, and its fallback
+- `add moment` records one primary authored move, its trigger, implementation tool, evidence or platform rule, and fallback
+- any installed or user-named library or shader is selected, replaced by a recorded equivalent, or rejected with a concrete reason
 - an authored move is not required merely because the artifact is new or visually quiet
 
 If this fails, use `needs artifact` or `refine`, not `ready`.

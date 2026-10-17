@@ -78,3 +78,13 @@ Note what the chain rules out. "The writer saves nothing" was the intuitive caus
 No logs, no repro, no access: the chain has a named gap, and that is an honest result.
 
 Report the gap explicitly — what you could not observe, what you tried, what would close it. Then choose between instrumentation now (log the boundary, wait for the next occurrence) and a scoped mitigation that stops the damage without claiming to be the fix. Never present the best-supported guess as a proven cause; that is the failure this chain exists to prevent.
+
+## Localization fallbacks
+
+When the whole path cannot be run or is unknown, use the fallback that removes the most uncertainty per action:
+
+- **Bisect the code path** — check the midpoint; a correct state there puts the cause downstream.
+- **Bisect history** — `git bisect run <repro command>` when the behaviour used to work.
+- **Bisect by release** — compare version and deployment traces; invoke `noootwo-release` when the trace is missing.
+- **Bisect the input** — halve the input, config, or test data and keep halving.
+- **Differential debugging** — diff a working case against a broken one and investigate the differences.

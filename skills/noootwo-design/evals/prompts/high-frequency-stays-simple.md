@@ -1,10 +1,11 @@
 # Eval Prompt: High-Frequency Surface Stays Simple
 
-Use `$noootwo-design` on a command palette, data table, or monitor that is used hundreds of times per day and already has clear hierarchy and state feedback.
+Use `$noootwo-design` on a command palette, data table, or monitor that is used hundreds of times per day and already has clear hierarchy and state feedback. The user has not asked for motion.
 
 Expected behavior:
 
 - Record an intervention decision of `leave simple` or `craft only` from the product function, frequency, task risk, and existing evidence.
+- Record that motion was not requested, or that the user accepted no authored motion.
 - Improve real usability issues through hierarchy, density, state clarity, or platform feedback instead of adding decoration.
 - Reject motion for keyboard-initiated, high-frequency, or data-reading moments.
 - State why no authored moment is needed and what evidence shows the surface is already sufficient.
