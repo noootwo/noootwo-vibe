@@ -1,5 +1,13 @@
 # noootwo-release Releases
 
+## v0.3.0
+
+- Added the Release Verification Ledger: one open queue for checks that must be decided at the release boundary, with explicit item ownership, evidence, status, and release conditions.
+- Requirement-level detail stays in its completed Change Check; repeated cross-cutting checks are deduped by command or evidence boundary instead of copied once per feature.
+- Before versioning or tagging, the ledger is reconciled against the exact release-candidate commit. The Release Check consumes each remaining item once.
+- The completed ledger is sealed into the immutable release record before the open working ledger is reset. Sealed evidence is never deleted.
+- Added `references/release-verification-ledger.md`, a lifecycle eval, and ADR 0021. The release skill keeps ownership of the lifecycle; `noootwo-state` chooses the storage path and form.
+
 ## v0.2.0
 
 - Release now requires a Release Check for the exact commit before the Release Plan: full suite or CI evidence, full Structure Sweep, release evidence, and named gaps.

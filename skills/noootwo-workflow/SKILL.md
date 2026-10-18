@@ -58,6 +58,7 @@ Answer before calling the work done:
 - Did the required verification depth run — Change Check, escalation when the blast radius required it, and Release Check at the release boundary — or is the gap explicit?
 - Did a specialist or matching installed skill need to run, and was it invoked?
 - For a non-direct code change, did `noootwo-code-health` shape the implementation when the seam was non-obvious, run a scoped Change Check after green, and run a Release Check only when the task reached release?
+- If a completed change created a release-bound check or known gap, did `noootwo-release` add it to the open Release Verification Ledger?
 - For release work, did `noootwo-release` produce the Release Plan and did `noootwo-state` receive the release record and deployment evidence?
 - Did behavior, state, or release facts change, and did `noootwo-state` place them?
 - Is user acceptance still required before commit, push, tag, or publish?

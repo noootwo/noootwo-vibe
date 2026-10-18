@@ -241,6 +241,22 @@ Source index for the verification-depth pass:
 - Google Engineering Practices, Small CLs: `https://google.github.io/eng-practices/review/developer/small-cls.html`
 - SmartBear code-review study summary: `https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/`
 
+Release-ledger pass, checked 2026-10-18:
+
+- Google SRE's *Reliable Product Launches at Scale* reports that a curated launch checklist helped produce reproducibly reliable launches. The abridged Launch Coordination Checklist groups architecture, reliability, security, automation, rollout, and schedule checks, which supports one release-bound aggregate instead of rediscovering the same cross-cutting checks per feature.
+- Microsoft Azure deployment gates collect health signals before or after deployment and re-evaluate until all required gates pass in the same interval; timeout blocks promotion. This supports explicit evidence, a stop condition, and a single release-bound consumption point.
+- The WHO Surgical Safety Checklist study reported complications falling from 11.0% to 7.0% and death from 1.5% to 0.8% after introduction, showing that a short explicit checklist can change outcomes.
+- The counterexample is Ontario's mandatory checklist adoption: across 109,341 pre-adoption and 106,370 post-adoption procedures, mortality and complication changes were not statistically significant. Checklist presence alone is not proof of adherence, so the Release Verification Ledger requires owner, status, evidence, exact-commit revalidation, and an immutable sealed record.
+- Together these support a release-bound ledger that dedupes by evidence boundary and closes once at release. They do not establish a measured token or time saving for this repository.
+
+Source index for the release-verification-ledger pass:
+
+- Google SRE, Reliable Product Launches at Scale: `https://sre.google/sre-book/reliable-product-launches/`
+- Google SRE, Launch Coordination Checklist: `https://sre.google/sre-book/launch-checklist/`
+- Microsoft Azure deployment gates: `https://learn.microsoft.com/en-us/azure/devops/pipelines/release/approvals/gates?view=azure-devops`
+- WHO Surgical Safety Checklist study: `https://pubmed.ncbi.nlm.nih.gov/19144931/`
+- Ontario surgical checklist counterexample: `https://pubmed.ncbi.nlm.nih.gov/24620866/`
+
 ## Mechanisms Borrowed
 
 - Keep publishable units independently addressable under `skills/`.

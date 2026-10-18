@@ -73,6 +73,7 @@ A coined word recruits no priors: you pay in definition tokens what a pretrained
 | **slop** | output that is generic, decorative, or assembled rather than designed |
 | **Change Check** | the diff-scoped verification after one requirement; no full-suite or whole-repo audit by default |
 | **Release Check** | the full verification once before release or a ship-readiness submit gate |
+| **Release Verification Ledger** | the open queue of release-bound checks, sealed into the release record and reset after release |
 
 Anchored words already in use — `artifact`, `trace`, `layer`, `seam` — stay.
 

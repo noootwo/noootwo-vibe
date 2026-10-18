@@ -14,7 +14,7 @@
     {
       "name": "noootwo-workflow",
       "path": "skills/noootwo-workflow",
-      "version": "0.18.0",
+      "version": "0.18.1",
       "status": "public",
       "dependencies": [
         "noootwo-state",
@@ -84,7 +84,7 @@
     {
       "name": "noootwo-release",
       "path": "skills/noootwo-release",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "status": "public",
       "dependencies": [
         "noootwo-state",

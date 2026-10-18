@@ -1,5 +1,10 @@
 # noootwo-workflow Releases
 
+## v0.18.1
+
+- The close gate now asks whether a completed change created a release-bound check or known gap, and whether `noootwo-release` added it to the open Release Verification Ledger.
+- Requirement-level detail stays in its completed Change Check; the ledger receives only cross-cutting checks, evidence that must be re-established at the release candidate, or a known blocking gap.
+
 ## v0.18.0
 
 - Added the Change Check / Release Check split to scheduling and the close gate.
