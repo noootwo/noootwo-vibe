@@ -38,7 +38,7 @@ This repository does **not** set `disable-model-invocation`. It ships as a Codex
 
 Only `noootwo-ask` is user-invoked, because only it exists purely to orient a human. Every other skill must be reachable by the agent and by its siblings.
 
-`noootwo-workflow` may discover and invoke other installed skills as execution resources when the task belongs outside the Noootwo set, such as slides, documents, or media work. Those skills are not added to the public set or the capability map.
+`noootwo-workflow` may discover and invoke other installed skills as execution resources when the task belongs outside the Noootwo set, such as slides, documents, or media work. Those skills are not added to the public set or the capability map. Their method and default output paths are execution details; durable specs, plans, and other project facts are persisted through `noootwo-state` in the project's owning layer.
 
 ## Router
 

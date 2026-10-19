@@ -63,6 +63,8 @@ Produce the `Product-to-Design Handoff` from `references/product-flow.md`: real 
 
 Hand off when every material decision is settled or delegated and no carried risk would change the main path, trust boundary, scope, or acceptance.
 
+When the settled result must survive the session as a project spec, invoke the `noootwo-state` skill: read its `SKILL.md` and follow it. A spec belongs in `docs/specs/`; do not adopt another skill's default spec directory. A small checkpoint does not need a durable spec.
+
 When UI work is next, invoke the `noootwo-design` skill: read its `SKILL.md` and follow it.
 
 When code work is next and the seam is not obvious, invoke the `noootwo-code-health` skill for an Integration Read before implementation: read its `SKILL.md` and follow it.

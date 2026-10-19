@@ -31,6 +31,7 @@ Do not turn this into a large condition table. If the current evidence points to
 - Change Check stays on the touched path; a full-project Structure Sweep runs in the Release Check, on a documented trigger, or on an explicit user request.
 - Do not run a Release Check after every requirement. A long task or a large diff does not by itself trigger one; blast radius does. Existing CI for the exact commit can satisfy the full-suite part.
 - A specialist may hand back a sequencing decision to workflow; record it in state rather than reimplementing the specialist.
+- An installed external skill owns its method, not the project's documentation layout. Persist durable artifacts through `noootwo-state`; never create a new project convention under an external skill's directory.
 
 ## Stop conditions
 

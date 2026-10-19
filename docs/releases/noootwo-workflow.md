@@ -1,5 +1,12 @@
 # noootwo-workflow Releases
 
+## v0.18.2
+
+- External installed skills remain execution resources, but their default artifact directories no longer become project conventions.
+- Durable specs, plans, and other project facts are persisted through `noootwo-state` in the Noootwo-owned layer.
+- The close gate now checks whether an external skill produced a durable artifact and whether it was stored in the correct project layer.
+- Added an eval for an external brainstorming/writing-plans request that attempts to use `docs/superpowers/`.
+
 ## v0.18.1
 
 - The close gate now asks whether a completed change created a release-bound check or known gap, and whether `noootwo-release` added it to the open Release Verification Ledger.

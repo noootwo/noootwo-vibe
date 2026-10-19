@@ -29,6 +29,8 @@
         "event.appended",
         "format.selected",
         "decision.recorded",
+        "spec.recorded",
+        "plan.recorded",
         "narrative.recorded",
         "release.recorded",
         "evidence.recorded",

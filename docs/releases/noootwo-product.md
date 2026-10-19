@@ -1,5 +1,11 @@
 # noootwo-product Releases
 
+## v0.11.0
+
+- A settled result can now persist as a project spec through `noootwo-state`; the durable location is `docs/specs/`.
+- Product does not adopt another installed skill's default spec directory.
+- Small checkpoints still stay in the reply and do not create a document merely because a spec layer exists.
+
 ## v0.10.1
 
 - When code work is next and the seam is not obvious, the product handoff now invokes `noootwo-code-health` for an Integration Read before implementation.

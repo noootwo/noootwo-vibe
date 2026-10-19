@@ -29,7 +29,7 @@ Use `references/route-by-signal.md`. Match by intent, artifact shape, current bl
 
 - Unambiguous owner → invoke it by reading its `SKILL.md` and following it.
 - Tie or no owner → stop, state one or two candidates and why, and wait for the user.
-- External installed skills are valid execution resources; they are not added to the Noootwo public set.
+- External installed skills are valid execution resources; they are not added to the Noootwo public set. Their default artifact directories are not project policy; durable output goes through `noootwo-state` into the owning Noootwo layer.
 
 **Done when:** one owner is invoked, or the user resolves a tie/absence.
 
@@ -61,6 +61,7 @@ Answer before calling the work done:
 - If a completed change created a release-bound check or known gap, did `noootwo-release` add it to the open Release Verification Ledger?
 - For release work, did `noootwo-release` produce the Release Plan and did `noootwo-state` receive the release record and deployment evidence?
 - Did behavior, state, or release facts change, and did `noootwo-state` place them?
+- Did an external skill propose a spec, plan, or other durable artifact? If so, was it stored in the Noootwo-owned layer instead of the external skill's default directory?
 - Is user acceptance still required before commit, push, tag, or publish?
 
 Then report what changed, what was verified, what was documented, and what remains open.

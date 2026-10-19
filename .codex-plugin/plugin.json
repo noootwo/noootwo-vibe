@@ -1,6 +1,6 @@
 {
   "name": "noootwo-vibe",
-  "version": "0.20.0",
+  "version": "0.21.0",
   "description": "A Noootwo multi-skill workspace for controlled AI software development, user-centered product decisions, design, code health, and project state persistence.",
   "author": {
     "name": "Noootwo",
@@ -34,13 +34,13 @@
     ],
     "defaultPrompt": [
       "Use $noootwo-ask when you want the right Noootwo skill for your situation and the order to run them in.",
-      "Use $noootwo-workflow to run one multi-step task across files or skills, with lifecycle guardrails and handoffs.",
-      "Use $noootwo-product to settle real user, first loop, scope, main path, states, and acceptance before design or build.",
+      "Use $noootwo-workflow to run one multi-step task across files or skills, with lifecycle guardrails and handoffs, without importing an external skill's project layout.",
+      "Use $noootwo-product to settle real user, first loop, scope, main path, states, and acceptance before design or build, and persist durable specs through the project's owning layer.",
       "Use $noootwo-design for UI, visual, artifact, and frontend work once the product path is settled.",
       "Use $noootwo-tdd for behavior-changing code: failing test first, minimal implementation, relevant tests, then refactor; the full suite belongs to the Release Check.",
       "Use $noootwo-code-health to shape a non-obvious change before implementation, run a scoped Change Check after each requirement, and run the full Release Check before release.",
       "Use $noootwo-release when versioning, tagging, releasing, deploying, rolling back, or tracing a release, including the Release Verification Ledger and Release Check consumption.",
-      "Use $noootwo-state to read, record, or update project state and context, and to choose the storage form for each fact.",
+      "Use $noootwo-state to read, record, or update project state and context, including specs and plans, and to choose the storage form and owning layer for each fact.",
       "Use $noootwo-debug when something is broken, failing, flaky, or wrong: it proves the cause before any fix.",
       "Use $noootwo-research when a decision needs evidence from outside the repo: a direction, a stack or library, a market expectation.",
       "Use $noootwo-onboard when you enter an unfamiliar project or need to know which skills it needs."

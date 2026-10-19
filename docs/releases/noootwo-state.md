@@ -1,5 +1,13 @@
 # noootwo-state Releases
 
+## v0.3.0
+
+- Added `spec` and `plan` fact types so accepted design contracts and their implementation sequences have explicit Noootwo-owned Markdown layers.
+- Project specs now belong under `docs/specs/`; implementation plans belong under `docs/plans/`; `.noootwo/specs/active-design.md` remains the active task contract.
+- Another installed skill's default output directory no longer overrides project document ownership. External paths remain read-only legacy unless the user approves a migration.
+- Added `spec.recorded` and `plan.recorded` events and self-test coverage for spec and plan destinations.
+- An omitted destination now defaults to `docs/specs/<request_id>.md` or `docs/plans/<request_id>.md`; relative custom destinations resolve from the project root.
+
 ## v0.2.0
 
 - Added an abstract `migrate` command that ingests old files through a migration manifest and converts them into the current state format without interpreting their content.

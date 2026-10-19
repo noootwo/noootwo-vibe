@@ -11,9 +11,12 @@ Choose one owning location for each persisted fact. The location follows the fac
 | Durable decision | an accepted choice and its consequence | temporary status |
 | Procedure | how to repeat a task | field-level reference |
 | Reference | exact fields, commands, schemas, manifests | narrative reasoning |
+| Specification | an accepted product, UX, or system design contract | current status, release notes, repeatable procedure |
+| Implementation plan | the order and checkpoints for an accepted specification | repeatable procedure, raw evidence |
 | Release record | versioned change and migration notes | current active work |
 | Cold evidence | raw evidence, long logs, old notes | anything read on every task |
 | Legacy archive | superseded source files moved during migration | current truth or hot reads |
+| Legacy external-skill path | read-only imported history | new truth or newly authored artifacts |
 
 If a repository uses different names, map to responsibility instead of forcing these names.
 
@@ -24,6 +27,8 @@ If a repository uses different names, map to responsibility instead of forcing t
 | `state` | structured current snapshot |
 | `event` | append-only history |
 | `decision` | durable decision record |
+| `spec` | `docs/specs/` accepted design contract |
+| `plan` | `docs/plans/` implementation sequence |
 | `narrative` | Markdown owning layer |
 | `release` | release record |
 | `procedure` | procedure layer |
@@ -39,6 +44,7 @@ One fact, one owner. Link from another layer only when discovery would otherwise
 4. Link from other layers only when required.
 5. Remove or revise stale claims in the same pass.
 6. Keep hot files within budget; move detail to an on-demand or cold layer.
+7. When another skill supplies its own directory convention, map the fact through this table instead of adopting that path as project truth.
 
 ## Budget
 

@@ -7,13 +7,13 @@ It publishes eleven focused skills — a router plus ten specialists:
 | Skill | Invocation | Purpose | Version |
 | --- | --- | --- | --- |
 | `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in | `0.5.1` |
-| `noootwo-workflow` | model-invoked | Reads current project state, matches the correct installed skill, and schedules shape-before-implementation, scoped Change Checks, Release Verification Ledger handoffs, and the full Release Check | `0.18.1` |
-| `noootwo-product` | model-invoked | Settles real user, first loop, scope, main path, states, and acceptance before design or build | `0.10.1` |
+| `noootwo-workflow` | model-invoked | Reads current project state, matches the correct installed skill, and schedules shape-before-implementation, scoped Change Checks, Release Verification Ledger handoffs, and the full Release Check | `0.18.2` |
+| `noootwo-product` | model-invoked | Settles real user, first loop, scope, main path, states, and acceptance before design or build | `0.11.0` |
 | `noootwo-design` | model-invoked | Turns a settled product path into a contextual visual intervention, tokens, a Design Contract, and a reviewed artifact | `0.19.1` |
 | `noootwo-tdd` | model-invoked | Owns red-green-refactor and relevant-test evidence for behavior-changing code | `0.6.0` |
 | `noootwo-code-health` | model-invoked | Shapes a non-obvious change, runs a scoped Change Check after each requirement, and a full Release Check before release | `0.17.0` |
 | `noootwo-release` | model-invoked | Owns the Release Verification Ledger, Release Check consumption, versioning, tags, immutable artifacts, deployment traces, provenance, rollback, and release health | `0.3.0` |
-| `noootwo-state` | model-invoked | Reads and records project state and context, and chooses the storage form | `0.2.0` |
+| `noootwo-state` | model-invoked | Reads and records project state and context, and chooses the storage form and owning layer | `0.3.0` |
 | `noootwo-debug` | model-invoked | Proves the cause, bounds the fix, and closes systemically to prevent recurrence | `0.5.0` |
 | `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, and borrows mechanisms instead of surfaces | `0.6.1` |
 | `noootwo-onboard` | model-invoked | Enters an unfamiliar project and audits which skills it needs | `0.4.1` |
@@ -190,13 +190,13 @@ python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scena
 Each child skill has its own `VERSION` file and tag prefix:
 
 - `noootwo-ask@v0.5.1`
-- `noootwo-workflow@v0.18.1`
-- `noootwo-product@v0.10.1`
+- `noootwo-workflow@v0.18.2`
+- `noootwo-product@v0.11.0`
 - `noootwo-design@v0.19.1`
 - `noootwo-tdd@v0.6.0`
 - `noootwo-code-health@v0.17.0`
 - `noootwo-release@v0.3.0`
-- `noootwo-state@v0.2.0`
+- `noootwo-state@v0.3.0`
 - `noootwo-debug@v0.5.0`
 - `noootwo-research@v0.6.1`
 - `noootwo-onboard@v0.4.1`

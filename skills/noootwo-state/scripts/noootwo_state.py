@@ -37,6 +37,8 @@ EVENT_TYPES = {
     "event.appended",
     "format.selected",
     "decision.recorded",
+    "spec.recorded",
+    "plan.recorded",
     "narrative.recorded",
     "release.recorded",
     "evidence.recorded",
@@ -50,12 +52,13 @@ EVENT_TYPES = {
     "abandoned",
 }
 REQUEST_REQUIRED = {"request_id", "fact_type", "query_profile", "mutability", "lifespan", "content"}
-FACT_TYPES = {"state", "event", "decision", "narrative", "release", "evidence", "procedure"}
+FACT_TYPES = {"state", "event", "decision", "spec", "plan", "narrative", "release", "evidence", "procedure"}
 QUERY_PROFILES = {"field", "tail", "search", "human"}
 MUTABILITIES = {"current", "append-only", "immutable"}
 LIFESPANS = {"hot", "durable", "cold"}
 HASH_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
 ISO_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}")
+SAFE_REQUEST_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 
 
 def utc_now() -> str:
@@ -348,7 +351,7 @@ def choose_form(request: dict) -> str:
         return "event"
     if fact_type == "evidence" or (lifespan == "cold" and query_profile == "search"):
         return "cold"
-    if fact_type in {"decision", "narrative", "release", "procedure"} or query_profile == "human":
+    if fact_type in {"decision", "spec", "plan", "narrative", "release", "procedure"} or query_profile == "human":
         return "markdown"
     return "state"
 
@@ -365,6 +368,23 @@ def validate_request(request: dict) -> None:
         raise SystemExit("invalid mutability")
     if request["lifespan"] not in LIFESPANS:
         raise SystemExit("invalid lifespan")
+
+
+def resolve_destination(root: Path, destination: Path | None) -> Path | None:
+    if destination is None:
+        return None
+    return destination if destination.is_absolute() else root / destination
+
+
+def default_markdown_destination(root: Path, request: dict) -> Path:
+    fact_type = request["fact_type"]
+    if fact_type in {"spec", "plan"}:
+        request_id = request["request_id"]
+        if not SAFE_REQUEST_ID_RE.match(request_id):
+            raise SystemExit("spec and plan request_id must be a safe file name when --destination is omitted")
+        directory = "specs" if fact_type == "spec" else "plans"
+        return root / "docs" / directory / f"{request_id}.md"
+    return state_dir(root) / "records" / f"{request['request_id']}.md"
 
 
 def apply_request(root: Path, request: dict, destination: Path | None = None, source: str | None = None) -> str:
@@ -387,16 +407,16 @@ def apply_request(root: Path, request: dict, destination: Path | None = None, so
         payload = {"request_id": request["request_id"], "replaces": replaces}
     elif form == "cold":
         if isinstance(request["content"], str):
-            destination = Path(destination) if destination else state_dir(root) / "evidence" / f"{request['request_id']}.md"
+            destination = resolve_destination(root, destination) or state_dir(root) / "evidence" / f"{request['request_id']}.md"
             content = request["content"]
         else:
-            destination = Path(destination) if destination else state_dir(root) / "evidence" / f"{request['request_id']}.json"
+            destination = resolve_destination(root, destination) or state_dir(root) / "evidence" / f"{request['request_id']}.json"
             content = json.dumps(request["content"], indent=2, ensure_ascii=False)
         atomic_write(destination, content if content.endswith("\n") else content + "\n")
         event_type = "evidence.recorded"
         payload = {"request_id": request["request_id"], "destination": str(destination), "replaces": replaces}
     else:
-        destination = Path(destination) if destination else state_dir(root) / "records" / f"{request['request_id']}.md"
+        destination = resolve_destination(root, destination) or default_markdown_destination(root, request)
         content = request["content"]
         if not isinstance(content, str):
             content = json.dumps(content, indent=2, ensure_ascii=False)
@@ -481,6 +501,30 @@ def self_test() -> None:
             "owner_skill": "caller",
         }
         request_command(root, argparse.Namespace(json_request=json.dumps(request), request_file=None, destination=None))
+        spec = {
+            "request_id": "spec_1",
+            "fact_type": "spec",
+            "query_profile": "human",
+            "mutability": "immutable",
+            "lifespan": "durable",
+            "content": "# Self-test spec\n",
+            "owner_skill": "caller",
+        }
+        request_command(root, argparse.Namespace(json_request=json.dumps(spec), request_file=None, destination=None))
+        if not (root / "docs" / "specs" / "spec_1.md").is_file():
+            raise SystemExit("spec was not written to the default spec destination")
+        plan = {
+            "request_id": "plan_1",
+            "fact_type": "plan",
+            "query_profile": "human",
+            "mutability": "immutable",
+            "lifespan": "durable",
+            "content": "# Self-test plan\n",
+            "owner_skill": "caller",
+        }
+        request_command(root, argparse.Namespace(json_request=json.dumps(plan), request_file=None, destination=Path("docs") / "plans" / "custom-plan.md"))
+        if not (root / "docs" / "plans" / "custom-plan.md").is_file():
+            raise SystemExit("plan was not written relative to the project root")
         evidence = {
             "request_id": "ev_1",
             "fact_type": "evidence",

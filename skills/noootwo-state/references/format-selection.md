@@ -4,7 +4,7 @@ Choose the storage form from the request properties only. Do not use the content
 
 ## Request properties
 
-- `fact_type`: `state | event | decision | narrative | release | evidence | procedure`
+- `fact_type`: `state | event | decision | spec | plan | narrative | release | evidence | procedure`
 - `query_profile`: `field | tail | search | human`
 - `mutability`: `current | append-only | immutable`
 - `lifespan`: `hot | durable | cold`
@@ -15,7 +15,7 @@ Choose the storage form from the request properties only. Do not use the content
 | --- | --- |
 | `query_profile` is `field` or `tail`, and `mutability` is `current` | JSON current snapshot |
 | `mutability` is `append-only`, and `fact_type` is `event` | JSONL event history |
-| `query_profile` is `human`, or `fact_type` is `narrative`, `decision`, or `release` | Markdown owning layer |
+| `query_profile` is `human`, or `fact_type` is `narrative`, `decision`, `spec`, `plan`, or `release` | Markdown owning layer |
 | `lifespan` is `cold`, and `query_profile` is `search` | cold evidence file or reference path |
 | `fact_type` is `procedure` | Markdown procedure layer |
 

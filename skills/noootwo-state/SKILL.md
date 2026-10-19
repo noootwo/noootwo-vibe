@@ -13,7 +13,7 @@ Take an abstract StateWriteRequest. Do not interpret the content's domain meanin
 
 | Field | Values |
 | --- | --- |
-| `fact_type` | `state`, `event`, `decision`, `narrative`, `release`, `evidence`, `procedure` |
+| `fact_type` | `state`, `event`, `decision`, `spec`, `plan`, `narrative`, `release`, `evidence`, `procedure` |
 | `query_profile` | `field`, `tail`, `search`, `human` |
 | `mutability` | `current`, `append-only`, `immutable` |
 | `lifespan` | `hot`, `durable`, `cold` |
@@ -25,8 +25,10 @@ Use `references/format-selection.md`. The decision comes only from the request p
 ## 3. Persist
 
 - Structured current state or append-only events → `scripts/noootwo_state.py request` or `log`.
-- Narrative, decision, or release facts → the owning Markdown layer named in `references/state-layering.md`.
+- Narrative, decision, spec, plan, or release facts → the owning Markdown layer named in `references/state-layering.md`.
+- A spec or plan without an explicit destination defaults to `docs/specs/<request_id>.md` or `docs/plans/<request_id>.md`.
 - Do not create a second authority for the same fact; replace or link the stale one.
+- Another skill's default artifact path is not project policy. Put the durable record in the owning Noootwo layer; keep external paths only as read-only legacy.
 
 ## 4. Read cheaply
 
