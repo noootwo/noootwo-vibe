@@ -24,6 +24,7 @@ Start here, then merge onto the main flow.
 
 - **Anything multi-step, cross-file, or risky** → `$noootwo-workflow`. It reads current project state, matches the correct installed skill, and schedules one next step at a time. Start here when you are unsure where to start.
 - **Something is broken** → `$noootwo-debug`: it proves the cause before any fix. Add `$noootwo-workflow` when the fix spans several files, skills, or a release.
+- **A claim or several suspected problems need confirmation** → `$noootwo-debug`: it maps each claim to the evidence that can settle it, stays read-only, and returns a verdict and options before any fix.
 - **A decision needs evidence from outside the repo** → `$noootwo-research`: a design direction, a stack or library choice, a competitor or user expectation, or prior art.
 - **You are new to this project** → `$noootwo-onboard`: it audits which skills the project needs and what foundation is missing.
 - **The last attempt was rejected** → `$noootwo-workflow`. It diagnoses which layer failed — product, design, implementation, or evidence — and routes to the skill that owns it, instead of another round of the same polish.
@@ -54,6 +55,7 @@ Start here, then merge onto the main flow.
 | A version, tag, artifact, deployment trace, or rollback path is needed | `$noootwo-release` |
 | Something changed and state or context must stay true | `$noootwo-state` |
 | Something is broken and the cause is not yet proven | `$noootwo-debug` |
+| A claim or several suspected problems need evidence and a recommendation | `$noootwo-debug` |
 | A decision needs evidence that only exists outside the repo | `$noootwo-research` |
 | Something works but is too slow, too big, or too expensive | `$noootwo-code-health` |
 | You do not know the project, or which skills it needs | `$noootwo-onboard` |

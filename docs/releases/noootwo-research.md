@@ -1,5 +1,11 @@
 # noootwo-research Releases
 
+## v0.7.0
+
+- Clarified that live runtime, configuration, and deployment state are observations owned by the evidence path, not research findings.
+- A disputed live fact now routes to `noootwo-debug`; research can establish what a protocol or product supports, but not which instance is currently running.
+- Added `runtime-fact-not-research` and declared `noootwo-debug` as a dependency.
+
 ## v0.6.1
 
 - Added `emilkowalski/skills`, `alchaincyf/huashu-art-motion`, Shaders, and Paper Shaders to the motion and native-craft source pool with licence, paid-service, asset, and fallback boundaries.

@@ -86,7 +86,7 @@ Adopt only what prevents a repeated, concrete failure, fits the budget, keeps th
 
 Report the finding and its boundary. When the decision is a product decision, invoke the `noootwo-product` skill: read its `SKILL.md` and follow it. When the finding changes a durable fact, invoke the `noootwo-state` skill to place it. When it changes a visual direction, invoke the `noootwo-design` skill.
 
-When the request is not research at all — a local lookup, a bug, or an implementation — say so in one line and re-route instead of running a pass.
+When the request is not research at all — a local lookup, runtime or deployment state, a bug, or an implementation — say so in one line and re-route instead of running a pass. A disputed live fact goes to `noootwo-debug`; invoke it by reading its `SKILL.md` and following it, and let its Diagnosis Map choose the release evidence owner.
 
 **Done when:** the finding is delivered, its boundary is stated, and the owning skill is invoked or recorded as not applying.
 

@@ -21,6 +21,7 @@ Skip it when the change is local and the seam is obvious, with no contract, data
 - product behavior or acceptance is unsettled -> `noootwo-product`;
 - UI direction or visual language is unsettled -> `noootwo-design`;
 - the cause of a failure is unproven -> `noootwo-debug`;
+- a fact about live deployment, current data, or the running build is disputed -> `noootwo-debug` or `noootwo-release`;
 - the answer exists only outside the repository -> `noootwo-research`.
 
 ## Read the current shape

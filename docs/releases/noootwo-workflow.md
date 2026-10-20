@@ -1,5 +1,12 @@
 # noootwo-workflow Releases
 
+## v0.19.0
+
+- Routed confirmation requests, suspected-problem lists, and evidence-first recommendations to `noootwo-debug`'s Diagnosis Map.
+- Added a close-gate check that every requested claim reaches a terminal verdict before a fix or systemic expansion.
+- Added stop conditions for source mutation, deployment, persistent data changes, new systems, and merging independent claims without shared-cause evidence.
+- Added `route-confirmation-to-debug` and `multi-question-frontier` evals.
+
 ## v0.18.2
 
 - External installed skills remain execution resources, but their default artifact directories no longer become project conventions.

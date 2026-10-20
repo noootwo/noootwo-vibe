@@ -1,5 +1,13 @@
 # noootwo-debug Releases
 
+## v0.6.0
+
+- Added the Diagnosis Map as the entry artifact for every debug request. Each claim records its problem class, evidence authority, decisive check, terminal status, stop bound, and handoff.
+- Added layer-specific evidence authority for product, external, protocol, code-path, deployment, data, and agent-process claims. Documentation, source code, and live state no longer substitute for one another.
+- Confirmation is read-only until every requested claim is `confirmed`, `refuted`, `insufficient`, or `decision-needed`. Only confirmed failures enter the existing Incident Path.
+- Added one-check and stop rules so a long report, unrelated system tour, repeated evidence, or more available time cannot widen a settled claim.
+- Added `references/diagnosis-map.md` and three evals covering cross-system audit drift, evidence authority, and mutation before a verdict.
+
 ## v0.5.0
 
 - Added the Systemic Close as Step 8, organized around eight questions: after the incident is closed, debug asks why the defect existed, why existing controls missed it, where sibling or near-miss paths share the condition, which barrier prevents recurrence, and what learning loop changes if the class returns.

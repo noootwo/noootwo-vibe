@@ -1,5 +1,10 @@
 # noootwo-code-health Releases
 
+## v0.17.1
+
+- A disputed premise about failing behavior, the running build, deployment, or current data now routes to `noootwo-debug` or `noootwo-release` before an Integration Read or Change Shape.
+- Added `confirm-premise-before-shape` so design cannot build an implementation around a defect or deployment state that has not been confirmed.
+
 ## v0.17.0
 
 - Split verification into three evidence depths: `change`, `escalated`, and `release`.

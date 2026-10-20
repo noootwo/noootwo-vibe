@@ -23,7 +23,7 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 
 - Current role: user-invoked router.
 - Prior art: Codex/Claude skill routers, Product Design index skill, motion-web intent-detection map.
-- Adopt: negative routing per skill, one hop per trigger, router never does the specialist's work.
+- Adopt: negative routing per skill, one hop per trigger, router never does the specialist's work, and an explicit confirmation route to `noootwo-debug`.
 - Reject: model-invoking the router automatically; duplicating skill bodies inside the router.
 - Next pass: make each `$noootwo-*` entry answer "when not to use it".
 
@@ -31,9 +31,9 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 
 - Current role: evidence-driven re-entrant orchestration, one-next-step scheduling, scope, stop conditions, and external-skill discovery.
 - Prior art: Superpowers orchestration/executing-plans, writing-plans, subagent-driven-development; skill-discovery routers.
-- Adopt: read current project state before stage, match one owner by intent/artifact, keep direct cheap, stop on ambiguity, and persist `.noootwo/workflow-state.md`.
+- Adopt: read current project state before stage, match one owner by intent/artifact, keep direct cheap, stop on ambiguity, persist `.noootwo/workflow-state.md`, and send confirmation requests to `noootwo-debug`'s Diagnosis Map as independent claims.
 - Reject: fixed keyword routing tables, full DAG pre-planning, adding external skills to the Noootwo public set.
-- Next pass: measure routing precision, mid-project resumption, and the Change Check / Release Check boundary across eval scenarios.
+- Next pass: measure routing precision, confirmation routing, independent multi-question frontiers, mid-project resumption, and the Change Check / Release Check boundary across eval scenarios.
 
 ### noootwo-product
 
@@ -54,9 +54,9 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 
 - Current role: settle decisions with outside evidence and audit prior art.
 - Prior art: `dzhng/deep-research`, `mvanhorn/last30days`, `obra/superpowers`, `pbakaus/impeccable`, `mattpocock/skills`, `anthropics/skills`, OpenAI Product Design, `feitangyuan/motion-web`.
-- Adopt: breadth/depth control, evidence ladder, mechanism extraction, borrow-audit gate.
+- Adopt: breadth/depth control, evidence ladder, mechanism extraction, borrow-audit gate, and the boundary that live runtime or deployment state is an observation owned by another skill, not a research finding.
 - Reject: copying source wording, paid MCP as default path, dependencies that tax cheap modes.
-- Next pass: keep expanding `source-pools.md` across product, stack, community, and domain-specific pools; the motion pool now carries licence and maintenance checks.
+- Next pass: run `runtime-fact-not-research`; keep expanding `source-pools.md` across product, stack, community, and domain-specific pools; the motion pool now carries licence and maintenance checks.
 
 ### noootwo-design
 
@@ -78,9 +78,9 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 
 - Current role: pre-implementation integration design, code, architecture, performance, maintainability, refactoring, optimization, re-test, and user acceptance.
 - Prior art: Martin Fowler's *Refactoring* 2nd edition, the online catalog, *Workflows of Refactoring*, *Definition of Refactoring*, *Code Smell*, *Self-Testing Code*, *Technical Debt*, *Design Stamina Hypothesis*, *Is Design Dead?*, *Yagni*, *Branch by Abstraction*, and *Strangler Fig*; Google Engineering Practices and Design Docs at Google; Michael Feathers' seams and design-for-testability material; Thoughtworks Lightweight Architecture Decision Records; Ponytail lean-code-review ladder; Superpowers requesting/receiving code review and verification-before-completion; web.dev/vitals, Lighthouse, SRE, OpenTelemetry, k6, PostgreSQL docs, JMH and related benchmark guidance.
-- Adopt: an Integration Read and compact Change Shape before a non-obvious implementation; seam, ownership, contract, reuse, reversibility, test-seam, and smallest-first-slice decisions; a skip rule for obvious local changes; two hats; six refactoring workflows; small behavior-preserving catalog moves; green-baseline safety; economic payback; structural dispositions; measurable performance evidence; severity output; re-test gate; and explicit user acceptance before submit/publish.
+- Adopt: an Integration Read and compact Change Shape before a non-obvious implementation; seam, ownership, contract, reuse, reversibility, test-seam, and smallest-first-slice decisions; a disputed-premise handoff to debug or release before shaping; a skip rule for obvious local changes; two hats; six refactoring workflows; small behavior-preserving catalog moves; green-baseline safety; economic payback; structural dispositions; measurable performance evidence; severity output; re-test gate; and explicit user acceptance before submit/publish.
 - Reject: big design up front, speculative abstractions, mandatory design documents when no tradeoff exists, implementation manuals disguised as design docs, refactoring as a separate backlog of every smell, large-bang cleanup, refactoring without tests, and adding a separate architecture or performance skill.
-- Next pass: measure integration-read trigger and skip behavior, Change Shape quality, Change Check versus Release Check scope, workflow selection, structural-debt disposition, two-hats separation, and the review-is-part-of-done gate.
+- Next pass: measure the disputed-premise handoff, integration-read trigger and skip behavior, Change Shape quality, Change Check versus Release Check scope, workflow selection, structural-debt disposition, two-hats separation, and the review-is-part-of-done gate.
 
 ### noootwo-release
 
@@ -100,11 +100,11 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 
 ### noootwo-debug
 
-- Current role: prove the cause before fixing, bound the fix, then close systemically to prevent recurrence.
-- Prior art: root-cause analysis and debugging skills; scientific-method and falsification practice; James Reason's latent conditions and defenses; Nancy Leveson's STAMP control model; Chris Argyris's double-loop learning; Google SRE's blameless postmortem and preventive action; Erik Hollnagel's Safety-II.
-- Adopt: hypothesis ledger, evidence chain, toggle, bounded fix, Systemic Close, mechanism/control/learning layers, sibling and near-miss search, proportional recurrence barriers, and explicit learning-loop ownership.
-- Reject: fixing from stack-trace inference before a reproducible cause; a local patch with no systemic close; blaming people; inventing latent risk without a concrete path or hypothesis; turning every small defect into an architecture program.
-- Next pass: run the systemic-close, recurring-bug, near-miss, and proportionality evals on real defects and record whether the close finds concrete latent paths without bloating the fix.
+- Current role: turn a claim into a layer-appropriate verdict, then prove and fix a confirmed failure, then close systemically to prevent recurrence.
+- Prior art: `obra/superpowers` `systematic-debugging` and `diagnosing-superpowers`; `mattpocock/skills` `diagnosing-bugs`, `triage`, and `wayfinder`; `pbakaus/impeccable` audit routing; scientific-method and falsification practice; James Reason's latent conditions and defenses; Nancy Leveson's STAMP control model; Chris Argyris's double-loop learning; Google SRE's blameless postmortem and preventive action; Erik Hollnagel's Safety-II.
+- Adopt: Diagnosis Map, per-claim evidence authority, read-only confirmation, short terminal statuses, one decisive check per claim, frontier and stop rules, hypothesis ledger, evidence chain, toggle, bounded fix, Systemic Close, mechanism/control/learning layers, sibling and near-miss search, proportional recurrence barriers, and explicit learning-loop ownership.
+- Reject: fixing from stack-trace inference before a reproducible cause; treating several claims as one audit without a shared-cause proof; proving live state from docs or local code; a local patch with no systemic close; blaming people; inventing latent risk without a concrete path or hypothesis; turning every small defect into an architecture program.
+- Next pass: run the diagnosis-map, evidence-authority, mutation-stop, systemic-close, recurring-bug, near-miss, and proportionality evals on real defects; compare with-skill and baseline transcripts for scope, time, and token cost.
 
 ### noootwo-onboard
 

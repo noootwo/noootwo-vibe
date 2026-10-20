@@ -1,6 +1,6 @@
 ---
 name: noootwo-workflow
-description: "Use for multi-step tasks, refactors, releases, handoffs, rework, or when the right skill is unclear; reads current project state and matches the correct installed skill."
+description: "Use for multi-step tasks, evidence confirmation, refactors, releases, handoffs, rework, or when the right skill is unclear; reads current state and matches one owner."
 ---
 
 # Noootwo Workflow
@@ -37,6 +37,8 @@ Use `references/route-by-signal.md`. Match by intent, artifact shape, current bl
 
 Use `references/orchestration.md`. Decide one next step at a time. Specialist skills own their method; workflow only returns to the loop after each result.
 
+When the request is to confirm one or more suspected problems, gather evidence, or give options before a fix exists, schedule `noootwo-debug`'s Diagnosis Map. Keep each claim independent until a shared cause is proven; do not start a cross-system audit or implementation.
+
 Precedence is limited to blockers and stage continuity:
 
 `debug/research/product blocker -> design -> code-health/shape when the seam is non-obvious -> preparatory-refactor when structure blocks -> tdd/implementation -> code-health/change-check -> next change or code-health/release-check -> release when publishing -> state/release -> acceptance`
@@ -56,6 +58,7 @@ For non-direct, cross-skill, or external-skill work, invoke the `noootwo-state` 
 Answer before calling the work done:
 
 - Did the required verification depth run — Change Check, escalation when the blast radius required it, and Release Check at the release boundary — or is the gap explicit?
+- For a confirmation request, did every claim end as confirmed, refuted, insufficient, or decision-needed before any fix or expansion?
 - Did a specialist or matching installed skill need to run, and was it invoked?
 - For a non-direct code change, did `noootwo-code-health` shape the implementation when the seam was non-obvious, run a scoped Change Check after green, and run a Release Check only when the task reached release?
 - If a completed change created a release-bound check or known gap, did `noootwo-release` add it to the open Release Verification Ledger?

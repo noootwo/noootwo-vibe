@@ -33,6 +33,7 @@ Escalate on evidence, not anxiety. Stop when the evidence covers the blast radiu
 - Release Check scope is the full project and release surface.
 - Integration Read scope is the nearest seams, contracts, data owners, and existing patterns.
 - Refactoring inside the touched path is part of the change; a full Structure Sweep runs only on a trigger or explicit request.
+- A disputed premise — whether behavior fails, which build ran, or what data exists — goes to `noootwo-debug` or `noootwo-release` before shaping.
 - Ask before changing product behavior or choosing between real tradeoffs.
 
 ## Integration Read

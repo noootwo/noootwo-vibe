@@ -36,6 +36,7 @@ Examples of artifact-shaped matching:
 - repeated edits in one area, context cost growing, a giant file or directory, or a release trigger → `noootwo-code-health` Structure Sweep
 - version, tag, changelog, artifact, deployment trace, rollback, provenance, or release health → `noootwo-release` after code-health readiness
 - a broken behavior or regression → `noootwo-debug` before implementation
+- one or more suspected problems need confirmation, evidence, or a recommendation before a fix → `noootwo-debug` Diagnosis Map; keep the claims independent and the pass read-only until every claim has a verdict
 - an unsettled product decision → `noootwo-product` before design or build
 
 Do not write a permanent `keyword -> skill` table. Skill descriptions and trigger text are the registry.

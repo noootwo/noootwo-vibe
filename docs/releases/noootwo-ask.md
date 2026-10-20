@@ -1,5 +1,10 @@
 # noootwo-ask Releases
 
+## v0.6.0
+
+- Added an explicit route for a claim or several suspected problems that need evidence and a recommendation before any fix.
+- The route points to `noootwo-debug`, which maps each claim to its authority and returns a read-only verdict instead of treating the request as research or implementation.
+
 ## v0.5.1
 
 - The main flow now distinguishes a scoped Change Check after one requirement from the full Release Check before shipping.

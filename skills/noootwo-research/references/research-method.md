@@ -62,6 +62,7 @@ For a claim about what is *current*, *popular*, or *advanced*, record the date o
 | Summarising a source instead of extracting a mechanism | The summary cannot be applied; the mechanism can |
 | Copying a look, prompt, or brand surface | It is not a mechanism, and it carries licence and identity risk |
 | Researching without a named decision | Produces notes nobody acts on, at full cost |
+| Using docs to infer live runtime, configuration, or deployment state | Documentation establishes a capability; only the owning evidence path can establish the current instance |
 | Skipping the pass because the answer "seems obvious" | The obvious answer is the training-data answer, which is exactly what needs checking |
 
 ## Brief format

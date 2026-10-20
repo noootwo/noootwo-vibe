@@ -41,6 +41,8 @@ Stop and ask or reroute when:
 - a material product, architecture, or release choice is unresolved
 - verification is missing and cannot be inferred
 - the change would expand public behavior beyond the user's request
+- a confirmation or diagnosis would need a source edit, rebuild, deployment, persistent data change, or a new system before its claims have verdicts
+- several claims are being merged into one audit without evidence that they share a cause
 - three failed fixes reveal new problems in different places
 - user acceptance is required before commit, push, tag, or publish
 
