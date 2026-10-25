@@ -30,10 +30,13 @@ USER_INVOKED_SKILLS = {"noootwo-ask"}
 ROUTER_SKILLS = {"noootwo-ask"}
 
 MAX_DESCRIPTION_CHARS = 200
+MAX_TOTAL_DESCRIPTION_CHARS = 1800
 MAX_SKILL_LINES = 120
 MAX_REFERENCE_FILES = 12
 MIN_SHORT_DESCRIPTION = 25
 MAX_SHORT_DESCRIPTION = 64
+CONTEXT_LIFECYCLE = "write -> select -> compress -> isolate -> verify"
+CONTEXT_BUDGET_MARKERS = (CONTEXT_LIFECYCLE, "200 lines", "80 lines", "16 KiB", "one writer")
 
 FRONTMATTER_FIELD_RE = re.compile(r"^([A-Za-z0-9_-]+):\s*(.+?)\s*$")
 FRONTMATTER_ALLOWED = {"name", "description", "disable-model-invocation"}
@@ -321,6 +324,35 @@ def validate_skill_set(root: Path, manifest_items: list[dict], errors: list[str]
         validate_skill(root, item, errors)
 
 
+def validate_context_contract(root: Path, manifest_items: list[dict], errors: list[str]) -> None:
+    """Keep discovery load small and make every model-invoked skill budget its reads."""
+    total_description_chars = 0
+    for item in manifest_items:
+        name = item.get("name")
+        if not isinstance(name, str):
+            continue
+        skill_md = root / "skills" / name / "SKILL.md"
+        if not skill_md.is_file():
+            continue
+        raw = skill_md.read_text(encoding="utf-8")
+        frontmatter = parse_skill_frontmatter(skill_md, [])
+        if frontmatter:
+            total_description_chars += len(frontmatter.get("description", ""))
+        if name not in USER_INVOKED_SKILLS:
+            missing = [marker for marker in CONTEXT_BUDGET_MARKERS if marker not in raw]
+            if missing:
+                add(
+                    errors,
+                    f"{name} is missing the Context lifecycle rule markers: {', '.join(missing)}",
+                )
+    if total_description_chars > MAX_TOTAL_DESCRIPTION_CHARS:
+        add(
+            errors,
+            f"skill descriptions total {total_description_chars} characters; "
+            f"the always-loaded budget is {MAX_TOTAL_DESCRIPTION_CHARS}",
+        )
+
+
 def validate_design_module(root: Path, errors: list[str]) -> None:
     design_root = root / "skills" / "noootwo-design"
     for relative in (
@@ -400,6 +432,7 @@ def main() -> int:
     validate_plugin_manifest(root, errors)
     manifest_items = validate_manifest(root, errors)
     validate_skill_set(root, manifest_items, errors)
+    validate_context_contract(root, manifest_items, errors)
     validate_design_module(root, errors)
     permissions = validate_capability_map(root, errors)
     validate_call_permissions(root, permissions, errors)

@@ -1,5 +1,10 @@
 # noootwo-code-health Releases
 
+## v0.17.2
+
+- Added the package-wide context lifecycle and compressed the always-loaded description.
+- Lenses, Change Shape, Change Check, escalation, Release Check, and structural dispositions are unchanged.
+
 ## v0.17.1
 
 - A disputed premise about failing behavior, the running build, deployment, or current data now routes to `noootwo-debug` or `noootwo-release` before an Integration Read or Change Shape.

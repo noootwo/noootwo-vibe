@@ -40,6 +40,16 @@ Only `noootwo-ask` is user-invoked, because only it exists purely to orient a hu
 
 `noootwo-workflow` may discover and invoke other installed skills as execution resources when the task belongs outside the Noootwo set, such as slides, documents, or media work. Those skills are not added to the public set or the capability map. Their method and default output paths are execution details; durable specs, plans, and other project facts are persisted through `noootwo-state` in the project's owning layer.
 
+## Context lifecycle
+
+The suite uses one lifecycle: `write -> select -> compress -> isolate -> verify`. It belongs to the existing skills, not a twelfth context skill.
+
+- `noootwo-workflow` owns read depth and scheduling: `direct` reads no state; `resume` reads the capsule and at most three frontier entry points; `decision/evidence` reads only the source records that can settle the current step.
+- `noootwo-state` owns the bounded capsule, file inspection, cold capture, source hashes, and append-only history. It returns no duplicate event when a read or check changes nothing.
+- Every model-invoked skill uses the same 80-line live excerpt, 16 KiB cold-evidence boundary, and single-writer rule. References above about 200 lines are entered through headings or query hits before the matching section. Only independent read-only research or review may be isolated to a subagent.
+- After compaction, restore the capsule and verify it against the current commit, worktree, and latest evidence. Compression never makes a summary authoritative over its source.
+- When a completed goal is followed by an unrelated goal, write the capsule and recommend a new session unless the human explicitly continues the current one.
+
 ## Router
 
 A **router** is a user-invoked skill that names the other skills and the situations that reach them. It exists to cure cognitive load when the human has too many skills to remember, and it costs no context load.
@@ -79,7 +89,7 @@ Every capability has exactly one owner. A caller invokes the owner; it never re-
 | running red-green-refactor and keeping tests honest | `noootwo-tdd` | `noootwo-workflow`, `noootwo-code-health` | the relevant-test green evidence, the minimal implementation, and the behavior-preserving refactor baseline |
 | shaping a non-obvious change into existing code, scoping verification to the change, and keeping code structure healthy, including performance work | `noootwo-code-health` | `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard` | the Change Shape (seam, ownership, contracts, reuse, reversibility, test seam, first slice, rejected alternatives), the Change Check or Release Check, severity-ordered findings, the lenses applied, evidence read, verification gaps, structural dispositions, and the owning skill for each handoff |
 | owning the Release Verification Ledger, version policy, release artifacts, deployment traces, provenance, rollback, and release health | `noootwo-release` | `noootwo-workflow`, `noootwo-code-health`, `noootwo-onboard`, `noootwo-debug` | the reconciled and sealed Release Verification Ledger, Release Plan, version and artifact identity, deployment markers, rollback path, provenance gaps, and release-health evidence |
-| recording and reading project state/context and choosing storage format | `noootwo-state` | `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-tdd`, `noootwo-code-health`, `noootwo-release`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard` | the stored record, the chosen form and location, the read result, or a recorded decision that nothing changed |
+| recording and reading project state/context and choosing storage format | `noootwo-state` | `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-tdd`, `noootwo-code-health`, `noootwo-release`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard` | the stored record, chosen form and location, bounded capsule, file inspection, cold capture handle, or a recorded decision that nothing changed |
 | ordering, verification depth, scope, stop conditions, and handoffs | `noootwo-workflow` | the human, `noootwo-ask`, and every specialist handing sequencing back: `noootwo-product`, `noootwo-design`, `noootwo-code-health`, `noootwo-release`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard`, `noootwo-tdd` | mode, verification depth, sequence, handoffs, and the close report |
 
 A skill body may name a sibling only when that sibling's row lists the caller. Naming a skill is the instruction to load it, so an undeclared name is a call the bridge never authorized. `noootwo-ask` is exempt: it names skills as hints for the human and can never fire one.

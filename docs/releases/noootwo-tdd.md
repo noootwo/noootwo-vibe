@@ -1,5 +1,10 @@
 # noootwo-tdd Releases
 
+## v0.6.1
+
+- Added the package-wide context lifecycle and compressed the always-loaded description.
+- Red-green-refactor, relevant-test proof, and the Release Check boundary are unchanged.
+
 ## v0.6.0
 
 - Replaced the ambiguous "full relevant test command" with the relevant test command for the touched behavior and nearest boundary.

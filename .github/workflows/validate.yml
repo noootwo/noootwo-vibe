@@ -52,12 +52,14 @@ jobs:
             skills/noootwo-design/scripts/check_visual_gates.py \
             skills/noootwo-design/scripts/eval_noootwo_artifacts.py \
             skills/noootwo-design/scripts/noootwo_status.py \
-            skills/noootwo-state/scripts/noootwo_state.py
+            skills/noootwo-state/scripts/noootwo_state.py \
+            skills/noootwo-state/scripts/audit_codex_context.py
 
       - name: Verify Noootwo State scripts
         run: |
           sh -n skills/noootwo-state/scripts/noootwo-state.sh
           python skills/noootwo-state/scripts/noootwo_state.py --self-test
+          python skills/noootwo-state/scripts/audit_codex_context.py --self-test
 
       - name: Verify Noootwo Design harness bootstrap
         run: |

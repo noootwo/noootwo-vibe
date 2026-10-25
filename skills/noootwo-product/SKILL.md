@@ -1,11 +1,11 @@
 ---
 name: noootwo-product
-description: "Use before design or build when user, first loop, scope, main path, states, or acceptance are unsettled; also for new ideas, feature lists, backend flows, and auditing existing UX."
+description: "Use before design or build when user, first loop, scope, path, states, or acceptance are unsettled; also audit existing UX and new ideas."
 ---
 
 # Noootwo Product
 
-Settle what should exist before anything is designed or built. This is a product decision navigator, not a PRD generator.
+Settle what should exist before anything is designed or built. This is a product decision navigator, not a PRD generator. Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate only independent read-only work; keep one writer; verify summaries against source.
 
 ## The flow
 

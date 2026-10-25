@@ -1,11 +1,11 @@
 ---
 name: noootwo-code-health
-description: "Use before a non-obvious change to shape its seam; after each change for a scoped review; before release for a full structure, performance, and acceptance gate."
+description: "Use before a non-obvious change to shape its seam; after each change for scoped review; before release for structure, performance, and acceptance."
 ---
 
 # Noootwo Code Health
 
-Keep code elegant and healthy: shape a non-obvious change into the existing code before implementation, then judge and improve the structure the change exposed. Architecture, seams, test strategy, performance, maintainability, refactoring, optimization, and acceptance live here as lenses.
+Keep code elegant and healthy: shape a non-obvious change into the existing code before implementation, then judge and improve the structure the change exposed. Architecture, seams, test strategy, performance, maintainability, refactoring, optimization, and acceptance live here as lenses. Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate only independent read-only work; keep one writer; verify summaries against source.
 
 ## When this runs
 

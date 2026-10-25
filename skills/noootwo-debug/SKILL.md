@@ -1,11 +1,11 @@
 ---
 name: noootwo-debug
-description: "Use to confirm suspected problems or prove broken, failing, flaky, or unknown behavior across code, data, protocol, deployment, or agent state; map evidence, prove cause, bound the fix."
+description: "Use to confirm or disprove suspected failures across code, data, protocol, deployment, or agent state; map evidence, prove cause, bound the fix."
 ---
 
 # Noootwo Debug
 
-Turn a claim into a verdict backed by the authority that can settle it. A reproducible failure then gets a proven cause, the smallest fix, and a systemic close. A confirmation request may end at the verdict: it does not earn a cross-system audit, a patch, or a document. Making something faster, smaller, or cheaper is optimization, not a failure — that work belongs to the `noootwo-code-health` skill.
+Turn a claim into a verdict backed by the authority that can settle it. A reproducible failure then gets a proven cause, the smallest fix, and a systemic close. A confirmation request may end at the verdict: it does not earn a cross-system audit, a patch, or a document. Making something faster, smaller, or cheaper is optimization, not a failure — that work belongs to the `noootwo-code-health` skill. Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate only independent read-only work; keep one writer; verify summaries against source.
 
 When the expected behaviour is itself unsettled — what the thing should do is a decision, not a fact — invoke the `noootwo-product` skill first: read its `SKILL.md` and follow it.
 
@@ -20,7 +20,7 @@ Status: <open | confirmed | refuted | insufficient | decision-needed>  Stop / wi
 Handoff: <none | product | research | code-health | release | state | workflow>
 ```
 
-Read `references/diagnosis-map.md` before confirming multiple claims, mixing evidence layers, or choosing what counts as proof. Keep independent claims separate until a shared cause is proven.
+Before opening background docs, search once by the request's own identifiers; a named issue starts at its registry entry. Batch independent reads, cap each live command at 80 lines, and stop at the first terminal verdict. For recurrence or duplicate-registration claims, registry status, post-fix evidence, and fix ancestry are the whole evidence set when they agree; stop there, and inspect implementation, tests, or orientation docs only when those records conflict or are missing. Read `references/diagnosis-map.md` before confirming multiple claims, mixing evidence layers, or choosing what counts as proof. Keep independent claims separate until a shared cause is proven.
 
 For one failing behaviour, also record `Expected: <what should happen>` and `Actual: <what happens, with the raw error line>` in the user's words. For a confirmation-only claim, the map is the whole task; end at its verdict with the minimum evidence that settles it.
 
@@ -32,7 +32,7 @@ Until every requested claim has a status, stay read-only: no source edit, patch,
 
 Run the Incident Path only for a mapped failure. Get it failing on demand, locally, fast.
 
-- Record the exact command and its output; you will run it many times.
+- Record the exact command and its output; for output likely above 16 KiB, invoke the `noootwo-state` skill: read its `SKILL.md` and follow it, then use `capture --name ID --` instead of building evidence scaffolding. You will run the command many times.
 - Shrink it: fewest steps, smallest input, shortest loop.
 - Intermittent failures: measure the rate (n/10), then suspect order, time, concurrency, or shared state; an environment-only failure makes the environment difference the primary lead, not an excuse.
 

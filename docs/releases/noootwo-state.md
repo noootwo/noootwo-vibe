@@ -1,5 +1,14 @@
 # noootwo-state Releases
 
+## v0.4.0
+
+- Added `capsule`: a read-only `noootwo.context-capsule/0.1` Markdown or JSON view bounded by default to 80 lines and 6,000 characters, with a source hash and recent evidence handles. `summary` now shares capsule semantics.
+- Added `inspect PATH`: file size, line count, hash, title, headings, and bounded query hits without dumping a long file.
+- Added `capture --name ID -- CMD`: streamed, byte-preserving cold evidence with exit status, full log, hash, and bounded tail. It does not change project state.
+- Added `audit_codex_context.py`: aggregate token, compaction, tool-output, and repeated-command evidence with thread/response dedupe, date-only `--since`, and no message, tool-output, argument, environment, or credential text.
+- State updates now record actual changed fields and skip events when nothing changed. Evidence records carry destination, byte count, hash, source, command, and exit status when supplied. The state and event schemas remain unchanged; existing history remains readable.
+- Added deterministic self-tests for capsule formats and bounds, missing/corrupt state, file inspection and binary files, successful/failing/over-16-KiB capture, audit dedupe, top-level compaction counting, and privacy output; both state scripts now run these checks in CI.
+
 ## v0.3.0
 
 - Added `spec` and `plan` fact types so accepted design contracts and their implementation sequences have explicit Noootwo-owned Markdown layers.

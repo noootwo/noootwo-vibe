@@ -1,11 +1,11 @@
 ---
 name: noootwo-design
-description: "Use for UI, visual, artifact, or frontend work after product path is settled: screens, redesigns, tokens, components, critique, contextual motion decisions, or reference replication."
+description: "Use for UI, visual, artifact, or frontend work after product path is settled: screens, tokens, critique, motion, or reference replication."
 ---
 
 # Noootwo Design
 
-Turn a settled product path into a visual system, a reviewable artifact, and a handoff. When the real user, main path, states, or acceptance are unsettled, invoke the `noootwo-product` skill first: read its `SKILL.md` and follow it.
+Turn a settled product path into a visual system, a reviewable artifact, and a handoff. When the real user, main path, states, or acceptance are unsettled, invoke the `noootwo-product` skill first: read its `SKILL.md` and follow it. Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate only independent read-only work; keep one writer; verify summaries against source.
 
 ## 1. Size the work
 

@@ -49,3 +49,5 @@ One fact, one owner. Link from another layer only when discovery would otherwise
 ## Budget
 
 Hot entrypoints and current snapshots stay small. Move old versions to release records, durable choices to decision records, repeatable steps to procedures, and raw evidence or long history out of the hot path.
+
+Cold evidence may stay large, but its hot handle carries the path, source role, command or URL, exact commit or input, exit status where relevant, and content hash. Reopen the handle when a decision depends on details the capsule does not carry.

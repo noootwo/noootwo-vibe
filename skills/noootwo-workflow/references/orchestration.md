@@ -4,7 +4,7 @@ Workflow schedules one next owner at a time. It does not precompute a full DAG.
 
 ## Loop
 
-`snapshot -> route one owner -> specialist runs -> collect result -> update state -> next step or stop`
+`snapshot -> route one owner -> specialist runs -> collect result -> update state when changed -> next step or stop`
 
 Each cycle loads only what the current step needs. The specialist owns its method; workflow keeps order, scope, stop conditions, and handoffs.
 

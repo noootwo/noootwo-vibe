@@ -6,19 +6,41 @@ It publishes eleven focused skills — a router plus ten specialists:
 
 | Skill | Invocation | Purpose | Version |
 | --- | --- | --- | --- |
-| `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in | `0.6.0` |
-| `noootwo-workflow` | model-invoked | Reads current project state, matches the correct installed skill, and schedules shape-before-implementation, scoped Change Checks, Release Verification Ledger handoffs, and the full Release Check | `0.19.0` |
-| `noootwo-product` | model-invoked | Settles real user, first loop, scope, main path, states, and acceptance before design or build | `0.11.0` |
-| `noootwo-design` | model-invoked | Turns a settled product path into a contextual visual intervention, tokens, a Design Contract, and a reviewed artifact | `0.19.1` |
-| `noootwo-tdd` | model-invoked | Owns red-green-refactor and relevant-test evidence for behavior-changing code | `0.6.0` |
-| `noootwo-code-health` | model-invoked | Shapes a non-obvious change, runs a scoped Change Check after each requirement, and a full Release Check before release | `0.17.1` |
-| `noootwo-release` | model-invoked | Owns the Release Verification Ledger, Release Check consumption, versioning, tags, immutable artifacts, deployment traces, provenance, rollback, and release health | `0.3.0` |
-| `noootwo-state` | model-invoked | Reads and records project state and context, and chooses the storage form and owning layer | `0.3.0` |
-| `noootwo-debug` | model-invoked | Confirms claims with layer-appropriate evidence, proves a failure's cause, bounds the fix, and closes systemically | `0.6.0` |
-| `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, and borrows mechanisms instead of surfaces | `0.7.0` |
-| `noootwo-onboard` | model-invoked | Enters an unfamiliar project and audits which skills it needs | `0.4.1` |
+| `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in | `0.6.1` |
+| `noootwo-workflow` | model-invoked | Chooses read depth, loads one owner at a time, and schedules shape-before-implementation, scoped Change Checks, Release Verification Ledger handoffs, and the full Release Check | `0.20.0` |
+| `noootwo-product` | model-invoked | Settles real user, first loop, scope, main path, states, and acceptance before design or build | `0.11.1` |
+| `noootwo-design` | model-invoked | Turns a settled product path into a contextual visual intervention, tokens, a Design Contract, and a reviewed artifact | `0.19.2` |
+| `noootwo-tdd` | model-invoked | Owns red-green-refactor and relevant-test evidence for behavior-changing code | `0.6.1` |
+| `noootwo-code-health` | model-invoked | Shapes a non-obvious change, runs a scoped Change Check after each requirement, and a full Release Check before release | `0.17.2` |
+| `noootwo-release` | model-invoked | Owns the Release Verification Ledger, Release Check consumption, versioning, tags, immutable artifacts, deployment traces, provenance, rollback, and release health | `0.3.1` |
+| `noootwo-state` | model-invoked | Reads and records project state and context, produces bounded capsules, inspects files, captures cold evidence, and chooses the storage form and owning layer | `0.4.0` |
+| `noootwo-debug` | model-invoked | Confirms claims with layer-appropriate evidence, proves a failure's cause, bounds the fix, and closes systemically | `0.6.1` |
+| `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, and borrows mechanisms instead of surfaces | `0.7.1` |
+| `noootwo-onboard` | model-invoked | Enters an unfamiliar project, audits context health and the skills it needs | `0.5.0` |
 
 The repository root is not a published skill. It is the shared workspace for manifests, docs, validation, release helpers, and CI.
+
+## Context Budget
+
+The eleven skills share one lifecycle: `write -> select -> compress -> isolate -> verify`. It does not add a twelfth skill; `noootwo-workflow` chooses reading depth and `noootwo-state` owns the bounded read view and evidence handles.
+
+- `direct` work reads the current file context, not project state.
+- `resume` reads a context capsule, current commit/worktree, and at most three frontier entry points.
+- `decision/evidence` work reads only the ADRs, specs, release records, contracts, or local evidence that can settle the step.
+- References above about 200 lines are entered through headings or query hits. Live excerpts stay at 80 lines or fewer. Raw output above 16 KiB goes to cold evidence first; the hot context carries its path and hash.
+- One writer owns dependent changes. Only independent read-only research or review is isolated to a subagent.
+- After compaction or when the goal changes, the capsule is checked against the current commit, worktree, and latest evidence. An unrelated new goal after completion gets a new-session recommendation unless the user explicitly continues.
+
+Useful state reads:
+
+```bash
+skills/noootwo-state/scripts/noootwo-state.sh capsule
+skills/noootwo-state/scripts/noootwo-state.sh inspect docs/status.md --query release
+skills/noootwo-state/scripts/noootwo-state.sh capture --name failing-check -- npm test
+python3 skills/noootwo-state/scripts/audit_codex_context.py --cwd "$PWD" --since 2026-10-01 --json
+```
+
+The capsule is a read view, never a new source of truth. Append-only events and cold evidence remain the history. The design and evidence boundary are recorded in [ADR 0024](docs/adr/0024-bounded-context-lifecycle.md) and [the context-cost research brief](docs/reference/context-cost.md).
 
 ## Install
 
@@ -103,7 +125,7 @@ npx skills add ./skills/noootwo-design --list
 
 `noootwo-ask` is the only user-invoked skill. Type it when you are unsure which skill fits; it names the right one and the order to run them in, at no context cost to the agent.
 
-`noootwo-workflow` is the evidence-driven orchestrator. It reads current repo truth and project state through `noootwo-state`, matches the right owner from the available skill descriptions and artifact shape, and schedules one next step at a time. It owns order, verification depth, scope, stop conditions, and handoffs; the specialists and matching installed skills own the work. A request to confirm several suspected problems goes to `noootwo-debug`'s Diagnosis Map, with independent claims and a read-only verdict before any fix. For a non-obvious code change, it schedules `noootwo-code-health` to shape the seam before `noootwo-tdd`; an obvious local edit skips that pass. After one requirement, code-health runs a Change Check scoped to the diff and blast radius; before release, it runs one Release Check with the full suite or CI evidence, a full Structure Sweep, and release evidence. A newly discovered release-bound check or gap is routed to `noootwo-release` for the Release Verification Ledger instead of being carried as every requirement's full audit. It can invoke other installed skills for slides, documents, or media work without adding them to the Noootwo public set. When the owner is ambiguous or absent, it stops with one or two candidates instead of guessing.
+`noootwo-workflow` is the evidence-driven orchestrator. It chooses `direct`, `resume`, or `decision/evidence` reading depth, verifies a restored capsule against the current commit and worktree, matches the right owner from available skill descriptions and artifact shape, and schedules one next step at a time. It treats a named current spec, ADR, issue, or evidence record as an authority rather than a reason to re-run its authoring skill, and loads at most one specialist body before evidence. Plan-only work receives one bounded identifier search and no preloaded downstream owners. It owns order, verification depth, scope, stop conditions, and handoffs; the specialists and matching installed skills own the work. It records state only when the goal, decision, blocker, evidence, or next trigger changes, and recommends a new session for an unrelated goal after completion. A request to confirm several suspected problems goes to `noootwo-debug`'s Diagnosis Map, with independent claims and a read-only verdict before any fix. For a non-obvious code change, it schedules `noootwo-code-health` to shape the seam before `noootwo-tdd`; an obvious local edit skips that pass. After one requirement, code-health runs a Change Check scoped to the diff and blast radius; before release, it runs one Release Check with the full suite or CI evidence, a full Structure Sweep, and release evidence. A newly discovered release-bound check or gap is routed to `noootwo-release` for the Release Verification Ledger instead of being carried as every requirement's full audit. It can invoke other installed skills for slides, documents, or media work without adding them to the Noootwo public set. When the owner is ambiguous or absent, it stops with one or two candidates instead of guessing.
 
 `noootwo-product` settles what should exist before anything is designed or built. It reads discoverable facts itself, names what is unsettled, and then grills the frontier — the questions answerable now — one round at a time, each question carrying options and a recommendation. It ends when the frontier is empty and the user confirms a shared understanding, then produces the Product-to-Design Handoff.
 
@@ -115,13 +137,13 @@ npx skills add ./skills/noootwo-design --list
 
 `noootwo-release` owns release engineering. It turns a ready change into an identified, immutable release: version source and compatibility, tag semantics, artifact identity and provenance, changelog and release notes, deployment markers, rollback or forward-fix, and release health by version. It keeps one Release Verification Ledger for checks that must be decided at the release boundary, dedupes them by evidence boundary, consumes each once through the Release Check, and seals the result into the release record. It persists release facts through `noootwo-state` and uses existing CI or deployment tools as execution resources without binding the suite to one vendor. The append-only Release Ledger remains the release-identity history; the verification ledger is the open queue that feeds it.
 
-`noootwo-state` owns project state and context persistence. It receives an abstract record request, chooses JSON/JSONL for queryable state and Markdown for narrative facts, then writes, validates, and reads the record. Other skills own content; this skill owns the form and location.
+`noootwo-state` owns project state and context persistence. It receives an abstract record request, chooses JSON/JSONL for queryable state and Markdown for narrative facts, then writes, validates, and reads the record. Its capsule is a bounded 80-line/6,000-character re-entry view with source hash and evidence handles; `inspect` returns metadata, headings, and local hits instead of dumping long files; `capture` writes complete command output to cold evidence and returns only status, hash, path, and a bounded tail. The optional Codex audit reports aggregate token, compaction, and tool-output cost without emitting message content. Append-only history and state/event schemas stay authoritative and unchanged. Other skills own content; this skill owns the form and location.
 
 `noootwo-debug` turns a claim into a verdict before any file changes. Every request starts with a Diagnosis Map: each claim gets a problem class, the evidence authority that can settle it, one decisive check, a terminal status, a stop bound, and a handoff. Product decisions, official protocol evidence, runnable code paths, live deployment state, data state, and agent transcripts are not interchangeable; confirmation stays read-only, and a long report never upgrades an uncertain status. If a mapped row is a reproducible failure, it expands into the Incident Path: expected versus actual, reproduce, localize with checkpoints, prove the cause, bound the fix, then prove it with a toggle and failing-first regression test. After the fix it writes a Systemic Close covering sibling and near-miss paths, the recurrence barrier and owner, and the learning loop. Larger structural work is handed to the owning skill instead of expanded inside the fix.
 
 `noootwo-research` settles a decision that only outside evidence can settle — a design direction, a stack or library choice, a competitor or user expectation, or prior art. It names the decision and what would flip it, sizes the pass into `quick`, `standard`, or `deep`, draws on domain source pools with an access record and a fallback ladder, extracts transferable mechanisms rather than surfaces, and requires two independent sources plus a counterexample before a claim decides anything. Live runtime, configuration, and deployment state are observations for the owning evidence skill, not research findings. Its pools record what a probe actually observed: which case libraries are free, which need an account, which are paid, which are blocked, and which motion libraries publish a genuine agent-readable index. Every pass also surveys existing skills and public prior art against a four-part adoption gate.
 
-`noootwo-onboard` enters a project you do not know. It reads the nearest evidence, audits which skills the project needs and which it deliberately does not, routes the foundation health judgment to `noootwo-code-health`'s project-health lens, routes a missing release path to `noootwo-release`, and adds the single missing file that unblocks the work rather than scaffolding.
+`noootwo-onboard` enters a project you do not know. It reads the nearest evidence, audits context health for whole-read entrypoints, long-file retrieval routes, stale skill names, status timelines, and missing short-term state, then audits which skills the project needs and which it deliberately does not. It routes the foundation health judgment to `noootwo-code-health`'s project-health lens, routes a missing release path to `noootwo-release`, and adds the smallest AGENTS/status/state adapter that unblocks the work rather than scaffolding. Existing history is preserved.
 
 ## Validation
 

@@ -1,5 +1,10 @@
 # noootwo-research Releases
 
+## v0.7.1
+
+- Added the package-wide context lifecycle and compressed the always-loaded description.
+- Added the 2026-10-25 context-cost research brief and source pass; source levels, decision rules, and handoffs are unchanged.
+
 ## v0.7.0
 
 - Clarified that live runtime, configuration, and deployment state are observations owned by the evidence path, not research findings.

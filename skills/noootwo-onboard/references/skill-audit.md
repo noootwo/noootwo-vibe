@@ -61,6 +61,7 @@ Not Needed Now
 - `skill-name`: reason it is out of scope.
 
 Foundation
+- context health: whole-read entrypoints, long-file section routes, stale skill names, short-term state, evidence handles.
 - owned by `$noootwo-code-health` project-health lens: findings, evidence, gaps.
 - owned by `$noootwo-release`: version, artifact, deployment trace, provenance, rollback, and release-health gaps.
 
@@ -73,6 +74,8 @@ Routing Order
 
 - Listing every installed skill without evidence.
 - Loading many skill bodies before reading project files.
+- Reading whole long references when a heading or query hit can settle the fact.
+- Moving or deleting existing history while adding a context adapter.
 - Treating `$noootwo-design` as a general frontend code-quality review skill.
 - Letting `$noootwo-design` define feature scope or user paths that `$noootwo-product` should settle first.
 - Letting generic brainstorming own product discovery when `$noootwo-product` should find the first user and first loop.

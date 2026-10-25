@@ -257,6 +257,32 @@ Source index for the release-verification-ledger pass:
 - WHO Surgical Safety Checklist study: `https://pubmed.ncbi.nlm.nih.gov/19144931/`
 - Ontario surgical checklist counterexample: `https://pubmed.ncbi.nlm.nih.gov/24620866/`
 
+Context-cost pass, checked 2026-10-25:
+
+- All nine source URLs returned HTTP 200; the arXiv abstracts and the visible Chroma, Anthropic, and Cognition article text were read directly.
+- Chroma's *Context Rot* report tests 18 models and finds performance varies with input length even on simple tasks; retrieval accuracy falls further as needle-question similarity decreases and distractors increase. This supports selecting only the current frontier, not treating a large context window as uniform attention.
+- Anthropic's *Effective context engineering for AI agents* recommends just-in-time retrieval, high-fidelity compaction, structured notes, and the smallest set of high-signal tokens. It also reports subagent gains for isolated research, so isolation remains available for independent read-only work rather than becoming a default fan-out.
+- ACE (arXiv 2510.04618) uses structured, incremental context updates to resist brevity bias and context collapse. This supports append-only events and itemized deltas instead of repeatedly rewriting a lossy summary.
+- Agentic Context Management (arXiv 2607.21503 and 2607.23809) frames context as a lifecycle: ingest, scope, retain or forget with provenance, anticipate the next need, compact to a budget, and retrieve offloaded content on demand.
+- The Complexity Trap (arXiv 2508.21433) finds simple observation masking halves cost relative to raw history and matches or slightly exceeds LLM summarization in its tested agents. This is a counterexample to mandatory expensive summaries and supports keeping raw evidence behind handles.
+- Compression Method Matters (arXiv 2603.23527) finds aggressive prompt compression has benchmark-dependent output effects; token reduction can increase total inference cost. This rejects one universal aggressive compression ratio.
+- Compaction Laundering (arXiv 2610.29869) reports that flattening role provenance before compaction let forged approvals survive 87-100% of attempts in five harnesses, while role-typed harnesses were 0%. This is a new, unreplicated security preprint, but it directly supports source hashes and typed evidence handles.
+- Cognition's *Don't Build Multi-Agents* argues that dependent actions carry implicit decisions and that shared context plus conflict resolution matter. Its single-thread default resolves against Anthropic's isolated-research case by using one writer and isolating only read-only work.
+
+The resulting mechanism is `write -> select -> compress -> isolate -> verify`. Static checks and this source pass do not establish a token saving; the package-level 10% paired-project gate remains the decision evidence. Full evidence levels, counterexamples, and limits are in `docs/reference/context-cost.md`.
+
+Source index for the context-cost pass:
+
+- Context Rot: `https://research.trychroma.com/context-rot`
+- Anthropic context engineering: `https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents`
+- ACE: `https://arxiv.org/abs/2510.04618`
+- Agentic Context Management lifecycle: `https://arxiv.org/abs/2607.21503`
+- ACM for long-horizon tasks: `https://arxiv.org/abs/2607.23809`
+- The Complexity Trap: `https://arxiv.org/abs/2508.21433`
+- Compression Method Matters: `https://arxiv.org/abs/2603.23527`
+- Compaction Laundering: `https://arxiv.org/abs/2610.29869`
+- Cognition, Don't Build Multi-Agents: `https://cognition.ai/blog/dont-build-multi-agents`
+
 ## Mechanisms Borrowed
 
 - Keep publishable units independently addressable under `skills/`.
@@ -282,6 +308,10 @@ Source index for the release-verification-ledger pass:
 - Add Product Checkpoints for real-user product scope, user paths, state models, cognitive-cost risks, and user-behavior acceptance criteria before UI or implementation when those choices are unclear.
 - Borrow the Product Choice Challenge mechanism from brainstorming-style skills: make 2-3 meaningful options visible with a recommended default, but do not import the heavy always-on spec workflow.
 - Add Product Discovery as the product-shaped replacement for generic brainstorming when the user starts from a software product idea, blank project, broad product vision, or first-loop question.
+- Use one bounded context lifecycle across the skill package: direct work skips state, resume starts from a capsule and at most three frontier entry points, and decision/evidence work reads only the source that can settle the step.
+- Keep raw output above 16 KiB in cold evidence and carry its path, hash, source, and bounded tail into live context.
+- Keep append-only events authoritative; a capsule is a derived read view, and a no-change check creates no event.
+- Keep one writer for dependent work and isolate only independent read-only research or review.
 
 ## Boundaries
 

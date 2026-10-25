@@ -1,5 +1,11 @@
 # noootwo-onboard Releases
 
+## v0.5.0
+
+- Added a bounded context-health audit for whole-read entrypoints, on-demand files above about 200 lines without a section route, stale noootwo-docs/noootwo-review references, status timelines, and missing short-term state or evidence.
+- A real gap now gets the smallest AGENTS, status, or state adapter through `noootwo-state`.
+- Existing history is never auto-moved, merged, rewritten, or deleted during onboarding.
+
 ## v0.4.1
 
 - The project foundation template now routes non-obvious implementation integration design to `noootwo-code-health` before code review.

@@ -1,5 +1,10 @@
 # noootwo-debug Releases
 
+## v0.6.1
+
+- Added the package-wide context lifecycle and compressed the always-loaded description.
+- The Diagnosis Map, read-only confirmation, evidence authority, Incident Path, and Systemic Close are unchanged.
+
 ## v0.6.0
 
 - Added the Diagnosis Map as the entry artifact for every debug request. Each claim records its problem class, evidence authority, decisive check, terminal status, stop bound, and handoff.

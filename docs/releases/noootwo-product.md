@@ -1,5 +1,10 @@
 # noootwo-product Releases
 
+## v0.11.1
+
+- Added the package-wide context lifecycle and compressed the always-loaded description.
+- Product decisions, interview behavior, and the existing spec handoff are unchanged.
+
 ## v0.11.0
 
 - A settled result can now persist as a project spec through `noootwo-state`; the durable location is `docs/specs/`.

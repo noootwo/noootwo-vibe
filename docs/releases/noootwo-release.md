@@ -1,5 +1,10 @@
 # noootwo-release Releases
 
+## v0.3.1
+
+- Added the package-wide context lifecycle and compressed the always-loaded description.
+- Release identity, ledger, provenance, rollback, deployment trace, and health rules are unchanged.
+
 ## v0.3.0
 
 - Added the Release Verification Ledger: one open queue for checks that must be decided at the release boundary, with explicit item ownership, evidence, status, and release conditions.

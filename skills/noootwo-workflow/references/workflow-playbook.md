@@ -5,6 +5,10 @@ Compact guardrail and handoff packet reference. Routing and scheduling live in `
 ## Lightweight guardrails
 
 - Read repo truth before deciding; smallest read that covers risk.
+- Direct work reads no state; resume reads the capsule and at most three frontier entry points.
+- Record only a real goal, decision, blocker, evidence, or next-trigger change; pure reads create no event.
+- After compaction, re-check commit, worktree, and the latest evidence handle against the capsule.
+- A completed goal followed by an unrelated goal gets a capsule and a new-session recommendation unless the user continues.
 - Do not edit while product or debug is unresolved.
 - Non-obvious code changes use `noootwo-code-health` for an Integration Read before `noootwo-tdd`; obvious local seams go directly to TDD.
 - Behavior-changing code uses `noootwo-tdd` before review.

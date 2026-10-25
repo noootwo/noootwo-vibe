@@ -3,21 +3,30 @@
 from __future__ import annotations
 
 import argparse
+import contextlib
 import hashlib
+import io
 import json
 import os
 import re
 import shutil
+import subprocess
 import sys
 import tempfile
 import uuid
+from collections import deque
 from datetime import datetime, timezone
 from pathlib import Path
 
 
 PROTOCOL_STATE = "noootwo.state/0.1"
 PROTOCOL_EVENT = "noootwo.state-event/0.1"
+PROTOCOL_CAPSULE = "noootwo.context-capsule/0.1"
 STATE_SCHEMA_VERSION = 1
+DEFAULT_CAPSULE_MAX_CHARS = 6000
+DEFAULT_CAPSULE_LINES = 80
+DEFAULT_INSPECT_LINES = 80
+DEFAULT_CAPTURE_LINES = 40
 STATE_ENUM = {
     "stage": {
         "routing",
@@ -78,11 +87,15 @@ def events_file(root: Path) -> Path:
 
 
 def atomic_write(path: Path, text: str) -> None:
+    atomic_write_bytes(path, text.encode("utf-8"))
+
+
+def atomic_write_bytes(path: Path, data: bytes) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fd, tmp = tempfile.mkstemp(prefix=path.name + ".", dir=str(path.parent))
     try:
-        with os.fdopen(fd, "w", encoding="utf-8") as handle:
-            handle.write(text)
+        with os.fdopen(fd, "wb") as handle:
+            handle.write(data)
         os.replace(tmp, path)
     finally:
         if os.path.exists(tmp):
@@ -95,6 +108,18 @@ def canonical(data: object) -> str:
 
 def sha256_text(text: str) -> str:
     return "sha256:" + hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def sha256_bytes(data: bytes) -> str:
+    return "sha256:" + hashlib.sha256(data).hexdigest()
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return "sha256:" + digest.hexdigest()
 
 
 def state_hash(data: dict) -> str:
@@ -123,6 +148,40 @@ def read_events(path: Path) -> list[dict]:
         except Exception as exc:
             raise SystemExit(f"invalid event line {number} in {path}: {exc}") from exc
     return events
+
+
+def read_recent_events(path: Path, limit: int) -> list[dict]:
+    if limit <= 0 or not path.is_file():
+        return []
+    recent: deque[str] = deque(maxlen=limit)
+    with path.open(encoding="utf-8") as handle:
+        for line in handle:
+            if line.strip():
+                recent.append(line)
+    events: list[dict] = []
+    for number, line in enumerate(recent, 1):
+        try:
+            events.append(json.loads(line))
+        except Exception as exc:
+            raise SystemExit(f"invalid recent event line {number} in {path}: {exc}") from exc
+    return events
+
+
+def display_path(root: Path, path: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(root.resolve()))
+    except ValueError:
+        return str(path)
+
+
+def clip_text(value: object, limit: int = 600) -> str:
+    if isinstance(value, str):
+        text = value
+    else:
+        text = canonical(value)
+    if len(text) <= limit:
+        return text
+    return text[: max(0, limit - 3)] + "..."
 
 
 def default_state(work_id: str, session_id: str, attempt_id: str, goal: str) -> dict:
@@ -276,27 +335,76 @@ def init_command(root: Path, args: argparse.Namespace) -> None:
 
 def set_command(root: Path, args: argparse.Namespace) -> None:
     state = read_json(state_file(root))
+    changed: dict[str, object] = {}
+    settled_added: list[str] = []
+    unsettled_added: list[str] = []
+
+    def set_changed(key: str, value: object) -> None:
+        if state[key] == value:
+            return
+        state[key] = value
+        changed[key] = clip_text(value, 600)
+
     if args.stage is not None:
-        state["stage"] = args.stage
+        set_changed("stage", args.stage)
     if args.goal is not None:
-        state["goal"] = args.goal
+        set_changed("goal", args.goal)
     if args.waiting is not None:
-        state["waiting_on"] = args.waiting
+        set_changed("waiting_on", args.waiting)
     if args.last_owner is not None:
-        state["last_owner"] = args.last_owner
+        set_changed("last_owner", args.last_owner)
     if args.last_result is not None:
-        state["last_result"] = args.last_result
+        set_changed("last_result", args.last_result)
     if args.next_trigger is not None:
-        state["next_trigger"] = args.next_trigger
+        set_changed("next_trigger", args.next_trigger)
     for value in args.settled or []:
         if value not in state["settled"]:
             state["settled"].append(value)
+            settled_added.append(value)
     for value in args.unsettled or []:
         if value not in state["unsettled"]:
             state["unsettled"].append(value)
-    event = new_event(state, "state.updated", "state", {"changed": True}, "harness", "noootwo-state")
+            unsettled_added.append(value)
+    if not changed and not settled_added and not unsettled_added:
+        return
+    payload: dict[str, object] = {"changed": changed}
+    if settled_added:
+        payload["settled_added"] = [clip_text(value) for value in settled_added]
+    if unsettled_added:
+        payload["unsettled_added"] = [clip_text(value) for value in unsettled_added]
+    event = new_event(state, "state.updated", "state", payload, "harness", "noootwo-state")
     append_event(root, state, event)
     save_state(root, state)
+
+
+def sync_blocker(state: dict, event: dict) -> None:
+    payload = event.get("payload")
+    if not isinstance(payload, dict):
+        return
+    blocker = payload.get("blocker")
+    if event["event_type"] == "blocker.opened":
+        if not isinstance(blocker, dict) or not blocker.get("id") or not blocker.get("message"):
+            raise SystemExit("blocker.opened requires payload.blocker with id and message")
+        record = {
+            "id": str(blocker["id"]),
+            "message": str(blocker["message"]),
+            "status": "open",
+            "opened_at": str(blocker.get("opened_at") or event["occurred_at"]),
+        }
+        state["open_blockers"] = [
+            item for item in state["open_blockers"] if item.get("id") != record["id"]
+        ] + [record]
+    elif event["event_type"] == "blocker.resolved":
+        if not isinstance(blocker, dict) or not blocker.get("id"):
+            raise SystemExit("blocker.resolved requires payload.blocker.id")
+        blocker_id = str(blocker["id"])
+        found = False
+        for item in state["open_blockers"]:
+            if item.get("id") == blocker_id:
+                item["status"] = "resolved"
+                found = True
+        if not found:
+            raise SystemExit(f"unknown blocker: {blocker_id}")
 
 
 def log_command(root: Path, args: argparse.Namespace) -> None:
@@ -305,6 +413,7 @@ def log_command(root: Path, args: argparse.Namespace) -> None:
     if args.request_id:
         payload["request_id"] = args.request_id
     event = new_event(state, args.type, args.domain, payload, args.actor_kind, args.actor_name)
+    sync_blocker(state, event)
     append_event(root, state, event)
     save_state(root, state)
 
@@ -340,6 +449,421 @@ def render_command(root: Path, args: argparse.Namespace) -> None:
         lines.append(f"- {event['event_type']} ({event['occurred_at']})")
     atomic_write(state_dir(root) / "summary.md", "\n".join(lines) + "\n")
     print(state_dir(root) / "summary.md")
+
+
+def evidence_handles(events: list[dict], limit: int = 5) -> list[dict]:
+    handles: list[dict] = []
+    for event in reversed(events):
+        if event.get("event_type") != "evidence.recorded":
+            continue
+        payload = event.get("payload")
+        if not isinstance(payload, dict):
+            payload = {}
+        handle = {
+            "event_id": event.get("event_id"),
+            "occurred_at": event.get("occurred_at"),
+            "request_id": clip_text(payload.get("request_id", ""), 160),
+            "destination": clip_text(payload.get("destination", ""), 300),
+            "source": clip_text(payload.get("source", ""), 300),
+            "command": clip_text(payload.get("command", ""), 300),
+            "exit_code": payload.get("exit_code"),
+            "bytes": payload.get("bytes"),
+            "commit": clip_text(payload.get("commit", ""), 80),
+            "sha256": clip_text(payload.get("sha256", ""), 100),
+            "summary": clip_text(payload.get("summary", ""), 300),
+        }
+        handles.append({key: value for key, value in handle.items() if value not in ("", None)})
+        if len(handles) >= limit:
+            break
+    return handles
+
+
+def build_capsule(root: Path, recent: int = 5) -> dict:
+    state = read_json(state_file(root))
+    validate_state(state, state_file(root))
+    events = read_recent_events(events_file(root), max(50, recent * 8))
+    recent_events = []
+    for event in events[-recent:]:
+        payload = event.get("payload") if isinstance(event.get("payload"), dict) else {}
+        changed = payload.get("changed") if isinstance(payload.get("changed"), dict) else {}
+        recent_events.append({
+            "event_id": event.get("event_id"),
+            "event_type": event.get("event_type"),
+            "occurred_at": event.get("occurred_at"),
+            "changed_keys": sorted(changed),
+        })
+    current = {
+        "goal": clip_text(state["goal"], 600),
+        "stage": state["stage"],
+        "waiting_on": state["waiting_on"],
+        "last_owner": clip_text(state["last_owner"], 200),
+        "last_result": clip_text(state["last_result"], 600),
+        "next_trigger": clip_text(state["next_trigger"], 600),
+    }
+    blockers = []
+    for blocker in state["open_blockers"]:
+        blockers.append({
+            "id": clip_text(blocker.get("id", ""), 80),
+            "message": clip_text(blocker.get("message", ""), 300),
+            "status": blocker.get("status", "open"),
+            "opened_at": blocker.get("opened_at", ""),
+        })
+    return {
+        "protocol": PROTOCOL_CAPSULE,
+        "generated_at": utc_now(),
+        "source": {
+            "current": display_path(root, state_file(root)),
+            "events": display_path(root, events_file(root)),
+            "state_hash": state["state_hash"],
+            "last_event_id": state["last_event_id"],
+        },
+        "current": current,
+        "settled": [clip_text(value, 400) for value in state["settled"]],
+        "unsettled": [clip_text(value, 400) for value in state["unsettled"]],
+        "open_blockers": blockers,
+        "evidence_handles": evidence_handles(events, recent),
+        "recent_events": recent_events,
+        "truncated": False,
+    }
+
+
+def fit_capsule_json(
+    capsule: dict,
+    max_chars: int,
+    max_lines: int = DEFAULT_CAPSULE_LINES,
+) -> str:
+    working = json.loads(json.dumps(capsule, ensure_ascii=False))
+
+    def fit_current_shape() -> str | None:
+        pretty = json.dumps(working, indent=2, ensure_ascii=False) + "\n"
+        if len(pretty) <= max_chars and len(pretty.splitlines()) <= max_lines:
+            return pretty
+        compact = json.dumps(working, separators=(",", ":"), ensure_ascii=False) + "\n"
+        if len(compact) <= max_chars:
+            return compact
+        return None
+
+    fitted = fit_current_shape()
+    if fitted:
+        return fitted
+
+    working["truncated"] = True
+    for key in ("settled", "unsettled"):
+        working[key] = [clip_text(value, 240) for value in working[key][-10:]]
+    working["open_blockers"] = working["open_blockers"][-6:]
+    working["evidence_handles"] = working["evidence_handles"][:4]
+    working["recent_events"] = working["recent_events"][-4:]
+    fitted = fit_current_shape()
+    if fitted:
+        return fitted
+
+    working["current"] = {
+        key: clip_text(value, 160) for key, value in working["current"].items()
+    }
+    working["source"]["current"] = clip_text(working["source"]["current"], 240)
+    working["source"]["events"] = clip_text(working["source"]["events"], 240)
+    working["settled"] = [clip_text(value, 120) for value in working["settled"][-5:]]
+    working["unsettled"] = [clip_text(value, 120) for value in working["unsettled"][-5:]]
+    working["evidence_handles"] = [
+        {key: clip_text(value, 120) for key, value in item.items()}
+        for item in working["evidence_handles"][:2]
+    ]
+    working["recent_events"] = working["recent_events"][-2:]
+    fitted = fit_current_shape()
+    if fitted:
+        return fitted
+
+    working["settled"] = working["settled"][-2:]
+    working["unsettled"] = working["unsettled"][-2:]
+    working["open_blockers"] = working["open_blockers"][-2:]
+    working["evidence_handles"] = working["evidence_handles"][:1]
+    working["recent_events"] = working["recent_events"][-1:]
+    working["current"] = {
+        key: clip_text(value, 60) for key, value in working["current"].items()
+    }
+    for key in ("settled", "unsettled"):
+        working[key] = [clip_text(value, 60) for value in working[key]]
+    for value in working["open_blockers"]:
+        value["message"] = clip_text(value.get("message", ""), 80)
+    for value in working["evidence_handles"]:
+        for key, item in list(value.items()):
+            value[key] = clip_text(item, 80)
+    fitted = fit_current_shape()
+    if fitted:
+        return fitted
+    raise SystemExit(f"capsule cannot fit in {max_chars} characters and {max_lines} lines")
+
+
+def render_capsule(capsule: dict) -> str:
+    current = capsule["current"]
+    lines = [
+        "# Context Capsule",
+        "",
+        f"- Protocol: {capsule['protocol']}",
+        f"- Source: {capsule['source']['current']}",
+        f"- State hash: {capsule['source']['state_hash']}",
+        f"- Last event: {capsule['source']['last_event_id'] or '-'}",
+        "",
+        "## Current",
+        f"- Goal: {current['goal'] or '-'}",
+        f"- Stage: {current['stage']}",
+        f"- Waiting on: {current['waiting_on']}",
+        f"- Last owner: {current['last_owner'] or '-'}",
+        f"- Last result: {current['last_result'] or '-'}",
+        f"- Next trigger: {current['next_trigger'] or '-'}",
+    ]
+
+    def add_list(title: str, values: list[object], formatter) -> None:
+        lines.extend(["", f"## {title}"])
+        if not values:
+            lines.append("- none")
+            return
+        lines.extend(f"- {formatter(value)}" for value in values)
+
+    add_list("Settled", capsule["settled"], lambda value: str(value))
+    add_list("Unsettled", capsule["unsettled"], lambda value: str(value))
+    add_list(
+        "Open blockers",
+        capsule["open_blockers"],
+        lambda value: f"{value.get('id', '-')} [{value.get('status', 'open')}] {value.get('message', '')}",
+    )
+    add_list(
+        "Evidence handles",
+        capsule["evidence_handles"],
+        lambda value: " | ".join(
+            f"{key}={item}"
+            for key, item in value.items()
+            if key not in {"event_id", "occurred_at"} and item
+        ) or value.get("event_id", "-"),
+    )
+    add_list(
+        "Recent events",
+        capsule["recent_events"],
+        lambda value: (
+            f"{value.get('event_type')} {value.get('occurred_at')} "
+            f"changed={','.join(value.get('changed_keys', [])) or '-'}"
+        ),
+    )
+    return "\n".join(lines) + "\n"
+
+
+def cap_rendered_text(text: str, max_chars: int, max_lines: int) -> str:
+    lines = text.splitlines()
+    truncated = len(lines) > max_lines
+    if truncated:
+        lines = lines[: max_lines - 1] + ["... [truncated]"]
+    text = "\n".join(lines) + "\n"
+    if len(text) > max_chars:
+        notice = "\n... [truncated]\n"
+        text = text[: max(0, max_chars - len(notice))].rstrip() + notice
+    return text
+
+
+def capsule_command(root: Path, args: argparse.Namespace) -> None:
+    if args.max_chars < 2000:
+        raise SystemExit("--max-chars must be at least 2000")
+    capsule = build_capsule(root, recent=max(1, args.last))
+    if args.json_output:
+        sys.stdout.write(fit_capsule_json(capsule, args.max_chars))
+    else:
+        sys.stdout.write(cap_rendered_text(render_capsule(capsule), args.max_chars, DEFAULT_CAPSULE_LINES))
+
+
+def inspect_data(root: Path, relative: str, query: str | None, max_lines: int) -> dict:
+    path = Path(relative)
+    if not path.is_absolute():
+        path = root / path
+    path = path.resolve()
+    if not path.is_file():
+        raise SystemExit(f"not a file: {path}")
+    raw = path.read_bytes()
+    if b"\x00" in raw:
+        text = ""
+        text_lines = []
+        binary = True
+    else:
+        try:
+            text = raw.decode("utf-8")
+            text_lines = text.splitlines()
+            binary = False
+        except UnicodeDecodeError:
+            text = ""
+            text_lines = []
+            binary = True
+    headings = [
+        {"line": index, "text": clip_text(line, 200)}
+        for index, line in enumerate(text_lines, 1)
+        if re.match(r"^#{1,6}\s+", line)
+    ][:40]
+    title = None
+    if headings:
+        title = re.sub(r"^#{1,6}\s+", "", headings[0]["text"])
+    elif text_lines:
+        title = next((clip_text(line, 200) for line in text_lines if line.strip()), None)
+    excerpt: list[dict] = []
+    if not binary:
+        if query:
+            needle = query.casefold()
+            matching = [
+                index
+                for index, line in enumerate(text_lines, 1)
+                if needle in line.casefold()
+            ]
+            for index in matching[:max_lines]:
+                excerpt.append({"line": index, "text": clip_text(text_lines[index - 1], 400)})
+            truncated = len(matching) > max_lines
+        elif len(text_lines) <= max_lines:
+            excerpt = [
+                {"line": index, "text": clip_text(line, 400)}
+                for index, line in enumerate(text_lines, 1)
+            ]
+            truncated = False
+        else:
+            excerpt = [
+                {"line": index, "text": clip_text(line, 400)}
+                for index, line in enumerate(text_lines[: min(20, max_lines)], 1)
+            ]
+            truncated = True
+    else:
+        truncated = True
+    return {
+        "protocol": "noootwo.file-inspect/0.1",
+        "path": display_path(root, path),
+        "bytes": len(raw),
+        "lines": len(text_lines),
+        "sha256": sha256_bytes(raw),
+        "binary": binary,
+        "title": title,
+        "query": query,
+        "headings": headings,
+        "excerpt": excerpt,
+        "truncated": truncated,
+    }
+
+
+def inspect_command(root: Path, args: argparse.Namespace) -> None:
+    if not 1 <= args.max_lines <= DEFAULT_INSPECT_LINES:
+        raise SystemExit(
+            f"--max-lines must be between 1 and {DEFAULT_INSPECT_LINES}"
+        )
+    data = inspect_data(root, args.path, args.query, args.max_lines)
+    if args.json_output:
+        print(json.dumps(data, indent=2, ensure_ascii=False))
+        return
+    print(f"path: {data['path']}")
+    print(f"bytes: {data['bytes']}")
+    print(f"lines: {data['lines']}")
+    print(f"sha256: {data['sha256']}")
+    print(f"binary: {'yes' if data['binary'] else 'no'}")
+    print(f"title: {data['title'] or '-'}")
+    if data["headings"]:
+        print("headings:")
+        for heading in data["headings"]:
+            print(f"  {heading['line']}: {heading['text']}")
+    if data["excerpt"]:
+        print("excerpt:")
+        for line in data["excerpt"]:
+            print(f"  {line['line']}: {line['text']}")
+    elif not data["binary"]:
+        print("excerpt: no matches" if args.query else "excerpt: none")
+    if data["truncated"]:
+        print("truncated: yes")
+
+
+def bounded_tail(text: str, max_lines: int, max_chars: int = 6000) -> str:
+    lines = text.splitlines()
+    if len(lines) > max_lines:
+        if max_lines > 1:
+            lines = ["... earlier output omitted ..."] + lines[-(max_lines - 1) :]
+        else:
+            lines = lines[-1:]
+    result = "\n".join(lines)
+    if len(result) > max_chars:
+        notice = "... earlier output omitted ...\n" if max_lines > 1 else ""
+        result = notice + result[-max(0, max_chars - len(notice)) :]
+    return result
+
+
+def read_tail_text(path: Path, max_bytes: int = 64 * 1024) -> str:
+    size = path.stat().st_size
+    if size == 0:
+        return ""
+    with path.open("rb") as handle:
+        offset = max(0, size - max_bytes)
+        handle.seek(offset)
+        data = handle.read()
+    if offset:
+        newline = data.find(b"\n")
+        if newline >= 0:
+            data = data[newline + 1 :]
+    return data.decode("utf-8", errors="replace")
+
+
+def capture_command(root: Path, args: argparse.Namespace) -> None:
+    command_parts = getattr(args, "capture_argv", [])
+    if not SAFE_REQUEST_ID_RE.match(args.name):
+        raise SystemExit("--name must be a safe file name")
+    if not command_parts:
+        raise SystemExit("capture requires a command after --")
+    evidence_dir = state_dir(root) / "evidence"
+    log_path = evidence_dir / f"{args.name}.log"
+    meta_path = evidence_dir / f"{args.name}.json"
+    if log_path.exists() or meta_path.exists():
+        raise SystemExit(f"capture already exists: {display_path(root, log_path)}")
+    evidence_dir.mkdir(parents=True, exist_ok=True)
+    started_at = utc_now()
+    temp_fd, temp_name = tempfile.mkstemp(
+        prefix=f".{args.name}.",
+        suffix=".tmp",
+        dir=str(evidence_dir),
+    )
+    temp_path = Path(temp_name)
+    try:
+        with os.fdopen(temp_fd, "wb") as output_handle:
+            completed = subprocess.run(
+                command_parts,
+                cwd=root,
+                stdin=subprocess.DEVNULL,
+                stdout=output_handle,
+                stderr=subprocess.STDOUT,
+                check=False,
+            )
+    except OSError as exc:
+        if temp_path.exists():
+            temp_path.unlink()
+        raise SystemExit(f"capture failed to start: {exc}") from exc
+    finished_at = utc_now()
+    try:
+        output_bytes_count = temp_path.stat().st_size
+        digest = sha256_file(temp_path)
+        os.replace(temp_path, log_path)
+    except OSError as exc:
+        if temp_path.exists():
+            temp_path.unlink()
+        raise SystemExit(f"capture failed to store output: {exc}") from exc
+    metadata = {
+        "protocol": "noootwo.capture/0.1",
+        "name": args.name,
+        "command": command_parts,
+        "cwd": str(root),
+        "started_at": started_at,
+        "finished_at": finished_at,
+        "exit_code": completed.returncode,
+        "bytes": output_bytes_count,
+        "sha256": digest,
+        "log": display_path(root, log_path),
+    }
+    atomic_write(meta_path, json.dumps(metadata, indent=2, ensure_ascii=False) + "\n")
+    print(f"capture: {display_path(root, log_path)}")
+    print(f"metadata: {display_path(root, meta_path)}")
+    print(f"exit_code: {completed.returncode}")
+    print(f"bytes: {output_bytes_count}")
+    print(f"sha256: {metadata['sha256']}")
+    if output_bytes_count:
+        print("last_lines:")
+        print(bounded_tail(read_tail_text(log_path), args.max_lines))
+    else:
+        print("last_lines: (no output)")
 
 
 def choose_form(request: dict) -> str:
@@ -396,15 +920,36 @@ def apply_request(root: Path, request: dict, destination: Path | None = None, so
 
     state = read_json(state_file(root))
     form = choose_form(request)
+    payload: dict[str, object] = {
+        "request_id": request["request_id"],
+        "replaces": replaces,
+    }
     if form == "event":
         event_type = "event.appended"
-        payload = {"request_id": request["request_id"], "content": request["content"], "replaces": replaces}
+        content_hash = sha256_text(canonical(request["content"]))
+        payload.update({
+            "content": request["content"],
+            "changed": {"event_content_sha256": content_hash},
+        })
     elif form == "state":
+        request_id = request["request_id"]
+        removed = [old for old in replaces if old in state["entries"]]
+        unchanged = state["entries"].get(request_id) == request["content"]
+        if unchanged and not removed:
+            return ""
         for old in replaces:
             state["entries"].pop(old, None)
-        state["entries"][request["request_id"]] = request["content"]
+        state["entries"][request_id] = request["content"]
         event_type = "state.updated"
-        payload = {"request_id": request["request_id"], "replaces": replaces}
+        changed: dict[str, object] = {
+            "entries": {
+                "set": [request_id],
+                "sha256": sha256_text(canonical(request["content"])),
+            }
+        }
+        if removed:
+            changed["entries_removed"] = removed
+        payload["changed"] = changed
     elif form == "cold":
         if isinstance(request["content"], str):
             destination = resolve_destination(root, destination) or state_dir(root) / "evidence" / f"{request['request_id']}.md"
@@ -412,20 +957,39 @@ def apply_request(root: Path, request: dict, destination: Path | None = None, so
         else:
             destination = resolve_destination(root, destination) or state_dir(root) / "evidence" / f"{request['request_id']}.json"
             content = json.dumps(request["content"], indent=2, ensure_ascii=False)
-        atomic_write(destination, content if content.endswith("\n") else content + "\n")
+        data = (content if content.endswith("\n") else content + "\n").encode("utf-8")
+        atomic_write_bytes(destination, data)
         event_type = "evidence.recorded"
-        payload = {"request_id": request["request_id"], "destination": str(destination), "replaces": replaces}
+        payload.update({
+            "destination": display_path(root, destination),
+            "bytes": len(data),
+            "sha256": sha256_bytes(data),
+            "changed": {"evidence": display_path(root, destination)},
+        })
     else:
         destination = resolve_destination(root, destination) or default_markdown_destination(root, request)
         content = request["content"]
         if not isinstance(content, str):
             content = json.dumps(content, indent=2, ensure_ascii=False)
-        atomic_write(destination, content if content.endswith("\n") else content + "\n")
+        data = (content if content.endswith("\n") else content + "\n").encode("utf-8")
+        atomic_write_bytes(destination, data)
         event_type = f"{request['fact_type']}.recorded"
-        payload = {"request_id": request["request_id"], "destination": str(destination), "replaces": replaces}
+        payload.update({
+            "destination": display_path(root, destination),
+            "bytes": len(data),
+            "sha256": sha256_bytes(data),
+            "changed": {"record": display_path(root, destination)},
+        })
 
     if source:
         payload["source"] = source
+    elif isinstance(request.get("source"), str) and request["source"]:
+        payload["source"] = request["source"]
+    if request.get("summary"):
+        payload["summary"] = clip_text(request["summary"])
+    for field in ("command", "exit_code", "url", "commit", "input_ref", "source_role"):
+        if field in request and request[field] not in (None, "", [], {}):
+            payload[field] = request[field]
 
     event = new_event(state, event_type, request.get("domain", "state"), payload, "caller", request.get("owner_skill", "caller"))
     append_event(root, state, event)
@@ -442,7 +1006,8 @@ def request_command(root: Path, args: argparse.Namespace) -> None:
         raise SystemExit("request requires --json-request or --request-file")
     validate_request(request)
     event_id = apply_request(root, request, destination=Path(args.destination) if args.destination else None)
-    print(event_id)
+    if event_id:
+        print(event_id)
 
 
 def migrate_command(root: Path, args: argparse.Namespace) -> None:
@@ -490,7 +1055,56 @@ def self_test() -> None:
         root = Path(tmp)
         init_command(root, argparse.Namespace(force=False, work_id="w_self", session_id="s_self", attempt_id="a_self", goal="self test"))
         set_command(root, argparse.Namespace(stage="building", goal=None, waiting=None, last_owner="caller", last_result="ok", next_trigger="verify", settled=["one"], unsettled=[]))
+        events = read_events(events_file(root))
+        if events[-1]["payload"].get("changed", {}).get("stage") != "building":
+            raise SystemExit("state.updated did not preserve changed fields")
+        event_count = len(events)
+        set_command(root, argparse.Namespace(stage="building", goal=None, waiting=None, last_owner=None, last_result=None, next_trigger=None, settled=[], unsettled=[]))
+        if len(read_events(events_file(root))) != event_count:
+            raise SystemExit("no-op state update created an event")
+        state_request = {
+            "request_id": "entry_1",
+            "fact_type": "state",
+            "query_profile": "field",
+            "mutability": "current",
+            "lifespan": "hot",
+            "content": {"value": 1},
+            "owner_skill": "caller",
+        }
+        request_command(
+            root,
+            argparse.Namespace(
+                json_request=json.dumps(state_request),
+                request_file=None,
+                destination=None,
+            ),
+        )
+        state_event = read_events(events_file(root))[-1]
+        if state_event["payload"].get("changed", {}).get("entries", {}).get("set") != ["entry_1"]:
+            raise SystemExit("state request did not record its actual changed entry")
+        event_count = len(read_events(events_file(root)))
+        request_command(
+            root,
+            argparse.Namespace(
+                json_request=json.dumps(state_request),
+                request_file=None,
+                destination=None,
+            ),
+        )
+        if len(read_events(events_file(root))) != event_count:
+            raise SystemExit("unchanged state request created an event")
         check_command(root, argparse.Namespace())
+        log_command(root, argparse.Namespace(
+            type="blocker.opened",
+            domain="state",
+            request_id="blk_1",
+            payload=json.dumps({"blocker": {"id": "B1", "message": "waiting for proof"}}),
+            actor_kind="caller",
+            actor_name="self-test",
+        ))
+        state = read_json(state_file(root))
+        if state["open_blockers"][0]["status"] != "open":
+            raise SystemExit("blocker.opened did not update current state")
         request = {
             "request_id": "rec_1",
             "fact_type": "narrative",
@@ -537,6 +1151,136 @@ def self_test() -> None:
         request_command(root, argparse.Namespace(json_request=json.dumps(evidence), request_file=None, destination=None))
         if not (state_dir(root) / "evidence" / "ev_1.json").is_file():
             raise SystemExit("cold evidence was not written")
+        evidence_event = read_events(events_file(root))[-1]
+        evidence_payload = evidence_event["payload"]
+        if (
+            evidence_payload.get("destination") != ".noootwo/state/evidence/ev_1.json"
+            or not HASH_RE.match(str(evidence_payload.get("sha256", "")))
+            or evidence_payload.get("bytes", 0) <= 0
+        ):
+            raise SystemExit("cold evidence handle missing path, size, or hash")
+        log_command(root, argparse.Namespace(
+            type="evidence.recorded",
+            domain="state",
+            request_id="ev_2",
+            payload=json.dumps({
+                "destination": ".noootwo/state/evidence/ev_2.log",
+                "sha256": sha256_text("captured"),
+                "summary": "captured evidence",
+                "command": ["verify", "--fast"],
+                "exit_code": 0,
+            }),
+            actor_kind="caller",
+            actor_name="self-test",
+        ))
+        capsule = build_capsule(root)
+        if capsule["protocol"] != PROTOCOL_CAPSULE or not capsule["evidence_handles"]:
+            raise SystemExit("capsule missing protocol or evidence handles")
+        if not capsule["open_blockers"] or capsule["open_blockers"][0]["id"] != "B1":
+            raise SystemExit("capsule missing open blocker")
+        if (
+            capsule["evidence_handles"][0].get("command") != '["verify","--fast"]'
+            or capsule["evidence_handles"][0].get("exit_code") != 0
+        ):
+            raise SystemExit("capsule evidence handle lost command or exit status")
+        for index in range(6):
+            log_command(root, argparse.Namespace(
+                type="state.updated",
+                domain="state",
+                request_id=f"noise_{index}",
+                payload=json.dumps({"changed_fields": ["stage"]}),
+                actor_kind="caller",
+                actor_name="self-test",
+            ))
+        capsule = build_capsule(root, recent=2)
+        if not capsule["evidence_handles"]:
+            raise SystemExit("capsule did not scan recent history for evidence handles")
+        bounded_json = fit_capsule_json(capsule, 2000)
+        if len(bounded_json) > 2000 or len(bounded_json.splitlines()) > DEFAULT_CAPSULE_LINES:
+            raise SystemExit("JSON capsule exceeded its character or line budget")
+        rendered = cap_rendered_text(render_capsule(capsule), 1200, DEFAULT_CAPSULE_LINES)
+        if len(rendered) > 1200 or len(rendered.splitlines()) > DEFAULT_CAPSULE_LINES:
+            raise SystemExit("markdown capsule exceeded its budget")
+        json_buffer = io.StringIO()
+        with contextlib.redirect_stdout(json_buffer):
+            capsule_command(root, argparse.Namespace(json_output=True, max_chars=6000, last=5))
+        json_capsule = json.loads(json_buffer.getvalue())
+        if json_capsule["protocol"] != PROTOCOL_CAPSULE:
+            raise SystemExit("JSON capsule command used the wrong protocol")
+        markdown_buffer = io.StringIO()
+        with contextlib.redirect_stdout(markdown_buffer):
+            capsule_command(root, argparse.Namespace(json_output=False, max_chars=6000, last=5))
+        markdown_capsule = markdown_buffer.getvalue()
+        if len(markdown_capsule) > DEFAULT_CAPSULE_MAX_CHARS or len(markdown_capsule.splitlines()) > DEFAULT_CAPSULE_LINES:
+            raise SystemExit("default markdown capsule exceeded its budget")
+        long_doc = root / "long.md"
+        long_lines = [f"line {index}" for index in range(300)]
+        long_lines[19] = "needle unique local hit"
+        long_doc.write_text("# Title\n" + "\n".join(long_lines), encoding="utf-8")
+        inspected = inspect_data(root, "long.md", "needle unique", 10)
+        if inspected["lines"] != 301 or len(inspected["excerpt"]) > 10 or inspected["title"] != "Title":
+            raise SystemExit("inspect did not bound a long document")
+        if [item["line"] for item in inspected["excerpt"]] != [21]:
+            raise SystemExit("inspect did not return the requested local matches")
+        binary = root / "binary.dat"
+        binary.write_bytes(b"\x00\x01\x02")
+        if not inspect_data(root, "binary.dat", None, 10)["binary"]:
+            raise SystemExit("inspect did not classify binary data")
+        try:
+            inspect_command(root, argparse.Namespace(
+                path="long.md",
+                query="needle",
+                max_lines=DEFAULT_INSPECT_LINES + 1,
+                json_output=True,
+            ))
+        except SystemExit:
+            pass
+        else:
+            raise SystemExit("inspect accepted a live excerpt above the context budget")
+        empty_root = root / "empty"
+        empty_root.mkdir()
+        try:
+            build_capsule(empty_root)
+        except SystemExit:
+            pass
+        else:
+            raise SystemExit("capsule accepted missing state")
+        corrupt_root = root / "corrupt"
+        state_dir(corrupt_root).mkdir(parents=True)
+        state_file(corrupt_root).write_text("{broken", encoding="utf-8")
+        try:
+            build_capsule(corrupt_root)
+        except SystemExit:
+            pass
+        else:
+            raise SystemExit("capsule accepted corrupt state")
+        capture_event_bytes = events_file(root).read_bytes()
+        capture_stdout = io.StringIO()
+        with contextlib.redirect_stdout(io.StringIO()):
+            capture_command(root, argparse.Namespace(
+                name="capture_self",
+                max_lines=5,
+                capture_argv=[sys.executable, "-c", "import sys; print('captured'); sys.exit(7)"],
+            ))
+        capture_meta = read_json(state_dir(root) / "evidence" / "capture_self.json")
+        if capture_meta["exit_code"] != 7 or capture_meta["bytes"] == 0:
+            raise SystemExit("capture did not preserve exit status and output")
+        with contextlib.redirect_stdout(capture_stdout):
+            capture_command(root, argparse.Namespace(
+                name="capture_long",
+                max_lines=3,
+                capture_argv=[sys.executable, "-c", "import sys; sys.stdout.write('x' * 20000)"],
+            ))
+        long_log = state_dir(root) / "evidence" / "capture_long.log"
+        long_meta = read_json(state_dir(root) / "evidence" / "capture_long.json")
+        if len(long_log.read_bytes()) != 20000 or long_meta["bytes"] != 20000:
+            raise SystemExit("capture did not preserve long output")
+        if long_meta["sha256"] != sha256_bytes(long_log.read_bytes()):
+            raise SystemExit("capture hash does not cover the stored log")
+        if len(capture_stdout.getvalue()) > 6500:
+            raise SystemExit("capture returned too much of a long output")
+        if events_file(root).read_bytes() != capture_event_bytes:
+            raise SystemExit("capture changed project state")
         old = root / "old.md"
         old.write_text("old markdown\n", encoding="utf-8")
         manifest_path = root / "migrate.json"
@@ -567,7 +1311,9 @@ def self_test() -> None:
             raise SystemExit("render did not produce summary.md")
         shell = Path(__file__).with_name("noootwo-state.sh")
         if shell.is_file():
-            os.system(f"sh -n {shell}")
+            completed = subprocess.run(["sh", "-n", str(shell)], check=False)
+            if completed.returncode:
+                raise SystemExit("state shell helper has invalid syntax")
     print("self-test ok")
 
 
@@ -613,18 +1359,37 @@ def build_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("check")
     sub.add_parser("render")
+
+    p_capsule = sub.add_parser("capsule")
+    p_capsule.add_argument("--json", dest="json_output", action="store_true")
+    p_capsule.add_argument("--max-chars", type=int, default=DEFAULT_CAPSULE_MAX_CHARS)
+    p_capsule.add_argument("--last", type=int, default=5, help="Recent event and evidence handle count.")
+
+    p_inspect = sub.add_parser("inspect")
+    p_inspect.add_argument("path")
+    p_inspect.add_argument("--query")
+    p_inspect.add_argument("--max-lines", type=int, default=DEFAULT_INSPECT_LINES)
+    p_inspect.add_argument("--json", dest="json_output", action="store_true")
+
+    p_capture = sub.add_parser("capture")
+    p_capture.add_argument("--name", required=True)
+    p_capture.add_argument("--max-lines", type=int, default=DEFAULT_CAPTURE_LINES)
     return parser
 
 
 def main() -> int:
     parser = build_parser()
-    args = parser.parse_args()
+    args, leftovers = parser.parse_known_args()
     if args.self_test:
         self_test()
         return 0
     if not args.command:
         parser.print_help()
         return 2
+    if args.command == "capture":
+        args.capture_argv = leftovers[1:] if leftovers[:1] == ["--"] else leftovers
+    elif leftovers:
+        parser.error(f"unrecognized arguments: {' '.join(leftovers)}")
     root = args.root.resolve()
     if args.command == "init":
         init_command(root, args)
@@ -636,6 +1401,14 @@ def main() -> int:
         check_command(root, args)
     elif args.command == "render":
         render_command(root, args)
+    elif args.command == "capsule":
+        capsule_command(root, args)
+    elif args.command == "inspect":
+        inspect_command(root, args)
+    elif args.command == "capture":
+        if not 1 <= args.max_lines <= 80:
+            raise SystemExit("--max-lines must be between 1 and 80")
+        capture_command(root, args)
     elif args.command == "request":
         request_command(root, args)
     elif args.command == "migrate":

@@ -1,5 +1,10 @@
 # noootwo-ask Releases
 
+## v0.6.1
+
+- Compressed the always-loaded description without removing its routing triggers.
+- Participates in the package-wide context budget; routing behavior is unchanged.
+
 ## v0.6.0
 
 - Added an explicit route for a claim or several suspected problems that need evidence and a recommendation before any fix.

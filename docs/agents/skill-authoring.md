@@ -24,6 +24,21 @@ Budget: `description` ≤ 200 characters. If it does not fit, the skill covers t
 
 Material behind a pointer escapes context load at the price of the pointer's line. Material with no pointer rides entirely on cognitive load.
 
+## Context lifecycle budget
+
+Every model-invoked skill carries this operational rule:
+
+`write -> select -> compress -> isolate -> verify`
+
+- Load the selected skill and only the reference sections the current branch triggers.
+- Keep live excerpts at 80 lines or fewer.
+- Write raw output above 16 KiB to cold evidence first, then carry its path and hash.
+- Keep one writer. Isolate independent read-only research or review to a subagent.
+- Verify a compressed capsule against its source hash, current commit, and latest evidence before acting.
+- For an on-demand reference above about 200 lines, read headings or query hits first, then the matching section.
+
+The capsule is a bounded read view, not a replacement for append-only history or raw evidence. Compression must preserve provenance, uncertainty, and the condition that would reopen the source.
+
 ## Information hierarchy
 
 Rank every piece of content by how immediately the agent needs it:
@@ -95,6 +110,7 @@ A prohibition earns its place only as a hard guardrail that cannot be phrased po
 | Rule | Limit |
 | --- | --- |
 | `description` length | ≤ 200 characters |
+| all public `description`s combined | ≤ 1,800 characters |
 | `SKILL.md` length | ≤ 120 lines |
 | `references/` files per skill | ≤ 12 |
 | Every reference named by a pointer in `SKILL.md` | required |

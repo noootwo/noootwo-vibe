@@ -1,11 +1,11 @@
 ---
 name: noootwo-tdd
-description: "Use for any behavior-changing code: feature, bug fix, or refactor; owns the red-green-refactor loop and test quality. Direct one-file changes keep the same loop, just smaller."
+description: "Use for behavior-changing code: features, bug fixes, or refactors; own red-green-refactor and test quality at any change size."
 ---
 
 # Noootwo TDD
 
-Own the test-first loop for code development. This skill does not decide product scope, architecture, release, or submit; it produces a small, verified behavior change and returns to `noootwo-workflow` for the next step.
+Own the test-first loop for code development. This skill does not decide product scope, architecture, release, or submit; it produces a small, verified behavior change and returns to `noootwo-workflow` for the next step. Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate only independent read-only work; keep one writer; verify summaries against source.
 
 ## When this runs
 

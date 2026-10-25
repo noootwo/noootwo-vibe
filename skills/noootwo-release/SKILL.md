@@ -1,11 +1,11 @@
 ---
 name: noootwo-release
-description: "Use when versioning, tagging, releasing, deploying, rolling back, or tracing a release: verification ledger, version source, artifact identity, provenance, deployment markers, rollback, and health."
+description: "Use for versioning, release, deployment, rollback, or release tracing: ledger, artifact identity, provenance, markers, and health."
 ---
 
 # Noootwo Release
 
-Own release engineering: version, artifact, release record, deployment trace, rollback, and release health. Code health decides whether a change is ready; this skill owns how the release is identified, produced, promoted, traced, and reverted.
+Own release engineering: version, artifact, release record, deployment trace, rollback, and release health. Code health decides whether a change is ready; this skill owns how the release is identified, produced, promoted, traced, and reverted. Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate only independent read-only work; keep one writer; verify summaries against source.
 
 ## When this runs
 

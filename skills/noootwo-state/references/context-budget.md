@@ -2,6 +2,18 @@
 
 Use this when a documentation source is becoming expensive to read, when a status document is turning into a timeline, or when an agent needs facts from a long document.
 
+## Context lifecycle
+
+`write -> select -> compress -> isolate -> verify`
+
+1. **Write** the durable fact, decision, blocker, or evidence handle when it changes.
+2. **Select** only the facts and files that constrain the current step.
+3. **Compress** re-entry into a context capsule: goal, stage, settled and unsettled decisions, blockers, next trigger, provenance handles, and source hash.
+4. **Isolate** only independent, read-only research or review work. Keep one writer and do not duplicate dependent decisions across agents.
+5. **Verify** the capsule's claim against the named source before acting on it. Compression never upgrades uncertainty or replaces raw evidence.
+
+The capsule is `noootwo.context-capsule/0.1`; state and event schemas remain authoritative and unchanged.
+
 ## Principle
 
 Documentation should make the next task cheaper. If a file is read often, it must be short, scoped, and good at routing to deeper material. Long evidence, history, and raw material belong behind searchable names, not in always-read entrypoints.
@@ -15,6 +27,13 @@ Documentation should make the next task cheaper. If a file is read often, it mus
 | On-demand references | `references/`, `docs/reference/`, skill-specific playbooks | one topic per file; clear read trigger near the top |
 | Durable history | `docs/releases/`, `docs/adr/` | concise dated records, not session transcripts |
 | Cold evidence | raw evidence, long logs, screenshots, old task notes | searchable storage or out of repo; do not load by default |
+
+## Live and cold
+
+- A live excerpt defaults to 80 lines and never becomes the evidence record.
+- Output above 16 KiB goes to a cold evidence file before the next reasoning step.
+- The hot context carries the conclusion, file or URL, line or command, exit status, hash, and the path needed to reopen the source.
+- Re-read a source slice when its hash, commit, environment, or claimed role is unclear; do not trust a summary that lost provenance.
 
 ## Placement Table
 
@@ -37,7 +56,7 @@ When `docs/status.md` grows past the target budget:
 4. Move historical version details to release notes.
 5. Move stable decisions to ADRs.
 6. Move reusable procedures to guides or references.
-7. Delete stale process notes that no longer change present work.
+7. Move, link, or mark stale process notes; delete only non-authoritative scratch after its owner confirms no historical or evidentiary value.
 
 Do not preserve a complete landed-work timeline in status. If historical traceability matters, create a concise release note or ADR and link to it only when discovery would otherwise fail.
 
@@ -52,6 +71,14 @@ Before reading a long document, locate the relevant slice locally:
 5. Read the whole document only for whole-document audits, consistency checks, or when targeted search fails.
 
 Never use a long file as a context dump when a local search can isolate the relevant evidence.
+
+## State helper
+
+- `capsule` returns a bounded re-entry view in Markdown or JSON and never changes state; both forms default to 80 lines and 6,000 characters.
+- `inspect` returns metadata, headings, and matching lines; it never needs to dump a long file.
+- `capture` writes complete command output to cold evidence and returns only its exit status, hash, path, and bounded tail.
+- Read the append-only event tail only when reconstructing change history; use the capsule for ordinary re-entry.
+- An unchanged structured-state request creates no event; a changed request names what changed and stores the evidence hash and size.
 
 ## Maintenance Gate
 

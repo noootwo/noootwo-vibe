@@ -1,5 +1,10 @@
 # noootwo-design Releases
 
+## v0.19.2
+
+- Added the package-wide context lifecycle and compressed the always-loaded description.
+- Long visual references are now read by heading or query hit first; the design method, artifact gates, and readiness contract are unchanged.
+
 ## v0.19.1
 
 - Fixed a real-project failure where an explicit user request for motion was silently downgraded to `craft only`, producing only a few CSS transitions while an installed Motion runtime and the recommended material options were left unused.

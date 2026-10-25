@@ -1,6 +1,6 @@
 ---
 name: noootwo-ask
-description: "Find the right Noootwo skill for the situation and the order to run them; when unsure start with workflow, and do not turn a UI mention into a design or product decision."
+description: "Use when unsure which Noootwo skill fits; name the right skill and order. Start with workflow; do not turn a UI mention into a design or product decision."
 ---
 
 # Ask Noootwo

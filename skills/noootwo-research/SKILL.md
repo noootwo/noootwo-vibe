@@ -1,11 +1,11 @@
 ---
 name: noootwo-research
-description: "Use when a decision needs outside evidence: design, stack or library, competitor, user expectation, prior art, or whether to borrow a public skill. Extract mechanisms, not surfaces."
+description: "Use when a decision needs outside evidence: design, stack, market, prior art, or public skills; extract mechanisms, not surfaces."
 ---
 
 # Noootwo Research
 
-Settle a decision with evidence from outside the repository, or say plainly that the evidence does not settle it. Research unblocks a decision; it does not produce reading notes.
+Settle a decision with evidence from outside the repository, or say plainly that the evidence does not settle it. Research unblocks a decision; it does not produce reading notes. Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate only independent read-only work; keep one writer; verify summaries against source.
 
 Not every unknown is a research task. Read the repo, config, docs, and code first — a fact already written down is a lookup. Research starts when the answer only exists outside.
 

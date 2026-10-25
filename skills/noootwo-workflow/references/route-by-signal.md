@@ -7,7 +7,8 @@ Match the task to the right owner from evidence, not from keyword aliases.
 Collect the smallest useful set:
 
 - latest user intent and requested artifact
-- current stage from the `noootwo-state` helper, `docs/status.md`, and existing artifacts
+- an explicit issue ID, symbol, path, or error, which selects the owner without project orientation
+- for resume work, the current stage from the `noootwo-state` capsule and the relevant status or artifact; direct work reads no project state
 - git status and recently changed files
 - open blockers recorded by a previous specialist
 - available skill names and descriptions
@@ -48,6 +49,10 @@ Do not write a permanent `keyword -> skill` table. Skill descriptions and trigge
 - Two equally valid owners → stop and ask the user with one question.
 - No owner → stop and report the gap with one or two closest candidates; do not invent a Noootwo skill or guess a wrong external skill.
 
+For a plan or recommendation-only request, load only the owner of the current
+step. Name later owners in the proposed sequence without loading their bodies;
+load each one when its step starts.
+
 ## Return from a specialist
 
-After the specialist returns, do not assume the next step from the original plan. Re-read current state and match again. The next owner may change because new evidence appeared.
+After the specialist returns, do not assume the next step from the original plan. Re-read the changed frontier and match again. The next owner may change because new evidence appeared.

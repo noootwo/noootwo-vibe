@@ -1,5 +1,15 @@
 # noootwo-workflow Releases
 
+## v0.20.0
+
+- Replaced broad state loading with `direct | resume | decision/evidence` read depth. Direct work reads no project state; resume reads the capsule, git state, and at most three frontier entry points.
+- After compaction, the restored capsule is checked against the current state hash, commit, worktree, and latest evidence.
+- State records only actual goal, stage, decision, blocker, evidence, or next-trigger changes; pure reads and unchanged checks emit no event.
+- A completed goal followed by an unrelated goal gets a capsule and a new-session recommendation unless the user explicitly continues.
+- Added the package-wide context lifecycle, >200-line reference routing, 80-line excerpt, 16 KiB cold-evidence, read-only isolation, and single-writer rules.
+- Skill descriptions are now the routing index: a named current spec, ADR, issue, or evidence record is an authority, not a cue to load its authoring skill.
+- Before evidence, workflow loads at most one specialist body. Plan-only work does not preload later owners and receives one bounded identifier search plus at most three batched evidence slices.
+
 ## v0.19.0
 
 - Routed confirmation requests, suspected-problem lists, and evidence-first recommendations to `noootwo-debug`'s Diagnosis Map.
