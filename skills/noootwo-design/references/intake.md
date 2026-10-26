@@ -115,7 +115,7 @@ Rules:
 
 ### Anti-Slop Translation
 
-Reject these unless the product context specifically justifies them:
+Treat these as flags. Keep one only when product context and inspected artifact evidence show a deliberate choice without hierarchy, readability, brand-fit, or cohesion harm:
 
 - hero plus card wall as the default first screen
 - unmodified shadcn-like or UI-kit default components
@@ -123,6 +123,8 @@ Reject these unless the product context specifically justifies them:
 - Inter-only or system-only typography when personality is required
 - generic violet gradients, glow, glass, bokeh, decorative dots, fake dashboards, or fake-perfect metrics
 - adjectives without tokens, state behavior, artifact evidence, or forbidden substitutions
+
+Accessibility, readable hierarchy, real content, state completeness, and interaction recovery remain hard gates.
 
 ### Micro-Detail Checks
 

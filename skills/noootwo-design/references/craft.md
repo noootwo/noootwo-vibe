@@ -9,6 +9,8 @@ Noootwo Design should not produce work that looks instantly AI-generated or gene
 
 ### Default Failure Patterns
 
+Treat these as signals to investigate, not automatic bans. A deliberate product or brand choice may survive when rendered evidence shows it preserves hierarchy, readability, cohesion, and fit.
+
 - `Inter-only`, `system-only`, or a single safe grotesk with no contrast.
   Replace with a type system that creates tension through serif, mono, width, density, or case contrast.
 - `Pure black + white + glow + rounded-full`.
@@ -29,7 +31,7 @@ Noootwo Design should not produce work that looks instantly AI-generated or gene
 ### Typography Rules
 
 - Typography must be chosen, not inherited accidentally.
-- Avoid defaulting to Inter unless the current brand already uses Inter and the work must stay inside that system.
+- Treat Inter-only as an aesthetic flag. It passes when the current brand, platform convention, or rendered hierarchy makes it intentional.
 - Use no more than two core families plus an optional mono accent.
 - Every direction needs one explicit source of contrast:
   - serif vs sans

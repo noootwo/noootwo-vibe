@@ -20,7 +20,7 @@ Produce 3 directions only when the choice would materially change implementation
 
 Skip directions for `quick`, `review`, `extract-system`, handoff-only, explicit stay-close polish, and standard work where product path plus visual posture already make one implementation path clear.
 
-Directions are a user-facing decision menu, not internal notes. Present the menu, recommend one direction, and wait for user selection before implementation unless the user explicitly delegates the choice.
+Directions are a user-facing decision board, not internal notes. Present real samples, recommend one direction, and wait for user selection before implementation unless the user explicitly delegates the choice.
 
 For full redesign requests such as "redo all UI", "start over", "all design from scratch", or "do not use the current visual language", the direction menu is a hard blocking checkpoint.
 
@@ -37,6 +37,16 @@ Write `.noootwo/directions.md` with:
 - surface type and why the chosen source pool fits
 - for each direction: source evidence, borrowed mechanism, anti-example, design-spec delta, type/color/density, component/shape language, motion thesis or explicit no-motion rationale, artifact strategy, and mimicry risk to reject
 - for each direction: design thesis, authored move when justified, must-preserve, allowed-variation, forbidden-substitution, token target, component target, and motion target
+- for each direction: low-cost sample path, what the sample proves, and whether the sample was viewed
+
+### Low-Cost Direction Samples
+
+A direction is not reviewable until the user can see the structural difference, typography stance, density, and color hierarchy in a real artifact.
+
+- Default to three cheap samples: HTML skeletons for web, native previews for app work, or a medium-native mock for fixed-canvas work.
+- If the runtime is weak, use one fuller sample plus two lightweight variants. Keep all three materially different and record the limitation.
+- A sample is evidence, not the final design. Spend effort on structure and visual grammar, not polish.
+- Skip samples only for `quick`, a clear single direction, an explicit stay-close refinement, or a recorded blocker. Never replace a required sample with a prose-only menu.
 
 ### Internal Preflight
 
@@ -50,6 +60,7 @@ Before drafting, confirm:
 - product UI directions use product/design-system evidence, while campaign UI directions may use more experimental art-direction evidence
 - each direction names how it becomes reviewable
 - each direction includes at least one openable case link the user can inspect
+- each compared direction records a low-cost sample path and what that sample proves, or the recorded reason samples are not applicable
 - high-character directions have visual evidence or are explicitly marked low confidence with a spike requirement
 - each direction has stack translation
 - each direction names one visible authored move if it claims `add moment`; `leave simple` and `craft only` instead name the structural, typographic, state, or detail mechanism that prevents generic drift
@@ -114,6 +125,8 @@ Style Evidence Check
 ### Hard Rules
 
 - Do not turn "premium", "niche", "unique", or "advanced" into a confident design spec without visual evidence.
+- Do not accept a screenshot, capture, or sample that was never opened and inspected.
+- Do not treat a black, broken, or loading-state capture as visual evidence.
 - If evidence contradicts the proposed spec, return to style discovery instead of polishing implementation.
 - If only one weak reference exists, mark low confidence and require a spike or artifact review.
 - For product UI, product-flow evidence outranks pure art-direction shots.

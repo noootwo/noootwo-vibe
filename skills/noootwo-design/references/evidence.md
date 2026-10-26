@@ -137,126 +137,93 @@ Flag these as Claude-like convergence, even if they look polished:
 - handoff that drops component names, states, motion intent, or implementation risks
 
 
-## Impeccable Style Details
+## Impeccable Craft Signals
 
-Use this as craft guidance distilled from current impeccable design skills. Borrow the mechanisms, not the dependency or wording. For the 2026 mechanism-level pass (durable truth split, deterministic detectors, bounded verification, separated reviewer), read [evidence](evidence.md).
+Use this as craft guidance distilled from `pbakaus/impeccable` v4.7.0. Borrow the mechanisms, not the dependency, command vocabulary, or surface styling. For the 2026 mechanism-level pass and its evidence limits, read [Impeccable Research Notes](#impeccable-research-notes).
 
 ### Typography
 
-- Do not default to Inter, Roboto, Arial, Open Sans, or system fonts when the brief asks for personality.
+- `Inter-only`, Roboto-only, Arial-only, Open Sans-only, or system-only type is an aesthetic flag when the brief asks for personality. Keep it only when brand continuity, platform convention, or rendered hierarchy makes it intentional.
 - Pair with real contrast: serif/sans, wide/condensed, humanist/geometric, editorial/body, or restrained mono accent.
 - Use a small, explicit type scale. App UI needs predictable `rem` roles; campaign UI can use fluid display sizes.
 - Body text should normally be at least 16px on web.
 - Use `tabular-nums` for aligned values and operational data.
-- Do not set an own-world display voice in a system face (Impact, Arial Black, platform sans); source or self-host a face whose character matches the approved lettering.
+- A system display face (Impact, Arial Black, platform sans) is a flag for an own-world voice; pass it only when the artifact shows the face belongs to the brand or medium.
 
 ### Color
 
-- Avoid pure `#000` and `#fff` as the main palette unless a specific brand system requires them.
+- Pure `#000` and `#fff` are palette signals. Keep them when the brand, document mode, contrast need, or native platform makes them deliberate.
 - Tint neutrals toward the chosen brand mood.
 - Prefer OKLCH or `color-mix()` where web stack support allows.
-- Do not use the AI palette: cyan/purple/blue gradients, neon-on-dark, glow accents, or gradient text as the main idea.
+- Cyan/purple/blue gradients, neon-on-dark, glow accents, or gradient text are flags when they carry no brand or content reason.
 - Dominant color plus sharp accent is usually stronger than evenly spread decorative color.
-- Do not reach for cream/beige as the default "tasteful" AI surface; choose a background from a deliberate palette.
+- Cream or beige is a flag when it reads as the default "tasteful" surface; pass it when the palette and hierarchy prove intent.
 
 ### Composition And Space
 
 - Create rhythm with tight related groups and generous separation between groups.
-- Do not apply the same padding everywhere.
+- Uniform padding is a rhythm flag; confirm that it flattens grouping before blocking `ready`.
 - Use asymmetry, rails, rules, and structured density when they clarify hierarchy.
-- Avoid identical card grids, nested cards, centered hero templates, and card walls as a default structure.
+- Identical card grids, nested cards, centered hero templates, and card walls are convergence signals; judge the rendered structure before failing them.
 - A sophisticated layout can be dense if the data, labels, and actions are organized.
-- No eyebrow/kicker above every heading, and no decorative numbered section markers unless the sequence carries information.
+- Eyebrow/kicker labels above every heading and decorative numbered section markers are aesthetic flags. Keep them when they carry real sequence, navigation, or brand meaning without weakening hierarchy.
 
 ### Motion
 
 - Motion should explain state, continuity, emphasis, or identity.
 - One well-orchestrated transition is better than many generic fade-ups.
-- Avoid bounce/elastic easing unless the product explicitly wants playful physicality.
-- Do not put motion on top of a generic layout and call it premium.
+- Bounce or elastic easing is a flag unless the artifact shows playful physicality belongs to the product.
+- Motion over a generic layout is a review signal, not proof that a different layout is required.
 
-### Detail And Hard-Edge Refusals
+### Detail Evidence Flags
 
-- No gradient text; emphasis comes from weight or size.
-- No zero-blur hard offset shadows unless the world is truly neobrutalist.
-- No emoji/unicode glyphs standing in for an icon system.
-- No glass/blur decoration without a specific effect.
+- Gradient text is a flag when it weakens legibility or hierarchy compared with direct type treatment.
+- Zero-blur colored halos and hard offset shadows are flags when they fail to communicate depth, state, or a coherent world.
+- Emoji or Unicode glyphs standing in for an icon system are a flag when they break consistency, recognition, or accessibility.
+- Glass or blur decoration is a flag when it has no material role.
 - Theme the browser surfaces models usually skip: text selection, caret, custom scrollbars, focus rings, underline offsets, and tabular numerals.
 
 ### Review
 
-Ask whether the interface would be instantly recognized as AI-generated. If yes, return to directions or artifact instead of polishing. Confirm detector-style findings against a rendered screenshot before they block `ready`.
+Ask whether the interface would be instantly recognized as AI-generated. If yes, inspect why before returning to directions or artifact. A detector-style finding is only a lead; record the observed harm or the intentional use that survives review. WCAG, contrast, keyboard/touch reachability, real content and assets, state integrity, and interaction recovery remain hard gates.
 
 
 ## Impeccable Research Notes
 
-Recorded 2026-09 after a fresh pass over upstream `pbakaus/impeccable` (skill v4.3.1 / CLI 4.1.0, https://github.com/pbakaus/impeccable). Use this note when updating Noootwo Design's workflow, review gates, scripts, or public design-quality claims. It explains why that skill feels stronger than the prompt-only `.impeccable.md` version we borrowed from earlier (see `evidence.md` for the distilled craft rules).
+Recorded 2026-10-27 against `pbakaus/impeccable` v4.7.0 (`skill-v4.7.0` and `cli-v4.7.0`, commit `aeeb3d8c30b5f95aeeb3e893b0f1a308af8fdb8f`, released 2026-10-19). The evidence is official source plus inspectable release artifacts; no independent outcome study establishes a quality gain.
 
-### What Changed Upstream
+### Current Mechanisms
 
-Impeccable stopped being "one design-context file plus a few commands" and became a source-first system:
+- **Durable truth split.** Product facts, visual worlds, and per-surface briefs remain distinct; a design contract should be derived from them instead of inventing brand truth from the current screen.
+- **Code-first artifact evidence.** App screens and documentation surfaces start from implementable skeletons that a reviewer can inspect, rather than from prose about the intended style.
+- **Direction cards.** Candidate directions remain choices the user can see and compare. A menu is useful only when it carries enough visible structure to support the choice.
+- **Familiar control grammar with one signature.** Work surfaces keep controls users already know, then use one authored mechanism to carry identity. This prevents both generic kit output and novelty that taxes the task.
+- **Real work first.** Landing and product surfaces should expose actual product evidence, content, or interaction early instead of replacing it with decorative explanation.
+- **Device and medium checks.** Review includes the shipped viewport or device class when reachable; a desktop DOM scan cannot prove native touch, hover, or material behavior.
+- **Progressive disclosure.** On-demand guidance moves behind the current branch instead of becoming a banner-heavy permanent checklist.
+- **Measured finding mechanisms.** Upstream's deterministic findings remain useful as reproducible leads. Noootwo keeps its optional advisory checks and requires artifact evidence before a finding blocks `ready`.
 
-- **Durable truth split.** One-time `init` writes `PRODUCT.md` (users, jobs, constraints, evidence, platform, voice) and keeps visual worlds in `DESIGN.md` plus per-surface briefs. Product truth is not confused with surface decoration.
-- **Engine + context loader.** A small self-contained binary (`impeccable context`) resolves and loads `PRODUCT.md`, `DESIGN.md`, the matching surface brief, and native guidance at the start of each session. The skill references that loaded context instead of re-deriving it.
-- **Deterministic detectors.** 61 named rules (side-tab, overused-font, ai-color-palette, cream-palette, nested-cards, gradient-text, hero-eyebrow-chip, kicker-above-heading, numbered-section-labels, hard offset shadows, etc.) run from a Rust CLI, browser extension, and in-editor hook with no LLM and no API key. Findings are reproducible and CI-able.
-- **Edit-time hook.** The design hook auto-runs the detector after UI file edits and surfaces findings, so mechanical mistakes are caught while editing, not only in an end-of-turn review.
-- **Live browser mode.** Visual variants are iterated in a real browser session instead of only from screenshots.
-- **Craft floor as a separate reference.** A `craft-floor.md` is loaded only when about to edit UI. It carries absolute bans and shipping reflexes (contrast, depth, spacing, type, motion, states, browser surfaces).
-- **Bounded verification.** "Build fully, inspect once with a batched round (desktop and mobile together), fix everything in one batch, confirm with at most one more round, stop." Review is batched rather than an endless polish loop.
-- **Separated finish reviewer.** Final review uses a reviewer that does not inherit the generator's framing/transcript when a subagent is available; the generator cannot self-certify.
-- **Doctor / drift.** `doctor` reports drift between recorded artifacts and what the current version expects, without repairing it as a side effect.
+### Mechanisms Adopted
 
-### Why It Reads Stronger
+1. Keep the product/system/surface truth split aligned with `.noootwo/product-facts.md`, `.noootwo/system.md`, `.noootwo/design-tokens.md`, and the active brief.
+2. Require code-first low-cost direction samples when a direction choice is materially unresolved.
+3. Prefer familiar control grammar plus one visible authored mechanism over a whole-surface restyle with no task logic.
+4. Keep one batched inspection and at most one confirm round; do not turn review into an open-ended polish loop.
+5. Use a reviewer that did not generate the artifact when the harness allows it.
+6. Treat repeated aesthetic findings as evidence prompts, not universal prohibitions. The flag blocks only when the rendered artifact shows damaged hierarchy, readability, brand fit, or system cohesion.
 
-- Quality checks are **measurable and repeatable** instead of depending on whether a reviewer happens to notice an AI tell.
-- **Prevention happens at edit time**, not only in review.
-- The guidance is **specific and opinionated**: absolute bans (eyebrow above every heading, gradient text, cards-as-lazy-container, system display face, emoji/unicode icons) remove the decisions that converge on AI-generated output.
-- **Cost is bounded**: batched verification and at-most-one confirm round cap how much review can burn.
-- **Review is separated from generation**, reducing self-certification bias.
+### Rejected Or Deferred
 
-### Mechanisms To Borrow (not wording or dependencies)
+- The Rust engine, CLI, extension, hooks, provider-specific live-variant server, and command vocabulary would add a toolchain tax and a second routing surface.
+- Absolute anti-pattern bans, a universal style library, and brand-specific copies are rejected. They can replace judgment with a different safe mean.
+- Worst-case data, mobile-native, and animation-performance checks remain P2 until they are justified by a concrete local failure and a cheap check.
 
-1. **Enumerated deterministic anti-slop scan**
-   Extend `scripts/check_visual_gates.py` (already Playwright-based) with a small named rule set: overused fonts, gradient text, AI palette, cream/beige default, nested cards, monotonous spacing, bounce/elastic easing, pulsing dots, icon-tile stacks, hero-eyebrow chips, kicker-above-heading, numbered section labels, hard offset shadows, system display face, emoji-only icons, dark glow/radial halo, side-tab borders. Run it as evidence before `ready`; treat findings as advisory until confirmed by screenshot/DOM review. This converts `review.md` flags into reproducible findings.
-2. **Enforce durable truth split**
-   We already have `.noootwo/product-facts.md`, `system.md`, `design-tokens.md`, briefs, and surfaces. The discipline to borrow: visual contracts must be derived from product facts + existing system evidence; no aesthetic decisions are inferred inside the design contract without a recorded evidence path. `noootwo_status.py` should report missing or stale product-facts as a gate.
-3. **Craft floor with absolute bans**
-   Keep `craft.md` and `review.md`; make sure the force-return rules include new absolute bans that are hard to miss: no eyebrow/kicker above every heading, no numbered section markers as decoration, no hard offset shadows unless the world is truly neobrutalist, no system display face for an own-world page, no emoji/unicode glyphs standing in for icons, no cream/beige default surface, no gradient text. Add the cheap "built vs assembled" check: theme the browser surfaces the model usually skips (text selection, caret, custom scrollbars, focus ring, underline offset, tabular numerals).
-4. **Bounded verification loop**
-   In `review.md` loop rules, prefer one batched inspection (desktop + mobile on web, shipped device classes on native) followed by one fix batch and at most one confirm round. Do not spend polish loops on a direction that needs a structural pivot.
-5. **Separated final reviewer**
-   Prefer final review from a reviewer that does not inherit the generator's framing when the harness supports a fresh agent. Without one, step fully out of the build context before evaluating and disclose substitution in one line at finish. The generator never self-certifies `ready`.
-6. **Drift, reported not silently repaired**
-   `noootwo_status.py` should flag when `.noootwo/design-tokens.md`, active spec, or system file is stale against the rendered artifact. Report it; do not repair as a side effect of an unrelated design task unless the user asks.
+### Safety Floor
 
-### What We Are NOT Borrowing
+Evidence flags never waive WCAG contrast, readable hierarchy, keyboard/focus/touch reachability, real content and assets, state completeness, or recovery from empty, loading, error, permission, and success states. Intentional cream, system display type, gradient text, decorative numbering, eyebrow labels, offset shadows, colored halos, emoji icons, or Inter-only type may pass when the artifact demonstrates product or brand fit and no safety or cohesion harm.
 
-- The Rust engine, `npx` shim, provider-native finder, live browser variant server, or hook manifests. Adding those would make Noootwo Design heavy and harness-specific.
-- Impeccable's command vocabulary, site styling, brand voice, or leaked prompt wording.
-- Any dependency that makes `quick` mode require a toolchain. The deterministic scan stays an optional production/review tool; quick polish still works from existing evidence.
+### Evidence Boundary
 
-### Risks And Counterexamples
-
-- Over-structuring small tasks increases cost. Keep `quick` free of any new scan requirement.
-- Static scans can false-positive on deliberate choices (brand font, dark mode, editorial marquee). Findings must be confirmed in artifact review before they can block `ready`.
-- Requiring subagents or Playwright would break quick/non-interactive flows; treat these as optional evidence, never a mandatory gate.
-- Don't let "deterministic findings exist" replace visual judgment: a clean scan is evidence, not proof of design quality.
-
-### Cost Boundary
-
-- `quick`: no scan, no new files.
-- `standard`: use the enumerated gates as a checklist in the artifact review; batched verification applies.
-- `deep` / `production`: may run the deterministic scan (when tooling is available), consume findings as evidence, and record drift checks.
-- `review`: scans are evidence, never sole authority.
-
-### Verification Plan
-
-- A Noootwo eval scenario should include a "generic slop" artifact that trips at least two enumerated gates; the review must cite both finding and confirmed screenshot evidence before `ready`.
-- A "wise deviation" scenario (e.g., deliberate dark-glow brand, intentional Inter brand font) must not be blocked without artifact evidence.
-- After updating scripts or gates, run the workspace validator and the readiness/eval scripts, and record the result in `docs/status.md` if the change is user-facing.
-
-### Source Notes
-
-- Reviewed: upstream `README.md`, `AGENTS.md`, `skill/SKILL.src.md`, `skill/reference/craft-floor.md`, `skill/reference/init.md`, `skill/reference/audit.md`, `skill/reference/hooks.md`, `PRODUCT.md`, `DESIGN.md`, and `crates/foundation/src/registry.rs` (rule list). Access: GitHub clone, no access limitations.
-- Evidence level: official upstream source with running artifacts (detector, CLI, extension, tests).
-- Boundary: borrowed mechanisms (repeatable checks, bounded loops, separated reviewer, durable truth split, drift reporting) were extracted; no commands, engine, wording, or styling were copied.
+- Upstream v4.7.0 is a moving target; this note records the named tags and commit above.
+- The repository shows mechanisms and release practice, not an independent controlled test of UI quality.
+- Noootwo must not claim a general quality improvement until the fixture and reviewer evidence in `docs/experiments/2026-10-27-upstream-adoption.md` are recorded, and even then the claim is limited to the exercised workflow and evidence gates.

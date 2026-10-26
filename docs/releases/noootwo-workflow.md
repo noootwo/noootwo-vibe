@@ -1,5 +1,13 @@
 # noootwo-workflow Releases
 
+## v0.21.0
+
+- Approved execution now treats the accepted spec and plan as authority for reversible implementation details.
+- A plan ambiguity is resolved from the spec, plan, and evidence, then recorded with the decision, basis, error cost, and reopen trigger before work continues.
+- Routine naming, local structure, equivalent API, and test-organization choices no longer return for re-approval.
+- User-owned decisions, irreversible migration or data loss, security or privacy impact, external side effects or spend, and whole-plan invalidation remain stop boundaries.
+- Added two opt-in eval contracts covering continued rulings and real stop boundaries. Fresh model sessions remain unrun.
+
 ## v0.20.0
 
 - Replaced broad state loading with `direct | resume | decision/evidence` read depth. Direct work reads no project state; resume reads the capsule, git state, and at most three frontier entry points.

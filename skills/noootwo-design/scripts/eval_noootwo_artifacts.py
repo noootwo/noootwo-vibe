@@ -6,6 +6,8 @@ import argparse
 import re
 from pathlib import Path
 
+from validate_noootwo_readiness import validate_capture_file
+
 
 PENDING_RE = re.compile(r"^Status:\s*pending\b", re.IGNORECASE | re.MULTILINE)
 TBD_RE = re.compile(r"(?<!`)\bTBD\b(?!`)")
@@ -13,6 +15,11 @@ USER_DELEGATED_RE = re.compile(r"user delegated choice to agent\s*:\s*(?:yes|tru
 APPROVED_RE = re.compile(r"approved by user\s*:\s*(?:yes|true|approved)", re.IGNORECASE)
 PLAN_APPROVED_RE = re.compile(r"user approved or delegated implementation plan\s*:\s*(?:yes|true|approved|delegated)", re.IGNORECASE)
 INTERVENTION_VALUES = {"leave simple", "craft only", "add moment"}
+COMPARED_DIRECTION_RE = re.compile(
+    r"^##\s+Compared Direction\s+\d+\s*\n(.*?)(?=^##\s|\Z)",
+    re.IGNORECASE | re.MULTILINE | re.DOTALL,
+)
+SOURCE_BLOCK_RE = re.compile(r"^##\s+(?:Optional\s+)?Source\b.*$", re.IGNORECASE | re.MULTILINE)
 
 
 def read(root: Path, relative: str) -> str:
@@ -48,6 +55,73 @@ def field_value(content: str, label: str) -> str | None:
     if not match:
         return None
     return match.group(1).strip()
+
+
+def has_recorded_value(content: str, label: str) -> bool:
+    value = (field_value(content, label) or "").strip()
+    return bool(value) and "TBD" not in value.upper() and value.lower() not in {"pending", "blocked"}
+
+
+def local_artifact_exists(root: Path, value: str) -> bool:
+    clean = value.strip().strip("`")
+    if re.match(r"^https?://", clean, re.IGNORECASE):
+        return True
+    return (root / clean).exists()
+
+
+def validate_direction_sample_records(root: Path, directions: str) -> list[str]:
+    errors: list[str] = []
+    blocks = list(COMPARED_DIRECTION_RE.finditer(directions))
+    require(errors, len(blocks) >= 3, "directions compare fewer than 3 paths")
+    for index, match in enumerate(blocks, start=1):
+        block = match.group(1)
+        sample_path = (field_value(block, "Low-cost sample path") or "").strip()
+        sample_proves = (field_value(block, "What the sample proves") or "").strip()
+        inspected = (field_value(block, "Sample inspected") or "").strip().lower()
+        require(errors, bool(sample_path) and "TBD" not in sample_path.upper(), f"direction {index} missing low-cost sample path")
+        require(errors, bool(sample_proves) and "TBD" not in sample_proves.upper(), f"direction {index} missing what the sample proves")
+        require(errors, inspected.startswith(("yes", "viewed")), f"direction {index} sample was not inspected")
+        if sample_path:
+            require(errors, local_artifact_exists(root, sample_path), f"direction {index} sample path does not exist: {sample_path}")
+    return errors
+
+
+def validate_source_records(root: Path, board: str) -> list[str]:
+    errors: list[str] = []
+    blocks = SOURCE_BLOCK_RE.split(board)[1:]
+    require(errors, len(blocks) >= 3, "reference board has fewer than 3 sources")
+    for index, block in enumerate(blocks, start=1):
+        for label in ("Same-medium fit", "Artifact inspected", "Observed evidence", "Borrowed mechanism"):
+            require(errors, has_recorded_value(block, label), f"reference source {index} missing {label.lower()}")
+        inspected = (field_value(block, "Artifact inspected") or "").strip().lower()
+        capture = (field_value(block, "Capture path") or "").strip().strip("`")
+        if capture and capture.lower() not in {"unreachable", "none", "url-only", "url only", "blocked", "login required"}:
+            capture_error = validate_capture_file((root / capture).resolve())
+            require(errors, capture_error is None, f"reference source {index} capture {capture_error or 'is invalid'}: {capture}")
+            require(errors, inspected.startswith("yes"), f"reference source {index} capture was not inspected")
+    return errors
+
+
+def validate_aesthetic_review(review: str) -> list[str]:
+    errors: list[str] = []
+    safety = (field_value(review, "Safety hard-gate result") or "").strip()
+    evidence = (field_value(review, "Evidence of harm or intentional use") or "").strip()
+    require(errors, bool(safety) and "TBD" not in safety.upper(), "review missing safety hard-gate result")
+    require(errors, has_recorded_value(review, "Aesthetic flags"), "review missing aesthetic flags")
+    require(errors, bool(evidence) and "TBD" not in evidence.upper(), "review missing aesthetic harm or intentional-use evidence")
+
+    decision = (field_value(review, "Decision") or "").strip().lower()
+    ready = decision.startswith("ready")
+    if ready:
+        require(errors, safety.lower().startswith("pass"), "ready review cannot fail the safety hard gate")
+        lowered = evidence.lower()
+        harmful = bool(
+            re.search(r"(observed|demonstrated|confirmed|actual)\s+(harm|damage)", lowered)
+            or re.search(r"(breaks?|damages?|weakens?)\s+(hierarchy|readability|brand fit|cohesion)", lowered)
+        )
+        negated = "no demonstrated harm" in lowered or "no observed harm" in lowered or "without harm" in lowered
+        require(errors, not harmful or negated, "ready review records aesthetic harm without a passing resolution")
+    return errors
 
 
 def intervention_value(review: str) -> str:
@@ -230,6 +304,57 @@ def eval_visual_direction_implemented_as_default_ui(root: Path) -> list[str]:
     return errors
 
 
+def eval_direction_samples_not_prose(root: Path) -> list[str]:
+    directions = read(root, ".noootwo/directions.md")
+    if not directions:
+        return ["missing .noootwo/directions.md"]
+    return validate_direction_sample_records(root, directions)
+
+
+def eval_weak_runtime_fallback(root: Path) -> list[str]:
+    directions = read(root, ".noootwo/directions.md")
+    style = read(root, ".noootwo/style-discovery.md")
+    errors = validate_direction_sample_records(root, directions) if directions else ["missing .noootwo/directions.md"]
+    fallback = (field_value(style, "Weak-runtime fallback used") or "").strip().lower()
+    require(
+        errors,
+        fallback.startswith("one full sample plus two lightweight variants"),
+        "style discovery does not record one full sample plus two lightweight variants",
+    )
+    return errors
+
+
+def eval_same_medium_mechanism(root: Path) -> list[str]:
+    board = read(root, ".noootwo/reference-board.md")
+    if not board:
+        return ["missing .noootwo/reference-board.md"]
+    return validate_source_records(root, board)
+
+
+def eval_broken_capture_rejected(root: Path) -> list[str]:
+    board = read(root, ".noootwo/reference-board.md")
+    if not board:
+        return ["missing .noootwo/reference-board.md"]
+    return validate_source_records(root, board)
+
+
+def eval_intentional_aesthetic_flags_pass(root: Path) -> list[str]:
+    review = read(root, ".noootwo/review.md")
+    if not review:
+        return ["missing .noootwo/review.md"]
+    errors = validate_aesthetic_review(review)
+    decision = (field_value(review, "Decision") or "").strip().lower()
+    require(errors, decision.startswith("ready"), "intentional aesthetic flags must be able to pass with a ready decision")
+    return errors
+
+
+def eval_aesthetic_harm_blocks_ready(root: Path) -> list[str]:
+    review = read(root, ".noootwo/review.md")
+    if not review:
+        return ["missing .noootwo/review.md"]
+    return validate_aesthetic_review(review)
+
+
 SCENARIOS = {
     "missing-exploration-before-build": eval_missing_exploration,
     "missing-user-decision-under-ambiguity": eval_missing_user_decision,
@@ -243,6 +368,12 @@ SCENARIOS = {
     "craft-only-justified": eval_craft_only_justified,
     "add-moment-proof": eval_add_moment_proof,
     "explicit-motion-request-honored": eval_explicit_motion_request_honored,
+    "direction-samples-not-prose": eval_direction_samples_not_prose,
+    "weak-runtime-fallback": eval_weak_runtime_fallback,
+    "same-medium-mechanism": eval_same_medium_mechanism,
+    "broken-capture-rejected": eval_broken_capture_rejected,
+    "intentional-aesthetic-flags-pass": eval_intentional_aesthetic_flags_pass,
+    "aesthetic-harm-blocks-ready": eval_aesthetic_harm_blocks_ready,
 }
 
 DEFAULT_SCENARIOS = [

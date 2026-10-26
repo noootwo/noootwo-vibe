@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atlas Notes - Split Desk</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --canvas: #f8f9f6;
+      --panel: #ffffff;
+      --ink: #17201e;
+      --muted: #64706c;
+      --line: #d9ded9;
+      --accent: #14645b;
+      --soft: #e6f0ed;
+      --warm: #f1a63b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: "Helvetica Neue", Arial, sans-serif;
+    }
+    button, a { font: inherit; }
+    a { color: inherit; }
+    .app {
+      display: grid;
+      grid-template-columns: 248px minmax(0, 1fr) 330px;
+      min-height: 100vh;
+    }
+    .rail {
+      padding: 24px 18px;
+      color: #f8fffc;
+      background: #102c28;
+    }
+    .mark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 8px 28px;
+      font-size: 18px;
+      font-weight: 650;
+    }
+    .mark i {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #aee4d8;
+      border-radius: 50% 50% 50% 12%;
+      transform: rotate(-22deg);
+    }
+    .rail-label {
+      margin: 24px 8px 8px;
+      color: #8fb2aa;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .rail nav {
+      display: grid;
+      gap: 3px;
+    }
+    .rail nav a {
+      padding: 9px 10px;
+      color: #d6e8e3;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .rail nav a.active {
+      color: #0c2925;
+      background: #b9e8dc;
+      font-weight: 650;
+    }
+    .rail .count {
+      float: right;
+      opacity: .7;
+    }
+    .main {
+      min-width: 0;
+      padding: 30px 34px 40px;
+      border-right: 1px solid var(--line);
+    }
+    .topline {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+    .search {
+      flex: 1;
+      padding: 10px 13px;
+      color: var(--muted);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      font-size: 12px;
+    }
+    .button {
+      padding: 10px 14px;
+      color: white;
+      background: var(--accent);
+      border: 0;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .heading-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+    .kicker {
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 8px 0 0;
+      font: 600 40px/1.02 Georgia, "Times New Roman", serif;
+      letter-spacing: -.035em;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 11px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card {
+      min-height: 176px;
+      padding: 18px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+    .card.feature {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 26px;
+      min-height: 238px;
+      padding: 24px;
+      background: var(--soft);
+      border-color: #bdd6cf;
+    }
+    .card h2 {
+      margin: 12px 0 8px;
+      font: 500 24px/1.12 Georgia, "Times New Roman", serif;
+      letter-spacing: -.02em;
+    }
+    .card.feature h2 {
+      margin-top: 18px;
+      font-size: 34px;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+    .pill {
+      display: inline-block;
+      padding: 4px 7px;
+      color: #11584f;
+      background: #d6eee7;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .diagram {
+      display: grid;
+      align-content: center;
+      gap: 8px;
+      min-height: 180px;
+      padding-left: 22px;
+      border-left: 1px solid #b8d4cc;
+    }
+    .diagram span {
+      height: 9px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    .diagram span:nth-child(1) { width: 88%; }
+    .diagram span:nth-child(2) { width: 66%; opacity: .72; }
+    .diagram span:nth-child(3) { width: 78%; opacity: .48; }
+    .diagram span:nth-child(4) { width: 44%; opacity: .26; }
+    .inspector {
+      padding: 28px 24px;
+      background: var(--panel);
+    }
+    .inspector h2 {
+      margin: 0 0 4px;
+      font: 500 23px/1.2 Georgia, "Times New Roman", serif;
+    }
+    .inspector .date {
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+    .field {
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+    }
+    .field-label {
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .field-value {
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .quote {
+      margin: 22px 0;
+      padding: 15px 16px;
+      color: #173b35;
+      background: #fbf3e5;
+      border-left: 3px solid var(--warm);
+      font: italic 16px/1.45 Georgia, "Times New Roman", serif;
+    }
+    .actions {
+      display: flex;
+      gap: 8px;
+    }
+    .actions button {
+      flex: 1;
+      padding: 9px;
+      color: var(--ink);
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 650;
+    }
+    @media (max-width: 1040px) {
+      .app { grid-template-columns: 210px minmax(0, 1fr); }
+      .inspector { display: none; }
+    }
+    @media (max-width: 720px) {
+      .app { display: block; }
+      .rail { padding: 18px; }
+      .rail nav { grid-template-columns: repeat(2, 1fr); }
+      .main { padding: 22px 18px; border-right: 0; }
+      h1 { font-size: 34px; }
+      .grid { grid-template-columns: 1fr; }
+      .card.feature { grid-template-columns: 1fr; }
+      .diagram { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="rail">
+      <div class="mark"><i></i>Atlas Notes</div>
+      <div class="rail-label">Workspace</div>
+      <nav aria-label="Workspace">
+        <a class="active" href="#">Inbox <span class="count">8</span></a>
+        <a href="#">Open records <span class="count">17</span></a>
+        <a href="#">Collections <span class="count">6</span></a>
+        <a href="#">Shared with me <span class="count">3</span></a>
+      </nav>
+      <div class="rail-label">Collections</div>
+      <nav aria-label="Collections">
+        <a href="#">Meadow studies</a>
+        <a href="#">Reading traces</a>
+        <a href="#">Tools and methods</a>
+        <a href="#">Unfiled</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <div class="topline">
+        <div class="search">Search 128 records, 34 places, and 212 annotations</div>
+        <button class="button">New record</button>
+      </div>
+      <div class="heading-row">
+        <div>
+          <div class="kicker">Working set / recent</div>
+          <h1>Your research desk</h1>
+        </div>
+        <div class="meta">Sorted by last edited<br>14 records visible</div>
+      </div>
+      <section class="grid" aria-label="Recent records">
+        <article class="card feature">
+          <div>
+            <span class="pill">Continue working</span>
+            <h2>Paths after rain</h2>
+            <p>Drainage patterns, footfall, and the detours that become permanent. Last edited 18 minutes ago with three unresolved field labels.</p>
+          </div>
+          <div class="diagram" aria-label="Record structure preview">
+            <span></span><span></span><span></span><span></span>
+          </div>
+        </article>
+        <article class="card">
+          <span class="pill">Fieldwork</span>
+          <h2>A vocabulary for edges</h2>
+          <p>Twelve terms gathered from guides, farmers, and a broken fence line.</p>
+        </article>
+        <article class="card">
+          <span class="pill">Reading</span>
+          <h2>Seed heads, annotated</h2>
+          <p>Form, dispersal, and the geometry that survives wind.</p>
+        </article>
+        <article class="card">
+          <span class="pill">Method</span>
+          <h2>One place, four seasons</h2>
+          <p>A repeatable protocol for noticing change without forcing a story.</p>
+        </article>
+        <article class="card">
+          <span class="pill">Draft</span>
+          <h2>The quiet hour</h2>
+          <p>Notes on visiting a familiar place before the day begins.</p>
+        </article>
+      </section>
+    </main>
+    <aside class="inspector" aria-label="Selected record">
+      <h2>Paths after rain</h2>
+      <div class="date">Edited today, 08:42</div>
+      <div class="field">
+        <div class="field-label">Place</div>
+        <div class="field-value">Lower orchard / north boundary</div>
+      </div>
+      <div class="field">
+        <div class="field-label">Conditions</div>
+        <div class="field-value">Steady rain, then clear; 14 C; ground still soft</div>
+      </div>
+      <blockquote class="quote">The path does not move, but each person leaves a different evidence trail.</blockquote>
+      <div class="field">
+        <div class="field-label">Open questions</div>
+        <div class="field-value">Does the detour persist after the soil dries? Check the same line next week.</div>
+      </div>
+      <div class="actions">
+        <button>Open record</button>
+        <button>Add note</button>
+      </div>
+    </aside>
+  </div>
+</body>
+</html>

@@ -47,6 +47,8 @@ Design handoff is ready only when these are concrete enough:
 - `states`: relevant loading, empty, error, success, permission, and boundary states are listed.
 - `scope cuts`: deferred or forbidden work is explicit.
 - `acceptance criteria`: at least the primary user-visible outcome is testable.
+- `User-owned how decisions`: the platform, language, library, medium, dependency, or deployment choices the user owns are named.
+- `Agent-selected defaults`: implementation defaults chosen by the agent record their value, reason, and the condition that reopens the decision.
 - `open product decisions`: unresolved choices are listed instead of hidden.
 - `design constraints`: brand, platform, content, trust, accessibility, localization, or data constraints are named.
 
@@ -94,9 +96,13 @@ Use `product-reality-check.md` when output may be PM-shaped but user-confusing, 
 
 The flow in `SKILL.md` is the source of truth for the steps. This section adds the detail the steps do not carry.
 
-**Depth.** One unsettled decision makes a single-question round. Several dependent decisions make a multi-question round. There is no separate mode to select; the frontier decides.
+**Depth.** One controlling unsettled decision makes a single-question round. Several independent root decisions make a multi-question round. A dependent decision stays parked until its prerequisite is settled. There is no separate mode to select; the frontier decides.
 
 **Facts and decisions.** Finding facts is the agent's job. A question that the repo, the docs, a screenshot, analytics, or the current UI can answer is not a question for the user. Show the facts that shaped a question, with their source, so the user does not restate them.
+
+**Grounded response.** The first unresolved round starts with a brief response grounded in evidence: replay the intent in the user's language, state what was checked and where, separate observed facts from proposals, then ask the frontier. A single controlling gap gets one question; several independent gaps stay in one round. Never use a fixed script, word budget, or ceremonial recap when nothing remains unsettled.
+
+**How ownership.** Name the decisions the user owns, such as platform, language, library, medium, dependency, deployment, or cost boundary. When the user delegates an implementation choice, record the agent-selected default, why it fits, and what would reopen it. Do not silently convert a delegated default into a user decision or vice versa.
 
 **The ledger.** Track each decision as it settles, so a round never restarts from the beginning:
 
@@ -163,7 +169,7 @@ Field guidance:
 - `Rabbit holes`: likely complexity traps, such as marketplace dynamics, heavy admin tooling, unclear AI quality, sync, permissions, or monetization before value.
 - `First validation signal`: the behavior or evidence that would justify building the next slice.
 
-Ask the settled frontier when any answer changes the recommended first loop, scope, main path, states, or acceptance: one question for a single material gap, the whole frontier in one round for several dependent gaps. If the user has not explicitly delegated the decision, wait for the answer even when the user has asked to start implementation. State a delegated assumption and proceed only after explicit delegation.
+Ask the settled frontier when any answer changes the recommended first loop, scope, main path, states, or acceptance: one question for a single material gap, the whole frontier in one round for several independent gaps. If the user has not explicitly delegated the decision, wait for the answer even when the user has asked to start implementation. State a delegated assumption and proceed only after explicit delegation.
 
 ### Frontier Question Template
 
@@ -279,6 +285,9 @@ Include technical criteria only after the user-visible behavior is clear.
 - States:
 - Scope cuts:
 - Acceptance criteria:
+- User-owned how decisions:
+- Agent-selected defaults:
+  - `<decision>`: default `<value>`; reason `<why>`; reopen if `<condition>`.
 - Open product decisions:
 - Design constraints:
 

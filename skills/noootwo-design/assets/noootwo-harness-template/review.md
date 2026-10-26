@@ -28,6 +28,9 @@ Status: pending; replace with a real review before any ready/handoff claim
 - Mismatch between intent and rendered result: TBD
 - Style understanding fit: TBD
 - Product comprehension fit: TBD
+- Safety hard-gate result: pass or fail, with the checked gates: TBD
+- Aesthetic flags: TBD
+- Evidence of harm or intentional use: TBD
 
 ## Generic Drift Checks
 

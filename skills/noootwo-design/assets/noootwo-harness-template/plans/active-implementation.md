@@ -17,6 +17,12 @@ Status: pending; fill after the approved design spec and before editing UI files
 - Files/modules that must not change: TBD
 - User changes or existing constraints to preserve: TBD
 
+## Interfaces
+
+- Public APIs, events, schemas, shared types, or component contracts: TBD
+- State, storage, migration, or compatibility boundary: TBD
+- Contracts that must remain unchanged: TBD
+
 ## Component And System Mapping
 
 - Token mapping tasks: TBD
@@ -30,6 +36,12 @@ Status: pending; fill after the approved design spec and before editing UI files
 - How export or delivery output will be checked: TBD
 - Viewports/devices/platform states to check: TBD
 - Validator or visual-gate commands: TBD
+- Test assertions: TBD
+
+## Review Focus
+
+- Spec-implied failure risks that ordinary tests do not cover: TBD
+- Artifact or boundary evidence the reviewer must inspect: TBD
 
 ## Known Drift Risks
 
@@ -42,6 +54,13 @@ Status: pending; fill after the approved design spec and before editing UI files
 ## Implementation Steps
 
 1. TBD
+
+## Ruling Ledger
+
+- Ruling: none yet
+- Basis: not applicable
+- Cost if wrong: not applicable
+- Reopen trigger: not applicable
 
 ## Completion Criteria
 

@@ -30,25 +30,28 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 ### noootwo-workflow
 
 - Current role: evidence-driven re-entrant orchestration, one-next-step scheduling, scope, stop conditions, and external-skill discovery.
-- Prior art: Superpowers orchestration/executing-plans, writing-plans, subagent-driven-development; skill-discovery routers.
-- Adopt: read current project state before stage, match one owner by intent/artifact, keep direct cheap, stop on ambiguity, persist `.noootwo/workflow-state.md`, and send confirmation requests to `noootwo-debug`'s Diagnosis Map as independent claims.
-- Reject: fixed keyword routing tables, full DAG pre-planning, adding external skills to the Noootwo public set.
-- Next pass: measure routing precision, confirmation routing, independent multi-question frontiers, mid-project resumption, and the Change Check / Release Check boundary across eval scenarios.
+- Prior art: Superpowers `v7.0.1` orchestration/executing-plans, writing-plans, fresh builder checks, and ruling ledgers; skill-discovery routers.
+- Adopt: read current project state before stage, match one owner by intent/artifact, keep direct cheap, stop on ambiguity, persist `.noootwo/workflow-state.md`, send confirmation requests to `noootwo-debug`'s Diagnosis Map as independent claims, and continue approved work through recorded rulings unless a narrow stop boundary is crossed.
+- Reject: fixed keyword routing tables, full DAG pre-planning, routine re-approval of reversible implementation details, adding external skills to the Noootwo public set.
+- Next pass: measure routing precision, confirmation routing, independent multi-question frontiers, mid-project resumption, approved-execution rulings, and the Change Check / Release Check boundary across eval scenarios.
 
 ### noootwo-product
 
 - Current role: settle what should exist before design or build.
-- Prior art: OpenAI Product Design plugin (`product-design`), especially `get-context`, `ideate`, `audit`, and `critical-overrides`.
+- Prior art: Superpowers `v7.0.1` evidence-grounded intake, intent playback, how-decision ownership, and agent-selected defaults; OpenAI Product Design plugin (`product-design`), especially `get-context`, `ideate`, `audit`, and `critical-overrides`.
 - Adopt:
   - Minimum brief before frontier questions.
   - Project-local product context snapshot instead of global user context.
   - Product-flow audit for existing UX when the user asks to audit or critique a live flow.
   - Explore / Design / Build boundary at the product-to-design handoff.
+  - A short evidence-grounded response without a fixed script, plus a one-round frontier that handles one controlling gap or several independent roots.
+  - `User-owned how decisions` and `Agent-selected defaults` with a value, reason, and reopen condition.
 - Reject:
   - Global `user-context` outside a project.
   - Product Design's Sites/Browser-specific workflow and prototype templates.
   - Product Design's asset-generation and share/deploy paths; those belong to design or integrations.
-- Next pass: add trigger phrases for existing-flow audit, minimum brief, and product context.
+  - Fixed opening scripts, playback word budgets, and a one-question-per-round habit when several decisions are independently answerable.
+- Next pass: run the grounded-response, independent-frontier, settled-request, and how-ownership scenarios; check that the one-round frontier stays proportional.
 
 ### noootwo-research
 
@@ -61,10 +64,10 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 ### noootwo-design
 
 - Current role: UI, visual, contextual intervention, artifact, and frontend work after product path is settled.
-- Prior art: Anthropic frontend-design, impeccable, `ddruids/mobbin-skill`, `dembrandt`, `designlang`, `tinte`, `LottieFiles/motion-design-skill`, `kylezantos/design-motion-principles`, `emilkowalski/skills`, `alchaincyf/huashu-art-motion`, `Meet-Miyani/compose-skill`, Refero, `feitangyuan/motion-web`, `Leonxlnx/taste-skill`, `vercel-labs/web-interface-guidelines`, `antfu-design`, `jakubkrehel/make-interfaces-feel-better`, Shaders, and Paper Shaders.
-- Adopt: case capture, computed-style extraction, drift gate, contextual `leave simple | craft only | add moment` decisions, opportunity gates with rejected candidates, motion language, reference lock, anti-averaging, interaction/accessibility gates, data-presentation rules, component-state matrix, and image-intake discipline.
-- Reject: paid MCP as required, full motion-web cases/scripts/assets, huashu's video engine/assets/character frames, mandatory image generation, mandatory scroll animation, scanning every task for effects, and surface copying.
-- Next pass: run the six contextual-intervention evals, then the motion, interface-quality, and case-capture evals; record whether the model correctly chooses restraint as well as expression, and whether an explicit motion request can no longer collapse to zero motion.
+- Prior art: Anthropic frontend-design, impeccable `v4.7.0`, huashu-design `v3.0.0`, `ddruids/mobbin-skill`, `dembrandt`, `designlang`, `tinte`, `LottieFiles/motion-design-skill`, `kylezantos/design-motion-principles`, `emilkowalski/skills`, `alchaincyf/huashu-art-motion`, `Meet-Miyani/compose-skill`, Refero, `feitangyuan/motion-web`, `Leonxlnx/taste-skill`, `vercel-labs/web-interface-guidelines`, `antfu-design`, `jakubkrehel/make-interfaces-feel-better`, Shaders, and Paper Shaders.
+- Adopt: case capture, computed-style extraction, drift gate, contextual `leave simple | craft only | add moment` decisions, opportunity gates with rejected candidates, motion language, reference lock, anti-averaging, interaction/accessibility gates, data-presentation rules, component-state matrix, image-intake discipline, real low-cost direction samples, same-medium inspected evidence, and evidence-dependent aesthetic flags.
+- Reject: paid MCP as required, full motion-web cases/scripts/assets, huashu's full style library, global appearance memory, mandatory six polished directions, universal visual gates, huashu's video engine/assets/character frames, mandatory image generation, mandatory scroll animation, scanning every task for effects, and surface copying.
+- Next pass: run the sample-selection, weak-runtime, cross-medium, broken-capture, intentional-flag, harmful-flag, and existing motion/interface-quality evals; record only the exercised workflow and evidence-gate result, not a universal UI-quality claim.
 
 ### noootwo-tdd
 
@@ -77,10 +80,10 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 ### noootwo-code-health
 
 - Current role: pre-implementation integration design, code, architecture, performance, maintainability, refactoring, optimization, re-test, and user acceptance.
-- Prior art: Martin Fowler's *Refactoring* 2nd edition, the online catalog, *Workflows of Refactoring*, *Definition of Refactoring*, *Code Smell*, *Self-Testing Code*, *Technical Debt*, *Design Stamina Hypothesis*, *Is Design Dead?*, *Yagni*, *Branch by Abstraction*, and *Strangler Fig*; Google Engineering Practices and Design Docs at Google; Michael Feathers' seams and design-for-testability material; Thoughtworks Lightweight Architecture Decision Records; Ponytail lean-code-review ladder; Superpowers requesting/receiving code review and verification-before-completion; web.dev/vitals, Lighthouse, SRE, OpenTelemetry, k6, PostgreSQL docs, JMH and related benchmark guidance.
-- Adopt: an Integration Read and compact Change Shape before a non-obvious implementation; seam, ownership, contract, reuse, reversibility, test-seam, and smallest-first-slice decisions; a disputed-premise handoff to debug or release before shaping; a skip rule for obvious local changes; two hats; six refactoring workflows; small behavior-preserving catalog moves; green-baseline safety; economic payback; structural dispositions; measurable performance evidence; severity output; re-test gate; and explicit user acceptance before submit/publish.
-- Reject: big design up front, speculative abstractions, mandatory design documents when no tradeoff exists, implementation manuals disguised as design docs, refactoring as a separate backlog of every smell, large-bang cleanup, refactoring without tests, and adding a separate architecture or performance skill.
-- Next pass: measure the disputed-premise handoff, integration-read trigger and skip behavior, Change Shape quality, Change Check versus Release Check scope, workflow selection, structural-debt disposition, two-hats separation, and the review-is-part-of-done gate.
+- Prior art: Martin Fowler's *Refactoring* 2nd edition, the online catalog, *Workflows of Refactoring*, *Definition of Refactoring*, *Code Smell*, *Self-Testing Code*, *Technical Debt*, *Design Stamina Hypothesis*, *Is Design Dead?*, *Yagni*, *Branch by Abstraction*, and *Strangler Fig*; Google Engineering Practices and Design Docs at Google; Michael Feathers' seams and design-for-testability material; Thoughtworks Lightweight Architecture Decision Records; Ponytail lean-code-review ladder; Superpowers `v7.0.1` requesting/receiving code review, verification-before-completion, builder checks, decision-complete plans, and rulings; web.dev/vitals, Lighthouse, SRE, OpenTelemetry, k6, PostgreSQL docs, JMH and related benchmark guidance.
+- Adopt: an Integration Read and compact Change Shape before a non-obvious implementation; seam, ownership, contract, reuse, reversibility, test-seam, and smallest-first-slice decisions; a disputed-premise handoff to debug or release before shaping; a skip rule for obvious local changes; a conditional Builder Check for non-obvious, cross-session, expensive, or cross-boundary handoffs; decision-complete plan records with `Interfaces`, assertions, verification, `Review Focus`, and a ruling ledger; two hats; six refactoring workflows; small behavior-preserving catalog moves; green-baseline safety; economic payback; structural dispositions; measurable performance evidence; severity output; re-test gate; and explicit user acceptance before submit/publish.
+- Reject: big design up front, speculative abstractions, mandatory builder checks for obvious local changes, mandatory design documents when no tradeoff exists, implementation manuals disguised as design docs, refactoring as a separate backlog of every smell, large-bang cleanup, refactoring without tests, and adding a separate architecture or performance skill.
+- Next pass: measure the disputed-premise handoff, integration-read trigger and skip behavior, Builder Check four-bucket output, plan-completeness failures, Change Shape quality, Change Check versus Release Check scope, workflow selection, structural-debt disposition, two-hats separation, and the review-is-part-of-done gate.
 
 ### noootwo-release
 

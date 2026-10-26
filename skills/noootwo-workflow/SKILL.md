@@ -50,6 +50,8 @@ Precedence is limited to blockers and stage continuity:
 
 Code-health is not only a release gate. When a non-direct code change has a non-obvious seam, it shapes the change before TDD: `noootwo-code-health` produces a Change Shape, and its result may be direct TDD, a preparatory refactor, or a handoff to product, design, research, or a stopped change. A local change with an obvious seam and no contract, data, or migration impact skips that pass. After every non-direct behavior change, the loop returns to `noootwo-code-health` for a Change Check before the work can be reported done. That check stays on the diff, changed behavior, nearest callers, affected tests, and one to three lenses; it escalates only when blast radius requires it. Before release or a ship-readiness submit gate, code-health runs a Release Check once for the exact commit: full suite or CI evidence, full Structure Sweep, release evidence, and named gaps. Once readiness is established, versioning, tags, artifacts, deployment traces, provenance, rollback, and release health belong to `noootwo-release`.
 
+After a plan is approved, resolve a reversible ambiguity from the spec, plan, and evidence, record the ruling with its basis, error cost, and reopen trigger, then continue. Stop only for a user-owned decision, irreversible migration or data loss, security or privacy impact, external side effects or spend, or evidence that the plan is no longer viable. Ordinary implementation details do not return for routine re-approval.
+
 Do not precompute a full DAG or pile on condition tables.
 
 ## 4. Keep state
@@ -71,6 +73,7 @@ Answer before calling the work done:
 - If a completed change created a release-bound check or known gap, did `noootwo-release` add it to the open Release Verification Ledger?
 - For release work, did `noootwo-release` produce the Release Plan and did `noootwo-state` receive the release record and deployment evidence?
 - Did behavior, state, or release facts change, and did `noootwo-state` place them?
+- During approved execution, are reversible plan conflicts recorded as rulings rather than silently decided or escalated as routine re-approval?
 - Did an external skill propose a spec, plan, or other durable artifact? If so, was it stored in the Noootwo-owned layer instead of the external skill's default directory?
 - Is user acceptance still required before commit, push, tag, or publish?
 

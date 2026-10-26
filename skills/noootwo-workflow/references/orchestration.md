@@ -33,6 +33,27 @@ Do not turn this into a large condition table. If the current evidence points to
 - A specialist may hand back a sequencing decision to workflow; record it in state rather than reimplementing the specialist.
 - An installed external skill owns its method, not the project's documentation layout. Persist durable artifacts through `noootwo-state`; never create a new project convention under an external skill's directory.
 
+## Approved execution
+
+An accepted plan is the authority for ordinary implementation choices. When the plan is silent or ambiguous:
+
+1. Prefer the accepted spec.
+2. Then prefer the accepted plan's interfaces, sequence, assertions, and `Review Focus`.
+3. Then use current code, tests, and observed evidence.
+4. If the choice is reversible, record a ruling and continue.
+
+```markdown
+Ruling
+- Decision:
+- Basis: spec | plan | evidence
+- Cost if wrong:
+- Reopen trigger:
+```
+
+Record the ruling beside the plan or in project state through `noootwo-state`. Do not re-ask for approval on naming, local structure, equivalent APIs, test organization, or another reversible detail already bounded by the plan.
+
+Stop approved execution for a user-owned product or "how" decision, an irreversible migration or data loss, a security or privacy impact, an external side effect or spend, or evidence that the plan as a whole is no longer viable. When the plan changes materially, return to the owner that can accept the new plan.
+
 ## Stop conditions
 
 Stop and ask or reroute when:
@@ -45,5 +66,7 @@ Stop and ask or reroute when:
 - several claims are being merged into one audit without evidence that they share a cause
 - three failed fixes reveal new problems in different places
 - user acceptance is required before commit, push, tag, or publish
+
+The items above govern scheduling before approval or a changed goal. During already-approved execution, the narrower stop list in [Approved execution](#approved-execution) applies.
 
 For external installed skills, stop with one or two candidates when matching is ambiguous; do not choose one on a weak keyword match.

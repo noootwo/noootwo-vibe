@@ -9,7 +9,10 @@ Each source records where it came from, whether it was reachable, what was borro
 - Source URL or artifact: TBD
 - Source and evidence type: TBD
 - Evidence level: real product flow, product artifact, design system, curated gallery, community signal, or single shot: TBD
+- Same-medium fit: yes, no, or mixed, with the target artifact named: TBD
 - Accessibility result: reachable, login required, fallback, or unreachable: TBD
+- Artifact inspected: yes or no: TBD
+- Observed evidence: layout, type ratio, palette proportion, density, state grammar, or motion behavior actually seen: TBD
 - Capture path: TBD  a path under `.noootwo/references/`, or `unreachable`
 - Borrowed mechanism: TBD
 - Landed as: TBD  the token, component, rule, or motion value this became
@@ -25,7 +28,10 @@ Each source records where it came from, whether it was reachable, what was borro
 - Source URL or artifact: TBD
 - Source and evidence type: TBD
 - Evidence level: TBD
+- Same-medium fit: TBD
 - Accessibility result: TBD
+- Artifact inspected: yes or no: TBD
+- Observed evidence: TBD
 - Capture path: TBD
 - Borrowed mechanism: TBD
 - Landed as: TBD
@@ -41,7 +47,10 @@ Each source records where it came from, whether it was reachable, what was borro
 - Source URL or artifact: TBD
 - Source and evidence type: TBD
 - Evidence level: TBD
+- Same-medium fit: TBD
 - Accessibility result: TBD
+- Artifact inspected: yes or no: TBD
+- Observed evidence: TBD
 - Capture path: TBD
 - Borrowed mechanism: TBD
 - Landed as: TBD
@@ -57,7 +66,10 @@ Each source records where it came from, whether it was reachable, what was borro
 - Source URL or artifact: TBD
 - Source and evidence type: TBD
 - Evidence level: TBD
+- Same-medium fit: TBD
 - Accessibility result: TBD
+- Artifact inspected: yes or no: TBD
+- Observed evidence: TBD
 - Capture path: TBD
 - Borrowed mechanism: TBD
 - Landed as: TBD
@@ -73,7 +85,10 @@ Each source records where it came from, whether it was reachable, what was borro
 - Source URL or artifact: TBD
 - Source and evidence type: TBD
 - Evidence level: TBD
+- Same-medium fit: TBD
 - Accessibility result: TBD
+- Artifact inspected: yes or no: TBD
+- Observed evidence: TBD
 - Capture path: TBD
 - Borrowed mechanism: TBD
 - Landed as: TBD

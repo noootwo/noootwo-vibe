@@ -31,7 +31,9 @@ When none remain, produce a `Product Checkpoint` from `references/product-flow.m
 
 The **frontier** is every decision that is answerable now, because its prerequisites are settled.
 
-Ask the whole frontier in one round. For a single unsettled decision, one question is the round.
+Open with a short grounded response: replay the intent in the user's language, list the facts checked with their sources, and mark assumptions or agent-selected proposals as proposals. Do not use a fixed opener, word count, or repeat a brief the request already settles.
+
+Ask the frontier in one round: the single decision that most changes the build when one controls the path, or every independent root decision when several do. Do not split answerable choices across turns.
 
 Format each question:
 
@@ -41,7 +43,7 @@ Format each question:
 ➡️ <your recommendation, and why>
 ```
 
-Separate questions with a horizontal rule, and open the round with a short recap of what is already settled.
+Separate questions with a horizontal rule, and keep the grounded response distinct from the recommendations.
 
 Then wait. A request to build, start, or continue is not an answer; only an explicit choice or explicit delegation settles a decision. Record a delegated decision as an assumption.
 
@@ -59,7 +61,7 @@ Ask once whether that matches what they meant. On no, reopen only the mismatched
 
 ### 5. Hand off
 
-Produce the `Product-to-Design Handoff` from `references/product-flow.md`: real user, scenario, main path, states, scope cuts, acceptance criteria, open decisions, design constraints.
+Produce the `Product-to-Design Handoff` from `references/product-flow.md`: real user, scenario, main path, states, scope cuts, acceptance criteria, user-owned how decisions, agent-selected defaults, open decisions, and design constraints.
 
 Hand off when every material decision is settled or delegated and no carried risk would change the main path, trust boundary, scope, or acceptance.
 

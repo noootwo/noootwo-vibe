@@ -71,6 +71,36 @@ Rejected
 
 A Change Shape can end in direct TDD, a preparatory refactor, a product/design/research handoff, or a decision to stop. If it contains a material, hard-to-reverse, or competing technical tradeoff, present the smallest set of options with a recommendation and wait for the user's choice before TDD. A reversible, low-risk shape can proceed. The shape changes no behavior by itself.
 
+## Builder Check
+
+Run this only when the approved work crosses a non-obvious boundary, resumes in a fresh session, carries high implementation cost, or hands to a builder who did not make the plan. A local change with a closed plan and an obvious seam goes directly to TDD.
+
+The builder reads the accepted spec, implementation plan, nearest interfaces, tests, and evidence without relying on the planner's transcript. Return four buckets:
+
+```markdown
+Builder Check
+- plan-decided: requirements, interfaces, steps, assertions, and verification already fixed by the plan
+- builder-may-decide: reversible implementation details the builder may settle
+- user-decision-required: choices the user owns or a new irreversible tradeoff
+- blocking-ambiguity: a missing or contradictory fact that prevents a safe first slice
+```
+
+`plan-decided` proceeds to TDD. `builder-may-decide` proceeds with a ruling recorded in the plan. A non-empty `user-decision-required` or `blocking-ambiguity` stops before behavior changes; invoke the owning skill or ask the user for the smallest decision that unblocks the work. The check is fresh-context verification, not a second design review.
+
+## Decision-Complete Plan
+
+An accepted implementation plan records:
+
+- exact file and module scope, including paths that must not change;
+- `Interfaces`: public APIs, events, schemas, shared types, state, storage, migration, and compatibility contracts;
+- ordered steps with the stop point for the first behavior slice;
+- test assertions written as observable outcomes;
+- verification commands and the boundary they cover;
+- `Review Focus`: specification-implied failure risks that ordinary tests will not catch;
+- a ruling ledger that starts empty.
+
+Record rulings during approved execution as `decision | basis | cost if wrong | reopen trigger`. A reversible ambiguity is decided from the accepted spec, plan, and current evidence, recorded, and continued. Stop only for a user-owned choice, an irreversible migration or data loss, security or privacy impact, an external side effect or spend, or evidence that the plan as a whole is no longer viable. Do not send ordinary implementation details back for routine re-approval.
+
 ## Sizing
 
 - Small: keep the shape in the conversation; do not create a document.
@@ -105,5 +135,6 @@ This method combines four mechanisms:
 - preparatory refactoring makes a hard change easy before the behavior change (Martin Fowler, *Workflows of Refactoring*, 2014);
 - design documents identify design issues while they are cheap and compare alternatives, while mini design docs cover incremental improvements; skip them when the solution is obvious (Design Docs at Google);
 - seams and design for testability let behavior change without editing it in place (Michael Feathers, *Working Effectively with Legacy Code*, 2005).
+- Superpowers v7.0.1 adds a fresh builder check for non-obvious handoffs, decision-complete plans, explicit `Review Focus`, and recorded rulings for reversible conflicts. Its published outcome data is maintainer-run rather than independent, so Noootwo adopts the mechanism but not a universal quality or speed claim.
 
 The counterexamples are explicit: YAGNI rejects speculative features, and Google's design-doc guidance rejects documentation when there is no real tradeoff or when the doc is only an implementation manual.

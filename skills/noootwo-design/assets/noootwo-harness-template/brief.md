@@ -19,6 +19,12 @@ Status: pending; overwrite this file for the current active design task
 - States: TBD
 - Scope cuts: TBD
 - Acceptance criteria: TBD
+- User-owned how decisions: TBD
+- Agent-selected defaults:
+  - Decision: TBD
+  - Default: TBD
+  - Reason: TBD
+  - Reopen if: TBD
 - Open product decisions: TBD
 - Design constraints: TBD
 

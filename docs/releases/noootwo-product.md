@@ -1,5 +1,12 @@
 # noootwo-product Releases
 
+## v0.12.0
+
+- An unresolved first round now opens with a grounded response: replay the intent in the user's language, list checked facts with sources, and separate observations from proposals before asking.
+- A single controlling gap still gets one question; several independent root decisions remain in one frontier round, while dependent choices stay parked.
+- The Product-to-Design Handoff now separates user-owned how decisions from agent-selected defaults. Every default records its value, reason, and reopen condition.
+- Added four opt-in eval contracts. Fresh model sessions for those scenarios remain a separate behavior measurement.
+
 ## v0.11.1
 
 - Added the package-wide context lifecycle and compressed the always-loaded description.

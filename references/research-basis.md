@@ -283,6 +283,24 @@ Source index for the context-cost pass:
 - Compaction Laundering: `https://arxiv.org/abs/2610.29869`
 - Cognition, Don't Build Multi-Agents: `https://cognition.ai/blog/dont-build-multi-agents`
 
+Upstream mechanism refresh, checked 2026-10-27:
+
+- `obra/superpowers` `v7.0.1` resolves to commit `2ce8aa15d05bd57213e6f746f953aafb7ded7a8b`. Its important change is not a replacement of TDD or systematic debugging; it is a collaboration protocol around evidence-grounded intake, explicit ownership of platform/language/library/medium choices, approved plans, a fresh builder check for expensive handoffs, decision-complete plans, `Review Focus`, and rulings for reversible plan conflicts. The release-linked 176-conversation evaluation is maintainer-run, so it supports mechanism selection but not an independent quality or speed claim.
+- `alchaincyf/huashu-design` `v3.0.0` resolves to commit `798c4235ebff03d5c45e3c8affdf5e9d18f9dfa7`. Its useful mechanism is options over accumulating prohibitions: cheap real samples, same-medium references, inspected artifact evidence, factual linting, and a future project-local appearance ledger. The author's small blind-test narrative is low-confidence evidence. The supplied WeChat article redirected to a verification page with `环境异常`; GitHub release source and visible case artifacts were the fallback.
+- `pbakaus/impeccable` advanced from the recorded `v4.3.1` to `v4.7.0` at commit `aeeb3d8c30b5f95aeeb3e893b0f1a308af8fdb8f`. Relevant mechanisms are code-first samples, inspectable direction cards, familiar controls with one authored signature move, real work visible on the first screen, actual touch/device evidence, and progressive disclosure. The repository does not provide an independent controlled UI-quality study.
+- Adopt: Product grounded response without a fixed script, user-owned how decisions, agent defaults with reopen conditions, low-cost direction samples, same-medium inspected evidence, evidence-dependent aesthetic flags, conditional Builder Check, decision-complete plans, `Review Focus`, and reversible-execution rulings.
+- Preserve: one-round Product frontier, three directions when the choice is materially unresolved, safety/accessibility/state-integrity hard gates, Change Check and Release Check separation, and artifact review.
+- Reject: fixed opener length, mandatory six polished candidates, universal deep-design ceremony, global appearance memory, an expanded style library, routine re-approval for reversible implementation details, and copying prompts, templates, brand surfaces, or visual assets.
+- Evidence boundary: Superpowers and Impeccable are upstream/maintainer evidence; Huashu's quantitative narrative is a small author-run sample. The 2026-10-27 record and ADR 0025 carry the full version, commit, access, adoption, rejection, and confidence notes.
+
+Source index for the upstream mechanism refresh:
+
+- Superpowers: `https://github.com/obra/superpowers`
+- Huashu Design: `https://github.com/alchaincyf/huashu-design`
+- Impeccable: `https://github.com/pbakaus/impeccable`
+- Supplied WeChat article, body inaccessible after redirect: `https://mp.weixin.qq.com/s/gR3tDBD8-4hLJWj-x2b1Yw`
+- Durable research record: [upstream-refresh-2026-10-27](../docs/reference/upstream-refresh-2026-10-27.md)
+
 ## Mechanisms Borrowed
 
 - Keep publishable units independently addressable under `skills/`.
@@ -312,6 +330,12 @@ Source index for the context-cost pass:
 - Keep raw output above 16 KiB in cold evidence and carry its path, hash, source, and bounded tail into live context.
 - Keep append-only events authoritative; a capsule is a derived read view, and a no-change check creates no event.
 - Keep one writer for dependent work and isolate only independent read-only research or review.
+- Ground an unresolved Product round in repo facts and separate observed facts from proposals before asking.
+- Separate user-owned how decisions from reversible agent-selected defaults, and record the reason and reopen condition for each default.
+- Prefer real, viewed direction samples and same-medium evidence when a visual choice is materially unresolved.
+- Treat non-safety aesthetic patterns as evidence flags; keep accessibility, readability, content, and state integrity as hard gates.
+- Use a fresh Builder Check only for non-obvious, cross-session, expensive, or cross-boundary handoffs.
+- Record interfaces, assertions, verification, `Review Focus`, and reversible rulings in accepted implementation plans.
 
 ## Boundaries
 

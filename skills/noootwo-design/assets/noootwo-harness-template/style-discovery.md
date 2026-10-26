@@ -52,6 +52,7 @@ Status: pending; required for deep mode before high-character directions
 - URL or artifact 1: TBD
 - URL or artifact 2: TBD
 - URL or artifact 3: TBD
+- Same-medium fit and observed evidence by primary source: TBD
 - Screenshot or visual proof location: TBD
 
 ## Reference Lock
@@ -121,6 +122,7 @@ Status: pending; required for deep mode before high-character directions
 - Spike 1 artifact or screenshot: TBD
 - Spike 2 artifact or screenshot: TBD
 - Spike 3 artifact or screenshot: TBD
+- Weak-runtime fallback used: one full sample plus two lightweight variants, or not needed: TBD
 - Selected spike and reason: TBD
 - If fewer than 2 spikes, low-confidence limitation: TBD
 

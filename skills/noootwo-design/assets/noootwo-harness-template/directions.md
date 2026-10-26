@@ -56,6 +56,9 @@ Status: pending; generate for direction-sensitive standard or deep design work
 ## Compared Direction 1
 
 - Name: TBD
+- Low-cost sample path: TBD
+- What the sample proves: TBD
+- Sample inspected: yes or no: TBD
 - Key structural difference: TBD
 - Typography, color, and density stance: TBD
 - Signature mechanism: TBD
@@ -67,6 +70,9 @@ Status: pending; generate for direction-sensitive standard or deep design work
 ## Compared Direction 2
 
 - Name: TBD
+- Low-cost sample path: TBD
+- What the sample proves: TBD
+- Sample inspected: yes or no: TBD
 - Key structural difference: TBD
 - Typography, color, and density stance: TBD
 - Signature mechanism: TBD
@@ -78,6 +84,9 @@ Status: pending; generate for direction-sensitive standard or deep design work
 ## Compared Direction 3
 
 - Name: TBD
+- Low-cost sample path: TBD
+- What the sample proves: TBD
+- Sample inspected: yes or no: TBD
 - Key structural difference: TBD
 - Typography, color, and density stance: TBD
 - Signature mechanism: TBD

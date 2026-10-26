@@ -214,7 +214,7 @@ Define roles, not just swatches.
 - Neutral temperature: warm, cool, chromatic, deliberately neutral, or unknown, with rationale.
 - Contrast proof: the text/background and state pairs that must pass accessibility checks.
 - Color exceptions: where pure white, pure black, platform/system colors, or exact brand neutrals are intentional.
-- Forbidden color moves: generic gradients, glow, over-saturated accents, or brand-inconsistent colors.
+- Color evidence flags: generic gradients, glow, over-saturated accents, or brand-inconsistent colors; keep one only when inspected artifact evidence shows a deliberate role without hierarchy, readability, brand-fit, or cohesion harm.
 
 #### 5. Typography Roles
 
@@ -226,7 +226,7 @@ Define the role of each type style.
 - Label: navigation, controls, metadata, chip text, and case rules.
 - Numbers: tabular nums, alignment, unit treatment, decimal behavior.
 - Mono or annotation: only if it has a product reason; never as generic "technical" garnish.
-- Forbidden type moves: Inter-only/system-only when personality is required, CJK overweight display, decorative uppercase labels, arbitrary scale jumps.
+- Typography evidence flags: Inter-only/system-only when personality is required, CJK overweight display, decorative uppercase labels, arbitrary scale jumps; these block only when the rendered artifact demonstrates readability, hierarchy, brand-fit, or cohesion harm.
 
 #### 6. Layout And Density
 
@@ -235,7 +235,7 @@ Define the role of each type style.
 - Density target: compact, balanced, generous, editorial, operational, or immersive.
 - Grouping rhythm: tight related groups and generous separation between conceptual groups.
 - Responsive behavior: 390px, 768px, 1440px expectations or explicit platform limits.
-- Forbidden structure: hero + cards, card wall, over-thick mobile cards, fake dashboard, posterized app screen.
+- Structure evidence flags: hero + cards, card wall, over-thick mobile cards, fake dashboard, posterized app screen; keep one only when the product and inspected artifact evidence support it.
 
 #### 7. Shape, Material, And Depth
 

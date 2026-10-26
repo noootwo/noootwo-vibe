@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import argparse
 import re
+import struct
+import zlib
 from pathlib import Path
 
 
@@ -25,8 +27,8 @@ IMPLEMENTATION_REQUIRED_FILES = [
 
 STATUS_PENDING_RE = re.compile(r"^Status:\s*pending\b", re.IGNORECASE | re.MULTILINE)
 TBD_RE = re.compile(r"(?<!`)\bTBD\b(?!`)")
-READY_DECISION_RE = re.compile(r"^\s*-\s*ready,\s*refine,\s*pivot,\s*or\s*needs artifact\s*:\s*ready\s*$", re.IGNORECASE | re.MULTILINE)
-DECISION_LINE_RE = re.compile(r"^\s*-\s*ready,\s*refine,\s*pivot,\s*or\s*needs artifact\s*:\s*(.+?)\s*$", re.IGNORECASE | re.MULTILINE)
+READY_DECISION_RE = re.compile(r"^\s*-\s*(?:Decision\s*:\s*)?ready,\s*refine,\s*pivot,\s*or\s*needs artifact\s*:\s*ready\s*$", re.IGNORECASE | re.MULTILINE)
+DECISION_LINE_RE = re.compile(r"^\s*-\s*(?:Decision\s*:\s*)?ready,\s*refine,\s*pivot,\s*or\s*needs artifact\s*:\s*(.+?)\s*$", re.IGNORECASE | re.MULTILINE)
 RETURN_ACTION_RE = re.compile(r"^\s*-\s*return to .+?:\s*(.+?)\s*$", re.IGNORECASE | re.MULTILINE)
 APPROVED_BY_USER_RE = re.compile(r"approved by user\s*:\s*(?:yes|true|approved)", re.IGNORECASE)
 PLAN_APPROVED_RE = re.compile(r"user approved or delegated implementation plan\s*:\s*(?:yes|true|approved|delegated)", re.IGNORECASE)
@@ -34,6 +36,10 @@ USER_DELEGATED_RE = re.compile(r"user delegated choice to agent\s*:\s*(?:yes|tru
 ARTIFACT_FAMILY_LINE_RE = re.compile(
     r"^\s*-\s*Artifact family\s*:\s*(ui surface|fixed-canvas graphic|slide deck|live artifact)\s*$",
     re.IGNORECASE | re.MULTILINE,
+)
+COMPARED_DIRECTION_RE = re.compile(
+    r"^##\s+Compared Direction\s+\d+\s*\n(.*?)(?=^##\s|\Z)",
+    re.IGNORECASE | re.MULTILINE | re.DOTALL,
 )
 
 
@@ -93,6 +99,159 @@ def missing_sections(content: str, sections: list[str], path_label: str) -> list
         for section in sections
         if section not in lower_content
     ]
+
+
+def has_non_placeholder_value(content: str, label: str) -> bool:
+    value = (field_value(content, label) or "").strip()
+    return bool(value) and "TBD" not in value.upper() and value.lower() not in {"pending", "blocked"}
+
+
+def local_artifact_exists(target_root: Path, value: str) -> bool:
+    clean = value.strip().strip("`")
+    if re.match(r"^https?://", clean, re.IGNORECASE):
+        return True
+    return (target_root / clean).exists()
+
+
+def _paeth_predictor(left: int, above: int, upper_left: int) -> int:
+    estimate = left + above - upper_left
+    left_distance = abs(estimate - left)
+    above_distance = abs(estimate - above)
+    upper_left_distance = abs(estimate - upper_left)
+    if left_distance <= above_distance and left_distance <= upper_left_distance:
+        return left
+    if above_distance <= upper_left_distance:
+        return above
+    return upper_left
+
+
+def validate_capture_file(path: Path) -> str | None:
+    """Return a defect for an unusable PNG capture, or None when it is inspectable."""
+    if not path.exists():
+        return "does not exist"
+    if not path.is_file():
+        return "is not a file"
+    if path.stat().st_size == 0:
+        return "is empty"
+    if path.suffix.lower() != ".png":
+        return None
+
+    data = path.read_bytes()
+    if not data.startswith(b"\x89PNG\r\n\x1a\n"):
+        return "is not a valid PNG capture"
+
+    offset = 8
+    width = height = bit_depth = color_type = interlace = None
+    compressed = bytearray()
+    saw_iend = False
+    while offset + 12 <= len(data):
+        chunk_length = struct.unpack(">I", data[offset : offset + 4])[0]
+        chunk_type = data[offset + 4 : offset + 8]
+        chunk_end = offset + 12 + chunk_length
+        if chunk_end > len(data):
+            return "is a truncated PNG capture"
+        chunk_data = data[offset + 8 : offset + 8 + chunk_length]
+        expected_crc = struct.unpack(">I", data[offset + 8 + chunk_length : chunk_end])[0]
+        actual_crc = zlib.crc32(chunk_type)
+        actual_crc = zlib.crc32(chunk_data, actual_crc) & 0xFFFFFFFF
+        if actual_crc != expected_crc:
+            return "has a corrupt PNG chunk"
+        if chunk_type == b"IHDR":
+            if chunk_length != 13:
+                return "has an invalid PNG header"
+            width, height, bit_depth, color_type, _, _, interlace = struct.unpack(">IIBBBBB", chunk_data)
+        elif chunk_type == b"IDAT":
+            compressed.extend(chunk_data)
+        elif chunk_type == b"IEND":
+            saw_iend = True
+            break
+        offset = chunk_end
+
+    if width is None or height is None or width == 0 or height == 0:
+        return "has no readable PNG dimensions"
+    if not saw_iend:
+        return "has no PNG end marker"
+    channels = {0: 1, 2: 3, 4: 2, 6: 4}.get(color_type)
+    if bit_depth != 8 or channels is None or interlace != 0:
+        return None
+
+    stride = width * channels
+    try:
+        decoded = zlib.decompress(bytes(compressed))
+    except zlib.error:
+        return "has undecodable PNG image data"
+    expected_size = (stride + 1) * height
+    if len(decoded) < expected_size:
+        return "has incomplete PNG image data"
+
+    previous = bytearray(stride)
+    position = 0
+    brightest = 0.0
+    x_step = max(1, width // 64)
+    for _ in range(height):
+        filter_type = decoded[position]
+        position += 1
+        scanline = bytearray(decoded[position : position + stride])
+        position += stride
+        for index in range(stride):
+            left = scanline[index - channels] if index >= channels else 0
+            above = previous[index]
+            upper_left = previous[index - channels] if index >= channels else 0
+            if filter_type == 1:
+                scanline[index] = (scanline[index] + left) & 0xFF
+            elif filter_type == 2:
+                scanline[index] = (scanline[index] + above) & 0xFF
+            elif filter_type == 3:
+                scanline[index] = (scanline[index] + ((left + above) // 2)) & 0xFF
+            elif filter_type == 4:
+                scanline[index] = (scanline[index] + _paeth_predictor(left, above, upper_left)) & 0xFF
+            elif filter_type != 0:
+                return "has an unsupported PNG filter"
+
+        for x_position in range(0, width, x_step):
+            pixel = x_position * channels
+            if color_type in (0, 4):
+                red = green = blue = scanline[pixel]
+            else:
+                red, green, blue = scanline[pixel : pixel + 3]
+            luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue
+            brightest = max(brightest, luminance)
+        previous = scanline
+
+    if brightest < 6:
+        return "is effectively black and cannot support visual evidence"
+    return None
+
+
+def validate_direction_samples(target_root: Path, content: str) -> list[str]:
+    errors: list[str] = []
+    for index, match in enumerate(COMPARED_DIRECTION_RE.finditer(content), start=1):
+        block = match.group(1)
+        sample_path = (field_value(block, "Low-cost sample path") or "").strip()
+        sample_proves = (field_value(block, "What the sample proves") or "").strip()
+        sample_inspected = (field_value(block, "Sample inspected") or "").strip().lower()
+        require(
+            errors,
+            bool(sample_path) and "TBD" not in sample_path.upper(),
+            f".noootwo/directions.md direction {index} missing low-cost sample path",
+        )
+        require(
+            errors,
+            bool(sample_proves) and "TBD" not in sample_proves.upper(),
+            f".noootwo/directions.md direction {index} missing what the sample proves",
+        )
+        require(
+            errors,
+            sample_inspected.startswith("yes") or sample_inspected.startswith("viewed"),
+            f".noootwo/directions.md direction {index} sample was not inspected",
+        )
+        if sample_path:
+            require(
+                errors,
+                local_artifact_exists(target_root, sample_path),
+                f".noootwo/directions.md direction {index} sample path does not exist: {sample_path}",
+            )
+    return errors
 
 
 def extract_artifact_family(brief_content: str, spec_content: str) -> str | None:
@@ -162,6 +321,7 @@ def validate_directions(target_root: Path, deep_mode: bool, strict_workflow: boo
     compared_count = len(re.findall(r"^##\s+Compared Direction \d", content, re.MULTILINE))
     if strict_workflow or deep_mode:
         require(errors, compared_count >= 3, ".noootwo/directions.md must compare 3 directions for direction-sensitive work")
+        errors.extend(validate_direction_samples(target_root, content))
 
     if "why multiple reasonable directions exist" in content.lower():
         direction_required = has_meaningful_value(content, "Why multiple reasonable directions exist")
@@ -334,10 +494,13 @@ def validate_implementation_gate(target_root: Path, strict_workflow: bool) -> li
                 [
                     "preconditions",
                     "implementation scope",
+                    "interfaces",
                     "component and system mapping",
                     "verification plan",
+                    "review focus",
                     "known drift risks",
                     "implementation steps",
+                    "ruling ledger",
                     "completion criteria",
                 ],
                 ".noootwo/plans/active-implementation.md",
@@ -349,6 +512,8 @@ def validate_implementation_gate(target_root: Path, strict_workflow: bool) -> li
             require(errors, has_meaningful_value(plan_content, "How the artifact will be produced"), ".noootwo/plans/active-implementation.md missing artifact production plan")
             require(errors, has_meaningful_value(plan_content, "How screenshots/previews will be reviewed"), ".noootwo/plans/active-implementation.md missing screenshot/preview review plan")
             require(errors, has_meaningful_value(plan_content, "How export or delivery output will be checked"), ".noootwo/plans/active-implementation.md missing export/delivery verification plan")
+            require(errors, has_non_placeholder_value(plan_content, "Test assertions"), ".noootwo/plans/active-implementation.md missing test assertions")
+            require(errors, has_non_placeholder_value(plan_content, "Spec-implied failure risks that ordinary tests do not cover"), ".noootwo/plans/active-implementation.md missing Review Focus")
             require(errors, has_meaningful_value(plan_content, "Generic fallback risks"), ".noootwo/plans/active-implementation.md missing generic fallback risk record")
             require(errors, has_meaningful_value(plan_content, "Artifact-family-specific delivery risks"), ".noootwo/plans/active-implementation.md missing artifact-specific delivery risk record")
 
@@ -401,13 +566,35 @@ def validate_reference_capture(target_root: Path) -> list[str]:
     unreachable = 0
     for index, block in enumerate(blocks, start=1):
         label = f"{relative} source {index}"
-        for field in ("Accessibility result", "Borrowed mechanism", "Capture path", "Landed as"):
+        for field in (
+            "Same-medium fit",
+            "Accessibility result",
+            "Artifact inspected",
+            "Observed evidence",
+            "Borrowed mechanism",
+            "Capture path",
+            "Landed as",
+        ):
             value = (field_value(block, field) or "").strip()
             require(
                 errors,
                 bool(value) and "TBD" not in value.upper(),
                 f"{label} missing {field.lower()}",
             )
+
+        same_medium = (field_value(block, "Same-medium fit") or "").strip().lower()
+        require(
+            errors,
+            same_medium.startswith(("yes", "no", "mixed")),
+            f"{label} same-medium fit must be yes, no, or mixed",
+        )
+
+        inspected = (field_value(block, "Artifact inspected") or "").strip().lower()
+        require(
+            errors,
+            inspected.startswith(("yes", "no")),
+            f"{label} artifact inspected must be yes or no",
+        )
 
         capture = (field_value(block, "Capture path") or "").strip()
         if (
@@ -420,7 +607,13 @@ def validate_reference_capture(target_root: Path) -> list[str]:
                 unreachable += 1
             continue
         candidate = (target_root / capture.replace("`", "")).resolve()
-        require(errors, candidate.exists(), f"{label} capture path does not exist: {capture}")
+        capture_error = validate_capture_file(candidate)
+        require(errors, capture_error is None, f"{label} capture path {capture_error or 'is invalid'}: {capture}")
+        require(
+            errors,
+            inspected.startswith("yes"),
+            f"{label} has a capture but was not inspected; a broken or unopened capture cannot support style evidence",
+        )
 
     if blocks and unreachable == len(blocks):
         style = read_if_exists(target_root, Path(".noootwo/style-discovery.md"))
@@ -617,6 +810,8 @@ def validate_style_evidence_gate(target_root: Path) -> list[str]:
     directions = read_if_exists(target_root, Path(".noootwo/directions.md"))
     if directions:
         errors.extend(missing_sections(directions, ["style evidence check"], ".noootwo/directions.md"))
+        if "compared direction" in directions.lower():
+            errors.extend(validate_direction_samples(target_root, directions))
         require(errors, has_meaningful_value(directions, "Visual evidence"), ".noootwo/directions.md missing style visual evidence")
         require(errors, has_meaningful_value(directions, "Implementation translation"), ".noootwo/directions.md missing style implementation translation")
         require(errors, has_meaningful_value(directions, "Confidence"), ".noootwo/directions.md missing style confidence")
@@ -635,6 +830,20 @@ def validate_style_evidence_gate(target_root: Path) -> list[str]:
     if review:
         require(errors, has_meaningful_value(review, "Style understanding fit"), ".noootwo/review.md missing style understanding fit")
         require(errors, has_meaningful_value(review, "Product comprehension fit"), ".noootwo/review.md missing product comprehension fit")
+        safety = (field_value(review, "Safety hard-gate result") or "").strip()
+        require(errors, bool(safety) and "TBD" not in safety.upper(), ".noootwo/review.md missing safety hard-gate result")
+        require(errors, has_non_placeholder_value(review, "Aesthetic flags"), ".noootwo/review.md missing aesthetic flags record")
+        require(
+            errors,
+            has_non_placeholder_value(review, "Evidence of harm or intentional use"),
+            ".noootwo/review.md missing aesthetic harm or intentional-use evidence",
+        )
+        if READY_DECISION_RE.search(review):
+            require(
+                errors,
+                safety.lower().startswith("pass"),
+                ".noootwo/review.md cannot be ready while the safety hard-gate result is not pass",
+            )
 
     return errors
 
@@ -671,6 +880,8 @@ def main() -> int:
     )
     parser.add_argument(
         "--style-evidence-gate",
+        "--style-evidence",
+        dest="style_evidence_gate",
         action="store_true",
         help="Also require style evidence, confidence, and review-fit coverage for high-character design work.",
     )

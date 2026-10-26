@@ -16,6 +16,8 @@ Classify the surface before choosing sources:
 - **Mobile and native app screens** — prioritise native product screenshots, platform guidelines, motion and native craft, and stack-specific previews.
 - **Campaign, launch, editorial, microsite** — curated visual galleries and experiments can carry more weight, but record what cannot transfer to product UI.
 
+The primary reference for each material mechanism should use the target medium: an app for an app, a deck for a deck, an editorial page for an editorial page. Cross-medium sources may suggest a mechanism, but record the lower same-medium fit and do not let them carry the whole direction.
+
 ## The pass
 
 1. **Context query builder** — derive search queries from product type, user task, platform, target stack, audience, and constraints. Write each query as what is visible on screen, not as an abstract goal: `[product category] + [screen type] + [visible UI components] + [user state or action]`. `trust patterns` and `good onboarding` are not queries; `signup screen with progress indicator, phone number input, security message, and continue button` is.
@@ -43,7 +45,10 @@ For each source, write `.noootwo/references/<slug>/source.md` and capture `NN-<l
 - `url`: the page or artifact the reference came from.
 - `captured`: date, and the tool used.
 - `evidence level`: the rung from the weighting table below.
+- `same-medium fit`: `yes`, `no`, or `mixed`, against the target artifact.
 - `accessibility`: `reachable`, `login required`, `fallback`, or `unreachable`, with the result actually observed in this pass.
+- `artifact inspected`: `yes` or `no`, based on opening the capture and reading the actual composition.
+- `observed evidence`: the layout, type ratio, palette proportion, density, state grammar, or motion behavior actually seen.
 - `attribution and licence`: product or studio name, and any stated reuse limit.
 - `capture`: the screenshot paths, or `unreachable` when none could be taken.
 - `reference intent`: `replicate`, `redesign`, or `borrow-mechanism`, and why.
@@ -52,7 +57,7 @@ Take the screenshot in the same extractor pass that captures the values: `script
 
 When a source is unreachable or behind a login, record `capture: unreachable`, keep the URL, and continue with the sources that remain. A blocked source narrows the evidence; it never cancels the pass.
 
-Captured screenshots are personal reference held in the project's `.noootwo/` harness. They are not committed, not redistributed, and never a target to reproduce pixel for pixel. Borrow the mechanism — space, density, rhythm, state grammar, motion behaviour — and leave the artwork, brand assets, and exact composition behind.
+A screenshot path is not evidence until it was opened. A black, broken, placeholder, or loading capture records `artifact inspected: no` and cannot support a style claim. Captured screenshots are personal reference held in the project's `.noootwo/` harness. They are not committed, not redistributed, and never a target to reproduce pixel for pixel. Borrow the mechanism — space, density, rhythm, state grammar, motion behaviour — and leave the artwork, brand assets, and exact composition behind.
 
 When the intervention decision is `add moment`, the capture set includes motion or material examples: two or three references in the same register, each recorded as a mechanism — trigger, moving property, duration, curve, layer relationship, and what it communicates. The register and the sourcing procedure live in [motion](motion.md); the pool of motion libraries and showcases lives in the `noootwo-research` skill's source pools. A component library's demo is strong evidence of craft and weak evidence of fit, so it is adapted or dropped rather than pasted.
 
@@ -134,6 +139,7 @@ Write `.noootwo/style-discovery.md` with:
 - Evidence URLs or screenshots
 - Capture directory
 - Evidence levels
+- Same-medium fit and inspected evidence for every primary source
 - Style Evidence Check
 - Reference lock
 - Pattern clusters

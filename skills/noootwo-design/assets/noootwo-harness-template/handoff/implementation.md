@@ -14,6 +14,12 @@ Status: pending; fill this after a design direction has passed review
 - States: TBD
 - Scope cuts: TBD
 - Acceptance criteria: TBD
+- User-owned how decisions: TBD
+- Agent-selected defaults:
+  - Decision: TBD
+  - Default: TBD
+  - Reason: TBD
+  - Reopen if: TBD
 - Open product decisions: TBD
 - Design constraints: TBD
 

@@ -36,15 +36,15 @@ Variance, motion, and density follow the exact feature and moment. Dense, high-f
 
 ## 3. Direction
 
-Compare materially different directions when style or structure is unresolved, and stop for the user's choice. Read `references/direction.md` for the exploration method, the Style Evidence Check, and mechanism translation.
+Compare materially different directions when style or structure is unresolved, and stop for the user's choice. A prose menu is not a decision: before the choice, show a low-cost real sample for each direction, or one fuller sample plus two lightweight variants when the runtime is weak. Read `references/direction.md` for the sample method, Style Evidence Check, and mechanism translation.
 
 Read `references/design-discovery.md` for the discovery pass and the `.noootwo/style-discovery.md` contract. When the work is high-character, niche, premium, or previously rejected, invoke the `noootwo-research` skill first: read its `SKILL.md` and follow it — a design claim needs a source, an artifact, or a screenshot.
 
-For `deep` work, capture every reference the direction leans on into `.noootwo/references/<slug>/`, with a `source.md` recording URL, date, evidence level, accessibility result, and licence; capture real values from a live source with `scripts/extract_design_tokens.mjs` and its `NN-<label>.png` screenshot with `--screenshot` when a page or running product is reachable, and record inaccessible sources as `capture: unreachable`. Lock the build target and what must not drift before drafting, and let one direction dominate instead of averaging several. `standard` work stays on the lighter path in `references/design-discovery.md`.
+For `deep` work, prefer same-medium references and capture every source the direction leans on into `.noootwo/references/<slug>/`, with a `source.md` recording URL, date, evidence level, same-medium fit, inspected artifact evidence, accessibility result, and licence; capture real values from a live source with `scripts/extract_design_tokens.mjs` and its `NN-<label>.png` screenshot with `--screenshot` when a page or running product is reachable, and record inaccessible sources as `capture: unreachable`. A black or broken capture is not evidence. Lock the build target and what must not drift before drafting, and let one direction dominate instead of averaging several. `standard` work stays on the lighter path in `references/design-discovery.md`.
 
 For standard, deep, and production work, read `references/motion.md` before the contract and make an intervention decision. `leave simple` and `craft only` are valid only when the user accepts them or a concrete blocker prevents motion; an explicit motion or material request defaults to `add moment`.
 
-**Done when:** one direction is chosen by the user, or the chosen direction is justified by evidence.
+**Done when:** one direction is chosen by the user after reviewing real samples, or the chosen direction is justified by evidence and the sample requirement is recorded as not applicable.
 
 ## 4. Design Contract
 
@@ -69,7 +69,7 @@ Name semantic roles, not adjectives. Stable decisions become tokens, component r
 
 ## 5. Build
 
-Read `references/craft.md` immediately before editing UI. It carries the quality floor and the hard bans. Read `references/motion.md` for the intervention decision and whenever the artifact animates.
+Read `references/craft.md` immediately before editing UI. It carries the quality floor and evidence-backed aesthetic flags. Read `references/motion.md` for the intervention decision and whenever the artifact animates.
 
 Read `references/translate.md` to turn the contract into stack-native implementation, assets, and handoff. Read `references/system.md` when the work touches tokens, a design system, or a new artifact family.
 
@@ -79,7 +79,7 @@ When a direction, token set, or review outcome becomes durable, invoke the `nooo
 
 ## 6. Review the artifact
 
-Review the rendered thing, never the prose. Read `references/review.md` for the rubric, gates, and bans.
+Review the rendered thing, never the prose. Read `references/review.md` for the rubric, safety gates, and evidence-backed flags.
 
 ```
 Artifact Review
@@ -110,7 +110,7 @@ When this is not design work, name the failed layer and invoke the owning skill 
 - `references/motion-libraries.md` — the register gate, per-platform motion and material tools, licence and dependency checks, and adapt-or-reject recipes.
 - `references/system.md` — tokens, design-system extraction, and artifact-family contracts.
 - `references/craft.md` — anti-slop, typography, colour, responsive, and data-UI craft floors.
-- `references/review.md` — scoring, gates, hard bans, and final review.
+- `references/review.md` — scoring, safety gates, evidence-backed aesthetic flags, and final review.
 - `references/translate.md` — stack-native implementation, assets, and handoff.
 - `references/evidence.md` — verified cases and distilled reference-skill rules.
 - `references/notes.md` — research notes and cost boundaries.

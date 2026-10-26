@@ -1,5 +1,14 @@
 # noootwo-design Releases
 
+## v0.20.0
+
+- A materially unresolved direction choice now needs real low-cost samples before selection: three by default, or one fuller sample plus two lightweight variants when the runtime is weak.
+- Direction records now carry the sample path, what it proves, and whether it was viewed. A prose-only menu cannot satisfy the choice gate.
+- Deep references prefer the target medium and record `Same-medium fit`, `Artifact inspected`, and `Observed evidence`; black, broken, or unopened captures are not style evidence.
+- Non-safety aesthetic patterns are now evidence-dependent flags rather than universal bans. Cream or beige, system display faces, gradient text, decorative numbering, eyebrow labels, offset shadows, colored halos, emoji icons, and Inter-only type may pass when inspected evidence shows intent and no harm.
+- WCAG, contrast, readable hierarchy, keyboard and touch reachability, real content and assets, state integrity, and interaction recovery remain non-waivable safety gates.
+- Extended readiness, artifact evals, harness templates, and the reference board; added a three-direction desktop fixture and deterministic negative probes. The fixture does not prove mobile, interaction, runtime, or cross-project quality.
+
 ## v0.19.2
 
 - Added the package-wide context lifecycle and compressed the always-loaded description.

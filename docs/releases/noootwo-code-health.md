@@ -1,5 +1,13 @@
 # noootwo-code-health Releases
 
+## v0.18.0
+
+- Added a conditional Builder Check for non-obvious, cross-session, expensive, or cross-boundary handoffs. Closed local plans proceed directly to TDD.
+- The Builder Check separates `plan-decided`, `builder-may-decide`, `user-decision-required`, and `blocking-ambiguity` before behavior changes.
+- Decision-complete implementation plans now record file scope, `Interfaces`, ordered steps, observable test assertions, verification commands, `Review Focus`, and an initially empty ruling ledger.
+- Reversible ambiguities during approved execution are recorded as rulings and continue; user-owned decisions, irreversible changes, security or privacy impact, external side effects or spend, and plan invalidation still stop.
+- Added three opt-in eval contracts. Fresh model sessions remain unrun.
+
 ## v0.17.2
 
 - Added the package-wide context lifecycle and compressed the always-loaded description.

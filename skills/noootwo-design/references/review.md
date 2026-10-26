@@ -1,6 +1,6 @@
 # Design Review
 
-Scoring, gates, hard bans, bounded verification, and separated final review.
+Scoring, safety gates, evidence-backed aesthetic flags, bounded verification, and separated final review.
 
 
 ## Review Rubric
@@ -22,13 +22,13 @@ Score on 100 points:
 
 Thresholds:
 
-- `85-100`: ready only if artifact evidence exists and generic-risk flags are 0-1
+- `85-100`: ready only if artifact evidence exists and no confirmed generic-risk or aesthetic-harm finding remains
 - `70-84`: refine
 - `<70`: pivot unless the user explicitly preserves the direction
 
 ### Output
 
-Write `.noootwo/review.md` with artifact evidence, intervention decision and fit, scores, calibration fit, style understanding fit, product comprehension fit, user decision gate, generic/Claude/framework/designer-grade flags, role critique, authored move or deliberate absence, viewport evidence, typography evidence, data evidence when relevant, default-override review, micro-detail pass, readiness gate, decision, return action, and next action.
+Write `.noootwo/review.md` with artifact evidence, intervention decision and fit, scores, calibration fit, style understanding fit, product comprehension fit, user decision gate, safety hard-gate result, aesthetic flags with evidence of harm or intentional use, generic/Claude/framework/designer-grade flags, role critique, authored move or deliberate absence, viewport evidence, typography evidence, data evidence when relevant, default-override review, micro-detail pass, readiness gate, decision, return action, and next action.
 
 ### Intervention Review
 
@@ -62,6 +62,7 @@ Before `ready`, confirm:
 - review records typography evidence
 - review records responsive or platform evidence
 - implementation-bound work records default-override review and micro-detail review when generic drift was a risk
+- direction-sensitive work records either viewed low-cost samples or the reason samples were not applicable
 - full redesign has recorded user-selected direction
 - required user decision gates are resolved or delegated
 - the intervention decision is recorded in the design tokens and review, and both records agree
@@ -70,6 +71,7 @@ Before `ready`, confirm:
 - `add moment` records one primary authored move, its trigger, implementation tool, evidence or platform rule, and fallback
 - any installed or user-named library or shader is selected, replaced by a recorded equivalent, or rejected with a concrete reason
 - an authored move is not required merely because the artifact is new or visually quiet
+- the safety hard-gate result is pass, and every aesthetic flag records whether it caused demonstrated harm or was intentional
 
 If this fails, use `needs artifact` or `refine`, not `ready`.
 
@@ -121,25 +123,36 @@ Distinguish fidelity defects from intentional mechanism translation. A deliberat
 
 ### Generic And AI-Slop Flags
 
-- `Inter-only` or `system-only` typography without brand reason
 - centered template hero with generic supporting cards
 - card wall UI with interchangeable radius and shadows
 - pure black plus glow plus pills as the main aesthetic move
 - gradient-led styling with weak composition underneath
 - generic AI landing page, generic SaaS page, or obvious shadcn derivative
 
-### Hard Bans (no brief earns them back)
+These are review signals, not automatic failure counts. Confirm the actual hierarchy, readability, brand fit, and cohesion defect in the artifact.
+
+### Safety Hard Gates (never waived)
+
+- readable foreground/background contrast and type
+- keyboard, focus, touch, and control reachability
+- real content, imagery, and state integrity rather than broken placeholders
+- recovery from empty, loading, error, permission, and success states
+- no broken assets or unusable interaction paths
+- source fidelity when `Reference intent` is `replicate`
+
+### Aesthetic Evidence Flags
 
 - eyebrow/kicker label above every heading
 - decorative numbered section markers (01 / 02 / 03) when the sequence carries no information
-- gradient text; emphasis comes from weight or size
+- gradient text where legibility or hierarchy is weaker than a direct type treatment
 - hard offset shadows (`box-shadow: 4px 4px 0`) outside a genuinely neobrutalist world
 - system display face (Impact, Arial Black, platform sans) as the display voice of an own-world page
 - emoji or unicode glyphs standing in for an icon system
 - cream/beige page background reached for by reflex instead of a deliberate palette
 - zero-blur colored halo shadows used as depth
+- `Inter-only` or another inherited safe grotesk chosen without brand reason
 
-If 2 or more flags are present, the design cannot be `ready`. If 3 or more are present, default to `pivot`.
+Each flag requires `Evidence of harm or intentional use`. It blocks `ready` only when the rendered artifact shows damaged hierarchy, readability, brand fit, or system cohesion. A flag with a clear product or brand rationale and no demonstrated harm may pass. A safety hard-gate failure cannot be justified by intent or a brief.
 
 ### Color Calibration Flags
 
@@ -198,6 +211,7 @@ Theme the browser surfaces models usually skip: text selection, caret, custom sc
 
 - Missing type contrast, density stance, component vocabulary, motion thesis, or background/detail thesis: return to directions.
 - Direction menu without openable case links or source evidence: return to directions.
+- Direction menu without viewed low-cost samples, or with a broken/black capture standing in for evidence: return to directions.
 - Missing artifact strategy, stack translation, or visual proof: return to directions or stack translation.
 - Implementation-bound work missing surface inventory or detail translation constraints: return to approved spec.
 - Implementation-bound work missing component restyling matrix or default override pass: return to implementation plan.

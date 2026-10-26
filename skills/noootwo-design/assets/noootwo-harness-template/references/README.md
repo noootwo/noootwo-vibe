@@ -17,12 +17,15 @@ One directory per source the direction leans on:
 - captured:
 - tool:
 - evidence level: real product flow | design system | curated gallery | community signal | single shot
+- same-medium fit: yes | no | mixed, and why
 - accessibility: reachable | login required | fallback | unreachable
+- artifact inspected: yes | no
+- observed evidence: layout, type ratio, palette proportion, density, state grammar, or motion behavior actually seen
 - attribution and licence:
 - capture: ./01-screen.png
 ```
 
-When a source cannot be opened, record `accessibility: unreachable`, keep the URL and the reason, and move on. A blocked source narrows the evidence; it does not cancel the discovery pass.
+When a source cannot be opened, record `accessibility: unreachable`, keep the URL and the reason, and move on. A blocked source narrows the evidence; it does not cancel the discovery pass. A black, broken, placeholder, or loading capture records `artifact inspected: no` and cannot support a style claim.
 
 This directory holds personal reference. It stays out of version control, is never redistributed, and is never a target to reproduce pixel for pixel. Borrow the mechanism — space, density, rhythm, state grammar, motion behaviour — and leave the artwork, brand assets, and exact composition behind.
 
