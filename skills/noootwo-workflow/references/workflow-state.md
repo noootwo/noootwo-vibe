@@ -21,6 +21,19 @@ When a specialist changes the next frontier, hand it to `noootwo-state`:
 
 `noootwo-state` owns the form and location. Workflow only supplies the content and abstract properties. A pure read or no-change check creates no event.
 
+## Checkpoint
+
+A long turn drifts: the capsule goes stale, sources get re-read, and failed loops repeat. Refresh the capsule before further reading or acting when:
+
+- a compaction landed in this session
+- the same file or verification command is about to run a second time
+- two verification loops failed without producing new evidence
+- every current claim is terminal and reading continues
+
+The checkpoint carries the current claim, proven facts, the open frontier, the last evidence handle, the one next owner, and the condition that reopens a source. It is one `noootwo-state` capsule write; an unchanged structured write creates no event.
+
+After the checkpoint, resume from the capsule instead of re-reading an entrypoint or a skill body already followed. Then continue, change owner, or stop; an unmoved frontier with no new evidence ends the attempt, and the boundary is reported instead of broadening the read.
+
 ## Re-entry
 
 After compaction or on a new invocation, restore the capsule, verify the current commit, worktree status, and newest evidence handle, then prefer the recorded next trigger when it still matches reality. Replace it when new evidence changes the frontier.

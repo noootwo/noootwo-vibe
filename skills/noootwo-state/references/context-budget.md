@@ -35,6 +35,21 @@ Documentation should make the next task cheaper. If a file is read often, it mus
 - The hot context carries the conclusion, file or URL, line or command, exit status, hash, and the path needed to reopen the source.
 - Re-read a source slice when its hash, commit, environment, or claimed role is unclear; do not trust a summary that lost provenance.
 
+## Long-Turn Recovery
+
+Recovery after a compaction or a checkpoint reads in this order:
+
+1. The capsule, then the current commit and worktree.
+2. Only the evidence handles the next frontier names.
+3. A source slice only when its hash, commit, or claimed role changed.
+
+Rules that stop a long turn from paying twice for context it already bought:
+
+- An entrypoint that points at a long document is a routing pointer, not a whole read: read the section the current step needs, and record the compression opportunity with the file's owner.
+- The same file or verification command repeated within a turn is a checkpoint trigger; a second read is not new evidence.
+- Two verification loops without new evidence end the attempt: record the boundary and return to the owner of the next step.
+- Output above 16 KiB is captured before it is reasoned over; the live context keeps the exit status, hash, path, and bounded tail.
+
 ## Placement Table
 
 | Fact | Owner |

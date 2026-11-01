@@ -23,6 +23,8 @@ Choose one depth before reading project files; escalate only when a fact is miss
 
 Start with one bounded query (`-m 20` or an 80-line slice), batch independent reads, and do not repeat a file or history range. After an environment or permission failure, record it once and change evidence source instead of probing command variants. Stop at the first evidence that makes every current claim terminal; when a named change, artifact, or authority is absent, report that absence before planning around it. After compaction or session re-entry, restore the capsule and verify its source hash, current commit, worktree, and latest evidence before trusting the summary. Always prefer current repo truth and project state over assumed stage.
 
+**Checkpoint when the turn gets long.** Long turns drift: the capsule goes stale, sources get re-read, failed loops repeat. Refresh the capsule before further reading or acting when a compaction landed in this session, the same file or verification command is about to run a second time, two verification loops failed without new evidence, or every current claim is terminal and reads continue. The checkpoint carries the claim, proven facts, open frontier, last evidence handle, one next owner, and what reopens a source; then continue, change owner, or stop. It is one capsule write, not a plan rewrite, and direct work skips it.
+
 **Done when:** you can name the files and state that constrain this step.
 
 ## 2. Match one owner
@@ -56,7 +58,7 @@ Do not precompute a full DAG or pile on condition tables.
 
 ## 4. Keep state
 
-For non-direct, cross-skill, or external-skill work, invoke the `noootwo-state` skill when the goal, stage, decision, blocker, evidence, or next trigger actually changes: read its `SKILL.md` and follow it. Pure reads and no-change checks create no event. Direct single-file edits stay direct and do not create state.
+For non-direct, cross-skill, or external-skill work, invoke the `noootwo-state` skill when the goal, stage, decision, blocker, evidence, or next trigger actually changes: read its `SKILL.md` and follow it. A checkpoint is one capsule write through the same skill; an unchanged structured write creates no event. Pure reads and no-change checks create no event. Direct single-file edits stay direct and do not create state.
 
 When the current goal is complete and an unrelated goal appears, write the capsule and recommend a new session unless the user explicitly asks to continue in this one.
 
@@ -74,6 +76,7 @@ Answer before calling the work done:
 - For release work, did `noootwo-release` produce the Release Plan and did `noootwo-state` receive the release record and deployment evidence?
 - Did behavior, state, or release facts change, and did `noootwo-state` place them?
 - During approved execution, are reversible plan conflicts recorded as rulings rather than silently decided or escalated as routine re-approval?
+- For a long turn, did a checkpoint refresh the capsule before further reads, and did the attempt end when the frontier stopped moving?
 - Did an external skill propose a spec, plan, or other durable artifact? If so, was it stored in the Noootwo-owned layer instead of the external skill's default directory?
 - Is user acceptance still required before commit, push, tag, or publish?
 

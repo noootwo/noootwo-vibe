@@ -1,5 +1,13 @@
 # noootwo-state Releases
 
+## v0.5.0
+
+- Added long-turn recovery: after a compaction or a checkpoint, read the capsule, the current commit, and the worktree first, then only the evidence handles the next frontier names, and resume from the capsule instead of re-reading an entrypoint already followed.
+- A repeated read is evidence only when its hash, commit, or the claim it settles changed. A long document behind an entrypoint is read through the slice the current step needs, and two verification loops without new evidence end the attempt.
+- `audit_codex_context.py` now reports per-turn totals with `--top-turns N`: tokens, uncached input, output, responses, tool calls, tool-output bytes, outputs over 16 KiB, repeated commands, compaction items, and observed span, sorted by turn cost.
+- Per-turn attribution uses the `turn_id` on usage records and completed items; the report still emits only hashes, counts, byte sizes, and durations, and never message, tool-output, argument, environment, or credential text.
+- The state and event schemas are unchanged; existing history remains readable.
+
 ## v0.4.0
 
 - Added `capsule`: a read-only `noootwo.context-capsule/0.1` Markdown or JSON view bounded by default to 80 lines and 6,000 characters, with a source hash and recent evidence handles. `summary` now shares capsule semantics.

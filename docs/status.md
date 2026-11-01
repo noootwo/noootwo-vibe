@@ -9,7 +9,9 @@
 
 ## Current Validation Surface
 
-Last verified: 2026-10-27 on published `0.24.0`: workspace and skill budgets, state/audit self-tests, script syntax, 16 eval contracts, the rendered Design fixture and negative evidence probes, CI-equivalent checks, public clean install, publication CI, and both local install roots. Publication is complete.
+Last verified: 2026-11-02 on candidate `0.25.0` (`noootwo-workflow@v0.22.0`, `noootwo-state@v0.5.0`): workspace and skill budgets, all eleven skill validators, state/audit self-tests, per-turn audit reproduction for the three measured projects, three new eval contracts, script syntax, discovery, an isolated local install, and `git diff --check`. The candidate is prepared in the working tree; commit, tags, and publication are pending user acceptance.
+
+Previously verified: 2026-10-27 on published `0.24.0`: workspace and skill budgets, state/audit self-tests, script syntax, 16 eval contracts, the rendered Design fixture and negative evidence probes, CI-equivalent checks, public clean install, publication CI, and both local install roots. Publication is complete.
 
 - `python scripts/validate_skill_workspace.py .` — includes the authoring budgets: `description` ≤ 200 characters, `SKILL.md` ≤ 120 lines, ≤ 12 reference files each named by a pointer, `short_description` 25–64 characters, no `default_prompt`, and no bare `$noootwo-` reference inside a skill body
 - `python scripts/validate_skill_workspace.py .` — also enforces the capability bridge: every skill named in a `SKILL.md` must exist, every public skill must appear in the `docs/agents/invocation.md` capability map, and every skill named there must exist
@@ -23,6 +25,7 @@ Last verified: 2026-10-27 on published `0.24.0`: workspace and skill budgets, st
 - `git diff --check`
 - Behaviour measurement: `docs/experiments/skill-behaviour-2026-09-11.md`
 - Context measurement: `docs/experiments/2026-10-25-context-budget.md`; all ten behavior probes passed and six final pairs had a median total-token delta of `-44.3%` with no task regression above 10%
+- Long-turn measurement: `docs/experiments/2026-11-02-long-turn-cost-audit.md`; 37 sessions, 314 turns, 1,097 compactions, 930 MB of tool output, 14,812 outputs over 16 KiB, 6,571 repeated in-turn commands, and a largest turn of 556.8M tokens across 3,574 responses, 7,121 tool calls, and 10.4 hours. It describes these three projects only and claims no saving for the new rules.
 - `node --check` on `skills/noootwo-design/scripts/extract_design_tokens.mjs`, plus an end-to-end extraction against a foreign product site and a domestic design system
 - `node --check` on the `CHECK_JS` payload from `skills/noootwo-design/scripts/check_visual_gates.py`; the advisory interface rules still need an artifact run with Playwright for end-to-end proof
 - `python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scenario leave-simple-justified` — validates a justified no-motion result
@@ -40,6 +43,7 @@ Last verified: 2026-10-27 on published `0.24.0`: workspace and skill budgets, st
 - `docs/adr/0023-diagnosis-map-and-evidence-authority.md` records the Diagnosis Map, per-layer evidence authority, read-only confirmation boundary, per-claim stop rules, and the explicit routes from workflow, ask, code-health, and research.
 - `docs/adr/0024-bounded-context-lifecycle.md` records the package-wide `write -> select -> compress -> isolate -> verify` lifecycle, bounded capsule/inspection/capture APIs, one-owner routing gate, cold-evidence boundary, and the A/B release threshold.
 - `docs/adr/0025-evidence-backed-design-and-decision-complete-execution.md` records grounded Product intent, user-owned how decisions, real Design direction samples, same-medium inspected references, evidence-dependent aesthetic flags, conditional Builder Check, decision-complete plans, and rulings during approved execution.
+- `docs/adr/0026-long-turn-context-checkpoints.md` records the behaviour-triggered long-turn checkpoint, capsule-first recovery, the second-failed-loop stop condition, the per-turn audit reporting, and the rejected fixed-budget and hard-truncation alternatives.
 - `noootwo-code-health` now follows the Fowler refactoring health loop, the bounded Integration Read, and the Change Check / Release Check split; the deciding sources, boundaries, and stop rules are recorded in `docs/reference/borrowed-skills.md`, ADR 0015, ADR 0019, and ADR 0020.
 - `noootwo-code-health` is the renamed `noootwo-review` skill (`v0.14.0` rename, currently `v0.18.0`). The old `noootwo-review@v0.13.0` tag remains as history; current docs and routing use the new name.
 - `noootwo-release` owns versioning, tags, immutable artifacts, deployment traces, provenance, rollback, and release health; code-health keeps the ship-readiness gate. Release now requires a Release Check for the exact commit.
@@ -99,6 +103,7 @@ Last verified: 2026-10-27 on published `0.24.0`: workspace and skill budgets, st
 - GitHub Actions run `40367827289` emitted non-blocking deprecation warnings because `actions/checkout@v4`, `actions/setup-node@v4`, and `actions/setup-python@v5` still target Node 20. The job passed on the forced Node 24 runtime; a later CI-maintenance change should upgrade the actions.
 - Local skill roots retain historical `noootwo-docs` under `~/.agents/skills` and `noootwo-review` under both roots. They are outside the current public set and were not deleted during release. Current discovery and release checks verified all eleven public versions independently of those extras.
 - The capsule defaults are live-view budgets, not evidence limits. The main residual risk is under-selection: one bounded search plus three slices can miss decisive context. The correct response is to name the missing authority or reopen a source with provenance, not weaken cold storage or verification.
+- The `0.25.0` long-turn checkpoint has deterministic contracts and a measured problem record, but no fresh-session behavior run, so no token, time, or rework saving is claimed. The audit covers three related projects on one machine, model, and configuration, and the `kungfu-community` history was still appending while it ran, so a rerun differs slightly.
 
 ## Next Actions
 
@@ -117,6 +122,7 @@ Last verified: 2026-10-27 on published `0.24.0`: workspace and skill budgets, st
 - Run the new Diagnosis Map evals: `diagnosis-map-not-cross-system-audit`, `evidence-authority-by-layer`, `confirmation-stops-before-mutation`, `route-confirmation-to-debug`, `multi-question-frontier`, `runtime-fact-not-research`, and `confirm-premise-before-shape`. Record per-claim status quality, stop accuracy, time, token, and tool-call cost against a no-skill baseline.
 - Run the six contextual-intervention scenarios, then the existing motion, interface-quality, and case-capture scenarios under `skills/noootwo-design/evals/prompts/`, and record the results in `docs/experiments/`.
 - Run the 16 new `0.24.0` Product, Design, Code Health, and Workflow prompt contracts in fresh model sessions against a no-skill baseline; record behavior, stop accuracy, time, token, and tool-call cost before making any improvement claim.
+- Run the three new `0.25.0` checkpoint contracts (`compaction-checkpoint`, `repeat-read-checkpoint`, `failed-loops-stop`) in fresh sessions against a no-skill baseline, and re-run `audit_codex_context.py --top-turns 5` on the same three projects after the rules have been in use; compare per-turn totals, repeated commands, and over-16-KiB outputs before claiming any saving.
 - Extend the Design fixture to mobile, interaction, focus, error and recovery states, and the target runtime, then repeat screenshot review before widening the `0.24.0` quality claim.
 - Run the explicit-motion-request and installed-motion-runtime scenarios against a real project with `motion` already installed; the expected result is an artifact-visible authored move using the right tool, or a recorded equivalent/rejection.
 - Exercise `extract_design_tokens.mjs` and the advisory motion rules on a real project artifact, and record the false-positive rate for the deliberately-deviating brand-curve case.

@@ -8,6 +8,7 @@ Compact guardrail and handoff packet reference. Routing and scheduling live in `
 - Direct work reads no state; resume reads the capsule and at most three frontier entry points.
 - Record only a real goal, decision, blocker, evidence, or next-trigger change; pure reads create no event.
 - After compaction, re-check commit, worktree, and the latest evidence handle against the capsule.
+- Long turns checkpoint on a compaction, a repeat read or repeat verification command, or two failed loops without new evidence: refresh the capsule and the frontier, then continue, switch owner, or stop.
 - A completed goal followed by an unrelated goal gets a capsule and a new-session recommendation unless the user continues.
 - Do not edit while product or debug is unresolved.
 - Non-obvious code changes use `noootwo-code-health` for an Integration Read before `noootwo-tdd`; obvious local seams go directly to TDD.

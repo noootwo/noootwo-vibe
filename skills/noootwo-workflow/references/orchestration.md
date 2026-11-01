@@ -8,6 +8,8 @@ Workflow schedules one next owner at a time. It does not precompute a full DAG.
 
 Each cycle loads only what the current step needs. The specialist owns its method; workflow keeps order, scope, stop conditions, and handoffs.
 
+A checkpoint is re-entry inside one turn, not a new plan: it refreshes the capsule and the frontier, then the loop matches one owner again from current evidence instead of continuing the previous read or probe sequence.
+
 ## Precedence
 
 Use this only to break a stage tie:
@@ -64,6 +66,7 @@ Stop and ask or reroute when:
 - the change would expand public behavior beyond the user's request
 - a confirmation or diagnosis would need a source edit, rebuild, deployment, persistent data change, or a new system before its claims have verdicts
 - several claims are being merged into one audit without evidence that they share a cause
+- a second verification loop failed without new evidence; report the boundary instead of starting a third
 - three failed fixes reveal new problems in different places
 - user acceptance is required before commit, push, tag, or publish
 

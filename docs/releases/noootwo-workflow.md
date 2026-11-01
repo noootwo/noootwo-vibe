@@ -1,5 +1,13 @@
 # noootwo-workflow Releases
 
+## v0.22.0
+
+- Added a long-turn checkpoint: refresh the capsule before further reading or acting when a compaction landed in the session, the same file or verification command is about to run a second time, two verification loops failed without new evidence, or every current claim is terminal while reading continues.
+- The checkpoint carries the current claim, proven facts, the open frontier, the last evidence handle, one next owner, and the condition that reopens a source; the turn then continues, changes owner, or stops. It is one capsule write, not a plan rewrite, and direct work skips it.
+- Added the second-failed-verification-loop stop condition and a close-gate question about whether a long turn ended when the frontier stopped moving.
+- Added three opt-in eval contracts: a compaction checkpoint that restores the capsule before more reads, a repeat-read checkpoint, and a stop after two failed loops. Fresh model sessions remain unrun.
+- The mechanism and its measured evidence are recorded in ADR 0026 and the 2026-11-02 long-turn cost audit.
+
 ## v0.21.0
 
 - Approved execution now treats the accepted spec and plan as authority for reversible implementation details.

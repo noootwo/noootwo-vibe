@@ -30,6 +30,7 @@ The eleven skills share one lifecycle: `write -> select -> compress -> isolate -
 - References above about 200 lines are entered through headings or query hits. Live excerpts stay at 80 lines or fewer. Raw output above 16 KiB goes to cold evidence first; the hot context carries its path and hash.
 - One writer owns dependent changes. Only independent read-only research or review is isolated to a subagent.
 - After compaction or when the goal changes, the capsule is checked against the current commit, worktree, and latest evidence. An unrelated new goal after completion gets a new-session recommendation unless the user explicitly continues.
+- A long turn checkpoints before it drifts: a compaction, a repeat read or repeat verification command, two failed loops without new evidence, or a terminal claim that no longer stops the reads refreshes the capsule and the frontier before the turn continues.
 
 Useful state reads:
 
@@ -37,7 +38,7 @@ Useful state reads:
 skills/noootwo-state/scripts/noootwo-state.sh capsule
 skills/noootwo-state/scripts/noootwo-state.sh inspect docs/status.md --query release
 skills/noootwo-state/scripts/noootwo-state.sh capture --name failing-check -- npm test
-python3 skills/noootwo-state/scripts/audit_codex_context.py --cwd "$PWD" --since 2026-10-01 --json
+python3 skills/noootwo-state/scripts/audit_codex_context.py --cwd "$PWD" --since 2026-10-01 --top-turns 5 --json
 ```
 
 The capsule is a read view, never a new source of truth. Append-only events and cold evidence remain the history. The design and evidence boundary are recorded in [ADR 0024](docs/adr/0024-bounded-context-lifecycle.md) and [the context-cost research brief](docs/reference/context-cost.md).
