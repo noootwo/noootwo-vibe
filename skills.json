@@ -14,7 +14,7 @@
     {
       "name": "noootwo-workflow",
       "path": "skills/noootwo-workflow",
-      "version": "0.22.0",
+      "version": "0.23.0",
       "status": "public",
       "dependencies": [
         "noootwo-state",
@@ -32,7 +32,7 @@
     {
       "name": "noootwo-product",
       "path": "skills/noootwo-product",
-      "version": "0.12.0",
+      "version": "0.12.1",
       "status": "public",
       "dependencies": [
         "noootwo-research",
@@ -44,7 +44,7 @@
     {
       "name": "noootwo-design",
       "path": "skills/noootwo-design",
-      "version": "0.20.0",
+      "version": "0.20.1",
       "status": "public",
       "dependencies": [
         "noootwo-product",
@@ -95,7 +95,7 @@
     {
       "name": "noootwo-state",
       "path": "skills/noootwo-state",
-      "version": "0.5.0",
+      "version": "0.6.0",
       "status": "public",
       "dependencies": [],
       "tagPrefix": "noootwo-state@"
@@ -116,7 +116,7 @@
     {
       "name": "noootwo-research",
       "path": "skills/noootwo-research",
-      "version": "0.7.1",
+      "version": "0.7.2",
       "status": "public",
       "dependencies": [
         "noootwo-product",

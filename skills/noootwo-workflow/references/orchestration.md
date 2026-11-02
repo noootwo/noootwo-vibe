@@ -10,6 +10,8 @@ Each cycle loads only what the current step needs. The specialist owns its metho
 
 A checkpoint is re-entry inside one turn, not a new plan: it refreshes the capsule and the frontier, then the loop matches one owner again from current evidence instead of continuing the previous read or probe sequence.
 
+A new request, a phase shift, or a specialist return re-enters owner matching from the current artifact and evidence. The previously used specialist does not carry over, and a body read earlier in the session is not a reason to keep it.
+
 ## Precedence
 
 Use this only to break a stage tie:
@@ -53,6 +55,8 @@ Ruling
 ```
 
 Record the ruling beside the plan or in project state through `noootwo-state`. Do not re-ask for approval on naming, local structure, equivalent APIs, test organization, or another reversible detail already bounded by the plan.
+
+A plan pasted by the user or produced by an external skill arrives approved but unowned. Before the first edit, name the current owner and its verification depth, and name the release boundary when the plan can change a version, tag, artifact, deployment trace, or release fact. If the plan carries no test assertion or verification command, it is not execution-ready: name the missing decision and let its owner close it instead of inventing the validation.
 
 Stop approved execution for a user-owned product or "how" decision, an irreversible migration or data loss, a security or privacy impact, an external side effect or spend, or evidence that the plan as a whole is no longer viable. When the plan changes materially, return to the owner that can accept the new plan.
 

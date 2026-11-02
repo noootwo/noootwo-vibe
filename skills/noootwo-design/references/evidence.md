@@ -139,7 +139,7 @@ Flag these as Claude-like convergence, even if they look polished:
 
 ## Impeccable Craft Signals
 
-Use this as craft guidance distilled from `pbakaus/impeccable` v4.7.0. Borrow the mechanisms, not the dependency, command vocabulary, or surface styling. For the 2026 mechanism-level pass and its evidence limits, read [Impeccable Research Notes](#impeccable-research-notes).
+Use this as craft guidance distilled from `pbakaus/impeccable` v4.8.0. Borrow the mechanisms, not the dependency, command vocabulary, or surface styling. For the mechanism-level pass and its evidence limits, read [Impeccable Research Notes](#impeccable-research-notes).
 
 ### Typography
 
@@ -190,7 +190,13 @@ Ask whether the interface would be instantly recognized as AI-generated. If yes,
 
 ## Impeccable Research Notes
 
-Recorded 2026-10-27 against `pbakaus/impeccable` v4.7.0 (`skill-v4.7.0` and `cli-v4.7.0`, commit `aeeb3d8c30b5f95aeeb3e893b0f1a308af8fdb8f`, released 2026-10-19). The evidence is official source plus inspectable release artifacts; no independent outcome study establishes a quality gain.
+Recorded 2026-10-27 against `pbakaus/impeccable` v4.7.0 and rechecked 2026-11-03 at `skill-v4.8.0` (`414603bf14c7a344edb466bb1f85690c77ce8b7d`, released 2026-10-26). The evidence is official source plus inspectable release artifacts; no independent outcome study establishes a quality gain.
+
+### v4.8.0 Delta
+
+- The release is integration and maintenance work, not a new design philosophy. It adds Devin, Replit Agent, and Windsurf support; GitHub Actions annotations; `--list-rules`; install digest checks; Cursor/Codex hook fixes; Live Mode repairs; Arabic `harden` support; detector accuracy fixes; and an advisory hard-offset-shadow finding.
+- The `skill/SKILL.src.md` diff from v4.7.0 is one behavioral line: when the launcher is unavailable, the fallback must also read `craft-floor.md` immediately before a UI edit.
+- The code-first boundary remains the useful design judgment: app screens and documentation start from implementable artifacts; generated comps are reserved for landing, campaign, and showcase surfaces. Do not turn the v4.8.0 release into a claim of a new design paradigm.
 
 ### Current Mechanisms
 
@@ -224,6 +230,33 @@ Evidence flags never waive WCAG contrast, readable hierarchy, keyboard/focus/tou
 
 ### Evidence Boundary
 
-- Upstream v4.7.0 is a moving target; this note records the named tags and commit above.
+- Upstream v4.8.0 is a moving target; this note records the named tag and commit above. The v4.7.0 baseline remains the prior reviewed record.
 - The repository shows mechanisms and release practice, not an independent controlled test of UI quality.
 - Noootwo must not claim a general quality improvement until the fixture and reviewer evidence in `docs/experiments/2026-10-27-upstream-adoption.md` are recorded, and even then the claim is limited to the exercised workflow and evidence gates.
+
+## OIL UI Research Notes
+
+Recorded 2026-11-03 against `oil-oil/oil-ui` v0.30.0 (`4e8d25f91727b3b08a3bbf60bac84d81f6ff6574`, released 2026-11-02; MIT). The evidence is the official `SKILL.md`, references, README, and inspected gallery pages. `oil-oil/dsh-oil-ui` is a separate DeepSeek Harness wrapper, not the core skill. The gallery is author-curated; no independent benchmark or production-quality study was found.
+
+### Mechanisms Adopted As Reference
+
+- **Design north star.** One sentence names the first impression and what the whole surface is organized around; composition, type, color, media, and interaction must answer it. Use it as direction vocabulary, not a new required field.
+- **One focal object, one primary action.** Each screen has a single visual lead and one primary action. Equal-weight secondary actions or decoration are merged or demoted, and a grayscale structure makes the action path visible before color, type, or imagery.
+- **Five-axis tone calibration.** Energy (quiet ↔ loud), finish (raw ↔ refined), density (sparse ↔ dense), weight (light ↔ heavy), and seriousness (playful ↔ solemn) each need product evidence. This is a reference lens for translating vague taste, not a mandatory questionnaire.
+- **Concrete direction engine.** Build a direction from a material in an environment, a specific scene, a character archetype, a design movement or cultural grammar, a form borrowed from another field, or one deliberately broken convention. Do not start from adjectives.
+- **One memory point, then subtraction.** Concentrate identity in one moment or component; quiet the rest and remove what contributes neither task, hierarchy, state, nor brand memory. This reinforces the existing authored-move discipline rather than adding a second one.
+- **Conflict disclosure.** When design documents, visual sections in agent instructions, and code disagree, surface the conflict and name which source governs the decision. Do not silently merge, rewrite, or delete the sources.
+- **Optional landing/showcase comps.** For a landing or showcase surface, a generated comp can test composition before code: 45–65 word prompts across five slots, an optional `85:10:5` color range when no brand palette exists, a `1024×1536` desktop long-page comp when applicable, and palette or horizontal-ratio sampling with `measure_reference.py`. The comp is not a pixel blueprint: do not copy its compressed vertical spacing, and replace pseudo-Chinese with natural Simplified Chinese in implementation.
+
+### Not Adopted
+
+- Replacing Noootwo's material-choice direction exploration with OIL UI's default single-direction posture. Noootwo keeps three directions only when the choice materially changes implementation.
+- Mandatory image generation or comps for app screens; app screens and documentation remain code-first.
+- Treating `85:10:5` as a universal palette rule, requiring subagents, or copying OIL UI's full skill, prompts, scripts, assets, plugin wrapper, or Pro workflows.
+- Reintroducing real screenshot review or independent review as new rules; Noootwo already requires both.
+
+### OIL UI Boundary
+
+- The OIL UI gallery shows art direction and concept craft, not complete production flows, interaction states, accessibility, performance, or user research.
+- Its showcase is not model-attribution evidence: the wrapper, the model, the author's selection, and the prompt all contribute to a displayed result.
+- The adoption here is reference-only. It changes evidence vocabulary and examples, not the design workflow or readiness gates.

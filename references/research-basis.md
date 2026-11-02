@@ -301,6 +301,20 @@ Source index for the upstream mechanism refresh:
 - Supplied WeChat article, body inaccessible after redirect: `https://mp.weixin.qq.com/s/gR3tDBD8-4hLJWj-x2b1Yw`
 - Durable research record: [upstream-refresh-2026-10-27](../docs/reference/upstream-refresh-2026-10-27.md)
 
+Upstream mechanism refresh, checked 2026-11-03:
+
+- `pbakaus/impeccable` `skill-v4.8.0` peels to commit `414603bf14c7a344edb466bb1f85690c77ce8b7d` (2026-10-26), after the recorded `v4.7.0` commit `aeeb3d8c30b5f95aeeb3e893b0f1a308af8fdb8f` (2026-10-19). The release adds host integrations (Devin, Replit Agent, Windsurf), GitHub Actions annotations, `--list-rules`, install digest checks, Cursor/Codex hook fixes, Live Mode repairs, Arabic `harden` support, detector accuracy work, and an advisory hard-offset-shadow finding. The `skill/SKILL.src.md` diff is one behavioral line: on launcher failure, read `craft-floor.md` before any UI edit. This is integration and maintenance work, not a new design philosophy. The useful boundary remains: app screens and documentation are code-first; generated comps belong to landing, campaign, and showcase surfaces.
+- `oil-oil/oil-ui` `v0.30.0` resolves to commit `4e8d25f91727b3b08a3bbf60bac84d81f6ff6574` (2026-11-02; MIT). It is a host-neutral design skill, not only a DeepSeek Harness plugin. Mechanisms read from `SKILL.md` and its references: design north star, product facts before visual choices, one focal object and primary action per screen, five-axis tone calibration, concrete-engine direction generation, color drawn from product evidence, one default direction with comparison only when requested, one memory point plus subtraction, real screenshot review with an independent reviewer when available, and `.oil-ui/<task>` process isolation. v0.29.1 adds an optional generated-UI-comp path: 45–65 word prompts, five slots, `85:10:5` color range, `1024×1536` desktop landing comps, `measure_reference.py` sampling, no copying of vertical spacing from the comp, and cleanup of pseudo-Chinese. v0.30.0 surfaces conflicts among design docs, agent visual instructions, and code instead of silently merging them.
+- Adopt for Noootwo Design: reference-only vocabulary for the design north star, five-axis tone calibration, concrete-engine direction generation, one focal object/action, one memory point, optional landing/showcase comps, and conflict disclosure. Do not duplicate mechanisms already covered by material direction samples, real screenshot inspection, or independent review.
+- Reject or defer: making image generation mandatory, treating `85:10:5` as a universal ratio, replacing Noootwo's material-choice direction exploration with OIL UI's default, requiring subagents, and copying OIL UI's prompts, scripts, assets, plugin wrapper, or Pro workflows. The OIL UI gallery is an author-curated showcase, not an independent benchmark or proof of production quality.
+- Evidence boundary: Impeccable and OIL UI are upstream or maintainer evidence; no independent controlled UI-quality study was found. The model mix of the OIL UI gallery is not evidence that a particular harness or model caused the showcased result.
+
+Source index for the 2026-11-03 refresh:
+
+- Impeccable: `https://github.com/pbakaus/impeccable`
+- OIL UI: `https://github.com/oil-oil/oil-ui`
+- DeepSeek Harness wrapper, not the core skill: `https://github.com/oil-oil/dsh-oil-ui`
+
 ## Mechanisms Borrowed
 
 - Keep publishable units independently addressable under `skills/`.

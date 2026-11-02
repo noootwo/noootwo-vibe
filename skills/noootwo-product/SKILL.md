@@ -97,4 +97,6 @@ Read `references/product-reality-check.md` when the loop is unproven, the user i
 
 When the request is not a product decision, name the layer and invoke the owner in one hop: `noootwo-debug` for a failure, `noootwo-research` for outside evidence, `noootwo-design` for a visual system, `noootwo-code-health` for implementation shape, code, or performance judgment, `noootwo-onboard` for an unfamiliar project.
 
+After a handoff or compaction, resume from the capsule and current artifacts; reload this body only when product owns the next step.
+
 Missing skill fallback: first try `npx -y skills add noootwo/noootwo-vibe --global --agent codex --skill <name> --yes`; if install fails, take the smallest direct fallback and mark the record `skill-missing: <name>` (for persistence, write the owning file directly).

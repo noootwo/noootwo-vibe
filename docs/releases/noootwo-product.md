@@ -1,5 +1,10 @@
 # noootwo-product Releases
 
+## v0.12.1
+
+- The Return rule now resumes from the capsule and current artifacts after a handoff or compaction and reloads the product body only when product owns the next step.
+- No decision flow, handoff field, or gate changed.
+
 ## v0.12.0
 
 - An unresolved first round now opens with a grounded response: replay the intent in the user's language, list checked facts with sources, and separate observations from proposals before asking.

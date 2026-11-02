@@ -43,9 +43,12 @@ Recovery after a compaction or a checkpoint reads in this order:
 2. Only the evidence handles the next frontier names.
 3. A source slice only when its hash, commit, or claimed role changed.
 
+When no capsule exists, create one recovery capsule first if the work is cross-owner, cross-session, or already compacted; direct and single-owner read-only work continues from repository evidence with no state layer.
+
 Rules that stop a long turn from paying twice for context it already bought:
 
 - An entrypoint that points at a long document is a routing pointer, not a whole read: read the section the current step needs, and record the compression opportunity with the file's owner.
+- A skill body is not a recovery entry: reload it only when its skill owns the next step, never to rebuild context the capsule already carries.
 - The same file or verification command repeated within a turn is a checkpoint trigger; a second read is not new evidence.
 - Two verification loops without new evidence end the attempt: record the boundary and return to the owner of the next step.
 - Output above 16 KiB is captured before it is reasoned over; the live context keeps the exit status, hash, path, and bounded tail.

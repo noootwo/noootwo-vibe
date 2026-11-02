@@ -1,5 +1,13 @@
 # noootwo-design Releases
 
+## v0.20.1
+
+- Recorded `pbakaus/impeccable` v4.8.0 as an integration and maintenance refresh, not a new design philosophy; its only `SKILL.src.md` change at the tag is the launcher fallback reading `craft-floor.md` before a UI edit.
+- Added OIL UI v0.30.0 research notes and reference-only mechanisms: design north star, one focal object and primary action, five-axis tone calibration, concrete-engine direction generation, one memory point with subtraction, optional landing/showcase image comps, and visual-spec conflict disclosure.
+- Rejected or deferred mandatory image generation, universal `85:10:5` palettes, OIL UI's default single-direction replacement, required subagents, and copying its prompts, scripts, assets, plugin wrapper, or Pro workflows.
+- The Return rule now resumes from the capsule and current artifacts after a handoff or compaction and reloads the design body only when design owns the next step.
+- No workflow step, readiness gate, or migration changed; the release refreshes evidence and mechanism vocabulary and adds that recovery sentence.
+
 ## v0.20.0
 
 - A materially unresolved direction choice now needs real low-cost samples before selection: three by default, or one fuller sample plus two lightweight variants when the runtime is weak.

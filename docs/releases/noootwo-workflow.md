@@ -1,5 +1,14 @@
 # noootwo-workflow Releases
 
+## v0.23.0
+
+- A new request, phase shift, or specialist return now re-enters owner matching from the current artifact and evidence; a body read earlier in the session no longer stays the owner.
+- The description names re-entry after compaction or a phase change, so the routing owner is selected again when the context that carried the previous decision is gone.
+- A plan pasted by the user or produced by an external skill arrives approved but unowned: the current owner, its verification depth, and the release boundary are named before the first edit, and a plan with no assertion or verification command is not execution-ready.
+- Recovery is capsule-first: cross-owner, cross-session, or already-compacted work with no state writes one recovery capsule before further reads, while direct and single-owner read-only work stays state-free.
+- Added three eval contracts: `phase-shift-reroute`, `approved-plan-names-owners`, and `compaction-no-capsule`. Fresh model sessions remain unrun.
+- The mechanism and its measured evidence are recorded in ADR 0027 and the 2026-11-03 modocc route audit.
+
 ## v0.22.0
 
 - Added a long-turn checkpoint: refresh the capsule before further reading or acting when a compaction landed in the session, the same file or verification command is about to run a second time, two verification loops failed without new evidence, or every current claim is terminal while reading continues.

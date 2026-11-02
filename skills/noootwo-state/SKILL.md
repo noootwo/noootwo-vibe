@@ -38,12 +38,12 @@ Use `references/format-selection.md`. The decision comes only from the request p
 ## 4. Read cheaply
 
 - One field or a tail of events → `scripts/noootwo-state.sh state --field` or `events`.
-- Session re-entry → `scripts/noootwo-state.sh capsule`; Markdown and JSON default to 80 lines and 6,000 characters and include the source state hash plus recent evidence handles.
+- Session re-entry → `scripts/noootwo-state.sh capsule`; Markdown and JSON default to 80 lines and 6,000 characters and include the source state hash plus recent evidence handles. When state is absent and the work is cross-owner, cross-session, or already compacted, write one recovery capsule through this skill before continuing.
 - An unknown long document → `scripts/noootwo-state.sh inspect PATH --query TEXT`; start with headings or a query and load its bounded excerpt, not the whole file for one fact.
 - A verbose command above 16 KiB → `scripts/noootwo-state.sh capture --name ID -- <command>`; keep the returned exit status and last lines, and use the log/hash as the evidence handle. Capture needs no current-state file and does not change state.
 - A token, compaction, or long-turn question about local Codex history → `python3 scripts/audit_codex_context.py --cwd PATH --since ISO --json --top-turns N`; it reports aggregates and per-turn totals only and never emits message, tool, or argument content.
 - `summary` remains an alias for the same bounded capsule semantics.
-- A read-only decision does not create state. When `.noootwo/state/current.json` is absent, continue from repository evidence without building or enumerating a state layer.
+- A read-only decision does not create state. When state is absent, direct and single-owner read-only work continues from repository evidence without building or enumerating a state layer; only the cross-owner, cross-session, or already-compacted case above creates one recovery capsule.
 
 ## 5. Verify
 
@@ -66,6 +66,7 @@ The command reads each old file as content, persists it through the normal form 
 - Append-only events and cold evidence are history; the capsule is a bounded read view, never a second source of truth.
 - Record a checkpoint only when the goal, decision, blocker, evidence, or next frontier changes.
 - After compaction or a mid-turn checkpoint, read the capsule, the current commit/status, and only the evidence handles the next frontier names; resume from the capsule rather than re-reading an entrypoint already followed.
+- A skill body is not a recovery entry: reload it only when its skill owns the next step.
 - A repeated read is not evidence: reopen a file or command only when its hash, commit, or the claim it settles changed.
 - When the current goal is complete and an unrelated goal appears, write the capsule and recommend a new session unless the user explicitly continues.
 

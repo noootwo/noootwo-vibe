@@ -38,6 +38,8 @@ After the checkpoint, resume from the capsule instead of re-reading an entrypoin
 
 After compaction or on a new invocation, restore the capsule, verify the current commit, worktree status, and newest evidence handle, then prefer the recorded next trigger when it still matches reality. Replace it when new evidence changes the frontier.
 
+When no capsule exists and the work is cross-owner, cross-session, or already compacted, create one recovery capsule through `noootwo-state` before continuing; direct and single-owner read-only work keeps repository evidence and builds no state layer. Reloading a skill body is not recovery.
+
 When the recorded goal is complete and the new request is unrelated, write the capsule and recommend a new session unless the user explicitly continues here.
 
 Direct single-file edits stay direct and do not create state.

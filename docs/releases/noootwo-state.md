@@ -1,5 +1,12 @@
 # noootwo-state Releases
 
+## v0.6.0
+
+- Recovery is capsule-first when state is absent: cross-owner, cross-session, or already-compacted work writes one recovery capsule before further reads, while direct and single-owner read-only work continues from repository evidence with no state layer.
+- A skill body is not a recovery entry: it is reloaded only when its skill owns the next step, never to rebuild context the capsule already carries.
+- Added the `capsule-first-recovery` eval contract. Fresh model sessions remain unrun.
+- No schema change; existing history remains readable.
+
 ## v0.5.0
 
 - Added long-turn recovery: after a compaction or a checkpoint, read the capsule, the current commit, and the worktree first, then only the evidence handles the next frontier names, and resume from the capsule instead of re-reading an entrypoint already followed.

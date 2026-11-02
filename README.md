@@ -7,15 +7,15 @@ It publishes eleven focused skills — a router plus ten specialists:
 | Skill | Invocation | Purpose | Version |
 | --- | --- | --- | --- |
 | `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in | `0.6.1` |
-| `noootwo-workflow` | model-invoked | Chooses read depth, loads one owner at a time, and schedules shape-before-implementation, scoped Change Checks, Release Verification Ledger handoffs, and the full Release Check | `0.21.0` |
-| `noootwo-product` | model-invoked | Settles real user, first loop, scope, main path, states, and acceptance before design or build | `0.12.0` |
-| `noootwo-design` | model-invoked | Turns a settled product path into a contextual visual intervention, tokens, a Design Contract, and a reviewed artifact | `0.20.0` |
+| `noootwo-workflow` | model-invoked | Chooses read depth, re-matches one owner after compaction or a phase change, and schedules shape-before-implementation, scoped Change Checks, Release Verification Ledger handoffs, and the full Release Check | `0.23.0` |
+| `noootwo-product` | model-invoked | Settles real user, first loop, scope, main path, states, and acceptance before design or build | `0.12.1` |
+| `noootwo-design` | model-invoked | Turns a settled product path into a contextual visual intervention, tokens, a Design Contract, and a reviewed artifact | `0.20.1` |
 | `noootwo-tdd` | model-invoked | Owns red-green-refactor and relevant-test evidence for behavior-changing code | `0.6.1` |
 | `noootwo-code-health` | model-invoked | Shapes a non-obvious change, runs a scoped Change Check after each requirement, and a full Release Check before release | `0.18.0` |
 | `noootwo-release` | model-invoked | Owns the Release Verification Ledger, Release Check consumption, versioning, tags, immutable artifacts, deployment traces, provenance, rollback, and release health | `0.3.1` |
-| `noootwo-state` | model-invoked | Reads and records project state and context, produces bounded capsules, inspects files, captures cold evidence, and chooses the storage form and owning layer | `0.4.0` |
+| `noootwo-state` | model-invoked | Reads and records project state and context, produces bounded capsules, inspects files, captures cold evidence, and chooses the storage form and owning layer | `0.6.0` |
 | `noootwo-debug` | model-invoked | Confirms claims with layer-appropriate evidence, proves a failure's cause, bounds the fix, and closes systemically | `0.6.1` |
-| `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, and borrows mechanisms instead of surfaces | `0.7.1` |
+| `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, and borrows mechanisms instead of surfaces | `0.7.2` |
 | `noootwo-onboard` | model-invoked | Enters an unfamiliar project, audits context health and the skills it needs | `0.5.0` |
 
 The repository root is not a published skill. It is the shared workspace for manifests, docs, validation, release helpers, and CI.
@@ -31,6 +31,7 @@ The eleven skills share one lifecycle: `write -> select -> compress -> isolate -
 - One writer owns dependent changes. Only independent read-only research or review is isolated to a subagent.
 - After compaction or when the goal changes, the capsule is checked against the current commit, worktree, and latest evidence. An unrelated new goal after completion gets a new-session recommendation unless the user explicitly continues.
 - A long turn checkpoints before it drifts: a compaction, a repeat read or repeat verification command, two failed loops without new evidence, or a terminal claim that no longer stops the reads refreshes the capsule and the frontier before the turn continues.
+- A new request or phase shift re-matches one owner from the current artifact. Recovery is capsule-first; when no capsule exists, cross-owner, cross-session, or already-compacted work writes one through `noootwo-state`, while direct work stays state-free.
 
 Useful state reads:
 
@@ -213,15 +214,15 @@ python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scena
 Each child skill has its own `VERSION` file and tag prefix:
 
 - `noootwo-ask@v0.6.1`
-- `noootwo-workflow@v0.21.0`
-- `noootwo-product@v0.12.0`
-- `noootwo-design@v0.20.0`
+- `noootwo-workflow@v0.23.0`
+- `noootwo-product@v0.12.1`
+- `noootwo-design@v0.20.1`
 - `noootwo-tdd@v0.6.1`
 - `noootwo-code-health@v0.18.0`
 - `noootwo-release@v0.3.1`
-- `noootwo-state@v0.4.0`
+- `noootwo-state@v0.6.0`
 - `noootwo-debug@v0.6.1`
-- `noootwo-research@v0.7.1`
+- `noootwo-research@v0.7.2`
 - `noootwo-onboard@v0.5.0`
 
 The root `VERSION` records the workspace version only. Do not use it as the release source for child skills.

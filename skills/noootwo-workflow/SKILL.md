@@ -1,6 +1,6 @@
 ---
 name: noootwo-workflow
-description: "Use for multi-step tasks, evidence confirmation, refactors, releases, handoffs, or unclear routing; load one owner at a time and read state only when the task needs it."
+description: "Use for multi-step tasks, evidence confirmation, refactors, releases, handoffs, re-entry after compaction or a phase change, or unclear routing; one owner at a time, read state only when needed."
 ---
 
 # Noootwo Workflow
@@ -23,13 +23,15 @@ Choose one depth before reading project files; escalate only when a fact is miss
 
 Start with one bounded query (`-m 20` or an 80-line slice), batch independent reads, and do not repeat a file or history range. After an environment or permission failure, record it once and change evidence source instead of probing command variants. Stop at the first evidence that makes every current claim terminal; when a named change, artifact, or authority is absent, report that absence before planning around it. After compaction or session re-entry, restore the capsule and verify its source hash, current commit, worktree, and latest evidence before trusting the summary. Always prefer current repo truth and project state over assumed stage.
 
-**Checkpoint when the turn gets long.** Long turns drift: the capsule goes stale, sources get re-read, failed loops repeat. Refresh the capsule before further reading or acting when a compaction landed in this session, the same file or verification command is about to run a second time, two verification loops failed without new evidence, or every current claim is terminal and reads continue. The checkpoint carries the claim, proven facts, open frontier, last evidence handle, one next owner, and what reopens a source; then continue, change owner, or stop. It is one capsule write, not a plan rewrite, and direct work skips it.
+**Checkpoint when the turn gets long.** Long turns drift: the capsule goes stale, sources get re-read, failed loops repeat. Refresh the capsule before further reading or acting when a compaction landed in this session, the same file or verification command is about to run a second time, two verification loops failed without new evidence, or every current claim is terminal and reads continue. The checkpoint carries the claim, proven facts, open frontier, last evidence handle, one next owner, and what reopens a source; then continue, change owner, or stop. It is one capsule write, not a plan rewrite, and direct work skips it. When the project has no capsule and the work is cross-owner, cross-session, or already compacted, the checkpoint creates one recovery capsule before continuing; a direct or single-owner read-only task keeps repository evidence and builds no state layer.
 
 **Done when:** you can name the files and state that constrain this step.
 
 ## 2. Match one owner
 
 Use `references/route-by-signal.md`. Match by intent, artifact shape, current blockers, and available skill descriptions. Do not route from keywords alone.
+
+Every new user request, phase shift, and specialist return re-enters owner matching: a settled product or design path hands to implementation, green implementation hands to the change check or the next change, and a release boundary hands to release. A body read earlier never stays the owner by itself; match from the current artifact and evidence.
 
 - Unambiguous owner → invoke it by reading its `SKILL.md` and following it.
 - Tie or no owner → stop, state one or two candidates and why, and wait for the user.
@@ -51,6 +53,8 @@ Precedence is limited to blockers and stage continuity:
 `debug/research/product blocker -> design -> code-health/shape when the seam is non-obvious -> preparatory-refactor when structure blocks -> tdd/implementation -> code-health/change-check -> next change or code-health/release-check -> release when publishing -> state/release -> acceptance`
 
 Code-health is not only a release gate. When a non-direct code change has a non-obvious seam, it shapes the change before TDD: `noootwo-code-health` produces a Change Shape, and its result may be direct TDD, a preparatory refactor, or a handoff to product, design, research, or a stopped change. A local change with an obvious seam and no contract, data, or migration impact skips that pass. After every non-direct behavior change, the loop returns to `noootwo-code-health` for a Change Check before the work can be reported done. That check stays on the diff, changed behavior, nearest callers, affected tests, and one to three lenses; it escalates only when blast radius requires it. Before release or a ship-readiness submit gate, code-health runs a Release Check once for the exact commit: full suite or CI evidence, full Structure Sweep, release evidence, and named gaps. Once readiness is established, versioning, tags, artifacts, deployment traces, provenance, rollback, and release health belong to `noootwo-release`.
+
+A pasted, quoted, or externally produced plan is an approved plan, not an owner assignment. Before executing, name the current owner and its verification depth, and name the release boundary when the plan can change a version, tag, artifact, deployment trace, or release fact; that boundary routes through `noootwo-release` after code-health readiness. A plan with no test assertion or verification command is not execution-ready: name the missing decision and have its owner close it before implementation starts instead of inventing the validation.
 
 After a plan is approved, resolve a reversible ambiguity from the spec, plan, and evidence, record the ruling with its basis, error cost, and reopen trigger, then continue. Stop only for a user-owned decision, irreversible migration or data loss, security or privacy impact, external side effects or spend, or evidence that the plan is no longer viable. Ordinary implementation details do not return for routine re-approval.
 
@@ -77,6 +81,7 @@ Answer before calling the work done:
 - Did behavior, state, or release facts change, and did `noootwo-state` place them?
 - During approved execution, are reversible plan conflicts recorded as rulings rather than silently decided or escalated as routine re-approval?
 - For a long turn, did a checkpoint refresh the capsule before further reads, and did the attempt end when the frontier stopped moving?
+- After a compaction or phase shift, did the loop re-match one owner instead of reloading the skill bodies used before it?
 - Did an external skill propose a spec, plan, or other durable artifact? If so, was it stored in the Noootwo-owned layer instead of the external skill's default directory?
 - Is user acceptance still required before commit, push, tag, or publish?
 

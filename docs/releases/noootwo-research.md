@@ -1,5 +1,10 @@
 # noootwo-research Releases
 
+## v0.7.2
+
+- The handoff rule now resumes from the capsule and current artifacts after a handoff or compaction and reloads the research body only when research owns the next decision.
+- No evidence rule, source pool, or gate changed.
+
 ## v0.7.1
 
 - Added the package-wide context lifecycle and compressed the always-loaded description.

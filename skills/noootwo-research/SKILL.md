@@ -88,6 +88,8 @@ Report the finding and its boundary. When the decision is a product decision, in
 
 When the request is not research at all — a local lookup, runtime or deployment state, a bug, or an implementation — say so in one line and re-route instead of running a pass. A disputed live fact goes to `noootwo-debug`; invoke it by reading its `SKILL.md` and following it, and let its Diagnosis Map choose the release evidence owner.
 
+After a handoff or compaction, resume from the capsule and current artifacts; reload this body only when research owns the next decision.
+
 **Done when:** the finding is delivered, its boundary is stated, and the owning skill is invoked or recorded as not applying.
 
 ## Reference
