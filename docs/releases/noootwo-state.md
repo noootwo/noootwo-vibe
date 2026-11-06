@@ -1,5 +1,11 @@
 # noootwo-state Releases
 
+## v0.6.1
+
+- Linked worktrees now read and write project state through the primary checkout root, anchored by `git rev-parse --git-common-dir`; a worktree-local `.noootwo` is not a second project authority, and concurrent snapshot writes use one writer.
+- Added the `canonical-state-root` eval contract. Fresh model sessions remain unrun.
+- No schema change; existing history and state roots remain readable.
+
 ## v0.6.0
 
 - Recovery is capsule-first when state is absent: cross-owner, cross-session, or already-compacted work writes one recovery capsule before further reads, while direct and single-owner read-only work continues from repository evidence with no state layer.

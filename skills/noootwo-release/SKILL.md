@@ -1,6 +1,6 @@
 ---
 name: noootwo-release
-description: "Use for versioning, release, deployment, rollback, or release tracing: ledger, artifact identity, provenance, markers, and health."
+description: "Use for versioning, release, deployment, rollback, or tracing: main-only source, ledger, artifact identity, provenance, and health."
 ---
 
 # Noootwo Release
@@ -44,6 +44,7 @@ Release Plan
 - Compatibility classification:
 - Release ID / tag:
 - Commit SHA:
+- Production source eligibility:
 - Artifact identity / digest:
 - Config version:
 - Changelog / release notes:
@@ -73,6 +74,7 @@ Release Plan
 
 - One version source of truth per project. Record the chosen source as a decision in `noootwo-state`.
 - A tag points to a version; it never creates one. Prefer annotated tags for release identifiers.
+- Read `references/production-source.md` before accepting a commit for build or production. The exact source must be reachable from protected `main`, or identified by an annotated release tag whose peeled commit is reachable from protected `main`. A feature branch, unmerged release branch, mutable branch, or floating tag never produces a production artifact.
 - Build once, promote the same artifact, and keep environment differences in configuration.
 - A release is immutable and append-only. Any change creates a new release ID.
 - A Change Check is not release readiness. Before the Release Plan, require a Release Check for the exact commit: full suite or CI evidence, full Structure Sweep, release evidence, and named gaps. If it is missing, invoke `noootwo-workflow` instead of releasing.
@@ -84,7 +86,7 @@ Release Plan
 
 ## Done when
 
-The Release Plan is complete, the open ledger is reconciled, the Release Check evidence covers the exact commit, the version and artifact identity are consistent, the deployment trace is defined or verified, rollback is explicit, post-release health checks are named, and the completed ledger is sealed into the release record.
+The Release Plan is complete, the production source is eligible and recorded, the open ledger is reconciled, the Release Check evidence covers the exact commit, the version and artifact identity are consistent, the deployment trace is defined or verified, rollback is explicit, post-release health checks are named, and the completed ledger is sealed into the release record.
 
 ## Hand off
 
@@ -97,6 +99,7 @@ The Release Plan is complete, the open ledger is reconciled, the Release Check e
 - `references/versioning.md` — version source, SemVer, changelog, compatibility, and deprecation.
 - `references/release-verification-ledger.md` — verification ledger scope, item contract, dedupe, reconcile, consume, seal, and reset.
 - `references/artifacts.md` — build/release/run, immutable artifact identity, provenance, and signing.
+- `references/production-source.md` — protected-main eligibility, tag peeling, exact-commit checks, and rejected sources.
 - `references/deployment-trace.md` — release markers in logs, metrics, traces, health, and build info.
 - `references/rollback.md` — rollback, forward-fix, flags, migrations, canary, and blue/green.
 - `references/release-health.md` — release adoption, regression, DORA signals, and diagnosis handoff.

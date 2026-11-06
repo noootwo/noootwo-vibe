@@ -1,5 +1,12 @@
 # noootwo-ask Releases
 
+## v0.7.0
+
+- Added `$noootwo-delivery` to the main flow, on-ramp, standalone routes, and choosing table.
+- The router now covers concurrent requirements, branch/worktree isolation, merge conflicts, protected-main integration, hotfixes, and production-source rejection for feature or unmerged release branches.
+- The router now sends a proposed sibling copy or duplicate project context to delivery instead of treating it as safe isolation.
+- The main flow now hands only a `main`-reachable change to `$noootwo-release`.
+
 ## v0.6.1
 
 - Compressed the always-loaded description without removing its routing triggers.

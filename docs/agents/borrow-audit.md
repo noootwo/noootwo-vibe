@@ -22,17 +22,17 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 ### noootwo-ask
 
 - Current role: user-invoked router.
-- Prior art: Codex/Claude skill routers, Product Design index skill, motion-web intent-detection map.
-- Adopt: negative routing per skill, one hop per trigger, router never does the specialist's work, and an explicit confirmation route to `noootwo-debug`.
+- Prior art: Codex/Claude skill routers, Product Design index skill, motion-web intent-detection map, and the branch/worktree/merge-queue routes from Superpowers and open-skills.
+- Adopt: negative routing per skill, one hop per trigger, router never does the specialist's work, an explicit confirmation route to `noootwo-debug`, and a delivery route for concurrent requirements and protected-main integration.
 - Reject: model-invoking the router automatically; duplicating skill bodies inside the router.
 - Next pass: make each `$noootwo-*` entry answer "when not to use it".
 
 ### noootwo-workflow
 
 - Current role: evidence-driven re-entrant orchestration, one-next-step scheduling, scope, stop conditions, and external-skill discovery.
-- Prior art: Superpowers `v7.0.1` orchestration/executing-plans, writing-plans, fresh builder checks, and ruling ledgers; skill-discovery routers.
-- Adopt: read current project state before stage, match one owner by intent/artifact, keep direct cheap, stop on ambiguity, persist `.noootwo/workflow-state.md`, send confirmation requests to `noootwo-debug`'s Diagnosis Map as independent claims, and continue approved work through recorded rulings unless a narrow stop boundary is crossed.
-- Reject: fixed keyword routing tables, full DAG pre-planning, routine re-approval of reversible implementation details, adding external skills to the Noootwo public set.
+- Prior art: Superpowers `v7.0.2` orchestration/executing-plans, writing-plans, worktree and branch closeout, fresh builder checks, and ruling ledgers; fudesign `merge-discipline`/`feature-branch-closeout`; skill-discovery routers.
+- Adopt: read current project state before stage, match one owner by intent/artifact, keep direct cheap, stop on ambiguity, persist `.noootwo/workflow-state.md`, send confirmation requests to `noootwo-debug`'s Diagnosis Map as independent claims, schedule delivery before concurrent writes and before mainline integration, and continue approved work through recorded rulings unless a narrow stop boundary is crossed.
+- Reject: fixed keyword routing tables, full DAG pre-planning, routine re-approval of reversible implementation details, adding external skills to the Noootwo public set, and the five-part merge gate chain or mandatory closeout menu from the prior-art skills.
 - Next pass: measure routing precision, confirmation routing, independent multi-question frontiers, mid-project resumption, approved-execution rulings, and the Change Check / Release Check boundary across eval scenarios.
 
 ### noootwo-product
@@ -85,13 +85,21 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 - Reject: big design up front, speculative abstractions, mandatory builder checks for obvious local changes, mandatory design documents when no tradeoff exists, implementation manuals disguised as design docs, refactoring as a separate backlog of every smell, large-bang cleanup, refactoring without tests, and adding a separate architecture or performance skill.
 - Next pass: measure the disputed-premise handoff, integration-read trigger and skip behavior, Builder Check four-bucket output, plan-completeness failures, Change Shape quality, Change Check versus Release Check scope, workflow selection, structural-debt disposition, two-hats separation, and the review-is-part-of-done gate.
 
+### noootwo-delivery
+
+- Current role: own branch/worktree isolation, concurrent-requirement overlap, protected-main integration, the Delivery Policy, and the eligible production-source handoff.
+- Prior art: Superpowers `v7.0.2` `using-git-worktrees`, `finishing-a-development-branch`, and `dispatching-parallel-agents`; Addy Osmani `git-workflow-and-versioning`; fudesign `delivery-discipline`, `feature-branch-closeout`, `git-worktree-discipline`, `merge-discipline`, and `git-branch-protect`; Trunk Based Development; DORA; Google Engineering Practices small CLs; GitHub protected branches/merge queue/environments; GitLab protected branches/merge trains/protected environments.
+- Adopt: reuse-first worktree detection with a submodule guard, a canonical checkout and state root, linked-worktree-only isolation, sibling-copy rejection and recovery, native tooling before git fallback, ignored project-local worktrees, one writer per checkout, Overlap Check before parallel work, contract-first/feature-flag/expand-contract for shared meaning, current-base checks, merge queue or update-and-recheck, tip/landed-commit verification, a main-only production source, hotfix return to main, and release-owned rollback.
+- Reject: GitFlow as the default, sibling filesystem copies or separate clones as isolation, file locks or permanent file ownership, per-requirement deployment environments, every tiny edit requiring a worktree, long-lived integration branches, mandatory squash, the open-skills A→B→C→R→D gate chain, coverage and OpenSpec hard dependencies, and a universal three-option closeout menu.
+- Next pass: run the eleven `evals/prompts/` contracts in fresh sessions, exercise a real shared-contract pair, a real same-file/independent pair, and an existing sibling-copy recovery, and audit at least one repository's live branch protection, merge queue, and environment rules before claiming enforcement.
+
 ### noootwo-release
 
 - Current role: release engineering ownership — version policy, tags, immutable artifact identity, deployment traces, provenance, rollback, and release health.
-- Prior art: Semantic Versioning 2.0.0; Keep a Changelog 1.1.0; Conventional Commits 1.0.0; The Twelve-Factor App Build/Release/Run; OpenTelemetry resource conventions; SLSA provenance levels; GitHub artifact attestations; Sentry Releases; DORA four keys.
-- Adopt: one version source of truth, SemVer compatibility classification, append-only changelog and release ledger, build-once promotion, immutable artifact identity, deployment markers, explicit provenance gaps, rollback/forward-fix, and version-based release health.
+- Prior art: Semantic Versioning 2.0.0; Keep a Changelog 1.1.0; Conventional Commits 1.0.0; The Twelve-Factor App Build/Release/Run; OpenTelemetry resource conventions; SLSA provenance levels; GitHub artifact attestations and environment protection; GitLab protected environments; Sentry Releases; DORA four keys; fudesign `git-release-finish` and `git-branch-protect`.
+- Adopt: one version source of truth, SemVer compatibility classification, append-only changelog and release ledger, build-once promotion, immutable artifact identity, exact main-reachable or annotated-tag source eligibility, tag peeling, deployment markers, explicit provenance gaps, rollback/forward-fix, and version-based release health.
 - Reject: using a mutable tag as a release identity, rebuilding per environment, claiming provenance without evidence, binding the skill to one CI vendor, and adding separate versioning or deployment skills.
-- Next pass: run the release evals, confirm a green Change Check cannot pass as release readiness, and validate the deployment-trace contract against one real project artifact.
+- Next pass: run the release evals, confirm a green Change Check cannot pass as release readiness, validate the production-source check against a real protected branch and annotated tag, and validate the deployment-trace contract against one real project artifact.
 
 ### noootwo-state
 

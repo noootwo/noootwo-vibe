@@ -34,6 +34,8 @@ Use `references/format-selection.md`. The decision comes only from the request p
 - Do not create a second authority for the same fact; replace or link the stale one.
 - Another skill's default artifact path is not project policy. Put the durable record in the owning Noootwo layer; keep external paths only as read-only legacy.
 - An unchanged structured-state write creates no event.
+- In a linked worktree, resolve the primary checkout from the parent of `git rev-parse --git-common-dir` and pass `--root <primary>` to the state helper. `.noootwo` is project context, not branch scratch; do not initialize a second state root in a copy.
+- When multiple worktrees share the root, one writer owns the current snapshot; other worktrees append events/evidence or hand the update to that writer.
 
 ## 4. Read cheaply
 
@@ -44,6 +46,7 @@ Use `references/format-selection.md`. The decision comes only from the request p
 - A token, compaction, or long-turn question about local Codex history → `python3 scripts/audit_codex_context.py --cwd PATH --since ISO --json --top-turns N`; it reports aggregates and per-turn totals only and never emits message, tool, or argument content.
 - `summary` remains an alias for the same bounded capsule semantics.
 - A read-only decision does not create state. When state is absent, direct and single-owner read-only work continues from repository evidence without building or enumerating a state layer; only the cross-owner, cross-session, or already-compacted case above creates one recovery capsule.
+- From a linked worktree, prefix reads and writes with `--root <primary>`; the canonical root rule applies to both.
 
 ## 5. Verify
 

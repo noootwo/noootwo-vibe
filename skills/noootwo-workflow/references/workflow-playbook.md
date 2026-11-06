@@ -14,6 +14,9 @@ Compact guardrail and handoff packet reference. Routing and scheduling live in `
 - Non-obvious code changes use `noootwo-code-health` for an Integration Read before `noootwo-tdd`; obvious local seams go directly to TDD.
 - Behavior-changing code uses `noootwo-tdd` before review.
 - Non-direct behavior changes return to `noootwo-code-health` for a scoped Change Check after green, before the work is reported done.
+- Concurrent requirements use one branch/worktree each and an Overlap Check; shared contracts, migrations, and generated output are serialized or contract-first.
+- Work runs in the canonical checkout or a linked worktree; a sibling copy/separate clone is not isolation and never owns project state.
+- Integration goes through protected `main` with checks on the current base; without a merge queue, update and recheck the merge candidate.
 - A Release Check runs once before release or a ship-readiness submit gate; it owns the full suite, full Structure Sweep, release evidence, and named gaps.
 - Review/refactor/optimization must re-run the relevant tests, dispose of structural findings, and stop for user acceptance before submit or publish.
 - Release work goes to `noootwo-release` after the Release Check; version, artifact, deployment trace, rollback, and release-health evidence come back through `noootwo-state`.
@@ -45,6 +48,17 @@ Keep packets short. Workflow carries scope and sequencing; the specialist owns m
 - Structural findings and disposition:
 - Refactor/acceptance state:
 - Specific judgment requested:
+
+### To `noootwo-delivery`
+
+- Requirement and other active requirements:
+- Expected files, shared contracts, migrations, and generated output:
+- Canonical checkout and state root:
+- Current worktree, branch, and base:
+- Overlap decision needed: parallel | serialize | contract-first
+- Readiness/review state:
+- Target `main`, merge queue, and production boundary:
+- What workflow still owns:
 
 ### To `noootwo-release`
 

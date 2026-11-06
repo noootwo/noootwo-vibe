@@ -16,6 +16,7 @@ EXPECTED_SKILLS = [
     "noootwo-design",
     "noootwo-tdd",
     "noootwo-code-health",
+    "noootwo-delivery",
     "noootwo-release",
     "noootwo-state",
     "noootwo-debug",
