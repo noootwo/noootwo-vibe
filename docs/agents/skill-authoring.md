@@ -87,6 +87,8 @@ A coined word recruits no priors: you pay in definition tokens what a pretrained
 | **rework** | work redone because an earlier layer failed; the failure this suite exists to prevent |
 | **slop** | output that is generic, decorative, or assembled rather than designed |
 | **Change Check** | the diff-scoped verification after one requirement; no full-suite or whole-repo audit by default |
+| **Delivery Policy** | one recorded set of branch, integration, production-source, hotfix, and rollback rules; the live platform rule wins |
+| **Overlap Check** | the pre-parallel comparison of files, shared contracts, migrations, and generated output |
 | **Release Check** | the full verification once before release or a ship-readiness submit gate |
 | **Release Verification Ledger** | the open queue of release-bound checks, sealed into the release record and reset after release |
 

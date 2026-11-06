@@ -1,5 +1,12 @@
 # noootwo-release Releases
 
+## v0.4.0
+
+- Production now has one source rule: an exact commit reachable from protected `main`, or an annotated release tag whose peeled commit is reachable from protected `main`.
+- Feature branches, unmerged release branches, mutable branches, floating tags, and unrecorded working trees are rejected as production sources.
+- Added `references/production-source.md` for tag peeling, ancestry checks, exact-SHA checkout, build-source proof, artifact promotion, release-record fields, and rollback.
+- Added the production-source eligibility field to the Release Plan and the `production-source-main-only` eval.
+
 ## v0.3.1
 
 - Added the package-wide context lifecycle and compressed the always-loaded description.

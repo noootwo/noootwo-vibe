@@ -30,12 +30,16 @@ Examples of artifact-shaped matching:
 - a document, report, README, or long-form written artifact → document/writing owner
 - a visual UI or frontend change → design owner when direction is unsettled; `noootwo-code-health` Integration Read when direction is settled but the seam is not; `noootwo-tdd` when both are settled
 - behavior-changing code with an obvious local seam and no contract, data, or migration impact → `noootwo-tdd`, then `noootwo-code-health` after green
+- two active requirements, branch/worktree isolation, a concurrent edit to the same shared contract, a merge conflict, or a PR into protected `main` → `noootwo-delivery`
+- a sibling directory copy, separate clone, or two `.noootwo`/docs contexts → `noootwo-delivery`; use a linked worktree from the canonical checkout
+- production would build or deploy a feature branch, unmerged release branch, or mutable branch → `noootwo-delivery` to reach `main`, then `noootwo-release` to enforce the exact source
 - one completed requirement → `noootwo-code-health` Change Check, not a full-project audit
 - a release or ship-readiness submit gate → `noootwo-code-health` Release Check, then `noootwo-release`
 - a new requirement needs an implementation shape, backend design, frontend integration, a new API/data/event contract, a migration, or a cross-module seam → `noootwo-code-health` Integration Read before `noootwo-tdd`
 - existing structure makes the requested change hard → `noootwo-code-health` Change Shape; preparatory refactoring is one disposition
 - repeated edits in one area, context cost growing, a giant file or directory, or a release trigger → `noootwo-code-health` Structure Sweep
 - version, tag, changelog, artifact, deployment trace, rollback, provenance, or release health → `noootwo-release` after code-health readiness
+- branch merging and production-source eligibility are separate decisions: delivery owns the path to `main`; release owns which exact `main` commit/tag may ship
 - a broken behavior or regression → `noootwo-debug` before implementation
 - one or more suspected problems need confirmation, evidence, or a recommendation before a fix → `noootwo-debug` Diagnosis Map; keep the claims independent and the pass read-only until every claim has a verdict
 - an unsettled product decision → `noootwo-product` before design or build

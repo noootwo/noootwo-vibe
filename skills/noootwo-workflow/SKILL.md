@@ -1,6 +1,6 @@
 ---
 name: noootwo-workflow
-description: "Use for multi-step tasks, evidence confirmation, refactors, releases, handoffs, re-entry after compaction or a phase change, or unclear routing; one owner at a time, read state only when needed."
+description: "Use for multi-step tasks, releases, branch/worktree isolation, handoffs, re-entry after compaction or a phase change, or unclear routing; one owner at a time, read state only when needed."
 ---
 
 # Noootwo Workflow
@@ -15,7 +15,7 @@ Workflow schedules. It owns order, verification depth, scope, stop conditions, a
 
 ## 1. Read current state
 
-Choose one depth before reading project files; escalate only when a fact is missing. An explicit issue ID, symbol, path, or error routes to its owner from the skill descriptions, and that owner reads the evidence; project orientation is not an ownership check. A current spec, ADR, issue, or evidence record named by the request is an authority, not a cue to load the skill that authored it; select the owner of the requested outcome. Structured project state exists at `.noootwo/state/current.json`; resume reads it through the `noootwo-state` skill: read its `SKILL.md` and follow it, and use its query helper instead of loading a full state file.
+Choose one depth before reading project files; escalate only when a fact is missing. An explicit issue ID, symbol, path, or error routes to its owner from the skill descriptions, and that owner reads the evidence; project orientation is not an ownership check. A current spec, ADR, issue, or evidence record named by the request is an authority, not a cue to load the skill that authored it; select the owner of the requested outcome. Structured project state exists at `.noootwo/state/current.json` in the canonical checkout; resume reads it through the `noootwo-state` skill: read its `SKILL.md` and follow it, and use its query helper instead of loading a full state file. Before a non-direct state read or write, confirm the checkout is the canonical checkout or a linked worktree; a sibling copy stops and routes to `noootwo-delivery`, and a linked worktree uses the primary checkout root for `.noootwo`.
 
 - `direct` — current file, changed-file context, nearest instructions; do not read project state.
 - `resume` — state capsule, current commit and worktree status, plus at most three entry points named by the frontier.
@@ -50,9 +50,11 @@ When the request is to confirm one or more suspected problems, gather evidence, 
 
 Precedence is limited to blockers and stage continuity:
 
-`debug/research/product blocker -> design -> code-health/shape when the seam is non-obvious -> preparatory-refactor when structure blocks -> tdd/implementation -> code-health/change-check -> next change or code-health/release-check -> release when publishing -> state/release -> acceptance`
+`debug/research/product blocker -> design -> delivery isolation before the first concurrent write -> code-health/shape when the seam is non-obvious -> preparatory-refactor when structure blocks -> tdd/implementation -> code-health/change-check -> delivery mainline integration -> code-health/release-check -> release when publishing -> state/release -> acceptance`
 
 Code-health is not only a release gate. When a non-direct code change has a non-obvious seam, it shapes the change before TDD: `noootwo-code-health` produces a Change Shape, and its result may be direct TDD, a preparatory refactor, or a handoff to product, design, research, or a stopped change. A local change with an obvious seam and no contract, data, or migration impact skips that pass. After every non-direct behavior change, the loop returns to `noootwo-code-health` for a Change Check before the work can be reported done. That check stays on the diff, changed behavior, nearest callers, affected tests, and one to three lenses; it escalates only when blast radius requires it. Before release or a ship-readiness submit gate, code-health runs a Release Check once for the exact commit: full suite or CI evidence, full Structure Sweep, release evidence, and named gaps. Once readiness is established, versioning, tags, artifacts, deployment traces, provenance, rollback, and release health belong to `noootwo-release`.
+
+Delivery enters twice. Before the first write, it isolates one requirement when another requirement or agent may share the repository; it records an Overlap Check before parallel work and chooses parallel, serialize, or contract-first. After green and review, it integrates through protected `main` with current-base checks and a merge queue where available. A direct local edit with no concurrent writer stays direct. Delivery never substitutes for the Change Check or the Release Check.
 
 A pasted, quoted, or externally produced plan is an approved plan, not an owner assignment. Before executing, name the current owner and its verification depth, and name the release boundary when the plan can change a version, tag, artifact, deployment trace, or release fact; that boundary routes through `noootwo-release` after code-health readiness. A plan with no test assertion or verification command is not execution-ready: name the missing decision and have its owner close it before implementation starts instead of inventing the validation.
 
@@ -76,6 +78,9 @@ Answer before calling the work done:
 - For a confirmation request, did every claim end as confirmed, refuted, insufficient, or decision-needed before any fix or expansion?
 - Did a specialist or matching installed skill need to run, and was it invoked?
 - For a non-direct code change, did `noootwo-code-health` shape the implementation when the seam was non-obvious, run a scoped Change Check after green, and run a Release Check only when the task reached release?
+- For concurrent work, did `noootwo-delivery` record an Overlap Check, serialize or contract-first shared contracts, and integrate each requirement through protected `main`?
+- Did the work stay in one canonical repository/state root, with no sibling copy or second `.noootwo` context?
+- For a release path, did the production source resolve to an exact `main`-reachable commit or an annotated tag on one, rather than a feature or unmerged release branch?
 - If a completed change created a release-bound check or known gap, did `noootwo-release` add it to the open Release Verification Ledger?
 - For release work, did `noootwo-release` produce the Release Plan and did `noootwo-state` receive the release record and deployment evidence?
 - Did behavior, state, or release facts change, and did `noootwo-state` place them?
@@ -96,6 +101,8 @@ When the user rejects a previous attempt, diagnose the failed layer before chang
 | They wanted something different, or scope is wrong | product | `noootwo-product` |
 | Direction or visual language is wrong | design | `noootwo-design` |
 | Intent was right and execution is not | implementation | `noootwo-tdd` detail pass, or `noootwo-code-health` |
+| Branch/worktree collision, concurrent-requirement conflict, or mainline integration failed | delivery | `noootwo-delivery` |
+| A sibling copy, separate clone, or duplicate docs/context is in use | delivery | `noootwo-delivery` |
 | Version, tag, artifact, deployment trace, rollback, or release health is wrong | release | `noootwo-release` |
 | Documents or project state no longer match reality | state | `noootwo-state` |
 | A regression or failure has no proven cause | evidence | `noootwo-debug` |

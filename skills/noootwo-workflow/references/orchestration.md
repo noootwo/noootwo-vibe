@@ -20,11 +20,13 @@ Use this only to break a stage tie:
 2. `noootwo-research` for a decision that only outside evidence can settle.
 3. `noootwo-product` for an unsettled real user, scope, main path, state, or acceptance.
 4. `noootwo-design` for UI/visual/artifact work when the product path is settled but direction is not.
-5. `noootwo-code-health` Integration Read before implementation when the seam is non-obvious; its Change Shape may call for preparatory refactoring, direct TDD, or another owner.
-6. `noootwo-tdd` for behavior-changing code, then `noootwo-code-health` for a Change Check after green before the work is reported done.
-7. `noootwo-code-health` Release Check once before release or a ship-readiness submit gate: full suite or CI for the exact commit, full Structure Sweep, release evidence, and named gaps.
-8. `noootwo-release` after code-health readiness when versioning, tagging, artifact identity, deployment trace, rollback, or release health is in scope.
-9. `noootwo-state` after behavior, state, release facts, or instructions change, including unresolved structural findings and the Release Plan.
+5. `noootwo-delivery` before the first write when another requirement is active or the work needs branch/worktree isolation; it records the Overlap Check before parallel work.
+6. `noootwo-code-health` Integration Read before implementation when the seam is non-obvious; its Change Shape may call for preparatory refactoring, direct TDD, or another owner.
+7. `noootwo-tdd` for behavior-changing code, then `noootwo-code-health` for a Change Check after green before the work is reported done.
+8. `noootwo-delivery` after green and review for protected-main integration; shared contracts must already be serialized or contract-first.
+9. `noootwo-code-health` Release Check once before release or a ship-readiness submit gate: full suite or CI for the exact commit, full Structure Sweep, release evidence, and named gaps.
+10. `noootwo-release` after code-health readiness when versioning, tagging, artifact identity, deployment trace, rollback, or release health is in scope.
+11. `noootwo-state` after behavior, state, release facts, or instructions change, including unresolved structural findings and the Release Plan.
 
 Do not turn this into a large condition table. If the current evidence points to a different owner, the evidence wins.
 
@@ -35,6 +37,9 @@ Do not turn this into a large condition table. If the current evidence points to
 - Change Check stays on the touched path; a full-project Structure Sweep runs in the Release Check, on a documented trigger, or on an explicit user request.
 - Do not run a Release Check after every requirement. A long task or a large diff does not by itself trigger one; blast radius does. Existing CI for the exact commit can satisfy the full-suite part.
 - A specialist may hand back a sequencing decision to workflow; record it in state rather than reimplementing the specialist.
+- One requirement uses one branch/worktree. Parallel work requires an Overlap Check; shared API, schema, event, component, config, or migration meaning is serialized or contract-first. File-name overlap alone is not a permanent lock.
+- Isolation is a linked worktree in the canonical repository, not a sibling copy or separate clone. Project state and durable docs keep one canonical root.
+- Delivery supplies an eligible `main` commit to release. It does not choose a version, build artifact, deployment method, or rollback; those stay with `noootwo-release`.
 - An installed external skill owns its method, not the project's documentation layout. Persist durable artifacts through `noootwo-state`; never create a new project convention under an external skill's directory.
 
 ## Approved execution
@@ -68,6 +73,8 @@ Stop and ask or reroute when:
 - a material product, architecture, or release choice is unresolved
 - verification is missing and cannot be inferred
 - the change would expand public behavior beyond the user's request
+- two concurrent requirements share a contract or migration order and have no serialize/contract-first decision
+- the target `main` moved after the checks and the merge candidate has not been rechecked
 - a confirmation or diagnosis would need a source edit, rebuild, deployment, persistent data change, or a new system before its claims have verdicts
 - several claims are being merged into one audit without evidence that they share a cause
 - a second verification loop failed without new evidence; report the boundary instead of starting a third

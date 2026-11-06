@@ -6,6 +6,8 @@ For non-direct, cross-skill, or external-skill work, do not write state here. In
 
 Direct work does not read project state. For resume, read the bounded capsule plus at most three entry points named by the frontier; go deeper only when the capsule conflicts with current evidence.
 
+In a linked worktree, use the primary checkout root (`--root <primary>`) so `.noootwo` stays one project context; do not create a worktree-local state root.
+
 - `scripts/noootwo-state.sh capsule`
 - `scripts/noootwo-state.sh state --field stage`
 - `scripts/noootwo-state.sh events --last 5`

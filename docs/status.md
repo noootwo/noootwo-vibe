@@ -2,14 +2,16 @@
 
 - Repository: `noootwo/noootwo-vibe`
 - Branch model: feature work on `codex/*`, default branch `main`
-- Public skill set: `noootwo-ask`, `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-tdd`, `noootwo-code-health`, `noootwo-release`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard`
+- Public skill set: `noootwo-ask`, `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-tdd`, `noootwo-code-health`, `noootwo-delivery`, `noootwo-release`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard`
 - Release model: independently versioned child skills listed in `skills.json`
 - Root `SKILL.md`: intentionally absent so default skill discovery lists all child skills
-- Invocation model: `noootwo-ask` is user-invoked; the other ten are model-invoked
+- Invocation model: `noootwo-ask` is user-invoked; the other eleven are model-invoked
 
 ## Current Validation Surface
 
-Last verified: 2026-11-03 on published `0.26.0`: workspace and skill budgets, all eleven skill validators, state/audit self-tests, the refreshed modocc route audit, four new eval contracts, script syntax, discovery, public CI, a published-clone clean install, and both local install roots. Publication is complete.
+Release candidate verified: 2026-11-06 on local `0.27.0` (not yet published): workspace validation, all twelve skill validators, twelve-skill discovery at normal and full depth, a temporary-home install with version readback, a linked-worktree identity and primary-state-root probe, JSON parsing, Python compilation, shell syntax, state/audit self-tests, and `git diff --check`. GitHub now requires a PR and a current-base `validate` check for `main`, enforces the rule for administrators, and blocks force-push and deletion; rulesets, environments, and a merge queue remain absent. The sealed record is `docs/releases/0.27.0.md`. No release commit, child tag, public CI run, or clean install from published `main` exists yet.
+
+Previously verified: 2026-11-03 on published `0.26.0`: workspace and skill budgets, all eleven skill validators, state/audit self-tests, the refreshed modocc route audit, four new eval contracts, script syntax, discovery, public CI, a published-clone clean install, and both local install roots. Publication is complete.
 
 Previously verified: 2026-11-02 on published `0.25.0`: workspace and skill budgets, all eleven skill validators, state/audit self-tests, per-turn audit reproduction for the three measured projects, three new eval contracts, script syntax, discovery, public CI, a published-clone clean install, and both local install roots. Publication is complete.
 
@@ -17,8 +19,8 @@ Previously verified: 2026-10-27 on published `0.24.0`: workspace and skill budge
 
 - `python scripts/validate_skill_workspace.py .` — includes the authoring budgets: `description` ≤ 200 characters, `SKILL.md` ≤ 120 lines, ≤ 12 reference files each named by a pointer, `short_description` 25–64 characters, no `default_prompt`, and no bare `$noootwo-` reference inside a skill body
 - `python scripts/validate_skill_workspace.py .` — also enforces the capability bridge: every skill named in a `SKILL.md` must exist, every public skill must appear in the `docs/agents/invocation.md` capability map, and every skill named there must exist
-- `python <skill-creator>/scripts/quick_validate.py skills/noootwo-*` for all eleven skills
-- `npx -y skills add . --list` and `--full-depth` — must list eleven skills
+- `python <skill-creator>/scripts/quick_validate.py skills/noootwo-*` for all twelve skills
+- `npx -y skills add . --list` and `--full-depth` — must list twelve skills
 - `python -m py_compile` on the design and state scripts
 - `sh -n skills/noootwo-state/scripts/noootwo-state.sh`
 - `python skills/noootwo-state/scripts/noootwo_state.py --self-test`
@@ -48,9 +50,11 @@ Previously verified: 2026-10-27 on published `0.24.0`: workspace and skill budge
 - `docs/adr/0025-evidence-backed-design-and-decision-complete-execution.md` records grounded Product intent, user-owned how decisions, real Design direction samples, same-medium inspected references, evidence-dependent aesthetic flags, conditional Builder Check, decision-complete plans, and rulings during approved execution.
 - `docs/adr/0026-long-turn-context-checkpoints.md` records the behaviour-triggered long-turn checkpoint, capsule-first recovery, the second-failed-loop stop condition, the per-turn audit reporting, and the rejected fixed-budget and hard-truncation alternatives.
 - `docs/adr/0027-owner-reentry-and-capsule-first-recovery.md` records owner re-entry after compaction or a phase change, owner assignment for pasted approved plans, capsule-first recovery with the absent-capsule branch, and the rejected always-resident and auto-capsule alternatives.
+- `docs/adr/0028-delivery-and-mainline-production.md` records the delivery/mainline boundary, the Overlap Check, and the main-only production source.
 - `noootwo-code-health` now follows the Fowler refactoring health loop, the bounded Integration Read, and the Change Check / Release Check split; the deciding sources, boundaries, and stop rules are recorded in `docs/reference/borrowed-skills.md`, ADR 0015, ADR 0019, and ADR 0020.
 - `noootwo-code-health` is the renamed `noootwo-review` skill (`v0.14.0` rename, currently `v0.18.0`). The old `noootwo-review@v0.13.0` tag remains as history; current docs and routing use the new name.
 - `noootwo-release` owns versioning, tags, immutable artifacts, deployment traces, provenance, rollback, and release health; code-health keeps the ship-readiness gate. Release now requires a Release Check for the exact commit.
+- `noootwo-delivery` owns branch/worktree isolation, sibling-copy rejection and recovery, concurrent-requirement overlap, protected-main integration, and the Delivery Policy; `noootwo-state` owns the canonical root for project state from linked worktrees; `noootwo-release` owns source eligibility after the commit reaches `main`.
 - The 2026-10-27 Design fixture at `docs/experiments/fixtures/upstream-adoption-2026-10-27/` passes deep/strict/style readiness, positive artifact evals, and three desktop visual gates. Temporary negative probes reject prose-only directions, black captures, truncated captures, unopened sources, and demonstrated aesthetic harm; the weak-runtime fallback passes.
 - The 16 new Product, Design, Code Health, and Workflow eval files pass their scenario-contract structure. They are prompts for a later fresh-session behavior measurement, not evidence of a measured behavior, speed, token, or rework change.
 - Release batch `0.18.0` was published on 2026-10-09 from commit `7469470cf368aff43be44af096ed7d5f352d4270`. Child tags: `noootwo-ask@v0.5.0`, `noootwo-workflow@v0.17.0`, `noootwo-product@v0.10.1`, `noootwo-design@v0.19.0`, `noootwo-tdd@v0.5.0`, `noootwo-code-health@v0.16.0`, `noootwo-research@v0.6.1`, `noootwo-onboard@v0.4.1`. A clean install found eleven skills, and both local install roots match the released child versions.
@@ -111,6 +115,8 @@ Previously verified: 2026-10-27 on published `0.24.0`: workspace and skill budge
 - The capsule defaults are live-view budgets, not evidence limits. The main residual risk is under-selection: one bounded search plus three slices can miss decisive context. The correct response is to name the missing authority or reopen a source with provenance, not weaken cold storage or verification.
 - The `0.25.0` long-turn checkpoint has deterministic contracts and a measured problem record, but no fresh-session behavior run, so no token, time, or rework saving is claimed. The audit covers three related projects on one machine, model, and configuration, and the `kungfu-community` history was still appending while it ran, so a rerun differs slightly.
 - The `0.26.0` re-entry and capsule-first rules have deterministic contracts and a measured problem record, but no fresh-session behavior run, so no token, time, or rework saving is claimed. The modocc audit covers one project, two threads, one machine, and one configuration, and its second thread was still appending while the audit ran.
+- The `0.27.0` candidate adds `noootwo-delivery`, the canonical repository/state rule, and the main-only production-source rule. Its local validators pass, but the thirteen new prompt contracts have not run in fresh sessions, so no behaviour or cost improvement is claimed.
+- The suite now requires protected `main` and a main-only production source. GitHub branch protection is live for `main` with a required PR, strict `validate`, administrator enforcement, and force-push/deletion blocks. Rulesets, environments, and a merge queue are still absent, and there is no deployed production service to exercise an environment rule.
 
 ## Next Actions
 
@@ -131,6 +137,8 @@ Previously verified: 2026-10-27 on published `0.24.0`: workspace and skill budge
 - Run the 16 new `0.24.0` Product, Design, Code Health, and Workflow prompt contracts in fresh model sessions against a no-skill baseline; record behavior, stop accuracy, time, token, and tool-call cost before making any improvement claim.
 - Run the three new `0.25.0` checkpoint contracts (`compaction-checkpoint`, `repeat-read-checkpoint`, `failed-loops-stop`) in fresh sessions against a no-skill baseline, and re-run `audit_codex_context.py --top-turns 5` on the same three projects after the rules have been in use; compare per-turn totals, repeated commands, and over-16-KiB outputs before claiming any saving.
 - Run the four new `0.26.0` contracts (`phase-shift-reroute`, `approved-plan-names-owners`, `compaction-no-capsule`, `capsule-first-recovery`) in fresh sessions against a no-skill baseline, then re-run `audit_codex_context.py --cwd <project> --top-turns 5` after the rules are in use; compare per-compaction skill-body reads and per-turn totals before claiming any saving.
+- Run the eleven `0.27.0` delivery contracts, the `canonical-state-root` state contract, and the `production-source-main-only` release contract in fresh sessions against a no-skill baseline; record branch/worktree and sibling-copy decisions, Overlap Check quality, source rejection, time, token, and tool-call cost before claiming any improvement.
+- Re-read the live repository protection after any remote change: protected `main`, required checks on the current base, merge queue or update-and-recheck fallback, and a production environment restricted to the allowed branch/tag pattern. Record any unreadable or unenforced layer as a gap.
 - Extend the Design fixture to mobile, interaction, focus, error and recovery states, and the target runtime, then repeat screenshot review before widening the `0.24.0` quality claim.
 - Run the explicit-motion-request and installed-motion-runtime scenarios against a real project with `motion` already installed; the expected result is an artifact-visible authored move using the right tool, or a recorded equivalent/rejection.
 - Exercise `extract_design_tokens.mjs` and the advisory motion rules on a real project artifact, and record the false-positive rate for the deliberately-deviating brand-curve case.

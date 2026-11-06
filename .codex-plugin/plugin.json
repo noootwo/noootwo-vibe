@@ -1,7 +1,7 @@
 {
   "name": "noootwo-vibe",
-  "version": "0.26.0",
-  "description": "A Noootwo multi-skill workspace for controlled AI software development, user-centered product decisions, design, code health, and project state persistence.",
+  "version": "0.27.0",
+  "description": "A Noootwo multi-skill workspace for controlled AI software development, delivery, release engineering, product decisions, design, code health, and project state persistence.",
   "author": {
     "name": "Noootwo",
     "url": "https://github.com/noootwo/noootwo-vibe"
@@ -25,7 +25,7 @@
   "interface": {
     "displayName": "Noootwo Vibe",
     "shortDescription": "AI development workflow skill suite",
-    "longDescription": "Noootwo Vibe bundles eleven focused skills with one bounded context lifecycle: write, select, compress, isolate, and verify. It covers a router, lifecycle scheduling, test-first red-green-refactor, Diagnosis Maps and evidence-chain debugging, research, onboarding and context-health audits, product decisions, design, code health, release engineering, and project state with context capsules, bounded file inspection, cold evidence capture, and privacy-safe Codex cost audits.",
+    "longDescription": "Noootwo Vibe bundles twelve focused skills with one bounded context lifecycle: write, select, compress, isolate, and verify. It covers a router, lifecycle scheduling, test-first red-green-refactor, Diagnosis Maps and evidence-chain debugging, research, onboarding and context-health audits, product decisions, design, code health, branch and concurrent-work delivery, release engineering, and project state with context capsules, bounded file inspection, cold evidence capture, and privacy-safe Codex cost audits.",
     "developerName": "Noootwo",
     "category": "Development",
     "capabilities": [
@@ -39,6 +39,7 @@
       "Use $noootwo-design for UI, visual, artifact, and frontend work once the product path is settled.",
       "Use $noootwo-tdd for behavior-changing code: failing test first, minimal implementation, relevant tests, then refactor; the full suite belongs to the Release Check.",
       "Use $noootwo-code-health to shape a non-obvious change before implementation, run a scoped Change Check after each requirement, and run the full Release Check before release.",
+      "Use $noootwo-delivery to isolate concurrent requirements in branches or worktrees, decide shared-contract overlap, and integrate through protected main.",
       "Use $noootwo-release when versioning, tagging, releasing, deploying, rolling back, or tracing a release, including the Release Verification Ledger and Release Check consumption.",
       "Use $noootwo-state to read, record, or update project state and context, including specs and plans, and to choose the storage form and owning layer for each fact.",
       "Use $noootwo-debug when a claim needs proof: it maps each suspicion to layer-appropriate evidence, stays read-only while confirming, and proves the cause before any fix.",

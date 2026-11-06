@@ -2,18 +2,19 @@
 
 Noootwo Vibe is a multi-skill workspace for controlled AI-assisted software development.
 
-It publishes eleven focused skills — a router plus ten specialists:
+It publishes twelve focused skills — a router plus eleven specialists:
 
 | Skill | Invocation | Purpose | Version |
 | --- | --- | --- | --- |
-| `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in | `0.6.1` |
-| `noootwo-workflow` | model-invoked | Chooses read depth, re-matches one owner after compaction or a phase change, and schedules shape-before-implementation, scoped Change Checks, Release Verification Ledger handoffs, and the full Release Check | `0.23.0` |
+| `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in | `0.7.0` |
+| `noootwo-workflow` | model-invoked | Chooses read depth, re-matches one owner after compaction or a phase change, and schedules shape-before-implementation, scoped Change Checks, delivery integration, Release Verification Ledger handoffs, and the full Release Check | `0.24.0` |
 | `noootwo-product` | model-invoked | Settles real user, first loop, scope, main path, states, and acceptance before design or build | `0.12.1` |
 | `noootwo-design` | model-invoked | Turns a settled product path into a contextual visual intervention, tokens, a Design Contract, and a reviewed artifact | `0.20.1` |
 | `noootwo-tdd` | model-invoked | Owns red-green-refactor and relevant-test evidence for behavior-changing code | `0.6.1` |
 | `noootwo-code-health` | model-invoked | Shapes a non-obvious change, runs a scoped Change Check after each requirement, and a full Release Check before release | `0.18.0` |
-| `noootwo-release` | model-invoked | Owns the Release Verification Ledger, Release Check consumption, versioning, tags, immutable artifacts, deployment traces, provenance, rollback, and release health | `0.3.1` |
-| `noootwo-state` | model-invoked | Reads and records project state and context, produces bounded capsules, inspects files, captures cold evidence, and chooses the storage form and owning layer | `0.6.0` |
+| `noootwo-delivery` | model-invoked | Gives each requirement an isolated branch/worktree, resolves concurrent overlap, and integrates through protected `main` | `0.1.0` |
+| `noootwo-release` | model-invoked | Owns main-only production sources, the Release Verification Ledger, versioning, tags, immutable artifacts, deployment traces, provenance, rollback, and release health | `0.4.0` |
+| `noootwo-state` | model-invoked | Reads and records project state and context, produces bounded capsules, inspects files, captures cold evidence, and chooses the storage form and owning layer | `0.6.1` |
 | `noootwo-debug` | model-invoked | Confirms claims with layer-appropriate evidence, proves a failure's cause, bounds the fix, and closes systemically | `0.6.1` |
 | `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, and borrows mechanisms instead of surfaces | `0.7.2` |
 | `noootwo-onboard` | model-invoked | Enters an unfamiliar project, audits context health and the skills it needs | `0.5.0` |
@@ -22,7 +23,7 @@ The repository root is not a published skill. It is the shared workspace for man
 
 ## Context Budget
 
-The eleven skills share one lifecycle: `write -> select -> compress -> isolate -> verify`. It does not add a twelfth skill; `noootwo-workflow` chooses reading depth and `noootwo-state` owns the bounded read view and evidence handles.
+The twelve skills share one lifecycle: `write -> select -> compress -> isolate -> verify`. It is a cross-cutting rule, not a separate context skill; `noootwo-workflow` chooses reading depth and `noootwo-state` owns the bounded read view and evidence handles.
 
 - `direct` work reads the current file context, not project state.
 - `resume` reads a context capsule, current commit/worktree, and at most three frontier entry points.
@@ -52,14 +53,14 @@ List all skills from the published repository:
 npx -y skills add noootwo/noootwo-vibe --list --full-depth
 ```
 
-Install all eleven skills globally for Codex:
+Install all twelve skills globally for Codex:
 
 ```bash
 npx -y skills add noootwo/noootwo-vibe --skill '*' --global --agent codex --yes
 ```
 
 The command uses the `skills` CLI's standard Agent Skills layout and installs the
-eleven child skills under `~/.agents/skills/`. Start a new task after installation
+twelve child skills under `~/.agents/skills/`. Start a new task after installation
 so the agent can discover them.
 
 Install one skill:
@@ -78,7 +79,7 @@ npx -y skills add /path/to/noootwo-vibe --skill '*' --global --agent codex --yes
 Update the globally installed Noootwo skills later with:
 
 ```bash
-npx -y skills update noootwo-ask noootwo-workflow noootwo-product noootwo-design noootwo-tdd noootwo-code-health noootwo-release noootwo-state noootwo-debug noootwo-research noootwo-onboard --global --yes
+npx -y skills update noootwo-ask noootwo-workflow noootwo-product noootwo-design noootwo-tdd noootwo-code-health noootwo-delivery noootwo-release noootwo-state noootwo-debug noootwo-research noootwo-onboard --global --yes
 ```
 
 Single-skill local checks are also supported:
@@ -114,6 +115,7 @@ npx skills add ./skills/noootwo-design --list
     ├── noootwo-design/
     ├── noootwo-tdd/
     ├── noootwo-code-health/
+    ├── noootwo-delivery/
     ├── noootwo-release/
     ├── noootwo-state/
     ├── noootwo-debug/
@@ -127,7 +129,7 @@ npx skills add ./skills/noootwo-design --list
 
 `noootwo-ask` is the only user-invoked skill. Type it when you are unsure which skill fits; it names the right one and the order to run them in, at no context cost to the agent.
 
-`noootwo-workflow` is the evidence-driven orchestrator. It chooses `direct`, `resume`, or `decision/evidence` reading depth, verifies a restored capsule against the current commit and worktree, matches the right owner from available skill descriptions and artifact shape, and schedules one next step at a time. It treats a named current spec, ADR, issue, or evidence record as an authority rather than a reason to re-run its authoring skill, and loads at most one specialist body before evidence. Plan-only work receives one bounded identifier search and no preloaded downstream owners. It owns order, verification depth, scope, stop conditions, and handoffs; the specialists and matching installed skills own the work. It records state only when the goal, decision, blocker, evidence, or next trigger changes, and recommends a new session for an unrelated goal after completion. A request to confirm several suspected problems goes to `noootwo-debug`'s Diagnosis Map, with independent claims and a read-only verdict before any fix. For a non-obvious code change, it schedules `noootwo-code-health` to shape the seam before `noootwo-tdd`; an obvious local edit skips that pass. After one requirement, code-health runs a Change Check scoped to the diff and blast radius; before release, it runs one Release Check with the full suite or CI evidence, a full Structure Sweep, and release evidence. Once a plan is approved, reversible ambiguities are decided from the spec, plan, and evidence, recorded as rulings with their error cost and reopen trigger, and continued. User-owned decisions, irreversible changes, security or privacy impact, external side effects or spend, and plan invalidation still stop. A newly discovered release-bound check or gap is routed to `noootwo-release` for the Release Verification Ledger instead of being carried as every requirement's full audit. It can invoke other installed skills for slides, documents, or media work without adding them to the Noootwo public set. When the owner is ambiguous or absent, it stops with one or two candidates instead of guessing.
+`noootwo-workflow` is the evidence-driven orchestrator. It chooses `direct`, `resume`, or `decision/evidence` reading depth, verifies a restored capsule against the current commit and worktree, matches the right owner from available skill descriptions and artifact shape, and schedules one next step at a time. It treats a named current spec, ADR, issue, or evidence record as an authority rather than a reason to re-run its authoring skill, and loads at most one specialist body before evidence. Plan-only work receives one bounded identifier search and no preloaded downstream owners. It owns order, verification depth, scope, stop conditions, and handoffs; the specialists and matching installed skills own the work. It records state only when the goal, decision, blocker, evidence, or next trigger changes, and recommends a new session for an unrelated goal after completion. A request to confirm several suspected problems goes to `noootwo-debug`'s Diagnosis Map, with independent claims and a read-only verdict before any fix. For a non-obvious code change, it schedules `noootwo-code-health` to shape the seam before `noootwo-tdd`; an obvious local edit skips that pass. When another requirement is active, it schedules `noootwo-delivery` before the first write for branch/worktree isolation and an Overlap Check, then again after green and review for protected-main integration. After one requirement, code-health runs a Change Check scoped to the diff and blast radius; before release, it runs one Release Check with the full suite or CI evidence, a full Structure Sweep, and release evidence. Once a plan is approved, reversible ambiguities are decided from the spec, plan, and evidence, recorded as rulings with their error cost and reopen trigger, and continued. User-owned decisions, irreversible changes, security or privacy impact, external side effects or spend, and plan invalidation still stop. A newly discovered release-bound check or gap is routed to `noootwo-release` for the Release Verification Ledger instead of being carried as every requirement's full audit. It can invoke other installed skills for slides, documents, or media work without adding them to the Noootwo public set. When the owner is ambiguous or absent, it stops with one or two candidates instead of guessing.
 
 `noootwo-product` settles what should exist before anything is designed or built. It reads discoverable facts itself, names what is unsettled, and then grills the frontier — the questions answerable now — one round at a time, each question carrying options and a recommendation. An unresolved first round starts from observed facts and proposals stated separately, then asks one controlling question or all independent root questions together. It records user-owned how decisions separately from agent defaults, including each default's reason and reopen condition. It ends when the frontier is empty and the user confirms a shared understanding, then produces the Product-to-Design Handoff.
 
@@ -137,9 +139,11 @@ npx skills add ./skills/noootwo-design --list
 
 `noootwo-code-health` keeps code elegant and healthy in two passes. Before implementation, when a change's seam or integration is non-obvious, it runs an Integration Read and produces a compact Change Shape: seam and ownership, contracts, reuse, reversibility, test seam, smallest first slice, and rejected alternatives. It skips that pass for an obvious local change with no contract, data, or migration impact. A non-obvious, cross-session, expensive, or cross-boundary handoff gets a conditional Builder Check; a closed local plan goes directly to TDD. Decision-complete plans record file scope, interfaces, ordered steps, observable assertions, verification, review focus, and a ruling ledger. After one requirement, it runs a Change Check on the current diff, changed behavior, nearest callers, affected tests, and one to three lenses; it escalates only when blast radius requires it. Before release, it runs one Release Check with the full suite or CI evidence, a full Structure Sweep, release evidence, and named gaps. It follows Fowler's two hats, six refactoring workflows, small catalog moves, green-baseline safety, and economic payback, and disposes of every structural finding as fixed, opportunity, planned, long-term, or accepted. It also owns optimization, re-testing, project health, and the user acceptance gate. Architecture and integration design remain code-health lenses; there is no separate `noootwo-architecture` skill.
 
-`noootwo-release` owns release engineering. It turns a ready change into an identified, immutable release: version source and compatibility, tag semantics, artifact identity and provenance, changelog and release notes, deployment markers, rollback or forward-fix, and release health by version. It keeps one Release Verification Ledger for checks that must be decided at the release boundary, dedupes them by evidence boundary, consumes each once through the Release Check, and seals the result into the release record. It persists release facts through `noootwo-state` and uses existing CI or deployment tools as execution resources without binding the suite to one vendor. The append-only Release Ledger remains the release-identity history; the verification ledger is the open queue that feeds it.
+`noootwo-delivery` owns the path to protected `main`. It keeps one canonical repository and state root, detects and reuses existing linked worktrees, and rejects a sibling filesystem copy or separate clone as isolation; each concurrent requirement gets one short-lived branch and checkout. It makes an Overlap Check before parallel work: independent files and contracts may run in parallel; shared API, schema, event, component, config, migration, or generated-output meaning is serialized or contract-first. It integrates through PR/MR review and current-base checks, uses a merge queue when available, and verifies the landed commit. Hotfixes start from `main` and return there before release. It records the Delivery Policy but does not own readiness, testing, versioning, tagging, artifacts, deployment, or rollback.
 
-`noootwo-state` owns project state and context persistence. It receives an abstract record request, chooses JSON/JSONL for queryable state and Markdown for narrative facts, then writes, validates, and reads the record. Its capsule is a bounded 80-line/6,000-character re-entry view with source hash and evidence handles; `inspect` returns metadata, headings, and local hits instead of dumping long files; `capture` writes complete command output to cold evidence and returns only status, hash, path, and a bounded tail. The optional Codex audit reports aggregate token, compaction, and tool-output cost without emitting message content. Append-only history and state/event schemas stay authoritative and unchanged. Other skills own content; this skill owns the form and location.
+`noootwo-release` owns release engineering. It accepts only an exact protected-`main` commit, or an annotated tag whose peeled commit is reachable from protected `main`; feature branches, unmerged release branches, mutable branches, and floating tags are rejected as production sources. It turns a ready change into an identified, immutable release: version source and compatibility, tag semantics, artifact identity and provenance, changelog and release notes, deployment markers, rollback or forward-fix, and release health by version. It keeps one Release Verification Ledger for checks that must be decided at the release boundary, dedupes them by evidence boundary, consumes each once through the Release Check, and seals the result into the release record. It persists release facts through `noootwo-state` and uses existing CI or deployment tools as execution resources without binding the suite to one vendor. The append-only Release Ledger remains the release-identity history; the verification ledger is the open queue that feeds it.
+
+`noootwo-state` owns project state and context persistence. It receives an abstract record request, chooses JSON/JSONL for queryable state and Markdown for narrative facts, then writes, validates, and reads the record. In a linked worktree, it uses the primary checkout root so `.noootwo` remains one project context rather than branch scratch. Its capsule is a bounded 80-line/6,000-character re-entry view with source hash and evidence handles; `inspect` returns metadata, headings, and local hits instead of dumping long files; `capture` writes complete command output to cold evidence and returns only status, hash, path, and a bounded tail. The optional Codex audit reports aggregate token, compaction, and tool-output cost without emitting message content. Append-only history and state/event schemas stay authoritative and unchanged. Other skills own content; this skill owns the form and location.
 
 `noootwo-debug` turns a claim into a verdict before any file changes. Every request starts with a Diagnosis Map: each claim gets a problem class, the evidence authority that can settle it, one decisive check, a terminal status, a stop bound, and a handoff. Product decisions, official protocol evidence, runnable code paths, live deployment state, data state, and agent transcripts are not interchangeable; confirmation stays read-only, and a long report never upgrades an uncertain status. If a mapped row is a reproducible failure, it expands into the Incident Path: expected versus actual, reproduce, localize with checkpoints, prove the cause, bound the fix, then prove it with a toggle and failing-first regression test. After the fix it writes a Systemic Close covering sibling and near-miss paths, the recurrence barrier and owner, and the learning loop. Larger structural work is handed to the owning skill instead of expanded inside the fix.
 
@@ -177,6 +181,7 @@ npx -y skills add ./skills/noootwo-ask --list
 npx -y skills add ./skills/noootwo-design --list
 npx -y skills add ./skills/noootwo-tdd --list
 npx -y skills add ./skills/noootwo-code-health --list
+npx -y skills add ./skills/noootwo-delivery --list
 npx -y skills add ./skills/noootwo-release --list
 npx -y skills add ./skills/noootwo-state --list
 npx -y skills add ./skills/noootwo-debug --list
@@ -211,21 +216,26 @@ python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scena
 
 ## Release Model
 
-Each child skill has its own `VERSION` file and tag prefix:
+Each child skill has its own `VERSION` file and tag prefix. Current source versions:
 
-- `noootwo-ask@v0.6.1`
-- `noootwo-workflow@v0.23.0`
+- `noootwo-ask@v0.7.0`
+- `noootwo-workflow@v0.24.0`
 - `noootwo-product@v0.12.1`
 - `noootwo-design@v0.20.1`
 - `noootwo-tdd@v0.6.1`
 - `noootwo-code-health@v0.18.0`
-- `noootwo-release@v0.3.1`
-- `noootwo-state@v0.6.0`
+- `noootwo-delivery@v0.1.0`
+- `noootwo-release@v0.4.0`
+- `noootwo-state@v0.6.1`
 - `noootwo-debug@v0.6.1`
 - `noootwo-research@v0.7.2`
 - `noootwo-onboard@v0.5.0`
 
-The root `VERSION` records the workspace version only. Do not use it as the release source for child skills.
+The root `VERSION` is the workspace version (`0.27.0`) and is not the release source for child skills. Child tags are created only after a validated batch lands on `main`; the versions above are the source versions for this release.
+
+## Delivery Policy
+
+The repository's branch, review, merge, hotfix, and main-only production rules are recorded in [`docs/engineering/delivery-policy.md`](docs/engineering/delivery-policy.md). The current live GitHub audit records that `main` is not yet protected and no merge queue or environment rule is configured; the policy file lists the exact gap rather than claiming enforcement.
 
 ## Research Basis
 

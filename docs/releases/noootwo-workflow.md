@@ -1,5 +1,13 @@
 # noootwo-workflow Releases
 
+## v0.24.0
+
+- Added `noootwo-delivery` to the precedence: isolate concurrent requirements before the first write, then integrate through protected `main` after green and review.
+- Workflow now checks repository identity before non-direct state reads/writes: a sibling copy routes to delivery, and linked worktrees use the primary checkout state root.
+- Workflow now stops when concurrent requirements share a contract or migration order without a serialize/contract-first decision, or when the target `main` moved after the checks.
+- The close gate checks the canonical repository/state root, the Overlap Check, protected-main integration, and production-source eligibility before release.
+- Added the delivery handoff packet and rework route for branch/worktree collisions, concurrent-requirement conflicts, and failed mainline integration.
+
 ## v0.23.0
 
 - A new request, phase shift, or specialist return now re-enters owner matching from the current artifact and evidence; a body read earlier in the session no longer stays the owner.

@@ -14,12 +14,15 @@ Every skill, `AGENTS.md`, and pointed-at doc is written to `docs/agents/skill-au
 
 ## Repository Rules
 
-- Keep the public skill set exactly: `noootwo-ask`, `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-tdd`, `noootwo-code-health`, `noootwo-release`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard`.
+- Keep the public skill set exactly: `noootwo-ask`, `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-tdd`, `noootwo-code-health`, `noootwo-delivery`, `noootwo-release`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard`.
 - `noootwo-workflow` schedules; specialists do the work. Do not let a route, mode, or reference in `noootwo-workflow` take over the method owned by a specialist skill.
 - Durable project state and context are written through `noootwo-state`; specialists produce content and invoke `noootwo-state` to choose the form and location.
 - When a named skill is missing, follow `docs/agents/dependency-fallback.md`: try to install it, and on failure take the smallest direct fallback and mark the record `skill-missing: <name>`.
 - Do not add `noootwo-architecture`; architecture, technical judgment, testing strategy, performance and optimization, and maintainability stay under `noootwo-code-health`. Do not add a separate performance skill.
+- `noootwo-delivery` owns branch/worktree isolation, concurrent-requirement overlap, protected-main integration, and the recorded Delivery Policy. Do not add separate branch-management, worktree, merge-queue, or concurrency skills.
+- Isolate work with a branch or linked git worktree in the canonical checkout. Never create a sibling filesystem copy or a separate clone to protect the current checkout, and never initialize a second `.noootwo` state root.
 - Release engineering stays under `noootwo-release`: versioning, tags, immutable artifacts, deployment traces, provenance, rollback, and release health. Do not add separate versioning or deployment skills.
+- Production may build or deploy only an exact commit reachable from protected `main`, or an annotated release tag whose commit is reachable from protected `main`. Feature branches, unmerged release branches, and mutable branches are never production sources.
 - Every capability has one owner. When a skill needs another's capability, it invokes it and reads its `SKILL.md`; the capability map in `docs/agents/invocation.md` is the source of truth, and the validator enforces it.
 - Only `noootwo-ask` is user-invoked. Every other skill stays reachable by the model and by its siblings.
 - Do not add a root `SKILL.md`; it prevents default discovery of all child skills.
