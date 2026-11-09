@@ -371,3 +371,34 @@ Source index for the 2026-11-03 refresh:
 - Do not make every code review a full project audit; choose lenses from the change and evidence.
 - Do not make every product clarification a full PRD; use a Product Choice Challenge only when one choice materially changes the user path or build scope.
 - Do not let generic brainstorming become the owner of product discovery when Noootwo Product can identify the first user, first loop, no-gos, rabbit holes, and validation signal.
+
+## Audience And Language Pass
+
+Checked on 2026-11-09. The decision was how Product and Design should turn the
+target user into interaction posture and information exposure without turning
+every task into a persona study.
+
+- NN/g novice/expert research supports conditional density and expert
+  affordances; plain-language research supports concise language for experts
+  while allowing evidence-backed shared domain terms; progressive-disclosure
+  research supports one first layer of frequent content and one clear second
+  layer, with low usability beyond two levels.
+- W3C COGA independently supports clear page purpose, short chunks, removing
+  unnecessary content, consistent controls, and no unexplained acronyms or
+  jargon.
+- GOV.UK Design Principles and Microsoft Style Guide independently support
+  starting from user needs and context, using simple words with precise
+  meanings, and doing the hard work to make things simple.
+- ISO 24495-1 frames plain language by reader outcome: relevant, findable,
+  understandable, and usable. The public MIT `danyuchn/iso-24495-skill` and
+  `content-designer/ux-writing-skill` were compared as prior art; neither owns
+  product scope, interaction posture, technical-evidence placement, or artifact
+  review.
+- The counterexamples constrain the rule: trained operators may need density and
+  shared domain terms; technical buyers need architecture, security,
+  performance, and compatibility evidence; and hiding the main path or required
+  evidence behind progressive disclosure is a comprehension defect.
+
+The full brief, source dates, access notes, and confidence are in
+`docs/reference/audience-language-evidence.md`. The durable decision is ADR
+0029. No fresh-session behavior or cost improvement is claimed.

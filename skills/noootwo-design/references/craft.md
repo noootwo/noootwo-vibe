@@ -53,6 +53,28 @@ Treat these as signals to investigate, not automatic bans. A deliberate product 
 - Large empty space is only valid when the product tone earns it.
 - Controlled density is as valid as generous negative space; choose one deliberately instead of drifting into neutral spacing.
 
+### Language And Information Exposure
+
+The interface speaks to the primary user, not to the system's builder. Copy is part of the interface, not documentation.
+
+| Surface | Default posture |
+| --- | --- |
+| Consumer or first use | plain language, low density, one primary action, strong defaults |
+| Trained operations | shared domain terms with evidence, high density, shortcuts, batch actions |
+| Technical evaluation | outcome first, technical evidence second, implementation on request |
+| Developer tool | technical terms are the domain language; still lead with the task and result |
+
+- Use the user's words for the task. A domain term is valid when the audience already shares it; explain an unfamiliar term on first use.
+- Order information as outcome → decision evidence → implementation detail. The first screen earns attention with what the user can do or learn, not with how the product is built.
+- Keep implementation names out of the product surface: framework, library, model, service, database, cache, API, deployment, feature-flag, and internal object names. They belong in code, runbooks, and developer docs unless they are the user's work object.
+- Show an ID, timestamp, or status only when it helps identify the current task, make a decision, or recover. Otherwise keep it in a details view or omit it.
+- Technical evidence belongs in a second layer when the user is evaluating integration, security, performance, compatibility, or risk. Lead with the outcome, then the proof. Keep evidence the buyer needs.
+- Consumer and first-use surfaces default to one primary action, strong defaults, plain language, and low density. Trained, frequent operations may use high density, keyboard shortcuts, batch actions, and compact rows; density never licenses implementation jargon.
+- Settings appear only when a recurring user decision cannot be handled by a default. Label the entry by the user's outcome, not the mechanism.
+- Every visible note, helper, badge, or explainer must prevent an error, explain a consequence, support recovery, or teach a term needed now. A note that changes no decision is deleted.
+- Error copy names what happened and the next action. An error code may appear as secondary, copyable support detail; it is not the explanation.
+- Keep design rationale, model behaviour, prompt logic, and "how it works" in the design record or developer docs, not in the product UI.
+
 ### Color, Motion, And Detail Rules
 
 - Dominant color with sharp accents is usually stronger than timid evenly distributed color.

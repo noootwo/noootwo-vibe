@@ -96,7 +96,9 @@ Status: pending extraction; replace this template with project-specific truth be
 
 ## Audience And Jobs
 
-- Primary audience: TBD
+- Primary audience and moment: TBD
+- Familiarity, frequency, error cost, and shared vocabulary: TBD
+- Interaction posture: TBD
 - Main jobs to be done: TBD
 - Behavioral expectations: TBD
 

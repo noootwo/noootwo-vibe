@@ -11,7 +11,7 @@ Status: pending; generate for direction-sensitive standard or deep design work
 ## Design Read
 
 - Surface kind: TBD
-- Audience: TBD
+- Audience contract: TBD
 - Product posture: TBD
 - Visual posture: TBD
 - Intervention: leave simple, craft only, or add moment: TBD
@@ -20,6 +20,7 @@ Status: pending; generate for direction-sensitive standard or deep design work
 - Variance: TBD
 - Motion: TBD
 - Density: TBD
+- Information exposure: TBD
 - Existing system to preserve: TBD
 
 ## Style Evidence Check

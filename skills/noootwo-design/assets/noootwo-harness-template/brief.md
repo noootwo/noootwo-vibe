@@ -14,6 +14,14 @@ Status: pending; overwrite this file for the current active design task
 ## Product-to-Design Handoff
 
 - Real user: TBD
+- Audience contract:
+  - Primary user and moment: TBD
+  - Familiarity and shared vocabulary: TBD
+  - Usage frequency: TBD
+  - Error / decision cost: TBD
+  - Learning vs throughput: TBD
+  - Visible / secondary / hidden information: TBD
+- Interaction posture: TBD
 - Scenario: TBD
 - Main path: TBD
 - States: TBD
@@ -31,7 +39,7 @@ Status: pending; overwrite this file for the current active design task
 ## Design Read
 
 - Surface kind: TBD
-- Audience: TBD
+- Audience contract: TBD
 - Product posture: TBD
 - Visual posture: TBD
 - Intervention: leave simple, craft only, or add moment: TBD
@@ -40,6 +48,7 @@ Status: pending; overwrite this file for the current active design task
 - Variance: TBD
 - Motion: TBD
 - Density: TBD
+- Information exposure: TBD
 - Existing system to preserve: TBD
 
 ## Objective
@@ -51,6 +60,9 @@ Status: pending; overwrite this file for the current active design task
 ## Audience And Context
 
 - Primary audience or user: TBD
+- Familiarity and shared vocabulary: TBD
+- Usage frequency and error cost: TBD
+- Interaction posture: TBD
 - Use context or product moment: TBD
 - Existing surface, route, artifact, or flow: TBD
 

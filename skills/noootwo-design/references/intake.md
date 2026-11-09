@@ -26,7 +26,7 @@ Before non-quick UI work, declare:
 ```markdown
 Design Read
 - Surface kind:
-- Audience:
+- Audience contract: role, moment, familiarity, frequency, error cost, shared vocabulary
 - Product posture:
 - Visual posture:
 - Intervention / context: leave simple | craft only | add moment — product function, frequency, risk, and emotional or brand value
@@ -34,13 +34,14 @@ Design Read
 - Variance:
 - Motion:
 - Density:
+- Information exposure: visible | secondary | hidden
 - Existing system to preserve:
 ```
 
 Field rules:
 
 - `Surface kind`: operational tool, dashboard, app shell, native screen, landing page, deck, fixed canvas, live artifact, editorial, or campaign.
-- `Audience`: first-time, expert, maintainer, operator, buyer, creator, student, teacher, parent, admin, or other specific role.
+- `Audience contract`: the primary role, moment, familiarity, frequency, error or decision cost, and the evidence for terms the audience already shares. "Consumer", "admin", or "user" alone is not an audience.
 - `Product posture`: what the product must communicate through use: trust, speed, control, calm, scrutiny, play, status, clarity, or another task-relevant stance.
 - `Visual posture`: the visual language that supports the product posture, not a fashion label.
 - `Intervention`: whether this exact product, feature, and moment should stay simple, receive craft-only work, or earn an authored moment.
@@ -49,6 +50,7 @@ Field rules:
 - `Variance`: 1-10. Low means symmetric and predictable; high means asymmetric and expressive.
 - `Motion`: 1-10. Low means hover/active only; high means staged or spatial motion with reduced-motion fallback.
 - `Density`: 1-10. Low means airy and guided; high means compact and repeated-use friendly.
+- `Information exposure`: what the first screen must show, what sits behind one clear second-layer entry, and what never enters the product UI. Implementation names, service or database details, framework or model names, internal IDs or flags, and design rationale belong in code or docs unless they are the user's work object.
 - `Existing system to preserve`: tokens, components, routes, brand assets, screenshots, or "none found".
 
 ### Dial Defaults
@@ -62,7 +64,7 @@ Use these as defaults, then override only with product evidence:
 | Landing, campaign, portfolio, editorial | 6-9 | 4-7 | 2-5 |
 | Fixed canvas or deck | 5-9 | 1-6 | depends on format |
 
-High variance must collapse cleanly on mobile. Motion above basic hover/active must honor reduced motion. High density must still preserve hit areas, readable line-height, and state clarity.
+High variance must collapse cleanly on mobile. Motion above basic hover/active must honor reduced motion. High density must still preserve hit areas, readable line-height, and state clarity. Density follows frequency and training; it never licenses implementation jargon. Language follows the audience contract, not the surface label.
 
 These dials are starting ranges, not instructions to add expression. A dense surface can still receive important craft and a first-use moment can still choose `leave simple` when the product evidence supports it.
 
@@ -87,6 +89,7 @@ In code, map these to the stack's native system: CSS variables, UnoCSS shortcuts
 ```markdown
 Design Contract
 - Structure:
+- Information exposure: visible | secondary | hidden; outcome → decision evidence → implementation detail
 - Type scale:
 - Color/token roles:
 - Component behavior:
@@ -156,7 +159,8 @@ The brief defines the problem, audience, and constraints. It does not prescribe 
 
 - `Status`
 - `Task`
-- `Audience`
+- `Audience contract`
+- `Interaction posture`
 - `Primary job to be done`
 - `Desired outcome`
 - `Surface or flow`
@@ -182,9 +186,11 @@ The brief defines the problem, audience, and constraints. It does not prescribe 
 
 - Keep the brief strategic and implementation-light
 - Separate hard constraints from preferences
+- Derive `Interaction posture` from the audience contract: density, language, main-path shape, settings stance, expert affordances, and help stance
 - If the user asks for "better" or "more polished", translate that into explicit design objectives
 - If the ask is ambiguous, the brief should expose the ambiguity instead of hiding it
 - If the user does not specify style ambition, choose the smallest intervention that fits the product, feature, frequency, and risk, and record that assumption explicitly
+- If the audience contract is missing and would change the first screen, write the unsettled decision and return to `noootwo-product`; if it would not change the screen, record the assumption and proceed
 - If the user does not specify a memorable move, do not invent one; use the intervention decision to decide whether identity belongs in structure, craft, or a rare authored moment
 - If the user wants high-end, niche, rare, or Claude Design-like work, require visual references or select credible mechanism references from [evidence](evidence.md)
 - If the target stack is Flutter, SwiftUI, Compose, React, Vue, or another app framework, record the artifact expectation before direction work begins

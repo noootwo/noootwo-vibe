@@ -38,6 +38,7 @@ Previously verified: 2026-10-27 on published `0.24.0`: workspace and skill budge
 - `python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scenario add-moment-proof` — validates an authored moment and its evidence
 - `python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scenario explicit-motion-request-honored` — verifies an explicit motion request cannot pass as zero motion
 - `python skills/noootwo-design/scripts/validate_noootwo_readiness.py <project> --motion-gate` — validates the intervention decision, user motion intent, implementation tool, library/material decision, and the conditional motion contract
+- `python skills/noootwo-design/scripts/validate_noootwo_readiness.py <project>` — every `ready` review now requires a passing Comprehension Gate plus the primary user/task and note-budget evidence; `--deep-mode --style-evidence-gate` also checks the high-character style evidence
 - `docs/agents/borrow-audit.md` maps the prior art each skill was compared against; the Product Design plugin maps primarily to `noootwo-product`, and motion-web maps primarily to `noootwo-design`.
 - `docs/adr/0018-contextual-design-intervention.md` records `leave simple | craft only | add moment` as the design decision before motion, source research, or new material.
 - `docs/adr/0019-systemic-close-in-debug.md` records the Systemic Close and its eight questions, proportional-response rule, and academic basis from Reason, Leveson, Argyris, Google SRE, and Hollnagel.
@@ -51,6 +52,7 @@ Previously verified: 2026-10-27 on published `0.24.0`: workspace and skill budge
 - `docs/adr/0026-long-turn-context-checkpoints.md` records the behaviour-triggered long-turn checkpoint, capsule-first recovery, the second-failed-loop stop condition, the per-turn audit reporting, and the rejected fixed-budget and hard-truncation alternatives.
 - `docs/adr/0027-owner-reentry-and-capsule-first-recovery.md` records owner re-entry after compaction or a phase change, owner assignment for pasted approved plans, capsule-first recovery with the absent-capsule branch, and the rejected always-resident and auto-capsule alternatives.
 - `docs/adr/0028-delivery-and-mainline-production.md` records the delivery/mainline boundary, the Overlap Check, and the main-only production source.
+- `docs/adr/0029-audience-derived-interaction-and-language.md` records the Audience Contract, Interaction Posture, information exposure, Comprehension Gate, note budget, and the evidence boundaries for consumer, operations, and technical-buyer surfaces.
 - `noootwo-code-health` now follows the Fowler refactoring health loop, the bounded Integration Read, and the Change Check / Release Check split; the deciding sources, boundaries, and stop rules are recorded in `docs/reference/borrowed-skills.md`, ADR 0015, ADR 0019, and ADR 0020.
 - `noootwo-code-health` is the renamed `noootwo-review` skill (`v0.14.0` rename, currently `v0.18.0`). The old `noootwo-review@v0.13.0` tag remains as history; current docs and routing use the new name.
 - `noootwo-release` owns versioning, tags, immutable artifacts, deployment traces, provenance, rollback, and release health; code-health keeps the ship-readiness gate. Release now requires a Release Check for the exact commit.
@@ -119,9 +121,11 @@ Previously verified: 2026-10-27 on published `0.24.0`: workspace and skill budge
 - The `0.27.0` release adds `noootwo-delivery`, the canonical repository/state rule, and the main-only production-source rule. Its deterministic checks and public install pass, but the thirteen new prompt contracts have not run in fresh sessions, so no behaviour or cost improvement is claimed.
 - The suite now requires protected `main` and a main-only production source. GitHub branch protection is live for `main` with a required PR, strict `validate`, administrator enforcement, and force-push/deletion blocks. Rulesets, environments, and a merge queue are still absent, and there is no deployed production service to exercise an environment rule.
 - The live protection requires zero approving reviews so the solo maintainer can self-merge after self-review and a green check. That is a deliberate solo-maintainer setting, not a team review control; a shared repository should raise the approval count.
+- The Audience Contract and Comprehension Gate have deterministic contracts and readiness checks, but their effect on first-screen comprehension, technical noise, time, token use, and rework is unmeasured. No quality or cost improvement is claimed before fresh-session comparison.
 
 ## Next Actions
 
+- Run the seven new audience/comprehension contracts under `skills/noootwo-product/evals/prompts/audience-contract-*.md` and `skills/noootwo-design/evals/prompts/` in fresh sessions against a no-skill baseline; record behavior, comprehension, time, token, and tool-call cost before claiming improvement.
 - Run the workspace validator after any change to skill layout, versions, metadata, descriptions, or references.
 - Re-run `docs/experiments/` scenarios when a skill's flow changes, and record the result beside the previous run.
 - Run the `noootwo-debug` scenarios under `skills/noootwo-debug/evals/prompts/` on seeded bugs with a hidden verifier and a decoy, including `systemic-close-required`, `recurring-bug-double-loop`, `near-miss-fragile-success`, and `simple-one-off-keeps-proportion`; record whether the close finds concrete latent paths without bloating the fix.

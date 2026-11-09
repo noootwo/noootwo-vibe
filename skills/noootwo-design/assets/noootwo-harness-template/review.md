@@ -28,6 +28,10 @@ Status: pending; replace with a real review before any ready/handoff claim
 - Mismatch between intent and rendered result: TBD
 - Style understanding fit: TBD
 - Product comprehension fit: TBD
+- Comprehension gate: pass or fail: TBD
+- Primary user and task tested: TBD
+- Technical or internal terms and their user decision: TBD
+- Note budget and information exposure: TBD
 - Safety hard-gate result: pass or fail, with the checked gates: TBD
 - Aesthetic flags: TBD
 - Evidence of harm or intentional use: TBD
@@ -67,6 +71,8 @@ Status: pending; replace with a real review before any ready/handoff claim
 - Generic drift: TBD
 - Style understanding fit: TBD
 - Product comprehension fit: TBD
+- Comprehension gate: TBD
+- Technical noise or note-budget failure: TBD
 - Responsive/type/state findings: TBD
 - Decision: ready, refine, pivot, or needs artifact: TBD
 - Return action: TBD

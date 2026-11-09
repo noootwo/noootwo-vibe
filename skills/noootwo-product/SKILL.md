@@ -21,7 +21,7 @@ Finding facts is your job. Ask the user only for decisions. When a fact exists o
 
 A decision is **settled** when it is made and confirmed; otherwise it is **unsettled**. Check these in order, skipping whatever the request or the repo already settles:
 
-real user and moment of use → outcome → first loop → scope and non-goals → main path → interaction and state behaviour → observable acceptance.
+real user, moment of use, and audience contract → outcome → first loop → scope and non-goals → main path → interaction and state behaviour → observable acceptance.
 
 **Done when:** you can name every unsettled decision, or state that none remain.
 
@@ -61,7 +61,7 @@ Ask once whether that matches what they meant. On no, reopen only the mismatched
 
 ### 5. Hand off
 
-Produce the `Product-to-Design Handoff` from `references/product-flow.md`: real user, scenario, main path, states, scope cuts, acceptance criteria, user-owned how decisions, agent-selected defaults, open decisions, and design constraints.
+Produce the `Product-to-Design Handoff` from `references/product-flow.md`: real user, audience contract, interaction posture, scenario, main path, states, scope cuts, acceptance criteria, user-owned how decisions, agent-selected defaults, open decisions, and design constraints.
 
 Hand off when every material decision is settled or delegated and no carried risk would change the main path, trust boundary, scope, or acceptance.
 
@@ -82,8 +82,12 @@ Read `references/product-reality-check.md` when the loop is unproven, the user i
 ## Rules
 
 - Start from the user's situation and vocabulary, not the database model or the requester's preference.
+- Name one primary user and the evidence for their vocabulary, frequency, and error cost before choosing density, language, or settings.
+- Consumer and first-use surfaces default to plain language and the shortest path; trained operational surfaces may be dense and domain-specific, but implementation names stay out of the product UI.
+- Order information outcome → decision evidence → implementation detail. Implementation detail belongs in code and docs unless it is the user's work object.
 - Treat `should not exist` as a first-class decision.
-- Prefer progressive disclosure over exposing every capability at once.
+- Use progressive disclosure for low-frequency capability, not as a place to hide the main path or the evidence a user needs to decide.
+- Give every visible note a job: prevent an error, explain a consequence, support recovery, or teach a term needed now. A note that changes no decision is removed.
 - Make empty, error, permission, and success states name the next action.
 - Treat strong criticism as evidence about which layer failed, and name that layer before changing anything.
 

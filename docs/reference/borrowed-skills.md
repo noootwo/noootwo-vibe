@@ -73,6 +73,20 @@ Borrowing rule (from `AGENTS.md`): borrow repeatable mechanisms, never leaked pr
 
 - **`antfu/skills`**, **`vercel-labs/skills`**, **`vuejs-ai/skills`**, **`flutter/agent-plugins`** — skill collections and plugin ecosystems compared for packaging and discovery. Landed in `references/research-basis.md`. Status: compared.
 
+## Audience and language pass (2026-11-09)
+
+- **NN/g — novice/expert, plain language, progressive disclosure, mental models, and match between system and real world** (`https://www.nngroup.com/articles/novice-vs-expert-users/`, `https://www.nngroup.com/articles/plain-language-experts/`, `https://www.nngroup.com/articles/progressive-disclosure/`, `https://www.nngroup.com/articles/mental-models/`, `https://www.nngroup.com/articles/match-system-real-world/`) — adopted the mechanisms that learning and throughput are both legitimate but conditional; experts still prefer concise plain language; shared domain terms are valid compression while implementation names are not; first-layer frequent content plus one clear second layer; and familiar words and mental models beat explanation. Landed in `noootwo-product` Audience Contract and Interaction Posture, and `noootwo-design` Information exposure and Comprehension Gate. Status: mechanisms adopted; no article text copied.
+
+- **W3C COGA — Making Content Usable for People with Cognitive and Learning Disabilities** (`https://www.w3.org/TR/coga-usable/`, Working Group Note 2021-04-29) — independently supports removing unnecessary content, short chunks, clear purpose, consistent controls, and no unexplained acronyms or jargon. Landed as a boundary and accessibility rationale, not as a new checklist. Status: evidence source.
+
+- **GOV.UK Design Principles** (`https://www.gov.uk/guidance/government-design-principles`, updated 2025-04-02) — supports starting from user needs and context, doing the hard work to make things simple, and treating legibility and inclusion as constraints. Landed as product-language rationale. Status: evidence source.
+
+- **Microsoft Style Guide — Use simple words, concise sentences** (`https://learn.microsoft.com/en-us/style-guide/word-choice/use-simple-words-concise-sentences`, last updated 2022-06-24) — supports precise simple words, removing words without substance, and one term for one concept. Landed in the note budget and vocabulary rules. Status: evidence source.
+
+- **`danyuchn/iso-24495-skill`** (`https://github.com/danyuchn/iso-24495-skill`, MIT, commit `113656b0a6a6cbeb3b3c2bb7cf3bc29349cb05cf`, 2026-08-13) — reader-outcome plain language: relevant, findable, understandable, usable, with audience and purpose first. Compared as prior art; the four outcomes informed the review gate, but no prompt or file was copied. Status: mechanism comparison.
+
+- **`content-designer/ux-writing-skill`** (`https://github.com/content-designer/ux-writing-skill`, MIT, commit `98cacde4ba2dd10ed28df43a8d53eef1e321c539`, 2026-05-26) — strong microcopy, error-message, tone, and plain-language patterns. Compared as prior art; it does not own product scope, interaction posture, or artifact review, so no separate skill was adopted. Status: mechanism comparison.
+
 ## Repos borrowed as mechanism (not agent skills)
 
 - **`shadcn-ui/ui`** (`https://github.com/shadcn-ui/ui`, MIT) — cloneable product source for token, component anatomy, and state behaviour. Landed in `noootwo-design` translation guidance. Status: adopted.

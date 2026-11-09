@@ -28,7 +28,7 @@ Thresholds:
 
 ### Output
 
-Write `.noootwo/review.md` with artifact evidence, intervention decision and fit, scores, calibration fit, style understanding fit, product comprehension fit, user decision gate, safety hard-gate result, aesthetic flags with evidence of harm or intentional use, generic/Claude/framework/designer-grade flags, role critique, authored move or deliberate absence, viewport evidence, typography evidence, data evidence when relevant, default-override review, micro-detail pass, readiness gate, decision, return action, and next action.
+Write `.noootwo/review.md` with artifact evidence, intervention decision and fit, scores, calibration fit, style understanding fit, comprehension gate, product comprehension fit, user decision gate, safety hard-gate result, aesthetic flags with evidence of harm or intentional use, generic/Claude/framework/designer-grade flags, role critique, authored move or deliberate absence, viewport evidence, typography evidence, data evidence when relevant, default-override review, micro-detail pass, readiness gate, decision, return action, and next action.
 
 ### Intervention Review
 
@@ -41,6 +41,20 @@ Review the decision before reviewing the decoration:
 A governed absence of an authored move is a valid `ready` result when the decision and craft evidence support it. A missing authored moment on an `add moment` contract is not.
 
 If the user explicitly requested motion, animation, liveliness, fancy, a named library, or shader/material rendering, zero motion is not ready unless the user accepted that outcome. Review the implementation tool too: an installed runtime or user-named library must be selected, replaced with a recorded equivalent, or rejected with a concrete reason.
+
+### Comprehension Gate
+
+Test the rendered artifact as the primary user before scoring:
+
+- On the first screen, the user can state what this is for and what to do next without reading a tutorial.
+- Labels use the user's vocabulary or a domain term the audience already shares; the review names the evidence for that vocabulary.
+- Every technical or internal term supports a user decision, recovery step, or consequence, or moves to a second layer or code/docs.
+- Every visible note, helper, badge, or explainer prevents an error, explains a consequence, supports recovery, or teaches a term needed now. A note that changes no decision is deleted.
+- Density and expert affordances match frequency and error cost. Consumer and first-use paths stay low-density and default-led; trained operators may get high density, shortcuts, batch actions, and compact layout.
+- Settings appear only when a recurring user decision cannot be handled by a good default; rare settings sit behind an outcome-labelled second layer.
+- Error copy states what happened and the next action. An error code may appear as secondary, copyable support detail.
+
+Record `Comprehension gate: pass | fail`, the primary user and task tested, and the artifact evidence. A fail returns to the artifact, or to `noootwo-product` when the audience contract or main path is unsettled.
 
 ### Gates To Read When Relevant
 
@@ -58,7 +72,8 @@ Before `ready`, confirm:
 - required files do not contain unresolved `TBD`
 - review records artifact evidence and a decision
 - high-character work records style understanding fit against visual evidence
-- product UI work records product comprehension fit against the Product-to-Design Handoff or known main path
+- product UI work records the comprehension gate against the primary user, first screen, and rendered copy
+- visible notes, technical details, and settings pass the note budget and information-exposure check
 - review records typography evidence
 - review records responsive or platform evidence
 - implementation-bound work records default-override review and micro-detail review when generic drift was a risk
@@ -77,7 +92,7 @@ If this fails, use `needs artifact` or `refine`, not `ready`.
 
 ### Decisions
 
-- `ready`: direction is strong, style evidence matches the rendered artifact, product comprehension is intact, craft is credible, output avoids generic fallbacks, and evidence is sufficient.
+- `ready`: direction is strong, style evidence matches the rendered artifact, the comprehension gate passes, craft is credible, output avoids generic fallbacks, and evidence is sufficient.
 - `refine`: direction is right but execution, hierarchy, proof, or specificity is weak.
 - `pivot`: direction is generic, misunderstood, mismatched, derivative, impractical, or structurally wrong.
 - `needs artifact`: design may be promising but cannot be judged from current evidence.
@@ -221,4 +236,6 @@ Theme the browser surfaces models usually skip: text selection, caret, custom sc
 - Missing preservation contract: return to directions or approved spec.
 - Failed typography: return to typography pass.
 - Failed responsive check: return to responsive pass.
+- Technical noise, unexplained internal terms, or note-heavy UI that fails the comprehension gate: return to artifact.
+- Missing audience contract or interaction posture: return to `noootwo-product`.
 - Generic direction: return to directions, not polish.
