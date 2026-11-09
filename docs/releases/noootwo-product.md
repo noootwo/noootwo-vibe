@@ -1,5 +1,13 @@
 # noootwo-product Releases
 
+## v0.13.0
+
+- Added an Audience Contract before the Product-to-Design Handoff: primary user and moment, familiarity and shared vocabulary, usage frequency, error or decision cost, learning-versus-throughput stance, and visible/secondary/hidden information.
+- Added an Interaction Posture derived from that contract: density, language, main-path shape, settings stance, expert affordances, and help stance.
+- Replaced the coarse B2C/B2B assumption with role, frequency, error cost, and evidence for shared terms. Consumer and first-use surfaces default to plain language and strong defaults; trained operations may be dense and domain-specific without exposing implementation names.
+- Added information order `outcome → decision evidence → implementation detail`, a note budget, and a settings test. Technical evidence stays when it supports an integration, security, performance, compatibility, or risk decision.
+- Added four opt-in eval contracts for consumer, operations, technical-buyer, and missing-audience cases. They are not yet a fresh-session behavior measurement.
+
 ## v0.12.1
 
 - The Return rule now resumes from the capsule and current artifacts after a handoff or compaction and reloads the product body only when product owns the next step.

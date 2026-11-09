@@ -1,5 +1,16 @@
 # noootwo-design Releases
 
+## v0.21.0
+
+- Design Read now consumes the Product Audience Contract, and the Design Contract adds `Information exposure`: what is visible, secondary, or excluded, ordered as `outcome → decision evidence → implementation detail`.
+- Artifact Review adds a `Comprehension Gate` for first-screen purpose and next action, evidence-backed user vocabulary, technical-term justification, note budget, density fit, settings stance, and error recovery.
+- Added a note budget: every visible note, helper, badge, or explainer must prevent an error, explain a consequence, support recovery, or teach a term needed now; otherwise it is deleted.
+- Implementation names, service or database details, framework or model names, internal IDs or flags, and design rationale stay out of the product surface unless they are the user's work object. Technical evidence remains available to technical buyers after the outcome it supports.
+- `ready` now requires `Comprehension gate: pass`; the readiness validator rejects a missing or failed gate on product UI work. Consumer and first-use surfaces stay default-led; trained operational surfaces may remain dense and keyboard-first without licensing implementation jargon.
+- Quick work that changes copy, notes, settings, or visible technical data now runs the same gate.
+- Added three opt-in eval contracts for consumer technical noise, operations density without implementation jargon, and a failed gate blocking `ready`. They are not yet a fresh-session behavior measurement.
+- Migration: completed projects that use readiness validation must record the Comprehension Gate and its evidence before claiming `ready`.
+
 ## v0.20.1
 
 - Recorded `pbakaus/impeccable` v4.8.0 as an integration and maintenance refresh, not a new design philosophy; its only `SKILL.src.md` change at the tag is the launcher fallback reading `craft-floor.md` before a UI edit.

@@ -7,6 +7,7 @@ Use this when the user asks to audit, critique, or fix an existing product flow:
 Before asking frontier questions, write the smallest brief that can be checked against the actual flow:
 
 - real user and moment of use
+- audience contract: familiarity, frequency, error cost, and shared vocabulary
 - the task the flow should complete
 - the first loop and its observable outcome
 - the states that matter: empty, loading, error, permission, success
@@ -35,6 +36,7 @@ This is project-local, not a global user profile. Do not copy unrelated past pro
 5. Separate these findings:
    - product-flow friction: the task is unclear, too long, or blocked
    - state/acceptance gaps: empty, error, permission, success states do not name the next action
+   - language/comprehension gaps: internal terms, implementation names, unexplained notes, or settings before defaults
    - visual or interaction defects: route to `noootwo-design`
    - code or performance defects: route to `noootwo-code-health`
 6. Rank by severity and product leverage, not by how easy the screenshot was to obtain.
@@ -47,6 +49,7 @@ Use the following shape:
 Product Flow Audit
 - Flow:
 - Goal:
+- Audience contract:
 - Captured steps:
 - Findings:
   - [severity] step N: what differs, evidence, impact, fix owner

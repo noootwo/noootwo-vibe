@@ -9,6 +9,8 @@ Status: pending; fill this after a design direction has passed review
 ## Product-to-Design Handoff
 
 - Real user: TBD
+- Audience contract: TBD
+- Interaction posture: TBD
 - Scenario: TBD
 - Main path: TBD
 - States: TBD
@@ -26,7 +28,7 @@ Status: pending; fill this after a design direction has passed review
 ## Design Read
 
 - Surface kind: TBD
-- Audience: TBD
+- Audience contract: TBD
 - Product posture: TBD
 - Visual posture: TBD
 - Intervention: leave simple, craft only, or add moment: TBD
@@ -35,6 +37,7 @@ Status: pending; fill this after a design direction has passed review
 - Variance: TBD
 - Motion: TBD
 - Density: TBD
+- Information exposure: TBD
 - Existing system to preserve: TBD
 
 ## Decisions That Must Survive Implementation

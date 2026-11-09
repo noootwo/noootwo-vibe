@@ -181,7 +181,8 @@ Do not copy another brand's surface language. Extract the structure: role-based 
 #### 1. Design Read
 
 - Surface kind: operational tool, dashboard, app shell, native screen, landing page, deck, fixed canvas, live artifact, editorial, campaign, or other.
-- Audience: who must understand and reuse the surface.
+- Audience contract: primary user, moment, familiarity, frequency, error cost, and shared vocabulary.
+- Information exposure: what is visible, secondary, or excluded from the product surface; use outcome → decision evidence → implementation detail.
 - Product posture: the product stance the UI must communicate through use.
 - Visual posture: the design language that supports the product posture.
 - Variance, motion, density: 1-10 dials with the reason for each.

@@ -11,6 +11,7 @@ Status: pending; fill after the direction is chosen and before implementation pl
 ## Design Contract
 
 - Structure: TBD
+- Information exposure: TBD
 - Type scale: TBD
 - Color/token roles: TBD
 - Component behavior: TBD
@@ -24,7 +25,7 @@ Status: pending; fill after the direction is chosen and before implementation pl
 ## Design Read
 
 - Surface kind: TBD
-- Audience: TBD
+- Audience contract: TBD
 - Product posture: TBD
 - Visual posture: TBD
 - Intervention: leave simple, craft only, or add moment: TBD
@@ -33,6 +34,7 @@ Status: pending; fill after the direction is chosen and before implementation pl
 - Variance: TBD
 - Motion: TBD
 - Density: TBD
+- Information exposure: TBD
 - Existing system to preserve: TBD
 
 ## Style Evidence Check

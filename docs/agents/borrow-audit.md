@@ -38,7 +38,7 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 ### noootwo-product
 
 - Current role: settle what should exist before design or build.
-- Prior art: Superpowers `v7.0.1` evidence-grounded intake, intent playback, how-decision ownership, and agent-selected defaults; OpenAI Product Design plugin (`product-design`), especially `get-context`, `ideate`, `audit`, and `critical-overrides`.
+- Prior art: Superpowers `v7.0.1` evidence-grounded intake, intent playback, how-decision ownership, and agent-selected defaults; OpenAI Product Design plugin (`product-design`), especially `get-context`, `ideate`, `audit`, and `critical-overrides`; NN/g novice/expert, plain-language, progressive-disclosure, mental-model, and real-world-match research; W3C COGA; GOV.UK Design Principles; Microsoft Style Guide; ISO 24495-1 and `danyuchn/iso-24495-skill`; `content-designer/ux-writing-skill`.
 - Adopt:
   - Minimum brief before frontier questions.
   - Project-local product context snapshot instead of global user context.
@@ -46,12 +46,17 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
   - Explore / Design / Build boundary at the product-to-design handoff.
   - A short evidence-grounded response without a fixed script, plus a one-round frontier that handles one controlling gap or several independent roots.
   - `User-owned how decisions` and `Agent-selected defaults` with a value, reason, and reopen condition.
+  - An Audience Contract covering primary user and moment, familiarity and shared vocabulary, frequency, error or decision cost, learning-versus-throughput stance, and visible/secondary/hidden information.
+  - An Interaction Posture derived from the contract: density, language, main-path shape, settings stance, expert affordances, and help stance.
+  - One primary audience per surface; multiple audiences get separate paths or layers instead of an averaged middle.
 - Reject:
   - Global `user-context` outside a project.
   - Product Design's Sites/Browser-specific workflow and prototype templates.
   - Product Design's asset-generation and share/deploy paths; those belong to design or integrations.
   - Fixed opening scripts, playback word budgets, and a one-question-per-round habit when several decisions are independently answerable.
-- Next pass: run the grounded-response, independent-frontier, settled-request, and how-ownership scenarios; check that the one-round frontier stays proportional.
+  - A B2C/B2B binary as the audience model.
+  - Treating "admin" or "expert" as permission for implementation names.
+- Next pass: run the grounded-response, independent-frontier, settled-request, how-ownership, and four `audience-contract-*` scenarios; check that the one-round frontier stays proportional.
 
 ### noootwo-research
 
@@ -64,10 +69,10 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 ### noootwo-design
 
 - Current role: UI, visual, contextual intervention, artifact, and frontend work after product path is settled.
-- Prior art: Anthropic frontend-design, impeccable `v4.8.0`, oil-ui `v0.30.0`, huashu-design `v3.0.0`, `ddruids/mobbin-skill`, `dembrandt`, `designlang`, `tinte`, `LottieFiles/motion-design-skill`, `kylezantos/design-motion-principles`, `emilkowalski/skills`, `alchaincyf/huashu-art-motion`, `Meet-Miyani/compose-skill`, Refero, `feitangyuan/motion-web`, `Leonxlnx/taste-skill`, `vercel-labs/web-interface-guidelines`, `antfu-design`, `jakubkrehel/make-interfaces-feel-better`, Shaders, and Paper Shaders.
-- Adopt: case capture, computed-style extraction, drift gate, contextual `leave simple | craft only | add moment` decisions, opportunity gates with rejected candidates, motion language, reference lock, anti-averaging, interaction/accessibility gates, data-presentation rules, component-state matrix, image-intake discipline, real low-cost direction samples, same-medium inspected evidence, and evidence-dependent aesthetic flags. OIL UI additions are reference-only: design north star, one focal object and primary action, five-axis tone calibration, concrete-engine direction generation, one memory point with subtraction, optional landing/showcase image comps, and visual-spec conflict disclosure.
-- Reject: paid MCP as required, full motion-web cases/scripts/assets, huashu's full style library, global appearance memory, mandatory six polished directions, universal visual gates, huashu's video engine/assets/character frames, mandatory image generation, mandatory scroll animation, scanning every task for effects, universal `85:10:5` palettes, required subagents, and surface or skill copying.
-- Next pass: run the sample-selection, weak-runtime, cross-medium, broken-capture, intentional-flag, harmful-flag, and existing motion/interface-quality evals; keep OIL UI reference-only until the image-comp boundary earns a checkable eval; record only the exercised workflow and evidence-gate result, not a universal UI-quality claim.
+- Prior art: Anthropic frontend-design, impeccable `v4.8.0`, oil-ui `v0.30.0`, huashu-design `v3.0.0`, `ddruids/mobbin-skill`, `dembrandt`, `designlang`, `tinte`, `LottieFiles/motion-design-skill`, `kylezantos/design-motion-principles`, `emilkowalski/skills`, `alchaincyf/huashu-art-motion`, `Meet-Miyani/compose-skill`, Refero, `feitangyuan/motion-web`, `Leonxlnx/taste-skill`, `vercel-labs/web-interface-guidelines`, `antfu-design`, `jakubkrehel/make-interfaces-feel-better`, Shaders, and Paper Shaders; NN/g plain-language and progressive-disclosure research; W3C COGA; GOV.UK Design Principles; Microsoft Style Guide; ISO 24495-1 and `danyuchn/iso-24495-skill`; `content-designer/ux-writing-skill`.
+- Adopt: case capture, computed-style extraction, drift gate, contextual `leave simple | craft only | add moment` decisions, opportunity gates with rejected candidates, motion language, reference lock, anti-averaging, interaction/accessibility gates, data-presentation rules, component-state matrix, image-intake discipline, real low-cost direction samples, same-medium inspected evidence, evidence-dependent aesthetic flags, information exposure in the Design Contract, a Comprehension Gate, and a note budget. OIL UI additions are reference-only: design north star, one focal object and primary action, five-axis tone calibration, concrete-engine direction generation, one memory point with subtraction, optional landing/showcase image comps, and visual-spec conflict disclosure.
+- Reject: paid MCP as required, full motion-web cases/scripts/assets, huashu's full style library, global appearance memory, mandatory six polished directions, universal visual gates, huashu's video engine/assets/character frames, mandatory image generation, mandatory scroll animation, scanning every task for effects, universal `85:10:5` palettes, required subagents, and surface or skill copying. Also reject blanket deletion of technical evidence and treating high density itself as the defect.
+- Next pass: run the sample-selection, weak-runtime, cross-medium, broken-capture, intentional-flag, harmful-flag, existing motion/interface-quality, and three new comprehension/noise scenarios; keep OIL UI reference-only until the image-comp boundary earns a checkable eval; record only the exercised workflow and evidence-gate result, not a universal UI-quality claim.
 
 ### noootwo-tdd
 

@@ -397,6 +397,23 @@ def validate_review(target_root: Path, allow_non_ready: bool, deep_mode: bool, s
             block_text = open_issue_block.group(1)
             if re.search(r"\b(block|blocking|unresolved|yes)\b", block_text, re.IGNORECASE):
                 errors.append(".noootwo/review.md marks ready while open issues still read as blocking or unresolved")
+        comprehension = (field_value(content, "Comprehension gate") or "").strip()
+        require(errors, has_meaningful_value(content, "Comprehension gate"), ".noootwo/review.md missing comprehension gate")
+        require(
+            errors,
+            comprehension.lower().startswith("pass"),
+            ".noootwo/review.md cannot be ready while the comprehension gate is not pass",
+        )
+        require(
+            errors,
+            has_meaningful_value(content, "Primary user and task tested"),
+            ".noootwo/review.md missing the primary user and task tested for the comprehension gate",
+        )
+        require(
+            errors,
+            has_meaningful_value(content, "Note budget and information exposure"),
+            ".noootwo/review.md missing the note-budget and information-exposure result",
+        )
 
     return errors
 
@@ -830,6 +847,7 @@ def validate_style_evidence_gate(target_root: Path) -> list[str]:
     if review:
         require(errors, has_meaningful_value(review, "Style understanding fit"), ".noootwo/review.md missing style understanding fit")
         require(errors, has_meaningful_value(review, "Product comprehension fit"), ".noootwo/review.md missing product comprehension fit")
+        require(errors, has_meaningful_value(review, "Comprehension gate"), ".noootwo/review.md missing comprehension gate")
         safety = (field_value(review, "Safety hard-gate result") or "").strip()
         require(errors, bool(safety) and "TBD" not in safety.upper(), ".noootwo/review.md missing safety hard-gate result")
         require(errors, has_non_placeholder_value(review, "Aesthetic flags"), ".noootwo/review.md missing aesthetic flags record")

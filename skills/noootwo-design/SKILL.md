@@ -5,11 +5,11 @@ description: "Use for UI, visual, artifact, or frontend work after product path 
 
 # Noootwo Design
 
-Turn a settled product path into a visual system, a reviewable artifact, and a handoff. When the real user, main path, states, or acceptance are unsettled, invoke the `noootwo-product` skill first: read its `SKILL.md` and follow it. Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate only independent read-only work; keep one writer; verify summaries against source.
+Turn a settled product path into a visual system, a reviewable artifact, and a handoff. When the real user, audience contract, main path, states, or acceptance are unsettled, invoke the `noootwo-product` skill first: read its `SKILL.md` and follow it. Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate only independent read-only work; keep one writer; verify summaries against source.
 
 ## 1. Size the work
 
-- `quick` — local polish inside the existing system. Read the current UI and tokens, make the change, check it.
+- `quick` — local polish inside the existing system. Read the current UI and tokens, make the change, check it; if the change touches copy, notes, settings, or visible technical data, run the Comprehension Gate.
 - `standard` — normal non-trivial UI. Design Read, one artifact, responsive and typography review.
 - `deep` — high-character, brand-heavy, or previously rejected work. Add evidence and directions.
 - `production` — implementing an approved design. Contract, tokens, components, states, artifact verification.
@@ -23,14 +23,14 @@ Declare this before choosing a look, for every mode except `quick`:
 ```
 Design Read
 - Surface kind:
-- Audience:
+- Audience contract: role, moment, familiarity, frequency, error cost, shared vocabulary
 - Product posture:
 - Visual posture:
 - Intervention / context / intent: leave simple | craft only | add moment — product function, frequency, risk, emotional or brand value, and whether the user explicitly requested motion or material
 - Variance / Motion / Density: low | medium | high
 ```
 
-Variance, motion, and density follow the exact feature and moment. Dense, high-frequency, evidence-heavy, or keyboard-driven work stays simple; rare first-use, completion, explanation, launch, and brand moments may justify more.
+Variance, motion, and density follow the exact feature and moment. Dense, high-frequency, evidence-heavy, or keyboard-driven work stays simple; rare first-use, completion, explanation, launch, and brand moments may justify more. Density and language follow the audience contract: trained, frequent work may be dense and domain-specific; first-use and consumer work stays plain and default-led.
 
 **Done when:** each dial has a value and a reason.
 
@@ -53,6 +53,7 @@ Write this before editing UI files, for `standard`, `deep`, and `production`:
 ```
 Design Contract
 - Structure:
+- Information exposure: visible | secondary | hidden; outcome → decision evidence → implementation detail
 - Type scale:
 - Colour and token roles:
 - Component behaviour:
@@ -84,16 +85,17 @@ Review the rendered thing, never the prose. Read `references/review.md` for the 
 ```
 Artifact Review
 - Evidence:
+- Comprehension gate:
 - Strongest authored move:
 - Defects:
-- Slop drift:
+- Slop drift / technical noise:
 - Decision: ready | refine | pivot | needs artifact
 - Return action:
 ```
 
 Verify in bounded passes: build fully, inspect once with a batch covering the relevant viewports together, fix everything it shows in one batch, then confirm with at most one more round and stop.
 
-`ready` requires artifact evidence and no blocking layout, readability, responsive, motion, product-comprehension, or slop-drift defect. Every other decision names exactly one return action.
+`ready` requires artifact evidence and no blocking layout, readability, responsive, motion, comprehension, or slop-drift defect. Every other decision names exactly one return action.
 
 **Done when:** a decision is recorded against real evidence, and `ready` is never self-certified — prefer a reviewer that did not build the artifact.
 
@@ -112,8 +114,7 @@ When this is not design work, name the failed layer and invoke the owning skill 
 - `references/craft.md` — anti-slop, typography, colour, responsive, and data-UI craft floors.
 - `references/review.md` — scoring, safety gates, evidence-backed aesthetic flags, and final review.
 - `references/translate.md` — stack-native implementation, assets, and handoff.
-- `references/evidence.md` — verified cases and distilled reference-skill rules.
-- `references/notes.md` — research notes and cost boundaries.
+- `references/evidence.md` and `references/notes.md` — verified cases, distilled reference-skill rules, research notes, and cost boundaries.
 - `scripts/extract_design_tokens.mjs` — capture real colours, type, spacing, shape, and motion values from a live page, and report drift against a saved baseline.
 
 Missing skill fallback: first try `npx -y skills add noootwo/noootwo-vibe --global --agent codex --skill <name> --yes`; if install fails, take the smallest direct fallback and mark the record `skill-missing: <name>` (for persistence, write the owning file directly).

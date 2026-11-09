@@ -26,22 +26,58 @@ Good product decisions move from user reality to surface behavior:
 
 If an upper layer is unclear, do not solve it by adding UI surface or implementation detail.
 
+### Audience Contract
+
+The audience decides how much the interface may ask the user to know. Make that decision explicit before design starts:
+
+| Field | Decision it settles |
+| --- | --- |
+| Primary user and moment | who is acting, under what pressure, on which device or environment |
+| Familiarity and shared vocabulary | what they already know; which domain terms have evidence, not assumption |
+| Usage frequency | first use, occasional, daily, or trained operator |
+| Error and decision cost | cost of a wrong choice, irreversible action, or failed recovery |
+| Learning vs throughput | optimize for first-use comprehension or repeated speed |
+| Information budget | what must be visible, what waits, what never appears |
+
+Derive one `Interaction Posture` from the contract:
+
+- density: low | medium | high
+- language: plain | shared domain | technical evaluator
+- main path: one primary action | multi-task workspace
+- settings: default-first | explicit configuration
+- expert affordances: none | shortcuts, batch actions, compact layout
+- help: inline at the decision | on demand | none
+
+Rules:
+
+- Do not run the contract as a questionnaire. Fill it from the request, repository evidence, or a recorded assumption; ask only the field that would change the first screen.
+- Name one primary audience per surface. When two audiences must share it, give each a distinct path or layer; do not average them into a generic middle.
+- `Admin` is not a vocabulary licence. A domain term is valid when the same users already use it in their work. Implementation names, service names, database fields, flags, framework names, and model names are not domain terms.
+- Consumer and first-use surfaces default to plain language, one clear action, strong defaults, and low density.
+- Trained operational surfaces may use high density, keyboard-first interaction, batch actions, and shared domain terms. Density does not license implementation jargon.
+- Technical evidence is content, not noise, when the user is evaluating integration, security, performance, compatibility, or risk. Lead with the outcome, then the evidence.
+- Settings appear only when a recurring user decision cannot be handled by a good default. Label the entry by the user's outcome, not the mechanism.
+- When the audience decision would change the first screen and is unknown, keep it unsettled and ask. When it would not change the screen, record the assumption and proceed.
+
 ### Backend-Shaped Flow Correction
 
 Backend-shaped requests expose internal objects before user intent. Correct them before design:
 
 - Replace object names with user tasks.
 - Replace status flags with what the user sees and can do next.
+- Replace implementation names with the user's task or a domain term the user already shares.
 - Group fields by decision moment, not database table.
 - Hide advanced or destructive choices until context exists.
 - Make success visible as user progress, not only saved data.
 - Turn errors into recovery paths, not system explanations.
+- Keep technical evidence only when it supports a user decision, and place it after the outcome it supports.
 
 ### Product-to-Design Readiness
 
 Design handoff is ready only when these are concrete enough:
 
-- `real user`: role, context, and pressure are named.
+- `real user and audience contract`: role, context, pressure, familiarity, frequency, error cost, and shared vocabulary are named.
+- `interaction posture`: density, language, main-path shape, settings stance, expert affordances, and help stance are derived from the audience contract.
 - `scenario`: the moment of use is specific.
 - `main path`: entry, steps, and success feedback are known.
 - `states`: relevant loading, empty, error, success, permission, and boundary states are listed.
@@ -62,15 +98,19 @@ A useful handoff lets `$noootwo-design` choose visual structure without inventin
 - Weak: "Build upload page, history list, detail page, dashboard, settings."
 - Good: "Payment failure state lets the parent retry, switch method, or keep the reserved seat for 10 minutes."
 - Weak: "Show error toast on pay API failure."
+- Good: "Night-shift dispatchers use 'ASN' and 'pick wave' daily; they need a dense queue, keyboard priority changes, and no service, flag, or database names."
+- Weak: "Admin users need a dashboard with status filters and advanced settings."
 
 ### What Not To Hand Off
 
 Do not hand off as design-ready when:
 
 - the real user is still "admin", "user", or "customer" without context
+- the audience is only "B2C" or "B2B", with no role, frequency, error cost, or shared vocabulary
 - the request is only a module list or navigation sitemap
 - the main path mirrors tables, CRUD endpoints, or status enums
 - empty, permission, onboarding, payment, AI trust, or error recovery changes the core screen structure
+- technical evidence is listed without the user decision it supports
 - acceptance is written as component names, DOM shape, or API fields
 
 
@@ -205,8 +245,9 @@ Use a Product Choice Challenge inside Product Discovery when one choice blocks c
 Check these before proposing scope:
 
 - Who is the real user and what pressure are they under?
-- What do they already understand before arriving here?
-- What words would they use for this task?
+- What do they already understand before arriving here, and how often do they do this task?
+- What is the cost of a wrong choice or a failed recovery?
+- Which words do they already use, and which internal terms would they not recognize?
 - What do they need to decide now, and what can wait?
 - What would make them feel stuck, unsafe, or unsure?
 - What is the smallest result that feels complete from their side?
@@ -220,7 +261,8 @@ Classify each proposed item:
 - `must exist`: required for the current user outcome
 - `can wait`: useful but not needed for the first complete path
 - `hide behind progressive disclosure`: useful only after context or intent is clear
-- `should not exist`: confusing, premature, developer-facing, or not tied to user value
+- `should not exist`: confusing, premature, or not tied to user value
+- `implementation detail`: belongs in code, runbooks, or developer docs, not the product surface
 
 Do not keep a feature because it is easy to implement. Keep it only if it improves the user outcome.
 
@@ -260,6 +302,9 @@ Red flags:
 - screens organized by database object instead of user task
 - many equal-weight actions before the user has context
 - labels that expose internal states, IDs, flags, or implementation terms
+- notes that explain how the system is built instead of what the user can decide or do
+- settings for a choice a good default already handles
+- technical evidence placed before the result it supports
 - success that is only visible as data changing somewhere else
 - errors that explain the system but not the next user action
 - flows that look tidy to the maker but cannot pass a first-time user comprehension check
@@ -272,6 +317,8 @@ Write acceptance as observable user behavior:
 - Weak: "Render a permission dialog with `courseId` and `status`."
 - Good: "After upload failure, the teacher can retry without reselecting the file."
 - Weak: "Show error toast on API 500."
+- Good: "A first-time customer can name the next step and complete it without seeing framework, model, database, or internal-status terms."
+- Good: "A dispatcher can scan the queue, change priority with the keyboard, and understand every status label from the team's existing workflow."
 
 Include technical criteria only after the user-visible behavior is clear.
 
@@ -280,6 +327,15 @@ Include technical criteria only after the user-visible behavior is clear.
 #### Product-to-Design Handoff
 
 - Real user:
+- Audience contract:
+  - Primary user and moment:
+  - Familiarity and shared vocabulary:
+  - Usage frequency:
+  - Error / decision cost:
+  - Learning vs throughput:
+  - Visible / secondary / hidden information:
+- Interaction posture:
+  - Density / language / main path / settings / expert affordances / help:
 - Scenario:
 - Main path:
 - States:
