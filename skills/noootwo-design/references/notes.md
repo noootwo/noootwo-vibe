@@ -195,8 +195,8 @@ Use this to prevent Noootwo Design from becoming too expensive for ordinary UI w
 ### Modes
 
 - `quick`: local polish. No source mining, no 3 directions, no spike comparison, no full harness completion. Use current UI, existing system/tokens when present, and one artifact or screenshot when available.
-- `standard`: normal UI design. Contextual intervention decision, light calibration, 1-3 relevant opportunity candidates, source lookup only after a candidate passes the gates, 1 artifact, typography and responsive review before ready.
-- `deep`: high-end, niche, brand-heavy, Claude Design-like, or major redesign work. Source accessibility, evidence-backed discovery, 2-3 artifact spikes, screenshot comparison, typography and responsive gates.
+- `standard`: normal UI design. Contextual intervention decision, light calibration, a task/platform reference audition with 2-3 candidates from at least two roles, one primary and at most one narrow supplement, one artifact, typography and responsive review before ready.
+- `deep`: high-end, niche, brand-heavy, Claude Design-like, or major redesign work. A 3-5 source audition, at least one same-medium source, complete capture, licence and fit records, 2-3 artifact spikes, screenshot comparison, typography and responsive gates.
 - `production`: approved design implementation. Token mapping, stack playbook, screenshot or preview acceptance.
 - `detail-translation`: not a standalone mode. It is an implementation-stage reinforcement layer for surfaces that otherwise drift back to defaults.
 - `adopt-project`: first use in an existing project. Capture baseline and constraints before redesigning.
@@ -213,8 +213,10 @@ Use this to prevent Noootwo Design from becoming too expensive for ordinary UI w
 - Use the detail-translation layer only for implementation-bound work, production review, or post-review drift. Do not make it the default cost of quick polish or early direction exploration.
 - Use readiness validation for delivery and handoff confidence, not as the first step of ordinary UI work.
 - Skip the spec/plan gate only for quick polish, explicit handoff-only work, or explicit user approval to proceed without the gate.
-- `leave simple` and `craft only` are valid outcomes and do not trigger external source mining, direction menus, or new tools.
+- `leave simple` and `craft only` are valid outcomes and do not trigger expressive source mining, direction menus, or new tools. They do not remove the task/platform light audition required for a standard UI task.
 - Only an `add moment` that survives the frequency, purpose, speed, and function gates may trigger a source lookup, library comparison, or expressive artifact spike.
+- The free source path must remain complete. Mobbin, Refero, and other login or paid sources are accelerators only when the user already has access.
+- Standard light audition records one inspectable primary capture, not a full token extraction. Deep capture and fit scoring start only for deep work.
 - If time or environment blocks source mining, screenshots, or target-stack previews, record the limitation and reduce readiness confidence.
 - If only 1 deep spike is possible, mark the exploration as low-confidence and do not claim full territory comparison.
 - Prefer existing project preview tools before adding new dependencies.
@@ -244,12 +246,52 @@ Recorded 2026-10-09 after comparing the three user-provided articles with the cu
 ### Cost Boundary
 
 - Quick polish does no opportunity scan.
-- Standard does the cheapest internal pass and searches only after a candidate survives.
+- Standard does the task/platform light audition before drafting, then searches for expressive motion only after a candidate survives.
 - Deep pays for capture, comparison, and spikes when the product context supports them.
 
 ### Real-Project Regression Recorded 2026-10-10
 
 An explicit user request for motion on a real product surface was silently downgraded to `craft only`. The implementation used only a few CSS transitions while an installed Motion runtime and the recommended material options were left unused. The fix adds a User Intent Gate, requires an implementation tool and trigger for `add moment`, and requires installed or user-named libraries to be selected, replaced by a recorded equivalent, or rejected with a concrete reason. The model-behaviour result still needs a real-project rerun.
+
+## Source Roles And Reference Audition Notes
+
+Recorded 2026-11-11 after probing the source pools and reviewing the design workflow. The source matrix lives in the `noootwo-research` skill at `references/design-source-registry.md`.
+
+### Why The Old Pool Was Not Enough
+
+The old source list mixed four different jobs: real product evidence, platform rules, visual inspiration, and implementation demos. A good-looking gallery could therefore outrank a real product flow, while a component-library demo could be mistaken for visual direction. The new audition assigns one primary role before opening candidates:
+
+- `product evidence` decides real screens, flows, states, density, and conventions.
+- `platform convention` decides platform structure, accessibility, controls, and native behavior.
+- `visual direction` decides composition, type, material, color proportion, and atmosphere only.
+- `motion mechanism` decides trigger, duration, curve, layer, and state meaning only.
+- `implementation resource` decides component anatomy, accessibility plumbing, and implementation cost only.
+- `asset source` decides font, icon, image, illustration, or 3D availability and licence only.
+- `research craft` supplies user, language, accessibility, and design-rule evidence, not a visual style.
+
+### Audition Cost
+
+- `quick` does no external audition.
+- `standard` uses 2-3 candidates, at least two roles, one inspectable primary, and no full extractor by default.
+- `deep` uses 3-5 sources, at least one same-medium source, full capture and licence records, fit scoring, and 2-3 spikes.
+- `production` reuses the locked references and returns to discovery only when the surface changes or the mechanism drifts.
+
+### User-Named Source Boundaries
+
+- Framer Gallery is `visual direction` for website and portfolio composition. It has a readable `?md` representation but no structured product-screen or flow search.
+- Awwwards is `visual direction` and motion showcase. Its public agent-readable index is limited to annual categories and nominees; gallery and search routes have crawler restrictions. It cannot prove product information architecture.
+- Recent is `visual direction` across web, interface, branding, and motion. It has no `llms.txt` or structured flow API; its content signal permits reference use, not AI-training rights.
+- React Bits is `motion mechanism` and `implementation resource` for React Web. It is not a default product-UI style, not a Vue/Flutter/native substitute, and its source must not be vendored.
+- Thrine remains unclassified until its identity is confirmed. `thrine.app` is a 3D scene/template tool; `thethrine.com` is a web/portfolio studio. Neither is product-flow evidence.
+- Mobbin and Refero provide structured screen and flow search only on paid plans. Their presence is optional; the free path uses reachable product artifacts, screenshots, and design systems.
+
+### Project Memory
+
+`.noootwo/appearance-ledger.md` records accepted and rejected reference decisions by surface and audience after review. It is project-local, is read section by section, and never becomes a global taste profile or a second `.noootwo` state root. Stable brand rules still belong in `.noootwo/system.md` and `.noootwo/design-tokens.md`.
+
+### Evidence Limits
+
+Access changes. The registry records the probe date; a source used for a current decision or release claim must be re-probed. A gallery screenshot is not a production asset, a component demo is not fit evidence, and a pattern observed in a shipped product is not proof that it improved an outcome. These limits are deliberate, not missing automation.
 
 ## Product Design And Motion Web Borrow Notes
 

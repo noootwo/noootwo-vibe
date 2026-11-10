@@ -35,6 +35,22 @@ Status: pending; replace with a real review before any ready/handoff claim
 - Safety hard-gate result: pass or fail, with the checked gates: TBD
 - Aesthetic flags: TBD
 - Evidence of harm or intentional use: TBD
+- Reference audition: pass or fail: TBD
+
+## Mechanism Landing
+
+Record every selected primary or supplement whose mechanism the design contract relies on. Use screenshot, DOM/token diff, component rule, state transition, or motion evidence.
+
+- Mechanism landing result: pass or fail: TBD
+
+### Mechanism 1
+
+- Source and role: TBD
+- Borrowed mechanism: TBD
+- Artifact evidence: TBD
+- Improved comprehension, operation efficiency, state recognition, or brand memory: TBD
+- Landed as: TBD
+- Verdict: landed, decoration, swallowed, or missing: TBD
 
 ## Generic Drift Checks
 

@@ -17,11 +17,16 @@ One directory per source the direction leans on:
 - captured:
 - tool:
 - evidence level: real product flow | design system | curated gallery | community signal | single shot
+- role: product evidence | platform convention | visual direction | motion mechanism | implementation resource | asset source | research craft
+- surface and audience:
+- platform:
 - same-medium fit: yes | no | mixed, and why
 - accessibility: reachable | login required | fallback | unreachable
 - artifact inspected: yes | no
 - observed evidence: layout, type ratio, palette proportion, density, state grammar, or motion behavior actually seen
 - attribution and licence:
+- decision: primary | supplement | rejected, with the reason
+- last verified:
 - capture: ./01-screen.png
 ```
 

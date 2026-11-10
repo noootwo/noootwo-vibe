@@ -19,7 +19,10 @@ COMPARED_DIRECTION_RE = re.compile(
     r"^##\s+Compared Direction\s+\d+\s*\n(.*?)(?=^##\s|\Z)",
     re.IGNORECASE | re.MULTILINE | re.DOTALL,
 )
-SOURCE_BLOCK_RE = re.compile(r"^##\s+(?:Optional\s+)?Source\b.*$", re.IGNORECASE | re.MULTILINE)
+SOURCE_BLOCK_RE = re.compile(
+    r"^##\s+(?:Optional\s+)?(?:Source|Candidate)\b.*$",
+    re.IGNORECASE | re.MULTILINE,
+)
 
 
 def read(root: Path, relative: str) -> str:
@@ -40,7 +43,7 @@ def require(errors: list[str], condition: bool, message: str) -> None:
 
 def has_value(content: str, label: str) -> bool:
     pattern = re.compile(
-        rf"^\s*-\s*{re.escape(label)}\s*:\s*(?!\s*(?:TBD|pending|none|no|blocked|not selected yet)\s*$).+\S",
+        rf"^[ \t]*-[ \t]*{re.escape(label)}[ \t]*:[ \t]*(?![ \t]*(?:TBD|pending|none|no|blocked|not selected yet)[ \t]*$)[^\r\n]+\S",
         re.IGNORECASE | re.MULTILINE,
     )
     return bool(pattern.search(content))
@@ -48,7 +51,7 @@ def has_value(content: str, label: str) -> bool:
 
 def field_value(content: str, label: str) -> str | None:
     pattern = re.compile(
-        rf"^\s*-\s*{re.escape(label)}\s*:\s*(.+?)\s*$",
+        rf"^[ \t]*-[ \t]*{re.escape(label)}[ \t]*:[ \t]*(.*?)[ \t]*$",
         re.IGNORECASE | re.MULTILINE,
     )
     match = pattern.search(content)
@@ -91,8 +94,16 @@ def validate_source_records(root: Path, board: str) -> list[str]:
     blocks = SOURCE_BLOCK_RE.split(board)[1:]
     require(errors, len(blocks) >= 3, "reference board has fewer than 3 sources")
     for index, block in enumerate(blocks, start=1):
-        for label in ("Same-medium fit", "Artifact inspected", "Observed evidence", "Borrowed mechanism"):
+        for label in ("Same-medium fit", "Artifact inspected"):
             require(errors, has_recorded_value(block, label), f"reference source {index} missing {label.lower()}")
+        require(
+            errors,
+            any(
+                has_recorded_value(block, label)
+                for label in ("Observed mechanism", "Observed evidence", "Borrowed mechanism")
+            ),
+            f"reference source {index} missing observed mechanism or borrowed mechanism",
+        )
         inspected = (field_value(block, "Artifact inspected") or "").strip().lower()
         capture = (field_value(block, "Capture path") or "").strip().strip("`")
         if capture and capture.lower() not in {"unreachable", "none", "url-only", "url only", "blocked", "login required"}:

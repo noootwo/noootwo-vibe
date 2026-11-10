@@ -10,7 +10,7 @@ Turn a settled product path into a visual system, a reviewable artifact, and a h
 ## 1. Size the work
 
 - `quick` — local polish inside the existing system. Read the current UI and tokens, make the change, check it; if the change touches copy, notes, settings, or visible technical data, run the Comprehension Gate.
-- `standard` — normal non-trivial UI. Design Read, one artifact, responsive and typography review.
+- `standard` — normal non-trivial UI. Design Read, light reference audition (2–3 candidates), one artifact, responsive and typography review.
 - `deep` — high-character, brand-heavy, or previously rejected work. Add evidence and directions.
 - `production` — implementing an approved design. Contract, tokens, components, states, artifact verification.
 
@@ -38,9 +38,9 @@ Variance, motion, and density follow the exact feature and moment. Dense, high-f
 
 Compare materially different directions when style or structure is unresolved, and stop for the user's choice. A prose menu is not a decision: before the choice, show a low-cost real sample for each direction, or one fuller sample plus two lightweight variants when the runtime is weak. Read `references/direction.md` for the sample method, Style Evidence Check, and mechanism translation.
 
-Read `references/design-discovery.md` for the discovery pass and the `.noootwo/style-discovery.md` contract. When the work is high-character, niche, premium, or previously rejected, invoke the `noootwo-research` skill first: read its `SKILL.md` and follow it — a design claim needs a source, an artifact, or a screenshot.
+Read `references/design-discovery.md` for the discovery pass, the source matrix, and the `.noootwo/style-discovery.md` / `.noootwo/reference-board.md` contract. When the work is standard, high-character, niche, premium, or previously rejected, invoke the `noootwo-research` skill first: read its `SKILL.md` and follow it — a design claim needs a source, an artifact, or a screenshot.
 
-For `deep` work, prefer same-medium references and capture every source the direction leans on into `.noootwo/references/<slug>/`, with a `source.md` recording URL, date, evidence level, same-medium fit, inspected artifact evidence, accessibility result, and licence; capture real values from a live source with `scripts/extract_design_tokens.mjs` and its `NN-<label>.png` screenshot with `--screenshot` when a page or running product is reachable, and record inaccessible sources as `capture: unreachable`. A black or broken capture is not evidence. Lock the build target and what must not drift before drafting, and let one direction dominate instead of averaging several. `standard` work stays on the lighter path in `references/design-discovery.md`.
+For `standard` and `deep` work, use `.noootwo/reference-board.md` as the audition record. Standard uses 2–3 candidates, one primary screenshot, and one narrow supplement; deep uses 3–5 captured sources, same-medium evidence, licence, fit scoring, and 2–3 spikes. Capture every deep source into `.noootwo/references/<slug>/` with `source.md`; capture real values with `scripts/extract_design_tokens.mjs` and `--screenshot` when reachable. A black or broken capture is not evidence. Read `.noootwo/appearance-ledger.md` for a matching surface before searching, and write an entry only after review. Lock the build target and what must not drift before drafting, and let one direction dominate instead of averaging several.
 
 For standard, deep, and production work, read `references/motion.md` before the contract and make an intervention decision. `leave simple` and `craft only` are valid only when the user accepts them or a concrete blocker prevents motion; an explicit motion or material request defaults to `add moment`.
 
@@ -95,7 +95,7 @@ Artifact Review
 
 Verify in bounded passes: build fully, inspect once with a batch covering the relevant viewports together, fix everything it shows in one batch, then confirm with at most one more round and stop.
 
-`ready` requires artifact evidence and no blocking layout, readability, responsive, motion, comprehension, or slop-drift defect. Every other decision names exactly one return action.
+`ready` requires artifact evidence, the reference audition, mechanism-landing evidence for every borrowed primary or supplement, and no blocking layout, readability, responsive, motion, comprehension, or slop-drift defect. Every other decision names exactly one return action.
 
 **Done when:** a decision is recorded against real evidence, and `ready` is never self-certified — prefer a reviewer that did not build the artifact.
 

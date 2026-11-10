@@ -96,6 +96,7 @@ After a handoff or compaction, resume from the capsule and current artifacts; re
 
 - `references/research-method.md` — question framing, query fan-out, breadth and depth, the evidence ladder, verification, and anti-patterns.
 - `references/source-pools.md` — where to look by domain, the fallback ladder, and the access record.
+- `references/design-source-registry.md` — the design source matrix: roles, surfaces, platforms, access, licensing, and selection boundaries.
 - `references/tech-selection.md` — evaluating libraries and stacks, and when to choose the boring option.
 - `references/borrow-audit.md` — comparing existing skills and public prior art, the adoption gate, and the do-not-copy list.
 

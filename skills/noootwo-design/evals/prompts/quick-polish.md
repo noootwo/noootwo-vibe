@@ -5,7 +5,7 @@ Use `$noootwo-design` to only tighten spacing, typography, and hierarchy on one 
 Expected behavior:
 
 - Route to `quick`.
-- Do not run full source mining, deep discovery, 3 directions, or spike comparison.
+- Do not run external source mining, light audition, deep discovery, 3 directions, or spike comparison.
 - Read existing `.noootwo/system.md` and tokens if available.
 - Make small changes that preserve the current visual system.
 - Ask before changing color system, navigation, component language, or interaction model.

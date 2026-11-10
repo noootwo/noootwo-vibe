@@ -28,7 +28,7 @@ Thresholds:
 
 ### Output
 
-Write `.noootwo/review.md` with artifact evidence, intervention decision and fit, scores, calibration fit, style understanding fit, comprehension gate, product comprehension fit, user decision gate, safety hard-gate result, aesthetic flags with evidence of harm or intentional use, generic/Claude/framework/designer-grade flags, role critique, authored move or deliberate absence, viewport evidence, typography evidence, data evidence when relevant, default-override review, micro-detail pass, readiness gate, decision, return action, and next action.
+Write `.noootwo/review.md` with artifact evidence, reference audition, intervention decision and fit, scores, calibration fit, style understanding fit, comprehension gate, product comprehension fit, user decision gate, mechanism landing, safety hard-gate result, aesthetic flags with evidence of harm or intentional use, generic/Claude/framework/designer-grade flags, role critique, authored move or deliberate absence, viewport evidence, typography evidence, data evidence when relevant, default-override review, micro-detail pass, readiness gate, decision, return action, and next action.
 
 ### Intervention Review
 
@@ -71,6 +71,9 @@ Before `ready`, confirm:
 - `.noootwo/directions.md`, `.noootwo/review.md`, and `.noootwo/design-tokens.md` are not pending
 - required files do not contain unresolved `TBD`
 - review records artifact evidence and a decision
+- standard and deep work record a passing reference audition with the required candidate count, role coverage, source access, and inspected primary capture
+- every selected primary or supplement records what mechanism landed and evidence that it is present in the artifact
+- `.noootwo/appearance-ledger.md` exists, is project-local, and has no pending or unresolved entry
 - high-character work records style understanding fit against visual evidence
 - product UI work records the comprehension gate against the primary user, first screen, and rendered copy
 - visible notes, technical details, and settings pass the note budget and information-exposure check
@@ -84,6 +87,7 @@ Before `ready`, confirm:
 - an explicit motion or material request records whether the user accepted no authored motion
 - `leave simple` or `craft only` records craft-sufficiency evidence and rejected opportunities
 - `add moment` records one primary authored move, its trigger, implementation tool, evidence or platform rule, and fallback
+- every selected reference mechanism is `landed`, not `decoration`, `swallowed`, or `missing`; the review names the evidence and the user outcome it improves
 - any installed or user-named library or shader is selected, replaced by a recorded equivalent, or rejected with a concrete reason
 - an authored move is not required merely because the artifact is new or visually quiet
 - the safety hard-gate result is pass, and every aesthetic flag records whether it caused demonstrated harm or was intentional
@@ -135,6 +139,21 @@ Put the reference and the implementation side by side in the same viewport and s
 - copy and content: app-specific text, empty, loading, error, permission, and success states
 
 Distinguish fidelity defects from intentional mechanism translation. A deliberate `borrow-mechanism` adaptation is not a fidelity defect; a faithful `replicate` that silently changes the source is.
+
+### Mechanism Landing QA
+
+Run this for every `borrow-mechanism` primary or supplement that the design contract relies on. `Reference intent: replicate` keeps the separate Source Fidelity QA; fidelity is not required for mechanism translation.
+
+Compare the reference record, approved contract, and rendered artifact:
+
+- The named mechanism appears in the artifact, not only in the reference board.
+- The evidence is inspectable: screenshot, DOM or token diff, component rule, state transition, or motion recording.
+- The review states what the mechanism improves: comprehension, operation efficiency, state recognition, or brand memory.
+- The verdict is `landed`, `decoration`, `swallowed`, or `missing`.
+
+`decoration` means it is visible but does no product job. `swallowed` means a default component, token, or framework behavior erased it. `missing` means it never reached the artifact.
+
+A selected mechanism that is not `landed` blocks `ready`. Return to the artifact or approved spec when the translation failed; return to discovery only when the reference itself was wrong. Do not require pixel-level similarity, and do not count a source's presence in a document as landing.
 
 ### Generic And AI-Slop Flags
 
@@ -232,6 +251,8 @@ Theme the browser surfaces models usually skip: text selection, caret, custom sc
 - Implementation-bound work missing component restyling matrix or default override pass: return to implementation plan.
 - Artifact is close but still generic and no micro-detail pass was recorded: return to artifact or enable the detail-translation gate.
 - Missing deep source evidence or spike comparison: return to discovery or artifact.
+- Missing standard or deep reference audition, source roles, candidate captures, or inspectable primary evidence: return to discovery.
+- A selected borrowed mechanism is `decoration`, `swallowed`, or `missing`: return to artifact or approved spec.
 - Missing token mapping in production: return to `.noootwo/design-tokens.md`.
 - Missing preservation contract: return to directions or approved spec.
 - Failed typography: return to typography pass.
