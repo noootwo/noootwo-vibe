@@ -237,7 +237,7 @@ Each child skill has its own `VERSION` file and tag prefix. Current source versi
 - `noootwo-research@v0.8.0`
 - `noootwo-onboard@v0.5.0`
 
-The root `VERSION` is the workspace version (`0.29.0`) and is not the release source for child skills. Child tags are created only after a validated batch lands on `main`; the versions above are the source versions for this unreleased candidate.
+The root `VERSION` is the workspace version (`0.29.0`) and is not the release source for child skills. Child tags are created only after a validated batch lands on `main`; the versions above are the published source versions for release `0.29.0`.
 
 ## Delivery Policy
 
