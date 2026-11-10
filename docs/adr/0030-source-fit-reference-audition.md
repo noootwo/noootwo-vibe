@@ -2,8 +2,9 @@
 
 ## Status
 
-Accepted on 2026-11-11. This is an unreleased implementation candidate, not a
-published release.
+Accepted on 2026-11-11 and published in workspace `0.29.0` from protected-main
+commit `608a0b20ee72da2ea38e88a14ea46da774123253`. The sealed record is
+`docs/releases/0.29.0.md`.
 
 ## Context
 
