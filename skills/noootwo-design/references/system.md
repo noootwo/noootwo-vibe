@@ -72,7 +72,24 @@ Update `.noootwo/system.md` with:
 - When implementation is likely, refresh `.noootwo/design-tokens.md` instead of leaving style choices only in prose
 - Express colors, typography, layout, component vocabulary, motion, and states as role rules with usage limits
 - Record permanent rules, variable expression, and task exceptions so reference-inspired work does not become generic during implementation
+- Record each visual reference's role, the surfaces it may influence, and what it must not decide; use `.noootwo/reference-board.md` for the audition record
+- Use `.noootwo/appearance-ledger.md` for reviewed, project-local accept/reject decisions; stable brand rules still live in `system.md` and tokens
 - If the system memory cannot produce a compact `Do` / `Do not` instruction block for another agent, it is not specific enough
+
+## Visual Reference Roles And Project Memory
+
+The visual reference library is a set of bounded inputs, not a mood board. For each reference record:
+
+- `role`: `product evidence`, `platform convention`, `visual direction`, `motion mechanism`, `implementation resource`, `asset source`, or `research craft`
+- `surface and audience`: what task and user the reference can inform
+- `may influence`: composition, information density, state grammar, type, material, motion, or implementation anatomy
+- `must not decide`: flow, information architecture, brand identity, or unrelated surfaces
+- `evidence`: the inspected screenshot, artifact, or platform rule
+- `licence / reuse`: reference only, usable asset, attribution requirement, or prohibited reuse
+
+`.noootwo/appearance-ledger.md` remembers what this project accepted or rejected after review and what the mechanism landed as. It is project-specific and intentionally does not feed a global appearance profile. Before a new audition, read only the matching surface/audience section; current artifact evidence still outranks an older ledger entry.
+
+The ledger is not a substitute for `system.md`. A repeated, confirmed brand rule moves into `system.md` and `design-tokens.md`; a one-off experiment stays in the task record.
 
 
 ## System Extraction

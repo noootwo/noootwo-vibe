@@ -23,6 +23,12 @@ Status: pending; required for deep mode before high-character directions
 - Product UI, data UI, utility UI, native screen, campaign, launch, editorial, or other: TBD
 - Source pool restriction for this surface: TBD
 
+## Audience Contract
+
+- Primary user and moment: TBD
+- Familiarity, frequency, error cost, and shared vocabulary: TBD
+- Visible, secondary, and hidden information: TBD
+
 ## Intervention Decision
 
 - Product function, frequency, task risk, and emotional or brand value: TBD
@@ -46,6 +52,16 @@ Status: pending; required for deep mode before high-character directions
 - Weak signals: TBD
 - Domestic fallback sources: TBD
 
+## Source Roles
+
+- Product evidence: TBD
+- Platform convention: TBD
+- Visual direction: TBD
+- Motion mechanism: TBD
+- Implementation resource: TBD
+- Asset source: TBD
+- Research craft: TBD
+
 ## Source Evidence
 
 - Capture directory: `.noootwo/references/`, or `none` with the reason
@@ -54,6 +70,7 @@ Status: pending; required for deep mode before high-character directions
 - URL or artifact 3: TBD
 - Same-medium fit and observed evidence by primary source: TBD
 - Screenshot or visual proof location: TBD
+- Last verified: TBD
 
 ## Reference Lock
 
@@ -115,6 +132,17 @@ Status: pending; required for deep mode before high-character directions
 
 - AI gradient SaaS, card wall, fake dashboard, trend skin, or other rejected patterns: TBD
 - Rejected mimicry: designer/artist cosplay, signature-style mimicry, exact artwork/layout copying, or other: TBD
+
+## Rejected Candidates
+
+- Candidate, role, reason, and capture: TBD
+
+## Appearance Ledger
+
+- Matching surface / audience read: TBD
+- Reused accepted mechanism or anti-rule: TBD
+- Why current evidence confirms or changes it: TBD
+- Entry to write after review: TBD
 
 ## Spike Comparison
 

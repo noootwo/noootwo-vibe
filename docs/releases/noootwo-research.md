@@ -1,5 +1,15 @@
 # noootwo-research Releases
 
+## v0.8.0
+
+- Added `references/design-source-registry.md`: a role-based source matrix for product evidence, platform convention, visual direction, motion mechanism, implementation resources, asset sources, and research craft.
+- Added explicit boundaries for Framer Gallery, Awwwards, Recent, Thrine, React Bits, and ordinary component libraries. A gallery cannot decide product flow; a component demo cannot decide visual direction; React Bits is React Web motion/implementation evidence only.
+- Added a 2026-11-11 dynamic-source probe record covering access, evidence, licence/reuse, strength, and limitation. Mobbin and Refero are optional paid accelerators; the free path stays complete.
+- Added candidate intake, canonical promotion, 90-day freshness, and blocked-source rules. A source must be opened and inspected before it can become canonical.
+- Added a separate asset lane for fonts, icons, images, illustration, and 3D with licence, attribution, commercial-use, access, and fallback checks. Gallery screenshots are not production assets.
+- `source-pools.md` now routes design work through the role matrix while keeping its general pool and fallback ladder.
+- No new public skill, dependency, or paid service was added.
+
 ## v0.7.2
 
 - The handoff rule now resumes from the capsule and current artifacts after a handoff or compaction and reloads the research body only when research owns the next decision.

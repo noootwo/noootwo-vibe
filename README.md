@@ -9,14 +9,14 @@ It publishes twelve focused skills — a router plus eleven specialists:
 | `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in | `0.7.0` |
 | `noootwo-workflow` | model-invoked | Chooses read depth, re-matches one owner after compaction or a phase change, and schedules shape-before-implementation, scoped Change Checks, delivery integration, Release Verification Ledger handoffs, and the full Release Check | `0.24.0` |
 | `noootwo-product` | model-invoked | Settles real user, audience contract, interaction posture, first loop, scope, main path, states, and acceptance before design or build | `0.13.0` |
-| `noootwo-design` | model-invoked | Turns a settled product path into a context-aware visual intervention, information exposure, tokens, a Design Contract, and a reviewed artifact | `0.21.0` |
+| `noootwo-design` | model-invoked | Turns a settled product path into a context-aware visual intervention, source-role audition, information exposure, tokens, a Design Contract, and a reviewed artifact | `0.22.0` |
 | `noootwo-tdd` | model-invoked | Owns red-green-refactor and relevant-test evidence for behavior-changing code | `0.6.1` |
 | `noootwo-code-health` | model-invoked | Shapes a non-obvious change, runs a scoped Change Check after each requirement, and a full Release Check before release | `0.18.0` |
 | `noootwo-delivery` | model-invoked | Gives each requirement an isolated branch/worktree, resolves concurrent overlap, and integrates through protected `main` | `0.1.0` |
 | `noootwo-release` | model-invoked | Owns main-only production sources, the Release Verification Ledger, versioning, tags, immutable artifacts, deployment traces, provenance, rollback, and release health | `0.4.0` |
 | `noootwo-state` | model-invoked | Reads and records project state and context, produces bounded capsules, inspects files, captures cold evidence, and chooses the storage form and owning layer | `0.6.1` |
 | `noootwo-debug` | model-invoked | Confirms claims with layer-appropriate evidence, proves a failure's cause, bounds the fix, and closes systemically | `0.6.1` |
-| `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, and borrows mechanisms instead of surfaces | `0.7.2` |
+| `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, separating source roles and borrowing mechanisms instead of surfaces | `0.8.0` |
 | `noootwo-onboard` | model-invoked | Enters an unfamiliar project, audits context health and the skills it needs | `0.5.0` |
 
 The repository root is not a published skill. It is the shared workspace for manifests, docs, validation, release helpers, and CI.
@@ -133,7 +133,7 @@ npx skills add ./skills/noootwo-design --list
 
 `noootwo-product` settles what should exist before anything is designed or built. It reads discoverable facts itself, names what is unsettled, and then grills the frontier — the questions answerable now — one round at a time, each question carrying options and a recommendation. An unresolved first round starts from observed facts and proposals stated separately, then asks one controlling question or all independent root questions together. It records user-owned how decisions separately from agent defaults, including each default's reason and reopen condition. Before handoff it records an Audience Contract — primary user and moment, familiarity and shared vocabulary, frequency, error cost, and information budget — and derives the Interaction Posture for density, language, settings, expert affordances, and help. It ends when the frontier is empty and the user confirms a shared understanding, then produces the Product-to-Design Handoff.
 
-`noootwo-design` turns a settled product path into a contextual visual intervention. It declares a Design Read, decides whether the exact feature and moment should `leave simple`, use `craft only`, or `add moment`, and only then considers motion, shaders, sound, or haptics. A candidate must pass frequency, purpose, speed, and function gates before source research or a new tool starts; rejected opportunities stay visible. When a direction choice remains materially unresolved, it presents real low-cost samples rather than a prose menu, and the user chooses after seeing them. `leave simple` and `craft only` remain valid outcomes when the product needs clarity or speed, but an explicit user request for motion or material defaults to `add moment` and cannot be silently downgraded. The implementation must name its tool and trigger; an installed or user-named library or shader is selected, replaced by a recorded equivalent, or rejected with a concrete reason. The skill writes a Design Contract before editing, including what is visible, secondary, or hidden and the order outcome → decision evidence → implementation detail. It reads the craft floor immediately before building, and reviews the rendered artifact in bounded passes through a Comprehension Gate: first-screen purpose and next action, the user's vocabulary, technical-term justification, note budget, density fit, settings stance, and error recovery. Deep references prefer the target medium and must have been inspected; broken captures are not evidence. Repeated aesthetic patterns are evidence flags, while accessibility, readability, real content, state integrity, and interaction recovery remain hard gates. For `deep` work it also extracts real values from a reachable page with its zero-dependency Chrome extractor, locks the build target, and reports drift against that baseline afterwards. When an authored moment is selected, motion is a language rather than a field: personality, register, millisecond scale, easing, choreography, and reduced-motion fallback. `ready` is never self-certified. When the real user, audience contract, main path, states, or acceptance turn out to be unsettled, it invokes `noootwo-product`.
+`noootwo-design` turns a settled product path into a contextual visual intervention. It declares a Design Read, decides whether the exact feature and moment should `leave simple`, use `craft only`, or `add moment`, and only then considers motion, shaders, sound, or haptics. Every non-quick UI task runs a source-role audition: `standard` uses 2-3 candidates and one inspected primary capture; `deep` uses 3-5 captured sources, same-medium evidence, licence records, fit scoring, and spikes. Product evidence, platform convention, visual direction, motion, implementation resources, assets, and research craft cannot borrow one another's authority. A gallery cannot decide a dashboard flow, and a component demo cannot become the art direction. The project-local `.noootwo/appearance-ledger.md` remembers reviewed accepts and rejects but never becomes a global taste profile. Mechanism Landing QA checks that every selected primary or supplement mechanism is present in the artifact and improves a named user outcome; a missing or swallowed mechanism blocks `ready`. A candidate must pass frequency, purpose, speed, and function gates before expressive source work or a new tool starts; rejected opportunities stay visible. When a direction choice remains materially unresolved, it presents real low-cost samples rather than a prose menu, and the user chooses after seeing them. `leave simple` and `craft only` remain valid outcomes when the product needs clarity or speed, but an explicit user request for motion or material defaults to `add moment` and cannot be silently downgraded. The skill writes a Design Contract before editing, including what is visible, secondary, or hidden and the order outcome → decision evidence → implementation detail. It reviews the rendered artifact through a Comprehension Gate: first-screen purpose and next action, the user's vocabulary, technical-term justification, note budget, density fit, settings stance, and error recovery. Deep references prefer the target medium and must have been inspected; broken captures are not evidence. Accessibility, readability, real content, state integrity, and interaction recovery remain hard gates. `ready` is never self-certified. When the real user, audience contract, main path, states, or acceptance turn out to be unsettled, it invokes `noootwo-product`.
 
 `noootwo-tdd` owns the test-first loop for behavior-changing code. It requires a failing test first, the minimal implementation, relevant-test proof, and refactoring only after green. Red and green are the adding-function hat; the post-green refactor is the refactoring hat, and the two never mix. The full suite is a Release Check, not the TDD exit. When the implementation shape or seam is unsettled, it returns to workflow instead of inventing architecture inside the loop. It rejects production-first, tests-after, manual-test-only, and “too simple to test” reasoning.
 
@@ -198,6 +198,12 @@ if python skills/noootwo-design/scripts/validate_noootwo_readiness.py "$tmpdir" 
   echo "Expected pending bootstrap harness to fail readiness validation"
   exit 1
 fi
+python skills/noootwo-design/scripts/validate_noootwo_readiness.py \
+  docs/experiments/fixtures/reference-audition-2026-11-11 \
+  --reference-audition
+python skills/noootwo-design/scripts/validate_noootwo_readiness.py \
+  docs/experiments/fixtures/upstream-adoption-2026-10-27 \
+  --deep-mode --strict-workflow --style-evidence
 ```
 
 The readiness command is expected to fail on a freshly bootstrapped pending harness unless it is used inside a completed design workflow.
@@ -221,17 +227,17 @@ Each child skill has its own `VERSION` file and tag prefix. Current source versi
 - `noootwo-ask@v0.7.0`
 - `noootwo-workflow@v0.24.0`
 - `noootwo-product@v0.13.0`
-- `noootwo-design@v0.21.0`
+- `noootwo-design@v0.22.0`
 - `noootwo-tdd@v0.6.1`
 - `noootwo-code-health@v0.18.0`
 - `noootwo-delivery@v0.1.0`
 - `noootwo-release@v0.4.0`
 - `noootwo-state@v0.6.1`
 - `noootwo-debug@v0.6.1`
-- `noootwo-research@v0.7.2`
+- `noootwo-research@v0.8.0`
 - `noootwo-onboard@v0.5.0`
 
-The root `VERSION` is the workspace version (`0.28.0`) and is not the release source for child skills. Child tags are created only after a validated batch lands on `main`; the versions above are the source versions for this release.
+The root `VERSION` is the workspace version (`0.29.0`) and is not the release source for child skills. Child tags are created only after a validated batch lands on `main`; the versions above are the source versions for this unreleased candidate.
 
 ## Delivery Policy
 

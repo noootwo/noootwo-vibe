@@ -14,7 +14,9 @@ If no URL, screenshot, artifact, or platform documentation can be recorded, the 
 
 ## Design and UI
 
-Probed 2026-09-17 by HTTP request and by rendering each page in a real headless browser. Reachability is what this probe observed; re-check it in your own pass and record the result, because a source can change without notice.
+Initial pool probe: 2026-09-17 by HTTP request and by rendering each page in a real headless browser. The design-specific role, access, licence, and 2026-11-11 probe record live in [design-source-registry](design-source-registry.md). Reachability is what the named probe observed; re-check it in your own pass and record the result, because a source can change without notice.
+
+For design work, read [design-source-registry](design-source-registry.md) before using this pool. It separates task evidence, platform convention, visual direction, motion mechanism, implementation resources, assets, and research craft.
 
 ### Agent skills and plugin prior art
 
@@ -23,20 +25,18 @@ Probed 2026-09-17 by HTTP request and by rendering each page in a real headless 
 
 Order the search by what survives without a subscription, and treat the domestic pool as first-class rather than as a consolation.
 
-Order the search by what survives without a subscription, and treat the domestic pool as first-class rather than as a consolation.
-
 ### Product flows and app screens
 
 - **Free and reachable without a login** — ScreensDesign (`/explore/` and its screen-type, flow, and element indexes). Real mobile app screens with direct image URLs. No free agent interface; capture in a browser.
 - **Free with an account** — Pttrns (mobile patterns), Appshots (flows and apps). Both gate the library behind a signup; a logged-in browser session is enough.
 - **Free preview only** — Refero. Anonymous search returns real results and then gates the remainder behind a login. Its MCP is a paid plan, so treat it as human-facing evidence.
-- **Paid and agent-native** — the Mobbin MCP (`https://api.mobbin.com/mcp`, Pro and above) and the Refero MCP (`https://api.refero.design/mcp`). The Mobbin free tier explicitly excludes search, flows, and MCP. Use these only when the user already has access; the free path must not depend on them.
+- **Paid and agent-native** — the Mobbin MCP (`https://api.mobbin.com/mcp`, Pro and above) and the Refero MCP (`https://api.refero.design/mcp`). The Mobbin free tier explicitly excludes search, flows, and MCP. Use these only when the user already has access; the free path must not depend on them. Mobbin's `llms.txt` documents screen, flow, and section search; Refero documents styles, screens, and flows. Their own guidance says a visible pattern is a convention, not proof of effectiveness.
 - **Blocked, do not plan around** — Screenlane, Page Flows, Land-book, and UXArchive answer with a Cloudflare challenge that a real headless browser also fails to clear. `minimal.gallery` does not resolve. Record them as unreachable rather than as candidates.
 
 ### Web, campaign, and art direction
 
 - **Free and agent-readable** — the Siteinspire MCP at `https://www.siteinspire.com/api/mcp`. It answers without credentials, exposes eight read-only tools, and returns real screenshot URLs; its robots file allowlists user-directed agent user agents on that path. Its coverage is websites and marketing surfaces, not in-app product screens.
-- **Free and human-facing** — Awwwards, Savee, Recent (formerly Godly), Httpster, Landingfolio, Interface In Game, Collect UI. Browse or capture them in a browser; none publishes an agent interface.
+- **Free and human-facing** — Awwwards, Framer Gallery, Savee, Recent (formerly Godly), Httpster, Landingfolio, Interface In Game, Collect UI. Browse or capture them in a browser. Awwwards has a limited agent-readable annual-awards index, Framer Gallery exposes a readable `?md` view, and Recent has no structured agent index; none supplies full product-flow search.
 
 ### Product craft, design systems, and real product code
 
@@ -51,7 +51,7 @@ This tier decides product UI when no case library is reachable, and it is the on
 Probed 2026-09-17; Shaders and Paper Shaders were rechecked on 2026-10-09. Decide the intervention and register before searching: a source only transfers when the product function calls for it, and the decision rules live in the design skill's `references/motion.md`.
 
 - **Published platform values** — Material 3 motion overview, easing-and-duration, transitions, transition patterns, and the M3 Expressive motion theming article; Apple HIG motion. All reachable, all carrying real duration, easing, and spring values. The Carbon motion page is currently unreachable; do not cite it. Android platform documentation was unreachable from this environment on 2026-09-22; verify API names against the target Compose version.
-- **Libraries that publish agent-readable indexes** — Motion (`motion.dev/llms.txt`, MIT, React/Vue/JavaScript), GSAP (`gsap.com/llms.txt`, docs served as markdown, standard GSAP licence), Aceternity UI (`ui.aceternity.com/llms.txt` plus a JSON catalog at `ui.aceternity.com/api/components`), Magic UI (`magicui.design/llms.txt`, MIT, React/Tailwind landing-page components), React Bits (`reactbits.dev/llms.txt`, React copy-in, MIT + Commons Clause, dependencies vary), Animata (`animata.design/llms.txt`, MIT, shadcn-installable React primitives), Shaders (`shaders.com/llms.txt` and `llms-full.txt`; free WebGPU component library MIT; Pro presets, editor export, and MCP are paid and optional), Paper Shaders (`shaders.paper.design`, Apache-2.0, zero-dependency React/GLSL), and 21st.dev (registry or marketplace; verify each component licence). Use these only after an intervention candidate passes the design gates; an index is a capability source, not a suggestion to add effects.
+- **Libraries that publish agent-readable indexes** — Motion (`motion.dev/llms.txt`, MIT, React/Vue/JavaScript), GSAP (`gsap.com/llms.txt`, docs served as markdown, standard GSAP licence), Aceternity UI (`ui.aceternity.com/llms.txt` plus a JSON catalog at `ui.aceternity.com/api/components`), Magic UI (`magicui.design/llms.txt`, MIT, React/Tailwind landing-page components), React Bits (`reactbits.dev/llms.txt`, React copy-in, MIT + Commons Clause, dependencies vary), Animata (`animata.design/llms.txt`, MIT, shadcn-installable React primitives), Shaders (`shaders.com/llms.txt` and `llms-full.txt`; free WebGPU component library MIT; Pro presets, editor export, and MCP are paid and optional), Paper Shaders (`shaders.paper.design`, Apache-2.0, zero-dependency React/GLSL), and 21st.dev (registry or marketplace; verify each component licence). Use these only after an intervention candidate passes the design gates; an index is a capability source, not a suggestion to add effects. Treat a component/vendor demo as implementation evidence, not as a product-flow source.
 - **Vue motion and lightweight runtime options** — Vue Bits (`DavidHDev/vue-bits`, separate project from React Bits, same MIT + Commons Clause boundary, no `llms.txt` observed) for copy-in expressive Vue components; Motion for Vue (`motion.dev` Vue docs) for layout, gesture, and spring work; `@formkit/auto-animate` (MIT, zero dependencies, about 3.2KB gzip) for list enter, exit, and reorder. Prefer Motion for Vue over `@vueuse/motion`, whose last repository update predates the 2026-09 probe by more than a year.
 - **Curated demos and interaction showcases** — Codrops, Awwwards, Savee, Recent, Dribbble. Human-facing; capture in a browser.
 - **Restrained and designed register** — easings.net, cubic-bezier.com, transitions.dev, and the published demos of vaulted primitives such as Vaul and Sonner. Use these when the target is Quiet or Present rather than Expressive.

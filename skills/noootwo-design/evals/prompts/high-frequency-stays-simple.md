@@ -9,10 +9,11 @@ Expected behavior:
 - Improve real usability issues through hierarchy, density, state clarity, or platform feedback instead of adding decoration.
 - Reject motion for keyboard-initiated, high-frequency, or data-reading moments.
 - State why no authored moment is needed and what evidence shows the surface is already sufficient.
+- Audition real operations products, data-UI guidance, and the relevant platform convention before drafting.
 
 Failure signals:
 
-- Scans external effect libraries because the task is visually ordinary.
+- Scans animation or effect libraries instead of real operations products and design systems.
 - Adds a signature animation, shader, sound, or new runtime to prove design effort.
 - Treats any no-motion result as incomplete.
 - Calls the work ready without checking real states or the nearest artifact.

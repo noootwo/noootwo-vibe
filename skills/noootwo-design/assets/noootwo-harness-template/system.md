@@ -173,9 +173,13 @@ Status: pending extraction; replace this template with project-specific truth be
 
 ## Visual Reference Library
 
+- Audition record: `.noootwo/reference-board.md`
+- Project appearance memory: `.noootwo/appearance-ledger.md` (project-local only)
 - References reviewed: TBD
+- Reference role and surface: TBD
 - What each reference may influence: TBD
-- What must not be copied: TBD
+- What each reference must not decide: TBD
+- Licence / reuse boundary: TBD
 - Preservation contract per reference: TBD
 
 ## Agent Design Guidance

@@ -6,6 +6,7 @@ import argparse
 import re
 import struct
 import zlib
+from datetime import date, timedelta
 from pathlib import Path
 
 
@@ -18,6 +19,11 @@ REQUIRED_FILES = [
 DEEP_REQUIRED_FILES = [
     Path(".noootwo/style-discovery.md"),
     Path(".noootwo/reference-board.md"),
+]
+
+AUDITION_REQUIRED_FILES = [
+    Path(".noootwo/reference-board.md"),
+    Path(".noootwo/appearance-ledger.md"),
 ]
 
 IMPLEMENTATION_REQUIRED_FILES = [
@@ -75,7 +81,7 @@ def require(errors: list[str], condition: bool, message: str) -> None:
 
 def has_meaningful_value(content: str, label: str) -> bool:
     pattern = re.compile(
-        rf"^\s*-\s*{re.escape(label)}\s*:\s*(?!\s*(?:TBD|pending|none|no|not selected yet|not reviewed|blocked)\s*$).+\S",
+        rf"^[ \t]*-[ \t]*{re.escape(label)}[ \t]*:[ \t]*(?![ \t]*(?:TBD|pending|none|no|not selected yet|not reviewed|blocked)[ \t]*$)[^\r\n]+\S",
         re.IGNORECASE | re.MULTILINE,
     )
     return bool(pattern.search(content))
@@ -83,13 +89,103 @@ def has_meaningful_value(content: str, label: str) -> bool:
 
 def field_value(content: str, label: str) -> str | None:
     pattern = re.compile(
-        rf"^\s*-\s*{re.escape(label)}\s*:\s*(.+?)\s*$",
+        rf"^[ \t]*-[ \t]*{re.escape(label)}[ \t]*:[ \t]*(.*?)[ \t]*$",
         re.IGNORECASE | re.MULTILINE,
     )
     match = pattern.search(content)
     if not match:
         return None
     return match.group(1).strip()
+
+
+def metadata_value(content: str, label: str) -> str | None:
+    pattern = re.compile(
+        rf"^[ \t]*(?:-[ \t]*)?{re.escape(label)}[ \t]*:[ \t]*(.*?)[ \t]*$",
+        re.IGNORECASE | re.MULTILINE,
+    )
+    match = pattern.search(content)
+    return match.group(1).strip() if match else None
+
+
+def first_field(content: str, labels: tuple[str, ...]) -> str:
+    for label in labels:
+        value = field_value(content, label)
+        if value:
+            return value.strip()
+    return ""
+
+
+def is_unresolved(value: str) -> bool:
+    lowered = value.strip().lower()
+    return not lowered or "TBD" in value.upper() or lowered in {
+        "pending",
+        "none",
+        "not reviewed",
+        "not selected yet",
+        "blocked",
+        "n/a",
+        "na",
+    }
+
+
+def reference_blocks(content: str) -> list[str]:
+    headings = list(REFERENCE_BLOCK_RE.finditer(content))
+    blocks: list[str] = []
+    for heading in headings:
+        start = heading.end()
+        next_heading = re.search(r"^##\s+", content[start:], re.IGNORECASE | re.MULTILINE)
+        end = start + next_heading.start() if next_heading else len(content)
+        blocks.append(content[start:end])
+    return blocks
+
+
+def mechanism_blocks(content: str) -> list[str]:
+    headings = list(MECHANISM_HEADING_RE.finditer(content))
+    blocks: list[str] = []
+    for heading in headings:
+        start = heading.end()
+        next_heading = re.search(r"^(?:##|###)\s+", content[start:], re.IGNORECASE | re.MULTILINE)
+        end = start + next_heading.start() if next_heading else len(content)
+        blocks.append(content[start:end])
+    return blocks
+
+
+def parse_verified_date(value: str) -> date | None:
+    match = re.search(r"\b(\d{4}-\d{2}-\d{2})\b", value)
+    if not match:
+        return None
+    try:
+        return date.fromisoformat(match.group(1))
+    except ValueError:
+        return None
+
+
+def is_native_platform(value: str) -> bool:
+    lowered = value.lower()
+    return any(
+        marker in lowered
+        for marker in ("native", "ios", "android", "flutter", "swiftui", "compose", "react native")
+    )
+
+
+def is_dynamic_source(source: str, access: str) -> bool:
+    return bool(re.match(r"^https?://", source.strip(), re.IGNORECASE)) or access in {"login", "paid"}
+
+
+def surface_is_product_ui(board: str, audience: str, surface_platform: str) -> bool:
+    surface_text = f"{surface_platform} {audience}".lower()
+    if any(marker in surface_text for marker in MARKETING_SURFACE_MARKERS) and not any(
+        marker in surface_text for marker in PRODUCT_SURFACE_MARKERS
+    ):
+        return False
+    block_surface_text = " ".join(
+        first_field(block, ("Surface / audience", "Surface", "Audience"))
+        for block in reference_blocks(board)
+    ).lower()
+    combined = f"{surface_text} {block_surface_text}"
+    return is_native_platform(surface_platform) or any(
+        marker in combined for marker in PRODUCT_SURFACE_MARKERS
+    )
 
 
 def missing_sections(content: str, sections: list[str], path_label: str) -> list[str]:
@@ -456,10 +552,7 @@ def validate_deep_mode(target_root: Path) -> list[str]:
             missing_sections(
                 reference_content,
                 [
-                    "source url or artifact",
-                    "borrowed mechanism",
-                    "capture path",
-                    "landed as",
+                    "rejected candidates",
                     "selected mechanisms",
                     "preservation contract",
                 ],
@@ -564,10 +657,384 @@ def validate_detail_translation_gate(target_root: Path) -> list[str]:
     return errors
 
 
-SOURCE_BLOCK_RE = re.compile(r"^##\s+(?:Optional\s+)?Source\b.*$", re.IGNORECASE | re.MULTILINE)
 MOTION_SECTION_RE = re.compile(r"^##\s+Motion\b(.*?)(?=^##\s|\Z)", re.IGNORECASE | re.MULTILINE | re.DOTALL)
 MOTION_STATES = ["enter", "exit", "expand", "reorder", "success", "error"]
 UNREACHABLE_VALUES = {"unreachable", "url-only", "url only", "none", "blocked", "login required"}
+CAPTURE_IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".avif"}
+REFERENCE_BLOCK_RE = re.compile(
+    r"^##\s+(?:Optional\s+)?(?:Source|Candidate)\s+\d+\b.*$",
+    re.IGNORECASE | re.MULTILINE,
+)
+MECHANISM_HEADING_RE = re.compile(r"^###\s+Mechanism\s+\d+\b.*$", re.IGNORECASE | re.MULTILINE)
+REFERENCE_ROLES = {
+    "product evidence",
+    "platform convention",
+    "visual direction",
+    "motion mechanism",
+    "implementation resource",
+    "asset source",
+    "research craft",
+}
+REFERENCE_DECISIONS = {"primary", "supplement", "rejected"}
+ACCESS_PREFIXES = ("free", "login", "paid", "unreachable")
+MECHANISM_VERDICTS = {"landed", "decoration", "swallowed", "missing"}
+LICENCE_MARKERS = (
+    "reference only",
+    "cannot copy",
+    "no reuse",
+    "attribution",
+    "mit",
+    "apache",
+    "ofl",
+    "open font license",
+    "cc by",
+    "cc0",
+    "public domain",
+    "licensed",
+    "licence",
+    "license",
+    "proprietary",
+    "commercial use",
+)
+UNUSABLE_LICENCE_MARKERS = (
+    "unknown",
+    "unlicensed",
+    "not licensed",
+    "no licence",
+    "no license",
+    "pending",
+    "tbd",
+    "n/a",
+    "not permitted",
+    "cannot use",
+)
+PRODUCT_SURFACE_MARKERS = (
+    "product ui",
+    "product surface",
+    "dashboard",
+    "admin",
+    "workbench",
+    "settings",
+    "analytics",
+    "data table",
+    "data ui",
+    "native app",
+    "consumer app",
+    "mobile app",
+    "app screen",
+    "product flow",
+    "utility screen",
+    "back office",
+    "backoffice",
+    "console",
+)
+MARKETING_SURFACE_MARKERS = ("marketing", "campaign", "editorial", "portfolio", "landing page", "microsite")
+
+
+def validate_reference_audition(target_root: Path, expected_mode: str | None = None) -> list[str]:
+    errors: list[str] = []
+    relative = Path(".noootwo/reference-board.md")
+
+    for required in AUDITION_REQUIRED_FILES:
+        errors.extend(validate_file(target_root, required))
+
+    content = read_if_exists(target_root, relative)
+    if not content:
+        return errors
+    errors.extend(
+        missing_sections(
+            content,
+            ["rejected candidates", "selected mechanisms"],
+            str(relative),
+        )
+    )
+
+    mode_value = (metadata_value(content, "Mode") or "").strip().lower()
+    require(
+        errors,
+        mode_value in {"standard", "deep"},
+        f"{relative} Mode must be standard or deep",
+    )
+    if expected_mode:
+        require(
+            errors,
+            mode_value == expected_mode,
+            f"{relative} Mode must be {expected_mode} when --{expected_mode}-mode is used",
+        )
+
+    audience = (metadata_value(content, "Audience") or "").strip()
+    surface_platform = (metadata_value(content, "Surface / platform") or "").strip()
+    require(errors, not is_unresolved(audience), f"{relative} missing the target Audience")
+    require(
+        errors,
+        not is_unresolved(surface_platform),
+        f"{relative} missing Surface / platform",
+    )
+
+    blocks = reference_blocks(content)
+    expected_range = (2, 3) if mode_value == "standard" else (3, 5)
+    require(
+        errors,
+        expected_range[0] <= len(blocks) <= expected_range[1],
+        f"{relative} needs {expected_range[0]}-{expected_range[1]} candidates for {mode_value or 'the declared mode'}; found {len(blocks)}",
+    )
+
+    roles: set[str] = set()
+    decisions: list[str] = []
+    primary_roles: list[str] = []
+    selected_native = False
+    selected_product_evidence = False
+    selected_same_medium = False
+    today = date.today()
+
+    for index, block in enumerate(blocks, start=1):
+        label = f"{relative} candidate {index}"
+        source = first_field(block, ("Source", "Source URL or artifact"))
+        role = first_field(block, ("Role", "Source role")).strip().lower()
+        surface = first_field(block, ("Surface / audience", "Surface"))
+        platform = first_field(block, ("Platform", "Target platform"))
+        access = first_field(block, ("Access", "Accessibility result")).strip().lower()
+        evidence = first_field(block, ("Evidence level", "Evidence"))
+        same_medium = first_field(block, ("Same-medium fit",)).strip().lower()
+        inspected = first_field(block, ("Artifact inspected",)).strip().lower()
+        observed = first_field(block, ("Observed mechanism", "Observed evidence", "Borrowed mechanism"))
+        fit = first_field(block, ("Fit", "Fit score"))
+        decision = first_field(block, ("Decision",)).strip().lower()
+        reject_reason = first_field(block, ("Reject reason", "Why rejected"))
+        capture = first_field(block, ("Capture path", "Capture"))
+        licence = first_field(block, ("Licence / reuse", "Licence", "License", "Attribution and licence"))
+        landed = first_field(block, ("Landed as",))
+        last_verified = first_field(block, ("Last verified", "Verified"))
+        do_not_copy = first_field(block, ("Do not copy",))
+        preservation = first_field(block, ("Preservation contract",))
+
+        for value, field_name in (
+            (source, "source"),
+            (surface, "surface / audience"),
+            (platform, "platform"),
+            (evidence, "evidence level"),
+            (observed, "observed mechanism"),
+            (fit, "fit"),
+            (capture, "capture path"),
+            (licence, "licence / reuse"),
+            (last_verified, "last verified"),
+        ):
+            require(errors, not is_unresolved(value), f"{label} missing {field_name}")
+
+        require(errors, role in REFERENCE_ROLES, f"{label} Role must be one of {sorted(REFERENCE_ROLES)}")
+        if role:
+            roles.add(role)
+        require(
+            errors,
+            access.startswith(ACCESS_PREFIXES),
+            f"{label} Access must be free, login, paid, or unreachable",
+        )
+        require(
+            errors,
+            same_medium.startswith(("yes", "no", "mixed")),
+            f"{label} Same-medium fit must be yes, no, or mixed",
+        )
+        require(
+            errors,
+            inspected.startswith(("yes", "no")),
+            f"{label} Artifact inspected must be yes or no",
+        )
+        require(errors, decision in REFERENCE_DECISIONS, f"{label} Decision must be primary, supplement, or rejected")
+        if decision:
+            decisions.append(decision)
+        require(
+            errors,
+            any(marker in licence.lower() for marker in LICENCE_MARKERS)
+            and not any(marker in licence.lower() for marker in UNUSABLE_LICENCE_MARKERS),
+            f"{label} Licence / reuse is not a usable reference or reuse statement",
+        )
+
+        verified_date = parse_verified_date(last_verified)
+        require(errors, verified_date is not None, f"{label} Last verified must contain a YYYY-MM-DD date")
+
+        if decision in {"primary", "supplement"}:
+            require(
+                errors,
+                access in {"free", "login", "paid"},
+                f"{label} selected source must be reachable",
+            )
+            capture_key = capture.replace("`", "").strip()
+            require(
+                errors,
+                bool(capture_key)
+                and capture_key.lower() not in UNREACHABLE_VALUES
+                and "TBD" not in capture_key.upper()
+                and "<slug>" not in capture_key,
+                f"{label} selected source needs an inspectable capture, not unreachable",
+            )
+            if (
+                capture_key
+                and capture_key.lower() not in UNREACHABLE_VALUES
+                and "TBD" not in capture_key.upper()
+                and "<slug>" not in capture_key
+            ):
+                require(
+                    errors,
+                    Path(capture_key).suffix.lower() in CAPTURE_IMAGE_SUFFIXES,
+                    f"{label} selected source Capture path must point to a screenshot image",
+                )
+                capture_error = validate_capture_file((target_root / capture_key).resolve())
+                require(
+                    errors,
+                    capture_error is None,
+                    f"{label} capture path {capture_error or 'is invalid'}: {capture_key}",
+                )
+            require(
+                errors,
+                inspected.startswith("yes"),
+                f"{label} selected source capture was not inspected",
+            )
+            require(
+                errors,
+                not is_unresolved(landed) and landed.lower() not in {"none", "not applicable", "n/a"},
+                f"{label} missing Landed as for the selected mechanism",
+            )
+            require(errors, not is_unresolved(do_not_copy), f"{label} missing Do not copy boundary")
+            require(
+                errors,
+                not is_unresolved(preservation),
+                f"{label} missing Preservation contract",
+            )
+            if (
+                verified_date
+                and is_dynamic_source(source, access)
+                and today - verified_date > timedelta(days=90)
+            ):
+                errors.append(f"{label} Last verified is older than 90 days; re-probe the source")
+
+            if role == "product evidence":
+                selected_product_evidence = True
+            if same_medium.startswith("yes"):
+                selected_same_medium = True
+            if is_native_platform(platform):
+                selected_native = True
+        elif decision == "rejected":
+            require(errors, not is_unresolved(reject_reason), f"{label} rejected candidate needs a Reject reason")
+
+        if decision == "primary":
+            primary_roles.append(role)
+
+    require(errors, len(roles) >= 2, f"{relative} candidates must cover at least two source roles")
+    if mode_value == "standard":
+        require(
+            errors,
+            decisions.count("primary") == 1,
+            f"{relative} standard audition needs exactly one primary",
+        )
+        require(
+            errors,
+            decisions.count("supplement") <= 1,
+            f"{relative} standard audition allows at most one narrow supplement",
+        )
+    elif mode_value == "deep":
+        require(
+            errors,
+            decisions.count("primary") >= 1,
+            f"{relative} deep audition needs at least one primary direction",
+        )
+        require(
+            errors,
+            selected_same_medium,
+            f"{relative} deep audition needs at least one selected same-medium source",
+        )
+
+    require(
+        errors,
+        bool(primary_roles) and all(role not in {"implementation resource", "asset source"} for role in primary_roles),
+        f"{relative} component or asset resource cannot be the only primary source",
+    )
+
+    product_ui = surface_is_product_ui(content, audience, surface_platform)
+    if product_ui:
+        require(
+            errors,
+            selected_product_evidence,
+            f"{relative} product UI audition needs a selected product evidence source",
+        )
+        require(
+            errors,
+            bool(primary_roles)
+            and all(role in {"product evidence", "platform convention"} for role in primary_roles),
+            f"{relative} product UI cannot let a gallery, demo, or effect library carry the primary direction",
+        )
+
+    native_target = is_native_platform(surface_platform)
+    if native_target:
+        require(
+            errors,
+            selected_native,
+            f"{relative} native work needs a selected native or platform-specific source",
+        )
+
+    review = read_if_exists(target_root, Path(".noootwo/review.md"))
+    if review:
+        errors.extend(missing_sections(review, ["reference audition", "mechanism landing"], ".noootwo/review.md"))
+        audition_result = (field_value(review, "Reference audition") or "").strip().lower()
+        require(
+            errors,
+            audition_result.startswith(("pass", "fail")),
+            ".noootwo/review.md Reference audition must record pass or fail",
+        )
+        landing_result = (field_value(review, "Mechanism landing result") or "").strip().lower()
+        require(
+            errors,
+            landing_result.startswith(("pass", "fail")),
+            ".noootwo/review.md Mechanism landing result must record pass or fail",
+        )
+        mechanism_records = mechanism_blocks(review)
+        selected_count = sum(1 for decision in decisions if decision in {"primary", "supplement"})
+        require(
+            errors,
+            len(mechanism_records) >= selected_count,
+            f".noootwo/review.md needs one Mechanism Landing record per selected source; found {len(mechanism_records)} for {selected_count} selected",
+        )
+        for index, mechanism in enumerate(mechanism_records, start=1):
+            label = f".noootwo/review.md mechanism {index}"
+            for field in (
+                "Source and role",
+                "Borrowed mechanism",
+                "Artifact evidence",
+                "Improved comprehension, operation efficiency, state recognition, or brand memory",
+                "Landed as",
+            ):
+                require(errors, has_meaningful_value(mechanism, field), f"{label} missing {field.lower()}")
+            verdict = (field_value(mechanism, "Verdict") or "").strip().lower()
+            require(errors, verdict in MECHANISM_VERDICTS, f"{label} Verdict must be landed, decoration, swallowed, or missing")
+
+        if READY_DECISION_RE.search(review):
+            require(errors, audition_result.startswith("pass"), ".noootwo/review.md cannot be ready unless the reference audition passes")
+            require(errors, landing_result.startswith("pass"), ".noootwo/review.md cannot be ready unless mechanism landing passes")
+            require(
+                errors,
+                all(
+                    (field_value(mechanism, "Verdict") or "").strip().lower() == "landed"
+                    for mechanism in mechanism_records
+                ),
+                ".noootwo/review.md cannot be ready while a selected mechanism is not landed",
+            )
+
+    ledger = read_if_exists(target_root, Path(".noootwo/appearance-ledger.md"))
+    if ledger:
+        scope = (metadata_value(ledger, "Scope") or "").strip().lower()
+        require(
+            errors,
+            scope == "project-local",
+            ".noootwo/appearance-ledger.md Scope must be project-local",
+        )
+        errors.extend(
+            missing_sections(
+                ledger,
+                ["entries", "entry template"],
+                ".noootwo/appearance-ledger.md",
+            )
+        )
+
+    return errors
 
 
 def validate_reference_capture(target_root: Path) -> list[str]:
@@ -577,62 +1044,38 @@ def validate_reference_capture(target_root: Path) -> list[str]:
     if not content:
         return errors
 
-    blocks = SOURCE_BLOCK_RE.split(content)[1:]
+    blocks = reference_blocks(content)
     require(errors, len(blocks) >= 3, f"{relative} needs at least 3 captured sources for deep work")
 
-    unreachable = 0
+    captured = 0
     for index, block in enumerate(blocks, start=1):
         label = f"{relative} source {index}"
-        for field in (
-            "Same-medium fit",
-            "Accessibility result",
-            "Artifact inspected",
-            "Observed evidence",
-            "Borrowed mechanism",
-            "Capture path",
-            "Landed as",
-        ):
-            value = (field_value(block, field) or "").strip()
-            require(
-                errors,
-                bool(value) and "TBD" not in value.upper(),
-                f"{label} missing {field.lower()}",
-            )
-
-        same_medium = (field_value(block, "Same-medium fit") or "").strip().lower()
-        require(
-            errors,
-            same_medium.startswith(("yes", "no", "mixed")),
-            f"{label} same-medium fit must be yes, no, or mixed",
-        )
-
-        inspected = (field_value(block, "Artifact inspected") or "").strip().lower()
-        require(
-            errors,
-            inspected.startswith(("yes", "no")),
-            f"{label} artifact inspected must be yes or no",
-        )
-
-        capture = (field_value(block, "Capture path") or "").strip()
+        inspected = first_field(block, ("Artifact inspected",)).strip().lower()
+        capture = first_field(block, ("Capture path", "Capture")).strip()
         if (
             not capture
             or capture.lower() in UNREACHABLE_VALUES
             or "TBD" in capture.upper()
             or "<slug>" in capture
         ):
-            if capture and capture.lower() in UNREACHABLE_VALUES:
-                unreachable += 1
             continue
-        candidate = (target_root / capture.replace("`", "")).resolve()
-        capture_error = validate_capture_file(candidate)
+        capture_error = validate_capture_file((target_root / capture.replace("`", "")).resolve())
         require(errors, capture_error is None, f"{label} capture path {capture_error or 'is invalid'}: {capture}")
         require(
             errors,
             inspected.startswith("yes"),
             f"{label} has a capture but was not inspected; a broken or unopened capture cannot support style evidence",
         )
+        if capture_error is None and inspected.startswith("yes"):
+            captured += 1
 
-    if blocks and unreachable == len(blocks):
+    require(
+        errors,
+        captured >= 3,
+        f"{relative} needs at least 3 inspectable captures for deep work; found {captured}",
+    )
+
+    if blocks and captured == 0:
         style = read_if_exists(target_root, Path(".noootwo/style-discovery.md"))
         confidence = (field_value(style, "Confidence") or "").strip().lower()
         require(
@@ -887,6 +1330,11 @@ def main() -> int:
         help="Also validate deep-mode style discovery, reference board, and evidence coverage.",
     )
     parser.add_argument(
+        "--reference-audition",
+        action="store_true",
+        help="Also validate the standard/deep source-role audition, inspected primary capture, licence, freshness, appearance ledger, and mechanism landing.",
+    )
+    parser.add_argument(
         "--implementation-gate",
         action="store_true",
         help="Also require an approved design spec and approved/delegated implementation plan.",
@@ -925,6 +1373,13 @@ def main() -> int:
     errors.extend(validate_tokens(target_root))
     errors.extend(validate_directions(target_root, args.deep_mode, args.strict_workflow))
     errors.extend(validate_review(target_root, args.allow_non_ready, args.deep_mode, args.strict_workflow))
+    if args.reference_audition or args.deep_mode:
+        errors.extend(
+            validate_reference_audition(
+                target_root,
+                expected_mode="deep" if args.deep_mode else None,
+            )
+        )
     if args.deep_mode:
         errors.extend(validate_deep_mode(target_root))
         errors.extend(validate_reference_capture(target_root))

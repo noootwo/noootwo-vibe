@@ -6,7 +6,9 @@ Source pools, access records, and the fallback ladder belong to the `noootwo-res
 
 ## When
 
-Run this in `deep` mode and for high-character, niche, premium, brand-heavy, or previously rejected work. `quick`, `standard`, and `production` do not pay this cost.
+Run a light audition for every `standard` and `deep` UI task. `standard` uses `.noootwo/reference-board.md` with 2–3 candidates and one primary screenshot. `deep` adds the full `.noootwo/style-discovery.md` pass, 3–5 captured sources, fit scoring, and 2–3 spikes. `quick` does not source externally. `production` uses the locked references and returns to discovery only when drift or a changed surface invalidates them.
+
+The audition is not optional for `standard`; it is the difference between selecting a reference and inheriting a model default.
 
 ## Surface routing
 
@@ -21,20 +23,72 @@ The primary reference for each material mechanism should use the target medium: 
 ## The pass
 
 1. **Context query builder** — derive search queries from product type, user task, platform, target stack, audience, and constraints. Write each query as what is visible on screen, not as an abstract goal: `[product category] + [screen type] + [visible UI components] + [user state or action]`. `trust patterns` and `good onboarding` are not queries; `signup screen with progress indicator, phone number input, security message, and continue button` is.
-2. **Intervention decision** — decide `leave simple`, `craft only`, or `add moment` before sourcing. Deep work pays for discovery only when a candidate survives the frequency, purpose, speed, and function gates.
-3. **Source accessibility check** — record which pools are reachable; use the fallback ladder when they are not, and record the substitution.
-4. **Community signal mining** — search the design pools the research skill names, including product-flow libraries, design systems, curated galleries, and the domestic fallback.
-5. **Case capture** — resolve the platform (app or web), route each query to single screens or to multi-step flows, then run two or three queries at a time and write the observations down before starting the next batch. Screens are large; a batch that is not recorded is a batch that gets dropped.
-6. **Source weighting** — rank evidence by credibility and by fit to this surface.
-7. **Influence discovery** — when useful, find relevant designers, studios, products, movements, architecture, exhibition, or spatial systems.
-8. **Pattern clustering** — cluster findings into three to five mechanism groups instead of listing examples.
-9. **Style evidence check** — record the style claim, the visual evidence, the anti-example, the borrowed mechanism, the implementation translation, the confidence, and whether a spike is needed. The check shape lives in `direction.md`.
-10. **Mechanism transfer** — translate each cluster into UI primitives: grid, rail, surface, type scale, data grammar, state model, motion primitive, native component vocabulary.
-11. **Preservation contract** — state what must survive translation, what may vary, and what must never be substituted.
-12. **Reference lock** — name the build target and what must not drift before drafting.
-13. **Fit scoring** — score each candidate territory for scenario fit, practicality, distinctiveness, implementation cost, and brand risk.
-14. **Artifact spike** — produce two or three small visual spikes for the best territories before investing in a polished draft. One spike only means low confidence.
-15. **Evaluator pass** — reject slop, trend cosplay, artist or designer cosplay, crude styling, weak utility, typography failure, responsive failure, and stack-incredible directions.
+2. **Surface and audience routing** — name the surface kind and the Audience Contract. Choose the source lanes before seeing a good-looking candidate; a gallery cannot become task evidence simply because it has a strong composition.
+3. **Ledger read** — if `.noootwo/appearance-ledger.md` exists, read only the matching surface/audience heading. Reuse a recorded mechanism or rejection only as a lead; current evidence still wins.
+4. **Intervention decision** — decide `leave simple`, `craft only`, or `add moment` before choosing expressive motion or material. The decision can remove expressive sources from scope; it cannot remove the task/platform audition for a standard UI task.
+5. **Audition scope** — `standard`: 2–3 candidates from at least two roles, one primary screenshot, one primary plus at most one narrow supplement. `deep`: 3–5 sources, at least one same-medium source, full capture, fit scoring, and 2–3 spikes.
+6. **Source accessibility check** — record which pools are reachable; use the fallback ladder when they are not, and record the substitution. A paid or login-gated source is optional, never the free path.
+7. **Source-role selection** — select by role, not by site prestige. Product UI needs real product evidence; native needs a native or platform source; marketing may let visual direction lead; a component library is implementation evidence, not a visual direction.
+8. **Community signal mining** — search the design pools the research skill names, including product-flow libraries, design systems, curated galleries, and the domestic fallback.
+9. **Case capture** — resolve the platform (app or web), route each query to single screens or to multi-step flows, then run two or three queries at a time and write the observations down before starting the next batch. Screens are large; a batch that is not recorded is a batch that gets dropped.
+10. **Source weighting** — rank evidence by role, credibility, and fit to this surface. A high-novelty gallery is still weak evidence for a dense workbench.
+11. **Influence discovery** — when useful, find relevant designers, studios, products, movements, architecture, exhibition, or spatial systems.
+12. **Pattern clustering** — cluster findings into three to five mechanism groups instead of listing examples.
+13. **Style evidence check** — record the style claim, the visual evidence, the anti-example, the borrowed mechanism, the implementation translation, the confidence, and whether a spike is needed. The check shape lives in `direction.md`.
+14. **Mechanism transfer** — translate each cluster into UI primitives: grid, rail, surface, type scale, data grammar, state model, motion primitive, native component vocabulary.
+15. **Preservation contract** — state what must survive translation, what may vary, and what must never be substituted.
+16. **Reference lock** — name the build target, primary, supplements, rejected candidates, and what must not drift before drafting.
+17. **Fit scoring** — score each candidate territory for scenario, audience, platform, practicality, distinctiveness, implementation credibility, and brand risk.
+18. **Artifact spike** — produce two or three small visual spikes for the best territories before investing in a polished draft. One spike only means low confidence.
+19. **Evaluator pass** — reject slop, trend cosplay, artist or designer cosplay, crude styling, weak utility, typography failure, responsive failure, and stack-incredible directions.
+
+## Audition tiers
+
+### Standard light audition
+
+Use this for every non-quick UI task, including settings, dashboards, tables, consumer screens, native screens, and marketing pages.
+
+- Pick 2–3 candidates from at least two source roles.
+- For product UI, include at least one `product evidence` source with a real screen or flow.
+- For native UI, include at least one native product screen or platform guideline.
+- For high-frequency work, use task evidence, platform guidance, and data-UI sources before any expressive gallery or effect library.
+- Capture one inspectable screen or section for each candidate; record `capture: unreachable` when access fails, but never select an uninspected primary.
+- Choose one primary and at most one narrow supplement. Do not average three sources into a safe middle.
+- Record the rejected candidates and why they were not selected. This is the defixation step, not optional prose.
+- Do not run the full extractor unless the selected primary needs live token values.
+
+### Deep audition
+
+Use this for high-character, brand-heavy, niche, premium, or previously rejected work.
+
+- Pick 3–5 sources, with at least one `same-medium: yes`.
+- Capture every source the direction leans on; record access, licence, inspected evidence, and observed values.
+- Run the existing fit scoring, reference lock, preservation contract, and 2–3 artifact spikes.
+- A blocked source narrows the evidence; it does not cancel the pass and it never becomes an invented observation.
+
+## Audience and source routing
+
+| Audience / surface | Primary evidence | Permitted support | Reject as primary |
+| --- | --- | --- | --- |
+| Consumer first-use | Real consumer products, platform guidance | Gallery for composition, type, material, atmosphere | Admin density, implementation jargon, effect-library demos |
+| Trained operations / admin | Real operations products, data UI, design systems | Gallery for a narrow type or colour mechanism | Marketing hero, expressive motion, generic component gallery |
+| Technical buyer | Real product, official docs, performance/security evidence | Gallery for composition; implementation detail after the outcome | Jargon-first hero, decorative technical badges |
+| Native app | Native product screens, Apple HIG/Material/native docs | Web/editorial sources for a cross-medium mechanism | Web layout transplanted directly; React-only effect library |
+| Marketing / editorial | Awwwards, Framer Gallery, Recent, Savee, editorial references | Real product evidence for claims; React Bits only for a justified motion moment | Fake product UI, copied brand assets, gallery-as-flow evidence |
+
+## Source evidence and licence
+
+Use the `noootwo-research` skill's `design-source-registry.md` for the lane definitions and source boundaries. Record the source role before opening candidates:
+
+- `product evidence` — real screens, flows, states, density, and task conventions.
+- `platform convention` — platform guidance and native behaviour.
+- `visual direction` — composition, type, material, colour, and atmosphere only.
+- `motion mechanism` — trigger, duration, curve, layer, and state meaning only.
+- `implementation resource` — components, accessibility plumbing, and dependency cost only.
+- `asset source` — font, icon, image, illustration, or 3D licence and availability only.
+- `research craft` — user, language, accessibility, and design-rule evidence only.
+
+Every selected source records `Last verified` and `Licence / reuse`. A component demo is evidence of craft, not fit. A gallery is evidence of visual direction, not product flow. A component library is evidence of implementation, not a design direction.
 
 ## Case capture
 
@@ -52,6 +106,10 @@ For each source, write `.noootwo/references/<slug>/source.md` and capture `NN-<l
 - `attribution and licence`: product or studio name, and any stated reuse limit.
 - `capture`: the screenshot paths, or `unreachable` when none could be taken.
 - `reference intent`: `replicate`, `redesign`, or `borrow-mechanism`, and why.
+- `role`: `product evidence`, `platform convention`, `visual direction`, `motion mechanism`, `implementation resource`, `asset source`, or `research craft`.
+- `surface and audience`: the exact surface and Audience Contract this source is meant to serve.
+- `decision`: `primary`, `supplement`, or `rejected`, with the reason.
+- `last verified`: the date of the access and artifact check.
 
 Take the screenshot in the same extractor pass that captures the values: `scripts/extract_design_tokens.mjs <url> --screenshot .noootwo/references/<slug>/NN-<label>.png`.
 
@@ -121,19 +179,25 @@ Never output "in the style of X" as a direction. Output a mechanism mix — for 
 
 Rungs 4–5 may influence art direction for campaign work and must not decide a dashboard, settings page, workbench, or native screen. High visual novelty with low product evidence is a lead, not a direction.
 
+The weighting is role-aware. A gallery at rung 3 can be the primary source for a marketing page's composition; it cannot be the primary source for a dashboard's flow. A component demo is stronger than a screenshot for state anatomy and weaker than a real product for task fit.
+
 ## Fit scoring
 
 Score each territory 1–5 on scenario fit, practicality and task clarity, distinctiveness, implementation credibility, and brand risk (where 5 means low risk). Discard anything with practicality below 3 for product UI, or implementation credibility below 3 for production work.
 
 ## Required output
 
-Write `.noootwo/style-discovery.md` with:
+For `standard`, write `.noootwo/reference-board.md` with `Mode: standard`, 2–3 candidates, one primary capture, rejected candidates, and `Landed as` for the selected mechanism. Do not create the full deep record.
+
+For `deep`, write `.noootwo/style-discovery.md` with:
 
 - Source accessibility
 - Intervention decision
 - Surface type
+- Audience contract
 - Search queries
 - Source pool
+- Source roles
 - Foreign sources tried
 - Domestic fallback sources when used
 - Evidence URLs or screenshots
@@ -146,6 +210,7 @@ Write `.noootwo/style-discovery.md` with:
 - Borrowed mechanisms
 - Influence shortlist when used
 - Rejected mimicry
+- Rejected candidates and reasons
 - Design-system translation
 - Preservation contract
 - Rejected surfaces
@@ -153,6 +218,6 @@ Write `.noootwo/style-discovery.md` with:
 - Spike comparison
 - Recommended territories
 
-Then update `.noootwo/reference-board.md` with the selected sources and mechanisms, including each source's capture path and what it landed as.
+Then update `.noootwo/reference-board.md` with every selected and rejected candidate, each source's role, capture path, fit decision, and what it landed as. Read or create `.noootwo/appearance-ledger.md` only through the matching surface/audience section; write an outcome entry after review.
 
 The readiness validator reads this file field by field. Keep the section and field names exactly as listed. If source accessibility, URL or artifact evidence, the capture directory, evidence levels, the Style Evidence Check, the reference lock, or rejected surfaces are missing, return to discovery before drafting — a missing field is a failed gate, not a formatting detail.

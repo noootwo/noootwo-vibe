@@ -1,5 +1,18 @@
 # noootwo-design Releases
 
+## v0.22.0
+
+- Added the source-role matrix through `noootwo-research`: product evidence, platform convention, visual direction, motion mechanism, implementation resource, asset source, and research craft. A source can inform only the role it actually carries.
+- Every `standard` and `deep` UI task now runs a reference audition. Standard uses 2-3 candidates, at least two roles, one inspected primary capture, and at most one narrow supplement. Deep uses 3-5 sources, one selected same-medium source, full capture and licence records, fit scoring, a reference lock, and 2-3 spikes. `quick` skips external audition; `production` uses locked references.
+- Added `.noootwo/reference-board.md` as the unified standard/deep record with role, access, evidence, same-medium fit, inspected state, observed mechanism, fit, decision, rejection reason, capture, licence, landed result, verification date, copy boundary, and preservation contract. Legacy `Source N` headings remain readable.
+- Added project-local `.noootwo/appearance-ledger.md` for reviewed accepted and rejected reference decisions. It is read by matching surface/audience section and never becomes global memory or a second state root.
+- Added Mechanism Landing QA: every selected primary or supplement must record artifact evidence, the improved user outcome, and a `landed`, `decoration`, `swallowed`, or `missing` verdict. A non-landed mechanism blocks `ready`.
+- Product UI needs a selected product-evidence source and cannot let a gallery, component demo, effect library, or asset source carry the primary direction. Native work needs a selected native or platform-specific source.
+- Added asset-lane boundaries for fonts, icons, imagery, illustration, and 3D, including licence, attribution, commercial use, access, and fallback.
+- Added `--reference-audition` to the readiness validator; `--deep-mode` implies it. The existing board, templates, bootstrap profiles, status output, and reference capture path are compatible with old deep records once the new fields are supplied.
+- Added seven prompt contracts and standard positive/negative fixtures. They are deterministic contracts, not fresh-session behavior evidence.
+- Migration: an existing project claiming `ready` or entering `deep` must add the audition fields, an inspected primary capture, a project-local appearance ledger, and mechanism-landing evidence. No bulk migration is required.
+
 ## v0.21.0
 
 - Design Read now consumes the Product Audience Contract, and the Design Contract adds `Information exposure`: what is visible, secondary, or excluded, ordered as `outcome → decision evidence → implementation detail`.

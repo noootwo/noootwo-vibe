@@ -19,6 +19,8 @@ PROFILE_FILES = {
         "brief.md",
         "directions.md",
         "review.md",
+        "reference-board.md",
+        "appearance-ledger.md",
     },
     "deep": {
         "system.md",
@@ -31,6 +33,7 @@ PROFILE_FILES = {
         "reference-board.md",
         "style-calibration.md",
         "references/README.md",
+        "appearance-ledger.md",
     },
     "production": {
         "system.md",
@@ -44,6 +47,8 @@ PROFILE_FILES = {
         "handoff/implementation.md",
         "handoff/acceptance.md",
         "handoff/assets.md",
+        "reference-board.md",
+        "appearance-ledger.md",
     },
 }
 PROFILE_FILES["full"] = {
@@ -63,6 +68,7 @@ PROFILE_FILES["full"] = {
     "handoff/acceptance.md",
     "handoff/assets.md",
     "references/README.md",
+    "appearance-ledger.md",
 }
 
 

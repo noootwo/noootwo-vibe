@@ -14,6 +14,7 @@ KEY_FILES = [
     ".noootwo/brief.md",
     ".noootwo/style-discovery.md",
     ".noootwo/reference-board.md",
+    ".noootwo/appearance-ledger.md",
     ".noootwo/directions.md",
     ".noootwo/specs/active-design.md",
     ".noootwo/plans/active-implementation.md",
@@ -25,44 +26,53 @@ KEY_FILES = [
 PENDING_RE = re.compile(r"^Status:\s*pending\b", re.IGNORECASE | re.MULTILINE)
 TBD_RE = re.compile(r"(?<!`)\bTBD\b(?!`)")
 READY_RE = re.compile(
-    r"(^|\n)\s*(?:-\s*)?(?:Decision\s*:\s*)?ready\s*(?:$|\n)",
+    r"(^|\n)\s*(?:-\s*)?(?:Decision\s*:\s*)?"
+    r"(?:ready|ready,\s*refine,\s*pivot,\s*or\s*needs artifact\s*:\s*ready)\s*(?:$|\n)",
     re.IGNORECASE,
 )
 DECISION_RE = re.compile(r"\b(ready|refine|pivot|needs artifact|not ready)\b", re.IGNORECASE)
 FULL_REDESIGN_RE = re.compile(
-    r"full redesign trigger\s*:\s*(?:yes|true|triggered|full redesign)",
+    r"full redesign trigger[ \t]*:[ \t]*(?:yes|true|triggered|full redesign)",
     re.IGNORECASE,
 )
 USER_SELECTED_DIRECTION_RE = re.compile(
-    r"^\s*-?\s*user selected direction\s*:\s*(?!\s*(?:not selected yet|not selected|pending|none|no)\s*$).+\S",
+    r"^[ \t]*-?[ \t]*user selected direction[ \t]*:[ \t]*(?![ \t]*(?:not selected yet|not selected|pending|none|no)[ \t]*$)[^\r\n]+\S",
     re.IGNORECASE | re.MULTILINE,
 )
 USER_DECISION_REQUIRED_RE = re.compile(
-    r"decision required before implementation\s*:\s*(?:yes|true|required)",
+    r"decision required before implementation[ \t]*:[ \t]*(?:yes|true|required)",
     re.IGNORECASE,
 )
 USER_SELECTED_OPTION_RE = re.compile(
-    r"^\s*-?\s*user selected option\s*:\s*(?!\s*(?:TBD|not selected yet|not selected|pending|none|no|n/a|na)\s*$).+\S",
+    r"^[ \t]*-?[ \t]*user selected option[ \t]*:[ \t]*(?![ \t]*(?:TBD|not selected yet|not selected|pending|none|no|n/a|na)[ \t]*$)[^\r\n]+\S",
     re.IGNORECASE | re.MULTILINE,
 )
 USER_DELEGATED_CHOICE_RE = re.compile(
-    r"^\s*-?\s*user delegated choice to agent\s*:\s*(?:yes|true|delegated)\s*$",
+    r"^[ \t]*-?[ \t]*user delegated choice to agent[ \t]*:[ \t]*(?:yes|true|delegated)[ \t]*$",
     re.IGNORECASE | re.MULTILINE,
 )
 APPROVED_BY_USER_RE = re.compile(
-    r"approved by user\s*:\s*(?:yes|true|approved)",
+    r"approved by user[ \t]*:[ \t]*(?:yes|true|approved)",
     re.IGNORECASE,
 )
 PLAN_APPROVED_RE = re.compile(
-    r"user approved or delegated implementation plan\s*:\s*(?:yes|true|approved|delegated)",
+    r"user approved or delegated implementation plan[ \t]*:[ \t]*(?:yes|true|approved|delegated)",
     re.IGNORECASE,
 )
 ARTIFACT_EVIDENCE_RE = re.compile(
-    r"(artifact reviewed|screenshot|preview|recording|visual proof|simulator|device|url)\s*:\s*(?!\s*(?:TBD|pending|none|no)\s*$).+",
+    r"(artifact reviewed|screenshot|preview|recording|visual proof|simulator|device|url)[ \t]*:[ \t]*(?![ \t]*(?:TBD|pending|none|no)[ \t]*$)[^\r\n]+",
     re.IGNORECASE,
 )
 MOTION_SECTION_RE = re.compile(r"^##\s+Motion\b(.*?)(?=^##\s|\Z)", re.IGNORECASE | re.MULTILINE | re.DOTALL)
 MOTION_SCALE_RE = re.compile(r"duration scale\s*:\s*.*?\d+\s*ms", re.IGNORECASE | re.DOTALL)
+REFERENCE_BLOCK_RE = re.compile(
+    r"^##\s+(?:Optional\s+)?(?:Source|Candidate)\s+\d+\b.*$",
+    re.IGNORECASE | re.MULTILINE,
+)
+REFERENCE_MODE_RE = re.compile(
+    r"^[ \t]*(?:-[ \t]*)?Mode[ \t]*:[ \t]*(standard|deep)[ \t]*$",
+    re.IGNORECASE | re.MULTILINE,
+)
 
 
 def read_text(path: Path) -> str:
@@ -73,7 +83,7 @@ def read_text(path: Path) -> str:
 
 def field_value(content: str, label: str) -> str:
     pattern = re.compile(
-        rf"^\s*-\s*{re.escape(label)}\s*:\s*(.+?)\s*$",
+        rf"^[ \t]*-[ \t]*{re.escape(label)}[ \t]*:[ \t]*(.*?)[ \t]*$",
         re.IGNORECASE | re.MULTILINE,
     )
     match = pattern.search(content)
@@ -95,6 +105,24 @@ def file_state(root: Path, relative: str) -> str:
 
 
 def reference_state(root: Path) -> str:
+    board = read_text(root / ".noootwo/reference-board.md")
+    candidates = REFERENCE_BLOCK_RE.findall(board)
+    if candidates:
+        capture_values = re.findall(
+            r"^[ \t]*-[ \t]*Capture path[ \t]*:[ \t]*(.*?)[ \t]*$",
+            board,
+            re.IGNORECASE | re.MULTILINE,
+        )
+        captures = sum(
+            1
+            for value in capture_values
+            if value.strip()
+            and value.strip().strip("`").lower()
+            not in {"unreachable", "url-only", "url only", "none", "blocked", "login required"}
+            and "TBD" not in value.upper()
+        )
+        return f"{len(candidates)} candidates on board; {captures} capture paths recorded"
+
     directory = root / ".noootwo" / "references"
     if not directory.is_dir():
         return "missing"
@@ -154,6 +182,10 @@ def infer_mode(root: Path) -> str:
     noootwo = root / ".noootwo"
     if not noootwo.exists():
         return "adopt-project"
+
+    reference_mode = REFERENCE_MODE_RE.search(read_text(root / ".noootwo/reference-board.md"))
+    if reference_mode and reference_mode.group(1).lower() == "deep":
+        return "deep"
 
     directions = read_text(root / ".noootwo/directions.md")
     if FULL_REDESIGN_RE.search(directions):
@@ -284,6 +316,9 @@ def next_steps(root: Path, inferred_mode: str, block_list: list[str]) -> list[st
     if spec_approved and plan_state != "complete":
         return ["create or complete .noootwo/plans/active-implementation.md before implementation"]
 
+    if inferred_mode in {"deep", "standard"} and file_state(root, ".noootwo/reference-board.md") != "complete":
+        return ["complete the reference audition in .noootwo/reference-board.md before drafting"]
+
     if block_list:
         return ["resolve blockers, then run validate_noootwo_readiness.py"]
 
@@ -319,6 +354,7 @@ def main() -> int:
     print("")
     print("Evidence:")
     print(f"  - .noootwo/references/: {reference_state(root)}")
+    print(f"  - appearance ledger: {file_state(root, '.noootwo/appearance-ledger.md')}")
     print(f"  - motion contract: {motion_state(root)}")
 
     print("")

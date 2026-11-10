@@ -1,116 +1,99 @@
 # Reference Board
 
-Status: pending; deep mode fills this from `.noootwo/style-discovery.md`
+Status: pending
+Mode: TBD
+Audience: TBD
+Surface / platform: TBD
 
-Each source records where it came from, whether it was reachable, what was borrowed, and what the borrowing landed as. A source with no `Landed as` value was read and then ignored; either use it or drop it.
+Record the audition before drafting. Keep one primary. A supplement contributes one narrow mechanism; rejected candidates stay visible with the reason they were not selected. Delete unused candidate sections and every unresolved placeholder.
 
-## Source 1
+## Candidate 1
 
-- Source URL or artifact: TBD
-- Source and evidence type: TBD
-- Evidence level: real product flow, product artifact, design system, curated gallery, community signal, or single shot: TBD
-- Same-medium fit: yes, no, or mixed, with the target artifact named: TBD
-- Accessibility result: reachable, login required, fallback, or unreachable: TBD
-- Artifact inspected: yes or no: TBD
-- Observed evidence: layout, type ratio, palette proportion, density, state grammar, or motion behavior actually seen: TBD
-- Capture path: TBD  a path under `.noootwo/references/`, or `unreachable`
-- Borrowed mechanism: TBD
-- Landed as: TBD  the token, component, rule, or motion value this became
-- Do not copy: TBD
-- Design-system translation: TBD
-- Mechanism library match: TBD
-- UI primitive mapping: grid, rail, surface, type scale, state model, motion primitive, data grammar, or stack-native move: TBD
-- Rejected surface styling: TBD
-- Preservation contract: must preserve TBD; allowed variation TBD; forbidden substitution TBD; signature mechanism TBD
+- Source:
+- Role: product evidence | platform convention | visual direction | motion mechanism | implementation resource | asset source | research craft
+- Surface / audience:
+- Platform:
+- Access: free | login | paid | unreachable
+- Evidence level:
+- Same-medium fit: yes | mixed | no, and why
+- Artifact inspected: yes | no
+- Observed mechanism:
+- Fit:
+- Decision: primary | supplement | rejected
+- Reject reason:
+- Capture path:
+- Licence / reuse:
+- Landed as:
+- Last verified:
+- Do not copy:
+- Preservation contract: must preserve; allowed variation; forbidden substitution; signature mechanism
 
-## Source 2
+## Candidate 2
 
-- Source URL or artifact: TBD
-- Source and evidence type: TBD
-- Evidence level: TBD
-- Same-medium fit: TBD
-- Accessibility result: TBD
-- Artifact inspected: yes or no: TBD
-- Observed evidence: TBD
-- Capture path: TBD
-- Borrowed mechanism: TBD
-- Landed as: TBD
-- Do not copy: TBD
-- Design-system translation: TBD
-- Mechanism library match: TBD
-- UI primitive mapping: TBD
-- Rejected surface styling: TBD
-- Preservation contract: must preserve TBD; allowed variation TBD; forbidden substitution TBD; signature mechanism TBD
+- Source:
+- Role:
+- Surface / audience:
+- Platform:
+- Access:
+- Evidence level:
+- Same-medium fit:
+- Artifact inspected: yes | no
+- Observed mechanism:
+- Fit:
+- Decision:
+- Reject reason:
+- Capture path:
+- Licence / reuse:
+- Landed as:
+- Last verified:
+- Do not copy:
+- Preservation contract:
 
-## Source 3
+## Candidate 3
 
-- Source URL or artifact: TBD
-- Source and evidence type: TBD
-- Evidence level: TBD
-- Same-medium fit: TBD
-- Accessibility result: TBD
-- Artifact inspected: yes or no: TBD
-- Observed evidence: TBD
-- Capture path: TBD
-- Borrowed mechanism: TBD
-- Landed as: TBD
-- Do not copy: TBD
-- Design-system translation: TBD
-- Mechanism library match: TBD
-- UI primitive mapping: TBD
-- Rejected surface styling: TBD
-- Preservation contract: must preserve TBD; allowed variation TBD; forbidden substitution TBD; signature mechanism TBD
+Deep work uses 3-5 candidates. Delete this section for a two-candidate standard audition.
 
-## Optional Source 4
+- Source:
+- Role:
+- Surface / audience:
+- Platform:
+- Access:
+- Evidence level:
+- Same-medium fit:
+- Artifact inspected: yes | no
+- Observed mechanism:
+- Fit:
+- Decision:
+- Reject reason:
+- Capture path:
+- Licence / reuse:
+- Landed as:
+- Last verified:
+- Do not copy:
+- Preservation contract:
 
-- Source URL or artifact: TBD
-- Source and evidence type: TBD
-- Evidence level: TBD
-- Same-medium fit: TBD
-- Accessibility result: TBD
-- Artifact inspected: yes or no: TBD
-- Observed evidence: TBD
-- Capture path: TBD
-- Borrowed mechanism: TBD
-- Landed as: TBD
-- Do not copy: TBD
-- Design-system translation: TBD
-- Mechanism library match: TBD
-- UI primitive mapping: TBD
-- Rejected surface styling: TBD
-- Preservation contract: must preserve TBD; allowed variation TBD; forbidden substitution TBD; signature mechanism TBD
+## Rejected Candidates
 
-## Optional Source 5
+Summarize every candidate marked `Decision: rejected`. Keep the full record above so the rejection has inspectable evidence.
 
-- Source URL or artifact: TBD
-- Source and evidence type: TBD
-- Evidence level: TBD
-- Same-medium fit: TBD
-- Accessibility result: TBD
-- Artifact inspected: yes or no: TBD
-- Observed evidence: TBD
-- Capture path: TBD
-- Borrowed mechanism: TBD
-- Landed as: TBD
-- Do not copy: TBD
-- Design-system translation: TBD
-- Mechanism library match: TBD
-- UI primitive mapping: TBD
-- Rejected surface styling: TBD
-- Preservation contract: must preserve TBD; allowed variation TBD; forbidden substitution TBD; signature mechanism TBD
+| Source | Role | Why it was not selected |
+| --- | --- | --- |
+| None recorded yet |  |  |
 
 ## Mechanism Clusters
 
-- Cluster 1: TBD
-- Cluster 2: TBD
-- Cluster 3: TBD
+- Cluster 1:
+- Cluster 2:
+- Cluster 3:
 
 ## Selected Mechanisms
 
-- Influence mechanism mix: base atmosphere TBD; information grammar TBD; interaction efficiency TBD
-- Typography: TBD
-- Layout and density: TBD
-- Component vocabulary: TBD
-- Motion or interaction: TBD
-- Background, material, imagery, or data treatment: TBD
-- Preservation contract: must preserve TBD; allowed variation TBD; forbidden substitution TBD; signature mechanism TBD
+- Primary direction:
+- Narrow supplement:
+- Information model:
+- Typography:
+- Layout and density:
+- Component vocabulary:
+- Motion or interaction:
+- Background, material, imagery, or data treatment:
+- Preservation contract: must preserve; allowed variation; forbidden substitution; signature mechanism
