@@ -90,6 +90,8 @@ For non-direct code changes, and for every refactor or optimization:
 - wait for explicit user acceptance,
 - do not commit, push, tag, or publish before that acceptance.
 
+Write-fanout is the narrow exception for local custody: its accepted plan authorizes local commits inside isolated lanes and local integration-branch rejoin commits so results can be frozen and reviewed. Those commits are not publication approval. Final user acceptance still precedes push, protected-main integration, tag, or publish.
+
 Direct single-file edits with an obvious check and no structural change may close normally after verification.
 
 ## Output

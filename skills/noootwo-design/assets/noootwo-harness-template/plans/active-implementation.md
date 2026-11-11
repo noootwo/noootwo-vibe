@@ -23,6 +23,14 @@ Status: pending; fill after the approved design spec and before editing UI files
 - State, storage, migration, or compatibility boundary: TBD
 - Contracts that must remain unchanged: TBD
 
+## Fan-out Check
+
+- Mode: pending Workflow Gate | serial | read-fanout | write-fanout | requirement-parallel
+- Independent units and observable results: TBD
+- Shared contract, migration, or generated output: TBD
+- Worker and isolation capability: TBD
+- Merge or join order and stop condition: TBD
+
 ## Component And System Mapping
 
 - Token mapping tasks: TBD

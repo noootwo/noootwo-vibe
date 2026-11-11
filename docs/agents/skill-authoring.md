@@ -33,7 +33,7 @@ Every model-invoked skill carries this operational rule:
 - Load the selected skill and only the reference sections the current branch triggers.
 - Keep live excerpts at 80 lines or fewer.
 - Write raw output above 16 KiB to cold evidence first, then carry its path and hash.
-- Keep one writer. Isolate independent read-only research or review to a subagent.
+- Keep one integrator and one current-state writer; no worker or secondary worktree writes `.noootwo`. Isolate independent read-only work as `read-fanout`; use `write-fanout` only after the workflow's Fan-out Gate has made every slice independently briefable and has a linked worktree and required rejoin order.
 - Verify a compressed capsule against its source hash, current commit, and latest evidence before acting.
 - For an on-demand reference above about 200 lines, read headings or query hits first, then the matching section.
 
@@ -89,6 +89,10 @@ A coined word recruits no priors: you pay in definition tokens what a pretrained
 | **Change Check** | the diff-scoped verification after one requirement; no full-suite or whole-repo audit by default |
 | **Delivery Policy** | one recorded set of branch, integration, production-source, hotfix, and rollback rules; the live platform rule wins |
 | **Overlap Check** | the pre-parallel comparison of files, shared contracts, migrations, and generated output |
+| **Fan-out Gate** | the plan-time choice among serial, read-fanout, write-fanout, and requirement-parallel, made from independence and host capability |
+| **Worker Brief** | the self-contained unit brief: method owner, base/worktree, owned files, settled contracts, acceptance, liveness, oversized-evidence handoff, and Result Packet requirement |
+| **Result Packet** | the worker's terminal status, commit/diff, bounded result, evidence handles, decisions, and conflicts, consumed as evidence by one integrator |
+| **Lane Map** | delivery's branch/worktree, liveness and evidence custody, ownership, required rejoin order, state-writer, and cleanup record for a write fan-out |
 | **Release Check** | the full verification once before release or a ship-readiness submit gate |
 | **Release Verification Ledger** | the open queue of release-bound checks, sealed into the release record and reset after release |
 

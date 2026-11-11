@@ -1,5 +1,10 @@
 # noootwo-design Releases
 
+## v0.22.1
+
+- Added a `Fan-out Check` section to the implementation plan template so a design handoff records execution mode, independent units, host capability, and rejoin order before writing; the mode starts `pending Workflow Gate`.
+- No visual-direction or artifact-review rule changed.
+
 ## v0.22.0
 
 - Added the source-role matrix through `noootwo-research`: product evidence, platform convention, visual direction, motion mechanism, implementation resource, asset source, and research craft. A source can inform only the role it actually carries.

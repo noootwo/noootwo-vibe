@@ -24,6 +24,7 @@ Eleven skills do the work; this one tells you which to reach for. A **flow** is 
 Start here, then merge onto the main flow.
 
 - **Anything multi-step, cross-file, or risky** → `$noootwo-workflow`. It reads current project state, matches the correct installed skill, and schedules one next step at a time. Start here when you are unsure where to start.
+- **A serial plan is slow because it contains independent slices** → `$noootwo-workflow`: its Fan-out Gate chooses `read-fanout`, `write-fanout`, or serial with a reason before any write.
 - **Something is broken** → `$noootwo-debug`: it proves the cause before any fix. Add `$noootwo-workflow` when the fix spans several files, skills, or a release.
 - **A claim or several suspected problems need confirmation** → `$noootwo-debug`: it maps each claim to the evidence that can settle it, stays read-only, and returns a verdict and options before any fix.
 - **Two requirements are active, branches or worktrees are colliding, or a PR/merge must reach `main`** → `$noootwo-delivery`: it isolates one requirement per workspace, records an Overlap Check, and integrates through the protected branch.
@@ -65,6 +66,7 @@ Start here, then merge onto the main flow.
 | A claim or several suspected problems need evidence and a recommendation | `$noootwo-debug` |
 | A decision needs evidence that only exists outside the repo | `$noootwo-research` |
 | Something works but is too slow, too big, or too expensive | `$noootwo-code-health` |
+| A multi-step plan has independent slices that could run concurrently | `$noootwo-workflow` Fan-out Gate, then `$noootwo-delivery` for write lanes |
 | You do not know the project, or which skills it needs | `$noootwo-onboard` |
 | You are unsure, or the task spans several of the above | `$noootwo-workflow` |
 

@@ -1,5 +1,11 @@
 # noootwo-ask Releases
 
+## v0.7.1
+
+- Added an on-ramp for a slow multi-step plan whose independent slices could use the workflow Fan-out Gate.
+- The choosing table now routes independent parallelizable slices through workflow mode selection and delivery write-lane isolation.
+- Clarified the public set as eleven specialists plus the user-invoked router.
+
 ## v0.7.0
 
 - Added `$noootwo-delivery` to the main flow, on-ramp, standalone routes, and choosing table.

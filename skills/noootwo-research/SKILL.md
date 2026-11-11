@@ -5,7 +5,7 @@ description: "Use when a decision needs outside evidence: design, stack, market,
 
 # Noootwo Research
 
-Settle a decision with evidence from outside the repository, or say plainly that the evidence does not settle it. Research unblocks a decision; it does not produce reading notes. Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate only independent read-only work; keep one writer; verify summaries against source.
+Settle a decision with evidence from outside the repository, or say plainly that the evidence does not settle it. Research unblocks a decision; it does not produce reading notes. Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; use `read-fanout` only after the workflow Gate selects it, and keep one writer for synthesis; verify summaries against source.
 
 Not every unknown is a research task. Read the repo, config, docs, and code first — a fact already written down is a lookup. Research starts when the answer only exists outside.
 
@@ -35,7 +35,7 @@ Size by the cost of being wrong, not by how interesting the question is.
 
 Derive three to six queries that separate the candidates instead of describing the topic: by product type, task, platform, audience, constraint, and the anti-pattern being avoided.
 
-Then fan out — breadth across independent sources first, depth into the two or three that survive. Read `references/research-method.md` for the query pattern, the breadth and depth discipline, and the follow-up rule.
+Then fan out — breadth across independent sources first, depth into the two or three that survive. Standalone research runs serially unless it invokes `noootwo-workflow` and the Gate selects `read-fanout`; then use 2-3 read-only workers for independent source questions and keep one research owner for evidence synthesis. Read `references/research-method.md` for the query pattern, the breadth and depth discipline, and the follow-up rule.
 
 **Done when:** the query set is written, and each query maps to a candidate or a constraint.
 

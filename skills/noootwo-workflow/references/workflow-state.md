@@ -10,6 +10,7 @@ In a linked worktree, use the primary checkout root (`--root <primary>`) so `.no
 
 - `scripts/noootwo-state.sh capsule`
 - `scripts/noootwo-state.sh state --field stage`
+- `scripts/noootwo-state.sh state --entry fanout`
 - `scripts/noootwo-state.sh events --last 5`
 - `scripts/noootwo-state.sh inspect PATH --query TEXT`
 
@@ -20,8 +21,13 @@ When a specialist changes the next frontier, hand it to `noootwo-state`:
 - current stage, last owner, last result, next trigger
 - settled and unsettled facts
 - open blockers and waiting condition
+- for a Fan-out Gate: mode, lane IDs, custody, branch/worktree, status, Result Packet handle, required rejoin order, and next trigger
 
-`noootwo-state` owns the form and location. Workflow only supplies the content and abstract properties. A pure read or no-change check creates no event.
+`noootwo-state` owns the form and location. Workflow only supplies the content and abstract properties. Only the integrator writes; no worker or secondary worktree writes `.noootwo` events, evidence, or snapshots. The helper's read-modify-write path is not safe for concurrent writers. A pure read or no-change check creates no event.
+
+Keep the structured Fan-out Gate record in the current-state entry named `fanout`. Session recovery reads it from the capsule's bounded `fanout` projection instead of loading the full state file.
+
+If that projection has `truncated: true`, read the exact `fanout` entry through the targeted entry command before dispatch, replacement, or merge. Never infer omitted custody from the compact projection.
 
 ## Checkpoint
 
@@ -33,6 +39,8 @@ A long turn drifts: the capsule goes stale, sources get re-read, and failed loop
 - every current claim is terminal and reading continues
 
 The checkpoint carries the current claim, proven facts, the open frontier, the last evidence handle, the one next owner, and the condition that reopens a source. It is one `noootwo-state` capsule write; an unchanged structured write creates no event.
+
+For a write fan-out, the checkpoint also carries lane status. A `done` lane is not re-dispatched; a `running` or orphaned lane is checked against its branch and latest Result Packet before replacement.
 
 After the checkpoint, resume from the capsule instead of re-reading an entrypoint or a skill body already followed. Then continue, change owner, or stop; an unmoved frontier with no new evidence ends the attempt, and the boundary is reported instead of broadening the read.
 

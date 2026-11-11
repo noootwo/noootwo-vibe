@@ -1,5 +1,12 @@
 # noootwo-research Releases
 
+## v0.9.0
+
+- Research breadth can use `read-fanout` for 2-3 independent source questions only after the workflow Fan-out Gate selects it.
+- Standalone research remains serial unless it invokes `noootwo-workflow` and the Gate chooses read fan-out.
+- One research owner remains responsible for synthesis and evidence quality; weakly related queries are not split into workers.
+- Added the 2026-11-11 parallel-execution source pass and evidence boundaries.
+
 ## v0.8.0
 
 - Added `references/design-source-registry.md`: a role-based source matrix for product evidence, platform convention, visual direction, motion mechanism, implementation resources, asset sources, and research craft.

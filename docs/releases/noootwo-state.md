@@ -1,5 +1,15 @@
 # noootwo-state Releases
 
+## v0.7.0
+
+- Worker Result Packets are evidence, not competing project state. No worker or secondary worktree writes `.noootwo`; the integrator serializes every snapshot, event, and evidence write.
+- The state helper's read-modify-write path is explicitly single-writer; `--root <primary>` fixes the location but does not make concurrent writers safe.
+- Parallel lane status, custody handles, packet handles, required rejoin order, and next trigger can be recorded without copying each packet into current state.
+- JSON and Markdown capsules now expose a bounded, source-marked `fanout` projection, so compaction recovery can read every lane status and custody without loading the full state file; `state --entry fanout` recovers the complete lease/worktree/evidence record when the projection is truncated.
+- Oversized worker output arrives through an integrator-assigned temp path and is imported into cold evidence with a verified path and hash.
+- Standalone specialists keep evidence work serial; `read-fanout` exists only after the Workflow Gate selects it.
+- Added `worker-results-are-evidence` and `parallel-state-single-writer` eval contracts. No schema change or migration.
+
 ## v0.6.1
 
 - Linked worktrees now read and write project state through the primary checkout root, anchored by `git rev-parse --git-common-dir`; a worktree-local `.noootwo` is not a second project authority, and concurrent snapshot writes use one writer.

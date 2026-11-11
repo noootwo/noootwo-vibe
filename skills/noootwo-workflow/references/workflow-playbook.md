@@ -15,10 +15,11 @@ Compact guardrail and handoff packet reference. Routing and scheduling live in `
 - Behavior-changing code uses `noootwo-tdd` before review.
 - Non-direct behavior changes return to `noootwo-code-health` for a scoped Change Check after green, before the work is reported done.
 - Concurrent requirements use one branch/worktree each and an Overlap Check; shared contracts, migrations, and generated output are serialized or contract-first.
+- Every non-direct plan gets a Fan-out Check before plan acceptance and the first write; the recorded result makes it execution-ready and the lane custody lives in the state `fanout` entry. Write lanes use one linked worktree each, 3 workers by default, 4 at most, and one integrator.
 - Work runs in the canonical checkout or a linked worktree; a sibling copy/separate clone is not isolation and never owns project state.
 - Integration goes through protected `main` with checks on the current base; without a merge queue, update and recheck the merge candidate.
 - A Release Check runs once before release or a ship-readiness submit gate; it owns the full suite, full Structure Sweep, release evidence, and named gaps.
-- Review/refactor/optimization must re-run the relevant tests, dispose of structural findings, and stop for user acceptance before submit or publish.
+- Review/refactor/optimization must re-run the relevant tests, dispose of structural findings, and stop for user acceptance before push, protected-main integration, tag, or publish unless that named action is already authorized. Local lane and integration-branch custody commits under the accepted plan are not publication approval.
 - Release work goes to `noootwo-release` after the Release Check; version, artifact, deployment trace, rollback, and release-health evidence come back through `noootwo-state`.
 - Update docs through `noootwo-state` when facts change.
 - Direct single-file work stays direct; do not add ceremony.
@@ -52,6 +53,8 @@ Keep packets short. Workflow carries scope and sequencing; the specialist owns m
 ### To `noootwo-delivery`
 
 - Requirement and other active requirements:
+- Fan-out mode and Fan-out Check: serial | read-fanout | write-fanout | requirement-parallel
+- If write-fanout: lane units, custody, owned files, acceptance, shared-contract owner, and required rejoin order
 - Expected files, shared contracts, migrations, and generated output:
 - Canonical checkout and state root:
 - Current worktree, branch, and base:

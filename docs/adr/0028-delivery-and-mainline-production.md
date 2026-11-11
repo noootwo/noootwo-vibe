@@ -124,8 +124,10 @@ and protected environments.
   review and readiness.
 - One canonical checkout owns project state; worktrees share the repository
   history and use the primary state root instead of creating a second context.
-  Concurrent current-snapshot writes use one writer; other worktrees append
-  events or evidence.
+  Concurrent writes have one writer. ADR 0031 narrows this rule: no worker or
+  secondary worktree writes snapshots, events, or evidence; all state writes
+  return to the integrator because the helper's read-modify-write path is not
+  concurrency-safe.
 - A shared contract can no longer be “parallel because the files differ.”
 - The live platform rule remains authoritative. A policy document that is not
   enforced by branch protection, environment rules, or CI is recorded as a gap,

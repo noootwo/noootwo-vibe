@@ -1,6 +1,6 @@
 ---
 name: noootwo-workflow
-description: "Use for multi-step tasks, releases, branch/worktree isolation, handoffs, re-entry after compaction or a phase change, or unclear routing; one owner at a time, read state only when needed."
+description: "Use for multi-step tasks, releases, parallel work, branch/worktree isolation, handoffs, re-entry after compaction or phase change, or unclear routing; one integrator, one state writer."
 ---
 
 # Noootwo Workflow
@@ -11,7 +11,7 @@ Run one task through one re-entrant loop:
 
 Routing gate: skill descriptions are the index. Do not read another `SKILL.md` to orient; choose from descriptions and load exactly one owner body for the current step.
 
-Workflow schedules. It owns order, verification depth, scope, stop conditions, and handoffs; the specialist or matching installed skill owns the work itself. Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate only independent read-only work; keep one writer; verify summaries against source. Load at most one specialist body before evidence; for a plan-only request, that is the only specialist body and later owners are named, not loaded.
+Workflow schedules. It owns order, verification depth, scope, stop conditions, and handoffs; the specialist or matching installed skill owns the work itself. Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate independent work by the Fan-out Gate; keep one integrator and one writer for current state; verify summaries against source. Load at most one specialist body before evidence; for a plan-only request, that is the only specialist body and later owners are named, not loaded.
 
 ## 1. Read current state
 
@@ -50,13 +50,15 @@ When the request is to confirm one or more suspected problems, gather evidence, 
 
 Precedence is limited to blockers and stage continuity:
 
-`debug/research/product blocker -> design -> delivery isolation before the first concurrent write -> code-health/shape when the seam is non-obvious -> preparatory-refactor when structure blocks -> tdd/implementation -> code-health/change-check -> delivery mainline integration -> code-health/release-check -> release when publishing -> state/release -> acceptance`
+`debug/research/product blocker -> design -> code-health/shape when the seam is non-obvious -> drafted decision-complete plan -> Fan-out Gate -> delivery isolation before the first concurrent write -> preparatory-refactor when structure blocks -> tdd/implementation -> code-health/change-check -> delivery local lane rejoin -> explicit user acceptance before push/protected-main integration/tag/publish -> delivery mainline integration -> code-health/release-check -> release when publishing -> state/release record -> done`
+
+After the seam is settled by code-health when required, draft the decision-complete plan and run the Fan-out Gate in `references/parallel-execution.md` before plan acceptance and the first write: choose `serial`, `read-fanout`, `write-fanout`, or `requirement-parallel`, and make every triggered independence question explicit. The recorded Gate result completes the plan; only then is it accepted and execution-ready. Write fan-out needs 2-3 independently briefed slices by default and 4 at most, one linked worktree per lane, one integrator, one recorded required rejoin order, and the Fan-out Check plus lane statuses written to the current-state entry `fanout` before dispatch. Missing capability records `serial - no-native-delegation`, `serial - no-native-collection`, or `serial - no-native-isolation`; background shells are not workers. Plan acceptance authorizes local implementation, lane-custody, and local integration-branch rejoin commits; these are not publication approval. User acceptance is separate and covers push, protected-main integration, tag, or publish unless already authorized.
 
 Code-health is not only a release gate. When a non-direct code change has a non-obvious seam, it shapes the change before TDD: `noootwo-code-health` produces a Change Shape, and its result may be direct TDD, a preparatory refactor, or a handoff to product, design, research, or a stopped change. A local change with an obvious seam and no contract, data, or migration impact skips that pass. After every non-direct behavior change, the loop returns to `noootwo-code-health` for a Change Check before the work can be reported done. That check stays on the diff, changed behavior, nearest callers, affected tests, and one to three lenses; it escalates only when blast radius requires it. Before release or a ship-readiness submit gate, code-health runs a Release Check once for the exact commit: full suite or CI evidence, full Structure Sweep, release evidence, and named gaps. Once readiness is established, versioning, tags, artifacts, deployment traces, provenance, rollback, and release health belong to `noootwo-release`.
 
-Delivery enters twice. Before the first write, it isolates one requirement when another requirement or agent may share the repository; it records an Overlap Check before parallel work and chooses parallel, serialize, or contract-first. After green and review, it integrates through protected `main` with current-base checks and a merge queue where available. A direct local edit with no concurrent writer stays direct. Delivery never substitutes for the Change Check or the Release Check.
+Delivery enters twice. Before the first write, it turns this Gate's `write-fanout` or `requirement-parallel` mode, acceptance, and required rejoin order into an executable Lane Map, linked worktrees, and an Overlap Check for shared meaning; after green and the integrator-scheduled Change Check, it rejoins lanes and integrates once through protected `main` with current-base checks and a merge queue where available. Workflow owns the scheduling constraint; delivery owns the mechanics. A direct local edit with no concurrent writer stays direct. Delivery never substitutes for the Change Check or the Release Check.
 
-A pasted, quoted, or externally produced plan is an approved plan, not an owner assignment. Before executing, name the current owner and its verification depth, and name the release boundary when the plan can change a version, tag, artifact, deployment trace, or release fact; that boundary routes through `noootwo-release` after code-health readiness. A plan with no test assertion or verification command is not execution-ready: name the missing decision and have its owner close it before implementation starts instead of inventing the validation.
+A pasted, quoted, or externally produced plan is approved input, not an owner assignment or proof of execution readiness. Before executing, name the current owner and its verification depth, and name the release boundary when the plan can change a version, tag, artifact, deployment trace, or release fact; that boundary routes through `noootwo-release` after code-health readiness. A plan with no test assertion, verification command, or Fan-out Check is still drafted, not execution-ready: name the missing decision and have its owner close it before implementation starts instead of inventing the validation.
 
 After a plan is approved, resolve a reversible ambiguity from the spec, plan, and evidence, record the ruling with its basis, error cost, and reopen trigger, then continue. Stop only for a user-owned decision, irreversible migration or data loss, security or privacy impact, external side effects or spend, or evidence that the plan is no longer viable. Ordinary implementation details do not return for routine re-approval.
 
@@ -78,7 +80,7 @@ Answer before calling the work done:
 - For a confirmation request, did every claim end as confirmed, refuted, insufficient, or decision-needed before any fix or expansion?
 - Did a specialist or matching installed skill need to run, and was it invoked?
 - For a non-direct code change, did `noootwo-code-health` shape the implementation when the seam was non-obvious, run a scoped Change Check after green, and run a Release Check only when the task reached release?
-- For concurrent work, did `noootwo-delivery` record an Overlap Check, serialize or contract-first shared contracts, and integrate each requirement through protected `main`?
+- For a non-direct plan, did the Fan-out Gate follow the settled seam, choose `serial`, `read-fanout`, `write-fanout`, or `requirement-parallel` with its units and required rejoin order, and persist lane status to the state `fanout` entry before dispatch? For concurrent writes, did `noootwo-delivery` isolate exact lane SHAs, rejoin one lane at a time into the integration branch, then integrate that branch through protected `main` once?
 - Did the work stay in one canonical repository/state root, with no sibling copy or second `.noootwo` context?
 - For a release path, did the production source resolve to an exact `main`-reachable commit or an annotated tag on one, rather than a feature or unmerged release branch?
 - If a completed change created a release-bound check or known gap, did `noootwo-release` add it to the open Release Verification Ledger?
@@ -88,7 +90,7 @@ Answer before calling the work done:
 - For a long turn, did a checkpoint refresh the capsule before further reads, and did the attempt end when the frontier stopped moving?
 - After a compaction or phase shift, did the loop re-match one owner instead of reloading the skill bodies used before it?
 - Did an external skill propose a spec, plan, or other durable artifact? If so, was it stored in the Noootwo-owned layer instead of the external skill's default directory?
-- Is user acceptance still required before commit, push, tag, or publish?
+- Did user acceptance cover push, protected-main integration, tag, or publish? An explicit request to release the work counts for those named actions; local lane-custody commits under the accepted plan are not publication approval.
 
 Then report what changed, what was verified, what was documented, and what remains open.
 
@@ -112,8 +114,7 @@ State the layer in one line, then invoke. Do not polish the same layer again.
 ## References
 
 - `references/route-by-signal.md` — accurate owner matching from current evidence.
-- `references/workflow-state.md` — project-local state and re-entrant timing.
-- `references/orchestration.md` — one-next-step scheduling and stop conditions.
-- `references/workflow-playbook.md` — handoff packets and lightweight guardrail checklist.
+- `references/workflow-state.md` and `references/orchestration.md` — project-local state timing, one-next-step scheduling, and stop conditions.
+- `references/parallel-execution.md` and `references/workflow-playbook.md` — Fan-out Gate, packets, caps, rejoin, handoffs, and guardrails.
 
 Missing skill fallback: first try `npx -y skills add noootwo/noootwo-vibe --global --agent codex --skill <name> --yes`; if install fails, take the smallest direct fallback and mark the record `skill-missing: <name>` (for persistence, write the owning file directly).

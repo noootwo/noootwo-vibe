@@ -1,6 +1,6 @@
 # Eval: A closed plan goes directly to TDD
 
-Prompt: "Implement this approved local plan. Interfaces, file scope, assertions, verification commands, and Review Focus are complete, and no new boundary is crossed."
+Prompt: "Implement this approved local plan. Interfaces, file scope, assertions, verification commands, and Review Focus are complete. Its Fan-out Check records `serial` because this is one local slice, and no new boundary is crossed."
 
 Expected:
 
