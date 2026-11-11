@@ -8,8 +8,8 @@ Use this when a documentation source is becoming expensive to read, when a statu
 
 1. **Write** the durable fact, decision, blocker, or evidence handle when it changes.
 2. **Select** only the facts and files that constrain the current step.
-3. **Compress** re-entry into a context capsule: goal, stage, settled and unsettled decisions, blockers, next trigger, provenance handles, and source hash.
-4. **Isolate** only independent, read-only research or review work. Keep one writer and do not duplicate dependent decisions across agents.
+3. **Compress** re-entry into a context capsule: goal, stage, settled and unsettled decisions, blockers, next trigger, provenance handles, source hash, and a bounded `fanout` projection when lane recovery is active.
+4. **Isolate** by the workflow's Fan-out Gate: when the Gate selects `read-fanout`, read-only work may share a checkout; independently specified write lanes use linked worktrees. A standalone specialist stays serial unless it invokes workflow for that decision. Keep one integrator and one state writer, and do not duplicate dependent decisions across agents.
 5. **Verify** the capsule's claim against the named source before acting on it. Compression never upgrades uncertainty or replaces raw evidence.
 
 The capsule is `noootwo.context-capsule/0.1`; state and event schemas remain authoritative and unchanged.
@@ -52,6 +52,7 @@ Rules that stop a long turn from paying twice for context it already bought:
 - The same file or verification command repeated within a turn is a checkpoint trigger; a second read is not new evidence.
 - Two verification loops without new evidence end the attempt: record the boundary and return to the owner of the next step.
 - Output above 16 KiB is captured before it is reasoned over; the live context keeps the exit status, hash, path, and bounded tail.
+- A parallel worker's Result Packet is evidence. No worker or secondary worktree writes `.noootwo` events, evidence, or the current snapshot; the integrator verifies the packet and serializes every state write through the one writer. Raw worker output above 16 KiB uses an integrator-assigned temp path outside the repository, then the integrator verifies and imports it through `capture`. The helper replaces the event log during a read-modify-write, so concurrent writers can lose history.
 
 ## Placement Table
 
@@ -93,6 +94,7 @@ Never use a long file as a context dump when a local search can isolate the rele
 ## State helper
 
 - `capsule` returns a bounded re-entry view in Markdown or JSON and never changes state; both forms default to 80 lines and 6,000 characters.
+- If the capsule's `fanout` projection is marked truncated, `state --entry fanout` reads that one exact entry without loading the full snapshot.
 - `inspect` returns metadata, headings, and matching lines; it never needs to dump a long file.
 - `capture` writes complete command output to cold evidence and returns only its exit status, hash, path, and bounded tail.
 - Read the append-only event tail only when reconstructing change history; use the capsule for ordinary re-entry.

@@ -402,3 +402,55 @@ every task into a persona study.
 The full brief, source dates, access notes, and confidence are in
 `docs/reference/audience-language-evidence.md`. The durable decision is ADR
 0029. No fresh-session behavior or cost improvement is claimed.
+
+Parallel-execution refresh, checked 2026-11-11:
+
+- Local Codex history contained 62 session files and 2.56 GiB of data for
+  October and November 2026. Deduplicated `function_call` records contained 29
+  `spawn_agent`, 50 `wait_agent`, 1 `send_input`, and 1 `close_agent` call; 9
+  session files contained a unique spawn. A one-session local Claude sample had
+  zero `Task` or `Agent` calls. These are machine-local counts, not task or
+  cross-harness statistics.
+- `obra/superpowers` `v7.0.2` contributes two mechanisms: dispatch only
+  independent tasks with no shared state, and give each fresh worker a
+  self-contained brief with a terminal status; its progress ledger prevents
+  completed work from being re-dispatched after compaction.
+- Anthropic's multi-agent research system reports strong breadth-first research
+  gains with much higher token use. Its companion guidance says most tasks
+  remain single-agent. The result supports isolated research fan-out, not
+  default write fan-out for coupled coding.
+- OpenAI Agents SDK defaults concurrent subagents to 3, Claude Code recommends
+  independent files/research/review while naming overhead, and Cursor and
+  GitHub Copilot expose separate parallel coding environments. Capability and
+  limits vary by harness, so the protocol must probe capabilities.
+- Cognition's *Don't Build Multi-Agents* supplies the governing counterexample:
+  dependent actions need shared context and conflict resolution. Noootwo keeps
+  one integrator, one current-state writer, and serial/contract-first behavior
+  for shared meaning. No worker or secondary worktree writes `.noootwo`;
+  snapshot, event, and evidence writes serialize through the integrator because
+  the state helper's read-modify-write path is not a multi-writer primitive.
+  Agentless supplies a second warning that more agents do not by themselves
+  improve outcomes.
+- Adopt: a conditional Fan-out Gate, `read-fanout`, `write-fanout`,
+  `requirement-parallel`, four independence questions, Worker Brief, Result
+  Packet, three-worker default/four-worker maximum, linked-worktree lanes, and
+  explicit compaction recovery rules for rejoin.
+- Reject: universal fan-out, background shells as subagents, multiple writers
+  in one checkout, worker-owned state, a separate orchestrator skill, a full DAG,
+  and an unbounded worker pool.
+- Evidence boundary: the local session audit shows the trigger gap, not a causal
+  effect of the new rules. Fresh-session paired measurements remain open, so no
+  speed, token, quality, or rework improvement is claimed.
+
+Source index for the parallel-execution refresh:
+
+- Superpowers: `https://github.com/obra/superpowers`
+- Anthropic multi-agent research system: `https://www.anthropic.com/engineering/multi-agent-research-system`
+- Anthropic multi-agent guidance: `https://claude.com/blog/building-multi-agent-systems-when-and-how-to-use-them`
+- Anthropic context engineering: `https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents`
+- OpenAI Agents SDK: `https://openai.github.io/openai-agents-python/multi_agent/`
+- Claude Code subagents: `https://code.claude.com/docs/en/sub-agents`
+- Cursor parallel agents: `https://cursor.com/docs/agent/parallel-agents`
+- GitHub Copilot coding agent: `https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-coding-agent`
+- Cognition, Don't Build Multi-Agents: `https://cognition.ai/blog/dont-build-multi-agents`
+- Agentless: `https://arxiv.org/abs/2407.01489`

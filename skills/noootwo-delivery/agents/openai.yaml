@@ -1,3 +1,3 @@
 interface:
   display_name: "Noootwo Delivery（交付管理）"
-  short_description: "Branches, worktrees, concurrent work, mainline"
+  short_description: "Gated write lanes, worktrees, mainline"

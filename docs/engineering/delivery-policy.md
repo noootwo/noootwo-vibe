@@ -63,7 +63,7 @@ Remaining optional setup:
 
 ## Concurrent Work
 
-Two active requirements use separate worktrees and branches. Before either starts, record an Overlap Check across expected files, shared contracts, migrations, generated output, and merge order. Shared skill manifests, validation scripts, public descriptions, and release facts are serialized or contract-first; independent skill directories can proceed in parallel. File-name overlap alone is not a permanent lock.
+Two active requirements use separate worktrees and branches. Before either starts, record an Overlap Check across expected files, shared contracts, migrations, generated output, and merge order. A `write-fanout` inside one requirement runs only after the workflow Gate, keeps one integration branch, gives each lane one primary-root-linked worktree, one worker, and custody handles, records a Lane Map, and merges one frozen SHA at a time through one integrator. No worker or secondary worktree writes `.noootwo`; all state writes serialize through the integrator. Shared skill manifests, validation scripts, public descriptions, and release facts are serialized or contract-first; independent skill directories can proceed in parallel. File-name overlap alone is not a permanent lock.
 
 A sibling copy is not a worktree. It has its own `.git`, refs, docs, and `.noootwo` context, so it turns one requirement into a manual diff-copying problem. If one already exists, stop, preserve its uncommitted work, and port only the intended change into a linked worktree from the canonical checkout. Do not delete it without explicit user approval.
 

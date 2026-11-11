@@ -87,17 +87,20 @@ Builder Check
 
 `plan-decided` proceeds to TDD. `builder-may-decide` proceeds with a ruling recorded in the plan. A non-empty `user-decision-required` or `blocking-ambiguity` stops before behavior changes; invoke the owning skill or ask the user for the smallest decision that unblocks the work. The check is fresh-context verification, not a second design review.
 
-## Decision-Complete Plan
+## Plan Draft and Execution Readiness
 
-An accepted implementation plan records:
+A non-direct plan is drafted before Workflow's Fan-out Gate, then completed and accepted only after that Gate records the execution mode:
 
 - exact file and module scope, including paths that must not change;
 - `Interfaces`: public APIs, events, schemas, shared types, state, storage, migration, and compatibility contracts;
+- `Fan-out Check`: `serial`, `read-fanout`, `write-fanout`, or `requirement-parallel`, with units, independence result, worker/isolation capability, and rejoin order;
 - ordered steps with the stop point for the first behavior slice;
 - test assertions written as observable outcomes;
 - verification commands and the boundary they cover;
 - `Review Focus`: specification-implied failure risks that ordinary tests will not catch;
 - a ruling ledger that starts empty.
+
+The draft supplies every field except the Gate result. Workflow runs the Gate, records the Fan-out Check, and only then marks the plan accepted and execution-ready. A plan that omits the Fan-out Check is drafted, not rejected for inventing one in TDD.
 
 Record rulings during approved execution as `decision | basis | cost if wrong | reopen trigger`. A reversible ambiguity is decided from the accepted spec, plan, and current evidence, recorded, and continued. Stop only for a user-owned choice, an irreversible migration or data loss, security or privacy impact, an external side effect or spend, or evidence that the plan as a whole is no longer viable. Do not send ordinary implementation details back for routine re-approval.
 

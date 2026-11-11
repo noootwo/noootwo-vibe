@@ -478,6 +478,81 @@ def evidence_handles(events: list[dict], limit: int = 5) -> list[dict]:
     return handles
 
 
+def bounded_state_value(
+    value: object,
+    *,
+    string_limit: int = 240,
+    item_limit: int = 12,
+    depth: int = 0,
+) -> object:
+    if depth >= 4:
+        rendered = (
+            value
+            if isinstance(value, str)
+            else json.dumps(value, ensure_ascii=False, separators=(",", ":"))
+        )
+        return clip_text(rendered, string_limit)
+    if isinstance(value, dict):
+        return {
+            clip_text(str(key), 80): bounded_state_value(
+                item,
+                string_limit=string_limit,
+                item_limit=item_limit,
+                depth=depth + 1,
+            )
+            for key, item in list(value.items())[:item_limit]
+        }
+    if isinstance(value, list):
+        return [
+            bounded_state_value(
+                item,
+                string_limit=string_limit,
+                item_limit=item_limit,
+                depth=depth + 1,
+            )
+            for item in value[:item_limit]
+        ]
+    if isinstance(value, str):
+        return clip_text(value, string_limit)
+    return value
+
+
+def clip_optional_text(value: object, limit: int) -> str | None:
+    return None if value is None else clip_text(str(value), limit)
+
+
+def fanout_capsule_fallback(value: object, source: str) -> dict:
+    fallback: dict[str, object] = {
+        "truncated": True,
+        "source": source,
+    }
+    if not isinstance(value, dict):
+        fallback["value"] = bounded_state_value(value, string_limit=120, item_limit=4)
+        return fallback
+
+    fallback["mode"] = clip_text(str(value.get("mode", "")), 80)
+    rejoin = value.get("required_rejoin_order")
+    if isinstance(rejoin, list):
+        fallback["required_rejoin_order"] = [
+            clip_text(str(item), 80) for item in rejoin[:4]
+        ]
+
+    lanes = value.get("lanes")
+    compact_lanes: list[dict] = []
+    if isinstance(lanes, list):
+        for lane in lanes[:4]:
+            if not isinstance(lane, dict):
+                continue
+            compact_lanes.append({
+                "id": clip_text(str(lane.get("id", "")), 80),
+                "status": clip_text(str(lane.get("status", "")), 40),
+                "base_sha": clip_optional_text(lane.get("base_sha"), 64),
+                "result_commit": clip_optional_text(lane.get("result_commit"), 64),
+            })
+    fallback["lanes"] = compact_lanes
+    return fallback
+
+
 def build_capsule(root: Path, recent: int = 5) -> dict:
     state = read_json(state_file(root))
     validate_state(state, state_file(root))
@@ -521,6 +596,7 @@ def build_capsule(root: Path, recent: int = 5) -> dict:
         "settled": [clip_text(value, 400) for value in state["settled"]],
         "unsettled": [clip_text(value, 400) for value in state["unsettled"]],
         "open_blockers": blockers,
+        "fanout": state["entries"].get("fanout") if "fanout" in state["entries"] else None,
         "evidence_handles": evidence_handles(events, recent),
         "recent_events": recent_events,
         "truncated": False,
@@ -548,6 +624,11 @@ def fit_capsule_json(
         return fitted
 
     working["truncated"] = True
+    if working["fanout"] is not None:
+        working["fanout"] = fanout_capsule_fallback(
+            working["fanout"],
+            f"{working['source']['current']}#entries/fanout",
+        )
     for key in ("settled", "unsettled"):
         working[key] = [clip_text(value, 240) for value in working[key][-10:]]
     working["open_blockers"] = working["open_blockers"][-6:]
@@ -591,6 +672,29 @@ def fit_capsule_json(
     fitted = fit_current_shape()
     if fitted:
         return fitted
+    if isinstance(working["fanout"], dict) and working["fanout"].get("truncated") is True:
+        working["fanout"] = {
+            "truncated": True,
+            "source": clip_text(working["fanout"].get("source", ""), 80),
+            "mode": clip_text(str(working["fanout"].get("mode", "")), 40),
+            "required_rejoin_order": [
+                clip_text(str(item), 40)
+                for item in working["fanout"].get("required_rejoin_order", [])[:4]
+            ],
+            "lanes": [
+                {
+                    "id": clip_text(str(lane.get("id", "")), 32),
+                    "status": clip_text(str(lane.get("status", "")), 24),
+                    "base_sha": clip_optional_text(lane.get("base_sha"), 40),
+                    "result_commit": clip_optional_text(lane.get("result_commit"), 40),
+                }
+                for lane in working["fanout"].get("lanes", [])[:4]
+                if isinstance(lane, dict)
+            ],
+        }
+        fitted = fit_current_shape()
+        if fitted:
+            return fitted
     raise SystemExit(f"capsule cannot fit in {max_chars} characters and {max_lines} lines")
 
 
@@ -600,9 +704,39 @@ def render_capsule(capsule: dict) -> str:
         "# Context Capsule",
         "",
         f"- Protocol: {capsule['protocol']}",
-        f"- Source: {capsule['source']['current']}",
+        f"- Source: {clip_text(capsule['source']['current'], 240)}",
         f"- State hash: {capsule['source']['state_hash']}",
         f"- Last event: {capsule['source']['last_event_id'] or '-'}",
+    ]
+    if capsule.get("fanout") is not None:
+        fanout = fanout_capsule_fallback(
+            capsule["fanout"],
+            f"{capsule['source']['current']}#entries/fanout",
+        )
+        lines.extend([
+            "",
+            "## Fan-out",
+            "- Truncated: yes",
+            f"- Source: {fanout['source']}",
+            f"- Mode: {fanout.get('mode') or '-'}",
+        ])
+        rejoin = fanout.get("required_rejoin_order")
+        if isinstance(rejoin, list) and rejoin:
+            lines.append(
+                f"- Required rejoin order: {', '.join(str(item) for item in rejoin)}"
+            )
+        lanes = fanout.get("lanes")
+        if isinstance(lanes, list):
+            for lane in lanes:
+                if not isinstance(lane, dict):
+                    continue
+                base_sha = lane.get("base_sha") or "-"
+                result_commit = lane.get("result_commit") or "-"
+                lines.append(
+                    f"- {lane.get('id', '-')} [{lane.get('status', '-')}] "
+                    f"base={base_sha} result={result_commit}"
+                )
+    lines.extend([
         "",
         "## Current",
         f"- Goal: {current['goal'] or '-'}",
@@ -611,7 +745,7 @@ def render_capsule(capsule: dict) -> str:
         f"- Last owner: {current['last_owner'] or '-'}",
         f"- Last result: {current['last_result'] or '-'}",
         f"- Next trigger: {current['next_trigger'] or '-'}",
-    ]
+    ])
 
     def add_list(title: str, values: list[object], formatter) -> None:
         lines.extend(["", f"## {title}"])
@@ -1093,6 +1227,51 @@ def self_test() -> None:
         )
         if len(read_events(events_file(root))) != event_count:
             raise SystemExit("unchanged state request created an event")
+        fanout_request = {
+            "request_id": "fanout",
+            "fact_type": "state",
+            "query_profile": "field",
+            "mutability": "current",
+            "lifespan": "hot",
+            "content": {
+                "mode": "write-fanout",
+                "required_rejoin_order": ["lane-a", "lane-b", "lane-c", "lane-d"],
+                "lanes": [
+                    {
+                        "id": f"lane-{suffix}",
+                        "status": (
+                            "done" if suffix == "b"
+                            else "running" if suffix in "ac"
+                            else "unstarted"
+                        ),
+                        "base_sha": "a" * 40,
+                        "branch": f"codex/lane-{suffix}",
+                        "worktree": f".worktrees/lane-{suffix}",
+                        "liveness_source": "native-task-state",
+                        "lease": {
+                            "acquired_at": "2026-11-11T08:00:00Z",
+                            "last_seen_at": "2026-11-11T08:04:00Z",
+                            "renew_by": "2026-11-11T08:09:00Z",
+                            "query": "task-state",
+                            "orphan_action": "inspect branch and stop",
+                        },
+                        "evidence_handoff": f"/tmp/noootwo-workers/lane-{suffix}.log",
+                        "result_packet": None,
+                        "result_commit": "b" * 40 if suffix == "b" else None,
+                    }
+                    for suffix in "abcd"
+                ],
+            },
+            "owner_skill": "caller",
+        }
+        request_command(
+            root,
+            argparse.Namespace(
+                json_request=json.dumps(fanout_request),
+                request_file=None,
+                destination=None,
+            ),
+        )
         check_command(root, argparse.Namespace())
         log_command(root, argparse.Namespace(
             type="blocker.opened",
@@ -1179,6 +1358,11 @@ def self_test() -> None:
         if not capsule["open_blockers"] or capsule["open_blockers"][0]["id"] != "B1":
             raise SystemExit("capsule missing open blocker")
         if (
+            capsule.get("fanout", {}).get("mode") != "write-fanout"
+            or capsule["fanout"]["lanes"][0]["status"] != "running"
+        ):
+            raise SystemExit("capsule missing fan-out recovery projection")
+        if (
             capsule["evidence_handles"][0].get("command") != '["verify","--fast"]'
             or capsule["evidence_handles"][0].get("exit_code") != 0
         ):
@@ -1198,6 +1382,47 @@ def self_test() -> None:
         bounded_json = fit_capsule_json(capsule, 2000)
         if len(bounded_json) > 2000 or len(bounded_json.splitlines()) > DEFAULT_CAPSULE_LINES:
             raise SystemExit("JSON capsule exceeded its character or line budget")
+        bounded_capsule = json.loads(bounded_json)
+        if (
+            bounded_capsule["fanout"].get("truncated") is not True
+            or bounded_capsule["fanout"].get("source") != f"{display_path(root, state_file(root))}#entries/fanout"
+            or bounded_capsule["fanout"].get("mode") != "write-fanout"
+            or bounded_capsule["fanout"].get("required_rejoin_order")
+            != ["lane-a", "lane-b", "lane-c", "lane-d"]
+            or len(bounded_capsule["fanout"].get("lanes", [])) != 4
+            or bounded_capsule["fanout"]["lanes"][0]["status"] != "running"
+            or bounded_capsule["fanout"]["lanes"][1]["status"] != "done"
+            or bounded_capsule["fanout"]["lanes"][1]["result_commit"] != "b" * 40
+        ):
+            raise SystemExit("compressed capsule did not expose a usable fan-out fallback")
+        rendered_fanout = render_capsule(capsule)
+        if (
+            f"{display_path(root, state_file(root))}#entries/fanout" not in rendered_fanout
+            or "Truncated: yes" not in rendered_fanout
+            or "lane-a [running]" not in rendered_fanout
+            or "lane-b [done]" not in rendered_fanout
+            or "lane-c [running]" not in rendered_fanout
+            or "lane-d [unstarted]" not in rendered_fanout
+        ):
+            raise SystemExit("markdown capsule did not preserve the bounded fan-out projection")
+        saturated = json.loads(json.dumps(capsule, ensure_ascii=False))
+        for key in ("goal", "last_result", "next_trigger"):
+            saturated["current"][key] = "x" * 600
+        saturated["current"]["last_owner"] = "o" * 200
+        saturated_markdown = cap_rendered_text(
+            render_capsule(saturated), 2000, DEFAULT_CAPSULE_LINES
+        )
+        if (
+            len(saturated_markdown) > 2000
+            or "Truncated: yes" not in saturated_markdown
+            or f"{display_path(root, state_file(root))}#entries/fanout"
+            not in saturated_markdown
+            or "lane-a [running]" not in saturated_markdown
+            or "lane-b [done]" not in saturated_markdown
+            or "lane-c [running]" not in saturated_markdown
+            or "lane-d [unstarted]" not in saturated_markdown
+        ):
+            raise SystemExit("saturated markdown capsule lost fan-out recovery")
         rendered = cap_rendered_text(render_capsule(capsule), 1200, DEFAULT_CAPSULE_LINES)
         if len(rendered) > 1200 or len(rendered.splitlines()) > DEFAULT_CAPSULE_LINES:
             raise SystemExit("markdown capsule exceeded its budget")

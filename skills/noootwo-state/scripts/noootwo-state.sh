@@ -10,6 +10,7 @@ usage() {
 Usage: noootwo-state.sh [--root DIR] <command> [options]
 
   state   --field KEY       print one current field
+          --entry KEY       print one structured entry as JSON
           --json            print the current snapshot
   events  --type TYPE       filter event_type
           --last N          show the last N events (default 20)
@@ -61,15 +62,31 @@ case "$command" in
     ;;
   state)
     field=""
+    entry=""
     json=0
     while [ "$#" -gt 0 ]; do
       case "$1" in
         --field) field="${2:-}"; shift 2 ;;
+        --entry) entry="${2:-}"; shift 2 ;;
         --json) json=1; shift ;;
         *) echo "unknown state argument: $1" >&2; usage >&2; exit 2 ;;
       esac
     done
     [ -f "$state_file" ] || { echo "missing $state_file" >&2; exit 1; }
+    if [ -n "$entry" ]; then
+      python3 - "$state_file" "$entry" <<'PY'
+import json
+import sys
+
+path, key = sys.argv[1], sys.argv[2]
+with open(path, encoding="utf-8") as handle:
+    state = json.load(handle)
+if key not in state.get("entries", {}):
+    raise SystemExit(f"missing state entry: {key}")
+print(json.dumps(state["entries"][key], indent=2, ensure_ascii=False))
+PY
+      exit 0
+    fi
     if [ "$json" -eq 1 ]; then
       cat "$state_file"
       exit 0

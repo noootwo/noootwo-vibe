@@ -1,15 +1,16 @@
 ---
 name: noootwo-delivery
-description: "Use for branch/worktree isolation, sibling copies, concurrent requirements, merge conflicts, or protected main; one canonical repo and state root, production stays main-only."
+description: "Use after the workflow Fan-out Gate for write-lane worktrees, concurrent requirements, merge conflicts, or protected main; one canonical repo/state root, production stays main-only."
 ---
 
 # Noootwo Delivery
 
-Own the path from a requirement's working copy to protected `main`: workspace isolation, overlap decisions between concurrent requirements, integration, and the recorded Delivery Policy. Code health owns readiness and review; release owns version, artifact, deployment trace, and rollback. Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate only independent read-only work; keep one writer; verify summaries against source.
+Own the path from a requirement's working copy to protected `main`: workspace isolation, overlap decisions between concurrent requirements, write-fanout lanes, integration, and the recorded Delivery Policy. Code health owns readiness and review; release owns version, artifact, deployment trace, and rollback. Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate independent work by workflow mode; give every write lane its own linked worktree and keep one integrator and one state writer; verify summaries against source.
 
 ## When this runs
 
 - Two or more requirements are active in one repository.
+- The workflow Fan-out Gate chose `write-fanout` or `requirement-parallel`; delivery turns it into a Lane Map, linked worktrees, and rejoin.
 - Work needs a separate branch or worktree, or two agents would otherwise share a checkout.
 - A merge conflict, PR to protected `main`, or merge queue is in scope.
 - A hotfix must return to the mainline before it can ship.
@@ -34,9 +35,11 @@ When no policy exists, create one from `references/delivery-policy.md` and place
 
 Resolve repository identity before creating isolation: `git rev-parse --show-toplevel`, `git rev-parse --git-common-dir`, and `git worktree list --porcelain`. A linked worktree shares the primary checkout's `.git`; a sibling directory with its own `.git` is a separate clone, not isolation. Never create a sibling copy with `cp -R`, `rsync`, or an adjacent `git clone` to protect the current checkout. If a copy already exists, stop and reconcile it using `references/parallel-work.md`.
 
-Detect an existing linked worktree before creating another. Reuse it when it already belongs to this requirement; never nest worktrees. Use the harness's native worktree capability when available, otherwise use the git fallback in `references/parallel-work.md`. Start from the latest `origin/<default-branch>` and give the branch a short, requirement-specific name. The primary checkout owns project-level `.noootwo` state and durable docs merge through one repository history; from a linked worktree, pass the primary root to `noootwo-state` rather than creating a second context. Concurrent state writes serialize through one writer; append events or hand off a current-snapshot update instead of racing it.
+Detect an existing linked worktree before creating another. Reuse it when it already belongs to this requirement; never nest worktrees. Use the harness's native worktree capability when available, otherwise use the git fallback in `references/parallel-work.md`. Start from the latest `origin/<default-branch>` and give the branch a short, requirement-specific name. The primary checkout owns project-level `.noootwo` state and durable docs merge through one repository history; from a linked worktree, pass the primary root to `noootwo-state` rather than creating a second context. No worker or secondary requirement writes `.noootwo`: every event, evidence record, and snapshot update is handed to the integrator and serialized through the one state writer.
 
 A single tiny edit with no concurrent writer may stay in place. Isolation is required when another requirement is active, the work will be reviewed, or the branch must merge independently. One checkout has one writer: switch branches only after the current requirement is committed or handed off.
+
+A `write-fanout` lane is a subordinate work unit of one requirement, not a second requirement. Create one linked worktree and branch per lane from the integration base, keep one integrator in the integration checkout, and never let two lanes share a working tree.
 
 **Done when:** the canonical checkout, worktree path, branch name, base commit, and active requirement are known; no sibling copy, second state root, or nested/orphaned worktree was created.
 
@@ -58,11 +61,13 @@ Use `references/parallel-work.md`. Independent files and independent contracts m
 
 Same file is not a permanent lock. Separate, semantically independent edits may remain parallel; shared meaning is the dependency. Incomplete shared work uses a feature flag; schema changes use expand/contract; generated clients have one owner.
 
-**Done when:** every concurrent requirement has a parallel, serialize, or contract-first decision with its merge order, or the work is explicitly held.
+For `write-fanout`, read `references/parallel-work.md` and record one Lane Map: integration branch and base, lane units, branches/worktrees, worker/task and collection/stop handles, lease, owned files, acceptance, shared-contract owner, required rejoin order, state writer, and cleanup. The integrator schedules the Change Check, merges one frozen lane SHA at a time in the required order, and reruns the lane plus combined checks after each.
+
+**Done when:** every concurrent requirement has a parallel, serialize, or contract-first decision with its merge order, or the work is explicitly held. Every write lane has one writer, one linked worktree, one integrator, custody handles, and a rejoin condition; no worker has project-state write authority.
 
 ## 4. Integrate through protected main
 
-Before merge, update the branch from the latest target, rerun the required checks on that base, and confirm the review/Change Check is complete. Open a PR/MR against `main`. Use the merge queue when the platform provides one; otherwise update the branch and rerun required checks on the resulting merge candidate. Direct pushes, local merges to `main`, and long-lived integration branches bypass the gate.
+Before merge, update the branch from the latest target, rerun the required checks on that base, and confirm the review/Change Check is complete. A write fan-out first rejoins every reviewed lane into its one integration branch; that branch opens one PR/MR against `main`, not one main-bound PR per lane. Use the merge queue when the platform provides one; otherwise update the branch and rerun required checks on the resulting merge candidate. Direct pushes, local merges to `main`, and long-lived integration branches bypass the gate.
 
 Resolve conflicts from the two changes' intent, not by choosing `ours` or `theirs` wholesale. Read the commits, PR description, issue, and tests; keep both behaviours where the product requires them; rerun the affected checks. Hotfixes branch from `main`, return through a PR, and only then enter release.
 
@@ -85,7 +90,7 @@ When the task includes versioning, tagging, build, deployment, or rollback, invo
 ## References
 
 - `references/delivery-policy.md` — the minimal policy template, live-rule checks, and default guardrails.
-- `references/parallel-work.md` — worktree detection/creation, the Overlap Check, contract-first, flags, migrations, and conflict intent.
+- `references/parallel-work.md` — write-fanout lanes, worktree detection/creation, the Lane Map and Overlap Check, contract-first, flags, migrations, and conflict intent.
 - `references/mainline.md` — PR and merge-queue integration, post-merge verification, hotfixes, and production boundaries.
 
 Missing skill fallback: first try `npx -y skills add noootwo/noootwo-vibe --global --agent codex --skill <name> --yes`; if install fails, take the smallest direct fallback and mark the record `skill-missing: <name>` (for persistence, write the owning file directly).

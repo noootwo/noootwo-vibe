@@ -9,7 +9,7 @@ Own how project state and context are persisted, read, and changed. Other skills
 
 ## Context budget
 
-Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate only independent read-only work; keep one writer; verify summaries against source.
+Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate evidence work only under a workflow-selected `read-fanout`; keep one writer; verify summaries against source.
 
 ## 1. Read the request
 
@@ -35,11 +35,14 @@ Use `references/format-selection.md`. The decision comes only from the request p
 - Another skill's default artifact path is not project policy. Put the durable record in the owning Noootwo layer; keep external paths only as read-only legacy.
 - An unchanged structured-state write creates no event.
 - In a linked worktree, resolve the primary checkout from the parent of `git rev-parse --git-common-dir` and pass `--root <primary>` to the state helper. `.noootwo` is project context, not branch scratch; do not initialize a second state root in a copy.
-- When multiple worktrees share the root, one writer owns the current snapshot; other worktrees append events/evidence or hand the update to that writer.
+- When multiple worktrees share the root, no worker or secondary requirement writes `.noootwo`; Result Packets are returned to the integrator, and the integrator serializes every snapshot, event, and evidence write through the one state writer. The helper's read-modify-write path is not a multi-writer primitive.
+- A specialist running standalone keeps evidence work serial unless it invokes `noootwo-workflow` and that Fan-out Gate selects `read-fanout`; a selected gate may use read-only workers that return evidence but never write state.
+- The integrator stores structured fan-out recovery in the current-state entry `fanout`; the capsule carries a bounded projection so lane status and custody survive compaction.
+- A worker returns raw output above 16 KiB through an integrator-assigned temporary path outside the repository and never writes `.noootwo`; the integrator verifies it, imports it with `capture`, which writes the canonical cold log under `.noootwo/state/evidence`, and records the resulting handle.
 
 ## 4. Read cheaply
 
-- One field or a tail of events → `scripts/noootwo-state.sh state --field` or `events`.
+- One field, one structured entry, or a tail of events → `scripts/noootwo-state.sh state --field`, `state --entry`, or `events`.
 - Session re-entry → `scripts/noootwo-state.sh capsule`; Markdown and JSON default to 80 lines and 6,000 characters and include the source state hash plus recent evidence handles. When state is absent and the work is cross-owner, cross-session, or already compacted, write one recovery capsule through this skill before continuing.
 - An unknown long document → `scripts/noootwo-state.sh inspect PATH --query TEXT`; start with headings or a query and load its bounded excerpt, not the whole file for one fact.
 - A verbose command above 16 KiB → `scripts/noootwo-state.sh capture --name ID -- <command>`; keep the returned exit status and last lines, and use the log/hash as the evidence handle. Capture needs no current-state file and does not change state.

@@ -1,5 +1,12 @@
 # noootwo-code-health Releases
 
+## v0.19.0
+
+- A drafted plan becomes execution-ready only after Workflow records a `Fan-out Check` with mode, units, independence, host capability, and rejoin order.
+- A serial default is valid when the plan states why the slices are coupled, tiny, or lack native capability; multi-lane execution without that decision is not ready.
+- Updated the incomplete-plan eval to reject a missing Fan-out Check.
+- Write-fanout local custody commits are authorized by the accepted plan inside isolated lanes and on the local integration branch; final user acceptance still precedes push, protected-main integration, tag, or publish.
+
 ## v0.18.0
 
 - Added a conditional Builder Check for non-obvious, cross-session, expensive, or cross-boundary handoffs. Closed local plans proceed directly to TDD.

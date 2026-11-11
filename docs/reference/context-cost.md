@@ -28,7 +28,7 @@ All nine source URLs returned HTTP 200 on 2026-10-25. The arXiv abstracts were r
 2. **Compression as a view, not a rewrite.** The capsule carries goal, stage, settled and unsettled decisions, blockers, next trigger, evidence handles, and a source state hash. Append-only events remain authoritative.
 3. **Lossless cold storage.** Raw outputs above 16 KiB are written before reasoning; the live context receives the path, command, exit status, hash, and a bounded tail.
 4. **Incremental state changes.** Append only when a durable field changed, and store the actual changed values. A read or unchanged check creates no history event.
-5. **Single-writer default.** Keep dependent decisions in one context. Isolate only independent read-only research or review, and return a bounded summary plus provenance.
+5. **Single-integrator default.** Keep dependent decisions in one context. Isolate independent read-only work as `read-fanout`; isolate independently briefable write slices only after the workflow's Fan-out Gate, with one linked worktree per lane and one integrator. Return a bounded Result Packet with provenance. Workers never write project state; the integrator serializes every event, evidence, and snapshot write.
 6. **Post-compaction verification.** Restore the capsule, then check the current commit, worktree, and newest evidence before trusting it.
 7. **Progressive disclosure.** For references above about 200 lines, read headings or query hits before the matching section.
 8. **No manual Lean mode.** The rules adapt to task depth, so quality paths do not depend on the user remembering to enable a cheaper mode.
@@ -37,14 +37,14 @@ All nine source URLs returned HTTP 200 on 2026-10-25. The arXiv abstracts were r
 
 - **Aggressive summarization of everything.** Rejected because summarization can drop domain detail and prompt compression has benchmark-dependent output effects. Noootwo keeps raw history and cold evidence.
 - **A new context-optimization skill.** Rejected because it adds a permanent description, routing branch, and another place to drift. The capability belongs to `noootwo-workflow` and `noootwo-state`.
-- **Subagents as a default fan-out.** Rejected because dependent actions carry implicit decisions that can diverge. The capability remains available only for independent read-only work.
+- **Subagents as a default fan-out.** Rejected because dependent actions carry implicit decisions that can diverge and exchange cost grows faster than the task. The capability stays conditional: read-only work may fan out, while write work needs the Fan-out Gate, disjoint semantics, isolated lanes, and one integrator.
 - **A fixed token or line cap on all work.** Rejected because a hard cap can truncate the one decisive evidence item. The 80-line and 16 KiB values are default live-view boundaries with an explicit cold handle, not quality limits on stored evidence.
 - **Clearing tool output without a handle.** Rejected because it destroys provenance and makes a later decision unreprovable.
 - **Manual Lean mode.** Rejected because it shifts the optimization burden to the user and makes comparisons ambiguous.
 
 ## Package Consequence
 
-The public set stays at eleven skills. `noootwo-workflow` owns reading depth and scheduling; `noootwo-state` owns the capsule, file inspection, cold capture, source hashes, and audit. All model-invoked skills carry the same compact lifecycle rule. The state and event schemas are unchanged, so rollback is a package-version rollback rather than a data migration.
+The public set stays at twelve skills. `noootwo-workflow` owns reading depth and scheduling; `noootwo-state` owns the capsule, file inspection, cold capture, source hashes, and audit. All model-invoked skills carry the same compact lifecycle rule. The state and event schemas are unchanged, so rollback is a package-version rollback rather than a data migration.
 
 ## Verification Boundary
 

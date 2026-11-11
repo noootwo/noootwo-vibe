@@ -1,5 +1,15 @@
 # noootwo-workflow Releases
 
+## v0.25.0
+
+- Added a mandatory Fan-out Gate after a non-direct plan is drafted, before acceptance and the first write, with re-entry triggers for independent unknowns, review lenses, multiple requirements, and compaction.
+- Added four modes: `serial`, `read-fanout`, `write-fanout`, and `requirement-parallel`.
+- Write fan-out now uses four independence questions, 3 workers by default, 4 at the hard maximum, one linked worktree per lane, one integration branch, one integrator, and one-at-a-time rejoin.
+- Added Worker Brief and Result Packet contracts, blocked-lane handling, and explicit compaction recovery rules for lane rejoin in `references/parallel-execution.md`; fresh-session recovery behavior is not yet measured.
+- Missing native delegation, collection, or isolation now records an explicit serial fallback; background shells and shared-checkout writers are not fan-out.
+- Added thirteen fan-out contracts for Gate ordering, drafted-versus-execution-ready plans, persisted dispatch state, the capability matrix, branch-only false isolation, custody and exact SHAs, capsule recovery, single-branch integration, late blocked meaning, and standalone specialists; integrated the Fan-out Check into orchestration, workflow state, and the close gate.
+- Lane custody must be written to the current-state `fanout` entry before dispatch; the plan may mirror it but cannot replace it. Plan acceptance authorizes local lane and integration-branch custody commits; explicit user acceptance still precedes push, protected-main integration, tag, or publish.
+
 ## v0.24.0
 
 - Added `noootwo-delivery` to the precedence: isolate concurrent requirements before the first write, then integrate through protected `main` after green and review.
