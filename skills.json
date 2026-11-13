@@ -33,7 +33,7 @@
     {
       "name": "noootwo-product",
       "path": "skills/noootwo-product",
-      "version": "0.13.0",
+      "version": "0.14.0",
       "status": "public",
       "dependencies": [
         "noootwo-research",

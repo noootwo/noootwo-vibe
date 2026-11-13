@@ -454,3 +454,63 @@ Source index for the parallel-execution refresh:
 - GitHub Copilot coding agent: `https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-coding-agent`
 - Cognition, Don't Build Multi-Agents: `https://cognition.ai/blog/dont-build-multi-agents`
 - Agentless: `https://arxiv.org/abs/2407.01489`
+
+Decision-continuity pass, checked 2026-11-13:
+
+- The problem recurs publicly with artifacts: `openai/codex` #54544 (repeats
+  settled questions), #42611 (auto-compaction replays an answered message),
+  #49022 (Active Goal lost, completed tasks resumed), #58369 (agent reopens
+  explicit user decisions), #46175 (returns to earlier clarification state),
+  #44648 (no question resolve/withdraw lifecycle); `anthropics/claude-code`
+  #80938, #96422, #26771, #97906 describe the same class. These are user
+  reports, not maintainer-confirmed diagnoses.
+- Local artifact: the 2026-11-13 kungfu-harness session ran 9 compactions in
+  2h22m; question rounds fired right after compactions, two decision ids were
+  re-asked with regenerated option sets, and answers drifted. The project state
+  held none of the decisions. Transcript and analysis recorded in
+  `docs/reference/decision-ledger-evidence.md`.
+- Anthropic's context-engineering guidance requires compaction to preserve
+  architectural decisions, unresolved bugs, and implementation details, and
+  warns aggressive compaction loses context needed later. Kiro's compaction
+  documentation puts goals, decisions, and constraints in the always-preserved
+  set with a session checkpoint; Claude Code supports custom compact
+  instructions and per-session memory loads. Official vendor guidance, not
+  independent measurement.
+- Spec Kit's `clarify` command states "Exclude questions already answered",
+  encodes answers back into the spec, and caps the session at five questions.
+  Rasa forms ask only the first unfilled required slot. Both are the
+  slot-filling dedupe mechanism applied at different scales.
+- Superpowers `v7.0.2` `brainstorming` says never to reopen what the user
+  already decided; `executing-plans` treats "the ledger" as the memory that
+  makes work recoverable after compaction. Manus rewrites its todo list to
+  recite objectives into the recent attention span. ACE (arXiv 2510.04618)
+  names the failure mode: brevity bias and context collapse under iterative
+  rewriting; structured incremental updates resist it. MADR gives changed
+  decisions an explicit `superseded by` status instead of silent replacement.
+- Adopt into `noootwo-product`: a Decision Ledger with stable ids and statuses,
+  an ask gate that recomputes the frontier as answerable-now minus answered,
+  frozen wording with evidence-cited supersede, per-round recitation of the
+  settled list, and append-only entries persisted through `noootwo-state` when
+  the work outlives the session.
+- Reject: global cross-project memory, full-transcript replay, host-specific
+  compaction hooks as a dependency (Codex has none), copying Spec Kit's
+  five-question cap or Cline's file hierarchy, and letting a summary override
+  the ledger.
+- Evidence boundary: no independent controlled study measures the ask gate. The
+  local transcript plus recurring public reports plus mechanism-level official
+  guidance support adoption; no token, speed, or quality claim is attached.
+  Full levels, boundaries, and counterexamples are in
+  `docs/reference/decision-ledger-evidence.md`; the decision is ADR 0032.
+
+Source index for the decision-continuity pass:
+
+- Anthropic context engineering: `https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents`
+- Kiro compaction: `https://kiro.dev/docs/compaction.md`
+- Kiro IDE 1.0 compaction: `https://kiro.dev/docs/ide/whats-new-v1/compaction.md`
+- Claude Code memory: `https://docs.claude.com/en/docs/claude-code/memory.md`
+- GitHub Spec Kit clarify: `https://github.com/github/spec-kit/blob/main/templates/commands/clarify.md`
+- Superpowers: `https://github.com/obra/superpowers`
+- Manus: `https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus`
+- ACE: `https://arxiv.org/abs/2510.04618`
+- 12-Factor Agents: `https://github.com/humanlayer/12-factor-agents`
+- MADR: `https://github.com/adr/madr`

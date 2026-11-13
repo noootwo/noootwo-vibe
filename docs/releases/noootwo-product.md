@@ -1,5 +1,15 @@
 # noootwo-product Releases
 
+## v0.14.0
+
+- Added a Decision Ledger: every settled decision is one entry with a stable id, the user's answer quoted in their words, a status (`answered`, `assumed`, `deferred`, `rejected`, `superseded by <id>`), and the condition that reopens it.
+- Added an ask gate: the frontier is recomputed as answerable-now minus answered, and a round asks only new or genuinely reopened ids.
+- Answered decisions keep their wording and options; reopening shows the old answer, names the new evidence, and records the new answer as a supersede.
+- Every asking round, shared-understanding summary, handoff, and plan now recites the settled list as `id: answer` lines, so a compaction summary cannot reopen a settled decision.
+- Ledger entries are append-only and persist through `noootwo-state` when the work outlives the session; read-only and plan-only turns recite the list and carry it into the plan.
+- Added three eval contracts: `answered-decisions-stay-answered`, `post-compaction-frontier-recovery`, and `reopen-only-with-new-evidence`. A three-scenario fresh-session probe passed; it is a contract check, not an independent behavior measurement.
+- Evidence and boundaries are recorded in `docs/reference/decision-ledger-evidence.md` and ADR 0032.
+
 ## v0.13.0
 
 - Added an Audience Contract before the Product-to-Design Handoff: primary user and moment, familiarity and shared vocabulary, usage frequency, error or decision cost, learning-versus-throughput stance, and visible/secondary/hidden information.

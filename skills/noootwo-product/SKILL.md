@@ -23,6 +23,8 @@ A decision is **settled** when it is made and confirmed; otherwise it is **unset
 
 real user, moment of use, and audience contract → outcome → first loop → scope and non-goals → main path → interaction and state behaviour → observable acceptance.
 
+When the project keeps a Decision Ledger, read it first; an answered entry is settled, whatever a summary or a fresh reconstruction suggests.
+
 **Done when:** you can name every unsettled decision, or state that none remain.
 
 When none remain, produce a `Product Checkpoint` from `references/product-flow.md` and stop.
@@ -49,6 +51,10 @@ Then wait. A request to build, start, or continue is not an answer; only an expl
 
 After the answers, recompute the frontier. Settled decisions unblock their dependents; keep a dependent question parked until its prerequisite is answered. Ask the next round only once the previous one is answered.
 
+Keep a **Decision Ledger**: every settled decision becomes one entry with a stable id, the user's answer in their words, and the condition that reopens it. Compare the frontier against the ledger before each round and ask only new or genuinely reopened ids. An answered decision keeps its wording and options; reopen it only when new evidence changes its outcome, say what changed, and record the new answer as superseding the old entry.
+
+Recite the settled list — `id: answer`, one line each — in every asking round, every shared-understanding summary, and every plan, so the recent context always carries the whole record. A compaction summary is a lead; the ledger is the authority on what remains open. Persist the ledger through the `noootwo-state` skill when the work outlives the session; in a read-only or plan-only turn, the recited list and the plan's settled section carry it.
+
 **Done when:** the frontier is empty — every decision is settled, delegated, deferred, rejected, or carried as a named risk.
 
 ### 4. Confirm shared understanding
@@ -64,6 +70,8 @@ Ask once whether that matches what they meant. On no, reopen only the mismatched
 Produce the `Product-to-Design Handoff` from `references/product-flow.md`: real user, audience contract, interaction posture, scenario, main path, states, scope cuts, acceptance criteria, user-owned how decisions, agent-selected defaults, open decisions, and design constraints.
 
 Hand off when every material decision is settled or delegated and no carried risk would change the main path, trust boundary, scope, or acceptance.
+
+Carry the ledger into the spec or handoff with settled entries quoted, not paraphrased.
 
 When the settled result must survive the session as a project spec, invoke the `noootwo-state` skill: read its `SKILL.md` and follow it. A spec belongs in `docs/specs/`; do not adopt another skill's default spec directory. A small checkpoint does not need a durable spec.
 
@@ -101,6 +109,6 @@ Read `references/product-reality-check.md` when the loop is unproven, the user i
 
 When the request is not a product decision, name the layer and invoke the owner in one hop: `noootwo-debug` for a failure, `noootwo-research` for outside evidence, `noootwo-design` for a visual system, `noootwo-code-health` for implementation shape, code, or performance judgment, `noootwo-onboard` for an unfamiliar project.
 
-After a handoff or compaction, resume from the capsule and current artifacts; reload this body only when product owns the next step.
+After a handoff or compaction, resume from the capsule, the ledger, and current artifacts; answered entries stay answered; reload this body only when product owns the next step.
 
 Missing skill fallback: first try `npx -y skills add noootwo/noootwo-vibe --global --agent codex --skill <name> --yes`; if install fails, take the smallest direct fallback and mark the record `skill-missing: <name>` (for persistence, write the owning file directly).

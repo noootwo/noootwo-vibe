@@ -38,7 +38,7 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
 ### noootwo-product
 
 - Current role: settle what should exist before design or build.
-- Prior art: Superpowers `v7.0.1` evidence-grounded intake, intent playback, how-decision ownership, and agent-selected defaults; OpenAI Product Design plugin (`product-design`), especially `get-context`, `ideate`, `audit`, and `critical-overrides`; NN/g novice/expert, plain-language, progressive-disclosure, mental-model, and real-world-match research; W3C COGA; GOV.UK Design Principles; Microsoft Style Guide; ISO 24495-1 and `danyuchn/iso-24495-skill`; `content-designer/ux-writing-skill`.
+- Prior art: Superpowers `v7.0.1` evidence-grounded intake, intent playback, how-decision ownership, and agent-selected defaults; Superpowers `v7.0.2` `brainstorming` (never reopen what the user already decided) and `executing-plans` (ledger as memory, rulings); OpenAI Product Design plugin (`product-design`), especially `get-context`, `ideate`, `audit`, and `critical-overrides`; GitHub Spec Kit `clarify` ("exclude questions already answered", answers encoded into the spec); Kiro compaction/memory docs (decisions always preserved, checkpoint); Manus recitation; ACE (arXiv 2510.04618) against brevity bias and context collapse; Cline Memory Bank; 12-Factor Agents; MADR `superseded by` status; Rasa forms slot filling; NN/g novice/expert, plain-language, progressive-disclosure, mental-model, and real-world-match research; W3C COGA; GOV.UK Design Principles; Microsoft Style Guide; ISO 24495-1 and `danyuchn/iso-24495-skill`; `content-designer/ux-writing-skill`.
 - Adopt:
   - Minimum brief before frontier questions.
   - Project-local product context snapshot instead of global user context.
@@ -49,6 +49,8 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
   - An Audience Contract covering primary user and moment, familiarity and shared vocabulary, frequency, error or decision cost, learning-versus-throughput stance, and visible/secondary/hidden information.
   - An Interaction Posture derived from the contract: density, language, main-path shape, settings stance, expert affordances, and help stance.
   - One primary audience per surface; multiple audiences get separate paths or layers instead of an averaged middle.
+  - A Decision Ledger: one entry per settled decision with a stable id, the answer quoted in the user's words, a status (`answered`, `assumed`, `deferred`, `rejected`, `superseded by <id>`), and the condition that reopens it.
+  - An ask gate that recomputes the frontier as answerable-now minus answered, frozen wording and options for answered decisions, reopen only with named new evidence recorded as a supersede, per-round recitation of the settled list, and append-only entries persisted through `noootwo-state` when the work outlives the session.
 - Reject:
   - Global `user-context` outside a project.
   - Product Design's Sites/Browser-specific workflow and prototype templates.
@@ -56,7 +58,8 @@ A "we already have it" conclusion is not valid unless the writing is also as sha
   - Fixed opening scripts, playback word budgets, and a one-question-per-round habit when several decisions are independently answerable.
   - A B2C/B2B binary as the audience model.
   - Treating "admin" or "expert" as permission for implementation names.
-- Next pass: run the grounded-response, independent-frontier, settled-request, how-ownership, and four `audience-contract-*` scenarios; check that the one-round frontier stays proportional.
+  - Global cross-project decision memory, full-transcript replay, and letting a compaction summary or a fresh reconstruction reopen an answered decision.
+- Next pass: run the grounded-response, independent-frontier, settled-request, how-ownership, four `audience-contract-*`, and the three decision-continuity scenarios (`answered-decisions-stay-answered`, `post-compaction-frontier-recovery`, `reopen-only-with-new-evidence`); check that the one-round frontier stays proportional and that the ledger stays silent in direct work.
 
 ### noootwo-research
 
