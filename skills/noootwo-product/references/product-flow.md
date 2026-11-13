@@ -144,11 +144,28 @@ The flow in `SKILL.md` is the source of truth for the steps. This section adds t
 
 **How ownership.** Name the decisions the user owns, such as platform, language, library, medium, dependency, deployment, or cost boundary. When the user delegates an implementation choice, record the agent-selected default, why it fits, and what would reopen it. Do not silently convert a delegated default into a user decision or vice versa.
 
-**The ledger.** Track each decision as it settles, so a round never restarts from the beginning:
+**The ledger.** Every settled decision becomes one entry the moment the answer arrives. The ledger is product's memory across rounds, sessions, and compactions:
+
+| Field | Content |
+| --- | --- |
+| `id` | a stable short name, reused if the decision ever reopens |
+| question | the decision in one line |
+| answer | the user's choice in their words, quoted |
+| status | `answered`, `assumed`, `deferred`, `rejected`, or `superseded by <id>` |
+| reopen-if | the evidence or constraint that would make it answerable again |
+
+- **Ask gate.** Before a round, diff the frontier against the ledger; ask only ids with no entry or a met `reopen-if`. Answered ids stay silent.
+- **Frozen wording.** An answered decision keeps its wording and options. Reopening shows the old answer, names the new evidence, and records the result as `superseded by <new id>`; the old entry stays as history.
+- **Recitation.** Every asking round, shared-understanding summary, handoff, and plan repeats the settled list as `id: answer` lines. Under compaction the recited list is what the next round trusts; a summary that contradicts it loses.
+- **Append.** Add entries and status changes; never regenerate the ledger from memory. Iterative rewriting is where detail dies, by brevity bias and context collapse.
+- **Storage.** A session-length interview may keep the ledger as the recited list; work that outlives the session or crosses a handoff persists it as a decision record through the `noootwo-state` skill. A read-only or plan-only turn recites it, and the plan's settled section becomes the durable copy.
+- **Size.** One line per decision, naming the decision, never the transcript.
+
+The compact shape:
 
 ```markdown
 Decision Ledger
-- Settled:
+- Answered: <id>: <question> -> <verbatim answer> (reopen if <condition>)
 - Assumed (delegated):
 - Deferred:
 - Rejected:
@@ -160,7 +177,7 @@ Decision Ledger
 
 ```markdown
 需求确认（本轮）
-- 已确认：
+- 已确认（带 ID 和你的原话）：
 - 已查到的事实：
 - 本轮需要确认：
 - 为什么重要：

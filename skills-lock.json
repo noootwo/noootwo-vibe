@@ -1,0 +1,65 @@
+{
+  "version": 2,
+  "skills": {
+    "noootwo-ask": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "b0ef5d514af32d41a20c79676dd9ebf1029548865018047acabdb5f6cbe5385c"
+    },
+    "noootwo-code-health": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "f15a638af43ae44decda91654ce75fe29c321432e074ef38cb0d8252cdcb2597"
+    },
+    "noootwo-debug": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "18015c5607e4ec15201b06da3e103d54f65d3ce8064ec323cf169177b7b46141"
+    },
+    "noootwo-delivery": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "ec2ff4a374dcb13f88f049141de935456a94e600149f5531887dfc7a7d73843d"
+    },
+    "noootwo-design": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "749bdd1aa6b7ad7ad5eca7579678cb7cc1c41209a70b94e3077654a24bd805f3"
+    },
+    "noootwo-onboard": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "c11ef27f47b24355b114561af2e2dfd2d7fc90e1879c471816535e9e338bc4a8"
+    },
+    "noootwo-product": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "c2b193c1b03f543a07c0383001a7fc5ff78188e3562835ddacf01a4e1e78ac5f"
+    },
+    "noootwo-release": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "11a17f7158aca0cbd059aa62c3e5a42d97c426fa0c7e893a076a1866857f1a8a"
+    },
+    "noootwo-research": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "9ffd17064b963e2bd9c6d23e56df9284cbbdf8ef27d8d7a7ddd3c5a54e1886c3"
+    },
+    "noootwo-state": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "f3d2a4338fdf027b666a898423d9e4680945ad16c41c60518a98dca187c5c68e"
+    },
+    "noootwo-tdd": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "cbf807787af1a16ef88bbc803fb5c835f1563b46b4221cdd873623f864f55d0b"
+    },
+    "noootwo-workflow": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "9abb1e61f9a8d3448fb3c896d1fe7d618b5972549b9e8b5604ee83c3415b20c0"
+    }
+  }
+}
