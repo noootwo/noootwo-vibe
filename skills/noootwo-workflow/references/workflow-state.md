@@ -21,6 +21,7 @@ When a specialist changes the next frontier, hand it to `noootwo-state`:
 - current stage, last owner, last result, next trigger
 - settled and unsettled facts
 - open blockers and waiting condition
+- a durable user rule or correction, with its scope and owning layer, or an explicit task-local classification
 - for a Fan-out Gate: mode, lane IDs, custody, branch/worktree, status, Result Packet handle, required rejoin order, and next trigger
 
 `noootwo-state` owns the form and location. Workflow only supplies the content and abstract properties. Only the integrator writes; no worker or secondary worktree writes `.noootwo` events, evidence, or snapshots. The helper's read-modify-write path is not safe for concurrent writers. A pure read or no-change check creates no event.

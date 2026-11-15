@@ -1,6 +1,6 @@
 ---
 name: noootwo-state
-description: "Use to read, record, or place project state and context; choose queryable state for structure and Markdown for narrative artifacts."
+description: "Use to read, record, or place project state, context, and durable user rules; choose queryable state for structure and Markdown for narrative artifacts."
 ---
 
 # Noootwo State
@@ -29,7 +29,9 @@ Use `references/format-selection.md`. The decision comes only from the request p
 ## 3. Persist
 
 - Structured current state or append-only events → `scripts/noootwo_state.py request` or `log`.
+- Current progress, stage, blockers, and next trigger → the structured snapshot through the state helper; a progress request does not require a new Markdown document.
 - Narrative, decision, spec, plan, or release facts → the owning Markdown layer named in `references/state-layering.md`.
+- A durable user rule, correction, or preference → `references/project-memory.md`; capture it in the same turn, with the shortest always-on form in the nearest `AGENTS.md` and any rationale in one linked decision record.
 - A spec or plan without an explicit destination defaults to `docs/specs/<request_id>.md` or `docs/plans/<request_id>.md`.
 - Do not create a second authority for the same fact; replace or link the stale one.
 - Another skill's default artifact path is not project policy. Put the durable record in the owning Noootwo layer; keep external paths only as read-only legacy.
@@ -65,7 +67,7 @@ The manifest is abstract: `protocol` is `noootwo.migrate/0.1` and `entries` name
 
 The command reads each old file as content, persists it through the normal form selection, records the old path as `replaces`, and by default archives the source to `.noootwo/state/legacy/<path>`. Pass `--keep` to leave the source in place. The caller supplies the classification; this skill does not interpret the content.
 
-**Done when:** the fact is in exactly one owning location, is readable through the intended query path, is validated, and stale duplicates are removed or linked.
+**Done when:** the fact is in exactly one owning location, is readable through the intended query path, is validated, and stale duplicates are removed or linked; a stated durable rule is placed or explicitly marked task-local.
 
 ## Context lifecycle
 
@@ -81,3 +83,4 @@ The command reads each old file as content, persists it through the normal form 
 - `references/state-layering.md` — abstract storage layers and ownership.
 - `references/format-selection.md` — property-only form selection.
 - `references/context-budget.md` — the context lifecycle, bounded reads, capsules, and cold evidence handles.
+- `references/project-memory.md` — when and where to persist durable user rules and corrections.

@@ -66,7 +66,7 @@ Do not precompute a full DAG or pile on condition tables.
 
 ## 4. Keep state
 
-For non-direct, cross-skill, or external-skill work, invoke the `noootwo-state` skill when the goal, stage, decision, blocker, evidence, or next trigger actually changes: read its `SKILL.md` and follow it. A checkpoint is one capsule write through the same skill; an unchanged structured write creates no event. Pure reads and no-change checks create no event. Direct single-file edits stay direct and do not create state.
+For non-direct, cross-skill, or external-skill work, invoke the `noootwo-state` skill when the goal, stage, decision, blocker, evidence, or next trigger actually changes: read its `SKILL.md` and follow it. A user-stated durable rule, correction, or preference is a state change even when no code changes: invoke `noootwo-state` in the same turn and do not wait for the user to repeat it. A checkpoint is one capsule write through the same skill; an unchanged structured write creates no event. Pure reads and no-change checks create no event. Direct single-file edits stay direct and do not create state.
 
 When the current goal is complete and an unrelated goal appears, write the capsule and recommend a new session unless the user explicitly asks to continue in this one.
 
@@ -85,7 +85,7 @@ Answer before calling the work done:
 - For a release path, did the production source resolve to an exact `main`-reachable commit or an annotated tag on one, rather than a feature or unmerged release branch?
 - If a completed change created a release-bound check or known gap, did `noootwo-release` add it to the open Release Verification Ledger?
 - For release work, did `noootwo-release` produce the Release Plan and did `noootwo-state` receive the release record and deployment evidence?
-- Did behavior, state, or release facts change, and did `noootwo-state` place them?
+- Did behavior, state, a durable user rule, or release facts change, and did `noootwo-state` place them?
 - During approved execution, are reversible plan conflicts recorded as rulings rather than silently decided or escalated as routine re-approval?
 - For a long turn, did a checkpoint refresh the capsule before further reads, and did the attempt end when the frontier stopped moving?
 - After a compaction or phase shift, did the loop re-match one owner instead of reloading the skill bodies used before it?

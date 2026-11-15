@@ -95,6 +95,7 @@ A coined word recruits no priors: you pay in definition tokens what a pretrained
 | **Lane Map** | delivery's branch/worktree, liveness and evidence custody, ownership, required rejoin order, state-writer, and cleanup record for a write fan-out |
 | **Release Check** | the full verification once before release or a ship-readiness submit gate |
 | **Release Verification Ledger** | the open queue of release-bound checks, sealed into the release record and reset after release |
+| **Project Rule** | one durable, scoped instruction that changes future project behavior; stored in one owning layer, with a short always-on form only when needed |
 
 Anchored words already in use — `artifact`, `trace`, `layer`, `seam` — stay.
 
