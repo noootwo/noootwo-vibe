@@ -33,6 +33,7 @@ If a repository uses different names, map to responsibility instead of forcing t
 | `release` | release record |
 | `procedure` | procedure layer |
 | `evidence` | cold evidence or reference path |
+| Project Rule | short form in the nearest hot entrypoint; one linked decision record only when its rationale must be preserved |
 
 One fact, one owner. Link from another layer only when discovery would otherwise fail.
 

@@ -1,5 +1,13 @@
 # noootwo-state Releases
 
+## v0.8.0
+
+- Added Project Rule capture: explicit user rules, repeated corrections, and stable inferred conventions are placed in one owning layer in the same turn.
+- Short always-on rules go in the nearest `AGENTS.md`; current progress stays in structured state; a durable choice with rationale links one ADR instead of duplicating the rule.
+- Added a correction shape (trigger, wrong behavior, new rule, prevention check) and a non-duplication/lookup rule so project memory does not become a transcript or a stale second codebase.
+- Added `durable-rule-capture`, `inferred-rule-stays-assumed`, and `correction-replaces-stale-rule` eval contracts. Fresh model sessions remain unrun.
+- The decision, boundaries, and rejected alternatives are recorded in ADR 0033. No schema change or migration; existing state/event history remains readable.
+
 ## v0.7.0
 
 - Worker Result Packets are evidence, not competing project state. No worker or secondary worktree writes `.noootwo`; the integrator serializes every snapshot, event, and evidence write.

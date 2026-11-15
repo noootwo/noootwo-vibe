@@ -8,6 +8,10 @@ This repository is a multi-skill workspace. The root is not a published skill; t
 2. For anything else, invoke the skill that owns the work, then follow it. To invoke one, read its `SKILL.md` and follow it — a skill you only considered has not run.
 3. Which skill, and the order to run them in: read `docs/agents/invocation.md`. When you are unsure, start with `noootwo-workflow`.
 
+## Project Memory
+
+When the user states, repeats, or corrects a durable project rule, treat it as project context and place it in its owning layer in the same turn. Short always-on rules go in the nearest `AGENTS.md`; current progress goes through `noootwo-state`; a durable choice with its rationale goes in an ADR. Search for and update the old claim, report where it landed, and do not require the user to repeat it. Task-local instructions stay in the task.
+
 ## Writing Skills
 
 Every skill, `AGENTS.md`, and pointed-at doc is written to `docs/agents/skill-authoring.md`. Read it before writing or reviewing one. The budgets in it are enforced by `python scripts/validate_skill_workspace.py .`, which must pass after any change to skill layout, versions, metadata, descriptions, or references.
@@ -16,7 +20,7 @@ Every skill, `AGENTS.md`, and pointed-at doc is written to `docs/agents/skill-au
 
 - Keep the public skill set exactly: `noootwo-ask`, `noootwo-workflow`, `noootwo-product`, `noootwo-design`, `noootwo-tdd`, `noootwo-code-health`, `noootwo-delivery`, `noootwo-release`, `noootwo-state`, `noootwo-debug`, `noootwo-research`, `noootwo-onboard`.
 - `noootwo-workflow` schedules; specialists do the work. Do not let a route, mode, or reference in `noootwo-workflow` take over the method owned by a specialist skill.
-- Durable project state and context are written through `noootwo-state`; specialists produce content and invoke `noootwo-state` to choose the form and location.
+- Durable project state and context are written through `noootwo-state`; specialists produce content and invoke `noootwo-state` to choose the form and location. A short always-on rule lives once in the nearest `AGENTS.md` and links to any deeper rationale.
 - When a named skill is missing, follow `docs/agents/dependency-fallback.md`: try to install it, and on failure take the smallest direct fallback and mark the record `skill-missing: <name>`.
 - Do not add `noootwo-architecture`; architecture, technical judgment, testing strategy, performance and optimization, and maintainability stay under `noootwo-code-health`. Do not add a separate performance skill.
 - `noootwo-delivery` owns branch/worktree isolation, concurrent-requirement overlap, protected-main integration, and the recorded Delivery Policy. Do not add separate branch-management, worktree, merge-queue, or concurrency skills.

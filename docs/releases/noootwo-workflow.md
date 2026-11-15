@@ -1,5 +1,12 @@
 # noootwo-workflow Releases
 
+## v0.26.0
+
+- A user-stated durable rule, correction, or preference is now a state change in the same turn, even when no code changes.
+- The close gate checks whether a durable user rule changed and whether `noootwo-state` placed it; task-local instructions remain in the task.
+- `references/workflow-state.md` now includes the rule/correction handoff and its scope and owning layer.
+- The decision is recorded in ADR 0033. No change to the Fan-out Gate, public skill set, or state/event schema.
+
 ## v0.25.0
 
 - Added a mandatory Fan-out Gate after a non-direct plan is drafted, before acceptance and the first write, with re-entry triggers for independent unknowns, review lenses, multiple requirements, and compaction.
