@@ -185,12 +185,16 @@ Record these in `.noootwo/directions.md`, `.noootwo/review.md`, or `.noootwo/des
 
 - Font choice and fallback: why the family fits the product, and what fallback preserves metrics.
 - Display/body contrast: family, width, weight, case, or rhythm contrast.
-- Type scale: fixed `rem` scale for dense app UI; fluid `clamp()` only where display text benefits.
+- Type registers: display for brand, launch, login, or hero moments; product for navigation, forms, data, settings, panels, and controls. A display style never becomes an operational title by convenience.
+- Type scale: fixed role values for dense app UI; fluid `clamp()` only where display text benefits. Name each role's size, line height, minimum, maximum, and allowed surfaces, and keep one application-root token source.
 - Weight roles: which weights serve headings, labels, body, captions, and numbers.
 - Line-height and line length: headings tight but not clipped; body readable; long text constrained with `ch` where useful.
 - Letter spacing: intentional small-caps/uppercase tracking; avoid default-everywhere or over-tight display text.
-- Mobile display cap: max title size and wrapping behavior at phone width.
+- Display cap: maximum size, rendered height share, and wrapping behavior at desktop and phone width. Keep a hero heading below roughly one fifth of the viewport and an operational page heading far smaller.
+- Local hierarchy: local title to body, page title to body, and control to body relationships, measured from computed values rather than inferred from the stylesheet.
+- Resize behavior: 200-percent page-zoom or equivalent narrow-layout evidence, with no lost content or function.
 - Numeric behavior: `tabular-nums` for tables, metrics, ledgers, timers, and aligned values.
+- Repair sequence: when type keeps oscillating, inventory rendered roles and the cascade first; classify the cause as register, token scope, blanket override, or role scale; correct the owning layer once and rerun the full evidence set.
 
 ### Failure Flags
 
@@ -200,12 +204,19 @@ Any of these prevents `ready`:
 - Display headline clips, overflows, or creates accidental orphan words on mobile.
 - CJK display text is oversized or overweight enough to make the app feel like a poster instead of a product screen.
 - Chinese and English labels fight for attention, especially when uppercase English labels are decorative rather than functional.
-- Body text below 16px on web without a product-specific density reason.
+- A display `clamp()` or hero heading is reused on Settings, an inspector, a side panel, a review card, or another operational surface.
+- One blanket font-size selector assigns the same value to unrelated titles, body copy, metadata, and controls. That is a hierarchy reset, not a type scale.
+- Semantic type tokens exist only inside one route or shell, so other routes fall back to browser defaults.
+- Readable operational copy sits below the product's declared floor, or below `11px` without a non-reading role such as a keycap or decorative badge.
+- A heading occupies more than roughly one fifth of the viewport, or the main task falls below the first screen because the title is oversized.
+- A settings or configuration page inherits the login scale merely because both contain form fields.
+- Local title and body copy render at nearly the same size, leaving weight or colour alone to invent hierarchy.
 - Arbitrary type sizes that do not follow a scale.
 - More than 2-3 families without a clear system reason.
 - Lazy monospace as the only signal for technical, industrial, or premium mood.
 - Display/body contrast is absent, or too similar to read as a decision.
 - Letter spacing is visibly random or makes text harder to read.
+- A dump of source font sizes is presented as review evidence without the populated rendered state.
 - Mobile app hierarchy depends on huge bold CJK type instead of a controlled scale, spacing, and state model.
 
 ### Review Action

@@ -1,5 +1,14 @@
 # noootwo-design Releases
 
+## v0.23.0
+
+- Added a Typography Balance Gate that separates bounded display type from fixed product roles and requires populated rendered evidence at desktop, tablet, phone, and a 200-percent or equivalent narrow viewport.
+- Type contracts now name display, page/local title, body, control, label, annotation, keycap, numeric, and resize roles with minima, maxima, line height, allowed surfaces, and one application-root token source.
+- Failure flags now cover display `clamp()` on operational surfaces, blanket font-size overrides across unrelated roles, route-only token definitions, unreadable operational copy, oversized heading share, settings inheriting login scale, flattened local hierarchy, and source-only review.
+- Added `typography-balance-rework.md` and ADR 0034; persisted the official type-system, WCAG resize, CSS `clamp()`, and CJK evidence through `noootwo-state`.
+- Made the write target explicit at intake: a project supplied as a case, reference, or comparison is read-only evidence and is never patched to demonstrate a skill change.
+- `SKILL.md` stays at 120 lines. No new public skill, dependency, state schema, or reference file was added.
+
 ## v0.22.1
 
 - Added a `Fan-out Check` section to the implementation plan template so a design handoff records execution mode, independent units, host capability, and rejoin order before writing; the mode starts `pending Workflow Gate`.

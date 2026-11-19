@@ -56,6 +56,28 @@ Test the rendered artifact as the primary user before scoring:
 
 Record `Comprehension gate: pass | fail`, the primary user and task tested, and the artifact evidence. A fail returns to the artifact, or to `noootwo-product` when the audience contract or main path is unsettled.
 
+### Typography Balance Gate
+
+Run this on the populated rendered surface, not an empty shell and not a source search alone.
+
+Record one row per visible role and state:
+
+| Surface / state | Role | Selector or component | Size | Line height | Rendered height share | Notes |
+| --- | --- | --- | --- | --- | --- | --- |
+
+Then confirm:
+
+- Display and product registers are visibly separate; no hero, launch, or login `clamp()` is driving a Settings, panel, Inspector, review, or control title.
+- Every semantic role resolves from one application-root token source. A route-scoped definition is a documented exception.
+- Operational copy meets the product's declared minimum; `10px` appears only on a non-reading keycap, badge, or decorative mark.
+- Local title to body, page title to body, and control to body remain distinguishable without relying on one blanket font size.
+- The main heading leaves the primary task and its first action visible. A hero heading stays below roughly one fifth of the viewport; an operational page heading stays far smaller than that.
+- The same evidence covers desktop, tablet, phone or the narrow breakpoint, and roughly 200-percent page zoom or an equivalent narrow viewport.
+- Long CJK and mixed-language copy wraps without clipped lines, orphaned single characters, or overlapping controls.
+- The populated review, error, loading, empty, disabled, and long-content states preserve the same role relationship.
+
+A measured failure blocks `ready` even when the screenshot looks calm. A source-only font-size list is not evidence; it is a lead for the rendered pass. When a screenshot contradicts the computed measurements, reopen the state or viewport that produced the mismatch before deciding.
+
 ### Gates To Read When Relevant
 
 - Generic, Claude-like, framework, influence/cosplay, and forced-return checks: [review](review.md)
@@ -77,7 +99,7 @@ Before `ready`, confirm:
 - high-character work records style understanding fit against visual evidence
 - product UI work records the comprehension gate against the primary user, first screen, and rendered copy
 - visible notes, technical details, and settings pass the note budget and information-exposure check
-- review records typography evidence
+- review records the populated-state typography role table, display/product boundary, readable minima, heading share, and 200-percent resize evidence
 - review records responsive or platform evidence
 - implementation-bound work records default-override review and micro-detail review when generic drift was a risk
 - direction-sensitive work records either viewed low-cost samples or the reason samples were not applicable

@@ -5,7 +5,7 @@ description: "Use for UI, visual, artifact, or frontend work after product path 
 
 # Noootwo Design
 
-Turn a settled product path into a visual system, a reviewable artifact, and a handoff. When the real user, audience contract, main path, states, or acceptance are unsettled, invoke the `noootwo-product` skill first: read its `SKILL.md` and follow it. Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate only independent read-only work; keep one writer; verify summaries against source.
+Turn a settled product path into a visual system, a reviewable artifact, and a handoff. Name the target root before editing; a project supplied as a case, reference, or comparison is read-only unless the user explicitly asks to change it. When the real user, audience contract, main path, states, or acceptance are unsettled, invoke the `noootwo-product` skill first: read its `SKILL.md` and follow it. Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate only independent read-only work; keep one writer; verify summaries against source.
 
 ## 1. Size the work
 
@@ -64,7 +64,7 @@ Design Contract
 - Artifact and review path:
 ```
 
-Name semantic roles, not adjectives. Stable decisions become tokens, component rules, and state behaviour.
+Name semantic roles, not adjectives. For type, name display and product registers, role minima and caps, and one application-root token source; a blanket font-size override is not a scale. When repairing existing type, classify the failure as register, token scope, blanket override, or role scale, and fix that owning layer once. Stable decisions become tokens, component rules, and state behaviour.
 
 **Done when:** typography roles, layout model, component vocabulary, and the artifact review path are all named.
 
@@ -93,7 +93,7 @@ Artifact Review
 - Return action:
 ```
 
-Verify in bounded passes: build fully, inspect once with a batch covering the relevant viewports together, fix everything it shows in one batch, then confirm with at most one more round and stop.
+Verify in bounded passes: build fully, inspect once with a batch covering the relevant viewports and populated states together, fix everything it shows in one batch, then confirm with at most one more round and stop. Typography evidence includes computed roles, heading share, readable minima, and a 200-percent or equivalent narrow-layout pass.
 
 `ready` requires artifact evidence, the reference audition, mechanism-landing evidence for every borrowed primary or supplement, and no blocking layout, readability, responsive, motion, comprehension, or slop-drift defect. Every other decision names exactly one return action.
 
