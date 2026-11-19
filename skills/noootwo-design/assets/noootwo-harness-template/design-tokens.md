@@ -29,18 +29,22 @@ Status: pending; fill or refresh when a direction moves toward implementation
 
 ## Typography
 
-- Display: TBD
-- Body: TBD
-- Title: TBD
-- Label: TBD
-- Number: TBD
+- Registers and allowed surfaces: display TBD; product TBD
+- Token source: application root TBD; documented route exceptions TBD
+- Display: family TBD; size range TBD; line-height TBD; letter-spacing TBD; viewport-height share TBD; surfaces TBD
+- Page title: size TBD; line-height TBD; title-to-body ratio TBD; truncation TBD
+- Local title: size TBD; line-height TBD; title-to-body ratio TBD; truncation TBD
+- Body: size TBD; declared minimum TBD; line-height TBD; measure TBD; density exception TBD
+- Control and input: size TBD; line-height TBD; separate authentication rules TBD
+- Label and annotation: size TBD; minimum TBD; case rules TBD; contrast role TBD
+- Keycap or badge: size TBD; non-reading exception TBD
+- Number: size TBD; tabular nums TBD; alignment TBD
 - Mono or annotation: TBD
-- Scale: TBD
+- Scale: role values TBD; blanket overrides forbidden TBD
 - Weight roles: TBD
-- Line-height: TBD
-- Letter-spacing: TBD
-- Mobile display cap: TBD
-- Numeric alignment and tabular nums: TBD
+- Heading share: desktop TBD; phone TBD
+- Resize evidence: 200-percent or equivalent narrow state TBD
+- Readable role floor: TBD; allowed exceptions TBD
 - CJK or localization handling: TBD
 - Fallback and font loading: TBD
 - Forbidden type moves: TBD

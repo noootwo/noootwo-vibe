@@ -238,13 +238,17 @@ Define roles, not just swatches.
 
 Define the role of each type style.
 
-- Display: font logic, weight, size range, line-height, letter-spacing, and mobile cap.
-- Title: section and card titles, weight difference from display, truncation behavior.
-- Body: readable size, line-height, width, fallback behavior, CJK handling.
-- Label: navigation, controls, metadata, chip text, and case rules.
+- Registers: which surfaces may use display type and which use the fixed product scale. State the boundary explicitly; a hero or brand heading never becomes an operational title by convenience.
+- Token source: the application-root semantic tokens every route resolves. Route-scoped values are documented exceptions, not the only definition.
+- Display: font logic, weight, size range, line-height, letter-spacing, viewport-height share, and mobile cap.
+- Page and local titles: section, card, and panel titles; maximum size; weight difference from display; title-to-body ratio; truncation behavior.
+- Body: readable size, declared minimum, line-height, width, fallback behavior, CJK handling, and density exception.
+- Label and annotation: navigation, controls, field labels, metadata, comments, and chip text; minimum size, case rules, and contrast role.
+- Control and input: button, tab, select, and input roles; keep authentication input requirements separate from configuration inputs.
 - Numbers: tabular nums, alignment, unit treatment, decimal behavior.
 - Mono or annotation: only if it has a product reason; never as generic "technical" garnish.
-- Typography evidence flags: Inter-only/system-only when personality is required, CJK overweight display, decorative uppercase labels, arbitrary scale jumps; these block only when the rendered artifact demonstrates readability, hierarchy, brand-fit, or cohesion harm.
+- Resize: the 200-percent or equivalent narrow-layout behavior each role must survive without clipping or loss of function.
+- Typography evidence flags: Inter-only/system-only when personality is required, CJK overweight display, decorative uppercase labels, arbitrary scale jumps, blank global overrides, display type on product surfaces, route-only token definitions, and unreadably small operational copy. These block when the populated rendered artifact demonstrates readability, hierarchy, brand-fit, resize, or cohesion harm.
 
 #### 6. Layout And Density
 

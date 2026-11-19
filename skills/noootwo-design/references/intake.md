@@ -2,6 +2,11 @@
 
 Reading a request, declaring the Design Read, sizing the harness, and adopting an existing project.
 
+## Target Boundary
+
+Before reading or editing, name the repository, product root, design system, or document that will change. The target is the deliverable named by the user, not every project mentioned around it.
+
+A project quoted as a case, benchmark, screenshot source, or comparison is read-only evidence. Inspect its rendered state and source when needed, but do not edit its files, tests, screenshots, assets, or deployment to demonstrate a skill or design change. If the requested write target remains ambiguous and the next action would be irreversible, ask before editing.
 
 ## Design Read And Contract
 

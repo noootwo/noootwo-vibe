@@ -61,9 +61,22 @@ Record every selected primary or supplement whose mechanism the design contract 
 ## Layout, Readability, And Responsive Checks
 
 - Layout defects found: TBD
-- Readability or typography defects found: TBD
+- Display/product register boundary: pass or fail: TBD
+- Application-root token source: pass or fail: TBD
+- Readable role floor and exceptions: TBD
+- Heading size and rendered viewport-height share: TBD
+- Typography role measurements: TBD
+- Populated-state typography defects found: TBD
 - Responsive/platform defects found: TBD
-- Viewports/devices reviewed: TBD
+- Desktop, tablet, phone or narrow-breakpoint, and 200-percent or equivalent resize evidence: TBD
+
+### Typography Role Evidence
+
+| Surface / state | Role | Selector or component | Size | Line height | Rendered height share | Notes |
+| --- | --- | --- | --- | --- | --- | --- |
+| TBD | TBD | TBD | TBD | TBD | TBD | TBD |
+
+- Source-only font-size inventories and empty-shell screenshots are not typography evidence.
 
 ## Artifact Delivery Checks
 

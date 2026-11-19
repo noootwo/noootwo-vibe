@@ -10,7 +10,7 @@ This repository is a multi-skill workspace. The root is not a published skill; t
 
 ## Project Memory
 
-When the user states, repeats, or corrects a durable project rule, treat it as project context and place it in its owning layer in the same turn. Short always-on rules go in the nearest `AGENTS.md`; current progress goes through `noootwo-state`; a durable choice with its rationale goes in an ADR. Search for and update the old claim, report where it landed, and do not require the user to repeat it. Task-local instructions stay in the task.
+When the user states, repeats, or corrects a durable project rule, treat it as project context and place it in its owning layer in the same turn. Short always-on rules go in the nearest `AGENTS.md`; current progress goes through `noootwo-state`; a durable choice with its rationale goes in an ADR. Search for and update the old claim, report where it landed, and do not require the user to repeat it. A repeated correction also needs a regression check in the same turn. Task-local instructions stay in the task.
 
 ## Writing Skills
 
@@ -34,6 +34,8 @@ Every skill, `AGENTS.md`, and pointed-at doc is written to `docs/agents/skill-au
 - `noootwo-workflow` may route to other installed skills as execution resources; it does not add them to the Noootwo public set or capability map.
 - Keep per-skill versions in `skills/<skill>/VERSION` and mirror them in `skills.json`.
 - Record a durable change to the skill model as an ADR in `docs/adr/`.
+- Treat display and operational typography as separate registers: use one application-root semantic scale, keep readable dense-UI copy at `11px` or above, and verify rendered desktop, narrow, populated-state, and 200% resize evidence before accepting a typography change. See `docs/adr/0034-typography-role-balance.md`.
+- A project supplied as a case, reference, side-by-side comparison, or evidence source is read-only. Edit only the explicitly named target root; never change a sample project or its tests to demonstrate a skill change.
 
 ## Research Rule
 
