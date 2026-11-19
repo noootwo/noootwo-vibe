@@ -187,6 +187,7 @@ Record these in `.noootwo/directions.md`, `.noootwo/review.md`, or `.noootwo/des
 - Display/body contrast: family, width, weight, case, or rhythm contrast.
 - Type registers: display for brand, launch, login, or hero moments; product for navigation, forms, data, settings, panels, and controls. A display style never becomes an operational title by convenience.
 - Type scale: fixed role values for dense app UI; fluid `clamp()` only where display text benefits. Name each role's size, line height, minimum, maximum, and allowed surfaces, and keep one application-root token source.
+- Surface authority: the declared surface kind and density contract select the register and numeric floor. A reading-page body minimum or an expressive title/body ratio applies to its own surface, not to dense operational roles.
 - Weight roles: which weights serve headings, labels, body, captions, and numbers.
 - Line-height and line length: headings tight but not clipped; body readable; long text constrained with `ch` where useful.
 - Letter spacing: intentional small-caps/uppercase tracking; avoid default-everywhere or over-tight display text.
@@ -210,6 +211,7 @@ Any of these prevents `ready`:
 - Readable operational copy sits below the product's declared floor, or below `11px` without a non-reading role such as a keycap or decorative badge.
 - A heading occupies more than roughly one fifth of the viewport, or the main task falls below the first screen because the title is oversized.
 - A settings or configuration page inherits the login scale merely because both contain form fields.
+- A reading or marketing body floor, such as `14-16px`, or an expressive title/body ratio such as `2.5x`, is applied to Settings, an inspector, metadata, and controls as one upward shift instead of resolving the declared density contract.
 - Local title and body copy render at nearly the same size, leaving weight or colour alone to invent hierarchy.
 - Arbitrary type sizes that do not follow a scale.
 - More than 2-3 families without a clear system reason.

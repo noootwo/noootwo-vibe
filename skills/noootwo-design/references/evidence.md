@@ -139,14 +139,14 @@ Flag these as Claude-like convergence, even if they look polished:
 
 ## Impeccable Craft Signals
 
-Use this as craft guidance distilled from `pbakaus/impeccable` v4.8.0. Borrow the mechanisms, not the dependency, command vocabulary, or surface styling. For the mechanism-level pass and its evidence limits, read [Impeccable Research Notes](#impeccable-research-notes).
+Use this as craft guidance distilled from `pbakaus/impeccable` v4.10.0. Borrow the mechanisms, not the dependency, command vocabulary, or surface styling. For the mechanism-level pass and its evidence limits, read [Impeccable Research Notes](#impeccable-research-notes).
 
 ### Typography
 
 - `Inter-only`, Roboto-only, Arial-only, Open Sans-only, or system-only type is an aesthetic flag when the brief asks for personality. Keep it only when brand continuity, platform convention, or rendered hierarchy makes it intentional.
 - Pair with real contrast: serif/sans, wide/condensed, humanist/geometric, editorial/body, or restrained mono accent.
 - Use a small, explicit type scale. App UI needs predictable `rem` roles; campaign UI can use fluid display sizes.
-- Body text should normally be at least 16px on web.
+- Reading copy usually starts near `14-16px` on the web; dense operational UI resolves the product's declared density contract instead. The surface kind decides, so a general web body floor never becomes a reason to raise every Settings, inspector, or metadata role together.
 - Use `tabular-nums` for aligned values and operational data.
 - A system display face (Impact, Arial Black, platform sans) is a flag for an own-world voice; pass it only when the artifact shows the face belongs to the brand or medium.
 
@@ -190,13 +190,19 @@ Ask whether the interface would be instantly recognized as AI-generated. If yes,
 
 ## Impeccable Research Notes
 
-Recorded 2026-10-27 against `pbakaus/impeccable` v4.7.0 and rechecked 2026-11-03 at `skill-v4.8.0` (`414603bf14c7a344edb466bb1f85690c77ce8b7d`, released 2026-10-26). The evidence is official source plus inspectable release artifacts; no independent outcome study establishes a quality gain.
+Recorded 2026-10-27 against `pbakaus/impeccable` v4.7.0, rechecked 2026-11-03 at `skill-v4.8.0` (`414603bf14c7a344edb466bb1f85690c77ce8b7d`, released 2026-10-26), and rechecked for typography on 2026-11-19 at `skill-v4.10.0` (`b49177d32788f2dc585c42831d845dacf1ebed2c`, released 2026-11-18). The evidence is official source plus inspectable release artifacts; no independent outcome study establishes a quality gain.
 
 ### v4.8.0 Delta
 
 - The release is integration and maintenance work, not a new design philosophy. It adds Devin, Replit Agent, and Windsurf support; GitHub Actions annotations; `--list-rules`; install digest checks; Cursor/Codex hook fixes; Live Mode repairs; Arabic `harden` support; detector accuracy fixes; and an advisory hard-offset-shadow finding.
 - The `skill/SKILL.src.md` diff from v4.7.0 is one behavioral line: when the launcher is unavailable, the fallback must also read `craft-floor.md` immediately before a UI edit.
 - The code-first boundary remains the useful design judgment: app screens and documentation start from implementable artifacts; generated comps are reserved for landing, campaign, and showcase surfaces. Do not turn the v4.8.0 release into a claim of a new design paradigm.
+
+### v4.10.0 Typography Recheck
+
+- `skill/reference/craft-floor.md` still defines the type floor as `65-75ch` measure, a `6rem` display maximum, a tracking floor of `-0.04em`, obvious scale and weight steps, real copy at every breakpoint, and overflow repair.
+- `skill/reference/mode-read.md` places reading body text near `16px`; that instruction belongs to the reading surface. `skill/reference/adapt.md` gives a `16px` minimum for mobile reading. Neither is a role table for dense desktop Settings, Inspector, or metadata.
+- The craft floor is useful as rendered evidence discipline, not as a universal pixel floor. Noootwo keeps its declared dense-product minima and applies the upstream reading values only to reading surfaces.
 
 ### Current Mechanisms
 
@@ -230,7 +236,7 @@ Evidence flags never waive WCAG contrast, readable hierarchy, keyboard/focus/tou
 
 ### Evidence Boundary
 
-- Upstream v4.8.0 is a moving target; this note records the named tag and commit above. The v4.7.0 baseline remains the prior reviewed record.
+- Upstream is a moving target; this note records the named tags and commits above. The v4.7.0 baseline, v4.8.0 integration recheck, and v4.10.0 typography recheck are separate reviewed records.
 - The repository shows mechanisms and release practice, not an independent controlled test of UI quality.
 - Noootwo must not claim a general quality improvement until the fixture and reviewer evidence in `docs/experiments/2026-10-27-upstream-adoption.md` are recorded, and even then the claim is limited to the exercised workflow and evidence gates.
 

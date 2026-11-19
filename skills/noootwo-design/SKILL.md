@@ -64,7 +64,7 @@ Design Contract
 - Artifact and review path:
 ```
 
-Name semantic roles, not adjectives. For type, name display and product registers, role minima and caps, and one application-root token source; a blanket font-size override is not a scale. When repairing existing type, classify the failure as register, token scope, blanket override, or role scale, and fix that owning layer once. Stable decisions become tokens, component rules, and state behaviour.
+Name semantic roles, not adjectives. For type, name display and product registers, role minima and caps, and one application-root token source; a blanket font-size override is not a scale. Source minima stay surface-scoped: a reading-page floor or expressive title ratio never overrides the declared dense product role table. When repairing existing type, classify the failure as register, token scope, blanket override, or role scale, and fix that owning layer once. Stable decisions become tokens, component rules, and state behaviour.
 
 **Done when:** typography roles, layout model, component vocabulary, and the artifact review path are all named.
 
