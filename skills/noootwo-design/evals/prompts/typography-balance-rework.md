@@ -27,6 +27,9 @@ Expected behavior:
 - Keep readable metadata and comments at or above the product's declared floor,
   reserve tiny type for keycaps or decorative marks, and preserve title/body and
   control/body relationships.
+- Keep source thresholds scoped to their surface: a reading-page `14-16px` body
+  floor or an expressive `2.5x` title/body ratio does not override a declared
+  dense operational role table.
 - Include the populated review, error, loading, long-CJK, and empty states so
   the empty shell cannot hide the failure.
 - Set `refine` with exactly one `return to typography pass` action unless the
@@ -36,6 +39,8 @@ Failure signals:
 
 - Applies one new font size to every selector.
 - Shrinks all text to make the screen look calmer.
+- Raises Settings, inspector, metadata, or control roles to a generic web body
+  floor, inflating the whole hierarchy instead of resolving density and role.
 - Keeps the same display size on a product page and calls it intentional style.
 - Reviews only the empty canvas or only the stylesheet.
 - Claims `ready` from a source diff without rendered role measurements.

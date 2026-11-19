@@ -70,6 +70,7 @@ Then confirm:
 - Display and product registers are visibly separate; no hero, launch, or login `clamp()` is driving a Settings, panel, Inspector, review, or control title.
 - Every semantic role resolves from one application-root token source. A route-scoped definition is a documented exception.
 - Operational copy meets the product's declared minimum; `10px` appears only on a non-reading keycap, badge, or decorative mark.
+- Source minima and title ratios stay scoped to their surface. A reading or marketing body floor does not lift dense Settings, Inspector, metadata, and control roles together.
 - Local title to body, page title to body, and control to body remain distinguishable without relying on one blanket font size.
 - The main heading leaves the primary task and its first action visible. A hero heading stays below roughly one fifth of the viewport; an operational page heading stays far smaller than that.
 - The same evidence covers desktop, tablet, phone or the narrow breakpoint, and roughly 200-percent page zoom or an equivalent narrow viewport.

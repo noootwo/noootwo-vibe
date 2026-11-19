@@ -110,6 +110,74 @@ so Western display ratios do not transfer one-for-one.
 Source: [W3C — Requirements for Chinese Text Layout](https://www.w3.org/TR/clreq/),
 accessed 2026-11-19. Evidence level: internationalization guidance.
 
+### Skill prior art separates roles, not literals
+
+Sources were read from their published skill repositories on 2026-11-19. The
+question was whether a well-regarded design skill supplies a better typography
+mechanism than the local role model, and where each numeric rule stops applying.
+The environment could not complete a fresh GitHub link probe; the sources were
+read from local clones pinned to the commits below, so version identity is
+recorded while link reachability is not claimed.
+
+- **Huashu Design `v3.3.0`** (MIT, commit
+  `e8d1148a80d5a281d4247cffe320add3df017928`, released 2026-11-09) derives the
+  scale from content type, language, and tone before choosing a font. It uses a
+  `1.2` modular ratio for dashboards and information-dense UI, keeps display
+  type outside that scale, bounds fluid display with `clamp()`, and treats more
+  than roughly five or six levels as a hierarchy failure. Its CJK reference uses
+  `17-18px` reading body, `22-38` characters per line, and line height up to
+  `1.8-2.0`; its rendered `design_lint.py` measures computed DOM sizes with a
+  web default of `14px` body and `12px` label, configurable by medium. Its
+  critique guide and steady-track fallback ask for at-least-`2.5x` title/body
+  contrast. That heuristic conflicts with Huashu's own `1.2` rule for a
+  dashboard or information-dense UI if either is treated as universal; the
+  content-derived ratio has to win. Source:
+  [typography.md](https://github.com/alchaincyf/huashu-design/blob/v3.3.0/references/typography.md)
+  and [design_lint.py](https://github.com/alchaincyf/huashu-design/blob/v3.3.0/scripts/design_lint.py).
+- **Impeccable `skill-v4.10.0`** (Apache-2.0, commit
+  `b49177d32788f2dc585c42831d845dacf1ebed2c`, released 2026-11-18) sets the
+  craft floor at `65-75ch` measure, a `6rem` display maximum, obvious scale and
+  weight steps, real copy at every breakpoint, and overflow repair. Its reading
+  mode places body text near `16px`. These are reading-surface and craft checks,
+  not a dense desktop role table. Source:
+  [craft-floor.md](https://github.com/pbakaus/impeccable/blob/skill-v4.10.0/skill/reference/craft-floor.md)
+  and [mode-read.md](https://github.com/pbakaus/impeccable/blob/skill-v4.10.0/skill/reference/mode-read.md).
+- **Antfu Design `2026.06.22`** is explicit prior art for compact tooling UI:
+  `micro 10/14`, `mini 11/16`, and `compact 13/18` tokens, hierarchy through
+  weight and colour before raw scale, no oversized H1, a `65ch` reading measure,
+  and `tabular-nums` for technical values. This supports compact product roles,
+  while the exact UnoCSS values remain tooling-specific. Source:
+  `antfu-design/references/core-principles.md` and
+  `antfu-design/references/best-practices-bias-correction.md`, installed on
+  2026-11-19.
+- **Anthropic `frontend-design`** (Apache-2.0, repository commit
+  `e4bb5d960d87126ff3b3a8af1a104b7db67560ba`, accessed 2026-11-16) asks for a
+  clear type scale, one or two families, line lengths below `80ch`, and
+  screenshot-based self-critique. It is an expressive-page skill and supplies no
+  operational role table or dense-interface body floor. Source:
+  [SKILL.md](https://github.com/anthropics/skills/blob/e4bb5d960d87126ff3b3a8af1a104b7db67560ba/skills/frontend-design/SKILL.md).
+- **Superpowers `v7.0.2`** (MIT, commit
+  `22f0b463e7a5e579904dd6211a520321035526f7`, released 2026-11-03) has no
+  dedicated typography skill or transferable scale mechanism. Its brainstorming
+  companion includes a local CSS template, but no method changes this decision;
+  the absence is recorded rather than turned into borrowed authority.
+
+**Synthesis:** every useful source separates expressive display from reading or
+product text, limits the number of levels, and asks for evidence from the
+rendered result. None supports one universal body size or one universal
+heading/body ratio. Huashu's critique/fallback `2.5x` ratio and web `14px` floor,
+Impeccable's reading `16px`, and Anthropic's `<80ch` measure stay scoped to
+their surfaces.
+Antfu's compact tokens and Huashu's rendered lint support the mechanism of
+declared dense roles; the platform systems above remain the authority for the
+exact dense-desktop minima.
+
+**Counterexamples:** a dense Settings or Inspector tree that applies a reading
+page's `16px` body floor and an expressive `2.5x` local-heading ratio grows
+every row and destroys scanning density. A long reading page that applies the
+dense tool's `11-12px` metadata roles fails its reading contract. Both are real
+surface mismatches; neither justifies a single global scale.
+
 ## Adopted Mechanism
 
 1. **Two registers.** Expressive surfaces may use a bounded display scale.
@@ -176,6 +244,10 @@ accessed 2026-11-19. Evidence level: internationalization guidance.
 
 - The observed rendered states were used to derive the role relationships and
   failure flags; they are not modified deliverables.
+- The 2026-11-19 prior-art pass read Huashu Design `v3.3.0`, Impeccable
+  `skill-v4.10.0`, Anthropic `frontend-design`, Antfu Design `2026.06.22`, and
+  Superpowers `v7.0.2` at source. It records each mechanism, its surface
+  boundary, and a dense-versus-reading counterexample.
 - `skills/noootwo-design/evals/prompts/typography-balance-rework.md` turns the
   failure into a behavioral contract without editing the case project.
 - No case-specific source, test, screenshot, asset, or deployment is included in

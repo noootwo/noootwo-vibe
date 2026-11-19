@@ -1,5 +1,13 @@
 # noootwo-design Releases
 
+## v0.23.1
+
+- Closed a contradictory legacy claim that treated `16px` as a universal web body minimum. Reading copy now starts near `14-16px`; dense operational UI resolves its declared density contract instead.
+- Added the surface-scope rule to the Design Contract, Typography Craft Rubric, and Balance Gate, and blocked importing a reading/marketing `14-16px` body floor or an expressive `2.5x` title/body ratio into Settings, Inspector, metadata, and control roles as one upward shift.
+- Extended `typography-balance-rework.md` with the same surface-scoping contract and failure signal.
+- Recorded the typography prior-art pass across Huashu Design `v3.3.0`, Impeccable `skill-v4.10.0`, Anthropic `frontend-design`, Antfu Design `2026.06.22`, and Superpowers `v7.0.2`, including each mechanism, boundary, counterexample, and what was rejected.
+- No skill name, dependency, state schema, harness field, or reference count changed. `SKILL.md` remains 120 lines, now carrying the surface-scope rule inline, and the skill keeps 11 references.
+
 ## v0.23.0
 
 - Added a Typography Balance Gate that separates bounded display type from fixed product roles and requires populated rendered evidence at desktop, tablet, phone, and a 200-percent or equivalent narrow viewport.

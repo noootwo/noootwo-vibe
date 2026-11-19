@@ -32,6 +32,16 @@ Apple, Material, Fluent, Carbon, WCAG 2.2, CSS `clamp()`, and W3C CJK guidance.
 Carbon's fixed product versus fluid expressive split and WCAG's 200-percent
 resize requirement are the two strongest constraints.
 
+The 2026-11-19 prior-art pass also reviewed Huashu Design `v3.3.0`, Impeccable
+`skill-v4.10.0`, Anthropic `frontend-design`, Antfu Design `2026.06.22`, and
+Superpowers `v7.0.2` at source. Huashu and Antfu independently support compact
+dense roles and hierarchy limits; Impeccable and Anthropic support bounded
+expressive type and rendered review; Superpowers supplies no typography method.
+None supplies a universal body floor. Huashu's critique/fallback `2.5x` ratio
+conflicts with its own `1.2` dashboard rule when universalized; its web/deck
+minima, Impeccable's reading-size guidance, and Anthropic's line-length rule
+stay scoped to their surfaces.
+
 ## Decision
 
 1. `noootwo-design` treats display type and product type as two registers.
@@ -46,7 +56,9 @@ resize requirement are the two strongest constraints.
 4. Readable operational text has a product-specific floor. `10px` is reserved
    for non-reading keycaps or badges; metadata starts at `11px` in a dense
    desktop tool, and body/control roles start at `12px` unless the product
-   records a different density contract.
+   records a different density contract. Numeric floors and title ratios from a
+   reading, marketing, expressive, or mobile-reading surface do not override
+   that contract.
 5. Hierarchy is checked as a relationship: local title to body, page title to
    body, and heading rendered height as a share of the viewport. A display
    heading below roughly one fifth of the viewport is the target; an operational
@@ -88,6 +100,9 @@ resize requirement are the two strongest constraints.
   text belongs to expressive surfaces.
 - **Use the login scale for Settings.** Authentication has a different input
   and focus contract from daily configuration work.
+- **Treat a reading-page `14-16px` body floor or an expressive `2.5x`
+  title/body ratio as universal.** Both are valid on their own surfaces and
+  destructive when lifted into dense operational chrome.
 - **Add a typography skill.** Typography is part of design ownership; a second
   skill would split one capability and inflate discovery load.
 - **Patch the example product.** Changing the case to prove the skill would
@@ -106,6 +121,10 @@ resize requirement are the two strongest constraints.
 - The supplied case's rendered screenshots and computed values were inspected
   as evidence. No case source, test, screenshot, asset, or deployment is part of
   this release.
+- The prior-art pass read the published Huashu Design `v3.3.0`, Impeccable
+  `skill-v4.10.0`, Anthropic `frontend-design`, Antfu Design `2026.06.22`, and
+  Superpowers `v7.0.2` sources. Their mechanisms and surface boundaries are
+  recorded in [typography-balance-evidence.md](../reference/typography-balance-evidence.md).
 - `python scripts/validate_skill_workspace.py .` must pass after the skill,
   reference, and version changes.
 
