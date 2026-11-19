@@ -36,7 +36,7 @@ Product Reality Check
 - `Moment of use`: the exact situation where the product becomes useful or confusing.
 - `Current alternative`: what the user does today without this product. If unknown, say unknown rather than inventing it.
 - `First loop`: start, action, feedback, and proof that the result mattered.
-- `User comprehension check`: whether the user can tell what to do next, why it matters, what changed, and how to recover, without internal terms or unexplained notes.
+- `User comprehension check`: whether the user can tell what to do next, why it matters, what the current state is, and how to recover, without internal terms or unexplained notes.
 - `Naive-AI failure`: the likely wrong product a generic model would build, such as a module list, dashboard-first flow, CRUD sitemap, premature AI agent, or status-enum UI.
 - `Decision`: `keep` if the product path is understandable, `revise` if the path is wrong, `ask` if one product choice blocks progress, or `stop` if the premise is not supported.
 - `Return action`: one of `return to discovery`, `return to checkpoint`, `return to choice challenge`, `return to handoff`, or `return to workflow`.
@@ -48,6 +48,7 @@ Ask these before handing off:
 - Would the real user understand the first screen without internal terms?
 - Can the user name the next action without reading an explainer?
 - Is every technical detail tied to a decision, recovery step, or consequence the user has now?
+- Does any copy explain the design, the redesign, or the agent's change instead of the user's object, state, or next action?
 - Does the first loop produce feedback the user can see and value?
 - Are empty, error, permission, loading, and success states understandable from the user's side?
 - Did we cut features because they are not needed now, or only because they are hard to build?

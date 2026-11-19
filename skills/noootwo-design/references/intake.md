@@ -55,7 +55,7 @@ Field rules:
 - `Variance`: 1-10. Low means symmetric and predictable; high means asymmetric and expressive.
 - `Motion`: 1-10. Low means hover/active only; high means staged or spatial motion with reduced-motion fallback.
 - `Density`: 1-10. Low means airy and guided; high means compact and repeated-use friendly.
-- `Information exposure`: what the first screen must show, what sits behind one clear second-layer entry, and what never enters the product UI. Implementation names, service or database details, framework or model names, internal IDs or flags, and design rationale belong in code or docs unless they are the user's work object.
+- `Information exposure`: what the first screen must show, what sits behind one clear second-layer entry, and what never enters the product UI. Implementation names, service or database details, framework or model names, internal IDs or flags, and design rationale belong in code or docs unless they are the user's work object. Operational copy addresses the primary user's object, state, or next action; requester-facing redesign summaries and quality claims stay in the review or handoff.
 - `Existing system to preserve`: tokens, components, routes, brand assets, screenshots, or "none found".
 
 ### Dial Defaults

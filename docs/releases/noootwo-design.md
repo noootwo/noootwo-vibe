@@ -1,5 +1,15 @@
 # noootwo-design Releases
 
+## v0.24.0
+
+- Added a rendered-copy audience check to the Comprehension Gate: requester-facing, self-evaluating, or redundant operational copy blocks `ready`.
+- Operational headings now name the user's object, state, or task. A title that claims the redesign is clear fails even when the layout is clear.
+- A layout-only request changes structure, not public copy. A note that restates the heading, label, layout, or state is deleted; guidance stays only when it prevents an error, explains a consequence, supports recovery, or teaches a term needed now.
+- Added the operational-versus-marketing register boundary and harness review fields for visible-copy audience, user job, and requester-facing findings.
+- Added `account-page-no-redesign-slogan.md`, which fails a polished account page that keeps a redesign slogan and page narration.
+- Evidence and boundaries are recorded in `docs/reference/operational-copy-evidence.md` and the 2026-11-19 amendment to ADR 0029.
+- `SKILL.md` remains 120 lines; no new public skill, dependency, state schema, reference file, or reference count changed.
+
 ## v0.23.1
 
 - Closed a contradictory legacy claim that treated `16px` as a universal web body minimum. Reading copy now starts near `14-16px`; dense operational UI resolves its declared density contract instead.

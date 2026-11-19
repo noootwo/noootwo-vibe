@@ -36,7 +36,7 @@ This is project-local, not a global user profile. Do not copy unrelated past pro
 5. Separate these findings:
    - product-flow friction: the task is unclear, too long, or blocked
    - state/acceptance gaps: empty, error, permission, success states do not name the next action
-   - language/comprehension gaps: internal terms, implementation names, unexplained notes, or settings before defaults
+   - language/comprehension gaps: internal terms, implementation names, unexplained notes, requester-facing copy, redesign narration, quality claims, or settings before defaults
    - visual or interaction defects: route to `noootwo-design`
    - code or performance defects: route to `noootwo-code-health`
 6. Rank by severity and product leverage, not by how easy the screenshot was to obtain.

@@ -73,7 +73,10 @@ The interface speaks to the primary user, not to the system's builder. Copy is p
 - Settings appear only when a recurring user decision cannot be handled by a default. Label the entry by the user's outcome, not the mechanism.
 - Every visible note, helper, badge, or explainer must prevent an error, explain a consequence, support recovery, or teach a term needed now. A note that changes no decision is deleted.
 - Error copy names what happened and the next action. An error code may appear as secondary, copyable support detail; it is not the explanation.
-- Keep design rationale, model behaviour, prompt logic, and "how it works" in the design record or developer docs, not in the product UI.
+- Write copy for the primary user. Design rationale, change summaries, proof of improvement, evaluation notes, task instructions, model behaviour, prompt logic, and "how it works" stay in the design record, handoff, or reply.
+- Operational headings name the object, state, or next action. Show clarity through grouping, hierarchy, alignment, and spacing; a title that claims the page is clear fails.
+- On account, settings, admin, inspector, and configuration surfaces, use operational copy. Expressive brand language belongs to marketing, launch, or completion moments with a user-facing purpose and evidence.
+- A layout-only request changes structure. New visible copy needs its own user job; delete a note that restates the heading, label, or layout, or fix the structure it is trying to explain.
 
 ### Color, Motion, And Detail Rules
 
@@ -94,6 +97,8 @@ The interface speaks to the primary user, not to the system's builder. Copy is p
 - Do not let the background collapse into a generic solid fill if the direction calls for texture, pattern, atmosphere, or depth.
 - Do not let Claude-like polish become the style: nested containers, pills, status dots, and tasteful serif headlines are not a point of view by themselves.
 - Do not use "in the style of X" as a direction. Name the transferable mechanism and the do-not-copy boundary instead.
+- Do not open an operational surface with a slogan, benefit claim, or proof-of-redesign line.
+- Do not use a helper sentence to explain a hierarchy the layout should make obvious.
 
 ### Self-Check
 
@@ -220,6 +225,9 @@ Any of these prevents `ready`:
 - Letter spacing is visibly random or makes text harder to read.
 - A dump of source font sizes is presented as review evidence without the populated rendered state.
 - Mobile app hierarchy depends on huge bold CJK type instead of a controlled scale, spacing, and state model.
+- An operational title or note speaks to the requester or agent ("clear at a glance", "now reorganized", "we simplified this") instead of naming the user's object, state, or next action.
+- New visible copy appears on a layout-only request without a user job, or a note merely restates the heading, label, or layout.
+- An account, settings, admin, inspector, or configuration surface uses marketing or launch-register copy without a real user-facing moment and evidence.
 
 ### Review Action
 
