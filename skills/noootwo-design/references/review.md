@@ -50,6 +50,10 @@ Test the rendered artifact as the primary user before scoring:
 - Labels use the user's vocabulary or a domain term the audience already shares; the review names the evidence for that vocabulary.
 - Every technical or internal term supports a user decision, recovery step, or consequence, or moves to a second layer or code/docs.
 - Every visible note, helper, badge, or explainer prevents an error, explains a consequence, supports recovery, or teaches a term needed now. A note that changes no decision is deleted.
+- Every heading names the user's object, task, state, or next action. A title that claims the result ("clear at a glance", "now simplified") fails even when the layout is clear.
+- Visible copy addresses the primary user, not the requester or generator. Design rationale, change summaries, quality claims, and evaluation notes stay in the review or handoff.
+- On an operational surface, a note adds information the controls, labels, and layout do not already carry. A note that restates them is deleted, not restyled.
+- A layout-only request does not authorize new public copy; any added string records the user need it serves.
 - Density and expert affordances match frequency and error cost. Consumer and first-use paths stay low-density and default-led; trained operators may get high density, shortcuts, batch actions, and compact layout.
 - Settings appear only when a recurring user decision cannot be handled by a good default; rare settings sit behind an outcome-labelled second layer.
 - Error copy states what happened and the next action. An error code may appear as secondary, copyable support detail.
@@ -99,7 +103,7 @@ Before `ready`, confirm:
 - `.noootwo/appearance-ledger.md` exists, is project-local, and has no pending or unresolved entry
 - high-character work records style understanding fit against visual evidence
 - product UI work records the comprehension gate against the primary user, first screen, and rendered copy
-- visible notes, technical details, and settings pass the note budget and information-exposure check
+- visible headings and notes record their audience and user job; visible notes, technical details, and settings pass the note budget and information-exposure check
 - review records the populated-state typography role table, display/product boundary, readable minima, heading share, and 200-percent resize evidence
 - review records responsive or platform evidence
 - implementation-bound work records default-override review and micro-detail review when generic drift was a risk
@@ -281,5 +285,6 @@ Theme the browser surfaces models usually skip: text selection, caret, custom sc
 - Failed typography: return to typography pass.
 - Failed responsive check: return to responsive pass.
 - Technical noise, unexplained internal terms, or note-heavy UI that fails the comprehension gate: return to artifact.
+- Requester-facing or self-evaluating operational copy, or visible copy added without a user job: return to artifact.
 - Missing audience contract or interaction posture: return to `noootwo-product`.
 - Generic direction: return to directions, not polish.

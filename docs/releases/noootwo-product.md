@@ -1,5 +1,14 @@
 # noootwo-product Releases
 
+## v0.15.0
+
+- Added an operational-copy audience split to the Audience Contract and Product-to-Design Handoff: primary-user content stays visible; design rationale, change summaries, proof claims, and task instructions stay in the handoff, review, docs, or reply.
+- A layout, clarity, or hierarchy request now changes structure rather than authorizing new public copy. Every new visible string needs its own user job, and operational headings name the object, task, state, or next action.
+- Added the surface register boundary: account, settings, admin, inspector, and configuration surfaces use operational copy; marketing and launch surfaces may use expressive copy with evidence and a real user-facing moment.
+- Added `operational-copy-not-design-rationale.md`, covering a request to improve account-page layout that must not invent a slogan or page-narration note.
+- Evidence and boundaries are recorded in `docs/reference/operational-copy-evidence.md` and the 2026-11-19 amendment to ADR 0029.
+- No new public skill, dependency, state schema, or reference count changed.
+
 ## v0.14.0
 
 - Added a Decision Ledger: every settled decision is one entry with a stable id, the user's answer quoted in their words, a status (`answered`, `assumed`, `deferred`, `rejected`, `superseded by <id>`), and the condition that reopens it.

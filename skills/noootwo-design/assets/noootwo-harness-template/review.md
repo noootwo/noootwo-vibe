@@ -32,6 +32,7 @@ Status: pending; replace with a real review before any ready/handoff claim
 - Primary user and task tested: TBD
 - Technical or internal terms and their user decision: TBD
 - Note budget and information exposure: TBD
+- Visible-copy audience and user job: TBD
 - Safety hard-gate result: pass or fail, with the checked gates: TBD
 - Aesthetic flags: TBD
 - Evidence of harm or intentional use: TBD
@@ -102,6 +103,7 @@ Record every selected primary or supplement whose mechanism the design contract 
 - Product comprehension fit: TBD
 - Comprehension gate: TBD
 - Technical noise or note-budget failure: TBD
+- Requester-facing or self-evaluating copy findings: TBD
 - Responsive/type/state findings: TBD
 - Decision: ready, refine, pivot, or needs artifact: TBD
 - Return action: TBD

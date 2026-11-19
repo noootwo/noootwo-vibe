@@ -47,6 +47,7 @@ Derive one `Interaction Posture` from the contract:
 - settings: default-first | explicit configuration
 - expert affordances: none | shortcuts, batch actions, compact layout
 - help: inline at the decision | on demand | none
+- copy audience: primary user only; rationale, change narration, and proof claims stay out of the product surface
 
 Rules:
 
@@ -58,6 +59,24 @@ Rules:
 - Technical evidence is content, not noise, when the user is evaluating integration, security, performance, compatibility, or risk. Lead with the outcome, then the evidence.
 - Settings appear only when a recurring user decision cannot be handled by a good default. Label the entry by the user's outcome, not the mechanism.
 - When the audience decision would change the first screen and is unknown, keep it unsettled and ask. When it would not change the screen, record the assumption and proceed.
+
+### Operational Copy And Audience
+
+Every visible string belongs to a named audience. Do not let the requester's view of the change leak into the product surface:
+
+| String | Audience | Home |
+| --- | --- | --- |
+| Object, state, decision, or next action | primary user | product surface |
+| Implementation evidence | primary user, only when it supports a decision | secondary layer or details |
+| Design rationale, change summary, proof of improvement, evaluation note, task instruction | requester, reviewer, or agent | handoff, review, docs, or reply |
+| Expressive or promotional copy | buyer in a real marketing or launch moment | marketing or launch surface |
+
+- Operational headings name the object or task: "Account information", "Security", "Billing". A claim such as "Your information, clear at a glance" speaks to the requester, not the user.
+- A layout, hierarchy, or readability request changes structure. Treat any new visible sentence as a separate product decision with its own user job.
+- Show clarity through grouping, hierarchy, alignment, spacing, labels, and state behaviour. A quality claim cannot substitute for the structure.
+- Delete a note that restates the heading, label, layout, or state. Keep a note only when it prevents an error, explains a consequence, supports recovery, or teaches a term needed now.
+- Account, settings, admin, inspector, and configuration surfaces use operational copy. Expressive brand language belongs to marketing, launch, or completion moments with a user-facing purpose and evidence.
+- Domain-heavy products use contextual guidance at the decision point, not a paragraph that narrates how to read the whole page.
 
 ### Backend-Shaped Flow Correction
 
@@ -71,6 +90,7 @@ Backend-shaped requests expose internal objects before user intent. Correct them
 - Make success visible as user progress, not only saved data.
 - Turn errors into recovery paths, not system explanations.
 - Keep technical evidence only when it supports a user decision, and place it after the outcome it supports.
+- Replace requester-facing commentary, redesign summaries, and quality claims with the user's object, state, or next action.
 
 ### Product-to-Design Readiness
 
@@ -87,6 +107,7 @@ Design handoff is ready only when these are concrete enough:
 - `Agent-selected defaults`: implementation defaults chosen by the agent record their value, reason, and the condition that reopens the decision.
 - `open product decisions`: unresolved choices are listed instead of hidden.
 - `design constraints`: brand, platform, content, trust, accessibility, localization, or data constraints are named.
+- `copy audience and visible-copy budget`: every visible string has a user job; layout-only requests do not authorize new public copy.
 
 If any required field is unknown and would change the UI structure, return to Product Checkpoint or Product Choice Challenge.
 
@@ -280,6 +301,7 @@ Classify each proposed item:
 - `hide behind progressive disclosure`: useful only after context or intent is clear
 - `should not exist`: confusing, premature, or not tied to user value
 - `implementation detail`: belongs in code, runbooks, or developer docs, not the product surface
+- `requester-facing copy`: belongs in the review, handoff, docs, or reply, not the product surface
 
 Do not keep a feature because it is easy to implement. Keep it only if it improves the user outcome.
 
@@ -320,6 +342,7 @@ Red flags:
 - many equal-weight actions before the user has context
 - labels that expose internal states, IDs, flags, or implementation terms
 - notes that explain how the system is built instead of what the user can decide or do
+- headings or notes that narrate the redesign, claim the page is clear, or explain what the agent changed
 - settings for a choice a good default already handles
 - technical evidence placed before the result it supports
 - success that is only visible as data changing somewhere else
@@ -353,6 +376,7 @@ Include technical criteria only after the user-visible behavior is clear.
   - Visible / secondary / hidden information:
 - Interaction posture:
   - Density / language / main path / settings / expert affordances / help:
+- Copy audience and visible-copy budget:
 - Scenario:
 - Main path:
 - States:

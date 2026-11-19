@@ -2,7 +2,8 @@
 
 ## Status
 
-Accepted on 2026-11-09.
+Accepted on 2026-11-09; amended on 2026-11-19 for operational-copy audience
+boundaries.
 
 ## Context
 
@@ -28,6 +29,14 @@ The existing split remains correct:
 
 The deciding evidence is recorded in
 `docs/reference/audience-language-evidence.md`.
+
+The 2026-11-19 amendment evidence is recorded in
+[operational-copy-evidence.md](../reference/operational-copy-evidence.md). It
+reads Anthropic `frontend-design`, Impeccable `skill-v4.10.0`, Huashu Design
+`v3.3.0`, Taste Skill `2.5.1`, Antfu Design `2026.06.22`, community fix PRs,
+and the existing NN/g, W3C, and Microsoft language record. The shared mechanism
+is that words help the user understand or act; redundant headings, narration,
+self-evaluation, and invented content are defects.
 
 The strongest mechanisms:
 
@@ -76,6 +85,27 @@ evidence behind progressive disclosure is a comprehension defect.
    Product. A missing contract that would not change the screen is recorded as
    an assumption.
 
+### Amendment - 2026-11-19
+
+A layout, readability, or hierarchy request repeatedly produced new visible
+copy that addressed the requester instead of the user: a large title claiming
+the page was now clear, followed by a sentence narrating how to read the page.
+The existing rule kept design rationale out of the UI in general, but it did not
+classify requester-facing copy as a distinct audience failure or say that a
+layout-only request changes structure rather than public content.
+
+8. Operational copy serves the primary user's object, state, or next action.
+   Design rationale, change summaries, proof of improvement, evaluation notes,
+   and task instructions stay in the handoff, review, docs, or reply.
+9. A layout, hierarchy, or readability request changes structure. New visible
+   copy needs its own user job; an operational title names the object or task,
+   not a quality claim such as "clear at a glance".
+10. Design blocks `ready` when operational copy addresses the requester or
+    generator, evaluates the redesign, or merely restates the heading, label,
+    layout, or state. Marketing and launch surfaces may use expressive copy with
+    a user-facing purpose and evidence; that exception does not transfer to
+    account, settings, admin, inspector, or configuration surfaces.
+
 ## Rejected alternatives
 
 - **B2C/B2B as the audience model.** It does not distinguish a first-time
@@ -95,6 +125,11 @@ evidence behind progressive disclosure is a comprehension defect.
   domain-specific. A shared domain term is valid; an implementation name is not.
 - **Rely on visual review alone.** A beautiful first screen can still fail the
   user's comprehension. The gate is a separate review result.
+- **Treat requester-facing commentary as transparency.** The user does not need
+  the agent's design rationale, change summary, or proof that the revision is
+  clearer.
+- **Use a slogan as the remedy for weak hierarchy.** If the page needs a claim
+  to explain its clarity, the structure has not done its job.
 
 ## Consequences
 
@@ -102,6 +137,10 @@ evidence behind progressive disclosure is a comprehension defect.
   Design does not invent density or vocabulary from the surface label.
 - Design review can block `ready` for technical noise, unexplained internal
   terms, note-heavy UI, or settings that should be defaults.
+- Product can separate user content from requester/agent-facing material before
+  design starts, so a layout request does not silently become new public copy.
+- Design review can block `ready` when a title or note explains the redesign,
+  claims the page is clear, or restates the layout instead of serving the task.
 - The existing `.noootwo` harness templates carry the new fields; no new state
   root or artifact family is created.
 - The public skill set stays at twelve. No new skill, schema migration, or
@@ -116,5 +155,10 @@ evidence behind progressive disclosure is a comprehension defect.
   missing-audience cases.
 - Three Design eval contracts cover consumer technical noise, operations density
   with internal jargon, and a failed comprehension gate blocking `ready`.
+- `skills/noootwo-product/evals/prompts/operational-copy-not-design-rationale.md`
+  covers a layout-only request that must not invent public copy.
+- `skills/noootwo-design/evals/prompts/account-page-no-redesign-slogan.md`
+  covers a rendered account page that must fail review until the slogan and
+  page narration are removed.
 - No fresh-session behavior, comprehension, time, token, or rework improvement
   is claimed until those contracts are run against a no-skill baseline.

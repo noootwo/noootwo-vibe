@@ -115,6 +115,12 @@ Sources: ISO 24495-1:2023 (standard, not reproduced); [danyuchn/iso-24495-skill]
 
 ## Adopted mechanisms
 
+The 2026-11-19 amendment adds the operational-copy audience split and is recorded
+in [operational-copy-evidence.md](operational-copy-evidence.md): requester-facing
+design rationale, change summaries, quality claims, and invented public copy stay
+outside the product surface, and a layout-only request changes structure rather
+than content.
+
 1. **Audience Contract** in Product: primary role and moment, familiarity and
    shared vocabulary, frequency, error cost, learning-versus-throughput stance,
    and visible/secondary/hidden information.
