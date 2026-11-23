@@ -93,7 +93,7 @@ Artifact Review
 - Return action:
 ```
 
-Verify in bounded passes: build fully, inspect once with a batch covering the relevant viewports and populated states together, fix everything it shows in one batch, then confirm with at most one more round and stop. Typography evidence includes computed roles, heading share, readable minima, and a 200-percent or equivalent narrow-layout pass.
+Verify in bounded passes: build fully, inspect once with a batch covering the relevant viewports and populated states together, fix everything it shows in one batch, then confirm with at most one more round and stop. Typography evidence includes computed roles, heading share, readable minima, and a 200-percent narrow check; layout evidence includes measured panel/toolbar insets, gaps, anchors, overlap or clipping, and a re-measure after each geometry fix.
 
 `ready` requires artifact evidence, the reference audition, mechanism-landing evidence for every borrowed primary or supplement, and no blocking layout, readability, responsive, motion, comprehension, or slop-drift defect. Every other decision names exactly one return action.
 

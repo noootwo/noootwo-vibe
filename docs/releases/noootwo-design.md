@@ -1,5 +1,15 @@
 # noootwo-design Releases
 
+## v0.25.0
+
+- Added a Layout Geometry Gate for changed, user-named, and contract-declared regions. Each region records container box, rendered insets, inner and outer gaps, alignment anchors, overlap or clipping, and a verdict.
+- A single-row toolbar, tab strip, filter row, breadcrumb, or control cluster now fails `ready` when its top and bottom insets differ beyond tolerance. Outer spacing must exceed inner spacing when spacing alone conveys grouping.
+- `check_visual_gates.py` gained `--region NAME=SELECTOR`, `data-noootwo-region` discovery, `--geometry-tolerance`, and `--require-geometry`. It computes rendered insets, gap ranges, left-edge anchors, sibling overlap, and containment; named geometry failures block the gate while heuristic findings stay advisory.
+- A named region with no visible items now fails instead of passing as an empty measurement.
+- Geometry repair now requires the same selector to be re-measured and every closed geometry row to be swept before readiness.
+- Added `layout-geometry-toolbar-miss.md` for the `padding: 0 28px 14px` regression and ADR 0035 for the evidence and boundaries.
+- `SKILL.md` remains 120 lines; no public skill, dependency, state schema, or reference count changed.
+
 ## v0.24.0
 
 - Added a rendered-copy audience check to the Comprehension Gate: requester-facing, self-evaluating, or redundant operational copy blocks `ready`.

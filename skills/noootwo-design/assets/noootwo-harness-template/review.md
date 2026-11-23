@@ -70,6 +70,8 @@ Record every selected primary or supplement whose mechanism the design contract 
 - Populated-state typography defects found: TBD
 - Responsive/platform defects found: TBD
 - Desktop, tablet, phone or narrow-breakpoint, and 200-percent or equivalent resize evidence: TBD
+- Layout geometry gate: pass or fail: TBD
+- Layout geometry re-measurement and closing sweep: TBD
 
 ### Typography Role Evidence
 
@@ -78,6 +80,15 @@ Record every selected primary or supplement whose mechanism the design contract 
 | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
 
 - Source-only font-size inventories and empty-shell screenshots are not typography evidence.
+
+### Layout Geometry Evidence
+
+| Surface / state | Region / owner | Selector | Container box | Inset T/R/B/L | Inner gap | Outer gap | Alignment anchor | Overlap / clip | Verdict |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
+
+- Screenshot-only inspection cannot prove local spacing, alignment, containment, or overlap.
+- A missing row for a changed, user-named, or contract-declared region is incomplete evidence.
 
 ## Artifact Delivery Checks
 
@@ -102,6 +113,7 @@ Record every selected primary or supplement whose mechanism the design contract 
 - Style understanding fit: TBD
 - Product comprehension fit: TBD
 - Comprehension gate: TBD
+- Layout geometry gate: TBD
 - Technical noise or note-budget failure: TBD
 - Requester-facing or self-evaluating copy findings: TBD
 - Responsive/type/state findings: TBD

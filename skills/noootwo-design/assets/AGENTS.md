@@ -16,6 +16,6 @@ For non-quick UI work, carry the Product-to-Design Handoff when available and de
 Decide whether the product function and moment call for `leave simple`, `craft only`, or `add moment`; a simple result is valid when the evidence supports it. Search for examples or tools only after a candidate passes the frequency, purpose, speed, and function gates.
 For high-character, niche, premium, selected, or previously rejected style work, record Style Evidence Check before trusting style prose.
 
-Do not claim `ready` without `.noootwo/review.md` and artifact/screenshot/preview evidence. If the artifact has layout, responsive, typography, or generic-drift defects, return to the earlier fixing stage instead of calling it polished.
+Do not claim `ready` without `.noootwo/review.md`, artifact evidence, and measured layout geometry for changed, user-named, or contract-declared regions. If the artifact has layout, responsive, typography, or generic-drift defects, return to the earlier fixing stage instead of calling it polished.
 
 Keep detailed Noootwo Design workflow rules inside the `$noootwo-design` skill; do not duplicate them here.
