@@ -9,7 +9,7 @@ It publishes twelve focused skills — a router plus eleven specialists:
 | `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in, including the route to parallel work | `0.7.1` |
 | `noootwo-workflow` | model-invoked | Chooses read depth, runs the Fan-out Gate, re-matches one owner after compaction or a phase change, and schedules shape-before-implementation, scoped Change Checks, delivery integration, Release Verification Ledger handoffs, and the full Release Check | `0.26.0` |
 | `noootwo-product` | model-invoked | Settles real user, audience contract, interaction posture, first loop, scope, main path, states, acceptance, and operational-copy audience before design or build | `0.15.0` |
-| `noootwo-design` | model-invoked | Turns a settled product path into a context-aware visual intervention, source-role audition, information exposure, balanced typography, rendered-copy comprehension, tokens, a Design Contract, a fan-out-aware implementation plan, and a reviewed artifact | `0.24.0` |
+| `noootwo-design` | model-invoked | Turns a settled product path into a context-aware visual intervention, source-role audition, information exposure, balanced typography, rendered-copy comprehension, measured layout geometry, tokens, a Design Contract, a fan-out-aware implementation plan, and a reviewed artifact | `0.25.0` |
 | `noootwo-tdd` | model-invoked | Owns red-green-refactor and relevant-test evidence for behavior-changing code | `0.6.1` |
 | `noootwo-code-health` | model-invoked | Shapes a non-obvious change, makes a plan execution-ready only after Workflow's Fan-out Check, runs a scoped Change Check after each requirement, and a full Release Check before release | `0.19.0` |
 | `noootwo-delivery` | model-invoked | Gives each requirement or write lane isolated linked worktrees, resolves shared-contract overlap, rejoins one lane at a time, and integrates through protected `main` | `0.2.0` |
@@ -80,6 +80,15 @@ Update the globally installed Noootwo skills later with:
 
 ```bash
 npx -y skills update noootwo-ask noootwo-workflow noootwo-product noootwo-design noootwo-tdd noootwo-code-health noootwo-delivery noootwo-release noootwo-state noootwo-debug noootwo-research noootwo-onboard --global --yes
+```
+
+Start a new Codex task after updating so it reloads the skill catalog. A full app
+restart is only needed when a new task still resolves the old installed version.
+Check the installed copy directly when in doubt:
+
+```bash
+cat ~/.agents/skills/noootwo-design/VERSION
+cat ~/.codex/skills/noootwo-design/VERSION 2>/dev/null || true
 ```
 
 Single-skill local checks are also supported:
@@ -164,7 +173,12 @@ Sync local installed skill copies when iterating locally:
 ```bash
 python scripts/sync_local_install.py --no-dedupe-codex
 python scripts/sync_local_install.py --target-root ~/.codex/skills --no-dedupe-codex
+python scripts/sync_local_install.py --check
 ```
+
+The sync command verifies every copied `VERSION` and `SKILL.md` before it
+reports success. `--check` verifies the installed `~/.agents/skills` and
+`~/.codex/skills` copies against the checkout without copying anything.
 
 The default sync target is `~/.agents/skills`. When a synced Noootwo skill exists there, the script removes the same `noootwo-*` skill from `~/.codex/skills` so Codex does not show duplicate local skills.
 For non-default targets, pass `--dedupe-codex` to apply the same duplicate cleanup.
@@ -220,6 +234,13 @@ python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scena
 python skills/noootwo-design/scripts/eval_noootwo_artifacts.py <project> --scenario explicit-motion-request-honored
 ```
 
+Measure named rendered layout regions before a readiness claim:
+
+```bash
+uv run --with playwright python skills/noootwo-design/scripts/check_visual_gates.py \
+  <url-or-html> --region "toolbar=.contentToolbar" --require-geometry
+```
+
 ## Release Model
 
 Each child skill has its own `VERSION` file and tag prefix. Current source versions:
@@ -227,7 +248,7 @@ Each child skill has its own `VERSION` file and tag prefix. Current source versi
 - `noootwo-ask@v0.7.1`
 - `noootwo-workflow@v0.26.0`
 - `noootwo-product@v0.15.0`
-- `noootwo-design@v0.24.0`
+- `noootwo-design@v0.25.0`
 - `noootwo-tdd@v0.6.1`
 - `noootwo-code-health@v0.19.0`
 - `noootwo-delivery@v0.2.0`
@@ -237,7 +258,7 @@ Each child skill has its own `VERSION` file and tag prefix. Current source versi
 - `noootwo-research@v0.9.0`
 - `noootwo-onboard@v0.5.0`
 
-The root `VERSION` is the workspace version (`0.34.0`) and is not the release source for child skills. Child tags are created only after a validated batch lands on `main`; the versions above are the source versions prepared for release `0.34.0`.
+The root `VERSION` is the workspace version (`0.35.0`) and is not the release source for child skills. Child tags are created only after a validated batch lands on `main`; the versions above are the source versions prepared for release `0.35.0`.
 
 ## Delivery Policy
 

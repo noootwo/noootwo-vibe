@@ -35,6 +35,7 @@ Every skill, `AGENTS.md`, and pointed-at doc is written to `docs/agents/skill-au
 - Keep per-skill versions in `skills/<skill>/VERSION` and mirror them in `skills.json`.
 - Record a durable change to the skill model as an ADR in `docs/adr/`.
 - Treat display and operational typography as separate registers: use one application-root semantic scale, keep readable dense-UI copy at `11px` or above, and verify rendered desktop, narrow, populated-state, and 200% resize evidence before accepting a typography change. See `docs/adr/0034-typography-role-balance.md`.
+- Review rendered layout through measured region geometry for changed, user-named, or contract-declared regions; a screenshot alone cannot prove spacing, alignment, containment, or overlap. See `docs/adr/0035-rendered-layout-geometry-review.md`.
 - A project supplied as a case, reference, side-by-side comparison, or evidence source is read-only. Edit only the explicitly named target root; never change a sample project or its tests to demonstrate a skill change.
 - Product-surface copy serves the primary user's object, state, or next action. Keep design rationale, change summaries, quality claims, and promotional slogans out of operational UI; a layout-only request changes structure, not public copy. See `docs/adr/0029-audience-derived-interaction-and-language.md`.
 

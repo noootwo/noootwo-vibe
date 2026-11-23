@@ -477,7 +477,7 @@ Any of these forces `refine`:
 
 ### Lightweight Automation
 
-Use `scripts/check_visual_gates.py` when a local URL or static HTML file is available. The script checks overflow, obvious clipped text, and a small advisory interface set across the required viewports. It is web-artifact only; for Flutter, SwiftUI, and Compose, use the platform notes below and a real preview or device. It is a guardrail, not a substitute for design judgment, and its interface findings need source, accessibility-tree, or keyboard confirmation before they change a decision.
+Use `scripts/check_visual_gates.py` when a local URL or static HTML file is available. The script checks overflow, obvious clipped text, and a small advisory interface set across the required viewports. Pass `--region "name=selector"` or mark a live region with `data-noootwo-region` to measure its container, insets, inner and outer gaps, alignment edges, overlaps, and clipping. A declared intentional attachment can set `data-noootwo-symmetric="false"` and record the reason. Named geometry failures block `ready`; heuristic findings remain advisory until confirmed. It is web-artifact only; for Flutter, SwiftUI, and Compose, use the platform notes below and a real preview or device. It is a guardrail, not a substitute for design judgment, and its interface findings need source, accessibility-tree, or keyboard confirmation before they change a decision.
 
 
 ## Interaction And Accessibility Gate

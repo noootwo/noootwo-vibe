@@ -14,9 +14,18 @@
 ```bash
 python scripts/sync_local_install.py --no-dedupe-codex
 python scripts/sync_local_install.py --target-root ~/.codex/skills --no-dedupe-codex
+python scripts/sync_local_install.py --check
 ```
 
-The default target is `~/.agents/skills`. Keeping `--no-dedupe-codex` while syncing both roots prevents the first command from removing the Codex copy before the second command refreshes it.
+The default target is `~/.agents/skills`. Keeping `--no-dedupe-codex` while
+syncing both roots prevents the first command from removing the Codex copy
+before the second command refreshes it. Each sync verifies the installed
+`VERSION` and `SKILL.md`; `--check` verifies both roots without copying.
+
+After an install or update, start a new Codex task so it reloads the skill
+catalog. Restart the app only when a new task still resolves the old installed
+version. `VERSION` is metadata; the installed `SKILL.md` and references are the
+content Codex reads.
 
 The public installation contract is:
 

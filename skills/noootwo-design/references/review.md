@@ -28,7 +28,7 @@ Thresholds:
 
 ### Output
 
-Write `.noootwo/review.md` with artifact evidence, reference audition, intervention decision and fit, scores, calibration fit, style understanding fit, comprehension gate, product comprehension fit, user decision gate, mechanism landing, safety hard-gate result, aesthetic flags with evidence of harm or intentional use, generic/Claude/framework/designer-grade flags, role critique, authored move or deliberate absence, viewport evidence, typography evidence, data evidence when relevant, default-override review, micro-detail pass, readiness gate, decision, return action, and next action.
+Write `.noootwo/review.md` with artifact evidence, reference audition, intervention decision and fit, scores, calibration fit, style understanding fit, comprehension gate, product comprehension fit, user decision gate, mechanism landing, safety hard-gate result, aesthetic flags with evidence of harm or intentional use, generic/Claude/framework/designer-grade flags, role critique, authored move or deliberate absence, viewport evidence, typography evidence, layout geometry evidence, data evidence when relevant, default-override review, micro-detail pass, readiness gate, decision, return action, and next action.
 
 ### Intervention Review
 
@@ -83,6 +83,26 @@ Then confirm:
 
 A measured failure blocks `ready` even when the screenshot looks calm. A source-only font-size list is not evidence; it is a lead for the rendered pass. When a screenshot contradicts the computed measurements, reopen the state or viewport that produced the mismatch before deciding.
 
+### Layout Geometry Gate
+
+Run this on the populated rendered surface for every region changed by the diff, named by the user, or declared by the contract. `standard`, `deep`, and `production` work also covers at least one representative region per visible group. Record one row per region and state:
+
+| Surface / state | Region / owner | Selector | Container box | Inset T/R/B/L | Inner gap | Outer gap | Alignment anchor | Overlap / clip | Verdict |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+Then confirm:
+
+- Single-row regions such as toolbars, tab strips, filter rows, breadcrumbs, and control clusters have matching top and bottom insets within tolerance unless the contract records an intentional attachment. A declared attachment may set `data-noootwo-symmetric="false"` and must record its reason in the geometry row.
+- When spacing alone communicates grouping, the space around a group exceeds the space inside it.
+- Items expected to share an edge resolve to one alignment anchor within tolerance; siblings do not overlap and child content stays inside its container.
+- Tolerance comes from the local spacing token or a small rendering tolerance; this gate catches semantic imbalance such as `0` versus `14px`, not pixel-perfect imitation.
+- Source padding is a lead; the rendered inset is evidence. An unmeasured region is not a pass.
+- Every changed, user-named, or contract-declared region has a row. The script's `data-noootwo-region` map or `--region` selectors can establish coverage; a wrapper region can mark its measured children with `data-noootwo-item`.
+- If no live DOM or platform inspector exists, use a measured screenshot crop or native geometry evidence and record the method and limitation.
+- After a geometry fix, re-measure every closed finding with the same selector and sweep all geometry rows once before `ready`.
+
+A measured geometry failure blocks `ready` even when the overall composition looks calm. Missing coverage returns to the artifact.
+
 ### Gates To Read When Relevant
 
 - Generic, Claude-like, framework, influence/cosplay, and forced-return checks: [review](review.md)
@@ -105,6 +125,7 @@ Before `ready`, confirm:
 - product UI work records the comprehension gate against the primary user, first screen, and rendered copy
 - visible headings and notes record their audience and user job; visible notes, technical details, and settings pass the note budget and information-exposure check
 - review records the populated-state typography role table, display/product boundary, readable minima, heading share, and 200-percent resize evidence
+- review records the layout geometry table and re-measurement sweep for every changed, user-named, or contract-declared region
 - review records responsive or platform evidence
 - implementation-bound work records default-override review and micro-detail review when generic drift was a risk
 - direction-sensitive work records either viewed low-cost samples or the reason samples were not applicable
@@ -147,6 +168,7 @@ If multiple return actions are plausible and the choice changes cost, scope, or 
 - Without a subagent, step fully out of the build context before evaluating, and disclose the substitution in one line at finish.
 - The generator never self-certifies `ready`; the reviewer's findings are the only list worked from.
 - When the user supplies evidence against a `ready` verdict (their screenshot, a named mismatch), that evidence outranks the capture: reopen the review with a fresh reviewer instead of patching inline and self-certifying.
+- A review that only describes composition has not produced geometry evidence.
 
 
 ## Review Gates
@@ -284,6 +306,7 @@ Theme the browser surfaces models usually skip: text selection, caret, custom sc
 - Missing preservation contract: return to directions or approved spec.
 - Failed typography: return to typography pass.
 - Failed responsive check: return to responsive pass.
+- Failed local layout geometry or missing region measurement: return to artifact; viewport-specific geometry failure returns to responsive pass.
 - Technical noise, unexplained internal terms, or note-heavy UI that fails the comprehension gate: return to artifact.
 - Requester-facing or self-evaluating operational copy, or visible copy added without a user job: return to artifact.
 - Missing audience contract or interaction posture: return to `noootwo-product`.

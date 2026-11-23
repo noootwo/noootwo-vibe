@@ -103,4 +103,5 @@ Status: pending; fill after the direction is chosen and before implementation pl
 - Required review evidence: TBD
 - Responsive/platform checks: TBD
 - Typography checks: TBD
+- Layout geometry checks for changed, user-named, and contract-declared regions: TBD
 - Review decision needed before handoff: TBD

@@ -32,6 +32,8 @@ Status: pending; define completion checks for the implementation agent
 - 1440px viewport preserves intended composition and density: TBD
 - 200% browser zoom, system text scale, or explicit limitation checked: TBD
 - Native safe area, platform chrome, and touch target checks when relevant: TBD
+- Changed, user-named, and contract-declared regions have measured inset, gap, anchor, overlap, and clip evidence: TBD
+- Each geometry repair was re-measured with the same selector and swept before ready: TBD
 
 ## Screenshot Or Preview Checks
 
@@ -44,6 +46,7 @@ Status: pending; define completion checks for the implementation agent
 - State screenshots that must exist: TBD
 - Visual proof location: TBD
 - Overflow check result or `scripts/check_visual_gates.py` output: TBD
+- Layout geometry output with named regions and verdicts: TBD
 - Flutter/native route, widget preview, simulator/device, or golden-style screenshot when relevant: TBD
 
 ## Token Checks
