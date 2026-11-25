@@ -98,6 +98,7 @@ Previously verified: 2026-10-27 on published `0.24.0`: workspace and skill budge
 
 ## Active Risks
 
+- The Observation Gate, Composition Pass, ready-level independent review, and WCAG 2.2 delta are written and validator-enforced, but the three new planted-defect evals have not been run in fresh sessions. No measured reduction in missed UI defects is claimed.
 - The five specialist skills were rewritten to `docs/agents/skill-authoring.md` in one pass. The behaviour measurement in `docs/experiments/` is the evidence for that rewrite; it is scenario-based, not a statistical claim about rework rates.
 - Deterministic enforcement — an engine, edit hooks, or detector rules as `pbakaus/impeccable` uses — is deliberately absent. It is the remaining structural gap between this suite and that project, recorded in [ADR 0006](adr/0006-skill-authoring-standard-and-router.md) for separate evaluation.
 - `noootwo-ask` is user-invoked through `policy.allow_implicit_invocation: false`. The repository does not set `disable-model-invocation`, because it ships as a Codex plugin and that validator requires the field to be `false`.

@@ -242,6 +242,10 @@ surface mismatches; neither justifies a single global scale.
 
 ## Verification
 
+- Amendment 2026-11-25: the `720x450` viewport remains the 200-percent zoom
+  check; WCAG 2.2 reflow is a separate `320` CSS px check. The `11-12px` roles
+  above are product-specific dense-desktop evidence, not a universal readability
+  floor, and CJK line length is measured in characters rather than `ch`.
 - The observed rendered states were used to derive the role relationships and
   failure flags; they are not modified deliverables.
 - The 2026-11-19 prior-art pass read Huashu Design `v3.3.0`, Impeccable

@@ -9,7 +9,7 @@ It publishes twelve focused skills — a router plus eleven specialists:
 | `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in, including the mandate vocabulary and the route to parallel work | `0.7.2` |
 | `noootwo-workflow` | model-invoked | Reads the mandate before any write, chooses read depth, runs the Fan-out Gate, re-matches one owner after compaction or a phase change, and schedules shape-before-implementation, scoped Change Checks, delivery integration, Release Verification Ledger handoffs, and the full Release Check | `0.27.0` |
 | `noootwo-product` | model-invoked | Settles real user, audience contract, interaction posture, first loop, scope, main path, states, acceptance, and operational-copy audience before design or build | `0.15.1` |
-| `noootwo-design` | model-invoked | Turns a settled product path into a context-aware visual intervention, source-role audition, information exposure, balanced typography, rendered-copy comprehension, measured layout geometry, tokens, a Design Contract, a fan-out-aware implementation plan, and a reviewed artifact | `0.25.1` |
+| `noootwo-design` | model-invoked | Turns a settled product path into a context-aware visual intervention, source-role audition, information exposure, balanced typography, rendered-copy comprehension, blind observation, composition review, measured layout geometry, tokens, a Design Contract, a fan-out-aware implementation plan, and an independently reviewed artifact | `0.26.0` |
 | `noootwo-tdd` | model-invoked | Owns red-green-refactor and relevant-test evidence for behavior-changing code | `0.6.2` |
 | `noootwo-code-health` | model-invoked | Shapes a non-obvious change, waits for the Mandate Gate before shaping or editing, treats a plan as execution-ready only after the user accepts the proposal, runs a scoped Change Check after each requirement, and a full Release Check before release | `0.19.1` |
 | `noootwo-delivery` | model-invoked | Gives each requirement or write lane isolated linked worktrees, resolves shared-contract overlap, rejoins one lane at a time, and integrates through protected `main` | `0.2.0` |
@@ -248,7 +248,7 @@ Each child skill has its own `VERSION` file and tag prefix. Current source versi
 - `noootwo-ask@v0.7.2`
 - `noootwo-workflow@v0.27.0`
 - `noootwo-product@v0.15.1`
-- `noootwo-design@v0.25.1`
+- `noootwo-design@v0.26.0`
 - `noootwo-tdd@v0.6.2`
 - `noootwo-code-health@v0.19.1`
 - `noootwo-delivery@v0.2.0`
@@ -258,7 +258,7 @@ Each child skill has its own `VERSION` file and tag prefix. Current source versi
 - `noootwo-research@v0.9.0`
 - `noootwo-onboard@v0.5.0`
 
-The root `VERSION` is the workspace version (`0.35.0`) and is not the release source for child skills. Child tags are created only after a validated batch lands on `main`; the versions above are the source versions prepared for release `0.35.0`.
+The root `VERSION` is the workspace version (`0.37.0`) and is not the release source for child skills. Child tags are created only after a validated batch lands on `main`; the versions above are the source versions prepared for release `0.37.0`.
 
 ## Delivery Policy
 

@@ -9,6 +9,7 @@ from urllib.parse import urlparse
 
 
 DEFAULT_VIEWPORTS = [
+    ("reflow", 320, 800),
     ("phone", 390, 844),
     ("narrow", 768, 1024),
     ("desktop", 1440, 900),
@@ -197,7 +198,7 @@ CHECK_JS = """
       const style = window.getComputedStyle(el);
       if (style.display === 'inline') continue;
       const rect = el.getBoundingClientRect();
-      if (rect.width < 40 || rect.height < 40) interfaceChecks.smallTouchTargets.push(describe(el));
+      if (rect.width < 24 || rect.height < 24) interfaceChecks.smallTouchTargets.push(describe(el));
     }
   }
 
@@ -733,7 +734,7 @@ def main() -> int:
         "imagesMissingDimensions": "image without stable dimensions or aspect ratio",
         "transitionAll": "transition: all on an animated element",
         "outlineRemoved": "outline removed with no focus rule",
-        "smallTouchTargets": "interactive target smaller than 40px on a narrow viewport",
+        "smallTouchTargets": "interactive target below the 24px WCAG minimum (product baseline 40px)",
         "zoomDisabled": "viewport meta disables or limits zoom",
     }
     interface_findings: dict[str, list[dict]] = {}

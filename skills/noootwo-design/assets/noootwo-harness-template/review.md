@@ -10,6 +10,21 @@ Status: pending; replace with a real review before any ready/handoff claim
 - Export target checked: TBD
 - Artifact-family-specific evidence captured: TBD
 
+## Observation And Composition
+
+- Blind observations: TBD; record 5-8 before scoring
+- First-pass defects: TBD; give region, state, and viewport, or "none; why"
+- Must-not-change item: TBD
+- Observation gate: pass or fail: TBD
+- Reading order and squint test: TBD
+- Grouping and proximity: TBD
+- Visual weight and focal point: TBD
+- Rhythm and density: TBD
+- Alignment and topology: TBD
+- Adaptation and extremes: TBD
+- Composition pass: pass or fail: TBD
+- Composition evidence: TBD
+
 ## Findings
 
 - Intervention decision: leave simple, craft only, or add moment: TBD
@@ -37,6 +52,7 @@ Status: pending; replace with a real review before any ready/handoff claim
 - Aesthetic flags: TBD
 - Evidence of harm or intentional use: TBD
 - Reference audition: pass or fail: TBD
+- Reviewer independence: independent reviewer, fresh session, or builder only - refine: TBD
 
 ## Mechanism Landing
 
@@ -72,6 +88,7 @@ Record every selected primary or supplement whose mechanism the design contract 
 - Desktop, tablet, phone or narrow-breakpoint, and 200-percent or equivalent resize evidence: TBD
 - Layout geometry gate: pass or fail: TBD
 - Layout geometry re-measurement and closing sweep: TBD
+- WCAG 2.2 AA delta: pass or fail: TBD
 
 ### Typography Role Evidence
 
@@ -114,6 +131,9 @@ Record every selected primary or supplement whose mechanism the design contract 
 - Product comprehension fit: TBD
 - Comprehension gate: TBD
 - Layout geometry gate: TBD
+- Observation gate: TBD
+- Composition pass: TBD
+- Reviewer independence: TBD
 - Technical noise or note-budget failure: TBD
 - Requester-facing or self-evaluating copy findings: TBD
 - Responsive/type/state findings: TBD

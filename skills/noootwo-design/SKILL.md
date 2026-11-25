@@ -9,7 +9,7 @@ Turn a settled product path into a visual system, a reviewable artifact, and a h
 
 ## 1. Size the work
 
-- `quick` — local polish inside the existing system. Read the current UI and tokens, make the change, check it; if the change touches copy, notes, settings, or visible technical data, run the Comprehension Gate.
+- `quick` — local polish inside the existing system. Read the current UI and tokens, make the change, then record a 5-line observation card: changed, rendered at, saw, defect, decision. If no rendered evidence exists, the decision is `needs artifact`; if the change touches copy, notes, settings, or visible technical data, run the Comprehension Gate.
 - `standard` — normal non-trivial UI. Design Read, light reference audition (2–3 candidates), one artifact, responsive and typography review.
 - `deep` — high-character, brand-heavy, or previously rejected work. Add evidence and directions.
 - `production` — implementing an approved design. Contract, tokens, components, states, artifact verification.
@@ -85,19 +85,22 @@ Review the rendered thing, never the prose. Read `references/review.md` for the 
 ```
 Artifact Review
 - Evidence:
+- Observations / first-pass defects (before score):
+- Composition pass:
 - Comprehension gate:
 - Strongest authored move:
 - Defects:
+- Reviewer independence:
 - Slop drift / technical noise:
 - Decision: ready | refine | pivot | needs artifact
 - Return action:
 ```
 
-Verify in bounded passes: build fully, inspect once with a batch covering the relevant viewports and populated states together, fix everything it shows in one batch, then confirm with at most one more round and stop. Typography evidence includes computed roles, heading share, readable minima, and a 200-percent narrow check; layout evidence includes measured panel/toolbar insets, gaps, anchors, overlap or clipping, and a re-measure after each geometry fix.
+Before scoring, write 5-8 blind observations and up to three first-pass defects; then run the Composition Pass. A clean geometry table cannot pass it. Missing, black, blank, stale, or wrong-state evidence is `needs artifact`, not `ready`. Verify in bounded passes: build fully, inspect once with a batch covering the relevant viewports and populated states together, fix everything it shows in one batch, then confirm with at most one more round and stop. Typography evidence includes computed roles, heading share, readable minima, a 200-percent narrow check, and 320 CSS px reflow; layout evidence includes measured panel/toolbar insets, gaps, anchors, overlap or clipping, and a re-measure after each geometry fix.
 
-`ready` requires artifact evidence, the reference audition, mechanism-landing evidence for every borrowed primary or supplement, and no blocking layout, readability, responsive, motion, comprehension, or slop-drift defect. Every other decision names exactly one return action.
+`ready` requires artifact evidence, every required viewport and state, a passing Observation Gate and Composition Pass, the reference audition, mechanism-landing evidence for every borrowed primary or supplement, no blocking layout, readability, responsive, motion, comprehension, or slop-drift defect, and `Reviewer independence: independent reviewer`. Without an independent reviewer, the highest decision is `refine`. Every other decision names exactly one return action.
 
-**Done when:** a decision is recorded against real evidence, and `ready` is never self-certified — prefer a reviewer that did not build the artifact.
+**Done when:** a decision is recorded against real evidence, and `ready` is never self-certified.
 
 ## Return
 
@@ -105,15 +108,11 @@ When this is not design work, name the failed layer and invoke the owning skill 
 
 ## Reference
 
-- `references/intake.md` — reading a request, the Design Read, harness sizing, and adopting an existing project.
-- `references/direction.md` — direction exploration, Style Evidence Check, and mechanism translation.
+- `references/intake.md` and `references/direction.md` — reading a request, the Design Read, harness sizing, adopting an existing project, direction exploration, Style Evidence Check, and mechanism translation.
 - `references/design-discovery.md` — the discovery pass, influence discovery, fit scoring, and the `.noootwo/style-discovery.md` contract.
-- `references/motion.md` — contextual intervention, opportunity gates, signature motion identity, duration, easing, choreography, and the motion bans.
-- `references/motion-libraries.md` — the register gate, per-platform motion and material tools, licence and dependency checks, and adapt-or-reject recipes.
-- `references/system.md` — tokens, design-system extraction, and artifact-family contracts.
-- `references/craft.md` — anti-slop, typography, colour, responsive, and data-UI craft floors.
-- `references/review.md` — scoring, safety gates, evidence-backed aesthetic flags, and final review.
-- `references/translate.md` — stack-native implementation, assets, and handoff.
+- `references/motion.md` and `references/motion-libraries.md` — contextual intervention, opportunity gates, signature motion identity, duration, easing, choreography, register gates, per-platform tools, licence checks, and adapt-or-reject recipes.
+- `references/system.md` and `references/craft.md` — tokens, design-system extraction, artifact-family contracts, anti-slop, typography, colour, responsive, and data-UI craft floors.
+- `references/review.md` and `references/translate.md` — observation, composition, scoring, safety gates, evidence-backed flags, final review, stack-native implementation, assets, and handoff.
 - `references/evidence.md` and `references/notes.md` — verified cases, distilled reference-skill rules, research notes, and cost boundaries.
 - `scripts/extract_design_tokens.mjs` — capture real colours, type, spacing, shape, and motion values from a live page, and report drift against a saved baseline.
 

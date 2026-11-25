@@ -59,9 +59,9 @@ Boundary: expressive brand and marketing pages can have a point of view, but the
 same license does not extend to operational screens. The source also supports
 real guidance for errors and empty states.
 
-**Impeccable** (`https://github.com/pbakaus/impeccable`, `skill-v4.10.0`,
-Apache-2.0, reviewed at commit `b49177d32788f2dc585c42831d845dacf1ebed2c`,
-113,304 GitHub stars on 2026-11-19).
+**Impeccable** (`https://github.com/pbakaus/impeccable`, `skill-v4.11.0`,
+Apache-2.0, reviewed at commit `88cfafae649164e6dc48b88d3c0c1bf6662eaade`,
+rechecked 2026-11-25; 113,304 GitHub stars on 2026-11-19).
 
 Mechanism: audit redundant headings, intros, helper text, and confirmations;
 say each idea once; when a heading already explains the state, an introduction

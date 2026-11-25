@@ -130,3 +130,14 @@ stay scoped to their surfaces.
 
 The eval contract is structural until it runs in a fresh model session; this ADR
 does not claim a measured behavior improvement.
+
+## Amendment 2026-11-25
+
+- The `11-12px` band remains a dense-desktop house floor, not a universal
+  readability standard. It applies only to metadata and body roles that pass
+  CJK wrapping, contrast, and 200-percent resize checks; `10px` stays reserved
+  for non-reading keycaps, badges, and decorative marks.
+- CJK line length is measured in characters or `em`, not `ch`. Latin prose uses
+  roughly `45-75ch`; CJK prose targets roughly `30-45` characters per line.
+- The WCAG 2.2 reflow check is `320` CSS px, not a `200%` zoom of a wide
+  viewport. A `390px` phone screenshot is supporting evidence, not a substitute.

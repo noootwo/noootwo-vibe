@@ -256,7 +256,7 @@ Define the role of each type style.
 - Grid: columns, gutters, max widths, rails, breakpoints, and safe areas.
 - Density target: compact, balanced, generous, editorial, operational, or immersive.
 - Grouping rhythm: tight related groups and generous separation between conceptual groups.
-- Responsive behavior: 390px, 768px, 1440px expectations or explicit platform limits.
+- Responsive behavior: 320 CSS px reflow, 390px, 768px, and 1440px expectations or explicit platform limits.
 - Structure evidence flags: hero + cards, card wall, over-thick mobile cards, fake dashboard, posterized app screen; keep one only when the product and inspected artifact evidence support it.
 
 #### 7. Shape, Material, And Depth
