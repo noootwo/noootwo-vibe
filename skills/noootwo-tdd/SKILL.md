@@ -9,7 +9,7 @@ Own the test-first loop for code development. This skill does not decide product
 
 ## When this runs
 
-Run for any code that changes behavior: a new feature, a bug fix, or a refactor. Do not run for throwaway spikes, generated code, pure config, or no-op docs unless the user explicitly opts in to behavior-code rules.
+Run for any code that changes behavior: a new feature, a bug fix, or a refactor. Do not run for throwaway spikes, generated code, pure config, or no-op docs unless the user explicitly opts in to behavior-code rules. A reported defect, critique, or question is not a TDD mandate; when the request does not authorize a change, invoke the `noootwo-workflow` skill and follow its Mandate Gate.
 
 ## The loop
 

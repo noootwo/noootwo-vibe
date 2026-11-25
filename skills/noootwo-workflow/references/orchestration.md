@@ -32,7 +32,7 @@ Use this only to break a stage tie:
 
 Do not turn this into a large condition table. If the current evidence points to a different owner, the evidence wins.
 
-Plan acceptance after the Fan-out Gate makes the plan execution-ready. It authorizes local implementation, lane-custody, and local integration-branch rejoin commits; none is publication approval or a substitute for user acceptance of push, protected-main integration, tag, or publish.
+The Fan-out Gate completes the plan, and the user's acceptance of the presented proposal makes it execution-ready. That acceptance authorizes local implementation, lane-custody, and local integration-branch rejoin commits; it is not publication approval or a substitute for the separate acceptance of push, protected-main integration, tag, or publish.
 
 ## Scope
 
@@ -48,7 +48,7 @@ Plan acceptance after the Fan-out Gate makes the plan execution-ready. It author
 
 ## Fan-out Gate
 
-Use `parallel-execution.md` after the seam is settled and a non-direct plan is drafted, before plan acceptance and the first write, and again when a new request exposes independent unknowns, review lenses, or requirements. The Gate result completes the drafted plan and makes it execution-ready. When code-health supplies a Change Shape, the Gate follows that shape; it never runs before the contracts are knowable.
+Use `parallel-execution.md` after the seam is settled and a non-direct plan is drafted, before the proposal is presented and the first write, and again when a new request exposes independent unknowns, review lenses, or requirements. The Gate result completes the drafted plan; the user's acceptance makes it execution-ready. When code-health supplies a Change Shape, the Gate follows that shape; it never runs before the contracts are knowable.
 
 ```markdown
 Fan-out Check
@@ -68,11 +68,11 @@ Fan-out Check
 - Read fan-out requires native delegation and collection. Write fan-out additionally requires a distinct linked working directory per lane; a branch alone is not isolation.
 - A missing capability records `serial - no-native-delegation`, `serial - no-native-collection`, or `serial - no-native-isolation`; background shells do not substitute.
 
-Before dispatch, persist the Fan-out Check plus worker/task handle, collection/stop handle, liveness source, base SHA, and lane status in the current-state entry `fanout`; a plan may mirror that record but cannot replace it. Workflow owns the brief, plan acceptance after the Gate, mode, and required rejoin constraint; the integrator schedules the Change Check that `noootwo-code-health` owns; delivery owns the executable Lane Map, merge mechanics, and one-at-a-time rejoin. A worker owns one unit and returns a Result Packet; it does not spawn, merge, write `.noootwo`, or change a shared contract. Only the integrator writes state, serializing every snapshot, event, and evidence record. The full worker/result contract and rejoin rules live in `parallel-execution.md`.
+Before dispatch, persist the Fan-out Check plus worker/task handle, collection/stop handle, liveness source, base SHA, and lane status in the current-state entry `fanout`; a plan may mirror that record but cannot replace it. Workflow owns the brief, the proposal and its acceptance after the Gate, mode, and required rejoin constraint; the integrator schedules the Change Check that `noootwo-code-health` owns; delivery owns the executable Lane Map, merge mechanics, and one-at-a-time rejoin. A worker owns one unit and returns a Result Packet; it does not spawn, merge, write `.noootwo`, or change a shared contract. Only the integrator writes state, serializing every snapshot, event, and evidence record. The full worker/result contract and rejoin rules live in `parallel-execution.md`.
 
 ## Approved execution
 
-An accepted plan is the authority for ordinary implementation choices. When the plan is silent or ambiguous:
+A plan the user has accepted is the authority for ordinary implementation choices. When that plan is silent or ambiguous:
 
 1. Prefer the accepted spec.
 2. Then prefer the accepted plan's interfaces, sequence, assertions, and `Review Focus`.

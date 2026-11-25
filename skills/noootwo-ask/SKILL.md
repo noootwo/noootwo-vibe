@@ -9,6 +9,10 @@ You do not remember every skill, so ask.
 
 Eleven skills do the work; this one tells you which to reach for. A **flow** is a path through them. Most work runs along the main flow; the rest is an on-ramp or standalone.
 
+## Say what you want
+
+A statement or question about existing behaviour gets a proposal, not an edit. Name the mandate when you care: `diagnose` for read-only evidence, `propose` for a plan, `edit` to change it locally, `publish` to ship it. "Go ahead", "you decide", or "free rein" grants the edit; silence after a proposal does not.
+
 ## The main flow: idea to shipped
 
 1. `$noootwo-product` — settle what should exist: real user, first loop, scope, main path, states, acceptance. Run this whenever those are unclear. It ends on a shared understanding you confirm.

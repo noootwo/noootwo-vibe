@@ -1,5 +1,10 @@
 # noootwo-debug Releases
 
+## v0.6.2
+
+- A complaint with no instruction to change anything is confirmation-only: debug ends at the verdict and routes a fix through `noootwo-workflow`'s Mandate Gate.
+- No change to the Diagnosis Map, evidence authority, or Incident Path.
+
 ## v0.6.1
 
 - Added the package-wide context lifecycle and compressed the always-loaded description.

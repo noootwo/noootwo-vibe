@@ -7,6 +7,7 @@ Match the task to the right owner from evidence, not from keyword aliases.
 Collect the smallest useful set:
 
 - latest user intent and requested artifact
+- what the request authorizes: `answer`, `diagnose`, `propose`, `edit`, or `publish`; read `mandate-gate.md` first when it is not explicit
 - an explicit issue ID, symbol, path, or error, which selects the owner without project orientation
 - for resume work, the current stage from the `noootwo-state` capsule and the relevant status or artifact; direct work reads no project state
 - git status and recently changed files
@@ -26,6 +27,7 @@ For each candidate ask:
 
 Examples of artifact-shaped matching:
 
+- a statement, critique, or question about existing behaviour with no instruction to change it → `propose` under `mandate-gate.md`; name the likely owner and stop at the proposal
 - a slide deck, PPT, keynote, or presentation brief → presentation/slide/ppt owner
 - a document, report, README, or long-form written artifact → document/writing owner
 - a visual UI or frontend change → design owner when direction is unsettled; `noootwo-code-health` Integration Read when direction is settled but the seam is not; `noootwo-tdd` when both are settled

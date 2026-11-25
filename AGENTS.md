@@ -38,6 +38,7 @@ Every skill, `AGENTS.md`, and pointed-at doc is written to `docs/agents/skill-au
 - Review rendered layout through measured region geometry for changed, user-named, or contract-declared regions; a screenshot alone cannot prove spacing, alignment, containment, or overlap. See `docs/adr/0035-rendered-layout-geometry-review.md`.
 - A project supplied as a case, reference, side-by-side comparison, or evidence source is read-only. Edit only the explicitly named target root; never change a sample project or its tests to demonstrate a skill change.
 - Product-surface copy serves the primary user's object, state, or next action. Keep design rationale, change summaries, quality claims, and promotional slogans out of operational UI; a layout-only request changes structure, not public copy. See `docs/adr/0029-audience-derived-interaction-and-language.md`.
+- A statement, critique, or question about existing behaviour is not a change mandate: follow `noootwo-workflow`'s Mandate Gate, present the proposal, and end the turn with zero writes unless the user granted free rein or the change needs no invented decision. See `docs/adr/0036-mandate-gate.md`.
 
 ## Research Rule
 

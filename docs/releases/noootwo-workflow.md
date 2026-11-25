@@ -1,5 +1,15 @@
 # noootwo-workflow Releases
 
+## v0.27.0
+
+- Added the Mandate Gate as Step 0: every request names `answer | diagnose | propose | edit | publish` before owner matching, and each level authorizes only its own actions.
+- Fixed the self-acceptance gap. A completed Fan-out Gate no longer makes a plan execution-ready; only the user's acceptance of the presented proposal does. Publication acceptance remains a separate boundary.
+- Added `references/mandate-gate.md`: the diff-summary test, fail-closed handling of unreadable intent, proposal shape, approval semantics, and cost controls.
+- An open-ended grant records its delegated scope and keeps irreversible, security, spend, and publication boundaries closed.
+- The close gate now asks what mandate the turn carried and whether every write stayed inside it.
+- Added six eval contracts for observation-without-write, vague change, explicit edit, open grant, approved-scope ruling, and "continue" without a decision.
+- The decision is recorded in ADR 0036. No new skill, schema change, or host feature dependency.
+
 ## v0.26.0
 
 - A user-stated durable rule, correction, or preference is now a state change in the same turn, even when no code changes.
