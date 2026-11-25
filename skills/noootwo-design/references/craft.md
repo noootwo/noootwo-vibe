@@ -194,7 +194,7 @@ Record these in `.noootwo/directions.md`, `.noootwo/review.md`, or `.noootwo/des
 - Type scale: fixed role values for dense app UI; fluid `clamp()` only where display text benefits. Name each role's size, line height, minimum, maximum, and allowed surfaces, and keep one application-root token source.
 - Surface authority: the declared surface kind and density contract select the register and numeric floor. A reading-page body minimum or an expressive title/body ratio applies to its own surface, not to dense operational roles.
 - Weight roles: which weights serve headings, labels, body, captions, and numbers.
-- Line-height and line length: headings tight but not clipped; body readable; long text constrained with `ch` where useful.
+- Line-height and line length: headings tight but not clipped; body readable; Latin prose usually `45-75ch`, CJK prose roughly `30-45` characters per line, and dense product roles need a line-length cap rather than a reading measure.
 - Letter spacing: intentional small-caps/uppercase tracking; avoid default-everywhere or over-tight display text.
 - Display cap: maximum size, rendered height share, and wrapping behavior at desktop and phone width. Keep a hero heading below roughly one fifth of the viewport and an operational page heading far smaller.
 - Local hierarchy: local title to body, page title to body, and control to body relationships, measured from computed values rather than inferred from the stylesheet.
@@ -213,7 +213,7 @@ Any of these prevents `ready`:
 - A display `clamp()` or hero heading is reused on Settings, an inspector, a side panel, a review card, or another operational surface.
 - One blanket font-size selector assigns the same value to unrelated titles, body copy, metadata, and controls. That is a hierarchy reset, not a type scale.
 - Semantic type tokens exist only inside one route or shell, so other routes fall back to browser defaults.
-- Readable operational copy sits below the product's declared floor, or below `11px` without a non-reading role such as a keycap or decorative badge.
+- Readable operational copy sits below the product's declared floor. The `11-12px` dense-desktop house floor applies only to metadata and body roles that pass CJK wrapping, contrast, and 200-percent resize checks; `10px` is reserved for non-reading keycaps, badges, or decorative marks.
 - A heading occupies more than roughly one fifth of the viewport, or the main task falls below the first screen because the title is oversized.
 - A settings or configuration page inherits the login scale merely because both contain form fields.
 - A reading or marketing body floor, such as `14-16px`, or an expressive title/body ratio such as `2.5x`, is applied to Settings, an inspector, metadata, and controls as one upward shift instead of resolving the declared density contract.
@@ -454,6 +454,7 @@ Use this before `ready` on any non-trivial UI artifact. A design that clips on c
 Record screenshot, preview, or limitation evidence for:
 
 - Phone: `390px` wide or nearest native device.
+- Reflow: `320` CSS px wide, or the documented equivalent; a `390px` phone is not a substitute.
 - Tablet or narrow desktop: `768px` wide.
 - Desktop: `1440px` wide.
 - Text scale or browser zoom: at least one check for 200% zoom, larger system text, or explicit limitation.
@@ -489,13 +490,31 @@ Use this before `ready` on any non-trivial UI artifact. Accessibility is part of
 - Every action and input has an accessible name. Web: visible label, `aria-label`, or `aria-labelledby`; Flutter: `Semantics` label; SwiftUI: `accessibilityLabel`; Compose: `contentDescription` or semantic text.
 - Every critical action is reachable by keyboard, switch control, remote, or the platform's primary non-pointer path. No gesture-only or hover-only action without an equivalent.
 - Focus and selection are visible, ordered, and never covered by sticky headers, sheets, or overlays. Web uses `:focus-visible`; Flutter and native use focus traversal and selection states.
-- Touch targets meet the platform floor: about `40px` on web, `48dp` on Android and Flutter Material, `44pt` on iOS. Extend the hit area without enlarging the visible control when the direction needs a small shape.
+- Pointer targets meet the WCAG 2.2 AA minimum: at least `24x24` CSS px on web with sufficient spacing. Use `40px` as the product baseline for primary web controls, `44pt` on iOS, and `48dp` on Android and Flutter; extend the hit area without enlarging the visible control when the direction needs a small shape.
 - State is never carried by colour alone. Pair semantic colour with text, icon, shape, position, or an explicit message.
 - Async feedback such as validation, save, or toast is announced or otherwise exposed. Web: `aria-live`; Flutter: `SemanticsService.announce` or a live region; iOS and Android: platform notification or focus movement.
 - Text scale and zoom remain available. Web must not disable zoom; Flutter, SwiftUI, and Compose must survive the system text-scale range without clipping the task.
 - Reduced motion preserves meaning: replace spatial movement with a crossfade or instant state change, and keep the state information visible.
 - Destructive actions have confirmation or undo. Long content, long identifiers, and empty values have a defined rendering instead of breaking the layout.
 - Decorative media is hidden from assistive technology; meaningful media has a label, caption, or transcript as appropriate.
+
+### WCAG 2.2 AA Delta
+
+Use this as the minimum accessibility delta; platform guidance wins where it is stricter.
+
+| Criterion | Required check |
+| --- | --- |
+| 1.4.10 Reflow | Content works at `320` CSS px width without two-dimensional scrolling, except data tables, maps, diagrams, video, games, presentations, and interfaces that require two-dimensional layout. |
+| 1.4.11 Non-text Contrast | Control boundaries, states, focus indicators, meaningful icons, and graphical objects reach `3:1` against adjacent colours. |
+| 1.4.12 Text Spacing | Content remains usable with line height `1.5x`, paragraph spacing `2x`, letter spacing `0.12em`, and word spacing `0.16em`. |
+| 2.4.11 Focus Not Obscured | A focused element is not entirely hidden by sticky headers, footers, sheets, or overlays. |
+| 2.5.7 Dragging Movements | Every drag interaction has a single-pointer alternative unless dragging is essential. |
+| 2.5.8 Target Size | Pointer targets reach `24x24` CSS px or have sufficient spacing; the product baseline can be larger. |
+| 3.2.6 Consistent Help | Help mechanisms keep the same relative order across pages when the product provides them. |
+| 3.3.7 Redundant Entry | The same information is not requested twice in one process unless it is necessary or auto-filled. |
+| 3.3.8 Accessible Authentication | Login does not require a cognitive function test; paste and password managers work, and an alternative is available. |
+
+Source: [WCAG 2.2 Quick Reference](https://www.w3.org/WAI/WCAG22/quickref/).
 
 ### Platform Notes
 

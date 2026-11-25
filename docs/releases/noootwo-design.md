@@ -1,5 +1,17 @@
 # noootwo-design Releases
 
+## v0.26.0
+
+- Review now starts with a blind Observation Gate: 5-8 rendered observations, up to three first-pass defects, one must-not-change item, and an evidence handle before any score.
+- Added a Composition Pass for squint-based reading order, grouping and proximity, visual weight, rhythm, density, alignment and topology, and adaptation or extremes. A clean geometry table cannot pass it.
+- Missing, black, blank, stale, or wrong-region/state evidence is `needs artifact`; source inspection cannot substitute for a rendered observation.
+- `ready` now requires `Reviewer independence: independent reviewer`. A builder-only review is capped at `refine`. `quick` records a five-line observation card rather than a full review file.
+- Added the WCAG 2.2 AA delta: `320` CSS px reflow, non-text contrast, text spacing, focus not obscured, dragging alternatives, target size, consistent help, redundant entry, and accessible authentication.
+- Corrected type and target-size guidance: CJK line length is character-based rather than `ch`-based, the `11-12px` floor is scoped to dense metadata/body roles with CJK, contrast, and resize proof, and `40px` web is a product baseline above the WCAG `24x24` minimum.
+- Readiness validation and the harness template require the Observation Gate, Composition Pass, and reviewer-independence record. `check_visual_gates.py` adds the `320` reflow viewport and uses the `24px` WCAG target-size minimum for its advisory finding.
+- Added `composition-reading-order-miss.md`, `reflow-320-miss.md`, and `state-contrast-gap.md`; updated `quick-polish.md`. The eval contracts are written but not yet run in fresh model sessions.
+- Recorded Impeccable `skill-v4.11.0` as evidence plumbing and routing, not a new design rubric. No new public skill, dependency, reference file, or state schema was added.
+
 ## v0.25.1
 
 - A report that a surface looks wrong, or a question about it, is now a proposal: design states the change and stops unless the request carries an edit mandate.

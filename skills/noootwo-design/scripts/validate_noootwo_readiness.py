@@ -98,6 +98,20 @@ def field_value(content: str, label: str) -> str | None:
     return match.group(1).strip()
 
 
+def recorded_pass(value: str | None) -> bool:
+    if value is None:
+        return False
+    normalized = value.strip().lower()
+    return re.match(r"^pass\b(?!\s+or\b)", normalized) is not None
+
+
+def recorded_independent_reviewer(value: str | None) -> bool:
+    if value is None:
+        return False
+    normalized = value.strip().lower()
+    return normalized.startswith("independent reviewer") and "builder only" not in normalized
+
+
 def metadata_value(content: str, label: str) -> str | None:
     pattern = re.compile(
         rf"^[ \t]*(?:-[ \t]*)?{re.escape(label)}[ \t]*:[ \t]*(.*?)[ \t]*$",
@@ -452,6 +466,8 @@ def validate_review(target_root: Path, allow_non_ready: bool, deep_mode: bool, s
             content,
             [
                 "artifact evidence",
+                "observation gate",
+                "composition pass",
                 "findings",
                 "generic drift checks",
                 "layout, readability, and responsive checks",
@@ -467,6 +483,12 @@ def validate_review(target_root: Path, allow_non_ready: bool, deep_mode: bool, s
     require(errors, has_meaningful_value(content, "Artifact reviewed"), ".noootwo/review.md missing artifact reviewed record")
     require(errors, has_meaningful_value(content, "URL, screenshot path, preview, simulator, recording, or accepted limitation"), ".noootwo/review.md missing artifact evidence path or accepted limitation")
     require(errors, has_meaningful_value(content, "Preview surface used"), ".noootwo/review.md missing preview surface record")
+    require(errors, has_meaningful_value(content, "Observation gate"), ".noootwo/review.md missing observation gate result")
+    require(errors, has_meaningful_value(content, "Blind observations"), ".noootwo/review.md missing blind observations")
+    require(errors, has_meaningful_value(content, "First-pass defects"), ".noootwo/review.md missing first-pass defects")
+    require(errors, has_meaningful_value(content, "Must-not-change item"), ".noootwo/review.md missing must-not-change item")
+    require(errors, has_meaningful_value(content, "Composition pass"), ".noootwo/review.md missing composition pass result")
+    require(errors, has_meaningful_value(content, "Reviewer independence"), ".noootwo/review.md missing reviewer independence record")
     require(errors, DECISION_LINE_RE.search(content) is not None, ".noootwo/review.md does not record a review decision")
     require(errors, RETURN_ACTION_RE.search(content) is not None, ".noootwo/review.md does not record a return action")
 
@@ -509,6 +531,21 @@ def validate_review(target_root: Path, allow_non_ready: bool, deep_mode: bool, s
             errors,
             has_meaningful_value(content, "Note budget and information exposure"),
             ".noootwo/review.md missing the note-budget and information-exposure result",
+        )
+        require(
+            errors,
+            recorded_pass(field_value(content, "Observation gate")),
+            ".noootwo/review.md cannot be ready while the observation gate is not pass",
+        )
+        require(
+            errors,
+            recorded_pass(field_value(content, "Composition pass")),
+            ".noootwo/review.md cannot be ready while the composition pass is not pass",
+        )
+        require(
+            errors,
+            recorded_independent_reviewer(field_value(content, "Reviewer independence")),
+            ".noootwo/review.md cannot be ready without an independent reviewer",
         )
 
     return errors

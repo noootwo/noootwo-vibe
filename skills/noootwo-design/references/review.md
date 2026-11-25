@@ -9,6 +9,22 @@ Review is mandatory before delivery. Review as an evaluator, not as the generato
 
 Prefer lived evidence: prototype, running page, screenshot set, simulator preview, target-stack prototype, or recorded interaction. If no artifact evidence exists, the decision is `needs artifact` unless the user explicitly accepted a handoff-only limitation.
 
+## Observation Gate
+
+Run this before the score table, automated findings, or any earlier review. The first look is blind.
+
+- Inspect the rendered artifact at the sizes it ships at, in a populated state.
+- Write 5-8 plain observations: what leads, what groups, what feels wrong, what is missing, what is crowded.
+- Name up to three first-pass defects with the exact region, state, and viewport. Fewer is valid only when the artifact shows fewer; say why.
+- Name one thing that must not change while fixing them.
+- Attach an evidence handle to every observation: URL, screenshot path, preview, simulator, or recording.
+
+A source read, DOM query, or prose description is not an observation. A black, blank, stale, or wrong-region capture is missing evidence. Without rendered evidence the decision is `needs artifact`.
+
+Record `Observation gate: pass | fail`. A fail returns to the artifact, not to the score table.
+
+**Done when:** the observations, first-pass defects, and must-not-change item exist before any score.
+
 ### Scoring
 
 Score on 100 points:
@@ -20,6 +36,8 @@ Score on 100 points:
 - `artifact_evidence`: 5
 - `stack_native_craft`: 5
 
+Score only after the Observation Gate and Composition Pass are recorded. The score explains the evidence; it never replaces it. Functionality, accessibility, state coverage, and composition remain hard gates independent of the total.
+
 Thresholds:
 
 - `85-100`: ready only if artifact evidence exists and no confirmed generic-risk or aesthetic-harm finding remains
@@ -28,7 +46,7 @@ Thresholds:
 
 ### Output
 
-Write `.noootwo/review.md` with artifact evidence, reference audition, intervention decision and fit, scores, calibration fit, style understanding fit, comprehension gate, product comprehension fit, user decision gate, mechanism landing, safety hard-gate result, aesthetic flags with evidence of harm or intentional use, generic/Claude/framework/designer-grade flags, role critique, authored move or deliberate absence, viewport evidence, typography evidence, layout geometry evidence, data evidence when relevant, default-override review, micro-detail pass, readiness gate, decision, return action, and next action.
+Write `.noootwo/review.md` with artifact evidence, the Observation Gate record, the Composition Pass, reference audition, intervention decision and fit, scores, calibration fit, style understanding fit, comprehension gate, product comprehension fit, user decision gate, mechanism landing, reviewer independence, safety hard-gate result, aesthetic flags with evidence of harm or intentional use, generic/Claude/framework/designer-grade flags, role critique, authored move or deliberate absence, viewport evidence, typography evidence, layout geometry evidence, data evidence when relevant, default-override review, micro-detail pass, readiness gate, decision, return action, and next action.
 
 ### Intervention Review
 
@@ -60,6 +78,20 @@ Test the rendered artifact as the primary user before scoring:
 
 Record `Comprehension gate: pass | fail`, the primary user and task tested, and the artifact evidence. A fail returns to the artifact, or to `noootwo-product` when the audience contract or main path is unsettled.
 
+### Composition Pass
+
+Run this after the Observation Gate and before local geometry or type scoring. Answer each item against the rendered artifact, not the source:
+
+- **Reading order:** apply the squint test. With detail blurred, can you still name the primary element, the secondary element, and the major groups in order?
+- **Grouping and proximity:** are related items close and distinct groups separated, or are containers compensating for weak proximity?
+- **Visual weight:** does one focal element lead, with supporting elements stepping down, or does everything carry the same weight?
+- **Rhythm:** do tight and generous intervals create a deliberate cadence, or is one spacing value repeated until every group feels equal?
+- **Density:** does information per region match task frequency, decision complexity, audience, and error cost?
+- **Alignment and topology:** do items that should share an edge resolve to one anchor, and does the structure match the content rather than a framework default?
+- **Adaptation and extremes:** at narrow, intermediate, wide, zoomed, and localized states, what reorders, collapses, wraps, scrolls, clips, or stays fixed? Do long, empty, loading, error, overlay, sticky, and missing-content states preserve reading order and focus order?
+
+Record `Composition pass: pass | fail` with the evidence for each item. A clean geometry table cannot pass this gate. A fail blocks `ready` and returns to the artifact or the responsive pass.
+
 ### Typography Balance Gate
 
 Run this on the populated rendered surface, not an empty shell and not a source search alone.
@@ -77,7 +109,7 @@ Then confirm:
 - Source minima and title ratios stay scoped to their surface. A reading or marketing body floor does not lift dense Settings, Inspector, metadata, and control roles together.
 - Local title to body, page title to body, and control to body remain distinguishable without relying on one blanket font size.
 - The main heading leaves the primary task and its first action visible. A hero heading stays below roughly one fifth of the viewport; an operational page heading stays far smaller than that.
-- The same evidence covers desktop, tablet, phone or the narrow breakpoint, and roughly 200-percent page zoom or an equivalent narrow viewport.
+- The same evidence covers desktop, tablet, phone, `320` CSS px reflow, and roughly 200-percent page zoom or an equivalent narrow viewport.
 - Long CJK and mixed-language copy wraps without clipped lines, orphaned single characters, or overlapping controls.
 - The populated review, error, loading, empty, disabled, and long-content states preserve the same role relationship.
 
@@ -118,6 +150,8 @@ Before `ready`, confirm:
 - `.noootwo/directions.md`, `.noootwo/review.md`, and `.noootwo/design-tokens.md` are not pending
 - required files do not contain unresolved `TBD`
 - review records artifact evidence and a decision
+- review records the 5-8 blind observations, first-pass defects, must-not-change item, and `Observation gate: pass`
+- review records the `Composition pass` result and its rendered evidence
 - standard and deep work record a passing reference audition with the required candidate count, role coverage, source access, and inspected primary capture
 - every selected primary or supplement records what mechanism landed and evidence that it is present in the artifact
 - `.noootwo/appearance-ledger.md` exists, is project-local, and has no pending or unresolved entry
@@ -127,6 +161,8 @@ Before `ready`, confirm:
 - review records the populated-state typography role table, display/product boundary, readable minima, heading share, and 200-percent resize evidence
 - review records the layout geometry table and re-measurement sweep for every changed, user-named, or contract-declared region
 - review records responsive or platform evidence
+- every required viewport and state has an evidence handle; a missing, black, blank, stale, or wrong-state capture returns `needs artifact`
+- `ready` records `Reviewer independence: independent reviewer`; a builder-only review is `refine`
 - implementation-bound work records default-override review and micro-detail review when generic drift was a risk
 - direction-sensitive work records either viewed low-cost samples or the reason samples were not applicable
 - full redesign has recorded user-selected direction
@@ -164,8 +200,9 @@ If multiple return actions are plausible and the choice changes cost, scope, or 
 
 ### Reviewer Separation
 
-- Prefer final review from a reviewer that does not inherit the generator's framing, transcript, or optimism. Use a fresh agent when the harness supports one.
-- Without a subagent, step fully out of the build context before evaluating, and disclose the substitution in one line at finish.
+- `ready` requires a reviewer that did not build the artifact. Record `Reviewer independence: independent reviewer (<agent or fresh session>)`.
+- Use a fresh agent when the harness supports one. Without a subagent, a new session that sees only the artifact, contract, and evidence can serve; disclose `Reviewer independence: independent reviewer (fresh session)`.
+- Without either, the highest decision is `refine`; record `Reviewer independence: builder only - refine`.
 - The generator never self-certifies `ready`; the reviewer's findings are the only list worked from.
 - When the user supplies evidence against a `ready` verdict (their screenshot, a named mismatch), that evidence outranks the capture: reopen the review with a fresh reviewer instead of patching inline and self-certifying.
 - A review that only describes composition has not produced geometry evidence.

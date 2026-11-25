@@ -28,12 +28,15 @@ Status: pending; define completion checks for the implementation agent
 ## Responsive Or Platform Checks
 
 - 390px or phone viewport has no horizontal overflow: TBD
+- 320 CSS px reflow check has no unintended two-dimensional scrolling: TBD
 - 768px viewport has no clipped critical text or unreachable controls: TBD
 - 1440px viewport preserves intended composition and density: TBD
 - 200% browser zoom, system text scale, or explicit limitation checked: TBD
 - Native safe area, platform chrome, and touch target checks when relevant: TBD
 - Changed, user-named, and contract-declared regions have measured inset, gap, anchor, overlap, and clip evidence: TBD
 - Each geometry repair was re-measured with the same selector and swept before ready: TBD
+- Observation gate and composition pass recorded against rendered evidence: TBD
+- Reviewer independence recorded before a ready claim: TBD
 
 ## Screenshot Or Preview Checks
 
