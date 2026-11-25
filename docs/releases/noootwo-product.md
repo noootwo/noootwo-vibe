@@ -1,5 +1,10 @@
 # noootwo-product Releases
 
+## v0.15.1
+
+- Strong criticism still names the failed layer first; without an explicit change mandate the skill now stops at the proposal and routes through `noootwo-workflow`'s Mandate Gate.
+- No change to the Decision Ledger, frontier, or Product-to-Design Handoff.
+
 ## v0.15.0
 
 - Added an operational-copy audience split to the Audience Contract and Product-to-Design Handoff: primary-user content stays visible; design rationale, change summaries, proof claims, and task instructions stay in the handoff, review, docs, or reply.

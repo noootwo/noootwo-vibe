@@ -1,5 +1,10 @@
 # noootwo-ask Releases
 
+## v0.7.2
+
+- Added a "Say what you want" section: a statement gets a proposal, and `diagnose`, `propose`, `edit`, and `publish` name the mandate when the user cares.
+- Silence after a proposal is not an edit grant; an explicit go-ahead is.
+
 ## v0.7.1
 
 - Added an on-ramp for a slow multi-step plan whose independent slices could use the workflow Fan-out Gate.

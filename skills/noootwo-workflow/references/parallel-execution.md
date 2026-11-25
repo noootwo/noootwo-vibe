@@ -4,7 +4,7 @@ Parallel work is a schedule choice, not a success metric. Keep coupled work with
 
 ## Fan-out Gate
 
-Run one Fan-out Gate after the current seam is settled and a non-direct plan is drafted, before the plan is accepted or any writer starts. The drafted plan supplies scope, interfaces, assertions, verification, and `Review Focus`; the recorded Gate result completes it and makes it execution-ready. When an Integration Read is required, the Gate runs after that shape. Re-run the Gate when the next step exposes two or more independently answerable unknowns, review splits into independent lenses, a second requirement becomes active, or compaction/session re-entry restores incomplete units.
+Run one Fan-out Gate after the current seam is settled and a non-direct plan is drafted, before the proposal is presented or any writer starts. The drafted plan supplies scope, interfaces, assertions, verification, and `Review Focus`; the recorded Gate result completes it, and the user's acceptance makes it execution-ready. When an Integration Read is required, the Gate runs after that shape. Re-run the Gate when the next step exposes two or more independently answerable unknowns, review splits into independent lenses, a second requirement becomes active, or compaction/session re-entry restores incomplete units.
 
 ```markdown
 Fan-out Check
@@ -80,7 +80,7 @@ Worker Brief
 
 Read-fanout fills the read-only scope and omits write fields. Write-fanout fills the exact base, branch, distinct linked-worktree path, ownership, evidence handoff, and custody handles.
 
-Workflow owns the Fan-out Check, plan acceptance, mode, and required rejoin constraint. The integrator schedules `noootwo-code-health`'s Change Check; code health owns its verification decision. `noootwo-delivery` owns the executable Lane Map, lane isolation, merge mechanics, and one-at-a-time rejoin. The integrator owns the single current-state write. A worker owns one unit, follows its named skill, edits only the owned scope, and returns evidence. A worker does not spawn another worker, merge, write `.noootwo`, alter a shared contract, or widen scope. A read-only worker makes no repository or durable-state write.
+Workflow owns the Fan-out Check, the proposal and its acceptance, mode, and required rejoin constraint. The integrator schedules `noootwo-code-health`'s Change Check; code health owns its verification decision. `noootwo-delivery` owns the executable Lane Map, lane isolation, merge mechanics, and one-at-a-time rejoin. The integrator owns the single current-state write. A worker owns one unit, follows its named skill, edits only the owned scope, and returns evidence. A worker does not spawn another worker, merge, write `.noootwo`, alter a shared contract, or widen scope. A read-only worker makes no repository or durable-state write.
 
 Raw worker output above 16 KiB never travels inline and is never written to `.noootwo` by the worker. The worker writes it to the integrator-assigned temporary path outside the repository and returns that path. The integrator verifies the bytes and hash, imports the artifact through `noootwo-state capture`; that capture writes the canonical cold log under `.noootwo/state/evidence` and returns the handle. If no safe handoff channel exists, the worker returns a bounded result and the integrator reruns the smallest decisive capture itself.
 

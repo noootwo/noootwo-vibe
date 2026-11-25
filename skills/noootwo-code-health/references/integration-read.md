@@ -89,7 +89,7 @@ Builder Check
 
 ## Plan Draft and Execution Readiness
 
-A non-direct plan is drafted before Workflow's Fan-out Gate, then completed and accepted only after that Gate records the execution mode:
+A non-direct plan is drafted before Workflow's Fan-out Gate, then completed by that Gate and presented for the user's acceptance before any writer starts:
 
 - exact file and module scope, including paths that must not change;
 - `Interfaces`: public APIs, events, schemas, shared types, state, storage, migration, and compatibility contracts;
@@ -100,7 +100,7 @@ A non-direct plan is drafted before Workflow's Fan-out Gate, then completed and 
 - `Review Focus`: specification-implied failure risks that ordinary tests will not catch;
 - a ruling ledger that starts empty.
 
-The draft supplies every field except the Gate result. Workflow runs the Gate, records the Fan-out Check, and only then marks the plan accepted and execution-ready. A plan that omits the Fan-out Check is drafted, not rejected for inventing one in TDD.
+The draft supplies every field except the Gate result. Workflow runs the Gate, records the Fan-out Check, and presents the completed proposal; only the user's acceptance makes it execution-ready. A plan that omits the Fan-out Check is drafted, not rejected for inventing one in TDD.
 
 Record rulings during approved execution as `decision | basis | cost if wrong | reopen trigger`. A reversible ambiguity is decided from the accepted spec, plan, and current evidence, recorded, and continued. Stop only for a user-owned choice, an irreversible migration or data loss, security or privacy impact, an external side effect or spend, or evidence that the plan as a whole is no longer viable. Do not send ordinary implementation details back for routine re-approval.
 

@@ -15,7 +15,7 @@ Compact guardrail and handoff packet reference. Routing and scheduling live in `
 - Behavior-changing code uses `noootwo-tdd` before review.
 - Non-direct behavior changes return to `noootwo-code-health` for a scoped Change Check after green, before the work is reported done.
 - Concurrent requirements use one branch/worktree each and an Overlap Check; shared contracts, migrations, and generated output are serialized or contract-first.
-- Every non-direct plan gets a Fan-out Check before plan acceptance and the first write; the recorded result makes it execution-ready and the lane custody lives in the state `fanout` entry. Write lanes use one linked worktree each, 3 workers by default, 4 at most, and one integrator.
+- Every non-direct plan gets a Fan-out Check before the proposal is presented and the first write; the user's acceptance makes it execution-ready, and the lane custody lives in the state `fanout` entry. Write lanes use one linked worktree each, 3 workers by default, 4 at most, and one integrator.
 - Work runs in the canonical checkout or a linked worktree; a sibling copy/separate clone is not isolation and never owns project state.
 - Integration goes through protected `main` with checks on the current base; without a merge queue, update and recheck the merge candidate.
 - A Release Check runs once before release or a ship-readiness submit gate; it owns the full suite, full Structure Sweep, release evidence, and named gaps.

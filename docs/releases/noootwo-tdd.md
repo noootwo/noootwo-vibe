@@ -1,5 +1,10 @@
 # noootwo-tdd Releases
 
+## v0.6.2
+
+- A reported defect, critique, or question is explicitly not a TDD mandate; unclear authority routes through `noootwo-workflow`'s Mandate Gate.
+- No change to the red-green-refactor loop or test-quality rules.
+
 ## v0.6.1
 
 - Added the package-wide context lifecycle and compressed the always-loaded description.

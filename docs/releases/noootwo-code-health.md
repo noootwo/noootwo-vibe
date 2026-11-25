@@ -1,5 +1,11 @@
 # noootwo-code-health Releases
 
+## v0.19.1
+
+- A problem report, critique, or question is explicitly not an edit mandate; shaping or editing waits for `noootwo-workflow`'s Mandate Gate verdict.
+- Integration Read now completes the plan at the Fan-out Gate and presents it; only the user's acceptance makes it execution-ready.
+- No change to the Change Shape, Change Check, Release Check, lenses, or refactoring workflows.
+
 ## v0.19.0
 
 - A drafted plan becomes execution-ready only after Workflow records a `Fan-out Check` with mode, units, independence, host capability, and rejoin order.

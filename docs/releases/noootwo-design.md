@@ -1,5 +1,11 @@
 # noootwo-design Releases
 
+## v0.25.1
+
+- A report that a surface looks wrong, or a question about it, is now a proposal: design states the change and stops unless the request carries an edit mandate.
+- Unclear authority routes through `noootwo-workflow`'s Mandate Gate instead of starting a build.
+- No change to the Design Read, Design Contract, Layout Geometry Gate, or artifact review method.
+
 ## v0.25.0
 
 - Added a Layout Geometry Gate for changed, user-named, and contract-declared regions. Each region records container box, rendered insets, inner and outer gaps, alignment anchors, overlap or clipping, and a verdict.

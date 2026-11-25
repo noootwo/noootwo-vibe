@@ -99,7 +99,7 @@ Read `references/product-reality-check.md` when the loop is unproven, the user i
 - Write operational copy for the primary user's object, state, or next action. Keep the requester's brief, design rationale, change summary, proof of improvement, and task instructions in the handoff, review, docs, or reply.
 - When the request is to improve layout, clarity, or hierarchy, change the structure. New visible copy needs its own user job; name an operational screen by its object or task, not by a quality claim such as "clear at a glance".
 - Make empty, error, permission, and success states name the next action.
-- Treat strong criticism as evidence about which layer failed, and name that layer before changing anything.
+- Treat strong criticism as evidence about which layer failed, and name that layer before changing anything; without an explicit change mandate, stop at the proposal and invoke the `noootwo-workflow` skill's Mandate Gate.
 
 ## Reference
 

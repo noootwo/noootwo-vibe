@@ -34,6 +34,7 @@ Escalate on evidence, not anxiety. Stop when the evidence covers the blast radiu
 - Integration Read scope is the nearest seams, contracts, data owners, and existing patterns.
 - Refactoring inside the touched path is part of the change; a full Structure Sweep runs only on a trigger or explicit request.
 - A disputed premise — whether behavior fails, which build ran, or what data exists — goes to `noootwo-debug` or `noootwo-release` before shaping.
+- A problem report, critique, or question is not an edit mandate: invoke the `noootwo-workflow` skill and follow its Mandate Gate before shaping or editing.
 - Ask before changing product behavior or choosing between real tradeoffs.
 
 ## Integration Read
