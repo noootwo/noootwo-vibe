@@ -12,10 +12,12 @@ Keep the default path light:
 
 For non-trivial design work, route by task structure. If multiple reasonable visual directions exist, present options and stop until the user chooses or explicitly delegates. If the task is implementation-bound, do not edit UI files before the approved design spec and implementation plan exist.
 
-For non-quick UI work, carry the Product-to-Design Handoff when available and declare the Design Read before choosing a look.
+For new or redesigned UI work, carry the Product-to-Design Handoff when available and declare the Design Read before choosing a look.
 Decide whether the product function and moment call for `leave simple`, `craft only`, or `add moment`; a simple result is valid when the evidence supports it. Search for examples or tools only after a candidate passes the frequency, purpose, speed, and function gates.
 For high-character, niche, premium, selected, or previously rejected style work, record Style Evidence Check before trusting style prose.
 
-Do not claim `ready` without `.noootwo/review.md`, artifact evidence, and measured layout geometry for changed, user-named, or contract-declared regions. If the artifact has layout, responsive, typography, or generic-drift defects, return to the earlier fixing stage instead of calling it polished.
+Render before judging. Run `scripts/design_probe.py <target> --out .noootwo/design`, write the short `.noootwo/design/review.json`, and validate it with `scripts/validate_design_evidence.py <project>`. A builder-only review may `ship` local work with `local_only: true`; production or publish requires an independent reviewer. If the artifact has layout, responsive, typography, state, copy, or generic-drift defects, choose `fix` or `rebuild` instead of calling it shipped.
+
+Do not bootstrap the legacy multi-file harness for new design work. It remains only for historical readiness fixtures.
 
 Keep detailed Noootwo Design workflow rules inside the `$noootwo-design` skill; do not duplicate them here.

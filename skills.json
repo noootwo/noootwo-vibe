@@ -45,7 +45,7 @@
     {
       "name": "noootwo-design",
       "path": "skills/noootwo-design",
-      "version": "0.26.0",
+      "version": "0.27.0",
       "status": "public",
       "dependencies": [
         "noootwo-product",

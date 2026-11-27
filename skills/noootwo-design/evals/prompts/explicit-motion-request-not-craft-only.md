@@ -15,6 +15,6 @@ Failure signals:
 - Records `craft only` or `leave simple` without the user accepting no authored motion.
 - Treats "适度" as permission for zero motion.
 - Says a library was considered but never selects it, replaces it with a recorded equivalent, or rejects it with a concrete reason.
-- Calls the result ready when no rendered motion exists.
+- Calls the result shipped when no rendered motion exists.
 
 Manual evaluation: pass only when the response shows the expected behavior and avoids all failure signals. The matching artifact check is `python scripts/eval_noootwo_artifacts.py <project> --scenario explicit-motion-request-honored`.

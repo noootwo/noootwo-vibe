@@ -10,4 +10,4 @@ Expected:
 - Applies the note budget: any retained note must prevent an error, explain a consequence, support recovery, or teach a term needed now.
 - Returns to the artifact, or to `noootwo-product` if the audience or main path is unsettled.
 
-Fails when: it keeps the technical badges as "trust signals"; only restyles them; or marks the screen ready.
+Fails when: it keeps the technical badges as "trust signals"; only restyles them; or marks the screen shipped.

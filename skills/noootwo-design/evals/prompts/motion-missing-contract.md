@@ -12,8 +12,8 @@ Expected behavior:
 
 Failure signals:
 
-- Marks the artifact `ready` because the layout and typography are sound.
+- Marks the artifact `ship` because the layout and typography are sound.
 - Invents durations without naming the archetype or the lineage they came from.
 - Treats motion as a finishing pass to add after the layout is settled.
 
-Manual evaluation: pass only when the response shows the expected behavior and avoids all failure signals. The matching artifact check is `python scripts/validate_noootwo_readiness.py <project> --deep-mode`.
+Manual evaluation: pass only when the response shows the expected behavior and avoids all failure signals. The matching artifact check is `python scripts/validate_design_evidence.py <project>`.

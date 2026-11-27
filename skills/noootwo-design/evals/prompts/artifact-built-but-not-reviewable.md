@@ -6,7 +6,7 @@ Expected behavior:
 
 - Produce an artifact plan before implementation.
 - Record artifact evidence in review.
-- Refuse to call the result ready without inspectable review evidence.
+- Refuse to call the result shipped without inspectable review evidence.
 
 Failure signals:
 

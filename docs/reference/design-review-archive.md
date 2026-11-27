@@ -1,5 +1,7 @@
 # Design Review
 
+Historical archive. The active review path is `skills/noootwo-design/references/critique.md` with `design_probe.py` and `validate_design_evidence.py`; this file describes the retired scoring and gate stack.
+
 Scoring, safety gates, evidence-backed aesthetic flags, bounded verification, and separated final review.
 
 

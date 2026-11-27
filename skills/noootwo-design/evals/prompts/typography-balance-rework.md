@@ -32,8 +32,8 @@ Expected behavior:
   dense operational role table.
 - Include the populated review, error, loading, long-CJK, and empty states so
   the empty shell cannot hide the failure.
-- Set `refine` with exactly one `return to typography pass` action unless the
-  visual direction itself must pivot.
+- Set `fix` with exactly one `return to typography pass` action unless the
+  visual direction itself must be rebuilt.
 
 Failure signals:
 
@@ -43,7 +43,7 @@ Failure signals:
   floor, inflating the whole hierarchy instead of resolving density and role.
 - Keeps the same display size on a product page and calls it intentional style.
 - Reviews only the empty canvas or only the stylesheet.
-- Claims `ready` from a source diff without rendered role measurements.
+- Claims `ship` from a source diff without rendered role measurements.
 - Replaces the direction or redesigns unrelated layout instead of repairing the
   type system.
 - Edits the case product or its tests to manufacture a passing demonstration.

@@ -85,7 +85,7 @@ The interface speaks to the primary user, not to the system's builder. Copy is p
 - Backgrounds should create atmosphere or depth; avoid defaulting to flat emptiness unless the direction truly earns it.
 - Component language must feel designed for the context, not inherited from a UI kit without modification.
 - Stack-native primitives should carry the direction; do not force every framework into the same web-card layout.
-- A screenshot-free design review is not enough for ready status unless the user explicitly accepted an artifact limitation.
+- A screenshot-free design review is not enough for `ship` unless the user explicitly accepted an artifact limitation.
 
 ### First-Screen Taboos
 
@@ -102,7 +102,7 @@ The interface speaks to the primary user, not to the system's builder. Copy is p
 
 ### Self-Check
 
-Before calling a design ready, ask:
+Before calling a design shipped, ask:
 
 - Would this still feel specific if the logo disappeared?
 - What is the authored move or craft mechanism users should remember, and is an authored move actually appropriate here?
@@ -136,7 +136,7 @@ Treat these as one system, not separate layers:
 - backgrounds and visual details
 - component language
 
-If these do not point toward the same mood, the design is not ready.
+If these do not point toward the same mood, the design is not cohesive.
 
 ### Direction Rules
 
@@ -182,7 +182,7 @@ Before entering draft mode, confirm:
 
 ## Typography Craft Rubric
 
-Use this before marking standard or deep UI work ready. Typography must prove intentional hierarchy, not just a font change.
+Use this before shipping `build` or `direction` work. Typography must prove intentional hierarchy, not just a font change.
 
 ### Required Decisions
 
@@ -204,7 +204,7 @@ Record these in `.noootwo/directions.md`, `.noootwo/review.md`, or `.noootwo/des
 
 ### Failure Flags
 
-Any of these prevents `ready`:
+Any of these prevents `ship`:
 
 - Overweight display type that crushes the composition.
 - Display headline clips, overflows, or creates accidental orphan words on mobile.
@@ -231,14 +231,14 @@ Any of these prevents `ready`:
 
 ### Review Action
 
-- If the concept is right but type craft fails, set decision `refine` and `Return action: return to typography pass`.
-- If typography is the main point of view and it fails structurally, set decision `pivot` or return to directions.
+- If the concept is right but type craft fails, set decision `fix` and `Return action: return to typography pass`.
+- If typography is the main point of view and it fails structurally, set decision `rebuild` or return to directions.
 - Do not let clean spacing compensate for weak type hierarchy.
 
 
 ## Motion Craft Rubric
 
-Use this before marking `standard`, `deep`, or `production` work ready, and whenever an artifact animates. The reference values live in [motion](motion.md); this is the floor.
+Use this before shipping `build`, `direction`, or production work, and whenever an artifact animates. The reference values live in [motion](motion.md); this is the floor.
 
 ### Required Decisions
 
@@ -253,7 +253,7 @@ Record these in `.noootwo/directions.md`, `.noootwo/design-tokens.md`, or `.nooo
 
 ### Hard Bans
 
-Any of these prevents `ready`:
+Any of these prevents `ship`:
 
 - Linear easing on spatial movement; keep linear for spinners and progress bars.
 - Opacity-only treatment for a meaningful state change; pair it with position, scale, or colour.
@@ -271,9 +271,9 @@ Any of these prevents `ready`:
 
 ### Review Action
 
-- If the direction is right and the motion craft fails, set decision `refine` and `Return action: return to motion pass`.
-- If the motion thesis is the point of view and it fails structurally, set decision `pivot` or return to directions.
-- Confirm any automated motion finding against a screenshot, preview, or DOM inspection before it blocks `ready`.
+- If the direction is right and the motion craft fails, set decision `fix` and `Return action: return to motion pass`.
+- If the motion thesis is the point of view and it fails structurally, set decision `rebuild` or return to directions.
+- Confirm any automated motion finding against a screenshot, preview, or DOM inspection before it blocks `ship`.
 
 
 ## Color System Calibration
@@ -316,7 +316,7 @@ Use this reference for:
 - icon or illustration colors that look imported from another product
 - implementation-bound token mapping, design-system extraction, or artifact review
 
-Do not require this for every quick polish task. Escalate only when color drift is part of the observed problem or the selected direction depends on color-system coherence.
+Do not require this for every `polish` task. Escalate only when color drift is part of the observed problem or the selected direction depends on color-system coherence.
 
 ### Calibration Contract
 
@@ -447,7 +447,7 @@ Do not estimate quality gains, conversion gains, token savings, or cost savings 
 
 ## Responsive Visual Gates
 
-Use this before `ready` on any non-trivial UI artifact. A design that clips on common viewports is not ready, even if the desktop screenshot looks strong.
+Use this before `ship` on any non-trivial UI artifact. A design that clips on common viewports cannot ship, even if the desktop screenshot looks strong.
 
 ### Required Viewports
 
@@ -461,7 +461,7 @@ Record screenshot, preview, or limitation evidence for:
 
 ### Hard Fail Checks
 
-Any of these forces `refine`:
+Any of these forces `fix`:
 
 - `document.documentElement.scrollWidth > window.innerWidth` on a web artifact.
 - Key headline, nav, primary action, or critical data is clipped.
@@ -474,16 +474,16 @@ Any of these forces `refine`:
 
 - Use `Return action: return to responsive pass` when the direction is good but viewport adaptation fails.
 - Use `Return action: return to stack pass` when the failure is caused by target-stack layout behavior.
-- If responsive evidence is unavailable, record the limitation and choose `needs artifact` or `refine`, not `ready`.
+- If responsive evidence is unavailable, record the limitation and choose `recapture` or `fix`, not `ship`.
 
 ### Lightweight Automation
 
-Use `scripts/check_visual_gates.py` when a local URL or static HTML file is available. The script checks overflow, obvious clipped text, and a small advisory interface set across the required viewports. Pass `--region "name=selector"` or mark a live region with `data-noootwo-region` to measure its container, insets, inner and outer gaps, alignment edges, overlaps, and clipping. A declared intentional attachment can set `data-noootwo-symmetric="false"` and record the reason. Named geometry failures block `ready`; heuristic findings remain advisory until confirmed. It is web-artifact only; for Flutter, SwiftUI, and Compose, use the platform notes below and a real preview or device. It is a guardrail, not a substitute for design judgment, and its interface findings need source, accessibility-tree, or keyboard confirmation before they change a decision.
+Use `scripts/design_probe.py` when a local URL or static HTML file is available. It captures the declared viewport/state matrix, checks overflow, clipping, fixed-bar overlap, focus occlusion, text contrast, control boundaries, and unlabeled controls. Use `scripts/check_visual_gates.py` only when its named-region geometry measurement is specifically needed. Named geometry failures block `ship`; heuristic findings remain advisory until confirmed. Both are web-artifact tools; for Flutter, SwiftUI, and Compose, use the platform notes below and a real preview or device. They are guardrails, not substitutes for design judgment, and their findings need source, accessibility-tree, or keyboard confirmation before they change a decision.
 
 
 ## Interaction And Accessibility Gate
 
-Use this before `ready` on any non-trivial UI artifact. Accessibility is part of visual quality, not a separate compliance pass. Platform equivalents matter more than web syntax.
+Use this before `ship` on any non-trivial UI artifact. Accessibility is part of visual quality, not a separate compliance pass. Platform equivalents matter more than web syntax.
 
 ### Required Checks
 
@@ -525,9 +525,9 @@ Source: [WCAG 2.2 Quick Reference](https://www.w3.org/WAI/WCAG22/quickref/).
 
 ### Review Action
 
-- A missing accessible name, keyboard path, focus indicator, or reduced-motion fallback on a critical action is a `refine`, not a cosmetic note.
-- A gesture-only or hover-only critical action is `refine` until an equivalent exists.
-- If the platform artifact is unavailable, record the limitation and choose `needs artifact` or `refine`; do not mark accessibility verified from code alone.
+- A missing accessible name, keyboard path, focus indicator, or reduced-motion fallback on a critical action is a `fix`, not a cosmetic note.
+- A gesture-only or hover-only critical action is a `fix` until an equivalent exists.
+- If the platform artifact is unavailable, record the limitation and choose `recapture` or `fix`; do not call accessibility verified from code alone.
 
 
 ## Data Ui Rubric
@@ -570,6 +570,6 @@ Charts and metrics cannot be decorative. They must help the user decide, diagnos
 
 ### Review Decision
 
-- If the interface is visually strong but the data is decorative, mark `refine`.
-- If the surface claims to be a workbench but lacks a credible action path, mark `pivot`.
-- If no artifact proves data hierarchy and interaction states, mark `needs artifact`.
+- If the interface is visually strong but the data is decorative, mark `fix`.
+- If the surface claims to be a workbench but lacks a credible action path, mark `rebuild`.
+- If no artifact proves data hierarchy and interaction states, mark `recapture`.

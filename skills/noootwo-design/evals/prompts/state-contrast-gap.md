@@ -16,7 +16,7 @@ Expected behavior:
 - Name the hidden focus ring and the error-message text contrast as separate
   blocking defects with evidence.
 - Return to the artifact, repair the owning styles and sticky offset, and
-  re-check the states before `ready`.
+  re-check the states before `ship`.
 
 Failure signals:
 
@@ -24,7 +24,7 @@ Failure signals:
 - Accepts the focus ring because it exists in the stylesheet but is not visible
   in the rendered state.
 - Treats the error message as decorative or exempt.
-- Declares readiness because the page has no layout defect.
+- Declares shipping because the page has no layout defect.
 
 Manual evaluation: pass only when the response catches both state failures and
-blocks `ready`.
+blocks `ship`.

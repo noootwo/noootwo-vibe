@@ -1,5 +1,20 @@
 # noootwo-design Releases
 
+## v0.27.0
+
+- Replaced the lifecycle and gate stack with command routing: `shape`, `build`, `critique`, `polish`, `layout`, `typeset`, `harden`, `motion`, `system`, `direction`, and `translate`.
+- `SKILL.md` now loads one command reference per task. The full reference library is no longer a default read; the old `standard` path cost about 52k tokens before rendering.
+- Review now runs the design assessment before probe findings, records `DEGRADED: single-context` when no isolated reviewer is available, and uses four dispositions only: `recapture`, `rebuild`, `fix`, `ship`.
+- Restored an explicit Comprehension Gate in `critique` and `polish`: the reviewer tests the rendered surface as the primary end user, not the requester, and treats mechanism vocabulary, requester-facing notes, and settings that expose implementation choices as blocking `copy` findings.
+- Added the `settings-mechanism-jargon` regression contract. It covers `WebGL`, tier, frame-rate, and re-detection labels on a consumer settings screen; the check is a prompt contract, not measured behavior.
+- A builder-only review may `ship` local work with `local_only: true`; production or publish still requires `reviewer: independent`. The old `ready` requirement made solo local work structurally unshippable.
+- Added `design_probe.py`: one primary capture per declared viewport/state, plus a bottom capture only when fixed-bar overlap or focus occlusion is detected. It checks overflow, clipping, fixed/sticky overlap, focus occlusion, text and control contrast, labels, and small targets.
+- Added `validate_design_evidence.py`: validates the declared matrix, capture validity, finding evidence paths, disposition rules, builder/local versus production/independent, and the result of the probe. It does not reward prose shape.
+- Replaced the multi-document harness as the active path with one `probe.json` and one short `review.json`. The legacy harness remains for historical fixtures and prints a deprecation notice.
+- Reconciled every design reference and eval prompt to the new commands and dispositions.
+- Fresh-session evidence: critique found 5/5 planted defects and treated hierarchy as release-blocking; repair fixed the mechanical defects, returned local `ship` with a builder review, and produced 23 evidence files instead of 80+. The summary card's visual weight remains a judgment item for an independent review.
+- Evidence and limits: `docs/experiments/2026-11-27-design-skill-rebuild.md`; ADR 0038 records the decision.
+
 ## v0.26.0
 
 - Review now starts with a blind Observation Gate: 5-8 rendered observations, up to three first-pass defects, one must-not-change item, and an evidence handle before any score.

@@ -183,7 +183,7 @@ Use [system](system.md) to write extracted facts as role-based design instructio
 
 Use this format when extracting a design system, writing directions, or preparing handoff. It borrows the useful structure of `DESIGN.md`-style design instructions without depending on any external repository, brand template, or live fetch.
 
-For non-quick UI work, start with `intake.md`. The Design Read sets surface kind, audience, product posture, visual posture, intervention, variance, motion, density, and the existing system to preserve. This spec expands that read into implementation-ready roles.
+For a new or redesigned surface, start with `shape.md`. The Design Read sets surface kind, audience, product posture, visual posture, intervention, variance, motion, density, and the existing system to preserve. This spec expands that read into implementation-ready roles.
 
 Research basis: `DESIGN.md`-style repositories such as `VoltAgent/awesome-design-md` show that agents follow UI intent better when visual systems are written as color roles, typography roles, component rules, spacing rules, and do/don't constraints. Noootwo absorbs that format only; it does not require that repository or copy its brand-specific specs. Current public design-system guidance also supports role-based translation: Figma describes primitive, semantic, and component token layers; Atlassian frames tokens as single-source usage names for design decisions; Carbon frames motion as productive feedback and expression rather than decoration.
 
@@ -338,7 +338,7 @@ Use this layer only when the work is implementation-bound, production-facing, or
 - `default override pass`: record the framework or UI-kit defaults that would collapse the design into a generic fallback
 - `micro-detail pass`: review dividers, icon alignment, focus treatment, button height, title wrapping, empty/loading/error states, scroll edges, and microcopy cadence
 - `evidence threshold`: do not claim this layer is complete without artifact evidence for the key states that carry the direction
-- `cost boundary`: do not force this layer into quick polish or early direction exploration
+- `cost boundary`: do not force this layer into `polish` or early direction exploration
 
 ### Direction Usage
 
@@ -460,7 +460,7 @@ Every family still inherits the same Noootwo workflow:
 Every family still needs:
 
 - explicit artifact family in the brief
-- explicit preview surface before ready
+- explicit preview surface before ship
 - explicit review evidence
 - explicit delivery or export target when relevant
 - explicit return action when review fails

@@ -2,7 +2,10 @@
 
 ## Status
 
-Accepted on 2026-11-25.
+Accepted on 2026-11-25. Superseded in part by
+[ADR 0038](0038-command-routing-design-skill.md): the observation-first and
+rendered-evidence principles remain, while the gate stack, `ready` ceiling, and
+multi-document harness were replaced by command routing and a bounded probe.
 
 ## Context
 

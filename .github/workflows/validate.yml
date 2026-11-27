@@ -49,12 +49,69 @@ jobs:
             scripts/validate_skill_workspace.py \
             scripts/sync_local_install.py \
             skills/noootwo-design/scripts/bootstrap_noootwo_harness.py \
+            skills/noootwo-design/scripts/design_probe.py \
+            skills/noootwo-design/scripts/validate_design_evidence.py \
             skills/noootwo-design/scripts/validate_noootwo_readiness.py \
             skills/noootwo-design/scripts/check_visual_gates.py \
             skills/noootwo-design/scripts/eval_noootwo_artifacts.py \
             skills/noootwo-design/scripts/noootwo_status.py \
             skills/noootwo-state/scripts/noootwo_state.py \
             skills/noootwo-state/scripts/audit_codex_context.py
+
+      - name: Verify Noootwo Design evidence validator
+        run: |
+          tmpdir="$(mktemp -d)"
+          mkdir -p "$tmpdir/.noootwo/design/shots"
+          python - "$tmpdir" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          root = Path(sys.argv[1])
+          shot = root / ".noootwo/design/shots/primary.png"
+          shot.write_bytes(b"\x89PNG\r\n\x1a\n" + b"\0" * 2048)
+          (root / ".noootwo/design/probe.json").write_text(json.dumps({
+              "target": "index.html",
+              "viewports": ["1440x900"],
+              "states": ["default"],
+              "captures": [{
+                  "viewport": "1440x900",
+                  "state": "default",
+                  "region": "primary",
+                  "path": ".noootwo/design/shots/primary.png",
+                  "valid": True,
+              }],
+              "results": [{"viewport": "1440x900", "state": "default"}],
+              "blockers": [],
+          }), encoding="utf-8")
+          (root / ".noootwo/design/review.json").write_text(json.dumps({
+              "target": "index.html",
+              "command": "critique",
+              "viewports": ["1440x900"],
+              "states": ["default"],
+              "findings": [],
+              "disposition": "ship",
+              "reviewer": "builder",
+              "local_only": True,
+              "next_action": "none",
+          }), encoding="utf-8")
+          PY
+          python skills/noootwo-design/scripts/validate_design_evidence.py "$tmpdir"
+          python - "$tmpdir" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          root = Path(sys.argv[1])
+          path = root / ".noootwo/design/probe.json"
+          payload = json.loads(path.read_text())
+          payload["captures"][0]["path"] = ".noootwo/design/shots/missing.png"
+          path.write_text(json.dumps(payload), encoding="utf-8")
+          PY
+          if python skills/noootwo-design/scripts/validate_design_evidence.py "$tmpdir"; then
+            echo "Expected missing design capture to fail validation"
+            exit 1
+          fi
 
       - name: Verify Noootwo State scripts
         run: |

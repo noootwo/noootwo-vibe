@@ -11,7 +11,7 @@ Expected behavior:
 
 Failure signals:
 
-- Notes the gap and still calls the artifact ready.
+- Notes the gap and still calls the artifact shipped.
 - Adds a reduced-motion query that removes all feedback, including state changes.
 - Claims reduced motion is out of scope for a native target.
 

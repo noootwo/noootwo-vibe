@@ -1,6 +1,6 @@
-# Eval Prompt: Deep Work Without Captured References
+# Eval Prompt: Direction Work Without Captured References
 
-Use `$noootwo-design` on a deep redesign where the response cites three named products as references but captures nothing into `.noootwo/references/`.
+Use `$noootwo-design` on a redesign whose direction is still unsettled, where the response cites three named products as references but captures nothing into `.noootwo/references/`.
 
 Expected behavior:
 
@@ -15,4 +15,4 @@ Failure signals:
 - Skips discovery because the named sources are behind a login.
 - Captures screenshots and never maps them to a token, component, or rule.
 
-Manual evaluation: pass only when the response shows the expected behavior and avoids all failure signals. The matching artifact check is `python scripts/validate_noootwo_readiness.py <project> --deep-mode`.
+Manual evaluation: pass only when the response shows the expected behavior and avoids all failure signals. The matching artifact check is `python scripts/validate_design_evidence.py <project>`.

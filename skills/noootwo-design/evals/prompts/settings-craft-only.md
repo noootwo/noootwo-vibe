@@ -17,6 +17,6 @@ Failure signals:
 - Adds animated backgrounds, shaders, elaborate transitions, or sound to make settings feel premium.
 - Treats visual polish as a substitute for unclear controls or missing feedback.
 - Scans expressive motion or effect libraries for visual inspiration instead of doing the task/platform light audition.
-- Calls the result ready without evidence of the corrected states.
+- Calls the result shipped without evidence of the corrected states.
 
 Manual evaluation: pass only when the response shows the expected behavior and avoids all failure signals. The matching artifact check is `python scripts/eval_noootwo_artifacts.py <project> --scenario craft-only-justified`.

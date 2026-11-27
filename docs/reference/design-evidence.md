@@ -190,7 +190,7 @@ Ask whether the interface would be instantly recognized as AI-generated. If yes,
 
 ## Impeccable Research Notes
 
-Recorded 2026-10-27 against `pbakaus/impeccable` v4.7.0, rechecked 2026-11-03 at `skill-v4.8.0` (`414603bf14c7a344edb466bb1f85690c77ce8b7d`, released 2026-10-26), rechecked for typography on 2026-11-19 at `skill-v4.10.0` (`b49177d32788f2dc585c42831d845dacf1ebed2c`, released 2026-11-18), and rechecked on 2026-11-25 at `skill-v4.11.0` (`88cfafae649164e6dc48b88d3c0c1bf6662eaade`, released 2026-11-24). The evidence is official source plus inspectable release artifacts; no independent outcome study establishes a quality gain.
+Recorded 2026-10-27 against `pbakaus/impeccable` v4.7.0, rechecked 2026-11-03 at `skill-v4.8.0` (`414603bf14c7a344edb466bb1f85690c77ce8b7d`, released 2026-10-26), rechecked for typography on 2026-11-19 at `skill-v4.10.0` (`b49177d32788f2dc585c42831d845dacf1ebed2c`, released 2026-11-18), rechecked on 2026-11-25 at `skill-v4.11.0` (`88cfafae649164e6dc48b88d3c0c1bf6662eaade`, released 2026-11-24), and rechecked on 2026-11-27 at `skill-v4.11.1` (published 2026-11-26T01:59:33Z). The v4.11.1 delta is copy and save-path wording; v4.11.0 carries the routing, isolated-assessment, invalid-capture, and finish-disposition mechanism. The evidence is official source plus inspectable release artifacts; no independent outcome study establishes a quality gain.
 
 ### v4.11.0 Observation Recheck
 

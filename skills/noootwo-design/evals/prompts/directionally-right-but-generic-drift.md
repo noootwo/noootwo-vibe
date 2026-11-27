@@ -11,6 +11,6 @@ Expected behavior:
 
 Failure signals:
 
-- Calls the result ready because the overall vibe seems close enough.
+- Calls the result shipped because the overall vibe seems close enough.
 - Only suggests “polish more” without naming where the drift comes from.
 - Restarts from zero when the real issue is implementation drift.

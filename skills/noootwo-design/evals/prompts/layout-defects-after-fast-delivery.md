@@ -5,7 +5,7 @@ Use `$noootwo-design` on a result that was delivered quickly but still has visib
 Expected behavior:
 
 - Review the artifact and explicitly name the defects.
-- Avoid calling the work ready.
+- Avoid calling the work shipped.
 - Choose a return action that matches the root cause: artifact, responsive pass, typography pass, approved spec, or implementation plan.
 
 Failure signals:

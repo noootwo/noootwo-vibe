@@ -18,7 +18,7 @@ Produce 3 directions only when the choice would materially change implementation
 - the user strongly rejects the current style as generic, not advanced, not unique, or not matching the chosen direction
 - the intervention decision is unresolved and the choice materially changes structure, information expression, or product identity
 
-Skip directions for `quick`, `review`, `extract-system`, handoff-only, explicit stay-close polish, and standard work where product path plus visual posture already make one implementation path clear.
+Skip directions for `polish`, `critique`, `system`, handoff-only, explicit stay-close polish, and build work where product path plus visual posture already make one implementation path clear.
 
 Directions are a user-facing decision board, not internal notes. Present real samples, recommend one direction, and wait for user selection before implementation unless the user explicitly delegates the choice.
 
@@ -90,7 +90,7 @@ Direction work is not a mandate to add a signature effect. It resolves a visual 
 
 An authored move is a repeatable product behavior, not a one-off decoration. It can be motion, material, spatial composition, typography, data grammar, sound, or haptics only when the candidate has passed the relevant product and accessibility gates. Component-library defaults are baseline support, not the authored move.
 
-For every `add moment`, record `source + mechanism + boundary + fallback`. A missing source keeps the move at low confidence and blocks `ready`; it does not block a well-supported `leave simple` or `craft only` direction.
+For every `add moment`, record `source + mechanism + boundary + fallback`. A missing source keeps the move at low confidence and blocks `ship`; it does not block a well-supported `leave simple` or `craft only` direction.
 
 
 ## Style Evidence Check
@@ -120,7 +120,7 @@ Style Evidence Check
 - `Borrowed mechanism`: transferable layout, type, material, density, interaction, or state behavior.
 - `Implementation translation`: how that mechanism becomes tokens, components, spacing, motion, native controls, or artifact structure.
 - `Confidence`: `low` unless evidence and translation are both clear.
-- `Artifact/spike required`: what visual proof must exist before `ready`.
+- `Artifact/spike required`: what visual proof must exist before `ship`.
 
 ### Hard Rules
 
@@ -150,7 +150,7 @@ Run for:
 - Flutter/native/app work where stack-native craft matters
 - tasks with taste adjectives but no visual references
 
-Skip for `quick`, `review`, `extract-system`, `handoff-only`, or explicit "stay close" work.
+Skip for `polish`, `critique`, `system`, `handoff-only`, or explicit "stay close" work.
 
 ### Output
 
@@ -158,7 +158,7 @@ Write `.noootwo/style-calibration.md` with:
 
 - one style thesis
 - 5-7 dials: novelty, brand safety, density, typography contrast, motion presence, surface/material character, composition risk
-- 1-2 reference mechanisms from [evidence](evidence.md) when useful, with case links the user can open
+- 1-2 reference mechanisms from [evidence](../../../docs/reference/design-evidence.md) when useful, with case links the user can open
 - one recommended calibration
 - what this rules out
 

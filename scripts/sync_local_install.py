@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import shutil
+from datetime import datetime, timezone
 from pathlib import Path
 
 
@@ -52,6 +53,11 @@ def verify_install(source: Path, target_root: Path, skill_names: list[str]) -> l
         if not (target_skill / "SKILL.md").is_file():
             errors.append(f"{target_skill}: missing SKILL.md")
 
+    for stale in stale_noootwo_skills(target_root, skill_names):
+        errors.append(
+            f"{stale}: stale Noootwo skill not in skills.json; rerun with --prune"
+        )
+
     if errors:
         print(f"Install check failed for {target_root}:")
         for error in errors:
@@ -59,6 +65,33 @@ def verify_install(source: Path, target_root: Path, skill_names: list[str]) -> l
     else:
         print(f"Verified {len(skill_names)} skills in {target_root}")
     return errors
+
+
+def stale_noootwo_skills(target_root: Path, skill_names: list[str]) -> list[Path]:
+    if not target_root.is_dir():
+        return []
+    names = set(skill_names)
+    return sorted(
+        path
+        for path in target_root.iterdir()
+        if path.is_dir() and path.name.startswith("noootwo-") and path.name not in names
+    )
+
+
+def prune_stale(
+    target_root: Path,
+    skill_names: list[str],
+    backup_root: Path,
+) -> None:
+    stale = stale_noootwo_skills(target_root, skill_names)
+    if not stale:
+        return
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    for path in stale:
+        destination = backup_root / stamp / path.name
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(path), str(destination))
+        print(f"Pruned stale skill {path.name}: {destination}")
 
 
 def remove_codex_duplicates(skill_names: list[str], agent_root: Path, codex_root: Path) -> None:
@@ -80,9 +113,14 @@ def main() -> int:
     parser.add_argument("--codex-target-root", default=str(DEFAULT_CODEX_SKILLS_ROOT), help="Codex skills root to dedupe when syncing into the user agent skills root.")
     parser.add_argument("--dedupe-codex", action="store_true", help="Remove duplicate skills from the Codex skills root after syncing, even when --target-root is not the default agent skills root.")
     parser.add_argument("--no-dedupe-codex", action="store_true", help="Do not remove duplicate skills from the Codex skills root after syncing to the user agent root.")
+    parser.add_argument("--prune", action="store_true", help="Move stale noootwo-* skills that are not in skills.json into the backup root.")
+    parser.add_argument("--backup-root", default=str(Path.home() / ".codex" / "skill-backups"), help="Where --prune moves stale skills.")
     parser.add_argument("--skill", action="append", help="Skill name to sync. Repeat for multiple. Defaults to every skill in skills.json.")
     parser.add_argument("--check", action="store_true", help="Do not copy. Verify installed VERSION and SKILL.md files in the target roots.")
     args = parser.parse_args()
+
+    if args.check and args.prune:
+        parser.error("--check and --prune cannot be combined")
 
     source = Path(args.source).resolve()
     target_root = Path(args.target_root).resolve()
@@ -109,6 +147,9 @@ def main() -> int:
             raise SystemExit(f"Skill not found: {skill_name}")
         copy_tree(skill_dir, target_root / skill_name)
         print(f"Synced {skill_name}: {target_root / skill_name}")
+
+    if args.prune:
+        prune_stale(target_root, skill_names, Path(args.backup_root).expanduser().resolve())
 
     errors = verify_install(source, target_root, skill_names)
     if errors:

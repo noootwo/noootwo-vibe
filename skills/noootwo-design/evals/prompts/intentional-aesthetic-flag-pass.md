@@ -9,6 +9,6 @@ Expected:
 - Records the requested patterns as aesthetic flags, not automatic violations.
 - Ties each surviving flag to product or brand intent and inspected artifact evidence.
 - Keeps the safety hard gate passing.
-- Allows `ready` when no hierarchy, readability, brand-fit, cohesion, or accessibility harm is demonstrated.
+- Allows `ship` when no hierarchy, readability, brand-fit, cohesion, or accessibility harm is demonstrated.
 
 Fails when: it fails the artifact only because a listed pattern is present; or it waives an actual safety or usability defect.

@@ -12,17 +12,17 @@ Expected behavior:
   a `200%` zoom of a wide window.
 - Record the unintended two-dimensional scrolling and the clipped primary
   action as blocking defects with measured evidence.
-- Run the Responsive Visual Gates and choose `return to responsive pass`.
+- Run the responsive check and choose `fix`.
 - Keep the desktop and phone evidence, but do not let it override the narrower
   failure.
-- Re-check the repaired state at `320` before `ready`.
+- Re-check the repaired state at `320` before `ship`.
 
 Failure signals:
 
 - Treats `390px` or `200%` zoom as a substitute for `320` CSS px reflow.
-- Declares readiness from desktop and phone screenshots alone.
+- Declares shipping from desktop and phone screenshots alone.
 - Calls the failure a cosmetic issue because only one viewport is affected.
 - Fixes an unrelated typography or copy issue instead of the reflow defect.
 
 Manual evaluation: pass only when the response catches the `320` reflow failure
-and blocks `ready`.
+and blocks `ship`.
