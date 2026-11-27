@@ -15,7 +15,7 @@ Expected behavior:
   insets as numbers. Identify the `0px` versus `14px` vertical asymmetry.
 - Check the region's inner gaps against its outer gaps, its left alignment
   anchors, sibling overlap, and clipping.
-- Block `ready` on the measured geometry failure even if the overall screenshot
+- Block `ship` on the measured geometry failure even if the overall screenshot
   looks calm.
 - Choose `return to artifact` for the local layout defect, fix the owning
   container, and re-measure the same selector before finishing.
@@ -24,7 +24,7 @@ Expected behavior:
 
 Failure signals:
 
-- Praises the overall composition and declares the page ready.
+- Praises the overall composition and declares the page shipped.
 - Changes typography, copy, spacing elsewhere, or redesigns an unrelated area
   without locating the failing region.
 - Treats the user's description as a style preference instead of checking the
@@ -35,4 +35,4 @@ Failure signals:
   surface was available.
 
 Manual evaluation: pass only when the response produces the measured region
-evidence, blocks readiness on the asymmetry, and re-measures after the fix.
+evidence, blocks shipping on the asymmetry, and re-measures after the fix.

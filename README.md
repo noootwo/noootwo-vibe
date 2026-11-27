@@ -9,7 +9,7 @@ It publishes twelve focused skills — a router plus eleven specialists:
 | `noootwo-ask` | user-invoked | Names the right skill for your situation and the order to run them in, including the mandate vocabulary and the route to parallel work | `0.7.2` |
 | `noootwo-workflow` | model-invoked | Reads the mandate before any write, chooses read depth, runs the Fan-out Gate, re-matches one owner after compaction or a phase change, and schedules shape-before-implementation, scoped Change Checks, delivery integration, Release Verification Ledger handoffs, and the full Release Check | `0.27.0` |
 | `noootwo-product` | model-invoked | Settles real user, audience contract, interaction posture, first loop, scope, main path, states, acceptance, and operational-copy audience before design or build | `0.15.1` |
-| `noootwo-design` | model-invoked | Turns a settled product path into a context-aware visual intervention, source-role audition, information exposure, balanced typography, rendered-copy comprehension, blind observation, composition review, measured layout geometry, tokens, a Design Contract, a fan-out-aware implementation plan, and an independently reviewed artifact | `0.26.0` |
+| `noootwo-design` | model-invoked | Routes UI work by command (`shape`, `build`, `critique`, `polish`, `layout`, `typeset`, `harden`, `motion`, `system`, `direction`, `translate`), renders before judging, separates design assessment from probe findings, and closes with `recapture`, `rebuild`, `fix`, or `ship` | `0.27.0` |
 | `noootwo-tdd` | model-invoked | Owns red-green-refactor and relevant-test evidence for behavior-changing code | `0.6.2` |
 | `noootwo-code-health` | model-invoked | Shapes a non-obvious change, waits for the Mandate Gate before shaping or editing, treats a plan as execution-ready only after the user accepts the proposal, runs a scoped Change Check after each requirement, and a full Release Check before release | `0.19.1` |
 | `noootwo-delivery` | model-invoked | Gives each requirement or write lane isolated linked worktrees, resolves shared-contract overlap, rejoins one lane at a time, and integrates through protected `main` | `0.2.0` |
@@ -142,7 +142,7 @@ npx skills add ./skills/noootwo-design --list
 
 `noootwo-product` settles what should exist before anything is designed or built. It reads discoverable facts itself, names what is unsettled, and then grills the frontier — the questions answerable now — one round at a time, each question carrying options and a recommendation. An unresolved first round starts from observed facts and proposals stated separately, then asks one controlling question or all independent root questions together. It records user-owned how decisions separately from agent defaults, including each default's reason and reopen condition. Before handoff it records an Audience Contract — primary user and moment, familiarity and shared vocabulary, frequency, error cost, and information budget — and derives the Interaction Posture for density, language, settings, expert affordances, and help. Operational copy serves the primary user's object, state, or next action; a layout-only request changes structure rather than authorizing new public copy. Design rationale, change summaries, proof claims, and slogans stay in the handoff, review, docs, or reply. It ends when the frontier is empty and the user confirms a shared understanding, then produces the Product-to-Design Handoff.
 
-`noootwo-design` turns a settled product path into a contextual visual intervention. It names the write target before editing, so a supplied case or comparison stays read-only evidence. It declares a Design Read, decides whether the exact feature and moment should `leave simple`, use `craft only`, or `add moment`, and only then considers motion, shaders, sound, or haptics. Every non-quick UI task runs a source-role audition: `standard` uses 2-3 candidates and one inspected primary capture; `deep` uses 3-5 captured sources, same-medium evidence, licence records, fit scoring, and spikes. Product evidence, platform convention, visual direction, motion, implementation resources, assets, and research craft cannot borrow one another's authority. A gallery cannot decide a dashboard flow, and a component demo cannot become the art direction. Typography separates bounded display type from fixed product roles, with one application-root scale, readable minima, and populated-state evidence across desktop, narrow, and 200-percent resize states. Source minima stay surface-scoped, so a reading-page body floor or presentation heading ratio never raises dense product chrome. The project-local `.noootwo/appearance-ledger.md` remembers reviewed accepts and rejects but never becomes a global taste profile. Mechanism Landing QA checks that every selected primary or supplement mechanism is present in the artifact and improves a named user outcome; a missing or swallowed mechanism blocks `ready`. A candidate must pass frequency, purpose, speed, and function gates before expressive source work or a new tool starts; rejected opportunities stay visible. When a direction choice remains materially unresolved, it presents real low-cost samples rather than a prose menu, and the user chooses after seeing them. `leave simple` and `craft only` remain valid outcomes when the product needs clarity or speed, but an explicit user request for motion or material defaults to `add moment` and cannot be silently downgraded. The skill writes a Design Contract before editing, including what is visible, secondary, or hidden and the order outcome → decision evidence → implementation detail. It reviews the rendered artifact through a Comprehension Gate: first-screen purpose and next action, the user's vocabulary, technical-term justification, note budget, density fit, settings stance, and error recovery. The gate also fails requester-facing or self-evaluating operational copy, a heading that claims the redesign is clear, and a note that merely restates the heading or layout. Operational headings name the user's object, state, or task. Deep references prefer the target medium and must have been inspected; broken captures are not evidence. Accessibility, readability, real content, state integrity, and interaction recovery remain hard gates. `ready` is never self-certified. When the real user, audience contract, main path, states, or acceptance turn out to be unsettled, it invokes `noootwo-product`.
+`noootwo-design` turns a settled product path into a rendered interface. It routes by command — `shape`, `build`, `critique`, `polish`, `layout`, `typeset`, `harden`, `motion`, `system`, `direction`, or `translate` — and loads one command reference, not the whole library. It names the write target before editing, so a supplied case or comparison stays read-only evidence. A design read and contract settle the surface, audience, hierarchy, information exposure, type roles, states, and non-drift decisions. The design assessment comes before probe findings: hierarchy, focal weight, reading order, grouping, rhythm, density, and taste are judged from the rendered artifact, while `design_probe.py` measures overflow, clipping, fixed-bar overlap, focus occlusion, contrast, labels, and targets. Four dispositions only: `recapture`, `rebuild`, `fix`, or `ship`. A builder-only review may ship local work with `local_only: true`; production or publish requires an independent reviewer. One `probe.json` and one short `review.json` replace the old multi-document gate stack. When the real user, audience contract, main path, states, or acceptance are unsettled, it invokes `noootwo-product`.
 
 `noootwo-tdd` owns the test-first loop for behavior-changing code. It requires a failing test first, the minimal implementation, relevant-test proof, and refactoring only after green. Red and green are the adding-function hat; the post-green refactor is the refactoring hat, and the two never mix. The full suite is a Release Check, not the TDD exit. When the implementation shape or seam is unsettled, it returns to workflow instead of inventing architecture inside the loop. It rejects production-first, tests-after, manual-test-only, and “too simple to test” reasoning.
 
@@ -171,14 +171,19 @@ python scripts/validate_skill_workspace.py .
 Sync local installed skill copies when iterating locally:
 
 ```bash
-python scripts/sync_local_install.py --no-dedupe-codex
-python scripts/sync_local_install.py --target-root ~/.codex/skills --no-dedupe-codex
+python scripts/sync_local_install.py --no-dedupe-codex --prune
+python scripts/sync_local_install.py --target-root ~/.codex/skills --no-dedupe-codex --prune
 python scripts/sync_local_install.py --check
 ```
 
 The sync command verifies every copied `VERSION` and `SKILL.md` before it
 reports success. `--check` verifies the installed `~/.agents/skills` and
 `~/.codex/skills` copies against the checkout without copying anything.
+
+`--prune` moves stale `noootwo-*` directories that are no longer in
+`skills.json` into `~/.codex/skill-backups/<timestamp>/`. `--check` fails while
+such a directory remains, so a release cannot claim every agent has the current
+set while an obsolete skill is still discoverable.
 
 The default sync target is `~/.agents/skills`. When a synced Noootwo skill exists there, the script removes the same `noootwo-*` skill from `~/.codex/skills` so Codex does not show duplicate local skills.
 For non-default targets, pass `--dedupe-codex` to apply the same duplicate cleanup.
@@ -203,15 +208,21 @@ npx -y skills add ./skills/noootwo-research --list
 npx -y skills add ./skills/noootwo-onboard --list
 ```
 
-Validate the design harness after changes to `noootwo-design`:
+Validate the active design render gate after changes to `noootwo-design`:
 
 ```bash
 tmpdir="$(mktemp -d)"
-python skills/noootwo-design/scripts/bootstrap_noootwo_harness.py "$tmpdir" --profile full
-if python skills/noootwo-design/scripts/validate_noootwo_readiness.py "$tmpdir" --allow-non-ready; then
-  echo "Expected pending bootstrap harness to fail readiness validation"
-  exit 1
-fi
+python skills/noootwo-design/scripts/design_probe.py \
+  docs/experiments/fixtures/design-probe \
+  --out "$tmpdir/design" --browser-channel chrome --allow-blockers
+python skills/noootwo-design/scripts/validate_design_evidence.py <project>
+```
+
+The demo fixture is intentionally broken, so its probe must report blockers. A clean probe proves only the mechanical floor; the design assessment still owns hierarchy, composition, and taste.
+
+Historical readiness fixtures remain available for compatibility:
+
+```bash
 python skills/noootwo-design/scripts/validate_noootwo_readiness.py \
   docs/experiments/fixtures/reference-audition-2026-11-11 \
   --reference-audition
@@ -219,9 +230,6 @@ python skills/noootwo-design/scripts/validate_noootwo_readiness.py \
   docs/experiments/fixtures/upstream-adoption-2026-10-27 \
   --deep-mode --strict-workflow --style-evidence
 ```
-
-The readiness command is expected to fail on a freshly bootstrapped pending harness unless it is used inside a completed design workflow.
-This is a skill-workspace validation check, not a requirement for every quick UI polish task.
 
 Run opt-in high-risk design eval scenarios only when their prompt applies:
 
@@ -248,7 +256,7 @@ Each child skill has its own `VERSION` file and tag prefix. Current source versi
 - `noootwo-ask@v0.7.2`
 - `noootwo-workflow@v0.27.0`
 - `noootwo-product@v0.15.1`
-- `noootwo-design@v0.26.0`
+- `noootwo-design@v0.27.0`
 - `noootwo-tdd@v0.6.2`
 - `noootwo-code-health@v0.19.1`
 - `noootwo-delivery@v0.2.0`
@@ -258,7 +266,7 @@ Each child skill has its own `VERSION` file and tag prefix. Current source versi
 - `noootwo-research@v0.9.0`
 - `noootwo-onboard@v0.5.0`
 
-The root `VERSION` is the workspace version (`0.37.0`) and is not the release source for child skills. Child tags are created only after a validated batch lands on `main`; the versions above are the source versions prepared for release `0.37.0`.
+The root `VERSION` is the workspace version (`0.38.0`) and is not the release source for child skills. Child tags are created only after a validated batch lands on `main`; the versions above are the source versions prepared for release `0.38.0`.
 
 ## Delivery Policy
 

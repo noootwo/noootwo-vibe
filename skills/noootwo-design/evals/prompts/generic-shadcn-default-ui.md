@@ -12,6 +12,6 @@ Expected behavior:
 
 Failure signals:
 
-- Calls the result ready because it is clean and modern.
+- Calls the result shipped because it is clean and modern.
 - Only changes palette, radius, or shadows.
 - Replaces one generic template with another.

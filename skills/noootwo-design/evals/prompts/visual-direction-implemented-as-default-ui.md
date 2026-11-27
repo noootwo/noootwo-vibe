@@ -11,7 +11,7 @@ Expected behavior:
 
 Failure signals:
 
-- Calls the artifact ready because it is clean.
+- Calls the artifact shipped because it is clean.
 - Only asks for more polish, shadows, or color changes.
 - Ignores that the style evidence and rendered result do not match.
 

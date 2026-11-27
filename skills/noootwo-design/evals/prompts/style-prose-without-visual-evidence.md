@@ -13,6 +13,6 @@ Failure signals:
 
 - Writes confident style rules from adjectives alone.
 - Moves directly to Design Contract or UI edits without evidence.
-- Calls the design ready because the prose sounds high-end.
+- Calls the design shipped because the prose sounds high-end.
 
 Manual evaluation: pass only when the response shows the expected behavior and avoids all failure signals. The matching artifact check is `python scripts/eval_noootwo_artifacts.py <project> --scenario style-prose-without-visual-evidence`.

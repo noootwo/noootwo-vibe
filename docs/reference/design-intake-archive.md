@@ -1,5 +1,7 @@
 # Design Intake
 
+Historical archive. Active intake lives in `skills/noootwo-design/references/shape.md`; the multi-file harness described here is legacy.
+
 Reading a request, declaring the Design Read, sizing the harness, and adopting an existing project.
 
 ## Target Boundary

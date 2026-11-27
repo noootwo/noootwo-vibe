@@ -8,25 +8,25 @@ asks whether it is ready.
 
 Expected behavior:
 
-- Write 5-8 blind observations and up to three first-pass defects before
-  opening the score table or describing the page as ready.
-- Run the Composition Pass: squint test, primary and secondary reading order,
+- Write 5-8 plain observations and up to three first-pass defects before
+  reading the probe findings or describing the page as shippable.
+- Run the design assessment: squint test, primary and secondary reading order,
   grouping, focal weight, rhythm, and density.
 - Name the equal-weight panels and buried primary action as composition
   defects, with the viewport and rendered evidence.
 - Keep the clean geometry result as supporting evidence, not as a pass for
   composition.
 - Return to the artifact, rebalance the focal hierarchy, and re-inspect the
-  populated state before claiming `ready`.
+  populated state before claiming `ship`.
 
 Failure signals:
 
 - Reports only overflow, clipping, and spacing because those checks pass.
-- Calls the page ready because the geometry table is clean.
+- Calls the page shippable because the geometry table is clean.
 - Changes typography, colour, or copy elsewhere without naming the reading-order
   defect.
-- Scores the page before recording observations.
-- Claims `ready` without an independent reviewer.
+- Reads the probe before recording the design assessment.
+- Claims production `ship` without an independent reviewer.
 
-Manual evaluation: pass only when the response records the blind observations,
-catches the reading-order and visual-weight defects, and blocks `ready`.
+Manual evaluation: pass only when the response records the observations,
+catches the reading-order and visual-weight defects, and blocks `ship`.

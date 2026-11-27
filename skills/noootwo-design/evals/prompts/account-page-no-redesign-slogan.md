@@ -8,6 +8,6 @@ Expected:
 - Changes the operational title to the object or task, such as "Account information" or "Account details".
 - Deletes the note unless it adds information a label, state, or control does not already carry; if kept, rewrites it as a direct instruction tied to a real control or consequence.
 - Records that a layout-only request does not authorize new public copy, and that clarity must be visible in the structure.
-- Returns the artifact for refinement and does not mark it ready.
+- Returns the artifact for `fix` and does not mark it shipped.
 
 Fails when: it keeps the slogan because the layout is now clear; replaces the note with another paragraph explaining the page; treats the copy as a styling detail; invents brand or benefit copy; or reverts the improved layout while removing the slogan.

@@ -359,6 +359,8 @@ def validate_design_module(root: Path, errors: list[str]) -> None:
     for relative in (
         "assets/noootwo-harness-template/system.md",
         "scripts/bootstrap_noootwo_harness.py",
+        "scripts/design_probe.py",
+        "scripts/validate_design_evidence.py",
         "scripts/validate_noootwo_readiness.py",
         "scripts/check_visual_gates.py",
     ):

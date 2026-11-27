@@ -244,7 +244,7 @@ Published libraries are strong evidence of craft and weak evidence of fit. A lib
 
 Reach for the smallest tool that carries the direction.
 
-Read [motion-libraries](motion-libraries.md) before adding a runtime or copying a registry component. It carries the register gate, the per-platform ladder, the licence and dependency checks, and the intent recipes. A copy-in component is the last rung, not the first.
+Read [motion libraries](../../../docs/reference/motion-libraries.md) before adding a runtime or copying a registry component. It carries the register gate, the per-platform ladder, the licence and dependency checks, and the intent recipes. A copy-in component is the last rung, not the first.
 
 | Need | Reach for |
 | --- | --- |
@@ -265,7 +265,7 @@ Every direction names a reduced-motion fallback in the same breath as its motion
 
 ## Bans
 
-Four rules are absolute and live with the quality floor in [craft](craft.md). Read it before editing UI; this file supplies the values, and that file decides what blocks `ready`.
+Four rules are absolute and live with the quality floor in [craft](craft.md). Read it before editing UI; this file supplies the values, and that file decides what blocks `ship`.
 
 ## Troubleshooting
 

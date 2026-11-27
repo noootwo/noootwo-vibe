@@ -16,6 +16,6 @@ Failure signals:
 - Scans animation or effect libraries instead of real operations products and design systems.
 - Adds a signature animation, shader, sound, or new runtime to prove design effort.
 - Treats any no-motion result as incomplete.
-- Calls the work ready without checking real states or the nearest artifact.
+- Calls the work shipped without checking real states or the nearest artifact.
 
 Manual evaluation: pass only when restraint is justified by the product context and the response avoids every failure signal. The matching artifact check is `python scripts/eval_noootwo_artifacts.py <project> --scenario leave-simple-justified`.

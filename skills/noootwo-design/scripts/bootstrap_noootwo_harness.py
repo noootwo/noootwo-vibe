@@ -178,6 +178,7 @@ def main() -> int:
         copied.append(destination_path)
 
     print(f"Bootstrapped {destination_root} using profile: {args.profile}")
+    print("Legacy harness: new design work uses design_probe.py plus .noootwo/design/review.json.")
     if copied:
         print("Copied:")
         for path in copied:

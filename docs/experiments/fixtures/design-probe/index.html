@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notification settings</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --surface: #ffffff;
+      --line: #e4e7ec;
+      --text: #1f2937;
+      --muted: #7b8794;
+      --helper: #8b95a5;
+      --accent: #2563eb;
+      --accent-ink: #1d4ed8;
+      --danger: #b45454;
+      --radius: 10px;
+      --shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body { padding-bottom: 0; }
+
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 240px;
+      flex: 0 0 240px;
+      background: #111827;
+      color: #d1d5db;
+      padding: 20px 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 8px 22px;
+      color: #ffffff;
+      font-weight: 650;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      background: #374151;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+    }
+
+    .nav-group {
+      margin: 18px 0 6px;
+      padding: 0 8px;
+      color: #6b7280;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 8px;
+      border-radius: 7px;
+      color: #d1d5db;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .nav-item.active {
+      background: #1f2937;
+      color: #ffffff;
+    }
+
+    .nav-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4b5563;
+    }
+
+    .nav-item.active .nav-dot { background: #93c5fd; }
+
+    .shell {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .topbar {
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 0 28px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .crumbs {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #e5e7eb;
+      color: #4b5563;
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .main {
+      padding: 26px 28px 0;
+      max-width: 1180px;
+    }
+
+    .page-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0 0 4px;
+      font-size: 20px;
+      line-height: 1.25;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .settings-grid {
+      display: grid;
+      grid-template-columns: minmax(520px, 1fr) 280px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .form-card {
+      padding: 22px;
+    }
+
+    .section + .section {
+      margin-top: 26px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    h2 {
+      margin: 0 0 4px;
+      font-size: 16px;
+      font-weight: 650;
+      letter-spacing: -0.005em;
+    }
+
+    .section-note {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .field:last-child { margin-bottom: 0; }
+
+    label {
+      font-size: 13px;
+      font-weight: 550;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select {
+      width: 100%;
+      height: 36px;
+      padding: 0 10px;
+      border: 1px solid #d0d5dd;
+      border-radius: 7px;
+      background: #ffffff;
+      color: var(--text);
+      font: inherit;
+      outline: none;
+    }
+
+    input:focus-visible,
+    select:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .helper {
+      color: var(--helper);
+      font-size: 12px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .check {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin: 0 0 11px;
+      font-size: 13px;
+    }
+
+    .check input { margin-top: 3px; }
+
+    .check span small {
+      display: block;
+      color: var(--helper);
+      font-size: 12px;
+    }
+
+    .summary {
+      overflow: hidden;
+    }
+
+    .summary-hero {
+      padding: 18px;
+      background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+      color: #ffffff;
+    }
+
+    .summary-kicker {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.82;
+    }
+
+    .summary-value {
+      margin-top: 6px;
+      font-size: 30px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .summary-caption {
+      margin-top: 6px;
+      font-size: 12px;
+      opacity: 0.86;
+    }
+
+    .summary-body {
+      padding: 16px 18px 18px;
+    }
+
+    .metric {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid #eef0f3;
+      font-size: 12px;
+    }
+
+    .metric:last-child { border-bottom: 0; }
+
+    .metric strong {
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .metric span { color: var(--muted); }
+
+    .summary-note {
+      margin: 10px 0 0;
+      color: var(--helper);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .btn {
+      height: 34px;
+      padding: 0 12px;
+      border: 1px solid #d0d5dd;
+      border-radius: 7px;
+      background: #ffffff;
+      color: #374151;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 550;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      color: var(--accent-ink);
+      border-color: #bfdbfe;
+    }
+
+    .btn-quiet {
+      border-color: transparent;
+      background: transparent;
+    }
+
+    .save-bar {
+      position: fixed;
+      left: 240px;
+      right: 0;
+      bottom: 0;
+      z-index: 20;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 0 28px;
+      background: rgba(255, 255, 255, 0.98);
+      border-top: 1px solid var(--line);
+      box-shadow: 0 -6px 18px rgba(16, 24, 40, 0.04);
+    }
+
+    .save-copy {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .save-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .error-box {
+      display: none;
+      margin: 0 0 16px;
+      padding: 12px 14px;
+      border: 1px solid #f0caca;
+      border-radius: 8px;
+      background: #fffafa;
+      color: var(--danger);
+      font-size: 12px;
+    }
+
+    .error-box strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 12px;
+    }
+
+    .state-error .error-box { display: block; }
+
+    .skeleton {
+      display: none;
+      height: 12px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, #eef0f3, #f7f8fa, #eef0f3);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s linear infinite;
+    }
+
+    .state-loading .skeleton { display: block; }
+    .state-loading .form-card > .section { display: none; }
+
+    .loading-stack {
+      display: grid;
+      gap: 12px;
+      padding: 6px 0;
+    }
+
+    @keyframes shimmer {
+      from { background-position: 200% 0; }
+      to { background-position: -200% 0; }
+    }
+
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .save-bar { left: 0; }
+      .settings-grid { grid-template-columns: minmax(520px, 1fr); }
+      .main { padding: 20px 16px 0; }
+      .topbar { padding: 0 16px; }
+      .save-bar { padding: 0 16px; }
+    }
+
+    @media (max-width: 560px) {
+      .page-head { display: block; }
+      .row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">N</span>
+        <span>Northline Ops</span>
+      </div>
+      <div class="nav-group">Workspace</div>
+      <a class="nav-item" href="#"><span class="nav-dot"></span>Overview</a>
+      <a class="nav-item" href="#"><span class="nav-dot"></span>Incidents</a>
+      <a class="nav-item" href="#"><span class="nav-dot"></span>On-call</a>
+      <div class="nav-group">Settings</div>
+      <a class="nav-item active" href="#"><span class="nav-dot"></span>Notifications</a>
+      <a class="nav-item" href="#"><span class="nav-dot"></span>Integrations</a>
+      <a class="nav-item" href="#"><span class="nav-dot"></span>Access</a>
+    </aside>
+
+    <div class="shell">
+      <header class="topbar" data-noootwo-region="topbar">
+        <div class="crumbs">Settings / Notifications</div>
+        <div class="topbar-actions">
+          <button class="btn btn-quiet" type="button">Help</button>
+          <span class="avatar">AR</span>
+        </div>
+      </header>
+
+      <main class="main">
+        <div class="page-head">
+          <div>
+            <h1>Configuration Surface</h1>
+            <p class="subtitle">Optimized clarity for operators</p>
+          </div>
+          <button class="btn" type="button">View audit log</button>
+        </div>
+
+        <div class="error-box" role="alert">
+          <strong>ERR_409</strong>
+          Request rejected
+        </div>
+
+        <div class="settings-grid">
+          <section class="card form-card" data-noootwo-region="form">
+            <div class="loading-stack">
+              <div class="skeleton" style="width: 46%"></div>
+              <div class="skeleton" style="width: 100%"></div>
+              <div class="skeleton" style="width: 72%"></div>
+              <div class="skeleton" style="width: 88%"></div>
+              <div class="skeleton" style="width: 54%"></div>
+            </div>
+
+            <div class="section">
+              <h2>Email notifications</h2>
+              <p class="section-note">Choose which incidents reach the on-call inbox.</p>
+
+              <div class="row">
+                <div class="field">
+                  <label for="email">Destination</label>
+                  <input id="email" type="email" value="oncall@northline.example">
+                  <span class="helper">Digest messages are sent every 5 minutes.</span>
+                </div>
+                <div class="field">
+                  <label for="severity">Minimum severity</label>
+                  <select id="severity">
+                    <option>Critical only</option>
+                    <option selected>Critical and high</option>
+                    <option>All incidents</option>
+                  </select>
+                  <span class="helper">Lower severities stay in the incident feed.</span>
+                </div>
+              </div>
+
+              <label class="check">
+                <input type="checkbox" checked>
+                <span>
+                  Page the on-call engineer
+                  <small>Uses the current escalation policy.</small>
+                </span>
+              </label>
+              <label class="check">
+                <input type="checkbox" checked>
+                <span>
+                  Send a recovery notice
+                  <small>Posted when an incident returns to normal.</small>
+                </span>
+              </label>
+
+              <button class="btn" type="button">Send test notification</button>
+            </div>
+
+            <div class="section">
+              <h2>Slack</h2>
+              <p class="section-note">Mirror incident updates into a shared channel.</p>
+
+              <div class="row">
+                <div class="field">
+                  <label for="channel">Channel</label>
+                  <input id="channel" type="text" value="#incidents">
+                  <span class="helper">The bot must already be in this channel.</span>
+                </div>
+                <div class="field">
+                  <label for="mention">Mention group</label>
+                  <input id="mention" type="text" value="@oncall">
+                  <span class="helper">Used only for critical incidents.</span>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="template">Message template</label>
+                <input id="template" type="text" value="[{{severity}}] {{title}} — {{service}}">
+                <span class="helper">Variables are replaced when the message is sent.</span>
+              </div>
+            </div>
+
+            <div class="section">
+              <h2>Quiet hours</h2>
+              <p class="section-note">Hold non-critical messages during the maintenance window.</p>
+
+              <div class="row">
+                <div class="field">
+                  <label for="start">Start</label>
+                  <input id="start" type="text" value="22:00">
+                </div>
+                <div class="field">
+                  <label for="end">End</label>
+                  <input id="end" type="text" value="07:00">
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="timezone">Time zone</label>
+                <select id="timezone">
+                  <option selected>Asia/Shanghai (UTC+8)</option>
+                  <option>UTC</option>
+                  <option>America/Los_Angeles (UTC-8)</option>
+                </select>
+                <span class="helper">Quiet hours follow this time zone across daylight saving changes.</span>
+              </div>
+            </div>
+          </section>
+
+          <aside class="card summary" data-noootwo-region="summary">
+            <div class="summary-hero">
+              <div class="summary-kicker">Signal density</div>
+              <div class="summary-value">12</div>
+              <div class="summary-caption">active channels this week</div>
+            </div>
+            <div class="summary-body">
+              <div class="metric"><span>Delivered</span><strong>1,284</strong></div>
+              <div class="metric"><span>Failed</span><strong>3</strong></div>
+              <div class="metric"><span>Median delay</span><strong>8s</strong></div>
+              <p class="summary-note">This surface reduces cognitive overhead.</p>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="save-bar" data-noootwo-region="savebar">
+    <div class="save-copy">Changes apply to every workspace member.</div>
+    <div class="save-actions">
+      <button class="btn" type="button">Cancel</button>
+      <button class="btn btn-primary" type="button">Save changes</button>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const state = params.get("state");
+    if (state) document.body.classList.add("state-" + state);
+
+    if (state === "long") {
+      const label = document.querySelector('label[for="template"]');
+      if (label) {
+        label.textContent = "消息模板（用于值班工程师在移动端查看的告警摘要与恢复通知）";
+      }
+    }
+
+    if (state === "focus") {
+      window.addEventListener("load", () => {
+        const target = document.querySelector("#timezone");
+        if (!target) return;
+        target.scrollIntoView({ block: "end" });
+        target.focus();
+      });
+    }
+  </script>
+</body>
+</html>

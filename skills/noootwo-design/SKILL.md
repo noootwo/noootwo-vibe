@@ -5,102 +5,90 @@ description: "Use for UI, visual, artifact, or frontend work after product path 
 
 # Noootwo Design
 
-Turn a settled product path into a visual system, a reviewable artifact, and a handoff. Name the target root before editing; a project supplied as a case, reference, or comparison is read-only unless the user explicitly asks to change it. A report that a surface looks wrong, or a question about it, is `propose`: present the change and stop; when the mandate is unclear, invoke the `noootwo-workflow` skill: read its `SKILL.md` and follow its Mandate Gate. When the real user, audience contract, main path, states, or acceptance are unsettled, invoke the `noootwo-product` skill first: read its `SKILL.md` and follow it. Context lifecycle `write -> select -> compress -> isolate -> verify`: load this skill and triggered reference sections; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with path and hash; isolate only independent read-only work; keep one writer; verify summaries against source.
+Design is judged by the rendered artifact, not by the prose around it. Name the target root before editing; a project supplied as a case, reference, or comparison is read-only unless the user asks to change it. A report that a surface looks wrong, or a question about it, is `propose`: present the change and stop. When the mandate is unclear, invoke the `noootwo-workflow` skill: read its `SKILL.md` and follow its Mandate Gate. When the real user, audience contract, main path, states, or acceptance are unsettled, invoke the `noootwo-product` skill first: read its `SKILL.md` and follow it.
 
-## 1. Size the work
+Context lifecycle `write -> select -> compress -> isolate -> verify`: load this body and one command reference; route references over 200 lines through headings or query hits; cap live excerpts at 80 lines; put output over 16 KiB in cold evidence with a path and hash; isolate the design assessment from the probe where possible; keep one writer for the review record; verify every claim against a rendered capture.
 
-- `quick` — local polish inside the existing system. Read the current UI and tokens, make the change, then record a 5-line observation card: changed, rendered at, saw, defect, decision. If no rendered evidence exists, the decision is `needs artifact`; if the change touches copy, notes, settings, or visible technical data, run the Comprehension Gate.
-- `standard` — normal non-trivial UI. Design Read, light reference audition (2–3 candidates), one artifact, responsive and typography review.
-- `deep` — high-character, brand-heavy, or previously rejected work. Add evidence and directions.
-- `production` — implementing an approved design. Contract, tokens, components, states, artifact verification.
+Read the current UI and its tokens before choosing a command. Load one command reference, not the whole library. `references/craft.md` is the shared quality floor; read it before any UI edit. `references/system.md` owns tokens and design systems; `references/translate.md` owns stack-native implementation.
 
-**Done when:** the mode is named and its proof of done is stated.
+## Commands
 
-## 2. Design Read
+| Command | Use when | Reference |
+|---|---|---|
+| `shape` | The surface, audience, or direction is unsettled | `references/shape.md` |
+| `build` | A new surface, redesign, or approved comp | `references/build.md` |
+| `critique` | Review an existing rendered artifact | `references/critique.md` |
+| `polish` | A local change inside an existing system | `references/polish.md` |
+| `layout` | Spacing, rhythm, hierarchy, or responsive defects | `references/layout.md` |
+| `typeset` | Type scale, roles, or readability | `references/craft.md` (typography) |
+| `harden` | States, errors, i18n, accessibility, edge cases | `references/harden.md` |
+| `motion` | Motion or material is part of the brief | `references/motion.md` |
+| `system` | Tokens, components, or design-system extraction | `references/system.md` |
+| `direction` | Direction is genuinely unresolved | `references/direction.md` and `references/design-discovery.md` |
+| `translate` | Contract to stack-native implementation | `references/translate.md` |
 
-Declare this before choosing a look, for every mode except `quick`:
+Routing:
 
-```
-Design Read
-- Surface kind:
-- Audience contract: role, moment, familiarity, frequency, error cost, shared vocabulary
-- Product posture:
-- Visual posture:
-- Intervention / context / intent: leave simple | craft only | add moment — product function, frequency, risk, emotional or brand value, and whether the user explicitly requested motion or material
-- Variance / Motion / Density: low | medium | high
-```
+- No argument: name the command you infer and why, then proceed when the mandate allows. Ask only when two commands fit and the choice changes cost or direction.
+- A critique, audit, or review request: `critique`.
+- A small local change inside an incumbent system: `polish`.
+- A mixed repair of an existing surface: `critique` once, then apply the findings as `polish` or the matching single-axis command.
+- A new surface or redesign: `shape` when direction is unsettled, then `build`.
+- A layout-only request: `layout`. A copy-only request: `harden`. A motion-only request: `motion`.
+- Do not run `direction` or a reference audition when the incumbent direction is clear.
 
-Variance, motion, and density follow the exact feature and moment. Dense, high-frequency, evidence-heavy, or keyboard-driven work stays simple; rare first-use, completion, explanation, launch, and brand moments may justify more. Density and language follow the audience contract: trained, frequent work may be dense and domain-specific; first-use and consumer work stays plain and default-led.
+## Non-negotiables
 
-**Done when:** each dial has a value and a reason.
+- **Render before judging.** A source read, DOM query, or prose description is not evidence. Missing, black, blank, stale, or wrong-state evidence returns `recapture`.
+- **Critique is separate from build.** Design judgment comes before detector or probe findings. If the host already provides an isolated reviewer without new delegation, use it. Otherwise run the design assessment and the probe as separate sequential passes and prefix the result `DEGRADED: single-context`.
+- **Critique changes no product file.** It may write the probe and review record under `.noootwo/`; those are evidence, not a product edit.
+- **Four dispositions only:** `recapture`, `rebuild`, `fix`, `ship`. Every other word is a finding, not a verdict.
+- **Builder-only review may `ship` local work** when the probe has no blockers and the review records `local_only: true`. Production or publish requires `reviewer: independent`.
+- **Bounded loop:** build or fix in one batch, inspect once, fix what the inspection shows in one batch, confirm once, stop. Two full rounds maximum.
+- **Evidence budget:** one `probe.json`, one short review record, and the screenshots the probe names. Do not create a document per gate.
 
-## 3. Direction
+## Render gate
 
-Compare materially different directions when style or structure is unresolved, and stop for the user's choice. A prose menu is not a decision: before the choice, show a low-cost real sample for each direction, or one fuller sample plus two lightweight variants when the runtime is weak. Read `references/direction.md` for the sample method, Style Evidence Check, and mechanism translation.
+Before `ship`, run:
 
-Read `references/design-discovery.md` for the discovery pass, the source matrix, and the `.noootwo/style-discovery.md` / `.noootwo/reference-board.md` contract. When the work is standard, high-character, niche, premium, or previously rejected, invoke the `noootwo-research` skill first: read its `SKILL.md` and follow it — a design claim needs a source, an artifact, or a screenshot.
-
-For `standard` and `deep` work, use `.noootwo/reference-board.md` as the audition record. Standard uses 2–3 candidates, one primary screenshot, and one narrow supplement; deep uses 3–5 captured sources, same-medium evidence, licence, fit scoring, and 2–3 spikes. Capture every deep source into `.noootwo/references/<slug>/` with `source.md`; capture real values with `scripts/extract_design_tokens.mjs` and `--screenshot` when reachable. A black or broken capture is not evidence. Read `.noootwo/appearance-ledger.md` for a matching surface before searching, and write an entry only after review. Lock the build target and what must not drift before drafting, and let one direction dominate instead of averaging several.
-
-For standard, deep, and production work, read `references/motion.md` before the contract and make an intervention decision. `leave simple` and `craft only` are valid only when the user accepts them or a concrete blocker prevents motion; an explicit motion or material request defaults to `add moment`.
-
-**Done when:** one direction is chosen by the user after reviewing real samples, or the chosen direction is justified by evidence and the sample requirement is recorded as not applicable.
-
-## 4. Design Contract
-
-Write this before editing UI files, for `standard`, `deep`, and `production`:
-
-```
-Design Contract
-- Structure:
-- Information exposure: visible | secondary | hidden; outcome → decision evidence → implementation detail
-- Type scale:
-- Colour and token roles:
-- Component behaviour:
-- State treatment:
-- Intervention / authored move / ledger: leave simple | craft only | add moment; none | primary plus optional support; candidates, rejected opportunities, source or platform rule, fallback
-- Motion: when `add moment`, name the implementation tool and trigger, archetype, easing, duration, layers, and choreography; otherwise `not applicable`
-- Anti-slop risks:
-- Artifact and review path:
+```bash
+python scripts/design_probe.py <target> --out .noootwo/design
 ```
 
-Name semantic roles, not adjectives. For type, name display and product registers, role minima and caps, and one application-root token source; a blanket font-size override is not a scale. Source minima stay surface-scoped: a reading-page floor or expressive title ratio never overrides the declared dense product role table. When repairing existing type, classify the failure as register, token scope, blanket override, or role scale, and fix that owning layer once. Stable decisions become tokens, component rules, and state behaviour.
+It writes `.noootwo/design/probe.json`, one primary capture per viewport and state, and a bottom capture only where fixed-bar overlap or focus occlusion is detected. The primary is full-page when the document scrolls, and the visible viewport for app-shell layouts. Drop states the surface cannot enter with `--state`; keep at least `default`. A missing or invalid capture is `recapture`. The probe is evidence, not judgment: a clean probe cannot prove hierarchy, composition, or taste.
 
-**Done when:** typography roles, layout model, component vocabulary, and the artifact review path are all named.
+## Review record
 
-## 5. Build
+Write `.noootwo/design/review.json` (or `.noootwo/review.json` for a single-artifact project):
 
-Read `references/craft.md` immediately before editing UI. It carries the quality floor and evidence-backed aesthetic flags. Read `references/motion.md` for the intervention decision and whenever the artifact animates.
-
-Read `references/translate.md` to turn the contract into stack-native implementation, assets, and handoff. Read `references/system.md` when the work touches tokens, a design system, or a new artifact family.
-
-When a direction, token set, or review outcome becomes durable, invoke the `noootwo-state` skill to persist it: read its `SKILL.md` and follow it, and submit an abstract record instead of writing shared project state directly.
-
-**Done when:** the artifact runs and every contract item is visibly present.
-
-## 6. Review the artifact
-
-Review the rendered thing, never the prose. Read `references/review.md` for the rubric, safety gates, and evidence-backed flags.
-
-```
-Artifact Review
-- Evidence:
-- Observations / first-pass defects (before score):
-- Composition pass:
-- Comprehension gate:
-- Strongest authored move:
-- Defects:
-- Reviewer independence:
-- Slop drift / technical noise:
-- Decision: ready | refine | pivot | needs artifact
-- Return action:
+```json
+{
+  "target": "index.html",
+  "command": "critique",
+  "viewports": ["320x800", "390x844", "768x1024", "1440x900"],
+  "states": ["default", "error", "loading", "focus", "long"],
+  "findings": [
+    {
+      "severity": "blocking",
+      "region": "settings grid",
+      "evidence": ".noootwo/design/shots/320x800-default.png"
+    }
+  ],
+  "disposition": "ship",
+  "reviewer": "builder",
+  "local_only": true,
+  "next_action": "none"
+}
 ```
 
-Before scoring, write 5-8 blind observations and up to three first-pass defects; then run the Composition Pass. A clean geometry table cannot pass it. Missing, black, blank, stale, or wrong-state evidence is `needs artifact`, not `ready`. Verify in bounded passes: build fully, inspect once with a batch covering the relevant viewports and populated states together, fix everything it shows in one batch, then confirm with at most one more round and stop. Typography evidence includes computed roles, heading share, readable minima, a 200-percent narrow check, and 320 CSS px reflow; layout evidence includes measured panel/toolbar insets, gaps, anchors, overlap or clipping, and a re-measure after each geometry fix.
+`ship` requires no blocking finding, valid evidence for every required viewport and state, and a passing probe. `recapture` means the evidence is unusable. `rebuild` means direction or structure is wrong. `fix` means local defects remain.
 
-`ready` requires artifact evidence, every required viewport and state, a passing Observation Gate and Composition Pass, the reference audition, mechanism-landing evidence for every borrowed primary or supplement, no blocking layout, readability, responsive, motion, comprehension, or slop-drift defect, and `Reviewer independence: independent reviewer`. Without an independent reviewer, the highest decision is `refine`. Every other decision names exactly one return action.
+Validate with:
 
-**Done when:** a decision is recorded against real evidence, and `ready` is never self-certified.
+```bash
+python scripts/validate_design_evidence.py <root>
+python scripts/validate_design_evidence.py <root> --production
+```
 
 ## Return
 
@@ -108,12 +96,16 @@ When this is not design work, name the failed layer and invoke the owning skill 
 
 ## Reference
 
-- `references/intake.md` and `references/direction.md` — reading a request, the Design Read, harness sizing, adopting an existing project, direction exploration, Style Evidence Check, and mechanism translation.
-- `references/design-discovery.md` — the discovery pass, influence discovery, fit scoring, and the `.noootwo/style-discovery.md` contract.
-- `references/motion.md` and `references/motion-libraries.md` — contextual intervention, opportunity gates, signature motion identity, duration, easing, choreography, register gates, per-platform tools, licence checks, and adapt-or-reject recipes.
-- `references/system.md` and `references/craft.md` — tokens, design-system extraction, artifact-family contracts, anti-slop, typography, colour, responsive, and data-UI craft floors.
-- `references/review.md` and `references/translate.md` — observation, composition, scoring, safety gates, evidence-backed flags, final review, stack-native implementation, assets, and handoff.
-- `references/evidence.md` and `references/notes.md` — verified cases, distilled reference-skill rules, research notes, and cost boundaries.
-- `scripts/extract_design_tokens.mjs` — capture real colours, type, spacing, shape, and motion values from a live page, and report drift against a saved baseline.
+- `references/shape.md` — intake, design read, direction only when unresolved, contract.
+- `references/build.md` — new surface or redesign, one contract, render, bounded critique.
+- `references/critique.md` — evidence validity, isolated assessments, four dispositions.
+- `references/polish.md` — local change inside an incumbent system.
+- `references/layout.md` — composition, geometry, responsive, extremes.
+- `references/harden.md` — states, errors, i18n, accessibility, copy.
+- `references/craft.md` — the shared quality floor, typography, colour, anti-slop.
+- `references/system.md` — tokens, components, extraction.
+- `references/motion.md` — motion and material decisions.
+- `references/direction.md` and `references/design-discovery.md` — only when direction is genuinely unresolved.
+- `references/translate.md` — stack-native implementation and handoff.
 
 Missing skill fallback: first try `npx -y skills add noootwo/noootwo-vibe --global --agent codex --skill <name> --yes`; if install fails, take the smallest direct fallback and mark the record `skill-missing: <name>` (for persistence, write the owning file directly).

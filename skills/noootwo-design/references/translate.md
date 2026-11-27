@@ -143,7 +143,7 @@ This pass calibrates the token system. It must not turn into a blanket ban on pu
 ### Risks And Counterexamples
 
 - Risk: turning this into a mandatory early-stage checklist makes Noootwo too expensive.
-  - Response: keep it out of quick mode and early direction exploration.
+  - Response: keep it out of `polish` and early direction exploration.
 - Risk: writing too many detail bullets without artifact proof creates fake precision.
   - Response: tie the pass to screenshots, previews, or simulator/device evidence.
 - Risk: confusing this with pixel-perfect mimicry of a reference.
@@ -290,7 +290,7 @@ Use this reference whenever a design result must be judged visually.
 
 ### Core Rule
 
-A design cannot be marked `ready` without a reviewable artifact or explicit evidence that an artifact cannot be produced in the current environment.
+A design cannot be marked `ship` without a reviewable artifact or explicit evidence that an artifact cannot be produced in the current environment.
 
 ### Artifact Types
 
@@ -348,7 +348,7 @@ If a live artifact cannot be produced:
 - record why it is blocked
 - produce the closest visual substitute
 - include stack-native translation notes
-- mark review as `needs artifact` unless the user explicitly accepts a text-only handoff
+- mark review as `recapture` unless the user explicitly accepts a text-only handoff
 
 
 ## Target Stack Rules
@@ -509,7 +509,7 @@ Use this when the target artifact is browser-based.
 - For React, use Motion or CSS transitions when motion carries the concept.
 - For Vue/Nuxt, use `<Transition>`, `<TransitionGroup>`, CSS transitions, or existing animation utilities.
 - Use GSAP only when scroll staging, timelines, or choreography justify the dependency.
-- Before adding a motion runtime or copying a registry component, read `references/motion.md` and `references/motion-libraries.md`; keep the register gate, licence check, and dependency ceiling.
+- Before adding a motion runtime or copying a registry component, read [motion](motion.md) and [motion libraries](../../../docs/reference/motion-libraries.md); keep the register gate, licence check, and dependency ceiling.
 
 ### Smell Checks
 
@@ -535,7 +535,7 @@ Use this when the target stack is Flutter.
 - A real Flutter artifact should come before HTML proxy when Flutter tooling is available.
 - If execution is blocked, provide an HTML-native visual prototype plus Flutter-specific token, widget, and motion mapping, and mark it as fallback.
 - Record screenshot or blocker details in `.noootwo/review.md`.
-- Do not mark Flutter work stack-native ready when the only artifact is an HTML phone-shell proxy.
+- Do not mark Flutter work stack-native `ship` when the only artifact is an HTML phone-shell proxy.
 - Deep Flutter work needs at least one real route/widget preview, simulator/device screenshot, or golden-style screenshot before `stack_native_craft` can be treated as strong.
 - Full Flutter redesign work should not start implementation until the user selected a direction from the 3-direction menu, unless the user explicitly delegated that choice.
 
@@ -552,7 +552,7 @@ Use this when the target stack is Flutter.
 - Use `Hero`, implicit animations, explicit animations, gestures, or page transitions when motion carries meaning.
 - Use `CustomPainter`, shaders, Rive, or Lottie only when they support the chosen art direction.
 - Prefer reusable widgets and theme extensions over one-off styling.
-- Follow the motion ladder in `references/motion-libraries.md`: built-in widgets first, then the Flutter `animations` package, then `flutter_animate` for chained micro-effects, and Rive or Lottie only for authored assets.
+- Follow the motion ladder in [motion libraries](../../../docs/reference/motion-libraries.md): built-in widgets first, then the Flutter `animations` package, then `flutter_animate` for chained micro-effects, and Rive or Lottie only for authored assets.
 
 ### Smell Checks
 
@@ -572,7 +572,7 @@ Use this when the target stack is Flutter.
 - Check text scale, safe area, touch targets, overflow, loading/empty/error states, reduced motion feasibility, and frame-risk effects.
 - Check whether the screen feels like a mature mobile app: clear task path, restrained navigation, controlled CJK type scale, useful density, and platform-credible interaction states.
 - Record whether `ThemeData`, `TextTheme`, `ThemeExtension`, slivers, `CustomPainter`, Rive, or other stack-native moves were actually used.
-- If only an HTML proxy was reviewed, the decision is `needs artifact`, `refine`, or fallback-ready only by explicit user acceptance.
+- If only an HTML proxy was reviewed, the decision is `recapture` or `fix`; fallback-ready needs explicit user acceptance.
 
 
 ## Native
@@ -595,7 +595,7 @@ Use this for SwiftUI, Jetpack Compose, or platform-native UI implementation.
 - Flutter: built-in implicit and explicit animation, `Hero`, and `AnimatedSwitcher` first; then the Flutter team's `animations` package; `flutter_animate` is optional.
 - SwiftUI: native animation, transition, and matched geometry first; then `PhaseAnimator`, `KeyframeAnimator`, or Pow; Rive and Lottie are for authored assets.
 - Compose: `animate*AsState`, `AnimatedVisibility`, `AnimatedContent`, shared elements, and `animateItem` first; Rive and Lottie are for authored assets.
-- Read `references/motion-libraries.md` for the full map, licence and dependency checks, and rejection rules. Verify API names against the target platform version.
+- Read [motion libraries](../../../docs/reference/motion-libraries.md) for the full map, licence and dependency checks, and rejection rules. Verify API names against the target platform version.
 
 ### SwiftUI Moves
 
