@@ -1,6 +1,6 @@
 ---
 name: noootwo-release
-description: "Use for versioning, release, deployment, rollback, or tracing: main-only source, ledger, artifact identity, provenance, and health."
+description: "Use for versioning, release, deployment, rollback, tracing, or agent install parity: main-only source, ledger, artifact identity, provenance, and health."
 ---
 
 # Noootwo Release
@@ -50,6 +50,7 @@ Release Plan
 - Changelog / release notes:
 - Migration and deprecation notes:
 - Provenance / SBOM / signature:
+- Agent installation parity:
 - Deployment markers:
 - Rollback or forward-fix:
 - Post-release health checks:
@@ -65,6 +66,7 @@ Release Plan
 | `version` | version scheme, source of truth, compatibility, deprecation |
 | `tag` | immutable release ID and the tag that points to it |
 | `artifact` | build-once identity, digest, provenance, SBOM, signing |
+| `install` | every detected agent skill root, full-set sync, stale pruning, version readback |
 | `deploy` | artifact promotion, configuration separation, environment markers |
 | `trace` | version in logs, metrics, traces, health endpoints, build info |
 | `rollback` | previous release, rollback or forward-fix, flags, migrations |
@@ -78,6 +80,7 @@ Release Plan
 - Build once, promote the same artifact, and keep environment differences in configuration.
 - A release is immutable and append-only. Any change creates a new release ID.
 - A Change Check is not release readiness. Before the Release Plan, require a Release Check for the exact commit: full suite or CI evidence, full Structure Sweep, release evidence, and named gaps. If it is missing, invoke `noootwo-workflow` instead of releasing.
+- When the release publishes skills or agent instructions, detect every existing agent skill root, sync the full released set, prune stale entries, and read back every installed version against the manifest. A missing copy, stale skill, or version mismatch blocks release; record the roots, readback, pruned skills, and backup paths.
 - Record at least artifact digest, commit SHA, build identity, environment, and build time.
 - A missing SBOM, attestation, or signature is a recorded gap, never a claim of provenance.
 - Rollback or forward-fix is mandatory in the release plan. Use expand/contract migrations for irreversible changes.
@@ -86,7 +89,7 @@ Release Plan
 
 ## Done when
 
-The Release Plan is complete, the production source is eligible and recorded, the open ledger is reconciled, the Release Check evidence covers the exact commit, the version and artifact identity are consistent, the deployment trace is defined or verified, rollback is explicit, post-release health checks are named, and the completed ledger is sealed into the release record.
+The Release Plan is complete, the production source is eligible and recorded, the open ledger is reconciled, the Release Check evidence covers the exact commit, the version and artifact identity are consistent, every detected agent skill root passes full-set version readback with stale entries pruned, the deployment trace is defined or verified, rollback is explicit, post-release health checks are named, and the completed ledger is sealed into the release record.
 
 ## Hand off
 

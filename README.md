@@ -13,7 +13,7 @@ It publishes twelve focused skills — a router plus eleven specialists:
 | `noootwo-tdd` | model-invoked | Owns red-green-refactor and relevant-test evidence for behavior-changing code | `0.6.2` |
 | `noootwo-code-health` | model-invoked | Shapes a non-obvious change, waits for the Mandate Gate before shaping or editing, treats a plan as execution-ready only after the user accepts the proposal, runs a scoped Change Check after each requirement, and a full Release Check before release | `0.19.1` |
 | `noootwo-delivery` | model-invoked | Gives each requirement or write lane isolated linked worktrees, resolves shared-contract overlap, rejoins one lane at a time, and integrates through protected `main` | `0.2.0` |
-| `noootwo-release` | model-invoked | Owns main-only production sources, the Release Verification Ledger, versioning, tags, immutable artifacts, deployment traces, provenance, rollback, and release health | `0.4.0` |
+| `noootwo-release` | model-invoked | Owns main-only production sources, the Release Verification Ledger, versioning, tags, immutable artifacts, all-agent install parity, deployment traces, provenance, rollback, and release health | `0.4.1` |
 | `noootwo-state` | model-invoked | Reads and records project state, context, and durable user rules, keeps worker results as evidence, serializes all shared-root writes through the integrator, produces bounded capsules, inspects files, captures cold evidence, and chooses the storage form and owning layer | `0.8.0` |
 | `noootwo-debug` | model-invoked | Confirms claims with layer-appropriate evidence, proves a failure's cause, bounds the fix, closes systemically, and stops at the verdict when no change is authorized | `0.6.2` |
 | `noootwo-research` | model-invoked | Settles a decision that only outside evidence can settle, separating source roles, using workflow-selected read fan-out for independent source questions, and borrowing mechanisms instead of surfaces | `0.9.0` |
@@ -168,26 +168,30 @@ Run the workspace validator:
 python scripts/validate_skill_workspace.py .
 ```
 
-Sync local installed skill copies when iterating locally:
+Sync every detected local agent skill root when iterating or releasing:
 
 ```bash
-python scripts/sync_local_install.py --no-dedupe-codex --prune
-python scripts/sync_local_install.py --target-root ~/.codex/skills --no-dedupe-codex --prune
-python scripts/sync_local_install.py --check
+python scripts/sync_local_install.py --all-known --prune
+python scripts/sync_local_install.py --all-known --check --json
 ```
 
 The sync command verifies every copied `VERSION` and `SKILL.md` before it
-reports success. `--check` verifies the installed `~/.agents/skills` and
-`~/.codex/skills` copies against the checkout without copying anything.
+reports success. `--all-known` covers every existing root among `~/.agents/skills`,
+`~/.codex/skills`, `~/.claude/skills`, `~/.cursor/skills`, `~/.gemini/skills`,
+`~/.windsurf/skills`, and `~/.codeium/skills`. `--check` verifies every discovered
+root against the checkout without copying anything; `--json` records each
+installed version for the release record.
 
 `--prune` moves stale `noootwo-*` directories that are no longer in
-`skills.json` into `~/.codex/skill-backups/<timestamp>/`. `--check` fails while
-such a directory remains, so a release cannot claim every agent has the current
-set while an obsolete skill is still discoverable.
+`skills.json` into `~/.codex/skill-backups/<timestamp>/<agent>/`. `--check`
+fails while such a directory or broken skill link remains, so a release cannot
+claim every agent has the current set while an obsolete skill is still discoverable.
 
 The default sync target is `~/.agents/skills`. When a synced Noootwo skill exists there, the script removes the same `noootwo-*` skill from `~/.codex/skills` so Codex does not show duplicate local skills.
 For non-default targets, pass `--dedupe-codex` to apply the same duplicate cleanup.
-For release batches that must keep both agent roots current, use `--no-dedupe-codex` and sync both roots explicitly.
+Release batches use `--all-known`, which keeps every detected root current and
+disables Codex deduplication. Pass an additional root with `--target-root` when
+an agent uses a path outside the known set.
 
 Run discovery checks:
 
@@ -260,13 +264,13 @@ Each child skill has its own `VERSION` file and tag prefix. Current source versi
 - `noootwo-tdd@v0.6.2`
 - `noootwo-code-health@v0.19.1`
 - `noootwo-delivery@v0.2.0`
-- `noootwo-release@v0.4.0`
+- `noootwo-release@v0.4.1`
 - `noootwo-state@v0.8.0`
 - `noootwo-debug@v0.6.2`
 - `noootwo-research@v0.9.0`
 - `noootwo-onboard@v0.5.0`
 
-The root `VERSION` is the workspace version (`0.38.0`) and is not the release source for child skills. Child tags are created only after a validated batch lands on `main`; the versions above are the source versions prepared for release `0.38.0`.
+The root `VERSION` is the workspace version (`0.38.1`) and is not the release source for child skills. Child tags are created only after a validated batch lands on `main`; the versions above are the source versions prepared for release `0.38.1`.
 
 ## Delivery Policy
 
