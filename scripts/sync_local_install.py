@@ -17,10 +17,21 @@ IGNORE_NAMES = shutil.ignore_patterns(
 
 DEFAULT_AGENT_SKILLS_ROOT = Path.home() / ".agents" / "skills"
 DEFAULT_CODEX_SKILLS_ROOT = Path.home() / ".codex" / "skills"
+KNOWN_AGENT_SKILL_ROOTS = (
+    DEFAULT_AGENT_SKILLS_ROOT,
+    DEFAULT_CODEX_SKILLS_ROOT,
+    Path.home() / ".claude" / "skills",
+    Path.home() / ".cursor" / "skills",
+    Path.home() / ".gemini" / "skills",
+    Path.home() / ".windsurf" / "skills",
+    Path.home() / ".codeium" / "skills",
+)
 
 
 def copy_tree(src: Path, dst: Path) -> None:
-    if dst.exists():
+    if dst.is_symlink() or dst.is_file():
+        dst.unlink()
+    elif dst.exists():
         shutil.rmtree(dst)
     shutil.copytree(src, dst, symlinks=False, ignore=IGNORE_NAMES)
 
@@ -37,34 +48,77 @@ def load_version(skill_dir: Path) -> str | None:
     return version_file.read_text(encoding="utf-8").strip()
 
 
-def verify_install(source: Path, target_root: Path, skill_names: list[str]) -> list[str]:
+def inspect_install(
+    source: Path,
+    target_root: Path,
+    skill_names: list[str],
+    all_skill_names: list[str],
+) -> tuple[dict, list[str]]:
     errors: list[str] = []
+    skills: list[dict] = []
     for skill_name in skill_names:
         source_version = load_version(source / "skills" / skill_name)
         target_skill = target_root / skill_name
         target_version = load_version(target_skill)
+        has_skill_md = (target_skill / "SKILL.md").is_file()
+        skill_errors: list[str] = []
         if target_version is None:
-            errors.append(f"{target_skill}: missing VERSION")
-            continue
-        if source_version != target_version:
-            errors.append(
+            skill_errors.append(f"{target_skill}: missing VERSION")
+        elif source_version != target_version:
+            skill_errors.append(
                 f"{target_skill}: expected {source_version or 'unknown'}, found {target_version}"
             )
-        if not (target_skill / "SKILL.md").is_file():
-            errors.append(f"{target_skill}: missing SKILL.md")
-
-    for stale in stale_noootwo_skills(target_root, skill_names):
-        errors.append(
-            f"{stale}: stale Noootwo skill not in skills.json; rerun with --prune"
+        if not has_skill_md:
+            skill_errors.append(f"{target_skill}: missing SKILL.md")
+        errors.extend(skill_errors)
+        skills.append(
+            {
+                "name": skill_name,
+                "expected": source_version,
+                "installed": target_version,
+                "skill_md": has_skill_md,
+                "ok": not skill_errors,
+            }
         )
 
+    stale = stale_noootwo_skills(target_root, all_skill_names)
+    for path in stale:
+        errors.append(
+            f"{path}: stale Noootwo skill not in skills.json; rerun with --prune"
+        )
+
+    report = {
+        "root": str(target_root),
+        "ok": not errors,
+        "skills": skills,
+        "stale": [str(path) for path in stale],
+    }
+    return report, errors
+
+
+def inspect_roots(
+    source: Path,
+    roots: list[Path],
+    skill_names: list[str],
+    all_skill_names: list[str],
+) -> tuple[list[dict], list[str]]:
+    reports: list[dict] = []
+    errors: list[str] = []
+    for root in roots:
+        report, root_errors = inspect_install(source, root, skill_names, all_skill_names)
+        reports.append(report)
+        errors.extend(root_errors)
+    return reports, errors
+
+
+def print_install_result(reports: list[dict], errors: list[str]) -> None:
     if errors:
-        print(f"Install check failed for {target_root}:")
+        print("Install check failed:")
         for error in errors:
             print(f"  - {error}")
-    else:
-        print(f"Verified {len(skill_names)} skills in {target_root}")
-    return errors
+        return
+    for report in reports:
+        print(f"Verified {len(report['skills'])} skills in {report['root']}")
 
 
 def stale_noootwo_skills(target_root: Path, skill_names: list[str]) -> list[Path]:
@@ -74,24 +128,53 @@ def stale_noootwo_skills(target_root: Path, skill_names: list[str]) -> list[Path
     return sorted(
         path
         for path in target_root.iterdir()
-        if path.is_dir() and path.name.startswith("noootwo-") and path.name not in names
+        if (path.is_dir() or path.is_symlink())
+        and path.name.startswith("noootwo-")
+        and path.name not in names
     )
+
+
+def root_label(target_root: Path) -> str:
+    label = target_root.parent.name.lstrip(".") or "root"
+    return "".join(character if character.isalnum() or character in "-_" else "-" for character in label)
 
 
 def prune_stale(
     target_root: Path,
     skill_names: list[str],
     backup_root: Path,
+    stamp: str,
+    quiet: bool,
 ) -> None:
     stale = stale_noootwo_skills(target_root, skill_names)
     if not stale:
         return
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     for path in stale:
-        destination = backup_root / stamp / path.name
+        destination = backup_root / stamp / root_label(target_root) / path.name
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.move(str(path), str(destination))
-        print(f"Pruned stale skill {path.name}: {destination}")
+        if not quiet:
+            print(f"Pruned stale skill {path.name}: {destination}")
+
+
+def unique_roots(roots: list[Path]) -> list[Path]:
+    unique: list[Path] = []
+    for root in roots:
+        resolved = root.expanduser().resolve()
+        if resolved not in unique:
+            unique.append(resolved)
+    return unique
+
+
+def existing_known_roots(target_root: Path, codex_target_root: Path) -> list[Path]:
+    return unique_roots(
+        [
+            root
+            for root in KNOWN_AGENT_SKILL_ROOTS
+            if root.is_dir()
+        ]
+        + [root for root in (target_root, codex_target_root) if root.is_dir()]
+    )
 
 
 def remove_codex_duplicates(skill_names: list[str], agent_root: Path, codex_root: Path) -> None:
@@ -117,45 +200,71 @@ def main() -> int:
     parser.add_argument("--backup-root", default=str(Path.home() / ".codex" / "skill-backups"), help="Where --prune moves stale skills.")
     parser.add_argument("--skill", action="append", help="Skill name to sync. Repeat for multiple. Defaults to every skill in skills.json.")
     parser.add_argument("--check", action="store_true", help="Do not copy. Verify installed VERSION and SKILL.md files in the target roots.")
+    parser.add_argument("--all-known", action="store_true", help="Use every existing known agent skill root instead of only the target roots.")
+    parser.add_argument("--json", action="store_true", help="Print a machine-readable install report.")
     args = parser.parse_args()
 
     if args.check and args.prune:
         parser.error("--check and --prune cannot be combined")
+    if args.all_known and args.skill:
+        parser.error("--all-known requires the complete skills.json set; do not combine it with --skill")
 
     source = Path(args.source).resolve()
     target_root = Path(args.target_root).resolve()
     codex_target_root = Path(args.codex_target_root).resolve()
-    skill_names = args.skill or load_skill_names(source)
+    all_skill_names = load_skill_names(source)
+    skill_names = args.skill or all_skill_names
 
     if args.check:
-        roots = []
-        for root in (target_root, codex_target_root):
-            if root not in roots and root.is_dir():
-                roots.append(root)
+        if args.all_known:
+            roots = existing_known_roots(target_root, codex_target_root)
+        else:
+            roots = unique_roots(
+                [root for root in (target_root, codex_target_root) if root.is_dir()]
+            )
         if not roots:
             raise SystemExit("No installed skill roots found to check.")
-        errors = []
-        for root in roots:
-            errors.extend(verify_install(source, root, skill_names))
-        return 1 if errors else 0
+        reports, errors = inspect_roots(source, roots, skill_names, all_skill_names)
+        if args.json:
+            print(json.dumps({"ok": not errors, "roots": reports, "errors": errors}, indent=2))
+        else:
+            print_install_result(reports, errors)
+        return 0 if not errors else 1
 
-    target_root.mkdir(parents=True, exist_ok=True)
+    if args.all_known:
+        roots = existing_known_roots(target_root, codex_target_root)
+        if not roots:
+            raise SystemExit("No installed skill roots found to sync.")
+    else:
+        roots = [target_root]
 
-    for skill_name in skill_names:
-        skill_dir = source / "skills" / skill_name
-        if not skill_dir.is_dir():
-            raise SystemExit(f"Skill not found: {skill_name}")
-        copy_tree(skill_dir, target_root / skill_name)
-        print(f"Synced {skill_name}: {target_root / skill_name}")
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    backup_root = Path(args.backup_root).expanduser().resolve()
+    for root in roots:
+        root.mkdir(parents=True, exist_ok=True)
+        for skill_name in skill_names:
+            skill_dir = source / "skills" / skill_name
+            if not skill_dir.is_dir():
+                raise SystemExit(f"Skill not found: {skill_name}")
+            copy_tree(skill_dir, root / skill_name)
+            if not args.json:
+                print(f"Synced {skill_name}: {root / skill_name}")
 
-    if args.prune:
-        prune_stale(target_root, skill_names, Path(args.backup_root).expanduser().resolve())
+        if args.prune:
+            prune_stale(root, all_skill_names, backup_root, stamp, args.json)
 
-    errors = verify_install(source, target_root, skill_names)
+    reports, errors = inspect_roots(source, roots, skill_names, all_skill_names)
+    if args.json:
+        print(json.dumps({"ok": not errors, "roots": reports, "errors": errors}, indent=2))
+    else:
+        print_install_result(reports, errors)
     if errors:
         return 1
 
-    should_dedupe = target_root == DEFAULT_AGENT_SKILLS_ROOT.resolve() or args.dedupe_codex
+    should_dedupe = (
+        not args.all_known
+        and (target_root == DEFAULT_AGENT_SKILLS_ROOT.resolve() or args.dedupe_codex)
+    )
     if not args.no_dedupe_codex and should_dedupe:
         remove_codex_duplicates(skill_names, target_root, codex_target_root)
 

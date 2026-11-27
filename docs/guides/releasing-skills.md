@@ -9,23 +9,30 @@
 7. Commit the change.
 8. Create a tag using the skill's `tagPrefix` from `skills.json`, for example `noootwo-code-health@vX.Y.Z`.
 9. Push the branch and tags.
-10. Verify the public clean install and sync both local install roots for a release batch:
+10. Verify the public clean install and sync every detected local agent skill root
+    for a release batch:
 
 ```bash
-python scripts/sync_local_install.py --no-dedupe-codex
-python scripts/sync_local_install.py --target-root ~/.codex/skills --no-dedupe-codex
-python scripts/sync_local_install.py --check
+npx -y skills add noootwo/noootwo-vibe --skill '*' --global --agent codex --yes
+python scripts/sync_local_install.py --all-known --prune
+python scripts/sync_local_install.py --all-known --check --json
 ```
 
-The default target is `~/.agents/skills`. Keeping `--no-dedupe-codex` while
-syncing both roots prevents the first command from removing the Codex copy
-before the second command refreshes it. Each sync verifies the installed
-`VERSION` and `SKILL.md`; `--check` verifies both roots without copying.
+`--all-known` covers every existing root among `~/.agents/skills`,
+`~/.codex/skills`, `~/.claude/skills`, `~/.cursor/skills`, `~/.gemini/skills`,
+`~/.windsurf/skills`, and `~/.codeium/skills`. Each sync verifies the installed
+`VERSION` and `SKILL.md`; `--check --json` reads back every child version and
+fails on a missing copy, stale `noootwo-*` entry, broken skill link, or version
+mismatch.
 
 After an install or update, start a new Codex task so it reloads the skill
 catalog. Restart the app only when a new task still resolves the old installed
 version. `VERSION` is metadata; the installed `SKILL.md` and references are the
 content Codex reads.
+
+The release record must list the detected roots, every installed child version,
+the pruned stale skills, and the backup path. A release may not claim all-agent
+availability after syncing only one root.
 
 The public installation contract is:
 

@@ -1,5 +1,12 @@
 # noootwo-release Releases
 
+## v0.4.1
+
+- Added all-agent installation parity to the Release Plan, `install` mode, release rules, and completion criteria.
+- A skills or agent-instruction release now detects every existing agent skill root, syncs the complete released set, prunes stale `noootwo-*` entries, and reads back every child `VERSION` against the manifest.
+- A missing root copy, stale skill, broken skill link, or version mismatch blocks the release. The release record carries the root paths, readback report, pruned skills, and backup paths.
+- Added the `agent-install-parity` eval contract and ADR 0039.
+
 ## v0.4.0
 
 - Production now has one source rule: an exact commit reachable from protected `main`, or an annotated release tag whose peeled commit is reachable from protected `main`.
